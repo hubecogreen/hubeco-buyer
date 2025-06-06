@@ -1,0 +1,218 @@
+'use client'
+
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import Lottie from 'lottie-react'
+import animationData from '../../../../../public/animations/failure.json'
+import Store from '../../../../reduxStore'
+import * as getEndpoint from '../../../../network/EndPoints'
+import * as Webservices from '../../../../network/WebServices'
+import CustomButton from '../../../../components/customButton/CustomButton'
+import { CircularProgress, Divider } from '@chakra-ui/react'
+import useClient from '@/components/hooks/useClient'
+
+const PaymentFailed = () => {
+  const token = Store.getState().user.token
+  const router = useRouter()
+  const [loading, setLoading] = useState<boolean>(true)
+  const [data, setData] = useState<any>(null)
+  const [time, setTime] = React.useState<number>(6)
+  const isClient = useClient()
+
+  const handleRetry = async () => {
+    setLoading(true)
+    const successPage = `${process.env.NEXT_PUBLIC_PROD_URL}/payment-success/`
+    const failedPage = `${process.env.NEXT_PUBLIC_PROD_URL}/payment-failed/`
+
+    const payloadData = {
+    //   planId: 'acfc82b7-49bc-41ea-a588-2d3360cb4a62', // Make this dynamic if needed
+      isYearlyPayment: true,
+      isReoccurring: true,
+      paymentFailedUrl: successPage,
+      paymentSuccessUrl: failedPage
+    }
+
+    try {
+      const result = await Webservices.callPostApi(getEndpoint.default.BUY_SUBSCRIPTION, payloadData, token, )
+
+      if (result.status === 201) {
+        setLoading(false)
+        setData(result.data)
+        document.open()
+        document.write(result.data)
+        document.close()
+      } else {
+        setLoading(false)
+      }
+    } catch (err) {
+      setLoading(false)
+      // consoleerror(err)
+    }
+  }
+
+  async function checkTransId(txnId: string) {
+    try {
+      const res = await Webservices.callPostApi(
+        getEndpoint.default.VERIFY_SUBSCRIPTION_PAYMENT, // Use the same endpoint as in the success page
+        { transactionId: txnId },
+        token,
+        
+      )
+
+      if (res.data != null) {
+        setData(res.data)
+      } else {
+        setData(null)
+        // Handle any specific error cases here, e.g., redirect to login if needed
+      }
+    } catch (e) {
+      // consoleerror(e)
+      setData(null)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    const txnId = window.location.search.split('txnId=')[1]
+    if (txnId === 'undefined' || txnId === 'null' || txnId === '' || txnId?.length < 7) {
+      // Redirect to login or another page if the txnId is invalid
+      // router.push('/login')
+    } else {
+      checkTransId(txnId)
+    }
+  }, [])
+
+
+  React.useEffect(() => {
+    const txnId = new URLSearchParams(window.location.search).get('orderId')
+
+    if (!txnId || txnId.length < 7) {
+      handleBackToLogin('run')
+    } else {
+      checkTransId(txnId)
+    }
+
+    const interval = setInterval(() => {
+      setTime(prevTime => {
+        if (prevTime <= 1) {
+          handleBackToLogin()
+          clearInterval(interval)
+        }
+        return prevTime - 1
+      })
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const handleBackToLogin = (change?: string) => {
+    // dispatch(saveToken(''))
+    // dispatch(saveRefreshToken(''))
+    // dispatch(setUser(''))
+    // deleteCookie('token')
+    if (change === 'run') {
+      window.location.href = '/quote-request'
+    } else {
+      window.location.href = '/quote-request'
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className='w-full h-full flex justify-center items-center'>
+        <CircularProgress isIndeterminate color="#A92449"  />
+      </div>
+    )
+  }
+
+  if(!isClient)
+    return <></>
+
+  return (
+    <div className="bg-white ">
+  
+    <div className='flex flex-col items-center justify-center bg-red-50 text-center'>
+      <div >
+        {/* Header */}
+        {/* <div className='mb-6'>
+          // <img src='/images/pages/hubeco-Logo.png' alt='Logo' className='w-32 mx-auto' />
+        </div> */}
+
+        {/* Failure Icon and Message */}
+        <div className='mb-8'>
+          <Lottie animationData={animationData} loop={true} className='w-72 h-72 mx-auto' />
+
+          <h4  className='font-bold text-red-600 mt-6 mb-2'>
+            Payment Failed
+          </h4>
+          {/* <p  className='text-gray-600 mb-3 max-w-md mx-auto'>
+            Don't worry, your account has been created successfully. Please verify your email address using the link
+            we've sent to your registered email. You can then use your email and password to log into your account.
+          </p>
+          <p className='text-gray-700 mb-6 font-medium'>
+            You can upgrade your plan in account details
+          </p>
+          <p  className='text-gray-500 '>
+            Unfortunately, your transaction could not be completed. Please try again.
+          </p> */}
+        </div>
+
+        {/* Transaction Details */}
+        {/* <div className='mb-4 bg-red-200 p-5 rounded-lg shadow-md'>
+          <h6  className='font-bold text-gray-700'>
+            Transaction Details
+          </h6>
+          <Divider className='my-4' />
+          {data ? (
+            <>
+              <div className='flex justify-between'>
+                <p className='font-bold text-gray-600'>
+                  Transaction ID:
+                </p>
+                <p className='text-gray-800'>
+                  {data.transactionId}
+                </p>
+              </div>
+              <div className='flex justify-between mt-2'>
+                <p className='font-bold text-gray-600'>
+                  Date:
+                </p>
+                <p className='text-gray-800'>
+                  {data.txnTime.split('T')[0]}
+                </p>
+              </div>
+              {/* <div className='flex justify-between mt-2'>
+                <p className='font-bold text-gray-600'>
+                  Amount:
+                </p>
+                <p className='text-gray-800'>
+                  ₹{data.txnAmount}
+                </p>
+              </div> 
+            </>
+          ) : (
+            <p className='text-gray-600'>
+              No transaction details available.
+            </p>
+          )}
+        </div> */}
+
+        {/* Action Button */}
+        <div className='flex justify-center'>
+          <CustomButton
+             title={`You will be redirected in ${time}`}
+            className='bg-secondary text-white hover:bg-red-700'
+            onPress={() => router.push('/login')}
+            loading={loading}
+          />
+            
+          
+        </div>
+      </div>
+    </div>
+    </div>
+  )
+}
+
+export default PaymentFailed

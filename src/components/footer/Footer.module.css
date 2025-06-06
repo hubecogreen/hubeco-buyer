@@ -1,0 +1,38 @@
+/* components/Footer.module.css */
+
+.footer {
+    background-color: #000000;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    border-top: 1px solid #000000;
+  }
+  
+  .companyInfo, .links, .socialMedia {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .companyInfo h3, .links h4, .socialMedia h4 {
+    /* margin-bottom: 10px; */
+  }
+  
+  .links ul, .socialMedia ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .links ul li, .socialMedia ul li {
+    margin-bottom: 5px;
+  }
+  
+  .links ul li a, .socialMedia ul li a {
+    text-decoration: none;
+    /* color: #007bff; */
+  }
+  
+  /* .links ul li a:hover, .socialMedia ul li a:hover {
+    text-decoration: underline;
+  } */
+  

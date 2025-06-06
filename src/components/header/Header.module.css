@@ -1,0 +1,333 @@
+/* components/header.css */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #F4F4F4;
+  border-bottom: 1px solid #eaeaea;
+  max-height: 106px;
+  height: 106px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  width: 13%
+}
+.sticky {
+  position: fixed;
+  top: 0px;
+  transition: 0.8s all ease;
+ 
+
+}
+
+.hide-nav {
+  top: -100%;
+  transition: 2s all ease;
+  position: fixed !important;
+  top: 7%;
+}
+
+.icons{
+  /* width: 6% */
+}
+
+@media screen and (max-width: 600px) {
+  .logo {
+    display: flex;
+    align-items: center;
+    width: 43% !important
+  }
+  .icons{
+    /* width: 36% */
+  }
+}
+
+.logo img {
+  /* height: 45px; */
+  max-width: 234px;
+  width: 100%;
+  margin-right: 10px;
+}
+
+.logo span {
+  font-size: 24px;
+  font-weight: bold;
+  color: #34c759;
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.location span:first-child {
+  font-size: 12px;
+  color: #888;
+}
+
+.location span:last-child {
+  font-size: 14px;
+  color: #000;
+}
+
+.search {
+  flex-grow: 1;
+  margin: 0 20px;
+}
+
+.search input {
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+}
+
+.icons i {
+  margin: 0 10px;
+  font-size: 20px;
+}
+
+.vendorButton {
+  padding: 10px 20px;
+  background-color: #d0021b;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.menu {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu {
+    display: block;
+  }
+
+  .search {
+    display: none;
+  }
+
+  .vendorButton {
+    display: none;
+  }
+}
+
+/* .mega-menu-header ul.w-full li {
+  width: 160px;
+}
+
+.mega-menu-header ul.w-full li a{
+ font-size: 24px;
+ font-weight: bolder;
+}
+
+.submenudiv{
+  position: absolute;
+    min-width: 230px;
+    padding: 25px 20px;
+    background: #fff;
+    -webkit-box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1);
+    -webkit-transform: perspective(600px) rotateX(-90deg);
+    transform: perspective(600px) rotateX(-90deg);
+    -webkit-transform-origin: 0 0 0;
+    transform-origin: 0 0 0;
+    left: 0;
+    right: auto;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    z-index: 99999;
+    top: 50px;
+    text-align: left;
+    display: block;
+}
+li.hasubmenu a:hover .submenudiv{
+  opacity: 1;
+    visibility: visible;
+    -webkit-transform: perspective(600px) rotateX(0deg);
+    transform: perspective(600px) rotateX(0deg);
+} */
+
+/* components/Header.module.css */
+.mega-menu-header ul.w-full li {
+  width: 160px;
+  position: relative; /* Ensure the li is the reference for the absolute positioning of the submenu */
+}
+
+.mega-menu-header ul.w-full li a {
+  font-size: 24px;
+  font-weight: bolder;
+}
+
+.submenuDiv {
+  position: absolute;
+  min-width: 230px;
+  /* padding: 25px 20px; */
+  background: #fff;
+  box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1);
+  transform: perspective(600px) rotateX(-90deg);
+  transform-origin: 0 0 0;
+  left: 0;
+  right: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.5s, opacity 0.5s;
+  z-index: 99999;
+  top: 48px;
+  text-align: left;
+}
+.thirdlevelmenu
+{
+  position: absolute;
+  left: 250px;
+
+  min-width: 230px;
+  /* padding: 25px 20px; */
+  background: #fff;
+  box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1);
+  transform: perspective(600px) rotateX(-90deg);
+  transform-origin: 0 0 0;
+
+  right: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.5s, opacity 0.5s;
+  z-index: 99999;
+  top: 10px;
+  text-align: left;
+
+}
+.fourthlevelMenu
+{
+  position: absolute;
+  left: 250px;
+
+  min-width: 230px;
+  /* padding: 25px 20px; */
+  background: #fff;
+  box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.1);
+  transform: perspective(600px) rotateX(-90deg);
+  transform-origin: 0 0 0;
+
+  right: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.5s, opacity 0.5s;
+  z-index: 99999;
+  top: 10px;
+  text-align: left;
+
+}
+
+/* Ensure the submenu remains visible when hovering over it */
+.hasSubmenu:hover .submenuDiv,
+.submenuDiv:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: perspective(600px) rotateX(0deg);
+}
+
+.hasChildmenu:hover .thirdlevelmenu,
+.thirdlevelmenu:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: perspective(600px) rotateX(0deg);
+}
+
+.hasInnerChildmenu:hover .fourthlevelMenu,
+.fourthlevelMenu:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: perspective(600px) rotateX(0deg);
+}
+
+.hasSubmenu  .submenuDiv a:hover{
+  /* font-size: 14px; */
+  color: #A92449;
+  /* text-decoration: underline; */
+  /* line-height: 18px; */
+  font-weight: 600;
+  transition: all 0.1s ease-in-out;
+
+}
+.hasChildmenu  .thirdlevelmenu a:hover{
+  /* font-size: 14px; */
+  color: #A92449;
+  /* text-decoration: underline; */
+  /* line-height: 18px; */
+  font-weight: 600;
+  transition: all 0.1s ease-in-out;
+
+}
+.hasInnerChildmenu  .fourthlevelmenu a:hover{
+  /* font-size: 14px; */
+  color: #A92449;
+  /* text-decoration: underline; */
+  /* line-height: 18px; */
+  font-weight: 600;
+  transition: all 0.1s ease-in-out;
+
+}
+.secondlevelchild,.thirdlevelchild,.fourthlevelchild
+{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  /* border-bottom: 0.5px solid #e8e8e8; */
+}
+.secondlevelchild a
+{ 
+display: flex;
+justify-content: space-between;
+width: 230px;
+align-items: center;
+}
+.thirdlevelchild a
+{ 
+display: flex;
+justify-content: space-between;
+width: 230px;
+align-items: center;
+}
+.fourthlevelchild a
+{ 
+display: flex;
+justify-content: space-between;
+width: 230px;
+align-items: center;
+}
+.secondlevelchild:hover a:first-child
+{
+/* left: 5px;
+position: relative;
+transition: left 2s ease; */
+/* padding-left: 13px; */
+}
+.parentMenuItem:hover a.parentMenuItemText
+{
+  /* color:#A92449; */
+  /* text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); */
+  /* padding: 4px 10px; */
+  /* font-size: 16px; */
+  font-weight: 600;
+}
+
+
+
+

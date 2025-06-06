@@ -1,0 +1,6 @@
+@layer components {
+    input:-webkit-autofill {
+      @apply bg-white-500 !important; /* Use Tailwind's bg-blue-500 utility */
+      /* Add other styles as needed */
+    }
+  }

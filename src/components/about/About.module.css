@@ -1,0 +1,8 @@
+.secondSection{
+    height: 650px
+}
+@media screen and (max-width: 600px) {
+    .secondSection{
+        height: 100% ! IMPORTANT;
+    }
+}

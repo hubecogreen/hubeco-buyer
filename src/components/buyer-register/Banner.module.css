@@ -1,0 +1,50 @@
+/* styles/gradientText.module.css */
+.gradientText {
+  background: linear-gradient(
+    90deg,
+    #942252,
+    #412b81
+  ); /* Replace with your gradient colors */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.textAnimate {
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.secondSection {
+  height: 500px;
+  background-image: "url('/images/about/aboutWavesBg.png')";
+  background-size: cover; /* or contain, auto, etc. */
+  background-repeat: no-repeat; /* or repeat, repeat-x, repeat-y */
+  background-position: top; /* or top, bottom, left, right, etc. */
+}
+@media screen and (max-width: 600px) {
+  .secondSection {
+    height: 100% !important;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-right-color: transparent;
+  }
+  50% {
+    border-right-color: black;
+  }
+}

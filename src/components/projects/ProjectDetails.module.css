@@ -1,0 +1,203 @@
+.container {
+    /* display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start; */
+    padding: 60px;
+}
+.blogsHeadText {
+    font-size: 40px;
+    font-weight: bold;
+}
+.image{
+width: 100%;
+height: 100%;
+}
+.imageLogo{
+    width: 100%;
+    height: 100%;
+    }
+/* .paraStyles{
+    padding-top: 30px;
+} */
+/* .joinBannerStyles{
+    padding: 80px;
+} */
+
+.blogsText {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Ensure exactly three items per row */
+    gap: 44px 32px;
+}
+
+.gridItem {
+    width: 100%;
+    /* Adjust as necessary */
+}
+
+.itemCard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* border: 1px solid #ccc; */
+    /* Optional: add border */
+    /* border-radius: 8px; */
+    /* Optional: add border radius */
+    overflow: hidden;
+    /* Optional: ensure content does not overflow */
+}
+.itemCard2 {
+    display: flex;
+    flex-direction: column;
+
+}
+.itemImage {
+    width: 414px;
+    height: 414px;
+    object-fit: cover;
+}
+
+.itemContent {
+    margin-top: 10px;
+}
+.itemTitle {
+    margin: 0;
+    font-size: 18px;
+    font-weight:bold;
+    line-height: 1.4;/* Adjust line height for better readability */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Show dots (...) if content overflows */
+    text-align: left;
+}
+
+.name {
+   
+    text-align: left;
+    margin-top: 7px;
+}
+
+.nameText {
+    margin-top: 8px;
+    color: #696969;
+    font-size: 13px;
+    
+    /* Adjust text color */
+}
+.nameTextColor{
+font-weight: 600;
+}
+.timeText {
+    margin-top: 8px;
+    color: #666;
+    font-size: 12px;
+    /* Adjust text color */
+}
+.itemTimings {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+/* .header {
+    
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 70px;
+} */
+/* .ownerName{
+    display: flex;
+    justify-content: space-between;
+   margin-bottom: 30px;
+} */
+/* .imageDetailSection{
+    padding-top: 40px;
+        padding-bottom: 40px;
+} */
+/* .nameByText{
+    margin-top: 5px;
+        color: #696969;
+        font-size: 13px;
+        font-weight: 500;
+} */
+.categorySlide {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    height: 414px;
+    width: 100%;
+}
+
+
+
+
+/* components/IntroSection.module.css */
+
+.swiperSlide {
+    position: relative;
+    width: 414px;
+    /* Adjust width as per your design */
+    height: 414px;
+    /* Adjust height as per your design */
+    margin-right: 15px;
+}
+
+.slideImage {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease-in-out;
+    /* Adjusted transition duration */
+}
+
+.slideContent {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Initial background color for hover */
+    opacity: 0;
+    /* Initially hidden */
+    transition: opacity 0.8s ease-in-out;
+    /* Adjusted transition duration */
+}
+
+.swiperSlide:hover .slideContent {
+    opacity: 1;
+    /* Show content on hover */
+}
+
+.slideContent:hover {
+    cursor: pointer;
+    /* Show pointer cursor on hover */
+}
+
+.slideOverlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    /* Adjusted transition duration */
+}
+
+.swiperSlide:hover .slideOverlay {
+    opacity: 1;
+    /* Show overlay on hover */
+}
+
+.swiper-slide-active.w-full.category-slide {
+    width: 100% !important;
+}

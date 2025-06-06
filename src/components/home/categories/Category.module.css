@@ -1,0 +1,120 @@
+/* components/IntroSection.module.css */
+
+.swiperSlide {
+  position: relative;
+  width: 414px; /* Adjust width as per your design */
+  height: 414px; /* Adjust height as per your design */
+  margin-right: 15px;
+}
+
+.slideImage {
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease-in-out; /* Adjusted transition duration */
+}
+
+.slideContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5); /* Initial background color for hover */
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.8s ease-in-out; /* Adjusted transition duration */
+}
+
+.swiperSlide:hover .slideContent {
+  opacity: 1; /* Show content on hover */
+}
+
+.slideContent:hover {
+  cursor: pointer; /* Show pointer cursor on hover */
+}
+
+.slideOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out; /* Adjusted transition duration */
+}
+
+.swiperSlide:hover .slideOverlay {
+  opacity: 1; /* Show overlay on hover */
+}
+
+.swiper-slide-active.w-full.category-slide {
+  width: 100% !important;
+}
+
+.categorySlide {
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  height: 414px;
+  width: 100%;
+}
+
+.categorySlide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 414px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: 9;
+  border-radius: 5px;
+  transition: background 0s ease-in, transform 0s ease-in; /* Added transition for before pseudo-element */
+}
+
+.categorySlide:hover .categoryOverlay {
+  background: rgba(0, 0, 0, 0);
+}
+
+.categorySlide:hover .categoryButton {
+  background-color: var(--hoverBg);
+}
+
+.categorySlide:hover::before {
+  /* background: rgb(255, 255, 255) linear-gradient(to bottom, rgb(255, 255, 255) 90%, rgb(255, 255, 255) 100%); */
+  background: rgb(255 255 255 / 90%) linear-gradient(to bottom, rgb(255 255 255 / 90%), rgba(255 255 255 / 90%));
+  z-index: 9;
+  /* transform: scale(0.5); */
+  width: 405px;
+  height: 0px;
+  transition: background 1s ease-in, transform 1s ease-in; /* Ensure transition duration matches */
+}
+
+.categorySlide:hover .catButton {
+  /* background-color: #2F318D; */
+  color: #ffffff; /* Adjust the hover text color variable */
+  transition: background-color 0.8s ease-in-out, color 0.8s ease-in-out;
+}
+
+.categorySlide:hover .cattitle {
+  color: #ffffff; /* Adjust the hover text color variable */
+  transition: color 0.8s ease-in-out;
+}
+
+.categorySlide:hover .catImg
+{
+opacity: 0.6;
+}
+/* .navCustLeft.swiper-button-prev:after{
+font-size: 20px;
+color: '#bcbcbc';
+} */
+
+/* .categorySlide {
+  flex: 0 0 auto;
+  padding: 0 15px;
+}
+
+.catImg {
+  width: 100%; 
+} */

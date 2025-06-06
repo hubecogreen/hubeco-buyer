@@ -1,0 +1,158 @@
+/* ProductCard.module.css */
+
+.productCard {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    /* margin: 15px 0px; */
+    position: relative;
+    background-color: #fff;
+    /* max-height: 480px; */
+    /* max-width: 320px; */
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    max-width: 92%;
+    width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  @media (min-width: 640px) {
+    .productCard {
+      width: 96%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  
+  .discountBadge {
+    background-color: #fff;
+    color: #439787;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+  
+  .top-row {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 100%;
+  }
+  
+  .productImage {
+    width: 370px;
+    height: 250px;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .product-card-title {
+    font-size: 18px;
+    margin: 16px 0 8px;
+  }
+  
+  .product-card-desc {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 16px;
+  }
+  
+  .priceSection {
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .addToCart {
+    background-color: '#bcbcbc'; /* Initial background color */
+    color: white;
+    border: none;
+    /* padding: 8px 10px; */
+    border: 1px solid white;
+    z-index: 9;
+  }
+  
+  
+  @media only screen and (max-width: 600px) {
+  
+    .productImage {
+    
+      height: 160px;
+    
+    }
+    .priceSection {
+  
+      width: 100%;
+      /* display: ruby; */
+    }
+    }
+  
+  .currentPrice {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .originalPrice {
+    font-size: 14px;
+    color: #888;
+    text-decoration: line-through;
+    margin-left: 8px;
+  }
+  
+  .productCard:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.05);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .productCard:hover .cartIcon {
+    display: block;
+  }
+  
+  .cartIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+    color: white;
+    background-color: black;
+    padding: 5px;
+    border-radius: 50%;
+  }
+  
+  .productCard:hover .priceSection .addToCart {
+    background-color: #A92449; 
+    color: white;
+  }
+  
+  .viewButton {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    display: none;
+    background-color: white;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+  }
+  
+  .productCard:hover .viewButton {
+    display: block;
+    transform: scale(1.1);
+  }
+  

@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://uat.hubeco.market
+Host: https://hubeco.market
 
 # Sitemaps
-Sitemap: https://uat.hubeco.market/sitemap.xml
+Sitemap: https://hubeco.market/sitemap.xml

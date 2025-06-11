@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import React from "react";
 import Script from "next/script";
 import MainLayout from "@/components/home/MainLayout";
- 
+
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
@@ -12,7 +12,7 @@ const poppins = Poppins({
   subsets: ["latin"],
   variable: "--poppins",
 });
- 
+
 export const metadata: Metadata = {
   title: "Marketplace for Green Building Materials",
   description:
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     ],
   },
 };
- 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,14 +41,21 @@ export default function RootLayout({
   const isProd =
     !process.env.NEXT_PUBLIC_API_BASE_URL?.includes("uat") &&
     !process.env.NEXT_PUBLIC_API_BASE_URL?.includes("dev");
- 
+
   return (
     <html lang="en" className={poppins.variable}>
-      <head />
-      <body className={poppins.className}>
-        <MainLayout isProd={isProd}>{children}</MainLayout>
- 
-        {/* Google Analytics */}
+      <head>
+        {/* Microsoft Clarity */}
+        <Script id="clarity-script" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "rxk45w9f02");
+          `}
+        </Script>
+        {/* Google Tag Manager */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-REE72KGV61"
           strategy="afterInteractive"
@@ -61,7 +68,10 @@ export default function RootLayout({
             gtag('config', 'G-REE72KGV61');
           `}
         </Script>
- 
+      </head>
+      <body className={poppins.className}>
+        <MainLayout isProd={isProd}>{children}</MainLayout>
+
         {/* LinkedIn Insight Tag */}
         <Script id="linkedin-insight-init" strategy="afterInteractive">
           {`

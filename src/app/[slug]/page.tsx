@@ -120,7 +120,7 @@ export async function generateMetadata({
       product?.meta?.metaWords ||
       "Green building materials, sustainable building materials, eco-friendly construction, etc.";
 
-    const canonicalUrl = `https://hubeco.market/products/${params.slug}`;
+    const canonicalUrl = `https://hubeco.market/${params.slug}`;
 
     const images =
       metaImages.length > 0

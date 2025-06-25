@@ -630,9 +630,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
     const result = err?.response;
 
     if (result?.status === 400) {
-      if (
-        result?.data?.message == "Item out of stock"
-      ) {
+      if (result?.data?.message == "Item out of stock") {
         toast.error("Out of Stock");
       }
     } else if (result?.status === 404) {
@@ -963,7 +961,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               ? totalProduct?.categoryId?.name
               : ""
           }`,
-          href: '/products',
+          href: "/products",
         }}
         link3={{
           name: `${
@@ -1343,9 +1341,11 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   <></>
                 )}
               </div>
-              <p className="text-[13px] text-primary text-normal mt-2">
-                Inclusive of all taxes
-              </p>
+              {totalProduct?.purchaseType !== "QUOTE" && (
+                <p className="text-[13px] text-primary text-normal mt-2">
+                  Inclusive of all taxes
+                </p>
+              )}
               {/* Price Section End*/}
               {/* Quantity Section Start */}
               {productData?.status == "PUBLISHED" &&
@@ -2502,7 +2502,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                       //       ).replace("//admin", "/admin")
                                       //     : `${assetURL}/${attachment?.value}`
                                       // }
-                                      src={normalizePath(`${assetURL}/${attachment?.value}`)}
+                                      src={normalizePath(
+                                        `${assetURL}/${attachment?.value}`
+                                      )}
                                       className="p-[10px] rounded "
                                       onError={(e) => {
                                         e.currentTarget.src =

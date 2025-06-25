@@ -1269,7 +1269,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               {/* Price Section Start*/}
               <div className="mt-3">
                 {/* {totalProduct?.purchaseType === "QUOTE" ? ( */}
-                {false ? (
+                {totalProduct?.purchaseType === "QUOTE" ? (
                   <></>
                 ) : productData?.MRP && productData?.discountedPrice ? (
                   <div className="block justify-start items-center">

@@ -832,48 +832,62 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
   }, [selectedAddress, quoteDueDate, submissionInstruction, notes]);
 
   const CheckDelivery = async (pincode: any) => {
-    if (pincode > 0 && pincode.length != 6) {
+    if (pincode > 0 && pincode.length !== 6) {
       setShowMssg(false);
       setDeliveyAvailable(false);
-    } else if (pincode > 0 && pincode.length == 6) {
+      return;
+    }
+  
+    if (pincode > 0 && pincode.length === 6) {
       const res = (await callApi(`pincodeInfo/${pincode}`, "GET")) as any;
-
-      // if (res?.data?.length == 0) {
-      //   return;
-      // }
-
+  
       let state = "";
+      let city = "";
       setShowMssg(true);
       setDeliveyAvailable(false);
+  
       if (res?.data?.length > 0) {
-        for (const component of res?.data[0]?.address_components) {
-          if (component.types.includes("administrative_area_level_1")) {
+        const components = res.data[0]?.address_components || [];
+  
+        for (const component of components) {
+          const types = component.types || [];
+  
+          if (types.includes("administrative_area_level_1")) {
             state = component.long_name;
-            if (
-              totalProduct &&
-              totalProduct?.deliveryZones &&
-              totalProduct?.deliveryZones?.length > 0
-            ) {
-              let isDeliveryAvailable = false;
-              totalProduct?.deliveryZones?.forEach((item: any) => {
-                if (item === state) {
-                  isDeliveryAvailable = true;
-                }
-              });
-              setDeliveyAvailable(isDeliveryAvailable);
-
-              // if(isDeliveryAvailable){
-              // setShowMssg(true);
-              // }
-            }
+          }
+  
+          if (types.includes("locality")) {
+            city = component.long_name;
           }
         }
+  
+        const cityZones = totalProduct?.deliveryZonesCities || [];
+        const stateZones = totalProduct?.deliveryZones || [];
+  
+        let isDeliveryAvailable = false;
+  
+        // ✅ Rule 1: If cities are defined, match must happen at city level only
+        if (cityZones.length > 0) {
+          if (city && cityZones.includes(city)) {
+            isDeliveryAvailable = true;
+          }
+        }
+        // ✅ Rule 2: If no cities defined, fallback to state check
+        else {
+          if (state && stateZones.includes(state)) {
+            isDeliveryAvailable = true;
+          }
+        }
+  
+        setDeliveyAvailable(isDeliveryAvailable);
       }
     } else {
       setShowMssg(false);
       setDeliveyAvailable(false);
     }
   };
+  
+  
 
   function checkBuyerLogin() {
     const buyer = sessionStorage.getItem("buyerUserInfo");

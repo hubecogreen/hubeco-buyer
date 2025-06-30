@@ -1,6 +1,6 @@
 // /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_PROD_URL || "https://hubeco.market", // Replace with your domain
+  siteUrl: process.env.NEXT_PUBLIC_PROD_URL || "https://uat.hubeco.market", // Replace with your domain
   generateRobotsTxt: true, // Automatically generate robots.txt
   sitemapSize: 10000000, // Number of URLs per sitemap file
   sitemapBaseFileName: "sitemap",

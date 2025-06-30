@@ -32,7 +32,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'assets.hubeco.market',
+        hostname: 'assets-uat.hubeco.market',
         // hostname: 'assets.hubeco.market',
         port: '',
         pathname: '/**',

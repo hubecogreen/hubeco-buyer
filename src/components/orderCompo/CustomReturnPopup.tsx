@@ -16,6 +16,15 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { set } from "lodash";
 import { FaFilePdf } from "react-icons/fa";
 import Link from "next/link";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
   if (!open) return null; // Don't render if the popup is closed
@@ -30,6 +39,21 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
   const { callApi } = useApi();
   const token = getCookie("token") as string;
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
+  const [customReturnReason, setCustomReturnReason] = useState("");
+
+  const handleReturnReasonChange = (e:any) => {
+    const value = e.target?.value || e.value || e; // handle both native and Select usage
+    setReturnReason(value);
+    if (value !== "Other") {
+      setCustomReturnReason('');
+    }
+  };  
+
+  const handleCustomReturnReasonChange = (e: React.ChangeEvent<HTMLTextAreaElement> | string) => {
+    const value = typeof e === 'string' ? e : e.target.value;
+    setCustomReturnReason(value);
+  };
+  
 
   const handleReturn = async () => {
     if (returnReason.length == 0 && imagesArry.length === 0) {
@@ -52,7 +76,7 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
     var now = dayjs();
     const payload = {
       orderId: orderId,
-      reason: returnReason,
+      reason: returnReason === "Other" ? customReturnReason : returnReason,
       returnType: "Refund",
       timeStamp: now,
       attachments: payloadImgArr,
@@ -69,7 +93,7 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
       if (result.data == null) {
         handleReturnApiError(result?.errorData, orderId);
       } else {
-        toast.success("Order Returned Successfully");
+        toast.success("Order Return Requested Successfully");
         // reloadPage();
         window.location.reload();
       }
@@ -129,16 +153,16 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
     }
   };
 
-  const handleReturnReasonChange = (value: any) => {
-    // console.log("ReasonValue", value);
-    setReturnReason(value);
-    if (value.length < 3) {
-      setReturnReasonError("Reason should be more than 3 characters");
-    } else {
-      setReturnReasonError("");
-    }
-    setReturnReason(value);
-  };
+  // const handleReturnReasonChange = (value: any) => {
+  //   // console.log("ReasonValue", value);
+  //   setReturnReason(value);
+  //   if (value.length < 3) {
+  //     setReturnReasonError("Reason should be more than 3 characters");
+  //   } else {
+  //     setReturnReasonError("");
+  //   }
+  //   setReturnReason(value);
+  // };
 
   const extractPath = (url: string): string => {
     try {
@@ -163,10 +187,10 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
       if (response.status === 200) {
         const extractedPath = extractPath(response.data.url);
         setPayloadImgArr((prev: any) => [...prev, extractedPath]);
-        await axios.put(response.data.url, file,{
+        await axios.put(response.data.url, file, {
           headers: {
-            'Content-Type': file.type
-          }
+            "Content-Type": file.type,
+          },
         });
       }
     } catch (err: any) {
@@ -232,8 +256,8 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
               alt="return order"
               width={70}
               height={70}
-              onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+              onError={(e) => {
+                e.currentTarget.src = "/images/product-placeholder.jpg";
               }}
               loading="lazy"
               className="mb-3"
@@ -252,13 +276,41 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
             >
               Reason for Return <span className="text-red">*</span>
             </label>
-            <CustomInput
-              placeholder="Enter Reason"
+
+            {/* Custom Select Component */}
+            <Select
               value={returnReason}
-              onChange={handleReturnReasonChange}
-              extraClassnames="w-full p-2 border border-gray-300 rounded resize-none"
-              isTextArea={true}
-            />
+              onValueChange={(value) =>
+                handleReturnReasonChange({ target: { value } })
+              }
+            >
+              <SelectTrigger className="w-full p-2 border border-gray-300 rounded mb-2">
+                <SelectValue placeholder="Select a reason" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="Damaged Goods">Damaged Goods</SelectItem>
+                  <SelectItem value="Partial Damage">Partial Damage</SelectItem>
+                  <SelectItem value="Not Delivered">Not Delivered</SelectItem>
+                  <SelectItem value="Wrong Product Delivered">
+                    Wrong Product Delivered
+                  </SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+
+            {/* Textarea for additional/custom reason */}
+            {returnReason === "Other" && (
+              <CustomInput
+                placeholder="Enter Reason"
+                value={customReturnReason}
+                onChange={handleCustomReturnReasonChange}
+                extraClassnames="w-full p-2 border border-gray-300 rounded resize-none"
+                isTextArea={true}
+              />
+            )}
+
             {returnReasonError && (
               <p className="text-red text-sm mt-1">{returnReasonError}</p>
             )}
@@ -349,8 +401,9 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
                           className="rounded !w-[100px] !h-[100px]"
                           width={100}
                           height={100}
-                          onError={e => {
-                            e.currentTarget.src = '/images/product-placeholder.jpg'
+                          onError={(e) => {
+                            e.currentTarget.src =
+                              "/images/product-placeholder.jpg";
                           }}
                           // loading="lazy"
                           loading="eager"

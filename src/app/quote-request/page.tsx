@@ -364,7 +364,7 @@ const QuoteRequest = () => {
       </div>
 
       {totalPages > 1 && (
-        <div className="flex justify-end mb-4 items-center border-t border-t-transparent mt-8">
+        <div className="flex justify-center mb-4 items-center border-t border-t-transparent mt-8">
           <Pagination
             totalItems={totalPages}
             itemsPerPage={limit}

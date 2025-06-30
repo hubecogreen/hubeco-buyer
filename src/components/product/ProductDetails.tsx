@@ -630,9 +630,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
     const result = err?.response;
 
     if (result?.status === 400) {
-      if (
-        result?.data?.message == "Item out of stock"
-      ) {
+      if (result?.data?.message == "Item out of stock") {
         toast.error("Out of Stock");
       }
     } else if (result?.status === 404) {
@@ -834,48 +832,62 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
   }, [selectedAddress, quoteDueDate, submissionInstruction, notes]);
 
   const CheckDelivery = async (pincode: any) => {
-    if (pincode > 0 && pincode.length != 6) {
+    if (pincode > 0 && pincode.length !== 6) {
       setShowMssg(false);
       setDeliveyAvailable(false);
-    } else if (pincode > 0 && pincode.length == 6) {
+      return;
+    }
+  
+    if (pincode > 0 && pincode.length === 6) {
       const res = (await callApi(`pincodeInfo/${pincode}`, "GET")) as any;
-
-      // if (res?.data?.length == 0) {
-      //   return;
-      // }
-
+  
       let state = "";
+      let city = "";
       setShowMssg(true);
       setDeliveyAvailable(false);
+  
       if (res?.data?.length > 0) {
-        for (const component of res?.data[0]?.address_components) {
-          if (component.types.includes("administrative_area_level_1")) {
+        const components = res.data[0]?.address_components || [];
+  
+        for (const component of components) {
+          const types = component.types || [];
+  
+          if (types.includes("administrative_area_level_1")) {
             state = component.long_name;
-            if (
-              totalProduct &&
-              totalProduct?.deliveryZones &&
-              totalProduct?.deliveryZones?.length > 0
-            ) {
-              let isDeliveryAvailable = false;
-              totalProduct?.deliveryZones?.forEach((item: any) => {
-                if (item === state) {
-                  isDeliveryAvailable = true;
-                }
-              });
-              setDeliveyAvailable(isDeliveryAvailable);
-
-              // if(isDeliveryAvailable){
-              // setShowMssg(true);
-              // }
-            }
+          }
+  
+          if (types.includes("locality")) {
+            city = component.long_name;
           }
         }
+  
+        const cityZones = totalProduct?.deliveryZonesCities || [];
+        const stateZones = totalProduct?.deliveryZones || [];
+  
+        let isDeliveryAvailable = false;
+  
+        // ✅ Rule 1: If cities are defined, match must happen at city level only
+        if (cityZones.length > 0) {
+          if (city && cityZones.includes(city)) {
+            isDeliveryAvailable = true;
+          }
+        }
+        // ✅ Rule 2: If no cities defined, fallback to state check
+        else {
+          if (state && stateZones.includes(state)) {
+            isDeliveryAvailable = true;
+          }
+        }
+  
+        setDeliveyAvailable(isDeliveryAvailable);
       }
     } else {
       setShowMssg(false);
       setDeliveyAvailable(false);
     }
   };
+  
+  
 
   function checkBuyerLogin() {
     const buyer = sessionStorage.getItem("buyerUserInfo");
@@ -963,7 +975,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               ? totalProduct?.categoryId?.name
               : ""
           }`,
-          href: '/products',
+          href: "/products",
         }}
         link3={{
           name: `${
@@ -1269,7 +1281,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               {/* Price Section Start*/}
               <div className="mt-3">
                 {/* {totalProduct?.purchaseType === "QUOTE" ? ( */}
-                {false ? (
+                {totalProduct?.purchaseType === "QUOTE" ? (
                   <></>
                 ) : productData?.MRP && productData?.discountedPrice ? (
                   <div className="block justify-start items-center">
@@ -1343,9 +1355,11 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   <></>
                 )}
               </div>
-              <p className="text-[13px] text-primary text-normal mt-2">
-                Inclusive of all taxes
-              </p>
+              {totalProduct?.purchaseType !== "QUOTE" && (
+                <p className="text-[13px] text-primary text-normal mt-2">
+                  Inclusive of all taxes
+                </p>
+              )}
               {/* Price Section End*/}
               {/* Quantity Section Start */}
               {productData?.status == "PUBLISHED" &&
@@ -2502,7 +2516,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                       //       ).replace("//admin", "/admin")
                                       //     : `${assetURL}/${attachment?.value}`
                                       // }
-                                      src={normalizePath(`${assetURL}/${attachment?.value}`)}
+                                      src={normalizePath(
+                                        `${assetURL}/${attachment?.value}`
+                                      )}
                                       className="p-[10px] rounded "
                                       onError={(e) => {
                                         e.currentTarget.src =

@@ -241,6 +241,8 @@ const RecentViewCard = ({
     return new Intl.NumberFormat("en-IN", options).format(roundedAmount);
   }
 
+  console.log('product cokdoeeof',product, purchaseType)
+
   return (
     <div
       className={`bg-white group border border-borderGray rounded-sm overflow-hidden shadow-sm hover:bg-[#E8E8E8] hover:shadow-lg transition-shadow duration-300 cursor-pointer`}
@@ -335,22 +337,21 @@ const RecentViewCard = ({
             )}
           </h3>
 
-          <div className="flex justify-between items-center">
-            {/* {product?.purchaseType === "QUOTE" ? ( */}
-            {false ? (
+          {/* <div className="flex justify-between items-center">
+            {purchaseType === "QUOTE" ? (
               <></>
             ) : product?.platformPrice ? (
+              
               <p className="text-xl text-[#01B6A3] font-bold">
                 <span className="text-xl text-[#01B6A3] mr-1 font-mono font-normal">
                   ₹
                 </span>
-
                 {formatCurrencyInIndianStyle(product?.platformPrice.toFixed(2))}
               </p>
             ) : (
               <></>
             )}
-          </div>
+          </div> */}
         </div>
         {/* <p className="text-sm text-gray-600 mb-2">{product.description}</p> */}
         {/* <div className="flex items-center justify-between space-x-3 mt-2 ">

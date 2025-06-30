@@ -111,9 +111,7 @@ const ProductCard = ({
     const result = err?.response;
 
     if (result?.status === 400) {
-      if (
-        result?.data?.message == "Item out of stock"
-      ) {
+      if (result?.data?.message == "Item out of stock") {
         toast.error("Out of Stock");
       }
     } else if (result?.status === 404) {
@@ -407,8 +405,7 @@ const ProductCard = ({
             <span className="line-clamp-2">{product.productName}</span>
           </h3>
 
-          <div className="flex justify-between items-center">
-            {/* {product?.purchaseType === "QUOTE" ? ( */}
+          {/* <div className="flex justify-between items-center">
             {false ? (
               <></>
             ) : product?.mrp && product?.discountedPrice ? (
@@ -432,19 +429,24 @@ const ProductCard = ({
                     {formatCurrencyInIndianStyle(product?.platformPrice)}
                   </p>
                 )}
-                {/* <p
-                  className={`${
-                    product.mrp == product?.discountedPrice
-                      ? "text-xl text-[#01B6A3] font-bold"
-                      : "text-md  font-medium text-[#ababab] line-through ml-2"
-                  }`}
-                >
-                  <span className="text-xl text-[#01B6A3] mr-1" style={{fontWeight:'400',fontFamily:'monospace'}}> ₹</span>{product?.platformPrice}
-                </p> */}
               </div>
             ) : (
               <></>
             )}
+          </div> */}
+          <div className="flex justify-between items-center">
+            {product?.purchaseType !== "QUOTE" &&
+              product?.mrp &&
+              product?.discountedPrice && (
+                <div className="flex items-center flex-row">
+                  <p className="text-xl text-[#01B6A3] font-bold">
+                    <span className="text-xl text-[#01B6A3] mr-1 font-normal font-mono">
+                      ₹
+                    </span>
+                    {formatCurrencyInIndianStyle(product?.platformPrice)}
+                  </p>
+                </div>
+              )}
           </div>
         </div>
         {/* <p className="text-sm text-gray-600 mb-2">{product.description}</p> */}

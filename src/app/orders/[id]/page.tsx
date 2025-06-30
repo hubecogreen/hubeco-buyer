@@ -201,17 +201,18 @@ export default function OrdersPage({ params }: any) {
     }
   };
 
-  const handleDownload = async (url: any) => {
+  const handleDownload = async (url: string, customFileName: string) => {
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Failed to download file");
       }
-
-      const blob = await response.blob(); // Get the file data as a blob
-      const fileName = url.split("/").pop(); // Extract the file name from the URL
-
-      // Create a blob URL and trigger download
+  
+      const blob = await response.blob();
+  
+      // Use provided custom file name
+      const fileName = customFileName || url.split("/").pop() || "downloaded-file";
+  
       const blobUrl = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = blobUrl;
@@ -219,12 +220,12 @@ export default function OrdersPage({ params }: any) {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-
-      // Revoke the blob URL after download
+  
       window.URL.revokeObjectURL(blobUrl);
     } catch (error: any) {
-      window.open(url);
-      // consoleerror("Download Failed:", error?.message);
+      // As fallback, open in a new tab
+      window.open(url, "_blank");
+      // console.error("Download failed:", error?.message);
     }
   };
 
@@ -418,7 +419,7 @@ export default function OrdersPage({ params }: any) {
                                     onClick={() =>
                                       // window.open(`${assetURL}/${order?.buyerInvoiceLink}`, "_blank")
                                       handleDownload(
-                                        `${assetURL}/${order?.buyerInvoiceLink}`
+                                        `${assetURL}/${order?.buyerInvoiceLink}`, `Hubeco Invoice_${order?.orderId}`
                                       )
                                     }
                                     variant={"outline"}
@@ -460,7 +461,7 @@ export default function OrdersPage({ params }: any) {
                                     onClick={() =>
                                       // window.open(`${assetURL}/${order?.buyerInvoiceLink}`, "_blank")
                                       handleDownload(
-                                        `${assetURL}/${order?.creditNoteInfo?.creditNoteLink}`
+                                        `${assetURL}/${order?.creditNoteInfo?.creditNoteLink}`, `Hubeco Credit Note_${order?.creditNoteInfo?.creditNoteNumber}`
                                       )
                                     }
                                     variant={"outline"}
@@ -579,7 +580,7 @@ export default function OrdersPage({ params }: any) {
                                     onClick={() =>
                                       // window.open(`${assetURL}/${order?.buyerInvoiceLink}`, "_blank")
                                       handleDownload(
-                                        `${assetURL}/${order?.buyerInvoiceLink}`
+                                        `${assetURL}/${order?.buyerInvoiceLink}`, `Hubeco Invoice_${order?.orderId}`
                                       )
                                     }
                                     variant={"outline"}
@@ -621,7 +622,7 @@ export default function OrdersPage({ params }: any) {
                                   onClick={() =>
                                     // window.open(`${assetURL}/${order?.buyerInvoiceLink}`, "_blank")
                                     handleDownload(
-                                      `${assetURL}/${order?.creditNoteInfo?.creditNoteLink}`
+                                      `${assetURL}/${order?.creditNoteInfo?.creditNoteLink}`, `Hubeco Credit Note_${order?.creditNoteInfo?.creditNoteNumber}`
                                     )
                                   }
                                   variant={"outline"}
@@ -726,7 +727,7 @@ export default function OrdersPage({ params }: any) {
                           onClick={() =>
                             // window.open(`${assetURL}/${order?.buyerInvoiceLink}`, "_blank")
                             handleDownload(
-                              `${assetURL}/${selectedOrder?.purchaseOrder}`
+                              `${assetURL}/${selectedOrder?.purchaseOrder}`, `Hubeco PO_${selectedOrder?.purchaseOrderNumber}`
                             )
                           }
                           variant={"outline"}

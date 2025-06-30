@@ -78,6 +78,7 @@ export default function RecentlyViewed() {
         }
       };
 
+      console.log('recentProducts',recentProducts)
     return (
     <div className="bg-white  block w-full  md:py-12 py-8 px-4 ">
             <p className="md:text-[30px] text-black font-bold text-md mb-4">
@@ -85,7 +86,7 @@ export default function RecentlyViewed() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {recentProducts && recentProducts?.map((product: any) => (
-                <ProductCard key={product?.id} product={product}  />
+                <ProductCard key={product?.id} product={product}/>
               ))}
             </div>
           </div>

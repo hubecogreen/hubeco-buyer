@@ -202,7 +202,7 @@ export default function Page() {
           handleBuyApiError(result?.errorData);
         } else {
           toast.success(
-            "Registration Successful, redirecting you to the Payment page",
+            "Redirecting you to the Payment page",
             {
               iconTheme: {
                 primary: "#439787",

@@ -259,27 +259,21 @@ const Cart = () => {
           getEndpoint.default.ADDRESSES,
           "GET"
         )) as any;
-        // // console.log('testing response',response)
-        // // console.log("addresses", response);
         if (response?.data) {
-          setAddresses(response?.data); // Assuming API response contains `addresses` array
+          setAddresses(response?.data); 
           if (response?.data?.length > 0) {
             const addId =
               response &&
               response?.data.forEach((element: any) => {
                 if (element?.isDefault == true) {
                   handleCalculateShipping(element);
-                } else {
                 }
               });
           } else {
             setEnableCheckout(false);
             setOpenShipping(true);
-            toast.success("Please add shipping address to enable checkout", {
-              iconTheme: {
-                primary: "#439787",
-                secondary: "#FFFAEE",
-              },
+            toast.error("Please add delivery address to proceed with checkout", {
+              duration: 4000
             });
           }
         }
@@ -613,20 +607,23 @@ const Cart = () => {
                           <div className="flex justify-between items-center mb-4">
                             <p>Delivery Charges</p>
                             <p>
-                              {cost?.deliveryCharges > 0 ? (
-                                <span className="">
-                                  <span
-                                   className="text-black text-lg font-normal font-mono mr-[5px]"
-
-                                  >
-                                    ₹
+                              {addresses.length > 0 ? (
+                                cost?.deliveryCharges > 0 ? (
+                                  <span className="">
+                                    <span
+                                     className="text-black text-lg font-normal font-mono mr-[5px]"
+                                    >
+                                      ₹
+                                    </span>
+                                    {formatCurrencyInIndianStyle(
+                                      cost?.deliveryCharges
+                                    )}
                                   </span>
-                                  {formatCurrencyInIndianStyle(
-                                    cost?.deliveryCharges
-                                  )}
-                                </span>
+                                ) : (
+                                  <span className="text-[#009886]">Free</span>
+                                )
                               ) : (
-                                <span className="text-[#009886]">Free</span>
+                                <span className="text-gray-500">Not Available</span>
                               )}
                             </p>
                           </div>

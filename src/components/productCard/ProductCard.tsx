@@ -412,7 +412,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
             <div className="flex justify-between items-center">
               {/* {product?.purchaseType === "QUOTE" ? ( */}
-              {false ? (
+              {product?.purchaseType === "QUOTE" ? (
                 <></>
               ) : product?.mrp && product?.discountedPrice ? (
                 <div className="flex items-center flex-row">

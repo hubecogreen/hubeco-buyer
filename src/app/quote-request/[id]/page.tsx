@@ -267,17 +267,18 @@ const QuoteDetails = ({ id }: any) => {
     return val;
   }
 
-  const handleDownload = async (url: any) => {
+  const handleDownload = async (url: string, customFileName: string) => {
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Failed to download file");
       }
-
-      const blob = await response.blob(); // Get the file data as a blob
-      const fileName = url.split("/").pop(); // Extract the file name from the URL
-
-      // Create a blob URL and trigger download
+  
+      const blob = await response.blob();
+  
+      // Use provided custom file name
+      const fileName = customFileName || url.split("/").pop() || "downloaded-file";
+  
       const blobUrl = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = blobUrl;
@@ -285,14 +286,15 @@ const QuoteDetails = ({ id }: any) => {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-
-      // Revoke the blob URL after download
+  
       window.URL.revokeObjectURL(blobUrl);
     } catch (error: any) {
-      window.open(url);
-      // consoleerror("Download Failed:", error?.message);
+      // As fallback, open in a new tab
+      window.open(url, "_blank");
+      // console.error("Download failed:", error?.message);
     }
   };
+  
 
   if (loading) {
     return (
@@ -459,7 +461,7 @@ const QuoteDetails = ({ id }: any) => {
                           <Button
                             onClick={() =>
                               handleDownload(
-                                `${assetUrl}/${initialState?.purchaseOrder}`
+                                `${assetUrl}/${initialState?.purchaseOrder}`, `Hubeco PO_${initialState?.purchaseOrderNumber}`
                               )
                             }
                             variant={"outline"}

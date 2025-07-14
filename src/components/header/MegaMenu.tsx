@@ -245,32 +245,38 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                       }}
                     >
                       {mainCategories.map((category, index) => (
-                        <div
-                          key={category._id}
-                          className={`flex items-center justify-between p-4 cursor-pointer rounded-lg mb-2 transition-all duration-200 ${
-                            selectedCategory?._id === category._id ||
-                            (index === 0 && !selectedCategory)
-                              ? "bg-teal-600 text-white shadow-sm"
-                              : "bg-white hover:bg-gray-50 text-gray-700"
-                          }`}
-                          onClick={() => handleCategoryClick(category)}
-                        >
-                          <span className="text-sm font-medium">
-                            {category.name}
-                          </span>
-                          {category.subCategories &&
-                            category.subCategories.length > 0 && (
-                              <GoArrowRight
-                                size={18}
-                                className={`transition-colors duration-200 ${
-                                  selectedCategory?._id === category._id ||
-                                  (index === 0 && !selectedCategory)
-                                    ? "text-white"
-                                    : "text-gray-400"
-                                }`}
-                              />
-                            )}
-                        </div>
+                       <div
+                       key={category._id}
+                       className={`flex items-center justify-between p-4 rounded-lg mb-2 transition-all duration-200
+                         ${
+                           selectedCategory?._id === category._id ||
+                           (index === 0 && !selectedCategory)
+                             ? "bg-teal-600 text-white shadow-sm"
+                             : "bg-white hover:bg-gray-50 text-gray-700"
+                         }
+                         ${category.subCategories && category.subCategories.length > 0 ? "cursor-pointer" : "cursor-default"}
+                       `}
+                       onClick={
+                         category.subCategories && category.subCategories.length > 0
+                           ? () => handleCategoryClick(category)
+                           : undefined
+                       }
+                     >
+                       <span className="text-sm font-medium">
+                         {category.name}
+                       </span>
+                       {category.subCategories && category.subCategories.length > 0 && (
+                         <GoArrowRight
+                           size={18}
+                           className={`transition-colors duration-200 ${
+                             selectedCategory?._id === category._id ||
+                             (index === 0 && !selectedCategory)
+                               ? "text-white"
+                               : "text-gray-400"
+                           }`}
+                         />
+                       )}
+                     </div>                     
                       ))}
                     </div>
                   </div>

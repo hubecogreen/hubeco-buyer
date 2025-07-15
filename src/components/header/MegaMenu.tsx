@@ -257,7 +257,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                        }
                        ${category.subCategories && category.subCategories.length > 0 ? "cursor-pointer" : "cursor-default"}
                      `}
-                     onClick={
+                     onMouseEnter={
                        category.subCategories && category.subCategories.length > 0
                          ? () => handleCategoryClick(category)
                          : undefined
@@ -312,7 +312,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                           style={{ margin: "20px" }}
                         >
                           <div
-                            className="p-6 overflow-y-auto max-h-[400px]"
+                            className="p-6 pt-0 overflow-y-auto max-h-[400px]"
                             style={{
                               scrollbarWidth: "thin",
                               scrollbarColor: "#c1c1c1 #f1f1f1",
@@ -374,7 +374,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                   ) {
                                     // Group child categories into rows of 4 items each (like the table columns)
                                     const children = subCat.childCategories;
-                                    const itemsPerRow = 3;
+                                    const itemsPerRow = 2;
 
                                     // 1. Calculate number of rows needed
                                     const numRows = Math.ceil(children.length / itemsPerRow);

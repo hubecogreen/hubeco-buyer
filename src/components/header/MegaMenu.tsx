@@ -285,11 +285,11 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                   <div className="flex-1 bg-white relative">
                     {/* Background image with left margin and custom height */}
                     <div
-                      className="absolute right-0 bottom-0 w-[250px] h-[200px] bg-[url('/images/logo-banner.png')] bg-contain bg-no-repeat"
+                      className="absolute right-0 bottom-0 w-[200px] h-[200px] bg-[url('/images/logo-banner.png')] bg-contain bg-no-repeat"
                       style={{
                         right: "30px", // Creates margin on the left side of the image
                         bottom: "20px",
-                        backgroundSize: "250px 200px", // Increased height (250px wide × 200px tall)
+                        backgroundSize: "190px 200px", // Increased height (250px wide × 200px tall)
                       }}
                     ></div>
                     {(selectedCategory || mainCategories.length > 0) && (
@@ -304,11 +304,11 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                         </div>
 
                         {/* Content Area */}
-                        <div className="flex h-[400px]">
+                        <div className="flex h-[380px]">
                           {/* Subcategories Column with Gray Background */}
                           <div
-                            className="w-[300px] bg-[#F5F5F5] border-r rounded-lg flex flex-col"
-                            style={{ margin: "30px" }}
+                            className="w-[300px] bg-[#FFFFFF] border-r rounded-lg flex flex-col"
+                            style={{ margin: "20px" }}
                           >
                             <div
                               className="p-6 overflow-y-auto max-h-[400px]"

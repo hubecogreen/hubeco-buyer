@@ -41,11 +41,21 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
       setSelectedParentId([]);
       setSelectedCats([]);
       setCategorySearch("");
+    };
+    resetOptions();
+  }, [pathname, searchParams]);
+
+  useEffect(() => {
+    const resetOptions = () => {
+      // Reset selected categories and parent
+      setSelectedParentId([]);
+      setSelectedCats([]);
+      setCategorySearch("");
       setVisibleCategoriesCount(10);
       fetchCategories()
     };
     resetOptions();
-  }, [pathname, searchParams, refresh]);
+  }, [refresh]);
 
   const fetchCategories = async () => {
     try {

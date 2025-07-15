@@ -308,7 +308,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                       <div className="flex h-[380px]">
                         {/* Subcategories Column with Gray Background */}
                         <div
-                          className="w-[300px] bg-[#FFFFFF] border-r rounded-lg flex flex-col"
+                          className="w-[300px] bg-[#FFFFFF] border-r rounded-none flex flex-col"
                           style={{ margin: "20px" }}
                         >
                           <div

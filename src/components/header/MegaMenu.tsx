@@ -232,7 +232,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                         <button className="absolute right-4 top-1/2 transform -translate-y-1/2">
                           <Search size={20} className="text-gray-400" />
                         </button> */}
-                        <p className="font-bold text-xl">Categories</p>
+                        <p className="font-bold text-xl pb-5">Categories</p>
                       </div>
                     </div>
 
@@ -372,20 +372,21 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                       subCat.childCategories.length > 0
                                     ) {
                                       // Group child categories into rows of 4 items each (like the table columns)
-                                      const rows = [];
+                                      const children = subCat.childCategories;
                                       const itemsPerRow = 3;
-                                      for (
-                                        let i = 0;
-                                        i < subCat.childCategories.length;
-                                        i += itemsPerRow
-                                      ) {
-                                        rows.push(
-                                          subCat.childCategories.slice(
-                                            i,
-                                            i + itemsPerRow
-                                          )
-                                        );
-                                      }
+
+                                      // 1. Calculate number of rows needed
+                                      const numRows = Math.ceil(children.length / itemsPerRow);
+
+                                      // 2. Build columns
+                                      const columns = Array.from({ length: itemsPerRow }, (_, colIdx) =>
+                                        children.filter((_, idx) => idx % itemsPerRow === colIdx)
+                                      );
+
+                                      // 3. Build rows from columns
+                                      const tableRows = Array.from({ length: numRows }, (_, rowIdx) =>
+                                        columns.map(col => col[rowIdx] || null)
+                                      );
 
                                       return (
                                         <div
@@ -399,51 +400,27 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                           <div className="w-full overflow-x-auto">
                                             <table className="w-full border-collapse">
                                               <tbody>
-                                                {rows.map((row, rowIndex) => (
-                                                  <tr
-                                                    key={rowIndex}
-                                                    className={`${
-                                                      rowIndex < rows.length - 1
-                                                        ? ""
-                                                        : ""
-                                                    } hover:bg-gray-50`}
-                                                  >
-                                                    {row.map(
-                                                      (child, colIndex) => (
-                                                        <td
-                                                          key={child._id}
-                                                          className={`py-3 px-4 ${
-                                                            colIndex === 0
-                                                              ? "text-gray-600"
-                                                              : "text-gray-600"
-                                                          }`}
-                                                        >
+                                                {tableRows.map((row, rowIndex) => (
+                                                  <tr key={rowIndex} className="hover:bg-gray-50">
+                                                    {row.map((child, colIndex) => (
+                                                      <td
+                                                        key={child ? child._id : `empty-${colIndex}`}
+                                                        className="py-3 px-4 text-gray-600 align-top"
+                                                      >
+                                                        {child ? (
                                                           <a
                                                             href={`/products?ccid=${child._id}`}
                                                             className="block hover:text-teal-600 transition-colors duration-200"
                                                             onClick={() => {
                                                               toggleSidebar();
-                                                              handleClick(
-                                                                child
-                                                              );
+                                                              handleClick(child);
                                                             }}
                                                           >
                                                             {child.name}
                                                           </a>
-                                                        </td>
-                                                      )
-                                                    )}
-                                                    {/* Fill empty cells if row has less than 4 items */}
-                                                    {Array(
-                                                      itemsPerRow - row.length
-                                                    )
-                                                      .fill()
-                                                      .map((_, i) => (
-                                                        <td
-                                                          key={`empty-${i}`}
-                                                          className="py-3 px-4"
-                                                        ></td>
-                                                      ))}
+                                                        ) : null}
+                                                      </td>
+                                                    ))}
                                                   </tr>
                                                 ))}
                                               </tbody>

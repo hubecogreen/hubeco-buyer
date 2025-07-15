@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import React from "react";
 import Script from "next/script";
 import MainLayout from "@/components/home/MainLayout";
+import WhatsAppWidget from "@/components/WhatsApp";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -115,6 +116,7 @@ export default function RootLayout({
             src="https://px.ads.linkedin.com/collect/?pid=8360633&fmt=gif"
           />
         </noscript>
+        <WhatsAppWidget />
       </body>
     </html>
   );

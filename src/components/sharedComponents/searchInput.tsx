@@ -34,8 +34,8 @@ export default function SearchInput({
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
-    // Allow only letters and numbers
-    const alphanumericRegex = /^[a-zA-Z0-9]*$/;
+    // Allow letters, numbers, spaces, and hyphens
+    const alphanumericRegex = /^[a-zA-Z0-9\s-]*$/;
 
     if (alphanumericRegex.test(value)) {
       setInputValue(value);
@@ -43,9 +43,8 @@ export default function SearchInput({
   };
 
   const handleOnclickSearch = (value: any) => {
-    // console.log("crevtgrh", value);
-    // Allow only letters and numbers
-    const alphanumericRegex = /^[a-zA-Z0-9]*$/;
+    // Allow letters, numbers, spaces, and hyphens
+    const alphanumericRegex = /^[a-zA-Z0-9\s-]*$/;
 
     if (alphanumericRegex.test(value)) {
       setInputValue(value);

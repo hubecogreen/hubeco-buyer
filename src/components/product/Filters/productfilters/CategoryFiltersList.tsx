@@ -41,6 +41,8 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
       setSelectedParentId([]);
       setSelectedCats([]);
       setCategorySearch("");
+      setVisibleCategoriesCount(10);
+      fetchCategories()
     };
     resetOptions();
   }, [pathname, searchParams, refresh]);

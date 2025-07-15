@@ -398,7 +398,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                         <div className="absolute bottom-0 right-0 w-1/3 h-fullopacity-20"></div>
 
                                         {/* Table-like layout */}
-                                        <div className="w-full overflow-x-auto">
+                                        <div className="w-full overflow-x-auto max-h-[350px] overflow-y-auto">
                                           <table className="w-full border-collapse">
                                             <tbody>
                                               {tableRows.map((row, rowIndex) => (

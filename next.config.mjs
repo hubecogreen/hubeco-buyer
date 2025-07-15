@@ -1,21 +1,37 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    async headers() {
-      return [
-        {
-          source: '/sitemap.xml',
-          headers: [
-            {
-              key: 'Content-Type',
-              value: 'application/xml',
-            },
-          ],
-        },
-      ]
-    },
+  async headers() {
+    return [
+      {
+        source: "/sitemap.xml",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "application/xml",
+          },
+        ],
+      },
+    ];
+  },
+
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "www.hubeco.market",
+          },
+        ],
+        destination: "https://hubeco.market/:path*",
+        permanent: true,
+      },
+    ];
+  },
 
   reactStrictMode: false,
- 
+
   //   future: {
   //     webpack5: true,
   //   },
@@ -27,17 +43,17 @@ const nextConfig = {
   },
   images: {
     // domains: ['assets-dev.hubeco.market']
-    disableStaticImages:true,
-    unoptimized:true,
+    disableStaticImages: true,
+    unoptimized: true,
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'assets.hubeco.market',
+        protocol: "https",
+        hostname: "assets.hubeco.market",
         // hostname: 'assets.hubeco.market',
-        port: '',
-        pathname: '/**',
+        port: "",
+        pathname: "/**",
       },
-    ]
+    ],
   },
   webpack(config) {
     config.module.rules.push({

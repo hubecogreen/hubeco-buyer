@@ -200,248 +200,248 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
         <ul className="w-full flex flex-col md:flex-row justify-center items-center pr-4 font-poppins">
           {/* All button with hamburger icon, styled like other menu items */}
           <li
-            className={`${styles.hasSubmenu} ${styles.parentMenuItem} relative flex h-full mr-5`}
+            className={`relative flex h-full mr-5`}
+            onMouseEnter={() => setSidebarOpen(true)}
+            onMouseLeave={() => setSidebarOpen(false)}
           >
             <button
-              className={`block float-start font-semibold text-md py-2 pl-4 text-white flex items-center ${styles.parentMenuItemText} cursor-pointer`}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                toggleSidebar();
-              }}
+              className={` block float-start font-semibold text-md py-2 pl-4 text-white flex items-center cursor-pointer hover:font-semibold transition-colors duration-200`}
+              // onClick={(e) => {
+              //   e.preventDefault();
+              //   e.stopPropagation();
+              //   toggleSidebar();
+              // }}
             >
               <FiMenu className="mr-2" />
               All
             </button>
-            {sidebarOpen && (
-              <div
-                ref={sidebarRef}
-                className="absolute left-0 top-[100%] w-[1200px] bg-white shadow-lg z-50 rounded-lg overflow-hidden "
-              >
-                <div className="flex h-[500px]">
-                  {/* Left Side - Search and Categories */}
-                  <div className="w-[400px] bg-gray-50 flex flex-col">
-                    {/* Search Bar */}
-                    <div className="p-6 bg-white">
-                      <div className="relative bg-gray-50 ">
-                        {/* <input
-                          type="text"
-                          placeholder="Looking for"
-                          className="w-full bg-transparent border-none outline-none text-sm py-3 px-4 placeholder-gray-400"
-                        />
-                        <button className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                          <Search size={20} className="text-gray-400" />
-                        </button> */}
-                        <p className="font-bold text-xl pb-5">Categories</p>
-                      </div>
+            <div
+              ref={sidebarRef}
+              className={`${styles.allMenuPopup} ${sidebarOpen ? styles.open : ''} w-[1200px] bg-white shadow-lg z-50 rounded-lg overflow-hidden`}
+            >
+              <div className="flex h-[500px]">
+                {/* Left Side - Search and Categories */}
+                <div className="w-[400px] bg-gray-50 flex flex-col">
+                  {/* Search Bar */}
+                  <div className="p-6 bg-white">
+                    <div className="relative bg-gray-50 ">
+                      {/* <input
+                        type="text"
+                        placeholder="Looking for"
+                        className="w-full bg-transparent border-none outline-none text-sm py-3 px-4 placeholder-gray-400"
+                      />
+                      <button className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                        <Search size={20} className="text-gray-400" />
+                      </button> */}
+                      <p className="font-bold text-xl pb-5">Categories</p>
                     </div>
+                  </div>
 
-                    {/* Categories List with Scrolling */}
-                    <div
-                      className="flex-1 px-6 pb-6 overflow-y-auto max-h-[350px]"
-                      style={{
-                        scrollbarWidth: "thin",
-                        scrollbarColor: "#c1c1c1 #f1f1f1",
-                      }}
-                    >
-                      {mainCategories.map((category, index) => (
-                       <div
-                       key={category._id}
-                       className={`flex items-center justify-between p-4 rounded-lg mb-2 transition-all duration-200
-                         ${
+                  {/* Categories List with Scrolling */}
+                  <div
+                    className="flex-1 px-6 pb-6 overflow-y-auto max-h-[350px]"
+                    style={{
+                      scrollbarWidth: "thin",
+                      scrollbarColor: "#c1c1c1 #f1f1f1",
+                    }}
+                  >
+                    {mainCategories.map((category, index) => (
+                     <div
+                     key={category._id}
+                     className={`flex items-center justify-between p-4 rounded-lg mb-2 transition-all duration-200
+                       ${
+                         selectedCategory?._id === category._id ||
+                         (index === 0 && !selectedCategory)
+                           ? "bg-teal-600 text-white shadow-sm"
+                           : "bg-white hover:bg-gray-50 text-gray-700"
+                       }
+                       ${category.subCategories && category.subCategories.length > 0 ? "cursor-pointer" : "cursor-default"}
+                     `}
+                     onClick={
+                       category.subCategories && category.subCategories.length > 0
+                         ? () => handleCategoryClick(category)
+                         : undefined
+                     }
+                   >
+                     <span className="text-sm font-medium">
+                       {category.name}
+                     </span>
+                     {category.subCategories && category.subCategories.length > 0 && (
+                       <GoArrowRight
+                         size={18}
+                         className={`transition-colors duration-200 ${
                            selectedCategory?._id === category._id ||
                            (index === 0 && !selectedCategory)
-                             ? "bg-teal-600 text-white shadow-sm"
-                             : "bg-white hover:bg-gray-50 text-gray-700"
-                         }
-                         ${category.subCategories && category.subCategories.length > 0 ? "cursor-pointer" : "cursor-default"}
-                       `}
-                       onClick={
-                         category.subCategories && category.subCategories.length > 0
-                           ? () => handleCategoryClick(category)
-                           : undefined
-                       }
-                     >
-                       <span className="text-sm font-medium">
-                         {category.name}
-                       </span>
-                       {category.subCategories && category.subCategories.length > 0 && (
-                         <GoArrowRight
-                           size={18}
-                           className={`transition-colors duration-200 ${
-                             selectedCategory?._id === category._id ||
-                             (index === 0 && !selectedCategory)
-                               ? "text-white"
-                               : "text-gray-400"
-                           }`}
-                         />
-                       )}
-                     </div>                     
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Right Side - Subcategories and Child Categories */}
-                  <div className="flex-1 bg-white relative">
-                    {/* Background image with left margin and custom height */}
-                    <div
-                      className="absolute right-0 bottom-0 w-[200px] h-[200px] bg-[url('/images/logo-banner.png')] bg-contain bg-no-repeat"
-                      style={{
-                        right: "30px", // Creates margin on the left side of the image
-                        bottom: "20px",
-                        backgroundSize: "190px 200px", // Increased height (250px wide × 200px tall)
-                      }}
-                    ></div>
-                    {(selectedCategory || mainCategories.length > 0) && (
-                      <>
-                        {/* Header */}
-                        <div className="px-8 py-6 border-b border-gray-100">
-                          <h1 className="text-2xl font-semibold text-gray-800">
-                            {selectedCategory
-                              ? selectedCategory.name
-                              : mainCategories[0]?.name}
-                          </h1>
-                        </div>
-
-                        {/* Content Area */}
-                        <div className="flex h-[380px]">
-                          {/* Subcategories Column with Gray Background */}
-                          <div
-                            className="w-[300px] bg-[#FFFFFF] border-r rounded-lg flex flex-col"
-                            style={{ margin: "20px" }}
-                          >
-                            <div
-                              className="p-6 overflow-y-auto max-h-[400px]"
-                              style={{
-                                scrollbarWidth: "thin",
-                                scrollbarColor: "#c1c1c1 #f1f1f1",
-                              }}
-                            >
-                              {(selectedCategory
-                                ? selectedCategory.subCategories
-                                : mainCategories[0]?.subCategories
-                              )?.map((subCat, index) => (
-                                <div
-                                  key={subCat._id}
-                                  className={`p-3 cursor-pointer rounded-lg mb-2 transition-all duration-200 ${
-                                    hoveredCategoryId === subCat._id ||
-                                    (index === 0 && !hoveredCategoryId)
-                                      ? "text-teal-600 bg-white font-medium"
-                                      : "text-gray-700 hover:text-teal-600 hover:bg-white"
-                                  }`}
-                                  onMouseEnter={() =>
-                                    handleMouseEnter(subCat._id)
-                                  }
-                                  onClick={() =>
-                                    setOpenedCategoryId(subCat._id)
-                                  }
-                                >
-                                  <span className="text-sm flex items-center justify-between">
-                                    {subCat.name}
-                                    {subCat.childCategories &&
-                                      subCat.childCategories.length > 0 && (
-                                        <ChevronRight
-                                          size={16}
-                                          className="ml-2 text-gray-400"
-                                        />
-                                      )}
-                                  </span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Child Categories Area with Background Pattern */}
-                          <div className="flex-1 p-2 pr-2 overflow-y-auto bg-gradient-to-br from-pink-50 to-blue-50 relative">
-                    
-
-                            {/* Content */}
-                            <div className="relative z-10 p-3 w-full">
-                              {(() => {
-                                const currentCategory =
-                                  selectedCategory || mainCategories[0];
-                                const currentHoveredId =
-                                  hoveredCategoryId ||
-                                  currentCategory?.subCategories?.[0]?._id;
-
-                                return currentCategory?.subCategories?.map(
-                                  (subCat) => {
-                                    if (
-                                      subCat._id === currentHoveredId &&
-                                      subCat.childCategories &&
-                                      subCat.childCategories.length > 0
-                                    ) {
-                                      // Group child categories into rows of 4 items each (like the table columns)
-                                      const children = subCat.childCategories;
-                                      const itemsPerRow = 3;
-
-                                      // 1. Calculate number of rows needed
-                                      const numRows = Math.ceil(children.length / itemsPerRow);
-
-                                      // 2. Build columns
-                                      const columns = Array.from({ length: itemsPerRow }, (_, colIdx) =>
-                                        children.filter((_, idx) => idx % itemsPerRow === colIdx)
-                                      );
-
-                                      // 3. Build rows from columns
-                                      const tableRows = Array.from({ length: numRows }, (_, rowIdx) =>
-                                        columns.map(col => col[rowIdx] || null)
-                                      );
-
-                                      return (
-                                        <div
-                                          key={subCat._id}
-                                          className="relative"
-                                        >
-                                          {/* Background image at bottom right */}
-                                          <div className="absolute bottom-0 right-0 w-1/3 h-fullopacity-20"></div>
-
-                                          {/* Table-like layout */}
-                                          <div className="w-full overflow-x-auto">
-                                            <table className="w-full border-collapse">
-                                              <tbody>
-                                                {tableRows.map((row, rowIndex) => (
-                                                  <tr key={rowIndex} className="hover:bg-gray-50">
-                                                    {row.map((child, colIndex) => (
-                                                      <td
-                                                        key={child ? child._id : `empty-${colIndex}`}
-                                                        className="py-3 px-4 text-gray-600 align-top"
-                                                      >
-                                                        {child ? (
-                                                          <a
-                                                            href={`/products?ccid=${child._id}`}
-                                                            className="block hover:text-teal-600 transition-colors duration-200"
-                                                            onClick={() => {
-                                                              toggleSidebar();
-                                                              handleClick(child);
-                                                            }}
-                                                          >
-                                                            {child.name}
-                                                          </a>
-                                                        ) : null}
-                                                      </td>
-                                                    ))}
-                                                  </tr>
-                                                ))}
-                                              </tbody>
-                                            </table>
-                                          </div>
-                                        </div>
-                                      );
-                                    }
-                                    return null;
-                                  }
-                                );
-                              })()}
-                            </div>
-                          </div>
-                        </div>
-                      </>
-                    )}
+                             ? "text-white"
+                             : "text-gray-400"
+                         }`}
+                       />
+                     )}
+                   </div>                     
+                    ))}
                   </div>
                 </div>
+
+                {/* Right Side - Subcategories and Child Categories */}
+                <div className="flex-1 bg-white relative">
+                  {/* Background image with left margin and custom height */}
+                  <div
+                    className="absolute right-0 bottom-0 w-[200px] h-[200px] bg-[url('/images/logo-banner.png')] bg-contain bg-no-repeat"
+                    style={{
+                      right: "30px", // Creates margin on the left side of the image
+                      bottom: "20px",
+                      backgroundSize: "190px 200px", // Increased height (250px wide × 200px tall)
+                    }}
+                  ></div>
+                  {(selectedCategory || mainCategories.length > 0) && (
+                    <>
+                      {/* Header */}
+                      <div className="px-8 py-6 border-b border-gray-100">
+                        <h1 className="text-2xl font-semibold text-gray-800">
+                          {selectedCategory
+                            ? selectedCategory.name
+                            : mainCategories[0]?.name}
+                        </h1>
+                      </div>
+
+                      {/* Content Area */}
+                      <div className="flex h-[380px]">
+                        {/* Subcategories Column with Gray Background */}
+                        <div
+                          className="w-[300px] bg-[#FFFFFF] border-r rounded-lg flex flex-col"
+                          style={{ margin: "20px" }}
+                        >
+                          <div
+                            className="p-6 overflow-y-auto max-h-[400px]"
+                            style={{
+                              scrollbarWidth: "thin",
+                              scrollbarColor: "#c1c1c1 #f1f1f1",
+                            }}
+                          >
+                            {(selectedCategory
+                              ? selectedCategory.subCategories
+                              : mainCategories[0]?.subCategories
+                            )?.map((subCat, index) => (
+                              <div
+                                key={subCat._id}
+                                className={`p-3 cursor-pointer rounded-lg mb-2 transition-all duration-200 ${
+                                  hoveredCategoryId === subCat._id ||
+                                  (index === 0 && !hoveredCategoryId)
+                                    ? "text-teal-600 bg-white font-medium"
+                                    : "text-gray-700 hover:text-teal-600 hover:bg-white"
+                                }`}
+                                onMouseEnter={() =>
+                                  handleMouseEnter(subCat._id)
+                                }
+                                onClick={() =>
+                                  setOpenedCategoryId(subCat._id)
+                                }
+                              >
+                                <span className="text-sm flex items-center justify-between">
+                                  {subCat.name}
+                                  {subCat.childCategories &&
+                                    subCat.childCategories.length > 0 && (
+                                      <ChevronRight
+                                        size={16}
+                                        className="ml-2 text-gray-400"
+                                      />
+                                    )}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Child Categories Area with Background Pattern */}
+                        <div className="flex-1 p-2 pr-2 overflow-y-auto bg-gradient-to-br from-pink-50 to-blue-50 relative">
+
+
+                          {/* Content */}
+                          <div className="relative z-10 p-3 w-full">
+                            {(() => {
+                              const currentCategory =
+                                selectedCategory || mainCategories[0];
+                              const currentHoveredId =
+                                hoveredCategoryId ||
+                                currentCategory?.subCategories?.[0]?._id;
+
+                              return currentCategory?.subCategories?.map(
+                                (subCat) => {
+                                  if (
+                                    subCat._id === currentHoveredId &&
+                                    subCat.childCategories &&
+                                    subCat.childCategories.length > 0
+                                  ) {
+                                    // Group child categories into rows of 4 items each (like the table columns)
+                                    const children = subCat.childCategories;
+                                    const itemsPerRow = 3;
+
+                                    // 1. Calculate number of rows needed
+                                    const numRows = Math.ceil(children.length / itemsPerRow);
+
+                                    // 2. Build columns
+                                    const columns = Array.from({ length: itemsPerRow }, (_, colIdx) =>
+                                      children.filter((_, idx) => idx % itemsPerRow === colIdx)
+                                    );
+
+                                    // 3. Build rows from columns
+                                    const tableRows = Array.from({ length: numRows }, (_, rowIdx) =>
+                                      columns.map(col => col[rowIdx] || null)
+                                    );
+
+                                    return (
+                                      <div
+                                        key={subCat._id}
+                                        className="relative"
+                                      >
+                                        {/* Background image at bottom right */}
+                                        <div className="absolute bottom-0 right-0 w-1/3 h-fullopacity-20"></div>
+
+                                        {/* Table-like layout */}
+                                        <div className="w-full overflow-x-auto">
+                                          <table className="w-full border-collapse">
+                                            <tbody>
+                                              {tableRows.map((row, rowIndex) => (
+                                                <tr key={rowIndex} className="hover:bg-gray-50">
+                                                  {row.map((child, colIndex) => (
+                                                    <td
+                                                      key={child ? child._id : `empty-${colIndex}`}
+                                                      className="py-3 px-4 text-gray-600 align-top"
+                                                    >
+                                                      {child ? (
+                                                        <a
+                                                          href={`/products?ccid=${child._id}`}
+                                                          className="block hover:text-teal-600 transition-colors duration-200"
+                                                          onClick={() => {
+                                                            toggleSidebar();
+                                                            handleClick(child);
+                                                          }}
+                                                        >
+                                                          {child.name}
+                                                        </a>
+                                                      ) : null}
+                                                    </td>
+                                                  ))}
+                                                </tr>
+                                              ))}
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    );
+                                  }
+                                  return null;
+                                }
+                              );
+                            })()}
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
-            )}
+            </div>
           </li>
           {subCategories
             .slice(0, threshold)

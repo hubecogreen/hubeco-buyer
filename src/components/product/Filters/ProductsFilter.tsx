@@ -107,6 +107,8 @@ const FiltersSidebar: React.FC<FilterProps> = ({
   const getFliters = async () => {
     setGridLoading(true);
     try {
+      // Debug log for subCatId and childCatId
+      console.log('DEBUG getFliters', { subCatId, childCatId });
       const params = {
         page: page || null,
         limit,
@@ -203,11 +205,11 @@ const FiltersSidebar: React.FC<FilterProps> = ({
     setParamsObj(params)
   };
 
-  const filterWithChildCategories = (childCats: any) => {
-    // // console.log("params from fun2 track back", childCats);
-    onChildCategorySelectionChange(childCats);
-    setSelectedFilters((prev: any) => ({ ...prev, childCats }));
-    setChildCatId(childCats);
+  const filterWithChildCategories = (data: { childId: any, subCategoryId: any }) => {
+    onChildCategorySelectionChange(data.childId);
+    setSelectedFilters((prev: any) => ({ ...prev, childCats: [data.childId] }));
+    setChildCatId(data.childId);
+    setSubCatId(data.subCategoryId);
   };
 
   const filterWithCategories = (categories: any) => {

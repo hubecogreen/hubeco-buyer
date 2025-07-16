@@ -215,9 +215,9 @@ const ProductsList: React.FC<Props> = () => {
     setSubCatId(subCategories);
   };
 
-  const filterWithChildCategories = (childCategories: string) => {
-    // console.log("params from fun", childCategories);
-    setChildCatId(childCategories);
+  const filterWithChildCategories = (data: { childId: string, subCategoryId: string | null }) => {
+    setChildCatId(data.childId);
+    setSubCatId(data.subCategoryId);
   };
 
   const filterWithPrice = (data: any) => {

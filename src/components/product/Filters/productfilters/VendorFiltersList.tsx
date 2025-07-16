@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import useApi from "@/components/Fetcher/useAPI";
 import * as getEndpoint from "../../../../network/EndPoints";
 import toast from "react-hot-toast";
@@ -44,7 +44,6 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
   const [vendorCount, setVendorCount] = useState<any>(null);
   const [totalPages, setTotalPages] = useState<any>(null);
   const [selectedVendorsList, setSelectedVendorsList] = useState<any>([]);
-  const refreshRef = useRef<boolean>(false);
 
   const handleApiError = async (err: any) => {
     const result = err?.response;
@@ -62,18 +61,12 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
   }, [refresh,filter]);
 
   useEffect(() => {
-    const resetOptions = () => {
-      // Reset selected categories and parent
-      refreshRef.current = true;
+    if (refresh) {
+      // console.log("Sleelel");
       setSelectedVendorsList([]);
       setSelectedVendors([]);
-      setVendorSearch("");
-      setCurrentPage(1);
-      
-      // Call API without filters immediately
-      getVendorsWithoutFilters(1);
-    };
-    resetOptions();
+      setVendorSearch("")
+    }
   }, [refresh]);
 
   const buildUrl = (baseUrl: any, params: any) => {
@@ -91,22 +84,12 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
   };
 
   const getVendors = async (page: number, searchVal?: string) => {
-    let params = {};
-    if(refreshRef.current){
-       params = {
-        page: page ? page : null,
-        limit: 10,
-        searchTerm: searchVal?.toLowerCase() ? searchVal?.toLowerCase() : null,
-      };
-    }else{
-       params = {
-        ...filter,
-        page: page ? page : null,
-        limit: 10,
-        searchTerm: searchVal?.toLowerCase() ? searchVal?.toLowerCase() : null,
-      };
-    }
-    
+    const params = {
+      ...filter,
+      page: page ? page : null,
+      limit: 10,
+      searchTerm: searchVal?.toLowerCase() ? searchVal?.toLowerCase() : null,
+    };
     const apiUrl = buildUrl(getEndpoint.default.VENDORS, params);
 
     try {
@@ -127,48 +110,6 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
         } else {
           setVendorsData((prev: any) => [...prev, ...newVendors]);
         }
-        
-        // Reset refreshRef after successful API call
-        if (refreshRef.current) {
-          refreshRef.current = false;
-        }
-      }
-    } catch (error) {
-      handleApiError(error);
-      // Reset refreshRef even on error
-      if (refreshRef.current) {
-        refreshRef.current = false;
-      }
-    }
-  };
-
-  const getVendorsWithoutFilters = async (page: number, searchVal?: string) => {
-    const params = {
-      page: page ? page : null,
-      limit: 10,
-      searchTerm: searchVal?.toLowerCase() ? searchVal?.toLowerCase() : null,
-    };
-    
-    const apiUrl = buildUrl(getEndpoint.default.VENDORS, params);
-
-    try {
-      const result = (await callApi(apiUrl, "GET")) as any;
-      if (result.data == null) {
-        handleApiError(result.errorData);
-      } else {
-        setVendorCount(result?.data?.meta?.totalItems);
-        setTotalPages(result?.data?.meta?.totalPages);
-        const newVendors = result?.data?.items || [];
-        setTotalVendors(result?.data?.total || 0);
-
-        // Clear the list when searching, otherwise append for "Show More"
-        if (searchVal) {
-          setVendorsData(newVendors);
-        } else if (page === 1) {
-          setVendorsData(newVendors);
-        } else {
-          setVendorsData((prev: any) => [...prev, ...newVendors]);
-        }
       }
     } catch (error) {
       handleApiError(error);
@@ -179,30 +120,16 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
     setVendorSearch(""); // Reset search term when showing more vendors
     const nextPage = currentPage + 1;
     setCurrentPage(nextPage);
-    if (refreshRef.current) {
-      getVendorsWithoutFilters(nextPage);
-    } else {
-      getVendors(nextPage);
-    }
+    getVendors(nextPage);
   };
   const handleShowLessVendors = () => {
     const nextPage = currentPage - 1;
     setCurrentPage(nextPage);
-    if (refreshRef.current) {
-      getVendorsWithoutFilters(nextPage);
-    } else {
-      getVendors(nextPage);
-    }
+    getVendors(nextPage);
   };
 
   const debouncedSearch = debounce(
-    (value: string) => {
-      if (refreshRef.current) {
-        getVendorsWithoutFilters(currentPage, value);
-      } else {
-        getVendors(currentPage, value);
-      }
-    },
+    (value: string) => getVendors(currentPage, value),
     300
   );
 
@@ -213,38 +140,35 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
     debouncedSearch(value); // Trigger the search
   };
 
-  const onSelectVendor = (vendor: any) => {
-    const vendorId = vendor?.id;
-    
+  const onSelectVendor = (id: any) => {
     setSelectedVendors((prevSelectedVendors) => {
-      const isSelected = prevSelectedVendors.includes(vendorId);
-      
-      if (isSelected) {
-        // Remove the vendor
-        const newSelectedVendors = prevSelectedVendors.filter((id) => id !== vendorId);
-        onVendorSelectionChange(newSelectedVendors);
-        return newSelectedVendors;
+      if (prevSelectedVendors.includes(id?.id)) {
+        // Remove the ID if it exists
+        onVendorSelectionChange(
+          prevSelectedVendors.filter((vendorId) => vendorId !== id?.id)
+        );
+        return prevSelectedVendors.filter((vendorId) => vendorId !== id?.id);
       } else {
-        // Add the vendor
-        const newSelectedVendors = [...prevSelectedVendors, vendorId];
-        onVendorSelectionChange(newSelectedVendors);
-        return newSelectedVendors;
+        // Add the ID if it doesn't exist
+        onVendorSelectionChange([...prevSelectedVendors, id?.id]);
+        return [...prevSelectedVendors, id?.id];
       }
     });
-
     setSelectedVendorsList((prevSelectedVendors: any[]) => {
-      const isSelected = prevSelectedVendors.some((v: any) => v.id?.id === vendorId);
-      
-      if (isSelected) {
-        // Remove the vendor
-        return prevSelectedVendors.filter((v: any) => v.id?.id !== vendorId);
+      // Check if the vendor already exists in the list by comparing the id
+      const vendorExists = prevSelectedVendors.some(
+        (vendor: any) => vendor.id === id
+      );
+      // console.log("cvrebtyru", vendorExists);
+
+      if (vendorExists) {
+        // Vendor exists, remove it from the selected vendors list
+
+        return prevSelectedVendors.filter((vendor: any) => vendor.id !== id);
       } else {
-        // Add the vendor (only if not already present)
-        const vendorExists = prevSelectedVendors.some((v: any) => v.id?.id === vendorId);
-        if (!vendorExists) {
-          return [...prevSelectedVendors, { id: vendor }];
-        }
-        return prevSelectedVendors;
+        // Vendor doesn't exist, add it to the selected vendors list
+
+        return [...prevSelectedVendors, { id }];
       }
     });
   };
@@ -290,7 +214,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                       {/* Display vendor name here */}
                       <IoClose
                         className="ml-2 cursor-pointer"
-                        onClick={() => onSelectVendor(vendor?.id)}
+                        onClick={() => onSelectVendor(vendor?.id)} // Use vendor.id for removal
                       />
                     </div>
                   )

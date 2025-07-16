@@ -7,7 +7,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import FilterHTML from "./FilterHTML";
 
 interface VendorFiltersListProps {
-  onCategorySelectionChange: (data: { childId: string, subCategoryId: string | null }) => void; // Function prop to handle selected child and subcategory
+  onCategorySelectionChange: (selectedCats: string[]) => void; // Function prop to handle selected vendors
   onChangeParentSelectionChange: (selectedParentid: string[]) => void;
   refresh: any;
 }
@@ -116,16 +116,13 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
         ? prevSelectedCats.filter((catId) => catId !== id)
         : [...prevSelectedCats, id];
 
-      // Find the parent subcategory id for the selected child
+      onCategorySelectionChange(updatedCats);
+
+      // Check if the parent category should be unselected if any child is unselected
       const parentCategory = categoriesData.find((cat: any) =>
         cat.childCategories?.some((child: any) => child._id === id)
       );
-      const subCategoryId = parentCategory ? parentCategory._id : null;
 
-      // Send both child and subcategory id to parent
-      onCategorySelectionChange({ childId: id, subCategoryId });
-
-      // Check if the parent category should be unselected if any child is unselected
       if (parentCategory) {
         const allChildrenSelected = parentCategory.childCategories?.every(
           (child: any) => updatedCats.includes(child._id)
@@ -177,7 +174,7 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
           const newSelectedCats = [
             ...Array.from(new Set([...prevSelectedCats, ...updatedCats])),
           ];
-          // Do NOT call onCategorySelectionChange here, as it now expects an object for single child selection only
+          onCategorySelectionChange(newSelectedCats);
           return newSelectedCats;
         });
       }
@@ -191,7 +188,7 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
                 (child: any) => child._id === catId
               )
           );
-          // Do NOT call onCategorySelectionChange here, as it now expects an object for single child selection only
+          onCategorySelectionChange(updatedCats);
           return updatedCats;
         });
       }

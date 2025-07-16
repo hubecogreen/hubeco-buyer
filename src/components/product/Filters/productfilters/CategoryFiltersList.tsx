@@ -45,18 +45,6 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
     resetOptions();
   }, [pathname, searchParams, refresh]);
 
-  // useEffect(() => {
-  //   const resetOptions = () => {
-  //     // Reset selected categories and parent
-  //     setSelectedParentId([]);
-  //     setSelectedCats([]);
-  //     setCategorySearch("");
-  //     setVisibleCategoriesCount(10);
-  //     fetchCategories()
-  //   };
-  //   resetOptions();
-  // }, [refresh]);
-
   const fetchCategories = async () => {
     try {
       const result = await callApi(getEndpoint.default.PRODUCTS_CATEGORIES, "GET");

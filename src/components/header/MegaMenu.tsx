@@ -27,6 +27,7 @@ interface MenuItem {
 }
 
 interface Category {
+  seoSlug: string;
   _id: string;
   name: string;
   subCategories?: Category[];
@@ -409,8 +410,8 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                                       className="py-3 px-4 text-gray-600 align-top"
                                                     >
                                                       {child ? (
-                                                        <a
-                                                          href={`/products?ccid=${child._id}`}
+                                                        <Link
+                                                          href={`/products/${currentCategory?.seoSlug || 'category'}/${subCat?.seoSlug || 'sub-category'}/${child?.seoSlug || 'child-category'}?ccid=${child._id}`}
                                                           className="block hover:text-teal-600 transition-colors duration-200"
                                                           onClick={() => {
                                                             toggleSidebar();
@@ -418,7 +419,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                                           }}
                                                         >
                                                           {child.name}
-                                                        </a>
+                                                        </Link>
                                                       ) : null}
                                                     </td>
                                                   ))}
@@ -467,7 +468,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                     </a>
                   </a> */}
                   <Link
-                    href={`/products?scid=${menuItem?._id}`}
+                    href={`/products/${menuItem?.seoSlug || 'sub-category'}?scid=${menuItem?._id}`}
                     className={`block font-semibold text-md py-2 px-3 text-white flex items-center ${styles.parentMenuItemText}`}
                     onClick={handleClick}
                   >
@@ -494,7 +495,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                 </a>
                               </a> */}
                               <Link
-                                href={`/products?ccid=${subItem?._id}`}
+                                href={`/products/${menuItem?.seoSlug || 'sub-category'}/${subItem?.seoSlug || 'child-category'}?ccid=${subItem?._id}`}
                                 replace={true}
                                 className="block text-black text-sm my-1 px-2 py-1"
                                 onClick={handleClick}
@@ -557,7 +558,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                           <ViewMore text={menuItem?.name} length={30} />
                         </h4> */}
                         <Link
-                          href={`/products?scid=${menuItem?._id}`}
+                          href={`/products/${menuItem?.seoSlug || 'sub-category'}?scid=${menuItem?._id}`}
                           className="font-medium text-base text-primary mb-1.5 cursor-pointer"
                         >
                           <ViewMore text={menuItem?.name} length={30} />
@@ -576,7 +577,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                             // </a>
                             <Link
                               key={itemIndex}
-                              href={`/products?ccid=${item?._id}`}
+                              href={`/products/${menuItem?.seoSlug || 'sub-category'}/${item?.seoSlug || 'child-category'}?ccid=${item?._id}`}
                               className="block text-black text-sm my-1"
                               onClick={handleClick}
                             >

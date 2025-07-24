@@ -1,3 +1,5 @@
+"use client"
+
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import JoinBannerDetails from "../joinBannerDetails/JoinBannerDetails";
 import styles from "./BlogsDetails.module.css";
@@ -122,14 +124,6 @@ const BlogsDetails = ({ id }: any) => {
 
   return (
     <>
-      <head>
-        <title>{blogData?.title}</title>
-        <meta name="description" content={blogData?.metaDescriptions} />
-        <meta name="keywords" content={blogData?.metaKeywords} />
-        <meta name="author" content={blogData?.author.firstName} />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-      </head>
       {
         loading ? <div className="flex inset-0 justify-center items-center h-full w-full">
           {/* <Stack direction='row' spacing={4}>

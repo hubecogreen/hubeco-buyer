@@ -1,6 +1,6 @@
-import BannerSection from "@/components/sharedComponents/BannerSection";
 import ProductsList from "@/components/product/ProductsList";
 import MetaTitleH1 from "./MetaTitleH1";
+import BreadCrumb, { BreadcrumbItem } from "@/components/sharedComponents/BreadCrumb";
 
 export async function generateMetadata({ params, searchParams }: {
   params: { slugs?: string[] },
@@ -89,6 +89,10 @@ export async function generateMetadata({ params, searchParams }: {
   };
 }
 
+function capitalizeFirstLetter(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
 export default function Page({
   params,
   searchParams
@@ -96,14 +100,28 @@ export default function Page({
   params: { slugs?: string[] },
   searchParams: { [key: string]: string | string[] | undefined }
 }) {
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: "Home", href: "/" },
+  ];
+
+  // Add all slugs as breadcrumb segments, only first letter capitalized
+  if (params.slugs && params.slugs.length > 0) {
+    let path = "/products";
+    params.slugs.forEach((slug) => {
+      path += `/${slug}`;
+      breadcrumbs.push({
+        name: capitalizeFirstLetter(slug.replace(/-/g, ' ')),
+        href: path
+      });
+    });
+  }
+
+  // Do NOT add ccid or scid as breadcrumbs
+
   return (
     <div className="bg-white">
-      {/* Visually hidden but SEO-visible H1 using Tailwind's sr-only, always matches meta title */}
       <MetaTitleH1 />
-      <BannerSection
-        link1={{ name: "Home", href: "/" }}
-        link2={{ name: "Featured Sustainable Products", href: "#" }}
-      />
+      <BreadCrumb breadcrumbs={breadcrumbs} />
       <ProductsList />
     </div>
   );

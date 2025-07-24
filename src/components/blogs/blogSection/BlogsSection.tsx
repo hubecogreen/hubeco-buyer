@@ -1,4 +1,4 @@
-// components/BlogsSection.tsx
+"use client"
 import styles from "./BlogsSection.module.css";
 import { useEffect, useState } from "react";
 import { IoIosSearch } from "react-icons/io";

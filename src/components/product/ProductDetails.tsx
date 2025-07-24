@@ -1239,9 +1239,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     {" "}
                     ID #{productData?.HSN}
                   </p>
-                  <p className="md:text-[30px] md:max-w-[100%]  text-[24px] font-semibold text-md  text-black text-normal pr-[10px]">
+                  <h1 className="md:text-[30px] md:max-w-[100%]  text-[24px] font-semibold text-md  text-black text-normal pr-[10px]">
                     {isSingle ? totalProduct?.name : productData?.variantName}
-                  </p>
+                  </h1>
+                  <h1 className="md:text-[30px] md:max-w-[100%]  text-[24px] font-semibold text-md  text-black text-normal pr-[10px] sr-only">
+                    {productData?.meta?.metaTitle}
+                  </h1>
                 </div>
                 {productData?.status == "PUBLISHED" &&
                 productData?.deletedAt == null &&

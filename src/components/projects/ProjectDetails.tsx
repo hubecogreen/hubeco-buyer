@@ -60,7 +60,11 @@ interface Blog {
   name: string;
 }
 
-const ProjectDetails: React.FC = ({ id }: any) => {
+interface ProjectDetailsProps {
+  id: string;
+}
+
+const ProjectDetails: React.FC<ProjectDetailsProps> = ({ id }) => {
   //// // console.log('id',id)
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
   const swiperRef = useRef(null);

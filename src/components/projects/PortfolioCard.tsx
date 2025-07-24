@@ -1,4 +1,4 @@
-// components/BlogsSection.tsx
+"use client"
 import styles from "./PortfolioSection.module.css";
 import { useEffect, useState } from "react";
 import Image from "next/image";

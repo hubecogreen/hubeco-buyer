@@ -207,7 +207,7 @@ const VerifyNumber: React.FC<VerifyNumProps> = ({ mobileNumber, onPress, resetPa
 
   return (
     <div className="relative mt-30">
-      <div className="bg-cover bg-center bg-[url('/images/auth/auth.png')] h-5/6">
+      <div className="bg-cover bg-center bg-[url('/images/auth/auth.webp')] h-5/6">
         <div className="bg-opacity-90 h-full flex items-center justify-center py-20 md:py-20">
           <div className="text-center md:p-10 md:pt-10 py-10 md:py-15 max-w-md md:max-w-lg text-white bg-white">
             <h1 className="text-[24px] md:text-3xl font-bold mb-4 text-black">

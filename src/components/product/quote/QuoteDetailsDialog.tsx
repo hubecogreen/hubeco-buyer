@@ -73,14 +73,14 @@ export default function QuoteDetailsDialog({
                         //           "/admin"
                         //         )
                         //       : `${assetUrl}/${product.variantId.thumbnail}`
-                        //     : "/images/product-placeholder.jpg"
+                        //     : "/images/product-placeholder.webp"
                         // }
                         src={
                           product.variantId.thumbnail
                             ? normalizePath(
                                 `${assetUrl}/${product.variantId.thumbnail}`
                               )
-                            : "/images/product-placeholder.jpg"
+                            : "/images/product-placeholder.webp"
                         }
                         alt={product.variantId.variantName}
                         boxSize="16"
@@ -89,7 +89,7 @@ export default function QuoteDetailsDialog({
                         mr={4}
                         onError={(e) => {
                           e.currentTarget.src =
-                            "/images/product-placeholder.jpg";
+                            "/images/product-placeholder.webp";
                         }}
                         loading="lazy"
                       />
@@ -234,7 +234,7 @@ export default function QuoteDetailsDialog({
                       <Image
                         // src={
                         //   selectedView.products[0].certificate.endsWith(".pdf")
-                        //     ? "/images/pdflogo.png"
+                        //     ? "/images/pdflogo.webp"
                         //     : selectedView.products[0].certificate
                         //     ? (
                         //         assetUrl +
@@ -247,21 +247,21 @@ export default function QuoteDetailsDialog({
                         //           selectedView.products[0].certificate
                         //         ).replace("//admin", "/admin")
                         //       : `${assetUrl}/${selectedView.products[0].certificate}`
-                        //     : "/images/product-placeholder.jpg"
+                        //     : "/images/product-placeholder.webp"
                         // }
                         src={
                           selectedView.products[0].certificate.endsWith(".pdf")
-                            ? "/images/pdflogo.png"
+                            ? "/images/pdflogo.webp"
                             : selectedView.products[0].certificate
                             ? normalizePath(`${assetUrl}/${selectedView.products[0].certificate}`)
-                            : "/images/product-placeholder.jpg"
+                            : "/images/product-placeholder.webp"
                         }
                         boxSize="70px"
                         rounded="md"
                         mr={8}
                         onError={(e) => {
                           e.currentTarget.src =
-                            "/images/product-placeholder.jpg";
+                            "/images/product-placeholder.webp";
                         }}
                         loading="lazy"
                       />
@@ -310,7 +310,7 @@ export default function QuoteDetailsDialog({
                               fill={true}
                               onError={(e) => {
                                 e.currentTarget.src =
-                                  "/images/product-placeholder.jpg";
+                                  "/images/product-placeholder.webp";
                               }}
                               loading="lazy"
                             />

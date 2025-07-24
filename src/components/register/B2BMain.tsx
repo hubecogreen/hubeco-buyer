@@ -100,9 +100,9 @@ const B2BMain:React.FC<B2BProps> = ({mobileParam}) =>  {
 
 
   const steps = [
-    { label: "Personal Information", img: "/images/register/personal.png" },
-    { label: "Company Details", img: "/images/register/company.png" },
-    { label: "Plans", img: "/images/register/company.png" },
+    { label: "Personal Information", img: "/images/register/personal.webp" },
+    { label: "Company Details", img: "/images/register/company.webp" },
+    { label: "Plans", img: "/images/register/company.webp" },
   ];
 
   const [activeStep, setActiveStep] = useState(0);
@@ -139,7 +139,7 @@ const B2BMain:React.FC<B2BProps> = ({mobileParam}) =>  {
           <div>
             {activeStep === 0 && (
               <B2BPersonal
-                imgSrc="/images/user.png" 
+                imgSrc="/images/user.webp" 
                 nextStep={handleNextStep}
               />
             )}
@@ -210,7 +210,7 @@ const B2BMain:React.FC<B2BProps> = ({mobileParam}) =>  {
                       width={48}
                       height={48}
                       onError={e => {
-                        e.currentTarget.src = '/images/user.png'
+                        e.currentTarget.src = '/images/user.webp'
                       }}
                       loading="lazy"
                        />

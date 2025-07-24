@@ -11,6 +11,16 @@ const nextConfig = {
           },
         ],
       },
+      {
+        // Cache static assets for 1 year
+        source: "/:all*(.js|.css|.png|.jpg|.jpeg|.webp|.svg|.woff2?)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
 

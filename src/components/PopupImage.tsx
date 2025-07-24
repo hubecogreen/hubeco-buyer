@@ -81,7 +81,7 @@ const PopupImage = ({ url }) => {
                     className={`max-w-full h-auto ${loading ? 'hidden' : 'block'} rounded-lg shadow-lg`}
 
                     onError={e => {
-                      e.currentTarget.src = '/images/product-placeholder.jpg'
+                      e.currentTarget.src = '/images/product-placeholder.webp'
                     }}
                     loading="lazy"
                     onLoad={handleContentLoad} // Load image without internal access

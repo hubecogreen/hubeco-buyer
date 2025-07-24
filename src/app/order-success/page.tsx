@@ -95,10 +95,6 @@ const PaymentSuccessful = () => {
   return (
     <div className="flex flex-col items-center justify-center  md:h-screen pb-16 bg-green-50 text-center">
       <div>
-        {/* <div className='mb-6'>
-          //<img src='/images/pages/hubeco-Logo.png' alt='Logo' className='w-32 mx-auto' />
-        </div> */}
-
         <div className="mb-1">
           <Lottie
             animationData={animationData}

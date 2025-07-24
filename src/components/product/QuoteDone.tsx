@@ -8,13 +8,13 @@ export default function QuoteDone({doneOpen, setDoneOpen}:any) {
     <DialogContent className="sm:max-w-lg p-10">
       <div className="flex justify-center items-center gap-5">
         <Image
-          src="/images/checkout/Group.png"
+          src="/images/checkout/Group.webp"
           alt="image"
           className="w-16 h-16"
           width={32}
           height={32}
           onError={e => {
-            e.currentTarget.src = '/images/product-placeholder.jpg'
+            e.currentTarget.src = '/images/product-placeholder.webp'
           }}
           loading="lazy"
         />

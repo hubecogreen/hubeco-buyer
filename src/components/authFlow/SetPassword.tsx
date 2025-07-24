@@ -173,7 +173,7 @@ const SetPassword:React.FC<Setprops> = ({token}) => {
   return (
     <div className="relative mt-30">
       <div
-        className="bg-cover bg-center bg-[url('/images/auth/auth.png')] h-5/6"
+        className="bg-cover bg-center bg-[url('/images/auth/auth.webp')] h-5/6"
       >
         <div className=" h-full flex items-center justify-center py-20 md:py-10 px-[10px] md:px-0">
           <div className="text-center py-10 md:py-15 max-w-full md:max-w-lg  text-white bg-white">

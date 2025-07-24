@@ -133,7 +133,7 @@ const VerifyEmail = (param: any) => {
       <div className="relative">
         <div
           className="bg-cover bg-center py-10"
-          style={{ backgroundImage: "url(/images/auth/auth.png)" }}
+          style={{ backgroundImage: "url(/images/auth/auth.webp)" }}
         >
           <div className="bg-white max-w-md md:max-w-lg mx-auto h-full flex items-center rounded-lg justify-center py-10 md:py-10">
             {unauthenticated == false && emailVerified == false && (

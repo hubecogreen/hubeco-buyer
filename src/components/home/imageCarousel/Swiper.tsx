@@ -4,11 +4,11 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image"
 const ImageSlider = () => {
   const images = [
-    "/images/home/latest/homebanner-roads.jpg",
-    "/images/home/latest/9.jpg",
-    // "/images/home/latest/3.jpg",
-    "/images/home/latest/f.png",
-    "/images/home/latest/8.jpg",
+    "/images/home/latest/homebanner-roads.webp",
+    "/images/home/latest/9.webp",
+    // "/images/home/latest/3.webp",
+    "/images/home/latest/f.webp",
+    "/images/home/latest/8.webp",
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -54,9 +54,9 @@ const ImageSlider = () => {
               width={500}
               height={500}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg';
+                e.currentTarget.src = '/images/product-placeholder.webp';
               }}
-              loading="lazy"
+              priority
               className={`absolute inset-0 object-cover w-full h-full transition-opacity duration-1000 ${
                 index === currentImageIndex ? "opacity-100" : "opacity-0"
               }`}

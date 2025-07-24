@@ -45,11 +45,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
           </Head>
           {/* <Header /> */}
           <div className='flex items-center flex-col text-center bg-white'>
-            {/* <img
-          alt='error-404-illustration'
-          src='/images/error404/error.png'
-          className='object-contain h-[250px] md:h-[250px] lg:h-[250px] mb-10 md:mb-8 md:mt-4 lg:mb-20'
-        /> */}
+
             <Lottie animationData={animationData} loop={true} className='w-72 h-72 mx-auto' />
 
             <div className='flex flex-col gap-2 w-[90vw] sm:w-auto mb-6'>

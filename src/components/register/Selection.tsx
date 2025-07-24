@@ -37,7 +37,7 @@ const CustomerTypeSelection: React.FC<CustomerTypeSelectionProps> = ({ onSelect 
               width={48}
               height={48}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
 />
@@ -48,7 +48,7 @@ const CustomerTypeSelection: React.FC<CustomerTypeSelectionProps> = ({ onSelect 
               width={48}
               height={48}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
             />
@@ -77,7 +77,7 @@ const CustomerTypeSelection: React.FC<CustomerTypeSelectionProps> = ({ onSelect 
               width={48}
               height={48}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
             />
@@ -88,7 +88,7 @@ const CustomerTypeSelection: React.FC<CustomerTypeSelectionProps> = ({ onSelect 
               width={48}
               height={48}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
             />

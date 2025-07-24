@@ -433,9 +433,9 @@ export default function Page() {
       };
 
     const steps = [
-        { label: "Personal Information", img: "/images/register/personal.png" },
-        { label: "Shipping Address", img: "/images/register/shipping.png" },
-        { label: "Account Settings", img: "/images/register/account.png" },
+        { label: "Personal Information", img: "/images/register/personal.webp" },
+        { label: "Shipping Address", img: "/images/register/shipping.webp" },
+        { label: "Account Settings", img: "/images/register/account.webp" },
       ];
 
       const renderStepContent = (step: number) => {
@@ -450,7 +450,7 @@ export default function Page() {
             <B2C_editPersonal
        
                 
-              imgSrc="/images/1.png" // Use your default image URL here
+              imgSrc="/images/1.webp" // Use your default image URL here
               nextStep={handleNextStep}
             />
           )}
@@ -527,7 +527,7 @@ export default function Page() {
                       width={100}
                       height={58.95}
                       onError={e => {
-                        e.currentTarget.src = '/images/user.png'
+                        e.currentTarget.src = '/images/user.webp'
                       }}
                       loading="lazy"
 

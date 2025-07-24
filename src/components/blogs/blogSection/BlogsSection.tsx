@@ -163,7 +163,7 @@ const BlogsSection = () => {
                     width={400}
                     height={300}
                     onError={(e) => {
-                      e.currentTarget.src = "/images/failedToLoadImage.jpg";
+                      e.currentTarget.src = "/images/failedToLoadImage.webp";
                     }}
                     loading="lazy"
                   />

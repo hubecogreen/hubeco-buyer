@@ -113,7 +113,7 @@ export default function Page() {
       </head>
       <Header />
       <div className="banner-section ">
-        <div className="relative md:px-20 px-10 bg-[url('/images/about/aboutBanner1.png')] bg-cover bg-center h-[200px] flex items-center justify-start text-white">
+        <div className="relative md:px-20 px-10 bg-[url('/images/about/aboutBanner1.webp')] bg-cover bg-center h-[200px] flex items-center justify-start text-white">
           <Link
             href="/"
             className="text-white flex items-center no-underline px-2.5 py-1 rounded"
@@ -132,7 +132,7 @@ export default function Page() {
         </div>
 
         <div className="bg-white w-full">
-          <div className="flex flex-col lg:flex-row items-start justify-between md:py-12 mobile-sm:py-4 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full bg-[url('/images/home/contactbg.png')] bg-contain bg-left-[10%] bg-no-repeat relative max-w-full">
+          <div className="flex flex-col lg:flex-row items-start justify-between md:py-12 mobile-sm:py-4 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full bg-[url('/images/home/contactbg.webp')] bg-contain bg-left-[10%] bg-no-repeat relative max-w-full">
             <div className="overflow-auto p-2 lg:p-4 w-full lg:w-4/12">
               <h1 className="text-4xl font-bold mb-4 text-black">
                 Vendor Plans
@@ -560,7 +560,7 @@ export default function Page() {
         <div className="relative">
           <div
             className="bg-cover bg-center h-96"
-            style={{ backgroundImage: "url('images/plans/signupBanner.png')" }}
+            style={{ backgroundImage: "url('images/plans/signupBanner.webp')" }}
           >
             <div className="bg-opacity-90 h-full flex items-center justify-center py-20">
               <div className="text-center p-4 max-w-5xl text-white">
@@ -597,7 +597,7 @@ export default function Page() {
           <div
             className="w-full md:w-11/12 md:flex items-center justify-center"
             style={{
-              backgroundImage: "url('/images/plans/bg-2-plans.jpg')",
+              backgroundImage: "url('/images/plans/bg-2-plans.webp')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -643,14 +643,14 @@ export default function Page() {
             </div>
             <div className="w-full md:w-4/12 flex justify-end">
               <Image
-                src="images/plans/help.png"
+                src="images/plans/help.webp"
                 alt="banner1"
                 className="w-full md:w-auto md:max-w-full"
                 // style={{ height: "330px" }}
                 width={398.56}
                 height={330}
                 onError={e => {
-                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                  e.currentTarget.src = '/images/product-placeholder.webp'
                 }}
                 loading="lazy"
               />

@@ -10,21 +10,21 @@ const Checkout = () => {
       title: "TATA Galvanised Gc Roofing Sheet",
       description: "Tata Tiscon",
       currentPrice: "₹62.00",
-      image: "/images/home/cat2.png",
+      image: "/images/home/cat2.webp",
       quantity: 1,
     },
     {
       title: "TATA Galvanised Gc Roofing Sheet",
       description: "Tata Tiscon",
       currentPrice: "₹62.00",
-      image: "/images/home/cat1.png",
+      image: "/images/home/cat1.webp",
       quantity: 1,
     },
     {
       title: "TATA Galvanised Gc Roofing Sheet",
       description: "Tata Tiscon",
       currentPrice: "₹62.00",
-      image: "/images/home/cat3.png",
+      image: "/images/home/cat3.webp",
       quantity: 1,
     },
   ];
@@ -45,13 +45,13 @@ const Checkout = () => {
             {/* Order Confirmation Section */}
             <div className="flex flex-col md:flex-row p-5 text-center justify-center items-center">
               <Image
-                src="/images/checkout/Group.png"
+                src="/images/checkout/Group.webp"
                 alt="image"
                 className="w-20 h-20"
                 width={80}
                 height={80}
                 onError={e => {
-                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                  e.currentTarget.src = '/images/product-placeholder.webp'
                 }}
                 loading="lazy"
               />
@@ -128,7 +128,7 @@ const Checkout = () => {
                   width={63.14}
                   height={64}
                   onError={e => {
-                    e.currentTarget.src = '/images/product-placeholder.jpg'
+                    e.currentTarget.src = '/images/product-placeholder.webp'
                   }}
                   loading="lazy"
                 />

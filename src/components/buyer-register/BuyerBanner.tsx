@@ -14,9 +14,9 @@ import Image from "next/image";
 const ImageSlider = () => {
   const router=useRouter()
   const images = [
-    "/images/buyer-register/buyerBannerN.png",
-    "/images/buyer-register/buyerBannerN.png",
-    "/images/buyer-register/buyerBannerN.png",
+    "/images/buyer-register/buyerBannerN.webp",
+    "/images/buyer-register/buyerBannerN.webp",
+    "/images/buyer-register/buyerBannerN.webp",
     // Add more image paths here
   ];
 
@@ -39,7 +39,7 @@ const ImageSlider = () => {
               width={1448}
               height={549}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
             />

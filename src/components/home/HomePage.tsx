@@ -25,7 +25,7 @@ const HomePage = () => {
       <div className="works-section  mx-auto  ">
         <WorksSection />
       </div>
-      <div className="projects-section mx-auto relative flex items-center justify-center pt-[30px] bg-[url('/images/home/bg5.png')] bg-top bg-no-repeat bg-cover">
+      <div className="projects-section mx-auto relative flex items-center justify-center pt-[30px] bg-[url('/images/home/bg5.webp')] bg-top bg-no-repeat bg-cover">
         <ProjectsSection />
       </div>
 

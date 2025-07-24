@@ -106,19 +106,19 @@ const BrandsSection: React.FC = () => {
                         //     ? (assetURL + '/' + vendor?.businessInfo?.logo).includes('//admin')
                         //       ? (assetURL + '/' + vendor?.businessInfo?.logo).replace('//admin', '/admin')
                         //       : `${assetURL}/${vendor?.businessInfo?.logo}`
-                        //     : '/images/product-placeholder.jpg'
+                        //     : '/images/product-placeholder.webp'
                         // }
                         src={
                           vendor?.businessInfo?.logo
                             ? normalizePath(`${assetURL}/${vendor?.businessInfo?.logo}`)
-                            : "/images/product-placeholder.jpg"
+                            : "/images/product-placeholder.webp"
                         }
                         alt={vendor?.businessInfo?.companyName}
                         fill
                         className="object-contain"
                         sizes="(max-width: 640px) 150px, (max-width: 768px) 180px, 200px"
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                       />

@@ -134,7 +134,7 @@ export async function generateMetadata({
           })
         : [
             {
-              url: "/images/Admin-2.png",
+              url: "/images/Admin-2.webp",
               alt: "Hubeco Logo",
             },
           ];

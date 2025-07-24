@@ -28,7 +28,7 @@ interface Category {
   items: string;
 }
 
-const FALLBACK_IMAGE = "/images/product-placeholder.jpg";
+const FALLBACK_IMAGE = "/images/product-placeholder.webp";
 
 const CategoryList = () => {
   const [vendors, setVendors] = useState([]);
@@ -123,17 +123,17 @@ const CategoryList = () => {
             <div className="relative w-full" onClick={() => router.push(`/products`)}>
             <Image
                     // src={category?.image}
-                    // src={category?.image ?  (assetURL+'/'+category?.image).includes('//admin') ? (assetURL+'/'+category?.image).replace('//admin', '/admin') : `${assetURL}/${category?.image}` : '/images/product-placeholder.jpg'}
+                    // src={category?.image ?  (assetURL+'/'+category?.image).includes('//admin') ? (assetURL+'/'+category?.image).replace('//admin', '/admin') : `${assetURL}/${category?.image}` : '/images/product-placeholder.webp'}
                     src={
                       category?.image
                         ? normalizePath(`${assetURL}/${category.image}`)
-                        : "/images/product-placeholder.jpg"
+                        : "/images/product-placeholder.webp"
                     }
                     alt={`Slide ${index}`}
                     width={300}
                     height={300}
                     onError={e => {
-                      e.currentTarget.src = '/images/product-placeholder.jpg'
+                      e.currentTarget.src = '/images/product-placeholder.webp'
                     }}
                     loading="lazy"
                     

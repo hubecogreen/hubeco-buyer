@@ -113,7 +113,7 @@ const WishList = () => {
         <div
           className="md:px-20 px-5 py-5 relative bg-cover bg-center h-[200px] flex items-center justify-start text-white"
           style={{
-            backgroundImage: 'url("images/about/aboutBanner1.png")',
+            backgroundImage: 'url("images/about/aboutBanner1.webp")',
           }}
         >
           <Link href="/" className="text-white flex items-center">

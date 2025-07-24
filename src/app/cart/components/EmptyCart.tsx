@@ -23,9 +23,9 @@ const EmptyCart = () => {
               loop={true}
               style={{ width: 300, height: 300 }}
             /> */}
-            <Image src="/images/wishlist/cartimage.png" alt="Image" width={300} height={300}
+            <Image src="/images/wishlist/cartimage.webp" alt="Image" width={300} height={300}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
             />

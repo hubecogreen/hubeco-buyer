@@ -95,7 +95,7 @@ const CategorySection = () => {
 
   return (
     <section className="relative w-full items-center justify-center bg-white overflow-hidden">
-      <div className="overflow-hidden bg-[url('/images/home/bg1.png')] bg-contain bg-top bg-no-repeat">
+      <div className="overflow-hidden bg-[url('/images/home/bg1.webp')] bg-contain bg-top bg-no-repeat">
         <div className="flex flex-col items-center  justify-center text-white  px-4 md:px-12">
           <h2
             className={`${styles.textAnimate} text-2xl md:text-3xl font-normal mb-4 text-secondary drop-shadow-md`}
@@ -174,14 +174,14 @@ const CategorySection = () => {
                         src={
                           category?.image
                             ? normalizePath(`${assetURL}/${category?.image}`)
-                            : "/images/product-placeholder.jpg"
+                            : "/images/product-placeholder.webp"
                         }
                         alt={`Slide ${index}`}
                         width={414}
                         height={414}
                         onError={(e) => {
                           e.currentTarget.src =
-                            "images/product-placeholder.jpg";
+                            "images/product-placeholder.webp";
                         }}
                         loading="lazy"
                         className="object-cover w-[414px] h-[414px] rounded-sm"

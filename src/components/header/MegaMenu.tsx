@@ -287,7 +287,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                 <div className="flex-1 bg-white relative">
                   {/* Background image with left margin and custom height */}
                   <div
-                    className="absolute right-0 bottom-0 w-[200px] h-[200px] bg-[url('/images/logo-banner.png')] bg-contain bg-no-repeat"
+                    className="absolute right-0 bottom-0 w-[200px] h-[200px] bg-[url('/images/logo-banner.webp')] bg-contain bg-no-repeat"
                     style={{
                       right: "30px", // Creates margin on the left side of the image
                       bottom: "20px",

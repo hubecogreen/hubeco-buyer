@@ -322,19 +322,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           //     ? (assetURL + "/" + product?.image).includes("//admin")
           //       ? (assetURL + "/" + product?.image).replace("//admin", "/admin")
           //       : `${assetURL}/${product?.image}`
-          //     : "/images/product-placeholder.jpg"
+          //     : "/images/product-placeholder.webp"
           // }
           src={
             product?.image
               ? normalizePath(`${assetURL}/${product?.image}`)
-              : "/images/product-placeholder.jpg"
+              : "/images/product-placeholder.webp"
           }
           alt={product.name}
           className={styles.productImage}
           width={320}
           height={320}
           onError={(e) => {
-            e.currentTarget.src = "/images/product-placeholder.jpg";
+            e.currentTarget.src = "/images/product-placeholder.webp";
           }}
           loading="lazy"
         />

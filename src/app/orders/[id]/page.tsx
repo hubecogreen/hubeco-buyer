@@ -364,12 +364,12 @@ export default function OrdersPage({ params }: any) {
                                   //       : `${assetURL}/${
                                   //           order && order?.item?.productImage
                                   //         }`
-                                  //     : "/images/product-placeholder.jpg"
+                                  //     : "/images/product-placeholder.webp"
                                   // }
                                   src={
                                     order?.item?.productImage
                                       ? normalizePath(`${assetURL}/${order.item.productImage}`)
-                                      : "/images/product-placeholder.jpg"
+                                      : "/images/product-placeholder.webp"
                                   }
                                   className="object-cover h-[135px] w-[160px] border border-borderGray cursor-pointer"
                                   alt={"order details"}
@@ -377,7 +377,7 @@ export default function OrdersPage({ params }: any) {
                                   height={135}
                                   onError={(e) => {
                                     e.currentTarget.src =
-                                      "/images/failedToLoadImage.jpg";
+                                      "/images/failedToLoadImage.webp";
                                   }}
                                   loading="lazy"
                                 />
@@ -529,12 +529,12 @@ export default function OrdersPage({ params }: any) {
                                 //       : `${assetURL}/${
                                 //           order && order?.item?.productImage
                                 //         }`
-                                //     : "/images/product-placeholder.jpg"
+                                //     : "/images/product-placeholder.webp"
                                 // }
                                 src={
                                   order?.item?.productImage
                                     ? normalizePath(`${assetURL}/${order.item.productImage}`)
-                                    : "/images/product-placeholder.jpg"
+                                    : "/images/product-placeholder.webp"
                                 }
                                 className="object-cover h-[135px] w-[160px] border border-borderGray cursor-pointer"
                                 alt={"order details"}
@@ -542,7 +542,7 @@ export default function OrdersPage({ params }: any) {
                                 height={135}
                                 onError={(e) => {
                                   e.currentTarget.src =
-                                    "/images/failedToLoadImage.jpg";
+                                    "/images/failedToLoadImage.webp";
                                 }}
                                 loading="lazy"
                               />

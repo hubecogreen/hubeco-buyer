@@ -56,7 +56,7 @@ const BlogCard: React.FC<blogCardProps> = ({
             width={390}
             height={250}
             onError={e => {
-              e.currentTarget.src = '/images/product-placeholder.jpg';
+              e.currentTarget.src = '/images/product-placeholder.webp';
             }}
             loading="lazy"
             className={`

@@ -128,7 +128,7 @@
 //                                     : `${assetURL}/${
 //                                         order && order?.item?.productImage
 //                                       }`
-//                                   : "/images/product-placeholder.jpg"
+//                                   : "/images/product-placeholder.webp"
 //                               }
 //                               className="object-cover h-[135px] w-[160px] border border-borderGray"
 //                               alt={"order details"}
@@ -428,7 +428,7 @@ export default function Page({ params }: any) {
             <ChatBox
               transactionList={transactionData}
               sender={{ name: "User1", displayImage: "" }}
-              receiver={{ name: "Hubeco - Support", displayImage: "/images/Admin-2.png" }}
+              receiver={{ name: "Hubeco - Support", displayImage: "/images/Admin-2.webp" }}
               chatEndPoint="customerSupport/getCSChats"
               roomEndPoint="customerSupport/getOrCreateRoom"
               refer="Support"
@@ -460,19 +460,19 @@ export default function Page({ params }: any) {
                       //         orderData?.item?.productImage
                       //       ).replace("//admin", "/admin")
                       //       : `${assetURL}/${orderData?.item?.productImage}`
-                      //     : "/images/product-placeholder.jpg"
+                      //     : "/images/product-placeholder.webp"
                       // }
                       src={
                         orderData?.item?.productImage
                           ? normalizePath(`${assetURL}/${orderData.item.productImage}`)
-                          : "/images/product-placeholder.jpg"
+                          : "/images/product-placeholder.webp"
                       }
                       className="object-cover h-[135px] w-[160px] border border-borderGray"
                       alt={"order details"}
                       width={160}
                       height={135}
                       onError={e => {
-                        e.currentTarget.src = '/images/product-placeholder.jpg'
+                        e.currentTarget.src = '/images/product-placeholder.webp'
                       }}
                       loading="lazy"
                     />

@@ -263,13 +263,13 @@ const RenderButton = ({ orderId, order, justify = "center" }: any) => {
                         className={`w-full flex justify-center items-center`}
                       >
                         <Image
-                          src="/images/wishlist/CancelS.png"
+                          src="/images/wishlist/CancelS.webp"
                           alt="cancel order"
                           width={70}
                           height={70}
                           onError={(e) => {
                             e.currentTarget.src =
-                              "/images/product-placeholder.jpg";
+                              "/images/product-placeholder.webp";
                           }}
                           loading="lazy"
                           className="mb-8"

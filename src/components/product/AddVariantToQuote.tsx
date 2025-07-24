@@ -71,12 +71,12 @@ export default function AddVariantToQuote({
                       //           "/admin"
                       //         )
                       //       : `${assetPath}/${elem?.thumbnail}`
-                      //     : "/images/product-placeholder.jpg"
+                      //     : "/images/product-placeholder.webp"
                       // }
                       src={
                         elem?.thumbnail
                           ? normalizePath(`${assetPath}/${elem?.thumbnail}`)
-                          : "/images/product-placeholder.jpg"
+                          : "/images/product-placeholder.webp"
                       }
                       alt={
                         elem?.thumbnail
@@ -86,7 +86,7 @@ export default function AddVariantToQuote({
                       width={100}
                       height={100}
                       onError={(e) => {
-                        e.currentTarget.src = "/images/product-placeholder.jpg";
+                        e.currentTarget.src = "/images/product-placeholder.webp";
                       }}
                       loading="lazy"
                     />

@@ -257,7 +257,7 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
               width={70}
               height={70}
               onError={(e) => {
-                e.currentTarget.src = "/images/product-placeholder.jpg";
+                e.currentTarget.src = "/images/product-placeholder.webp";
               }}
               loading="lazy"
               className="mb-3"
@@ -396,14 +396,14 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
                       <div key={index} className="relative w-[100px] h-[100px]">
                         <Image
                           src={fullUrl}
-                          // src={'https://assets-uat.hubeco.market/buyer/profilePictures/ff23034a-20b1-44a0-bb87-7cb309da53af-profile-pic.jpg'}
+                          // src={'https://assets-uat.hubeco.market/buyer/profilePictures/ff23034a-20b1-44a0-bb87-7cb309da53af-profile-pic.webp'}
                           alt={`Attachment ${index + 1}`}
                           className="rounded !w-[100px] !h-[100px]"
                           width={100}
                           height={100}
                           onError={(e) => {
                             e.currentTarget.src =
-                              "/images/product-placeholder.jpg";
+                              "/images/product-placeholder.webp";
                           }}
                           // loading="lazy"
                           loading="eager"

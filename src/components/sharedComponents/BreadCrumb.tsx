@@ -13,7 +13,7 @@ interface Props {
 function BreadCrumb({ breadcrumbs }: Props) {
   return (
     <nav aria-label="Breadcrumb" className="banner-section">
-      <div className="relative md:flex block md:justify-start justify-center items-center md:px-20 px-3 bg-[url('/images/about/aboutBanner1.png')] bg-cover bg-center h-[100px] md:h-[200px] flex items-center justify-start text-white">
+      <div className="relative md:flex block md:justify-start justify-center items-center md:px-20 px-3 bg-[url('/images/about/aboutBanner1.webp')] bg-cover bg-center h-[100px] md:h-[200px] flex items-center justify-start text-white">
         <ol
           itemScope
           itemType="https://schema.org/BreadcrumbList"

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: "https://hubeco.market/projects",
     images: [
       {
-        url: "/images/Admin-2.png",
+        url: "/images/Admin-2.webp",
         alt: "Hubeco Logo",
       },
     ],
@@ -32,7 +32,7 @@ const Projects = () => {
   return (
     <div className="bg-white min-h-screen">
       <div className="banner-section h-102">
-        <div className="md:px-20 px-5 py-5 relative bg-[url('/images/about/aboutBanner1.png')] bg-cover bg-center h-[200px] flex items-center justify-start text-white">
+        <div className="md:px-20 px-5 py-5 relative bg-[url('/images/about/aboutBanner1.webp')] bg-cover bg-center h-[200px] flex items-center justify-start text-white">
           <Link
             href="/"
             className="text-white flex items-center no-underline px-2.5 py-1 rounded"

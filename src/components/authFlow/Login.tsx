@@ -223,7 +223,7 @@ setIsLoading(false)
   return (
     <div className="relative">
       {!showForgotPassword ? ( // Show login form if not in forgot password state
-        <div className="bg-cover bg-center bg-[url('/images/auth/auth.png')] h-5/6">
+        <div className="bg-cover bg-center bg-[url('/images/auth/auth.webp')] h-5/6">
          <div className="h-full flex items-center justify-center py-20 md:py-10 px-[10px] md:px-0">
           {/* <div className=" flex items-center justify-center py-10 md:py-15 w-11/12  px-4 md:max-w-lg   bg-white"> */}
            <div className="text-center py-10 md:py-15 max-w-full md:max-w-lg  text-white bg-white">

@@ -249,7 +249,7 @@ const RecentViewCard = ({
     >
       <div className="relative">
         <Image
-          //   src={'/images/product-placeholder.jpg'}
+          //   src={'/images/product-placeholder.webp'}
           // src={
           //   product?.thumbnail
           //     ? (assetURL + "/" + product?.thumbnail).includes("//admin")
@@ -258,12 +258,12 @@ const RecentViewCard = ({
           //           "/admin"
           //         )
           //       : `${assetURL}/${product?.thumbnail}`
-          //     : "/images/product-placeholder.jpg"
+          //     : "/images/product-placeholder.webp"
           // }
           src={
             product?.thumbnail
               ? normalizePath(`${assetURL}/${product?.thumbnail}`)
-              : "/images/product-placeholder.jpg"
+              : "/images/product-placeholder.webp"
           }
           alt={product?.productName}
           className="w-full h-[314px] object-contain px-4 pt-10"
@@ -271,7 +271,7 @@ const RecentViewCard = ({
           width={100}
           quality={100}
           onError={(e) => {
-            e.currentTarget.src = "/images/product-placeholder.jpg";
+            e.currentTarget.src = "/images/product-placeholder.webp";
           }}
           loading="lazy"
           onClick={() => router.push(`/${product.slug}`)}

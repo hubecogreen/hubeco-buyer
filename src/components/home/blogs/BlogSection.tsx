@@ -101,7 +101,7 @@ setSlidesToShow(3)
     <>
     {blogs && blogs.length > 0 ? (
       <section
-      className="relative w-full items-center justify-center pt-4 md:pt-[50px] mobile-sm:mt-4 transition-bg ease-in-out duration-1000 bg-[url('/images/home/wavesBglight.png')] bg-contain bg-no-repeat bg-center"
+      className="relative w-full items-center justify-center pt-4 md:pt-[50px] mobile-sm:mt-4 transition-bg ease-in-out duration-1000 bg-[url('/images/home/wavesBglight.webp')] bg-contain bg-no-repeat bg-center"
       style={{ backgroundColor: bgColor }}
     >
       <div className="pb-10">

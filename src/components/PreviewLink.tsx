@@ -79,7 +79,7 @@ const PreviewLink = ({ url }) => {
                     width={500}
                     height={500}
                     onError={e => {
-                      e.currentTarget.src = '/images/product-placeholder.jpg'
+                      e.currentTarget.src = '/images/product-placeholder.webp'
                     }}
                     loading="lazy"
                   />

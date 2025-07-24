@@ -389,7 +389,7 @@ const Header: React.FC<HeaderProps> = () => {
               width={180}
               height={45}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
             />
@@ -470,10 +470,10 @@ const Header: React.FC<HeaderProps> = () => {
              <Image
              alt="vendor"
              className="text-black md:hidden mobile-sm:ml-2  hover:cursor-pointer"
-             src="/images/home/vendor.jpeg" 
+             src="/images/home/vendor.webp" 
              width={28} height={16}
              onError={e => {
-              e.currentTarget.src = '/images/product-placeholder.jpg'
+              e.currentTarget.src = '/images/product-placeholder.webp'
             }}
             loading="lazy"
              onClick={() => router.push('/plans')}

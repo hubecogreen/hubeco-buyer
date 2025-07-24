@@ -822,7 +822,7 @@ const B2C_editPersonal: React.FC<ProfileFormProps> = ({
                   ? URL.createObjectURL(file)
                   : buyerInfo?.displayImage
                   ? `${assetURL}/${buyerInfo?.displayImage}`
-                  : "/images/user.png"
+                  : "/images/user.webp"
               }
               alt="Profile"
             />

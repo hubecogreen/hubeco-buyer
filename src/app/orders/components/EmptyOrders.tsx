@@ -16,12 +16,12 @@ const EmptyOrders = () => {
           <div className="flex justify-center p-10">
             
             <Image
-              src={"/images/wishlist/no-orders.png"}
+              src={"/images/wishlist/no-orders.webp"}
               alt="Image"
               width={200}
               height={200}
               onError={(e) => {
-                e.currentTarget.src = "images/failedToLoadImage.jpg";
+                e.currentTarget.src = "images/failedToLoadImage.webp";
               }}
               loading="lazy"
             />

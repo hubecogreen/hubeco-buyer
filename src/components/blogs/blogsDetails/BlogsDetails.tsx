@@ -177,7 +177,7 @@ const BlogsDetails = ({ id }: any) => {
                     height={300}
                     className={`${styles.image} object-cover max-h-[450px] rounded`}
                     onError={(e) => {
-                      e.currentTarget.src = "/images/failedToLoadImage.jpg";
+                      e.currentTarget.src = "/images/failedToLoadImage.webp";
                     }}
                     loading="lazy"
                   />
@@ -246,7 +246,7 @@ const BlogsDetails = ({ id }: any) => {
                           height={300}
                           onClick={() => handleBlogClick(item.slug)}
                           onError={(e) => {
-                            e.currentTarget.src = "/images/failedToLoadImage.jpg";
+                            e.currentTarget.src = "/images/failedToLoadImage.webp";
                           }}
                           loading="lazy"
                           className="rounded-[5px] h-[300px] w-[400px] cursor-pointer"

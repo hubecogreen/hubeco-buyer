@@ -120,11 +120,11 @@ const isClient = useClient()
             <div className={styles.userInfo}>
             <Image
               alt="profile"
-              src={buyerInfo?.displayImage ? `${assetURL}/${buyerInfo?.displayImage}` : '/images/user.png'}
+              src={buyerInfo?.displayImage ? `${assetURL}/${buyerInfo?.displayImage}` : '/images/user.webp'}
               width={40}
               height={40}
               onError={e => {
-                e.currentTarget.src = '/images/user.png';
+                e.currentTarget.src = '/images/user.webp';
               }}
               loading="lazy"
               className="rounded-full w-[40px] h-[40px]"

@@ -63,14 +63,14 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, handleSectionClick ,se
                 <Image
                   src={
                     isOrdersExpanded
-                      ? "/images/wishlist/ordersEdit.png"
-                      : "/images/wishlist/orders.png"
+                      ? "/images/wishlist/ordersEdit.webp"
+                      : "/images/wishlist/orders.webp"
                   }
                   alt="Orders"
                   width={20}
                   height={20}
                   onError={e => {
-                    e.currentTarget.src = '/images/failedToLoadImage.jpg'
+                    e.currentTarget.src = '/images/failedToLoadImage.webp'
                   }}
                   loading="lazy"
                 />
@@ -125,8 +125,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, handleSectionClick ,se
             <Image
               src={
                 activeSection === "saved"
-                  ? "/images/wishlist/saved.png"
-                  : "/images/wishlist/savededit2.png"
+                  ? "/images/wishlist/saved.webp"
+                  : "/images/wishlist/savededit2.webp"
               }
               alt="Wishlist"
             //   width={20}
@@ -136,7 +136,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, handleSectionClick ,se
                   : 15}
               height={20}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
             />
@@ -162,14 +162,14 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, handleSectionClick ,se
             <Image
               src={
                 activeSection === "quote"
-                  ? "/images/wishlist/quoteEdit.png"
-                  : "/images/wishlist/quote.png"
+                  ? "/images/wishlist/quoteEdit.webp"
+                  : "/images/wishlist/quote.webp"
               }
               alt="Quote Requests"
               width={20}
               height={20}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
             />
@@ -186,34 +186,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, handleSectionClick ,se
           </Link>
         </li>
 
-        {/* My Coupons Section */}
-        {/* <li
-          className="flex items-center cursor-pointer"
-          onClick={() => handleSectionClick("coupons")}
-        >
-          <span className="mr-2 md:mr-3">
-            <img
-              src={
-                activeSection === "coupons"
-                  ? "/images/wishlist/couponEdit.png"
-                  : "/images/wishlist/coupon.png"
-              }
-              alt="My Coupons"
-              width={20}
-              height={20}
-            />
-          </span>
-          <a
-            href="/coupon"
-            className={`${
-              activeSection === "coupons"
-                ? "text-[#B90647] font-semibold"
-                : "text-[#31466B] hover:text-[#00A18A] font-medium"
-            }`}
-          >
-            My Coupons
-          </a>
-        </li> */}
+      
       </ul>
     </aside>
   );

@@ -98,10 +98,6 @@ const PaymentFailed = () => {
   
     <div className='flex flex-col items-center justify-center min-h-screen bg-red-50 text-center'>
       <div >
-        {/* Header */}
-        {/* <div className='mb-6'>
-         // <img src='/images/pages/hubeco-Logo.png' alt='Logo' className='w-32 mx-auto' />
-        </div> */}
 
         {/* Failure Icon and Message */}
         <div className='mb-8'>

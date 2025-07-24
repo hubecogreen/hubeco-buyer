@@ -323,25 +323,25 @@ const ProductCard = ({
     >
       <div className="relative">
         <Image
-          //   src={'/images/product-placeholder.jpg'}
+          //   src={'/images/product-placeholder.webp'}
           // src={
           //   product?.image
           //     ? (assetURL + "/" + product?.image).includes("//admin")
           //       ? (assetURL + "/" + product?.image).replace("//admin", "/admin")
           //       : `${assetURL}/${product?.image}`
-          //     : "/images/product-placeholder.jpg"
+          //     : "/images/product-placeholder.webp"
           // }
           src={
             product?.image
               ? normalizePath(`${assetURL}/${product?.image}`)
-              : "/images/product-placeholder.jpg"
+              : "/images/product-placeholder.webp"
           }
           alt={product?.productName}
           className="w-full h-[314px] object-contain px-4 pt-10"
           height={100}
           width={100}
           onError={(e) => {
-            e.currentTarget.src = "/images/failedToLoadImage.jpg";
+            e.currentTarget.src = "/images/failedToLoadImage.webp";
           }}
           loading="lazy"
           quality={100}

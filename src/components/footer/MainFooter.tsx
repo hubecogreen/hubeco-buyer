@@ -92,7 +92,7 @@ const Footer = () => {
       <div
         className="w-full bg-white px-xl pt-10 md:pt-20 md:px-xxl bg-cover bg-center text-white"
         style={{
-          backgroundImage: 'url("images/home/footer-bg-2.png")',
+          backgroundImage: 'url("images/home/footer-bg-2.webp")',
         }}
       >
 
@@ -110,7 +110,7 @@ const Footer = () => {
                 width={180}
                 height={45}
                 onError={e => {
-                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                  e.currentTarget.src = '/images/product-placeholder.webp'
                 }}
                 loading="lazy"
                 onClick={() => {
@@ -140,7 +140,7 @@ const Footer = () => {
                     width={28}
                     height={28}
                     alt="Facebook"
-                    src={"/images/contact/facebook.png"}
+                    src={"/images/contact/facebook.webp"}
                   /> */}
                 </li>
                 <li
@@ -158,7 +158,7 @@ const Footer = () => {
                     width={28}
                     height={28}
                     alt="Facebook"
-                    src={"/images/contact/twitter.png"}
+                    src={"/images/contact/twitter.webp"}
                   /> */}
                 </li>
                 <li
@@ -179,7 +179,7 @@ const Footer = () => {
                     width={28}
                     height={28}
                     alt="Facebook"
-                    src={"/images/contact/insta.png"}
+                    src={"/images/contact/insta.webp"}
                   /> */}
                 </li>
                 <li
@@ -200,7 +200,7 @@ const Footer = () => {
                     width={28}
                     height={28}
                     alt="Facebook"
-                    src={"/images/contact/linkedIn.png"}
+                    src={"/images/contact/linkedIn.webp"}
                   /> */}
                 </li>
                 {/* <li className="align-middle bg-secondary hover:bg-primary ml-4 p-1.5 rounded">
@@ -353,7 +353,7 @@ const Footer = () => {
                     Powered by
                     <Image width={50} height={15}
                       onError={e => {
-                        e.currentTarget.src = '/images/product-placeholder.jpg'
+                        e.currentTarget.src = '/images/product-placeholder.webp'
                       }}
                       loading="lazy"
                       src={"/images/msg91.svg"} className="ml-1 w-[50px] mt-[-5px] h-[15px]" alt={'MSG91'} /></span>

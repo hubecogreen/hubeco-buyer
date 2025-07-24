@@ -21,9 +21,9 @@ const ImageSlider = () => {
   };
 
   const images = [
-    "/images/vendor-register/vendorBanner.png",
-    "/images/vendor-register/vendorBanner.png",
-    "/images/vendor-register/vendorBanner.png",
+    "/images/vendor-register/vendorBanner.webp",
+    "/images/vendor-register/vendorBanner.webp",
+    "/images/vendor-register/vendorBanner.webp",
     // Add more image paths here
   ];
 
@@ -45,7 +45,7 @@ const ImageSlider = () => {
               src={src}
               alt={`Slide ${index}`}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
               className="object-cover w-full h-full"

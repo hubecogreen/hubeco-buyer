@@ -555,7 +555,7 @@ export default function Page() {
       <div
         className="flex flex-col lg:flex-row items-start justify-between py-12 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full"
         style={{
-          backgroundImage: "url('/images/home/contactbg.png')",
+          backgroundImage: "url('/images/home/contactbg.webp')",
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "left 10%",

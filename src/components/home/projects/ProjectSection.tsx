@@ -24,22 +24,22 @@ const ProjectsSection = () => {
     {
       title: "Agrocrete",
       category: "blog",
-      image: "/images/projects/project10.jpg",
+      image: "/images/projects/project10.webp",
     },
     {
       title: "Aggregrates",
       category: "blog",
-      image: "/images/projects/project2.png",
+      image: "/images/projects/project2.webp",
     },
     {
       title: "Sand",
       category: "news",
-      image: "/images/projects/project3a.png",
+      image: "/images/projects/project3a.webp",
     },
     {
       title: "Greenboards",
       category: "article",
-      image: "/images/projects/project4.png",
+      image: "/images/projects/project4.webp",
     },
 
   ];
@@ -78,11 +78,11 @@ const ProjectsSection = () => {
         <div className={`${styles.container3} `}>
           <div className={`${styles.gridItem}`}>
             <Image
-              src="/images/projects/project10.jpg"
+              src="/images/projects/project10.webp"
               alt="Brick Wall"
                className="rounded-md"
                onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
               width={500}
@@ -91,11 +91,11 @@ const ProjectsSection = () => {
           </div>
           <div className={`${styles.gridItem}`}>
             <Image
-              src="/images/projects/project2.png"
+              src="/images/projects/project2.webp"
               alt="Vertical Garden"
                className="rounded-md"
                onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
               width={500}
@@ -104,11 +104,11 @@ const ProjectsSection = () => {
           </div>
           <div className={`${styles.gridItem}`}>
             <Image
-              src="/images/projects/project3a.png"
+              src="/images/projects/project3a.webp"
               alt="Staircase"
                className="rounded-md"
                onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
               width={500}
@@ -117,11 +117,11 @@ const ProjectsSection = () => {
           </div>
           <div className={`${styles.gridItem}`}>
             <Image
-              src="/images/projects/project4.png"
+              src="/images/projects/project4.webp"
               alt="Green Wall"
               className="rounded-md"
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
               width={500}
@@ -161,7 +161,7 @@ const ProjectsSection = () => {
                     height={414}
                     width={414}
                     onError={e => {
-                      e.currentTarget.src = '/images/product-placeholder.jpg';
+                      e.currentTarget.src = '/images/product-placeholder.webp';
                     }}
                     loading="lazy"
                     className={`${styles.catImg} object-cover w-full h-full rounded-md`} // 'rounded-md' for border-radius

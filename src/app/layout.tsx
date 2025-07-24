@@ -5,6 +5,7 @@ import React from "react";
 import Script from "next/script";
 import MainLayout from "@/components/home/MainLayout";
 import WhatsAppWidget from "@/components/WhatsApp";
+import Image from "next/image";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     siteName: "Hubeco",
     images: [
       {
-        url: "/images/Admin-2.png",
+        url: "/images/Admin-2.webp",
         alt: "Hubeco Logo",
       },
     ],
@@ -46,6 +47,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.variable}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://assets.hubeco.market" crossOrigin="anonymous" />
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
@@ -108,9 +112,9 @@ export default function RootLayout({
           src="https://snap.licdn.com/li.lms-analytics/insight.min.js"
         />
         <noscript>
-          <img
-            height="1"
-            width="1"
+          <Image
+            height={1}
+            width={1}
             style={{ display: "none" }}
             alt=""
             src="https://px.ads.linkedin.com/collect/?pid=8360633&fmt=gif"

@@ -28,7 +28,7 @@
 
 .secondSection {
   height: 500px;
-  background-image: "url('/images/about/aboutWavesBg.png')";
+  background-image: "url('/images/about/aboutWavesBg.webp')";
   background-size: cover; /* or contain, auto, etc. */
   background-repeat: no-repeat; /* or repeat, repeat-x, repeat-y */
   background-position: top; /* or top, bottom, left, right, etc. */

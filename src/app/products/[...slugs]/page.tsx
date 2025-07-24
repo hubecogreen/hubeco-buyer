@@ -36,7 +36,7 @@ export async function generateMetadata({ params, searchParams }: {
           canonical: canonicalUrl,
           ogTitle: data?.metaTitle ? `${data.metaTitle} | Hubeco` : 'Products | Hubeco',
           ogDescription: data?.metaDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
-          ogImage: data?.metaImage ? (Array.isArray(data.metaImage) ? data.metaImage[0] : data.metaImage) : '/images/Admin-2.png',
+          ogImage: data?.metaImage ? (Array.isArray(data.metaImage) ? data.metaImage[0] : data.metaImage) : '/images/Admin-2.webp',
         };
       }
     } else if (ccid && typeof ccid === 'string') {
@@ -50,7 +50,7 @@ export async function generateMetadata({ params, searchParams }: {
           canonical: canonicalUrl,
           ogTitle: data?.metaTitle ? `${data.metaTitle} | Hubeco` : 'Products | Hubeco',
           ogDescription: data?.metaDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
-          ogImage: data?.metaImage ? (Array.isArray(data.metaImage) ? data.metaImage[0] : data.metaImage) : '/images/Admin-2.png',
+          ogImage: data?.metaImage ? (Array.isArray(data.metaImage) ? data.metaImage[0] : data.metaImage) : '/images/Admin-2.webp',
         };
       }
     } else {
@@ -75,7 +75,7 @@ export async function generateMetadata({ params, searchParams }: {
       siteName: "Hubeco",
       images: [
         {
-          url: metaData.ogImage || '/images/Admin-2.png',
+          url: metaData.ogImage || '/images/Admin-2.webp',
           alt: metaData.title || 'Hubeco Product Image',
         }
       ]
@@ -84,7 +84,7 @@ export async function generateMetadata({ params, searchParams }: {
       card: "summary_large_image",
       title: metaData.ogTitle || 'Products | Hubeco',
       description: metaData.ogDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
-      images: [metaData.ogImage || '/images/Admin-2.png']
+      images: [metaData.ogImage || '/images/Admin-2.webp']
     }
   };
 }

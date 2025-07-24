@@ -134,11 +134,6 @@ const PaymentFailed = () => {
   
     <div className='flex flex-col items-center justify-center bg-red-50 text-center'>
       <div >
-        {/* Header */}
-        {/* <div className='mb-6'>
-          // <img src='/images/pages/hubeco-Logo.png' alt='Logo' className='w-32 mx-auto' />
-        </div> */}
-
         {/* Failure Icon and Message */}
         <div className='mb-8'>
           <Lottie animationData={animationData} loop={true} className='w-72 h-72 mx-auto' />

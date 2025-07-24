@@ -218,17 +218,17 @@ const WishListCard: React.FC<ProductCardProps> = ({
           //           "/admin"
           //         )
           //       : `${assetURL}/${product?.thumbnail}`
-          //     : "/images/product-placeholder.jpg"
+          //     : "/images/product-placeholder.webp"
           // }
           src={
             product?.thumbnail
               ? normalizePath(`${assetURL}/${product?.thumbnail}`)
-              : "/images/product-placeholder.jpg"
+              : "/images/product-placeholder.webp"
           }
           width={300}
           height={300}
           onError={(e) => {
-            e.currentTarget.src = "/images/failedToLoadImage.jpg";
+            e.currentTarget.src = "/images/failedToLoadImage.webp";
           }}
           loading="lazy"
           alt={product?.title}

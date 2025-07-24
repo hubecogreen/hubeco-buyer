@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     url: "https://hubeco.market/blogs",
     images: [
       {
-        url: "/images/Admin-2.png",
+        url: "/images/Admin-2.webp",
         alt: "Hubeco Logo",
       },
     ],
@@ -36,7 +36,7 @@ export default function Blogs() {
       <div
         className="relative bg-cover bg-center h-[200px] flex items-center justify-start text-white md:px-28 px-10"
         style={{
-          backgroundImage: 'url("images/about/aboutBanner1.png")'
+          backgroundImage: 'url("images/about/aboutBanner1.webp")'
         }}
       >
         <Link

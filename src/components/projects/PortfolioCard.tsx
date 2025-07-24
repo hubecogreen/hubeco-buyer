@@ -210,13 +210,13 @@ const PortfolioCard = () => {
                     <div className={styles.itemCard}>
                       <Image
                         className={styles.itemImage}
-                        src={item?.thumbnail ?  (assetURL+'/'+item?.thumbnail).includes('//admin') ? (assetURL+'/'+item?.thumbnail).replace('//admin', '/admin') : `${assetURL}/${item?.thumbnail}` : '/images/product-placeholder.jpg'}
+                        src={item?.thumbnail ?  (assetURL+'/'+item?.thumbnail).includes('//admin') ? (assetURL+'/'+item?.thumbnail).replace('//admin', '/admin') : `${assetURL}/${item?.thumbnail}` : '/images/product-placeholder.webp'}
 
                         alt="image"
                         height={259}
                         width={380}
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                         style={{
@@ -261,13 +261,13 @@ const PortfolioCard = () => {
                             ? (assetURL + '/' + item.vendor?.user?.displayImage).includes('//admin')
                               ? (assetURL + '/' + item.vendor?.user?.displayImage).replace('//admin', '/admin')
                               : `${assetURL}/${item.vendor?.user?.displayImage}`
-                            : '/images/product-placeholder.jpg'}
+                            : '/images/product-placeholder.webp'}
                           alt="image"
                           className="h-[40px] w-[40px] rounded-full"
                           height={40}
                           width={40}
                           onError={e => {
-                            e.currentTarget.src = '/images/product-placeholder.jpg';
+                            e.currentTarget.src = '/images/product-placeholder.webp';
                           }}
                           loading="lazy"
                         />

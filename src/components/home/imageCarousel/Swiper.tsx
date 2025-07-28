@@ -52,7 +52,6 @@ const ImageSlider = () => {
               src={src}
               alt={`Slide ${index}`}
               width={500}
-              layout="responsive"
               height={500}
               onError={e => {
                 e.currentTarget.src = '/images/product-placeholder.webp';

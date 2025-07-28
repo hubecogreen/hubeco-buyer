@@ -57,7 +57,6 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
         category => category.subCategories || []
       );
   
-      console.log("All subcategories:", result.data, allSubCategories);
       setCategoriesData(allSubCategories);
       setFilteredCategories(allSubCategories);
       setCatCount(allSubCategories.length);

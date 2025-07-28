@@ -50,7 +50,6 @@ const BlogsSection = () => {
   const [slidesToShow,setSlidesToShow]=useState(3)
   const router=useRouter()
 
- // // console.log('blogs',slidesToShow)
 
   const getData = (page = 1) => {
     const token = getCookie('token') as string  

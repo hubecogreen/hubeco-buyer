@@ -11,6 +11,15 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: "/:all*(ico|jpg|jpeg|png|gif|webp|svg|css|js|woff|woff2|ttf|eot)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
 

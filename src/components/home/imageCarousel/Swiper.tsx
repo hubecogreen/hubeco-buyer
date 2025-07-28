@@ -72,6 +72,7 @@ const ImageSlider = () => {
             className={`w-3 h-3 rounded-full transition-all duration-500 ${
               index === currentImageIndex ? "bg-primary w-8 h-3" : "bg-white"
             }`}
+            aria-label="Go to next slide"
             onClick={() => handleDotClick(index)}
           />
         ))}

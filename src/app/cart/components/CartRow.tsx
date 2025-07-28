@@ -362,7 +362,6 @@ export default function CartRow({
   //   return data;
   // }
   
-console.log('check availability',  shipErr)
 
   return (
     <>

@@ -78,7 +78,6 @@ export default function RecentlyViewed() {
         }
       };
 
-      console.log('recentProducts',recentProducts)
     return (
     <div className="bg-white  block w-full  md:py-12 py-8 px-4 ">
             <p className="md:text-[30px] text-black font-bold text-md mb-4">

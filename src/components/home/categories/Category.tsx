@@ -88,8 +88,6 @@ const CategorySection = () => {
       }
     }, [isDataLoaded]);
 
-    console.log("subCategories", subCategories, subCategories.length);
-    console.log("isDataLoaded", isDataLoaded);
 
 
 

@@ -90,7 +90,6 @@ export async function GET(req: Request): Promise<NextResponse> {
 
     // Write the XML string to a file
     writeFileSync(sitemapPath, xml, 'utf-8');
-    console.log('Sitemap generated and saved to public/sitemap.xml');
 
     // Return a success response
     return NextResponse.json({ message: 'Sitemap generated successfully' });

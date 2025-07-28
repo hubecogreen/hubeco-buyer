@@ -87,11 +87,6 @@ const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid
 
   // Fetch products when filters change
   useEffect(() => {
-    // // console.log(childCatId,subCatId,catId,"params")
-    // return;
-    console.log("Filters changed:", {
-      searchParams,vendorCode, catId, subCatId, childCatId, priceRangeObj, selectedAttributes, sortBy
-    });
     getProducts(1);
   }, [
     // searchParams,

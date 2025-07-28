@@ -74,7 +74,6 @@ const Header: React.FC<HeaderProps> = () => {
 
   useEffect(() => {
     if (fullUrl.includes(`${domainUrl}/plans`)) {
-      console.log('check', fullUrl, domainUrl)
       setShowVendorLogin(true);
     } else {
       setShowVendorLogin(false);

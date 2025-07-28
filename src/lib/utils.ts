@@ -26,7 +26,6 @@ export function disableConsoleInProduction() {
     const isLocalhost =
       window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-      console.log(isLocalhost, "isLocalhost")
 
     if (!isLocalhost) {
       console.log = () => {};

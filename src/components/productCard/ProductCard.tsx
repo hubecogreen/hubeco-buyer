@@ -329,7 +329,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               ? normalizePath(`${assetURL}/${product?.image}`)
               : "/images/product-placeholder.webp"
           }
-          alt={product.name}
+          alt='Product Image'
           className={styles.productImage}
           width={320}
           height={320}

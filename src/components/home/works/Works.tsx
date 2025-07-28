@@ -39,7 +39,6 @@ const WorksSection = () => {
               }`}
               onClick={() => {
                 setShowBuyer(true);
-                console.log("first");
               }}
             >
               Buyer
@@ -55,7 +54,6 @@ const WorksSection = () => {
               }`}
               onClick={() => {
                 setShowBuyer(false);
-                console.log("second");
               }}
             >
               Vendor
@@ -71,7 +69,6 @@ const WorksSection = () => {
           onError={(e) => {
             e.currentTarget.src = "/images/product-placeholder.webp";
           }}
-          layout="responsive"
           priority={true}
         />
       </div>
@@ -85,7 +82,6 @@ const WorksSection = () => {
           onError={(e) => {
             e.currentTarget.src = "/images/product-placeholder.webp";
           }}
-          layout="responsive"
           priority={true}
         />
         <div className="  w-full  ">
@@ -104,7 +100,6 @@ const WorksSection = () => {
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
-                    layout="responsive"
                     priority={true}
                   />
                 </div>
@@ -130,7 +125,6 @@ const WorksSection = () => {
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
-                    layout="responsive"
                     priority={true}
                   />
                 </div>
@@ -156,7 +150,6 @@ const WorksSection = () => {
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
-                    layout="responsive"
                     priority={true}
                     // className="w-16 md:w-10"
                   />
@@ -182,7 +175,6 @@ const WorksSection = () => {
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
-                    layout="responsive"
                     priority={true}
                     // className="w-16 md:w-8"
                   />
@@ -210,7 +202,6 @@ const WorksSection = () => {
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
-                    layout="responsive"
                     priority={true}
                     // className="w-16 md:w-10"
                     // width={28}
@@ -239,7 +230,6 @@ const WorksSection = () => {
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
-                    layout="responsive"
                     priority={true}
                   />
                 </div>
@@ -266,7 +256,6 @@ const WorksSection = () => {
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
-                    layout="responsive"
                     priority={true}
                   />
                 </div>

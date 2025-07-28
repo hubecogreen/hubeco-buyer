@@ -241,7 +241,6 @@ const RecentViewCard = ({
     return new Intl.NumberFormat("en-IN", options).format(roundedAmount);
   }
 
-  console.log('product cokdoeeof',product, purchaseType)
 
   return (
     <div

@@ -110,7 +110,6 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
         const cuurentTime = new Date();
 
         const catResult = result && result?.data;
-        console.log("catresult", catResult);
         setMainCategories(catResult);
         catResult &&
           catResult.forEach((element: any) => {
@@ -146,7 +145,6 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
         const cuurentTime = new Date();
 
         const catResult = result && result?.data;
-        console.log("check mega menu result", catResult);
         setSubCategories(catResult);
         // setMainCategories(catResult);
         // catResult &&
@@ -164,21 +162,16 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
     }
   };
 
-  console.log("categoriesData", subCategories);
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
     setSelectedCategory(null);
   };
 
   const handleCategoryClick = (category: any) => {
-    console.log("Clicked category:", category);
-    console.log("Current openedCategoryId:", openedCategoryId);
-    console.log("Category childCategories:", category.childCategories);
 
     if (category.childCategories?.length > 0) {
       setOpenedCategoryId((prev) => {
         const newId = prev === category._id ? null : category._id;
-        console.log("Setting openedCategoryId from", prev, "to", newId);
         return newId;
       });
     }

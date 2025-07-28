@@ -39,11 +39,8 @@ const VerifyEmail = (param: any) => {
   
   const paramdds = useParams()
 
-  console.log(paramdds, "-----")
 
   const slug = param.params.slug;
-
-  console.log('checkslug', slug)
   const [emailVerified, setEmailVerified] = React.useState(false);
   const [unauthenticated, setUnauthenticated] = React.useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);

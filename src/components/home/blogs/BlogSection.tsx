@@ -107,7 +107,7 @@ setSlidesToShow(3)
       <div className="pb-10">
         <div className="items-center justify-center px-8 text-center z-20 md:pt-20 pt-4">
           <h1 className="text-4xl font-bold mb-4 text-white mt-30">
-            Blogs & News !
+            Blogs & News
           </h1>
         </div>
       </div>
@@ -156,7 +156,7 @@ setSlidesToShow(3)
     
       <div className="flex justify-center items-center md:py-10 py-4">
         <CustomButton
-          title="See all Blogs and News"
+          title="See all Blogs and Newss"
           className="px-3 py-3 mx-auto h-12 md:h-12 font-semibold bg-secondary hover:bg-primary2 text-sm w-72 text-white border border-white"
           onPress={() => router.push('/blogs')}
           rightIcon={<GoArrowRight />}

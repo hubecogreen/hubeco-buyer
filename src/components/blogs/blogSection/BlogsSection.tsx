@@ -10,7 +10,6 @@ import dayjs from "dayjs";
 import Lottie from "lottie-react";
 import animationData from '../../../../public/animations/nodatafound.json'
 import Image from "next/image";
-import { getSafeImageUrl } from "@/lib/utils";
 interface Blog {
   _id: string;
   title: string;
@@ -43,7 +42,7 @@ const BlogsSection = () => {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [totalPage, setTotalPage] = useState(1);
-  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || '';
+  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL
 
   useEffect(() => {
     getData();
@@ -159,7 +158,7 @@ const BlogsSection = () => {
               <div className={styles.itemCard}>
               <Image
                     className={`${styles.itemImage} w-[400px] h-[300px] cursor-pointer`}
-                    {...getSafeImageUrl(item.thumbnail || '', assetURL)}
+                    src={`${assetURL}${item.thumbnail.includes('/admin/') ? item.thumbnail : item.thumbnail.replace('admin/', '/admin/')}`}
                     alt="image"
                     width={400}
                     height={300}

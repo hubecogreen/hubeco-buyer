@@ -52,11 +52,12 @@ const ImageSlider = () => {
               src={src}
               alt={`Slide ${index}`}
               width={500}
+              layout="responsive"
               height={500}
               onError={e => {
                 e.currentTarget.src = '/images/product-placeholder.webp';
               }}
-              priority
+              priority={true}
               className={`absolute inset-0 object-cover w-full h-full transition-opacity duration-1000 ${
                 index === currentImageIndex ? "opacity-100" : "opacity-0"
               }`}

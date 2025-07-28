@@ -52,13 +52,20 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['assets-uat.hubeco.market'],
+    domains: [
+      "assets-uat.hubeco.market",
+      "assets.hubeco.market"
+    ],
     // Optional if your remote CDN hosts images under specific paths
     remotePatterns: [
       {
         protocol: "https",
         hostname: "assets-uat.hubeco.market",
-        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "assets.hubeco.market",
         pathname: "/**",
       },
     ],

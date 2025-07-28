@@ -19,7 +19,7 @@ import {
   saveWishlist,
 } from "@/reduxStore/slices/userSlice";
 import { setCookie, getCookie } from "cookies-next";
-import { normalizePath } from "@/lib/utils";
+import { normalizePath, getSafeImageUrl } from "@/lib/utils";
 
 const ProductCard = ({
   product,
@@ -58,7 +58,7 @@ const ProductCard = ({
   const token = getCookie("token");
 
   const router = useRouter();
-  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
+  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || '';
   const { refreshTokens } = useRefreshToken();
   const { callApi } = useApi();
 
@@ -323,19 +323,7 @@ const ProductCard = ({
     >
       <div className="relative">
         <Image
-          //   src={'/images/product-placeholder.webp'}
-          // src={
-          //   product?.image
-          //     ? (assetURL + "/" + product?.image).includes("//admin")
-          //       ? (assetURL + "/" + product?.image).replace("//admin", "/admin")
-          //       : `${assetURL}/${product?.image}`
-          //     : "/images/product-placeholder.webp"
-          // }
-          src={
-            product?.image
-              ? normalizePath(`${assetURL}/${product?.image}`)
-              : "/images/product-placeholder.webp"
-          }
+          {...getSafeImageUrl(product?.image || '', assetURL)}
           alt={product?.productName}
           className="w-full h-[314px] object-contain px-4 pt-10"
           height={100}

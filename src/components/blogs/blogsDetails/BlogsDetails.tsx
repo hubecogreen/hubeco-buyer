@@ -22,6 +22,7 @@ import Lottie from "lottie-react";
 import animationData from '../../../../public/animations/nodatafound.json'
 import { CircularProgress, Spinner, Stack } from "@chakra-ui/react";
 import Image from "next/image";
+import { getSafeImageUrl } from "@/lib/utils";
 interface Blog {
   _id: string;
   title: string;
@@ -53,7 +54,7 @@ const BlogsDetails = ({ id }: any) => {
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL
+  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || '';
 
   useEffect(() => {
     const token = getCookie("token") as string;
@@ -171,7 +172,7 @@ const BlogsDetails = ({ id }: any) => {
                     </div>
                   </div>
                   <Image
-                    src={`${assetURL}${blogData.thumbnail.includes('/admin/') ? blogData.thumbnail : blogData.thumbnail.replace('admin/', '/admin/')}`}
+                    {...getSafeImageUrl(blogData.thumbnail || '', assetURL)}
                     alt="blog"
                     width={339.33}
                     height={300}

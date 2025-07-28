@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import styles from "./BlogCard.module.css";
 import Image from "next/image";
+import { normalizePath, getSafeImageUrl } from "@/lib/utils";
+
 interface blogCardProps {
   imageStyle: React.CSSProperties;
   imageHoverStyle: React.CSSProperties;
@@ -37,8 +39,15 @@ const BlogCard: React.FC<blogCardProps> = ({
   imageStyle,
 }) => {
   const [hover, setHover] = useState(false);
-  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL
-  // // console.log('qrgwhety',encodeURIComponent(product.slug),product?.slug)
+  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || '';
+
+  // Fix the thumbnail URL construction
+  const getImageUrl = (thumbnail: string) => {
+    if (!thumbnail) return '/images/product-placeholder.webp';
+    
+    // Use normalizePath to handle the URL properly
+    return normalizePath(`${assetURL}/${thumbnail}`);
+  };
 
   return (
     <div
@@ -51,7 +60,7 @@ const BlogCard: React.FC<blogCardProps> = ({
         {/* <div className={styles.discountBadge}>{product.metaKeywords.split(",")[0].split(" ")[0]}</div> */}
         <div className="hover:cursor-pointer">
           <Image
-            src={`${assetURL}${product.thumbnail.includes('/admin/') ? product.thumbnail : product.thumbnail.replace('admin/', '/admin/')}`}
+            {...getSafeImageUrl(product.thumbnail, assetURL)}
             alt={product.title}
             width={390}
             height={250}

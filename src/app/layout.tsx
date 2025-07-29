@@ -108,6 +108,23 @@ export default function RootLayout({
             gtag('config', 'G-REE72KGV61');
           `}
         </Script>
+        
+        {/* Service Worker Registration for Enhanced Caching */}
+        <Script id="service-worker" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                  .then(function(registration) {
+                    console.log('SW registered: ', registration);
+                  })
+                  .catch(function(registrationError) {
+                    console.log('SW registration failed: ', registrationError);
+                  });
+              });
+            }
+          `}
+        </Script>
       </head>
       <body className={poppins.className}>
         {/* Google Tag Manager (noscript) */}

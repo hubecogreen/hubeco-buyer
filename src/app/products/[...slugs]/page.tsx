@@ -1,6 +1,7 @@
 import ProductsList from "@/components/product/ProductsList";
 import MetaTitleH1 from "./MetaTitleH1";
 import BreadCrumb, { BreadcrumbItem } from "@/components/sharedComponents/BreadCrumb";
+import BannerSection from "@/components/sharedComponents/BannerSection";
 
 export async function generateMetadata({ params, searchParams }: {
   params: { slugs?: string[] },
@@ -65,12 +66,12 @@ export async function generateMetadata({ params, searchParams }: {
     description: metaData.description || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
     keywords: metaData.keywords || 'Green building materials, sustainable building materials, eco-friendly construction, etc.',
     alternates: {
-      canonical: metaData.canonical || `${siteURL}/products`,
+      canonical: metaData.canonical,
     },
     openGraph: {
       title: metaData.ogTitle || 'Products | Hubeco',
       description: metaData.ogDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
-      url: metaData.canonical || `${siteURL}/products`,
+      url: metaData.canonical ,
       type: "website",
       siteName: "Hubeco",
       images: [
@@ -121,7 +122,12 @@ export default function Page({
   return (
     <div className="bg-white">
       <MetaTitleH1 />
-      <BreadCrumb breadcrumbs={breadcrumbs} />
+      <BannerSection
+        link1={{ name: "Home", href: "/" }}
+        link2={{ name: "Featured Sustainable Products", href: "/products" }}
+      />
+
+      {/* <BreadCrumb breadcrumbs={breadcrumbs} /> */}
       <ProductsList />
     </div>
   );

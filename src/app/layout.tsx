@@ -50,6 +50,17 @@ export default function RootLayout({
         {/* <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" /> */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://assets-uat.hubeco.market" crossOrigin="anonymous" />
+        
+        {/* Preload critical carousel images for LCP */}
+        <link rel="preload" href="/images/home/latest/homebanner-roads.webp" as="image" />
+        <link rel="preload" href="/images/home/latest/9.webp" as="image" />
+        <link rel="preload" href="/images/home/latest/f.webp" as="image" />
+        <link rel="preload" href="/images/home/latest/8.webp" as="image" />
+        
+        {/* Preload critical background images */}
+        <link rel="preload" href="/images/home/bg1.webp" as="image" />
+        <link rel="preload" href="/images/Admin-2.webp" as="image" />
+        
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`

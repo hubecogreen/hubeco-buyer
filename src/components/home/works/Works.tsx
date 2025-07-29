@@ -62,41 +62,47 @@ const WorksSection = () => {
         </div>
         <Image
           src={"/images/home/latest/Vector.webp"}
-          alt="User add"
-          className="hidden  md:block w-full -mt-10"
-          width={50}
-          height={50}
+          alt="How it works illustration"
+          className="hidden md:block w-full -mt-10"
+          width={100}
+          height={100}
+          priority={true}
+          quality={85}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
           onError={(e) => {
             e.currentTarget.src = "/images/product-placeholder.webp";
           }}
-          priority={true}
         />
       </div>
       <div className="md:w-1/2 md:pr-20 md:pl-10 md:pt-14 pt-8">
         <Image
           src={"/images/home/latest/worksImg.webp"}
-          className="rounded-md"
-          alt="User add"
-          width={500}
-          height={500}
+          className="rounded-md w-full h-auto"
+          alt="How it works process illustration"
+          width={600}
+          height={600}
+          priority={true}
+          quality={85}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
           onError={(e) => {
             e.currentTarget.src = "/images/product-placeholder.webp";
           }}
-          priority={true}
         />
-        <div className="  w-full  ">
+        <div className="w-full">
           {showBuyer ? (
-            <div className="flex flex-col space-y-4  pt-5">
+            <div className="flex flex-col space-y-4 pt-5">
               <div className="flex items-start items-start mt-4 lg:mt-4">
-                <div className="p-1.5 rounded-md h-10  flex items-center justify-center">
+                <div className="p-1.5 rounded-md h-10 flex items-center justify-center">
                   <Image
                     src="/images/home/latest/browse-products.webp"
-                    alt="User add"
-                    // width={38}
-                    // height={38}
-                    // className="w-16 md:w-10"
-                    width={45}
-                    height={45}
+                    alt="Browse products icon"
+                    width={60}
+                    height={60}
+                    quality={85}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
@@ -118,10 +124,12 @@ const WorksSection = () => {
                 <div className="p-1.5 pt-0 rounded-md h-10 flex items-center justify-center">
                   <Image
                     src="/images/home/latest/compare.webp"
-                    alt="User Verify"
-                    // className="w-16 md:w-10"
-                    width={50}
-                    height={50}
+                    alt="Compare products icon"
+                    width={70}
+                    height={70}
+                    quality={85}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
@@ -144,14 +152,16 @@ const WorksSection = () => {
                 <div className="p-1.5 pt-0 rounded-md h-10 flex items-center justify-center">
                   <Image
                     src="/images/home/latest/place-order.webp"
-                    alt="Set up"
-                    width={55}
-                    height={55}
+                    alt="Place order icon"
+                    width={75}
+                    height={75}
+                    quality={85}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
                     priority={true}
-                    // className="w-16 md:w-10"
                   />
                 </div>
                 <div className="ml-3 flex flex-col mb-2">
@@ -169,14 +179,16 @@ const WorksSection = () => {
                 <div className="p-1.5 pt-0 rounded-md h-10 flex items-center justify-center">
                   <Image
                     src="/images/home/latest/sustainability.webp"
-                    alt="Set up"
-                    width={45}
-                    height={45}
+                    alt="Sustainability icon"
+                    width={60}
+                    height={60}
+                    quality={85}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
                     priority={true}
-                    // className="w-16 md:w-8"
                   />
                 </div>
                 <div className="ml-4 flex flex-col mb-2">
@@ -191,21 +203,21 @@ const WorksSection = () => {
               </div>
             </div>
           ) : (
-            <div className="flex flex-col space-y-4  pt-5">
+            <div className="flex flex-col space-y-4 pt-5">
               <div className="flex items-start mt-4 lg:mt-4">
-                <div className="p-1.5 pt-0 rounded-md h-10  flex items-center justify-center">
+                <div className="p-1.5 pt-0 rounded-md h-10 flex items-center justify-center">
                   <Image
                     src="/images/home/latest/register.webp"
-                    alt="User add"
-                    width={30}
-                    height={30}
+                    alt="Registration icon"
+                    width={50}
+                    height={50}
+                    quality={85}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
                     priority={true}
-                    // className="w-16 md:w-10"
-                    // width={28}
-                    // height={28}
                   />
                 </div>
                 <div className="ml-4 flex flex-col mb-2">
@@ -223,10 +235,12 @@ const WorksSection = () => {
                 <div className="p-1.5 pt-0 rounded-md h-10 flex items-center justify-center">
                   <Image
                     src="/images/home/latest/cubes.webp"
-                    alt="User Verify"
-                    // className="w-12 md:w-12"
-                    width={40}
-                    height={40}
+                    alt="Upload products icon"
+                    width={60}
+                    height={60}
+                    quality={85}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
@@ -249,10 +263,12 @@ const WorksSection = () => {
                 <div className="p-1.5 pl-[5px] pt-0 rounded-md h-10 flex items-center justify-center">
                   <Image
                     src="/images/home/latest/sell.webp"
-                    alt="Set up"
-                    // className="w-16 md:w-12"
-                    width={38}
-                    height={38}
+                    alt="Start selling icon"
+                    width={55}
+                    height={55}
+                    quality={85}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}

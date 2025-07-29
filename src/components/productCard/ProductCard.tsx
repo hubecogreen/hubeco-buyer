@@ -22,10 +22,10 @@ import { normalizePath } from "@/lib/utils";
 
 interface ProductCardProps {
   product: any;
+  index?: number; // Add index for priority loading
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  // // console.log('ewrtyu',product)
+const ProductCard: React.FC<ProductCardProps> = ({ product, index = 0 }) => {
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
   const { refreshTokens } = useRefreshToken();
   const { callApi } = useApi();
@@ -46,9 +46,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   useEffect(() => {
     if (wishlistReduxData && wishlistReduxData.length > 0) {
       wishlistReduxData.forEach((item: any) => {
-        if (item?.product?._id === product?.variantId) {
-          // // console.log('abntemy',item?.product?._id,product?.variantId)
-        }
         if (item?.product?._id === product?.variantId) {
           setIsClicked(true);
           setWishlistId(item?._id);
@@ -188,7 +185,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       if (result?.data == null) {
         handleWishlistApiError(result?.errorData, id);
       } else {
-        // // console.log('wishshshs',result?.data)
         getWishlist();
         toast.success("Product Added to Wishlist Successfully", {
           iconTheme: {
@@ -201,13 +197,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         setWishlistId(result?.data?._id);
       }
     } catch (error) {
-      // // console.log(error);
       handleWishlistApiError(error, id);
     }
   };
 
   const deleteWishlist = async (id: any) => {
-    // // console.log('cbentrymu',id)
     try {
       const result = await callApi(
         `${getEndpoint.default.WISHLIST}/${wishlistId}`,
@@ -246,10 +240,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const OnClickQuote = (slug: any) => {
     if (token) {
-      // console.log("tokenOne");
       router.push(`/${slug}?qt=open`);
     } else {
-      // console.log("tokenOneNot");
       router.push("/login");
     }
   };
@@ -274,7 +266,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     >
       <div className="product-card-body w-full">
         <div className="flex justify-between w-full top-row items-center">
-          {/* {product?.mrp == product?.discountedPrice ? null : ( */}
           <div
             className={`${styles.discountBadge} ${
               product?.mrp == product?.discountedPrice
@@ -288,12 +279,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             )}
             % off
           </div>
-          {/* )} */}
           <div
             className={` w-6 h-6 align-center items-center justify-center flex rounded `}
           >
-            {/* <BsCart3 color="white" size={16} className="align-center" /> */}
-            {/* <GoBookmark color="white" size={16} className="align-center " /> */}
             {isClicked ? (
               <>
                 <IoBookmark
@@ -316,91 +304,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
         </div>
         <Image
-          // src={product && product.image}
-          // src={
-          //   product?.image
-          //     ? (assetURL + "/" + product?.image).includes("//admin")
-          //       ? (assetURL + "/" + product?.image).replace("//admin", "/admin")
-          //       : `${assetURL}/${product?.image}`
-          //     : "/images/product-placeholder.webp"
-          // }
           src={
             product?.image
               ? normalizePath(`${assetURL}/${product?.image}`)
               : "/images/product-placeholder.webp"
           }
-          alt='Product Image'
-          className={styles.productImage}
-          width={320}
-          height={320}
+          alt={`${product?.productName || 'Product'} image`}
+          className={`${styles.productImage} w-full h-auto object-contain`}
+          width={500}
+          height={500}
+          priority={index < 6} // Prioritize first 6 images for LCP
+          quality={85}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
           onError={(e) => {
             e.currentTarget.src = "/images/product-placeholder.webp";
           }}
-          loading="lazy"
+          loading={index < 6 ? "eager" : "lazy"}
+          sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
         />
-        {/* <div
-          className="block md:flex justify-start md:justify-between items-center mt-5"
-          style={{}}
-        >
-          <div>
-            <h3 className="text-primary text-lg font-semibold text-left product-card-title">
-              {product && product.productName && product?.productName?.length > 45
-              ? product?.productName.slice(0, 45) + "..."
-              : product.productName}
-            </h3>
-          </div>
-          <div className={`${styles.price} md:text-right text-left`}>
-            <span className="font-bold text-base text-primary">
-              {product && product.currentPrice}
-            </span>
-            <span className={styles.originalPrice}>
-              {product && product.originalPrice}
-            </span>
-          </div>
-        </div>
-        <p className="text-fontGray md:text-base text-xs text-left mt-3 mb-5 product-card-desc">
-          {product && product.description}
-        </p>
-        <div
-          className={`${styles.priceSection} block md:flex justify-start md:justify-between items-center hover-card w-1/2 md:w-full`}
-        >
-          <CustomButton
-            title={"Add to Cart"}
-            className={`${styles.addToCart} z-50 lg:px-2 bg-bgGray  hover:bg-primary md:w-32 w-32 md:p-md p-0.5 h-8 md:h-12 justify-around md:justify-between items-center font-semibold text-tiny md:text-xs text-white  hover:bg-secondary`}
-            customStyles={
-              {
-                // width: "130px",
-                // alignSelf: "flex-start",
-                // justifySelf: "flex-start",
-                // backgroundColor: "#A92449",
-              }
-            }
-            onPress={() => addToCart(product?.variantId)}
- 
-            hoverBgColor="#439787" // Hover background color
-            hoverColor="#ffffff" // Hover text color
-            // clickedColor="#2F318D" // Clicked background color
-            rightIcon={<GoArrowRight />}
-          />
-          <CustomButton
-            title={"Request Quote"}
-            onPress={() => router.push(`/${product.slug}`)}
-  
-            className={`${styles.addToCart} lg:px-2 z-50 bg-bgGray md:mt-0 mt-2  hover:bg-primary  md:w-36  w-32  md:p-md p-0.5 h-8 md:h-12 justify-center md:justify-between items-center   font-semibold  text-tiny md:text-xs text-white  hover:bg-secondary`}
-            customStyles={
-              {
-                // width: "140px",
-                // alignSelf: "flex-start",
-                // justifySelf: "flex-start",
-                // backgroundColor: "#bcbcbc",
-              }
-            }
-            hoverBgColor="#439787" // Hover background color
-            hoverColor="#ffffff" // Hover text color
-            // clickedColor="#2F318D" // Clicked background color
-            rightIcon={<GoArrowRight />}
-          />
-        </div> */}
         <div className="p-4 ">
           <div className="flex justify-between items-start mb-2 gap-2">
             <h3
@@ -411,7 +333,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </h3>
 
             <div className="flex justify-between items-center">
-              {/* {product?.purchaseType === "QUOTE" ? ( */}
               {product?.purchaseType === "QUOTE" ? (
                 <></>
               ) : product?.mrp && product?.discountedPrice ? (
@@ -446,17 +367,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               )}
             </div>
           </div>
-          {/* <p className="text-sm text-gray-600 mb-2">{product.description}</p> */}
           <div className="flex items-center justify-between gap-6 mt-2 ">
             {product?.purchaseType == "ONLINE" ? (
               <Button
                 disabled={loadingCartButton}
                 onClick={() => addToCart(product?.variantId)}
-                // onClick={() => router.push("/coming-soon")}
                 className="z-10 w-[50%] bg-secondary text-white py-2 px-4 rounded group-hover:bg-secondary hover:bg-primary transition duration-300 flex items-center justify-center gap-2"
               >
-                {/* {product.action}{" "}
-             {product.action === "Add to Cart" && <ArrowRight size={16} />} */}
                 {loadingCartButton ? (
                   <>
                     <CircularProgress color="#ffffff" size={6} />
@@ -469,12 +386,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               <Button
                 disabled={loadingQuoteButton}
                 variant={"outline"}
-                // onClick={() => router.push(`/${product.slug}?qt=open`)}
                 onClick={() => OnClickQuote(product?.slug)}
                 className="z-10 w-[50%] bg-secondary hover:text-white text-white py-2 px-4 rounded group-hover:bg-secondary hover:bg-primary transition duration-300 flex items-center justify-center gap-2"
               >
-                {/* {product.action}{" "}
-            {product.action === "Add to Cart" && <ArrowRight size={16} />} */}
                 {loadingQuoteButton ? (
                   <>
                     <CircularProgress color="#ffffff" size={6} />
@@ -488,11 +402,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 <Button
                   disabled={loadingCartButton}
                   onClick={() => addToCart(product?.variantId)}
-                  // onClick={() => router.push("/coming-soon")}
                   className="z-10 w-[50%] bg-secondary text-white py-2 px-4 rounded group-hover:bg-secondary hover:bg-primary transition duration-300 flex items-center justify-center gap-2"
                 >
-                  {/* {product.action}{" "}
-             {product.action === "Add to Cart" && <ArrowRight size={16} />} */}
                   {loadingCartButton ? (
                     <>
                       <CircularProgress color="#ffffff" size={6} />
@@ -504,13 +415,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 <Button
                   disabled={loadingQuoteButton}
                   variant={"outline"}
-                  // onClick={() => router.push(`/${product.slug}?qt=open`)}
-                  // onClick={() => router.push("/coming-soon")}
                   onClick={() => OnClickQuote(product?.slug)}
                   className="z-10 w-[50%] hover:bg-white !hover:text-secondary !hover:border-white  !text-secondary border-secondary py-2 px-4 rounded  transition duration-300 flex items-center justify-center gap-2"
                 >
-                  {/* {product.action}{" "}
-            {product.action === "Add to Cart" && <ArrowRight size={16} />} */}
                   {loadingQuoteButton ? (
                     <>
                       <CircularProgress color="#ffffff" size={6} />

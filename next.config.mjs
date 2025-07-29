@@ -20,6 +20,44 @@ const nextConfig = {
           },
         ],
       },
+      // Add specific caching for images
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+          {
+            key: "Vary",
+            value: "Accept-Encoding",
+          },
+        ],
+      },
+      // Add caching for Next.js optimized images
+      {
+        source: "/_next/image/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+          {
+            key: "Vary",
+            value: "Accept-Encoding",
+          },
+        ],
+      },
+      // Add caching for static assets
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
 
@@ -41,9 +79,6 @@ const nextConfig = {
 
   reactStrictMode: false,
 
-  //   future: {
-  //     webpack5: true,
-  //   },
   typescript: {
     ignoreBuildErrors: true,
   },

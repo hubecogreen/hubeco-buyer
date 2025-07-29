@@ -60,72 +60,83 @@ const ProjectsSection = () => {
 
   return (
     <section
-      className="relative w-full md:w-[80%] w-[98%]  items-center justify-center mx-auto projectsGrid"
-      
+      className="relative w-full md:w-[80%] w-[98%] items-center justify-center mx-auto projectsGrid"
     >
       <div className="pb-2 md:pb-10">
-        <div className="items-center justify-center px-8 text-center z-20  md:pt-7">
+        <div className="items-center justify-center px-8 text-center z-20 md:pt-7">
           <h1 className="text-2xl md:text-4xl font-bold mb-4 text-black mt-30">
             Green Projects
           </h1>
-          <p className="md:text-big text-md  w-full md:max-w-5xl mx-auto text-fontGray md:pt-5">
+          <p className="md:text-big text-md w-full md:max-w-5xl mx-auto text-fontGray md:pt-5">
             Browse the green building projects where our eco-friendly materials
             are deployed
           </p>
         </div>
       </div>
       <div className="md:flex hidden">
-        <div className={`${styles.container3} `}>
+        <div className={`${styles.container3}`}>
           <div className={`${styles.gridItem}`}>
             <Image
               src="/images/projects/project10.webp"
-              alt="Brick Wall"
-               className="rounded-md"
-               onError={e => {
+              alt="Agrocrete green building project"
+              className="rounded-md w-full h-auto object-cover"
+              onError={e => {
                 e.currentTarget.src = '/images/product-placeholder.webp'
               }}
-              loading="lazy"
-              width={500}
-              height={500}
+              priority={true}
+              quality={85}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              width={600}
+              height={600}
             />
           </div>
           <div className={`${styles.gridItem}`}>
             <Image
               src="/images/projects/project2.webp"
-              alt="Vertical Garden"
-               className="rounded-md"
-               onError={e => {
+              alt="Aggregates green building project"
+              className="rounded-md w-full h-auto object-cover"
+              onError={e => {
                 e.currentTarget.src = '/images/product-placeholder.webp'
               }}
-              loading="lazy"
-              width={500}
-              height={500}
+              priority={true}
+              quality={85}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              width={600}
+              height={600}
             />
           </div>
           <div className={`${styles.gridItem}`}>
             <Image
               src="/images/projects/project3a.webp"
-              alt="Staircase"
-               className="rounded-md"
-               onError={e => {
+              alt="Sand green building project"
+              className="rounded-md w-full h-auto object-cover"
+              onError={e => {
                 e.currentTarget.src = '/images/product-placeholder.webp'
               }}
-              loading="lazy"
-              width={500}
-              height={500}
+              priority={true}
+              quality={85}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              width={600}
+              height={600}
             />
           </div>
           <div className={`${styles.gridItem}`}>
             <Image
               src="/images/projects/project4.webp"
-              alt="Green Wall"
-              className="rounded-md"
+              alt="Greenboards green building project"
+              className="rounded-md w-full h-auto object-cover"
               onError={e => {
                 e.currentTarget.src = '/images/product-placeholder.webp'
               }}
-              loading="lazy"
-              width={500}
-              height={500}
+              priority={true}
+              quality={85}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              width={600}
+              height={600}
             />
           </div>
         </div>
@@ -157,14 +168,19 @@ const ProjectsSection = () => {
                 <div className="relative w-full">
                   <Image
                     src={product?.image}
-                    alt={`Slide ${index}`}
-                    height={414}
-                    width={414}
+                    alt={`${product?.title || 'Green project'} - ${product?.category || 'project'}`}
+                    height={500}
+                    width={500}
+                    priority={index < 3} // Prioritize first 3 images for LCP
+                    quality={85}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                     onError={e => {
                       e.currentTarget.src = '/images/product-placeholder.webp';
                     }}
-                    loading="lazy"
-                    className={`${styles.catImg} object-cover w-full h-full rounded-md`} // 'rounded-md' for border-radius
+                    loading={index < 3 ? "eager" : "lazy"}
+                    className={`${styles.catImg} object-cover w-full h-full rounded-md`}
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                   />
                 </div>
 

@@ -19,7 +19,16 @@ export function cn(...inputs: ClassValue[]) {
   return path;
 }
 
+export function encodeID(hexId: any) {
+  return Buffer.from(hexId, 'hex').toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
 
+export function decodeID(encoded: any) {
+  // Restore any missing padding for base64
+  encoded = encoded.replace(/-/g, '+').replace(/_/g, '/');
+  while (encoded.length % 4) encoded += '=';
+  return Buffer.from(encoded, 'base64').toString('hex');
+}
 
 export function disableConsoleInProduction() {
   if (typeof window !== 'undefined') {

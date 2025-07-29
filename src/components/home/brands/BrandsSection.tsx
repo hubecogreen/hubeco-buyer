@@ -43,7 +43,7 @@ const BrandsSection: React.FC = () => {
 
   useEffect(() => {
     const scroller = scrollerRef.current;
-    if (scroller && brands.length > 5 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (scroller && brands.length > 5 && typeof window !== 'undefined' && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const scrollerInner = scroller.querySelector(".scrolling-wrapper");
       const scrollerContent = Array.from(scrollerInner?.children || []);
 
@@ -101,26 +101,23 @@ const BrandsSection: React.FC = () => {
                   {vendor?.businessInfo?.logo ? (
                     <div className="relative aspect-[3/2] w-full">
                       <Image
-                        // src={
-                        //   vendor?.businessInfo?.logo
-                        //     ? (assetURL + '/' + vendor?.businessInfo?.logo).includes('//admin')
-                        //       ? (assetURL + '/' + vendor?.businessInfo?.logo).replace('//admin', '/admin')
-                        //       : `${assetURL}/${vendor?.businessInfo?.logo}`
-                        //     : '/images/product-placeholder.webp'
-                        // }
                         src={
                           vendor?.businessInfo?.logo
                             ? normalizePath(`${assetURL}/${vendor?.businessInfo?.logo}`)
                             : "/images/product-placeholder.webp"
                         }
-                        alt={vendor?.businessInfo?.companyName}
+                        alt={`${vendor?.businessInfo?.companyName || 'Brand'} logo`}
                         fill
+                        priority={index < 8} // Prioritize first 8 brand logos for LCP
+                        quality={85}
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                         className="object-contain"
                         sizes="(max-width: 640px) 150px, (max-width: 768px) 180px, 200px"
                         onError={e => {
                           e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
-                        loading="lazy"
+                        loading={index < 8 ? "eager" : "lazy"}
                       />
                     </div>
                   ) : (

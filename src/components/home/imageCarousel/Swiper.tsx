@@ -53,19 +53,21 @@ const ImageSlider = () => {
               key={index}
               src={src}
               alt={`Slide ${index + 1}`}
-              width={1920}
-              height={1080}
-              priority={index === 0} // Only prioritize the first image for LCP
-              quality={85}
+              width={1200}
+              height={675}
+              priority={index === 0}
+              quality={75}
               placeholder="blur"
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               onError={(e) => {
                 e.currentTarget.src = '/images/product-placeholder.webp';
               }}
-              className={`absolute inset-0 object-cover w-full h-full transition-opacity duration-1000 ${
+              className={`absolute inset-0 object-cover w-full h-full transition-opacity duration-500 ${
                 index === currentImageIndex ? "opacity-100" : "opacity-0"
               }`}
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 100vw"
+              fetchPriority={index === 0 ? "high" : "auto"}
+              decoding="async"
             />
           ))}
         </div>
@@ -75,7 +77,7 @@ const ImageSlider = () => {
         {images.map((_, index) => (
           <button
             key={index}
-            className={`w-3 h-3 rounded-full transition-all duration-500 ${
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentImageIndex ? "bg-primary w-8 h-3" : "bg-white"
             }`}
             aria-label={`Go to slide ${index + 1}`}

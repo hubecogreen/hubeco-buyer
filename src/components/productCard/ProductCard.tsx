@@ -322,6 +322,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index = 0 }) => {
           }}
           loading={index < 6 ? "eager" : "lazy"}
           sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+          fetchPriority={index < 6 ? "high" : "auto"}
+          decoding="async"
         />
         <div className="p-4 ">
           <div className="flex justify-between items-start mb-2 gap-2">

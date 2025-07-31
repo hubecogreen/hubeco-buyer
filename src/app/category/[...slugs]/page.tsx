@@ -1,0 +1,136 @@
+import ProductsList from "@/components/product/ProductsList";
+import MetaTitleH1 from "./MetaTitleH1";
+import BreadCrumb, { BreadcrumbItem } from "@/components/sharedComponents/BreadCrumb";
+import BannerSection from "@/components/sharedComponents/BannerSection";
+import { cookies } from "next/headers";
+
+export async function generateMetadata({ params, searchParams }: {
+  params: { slugs?: string[] },
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+  // Get category IDs from cookies instead of searchParams
+  const cookieStore = await cookies();
+  const ccid = cookieStore.get('currentccid')?.value;
+  const scid = cookieStore.get('currentscid')?.value;
+  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const siteURL = process.env.NEXT_PUBLIC_PROD_URL;
+  let metaData: any = {};
+
+  try {
+    let canonicalPath = `${siteURL}/category`;
+    if (params.slugs && params.slugs.length > 0) {
+      canonicalPath += '/' + params.slugs.join('/');
+    }
+    // Clean URL without query parameters since we're using cookies
+    const canonicalUrl = canonicalPath;
+
+    if (scid && typeof scid === 'string') {
+      const res = await fetch(`${baseURL}/subcategories/getSubcategoryByIdPublic/${scid}`);
+      if (res.ok) {
+        const data = await res.json();
+        metaData = {
+          title: data?.metaTitle ? `${data.metaTitle} | Hubeco` : 'Products | Hubeco',
+          description: data?.metaDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
+          keywords: data?.metaTags || 'Green building materials, sustainable building materials, eco-friendly construction, etc.',
+          canonical: canonicalUrl,
+          ogTitle: data?.metaTitle ? `${data.metaTitle} | Hubeco` : 'Products | Hubeco',
+          ogDescription: data?.metaDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
+          ogImage: data?.metaImage ? (Array.isArray(data.metaImage) ? data.metaImage[0] : data.metaImage) : '/images/Admin-2.webp',
+        };
+      }
+    } else if (ccid && typeof ccid === 'string') {
+      const res = await fetch(`${baseURL}/childCategories/getChildCategoryByIdPublic/${ccid}`);
+      if (res.ok) {
+        const data = await res.json();
+        metaData = {
+          title: data?.metaTitle ? `${data.metaTitle} | Hubeco` : 'Products | Hubeco',
+          description: data?.metaDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
+          keywords: data?.metaTags || 'Green building materials, sustainable building materials, eco-friendly construction, etc.',
+          canonical: canonicalUrl,
+          ogTitle: data?.metaTitle ? `${data.metaTitle} | Hubeco` : 'Products | Hubeco',
+          ogDescription: data?.metaDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
+          ogImage: data?.metaImage ? (Array.isArray(data.metaImage) ? data.metaImage[0] : data.metaImage) : '/images/Admin-2.webp',
+        };
+      }
+    } else {
+      metaData.canonical = canonicalUrl;
+    }
+  } catch (error) {
+    // fallback below
+  }
+
+  return {
+    title: metaData.title || 'Products | Hubeco',
+    description: metaData.description || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
+    keywords: metaData.keywords || 'Green building materials, sustainable building materials, eco-friendly construction, etc.',
+    alternates: {
+      canonical: metaData.canonical,
+    },
+    openGraph: {
+      title: metaData.ogTitle || 'Products | Hubeco',
+      description: metaData.ogDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
+      url: metaData.canonical ,
+      type: "website",
+      siteName: "Hubeco",
+      images: [
+        {
+          url: metaData.ogImage || '/images/Admin-2.webp',
+          alt: metaData.title || 'Hubeco Product Image',
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: metaData.ogTitle || 'Products | Hubeco',
+      description: metaData.ogDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
+      images: [metaData.ogImage || '/images/Admin-2.webp']
+    }
+  };
+}
+
+function capitalizeFirstLetter(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+export default async function Page({
+  params,
+  searchParams
+}: {
+  params: { slugs?: string[] },
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+  // Get category IDs from cookies
+  const cookieStore = await cookies();
+  const ccid = cookieStore.get('currentccid')?.value;
+  const scid = cookieStore.get('currentscid')?.value;
+  const breadcrumbs: BreadcrumbItem[] = [
+    { name: "Home", href: "/" },
+  ];
+
+  // Add all slugs as breadcrumb segments, only first letter capitalized
+  if (params.slugs && params.slugs.length > 0) {
+    let path = "/products";
+    params.slugs.forEach((slug) => {
+      path += `/${slug}`;
+      breadcrumbs.push({
+        name: capitalizeFirstLetter(slug.replace(/-/g, ' ')),
+        href: path
+      });
+    });
+  }
+
+  // Do NOT add ccid or scid as breadcrumbs
+
+  return (
+    <div className="bg-white">
+      <MetaTitleH1 />
+      <BannerSection
+        link1={{ name: "Home", href: "/" }}
+        link2={{ name: "Featured Sustainable Products", href: "/products" }}
+      />
+
+      {/* <BreadCrumb breadcrumbs={breadcrumbs} /> */}
+      <ProductsList ccid={ccid} scid={scid} />
+    </div>
+  );
+}

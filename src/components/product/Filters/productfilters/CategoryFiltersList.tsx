@@ -10,12 +10,16 @@ interface VendorFiltersListProps {
   onCategorySelectionChange: (data: { childId: string, subCategoryId: string | null }) => void; // Function prop to handle selected child and subcategory
   onChangeParentSelectionChange: (selectedParentid: string[]) => void;
   refresh: any;
+  childcatid: any;
+  subcatid: any;
 }
 
 const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
   onCategorySelectionChange,
   onChangeParentSelectionChange,
   refresh,
+  childcatid,
+  subcatid
 }) => {
   const { callApi } = useApi();
   const searchParams = useSearchParams();
@@ -30,8 +34,9 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
   const [visibleCategoriesCount, setVisibleCategoriesCount] = useState(10);
   const [showMore, setShowMore] = useState<any>(false);
 
-  const scid = searchParams?.get("scid") as any;
-  const ccid = searchParams?.get("ccid") as any;
+  console.log('childcatid, subcatid', childcatid) 
+  const scid = subcatid || searchParams?.get("scid") as any;
+  const ccid = childcatid || searchParams?.get("ccid") as any;
 
   const pathname = usePathname();
 

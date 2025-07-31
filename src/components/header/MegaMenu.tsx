@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import ViewMore from "../product/quote/ViewMore";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import { GoArrowRight } from "react-icons/go";
+import { setCookie } from "cookies-next";
 
 interface MenuItem {
   title: string;
@@ -407,9 +408,10 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                                     >
                                                       {child ? (
                                                         <Link
-                                                          href={`/products/${currentCategory?.seoSlug || 'category'}/${subCat?.seoSlug || 'sub-category'}/${child?.seoSlug || 'child-category'}?ccid=${child._id}`}
+                                                          href={`/category/${currentCategory?.seoSlug || 'category'}/${subCat?.seoSlug || 'sub-category'}/${child?.seoSlug || 'child-category'}`}
                                                           className="block hover:text-teal-600 transition-colors duration-200"
                                                           onClick={() => {
+                                                            setCookie('currentccid', child._id);
                                                             toggleSidebar();
                                                             handleClick(child);
                                                           }}
@@ -464,9 +466,12 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                     </a>
                   </a> */}
                   <Link
-                    href={`/products/${menuItem?.seoSlug || 'sub-category'}?scid=${menuItem?._id}`}
+                    href={`/category/${menuItem?.seoSlug || 'sub-category'}`}
                     className={`block font-semibold text-md py-2 px-3 text-white flex items-center ${styles.parentMenuItemText}`}
-                    onClick={handleClick}
+                    onClick={() => {
+                      setCookie('currentscid', menuItem?._id);
+                      handleClick();
+                    }}
                   >
                     {menuItem?.name}
                     <FiChevronDown className="ml-2" />
@@ -491,10 +496,13 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                 </a>
                               </a> */}
                               <Link
-                                href={`/products/${menuItem?.seoSlug || 'sub-category'}/${subItem?.seoSlug || 'child-category'}?ccid=${subItem?._id}`}
+                                href={`/category/${menuItem?.seoSlug || 'sub-category'}/${subItem?.seoSlug || 'child-category'}`}
                                 replace={true}
                                 className="block text-black text-sm my-1 px-2 py-1"
-                                onClick={handleClick}
+                                onClick={() => {
+                                  setCookie('currentccid', subItem?._id);
+                                  handleClick();
+                                }}
                               >
                                 {subItem?.name}
                               </Link>
@@ -554,8 +562,11 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                           <ViewMore text={menuItem?.name} length={30} />
                         </h4> */}
                         <Link
-                          href={`/products/${menuItem?.seoSlug || 'sub-category'}?scid=${menuItem?._id}`}
+                          href={`/category/${menuItem?.seoSlug || 'sub-category'}`}
                           className="font-medium text-base text-primary mb-1.5 cursor-pointer"
+                          onClick={() => {
+                            setCookie('currentscid', menuItem?._id);
+                          }}
                         >
                           <ViewMore text={menuItem?.name} length={30} />
                         </Link>
@@ -573,9 +584,12 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                             // </a>
                             <Link
                               key={itemIndex}
-                              href={`/products/${menuItem?.seoSlug || 'sub-category'}/${item?.seoSlug || 'child-category'}?ccid=${item?._id}`}
+                              href={`/category/${menuItem?.seoSlug || 'sub-category'}/${item?.seoSlug || 'child-category'}`}
                               className="block text-black text-sm my-1"
-                              onClick={handleClick}
+                              onClick={() => {
+                                setCookie('currentccid', item?._id);
+                                handleClick();
+                              }}
                             >
                               <ViewMore text={item?.name} length={30} />
                             </Link>

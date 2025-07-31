@@ -20,6 +20,8 @@ interface FilterProps {
   onSubCategorySelectionChange: (data: any) => void;
   onPirceRangeChange: (data: any) => void;
   onSelectAttributeChange: (data: any) => void;
+  ccid: any;
+  scid: any;
 }
 
 const FiltersSidebar: React.FC<FilterProps> = ({
@@ -28,7 +30,10 @@ const FiltersSidebar: React.FC<FilterProps> = ({
   onSubCategorySelectionChange,
   onPirceRangeChange,
   onSelectAttributeChange,
+  ccid,
+  scid
 }) => {
+  console.log('check inside product filter', ccid)
   const [minPrice, setMinPrice] = useState<any>(null);
   const [maxPrice, setMaxPrice] = useState<any>(null);
   const [priceRange, setPriceRange] = useState<any>([0, 98432432]);
@@ -61,8 +66,8 @@ const FiltersSidebar: React.FC<FilterProps> = ({
   const [purchaseType, setPurchaseType] = useState("");
   const [isSingle, setIsSingle] = useState(false);
   const [catId, setCatId] = useState<any>(null);
-  const [subCatId, setSubCatId] = useState<any>(null);
-  const [childCatId, setChildCatId] = useState<any>(null);
+  const [subCatId, setSubCatId] = useState<any>(scid);
+  const [childCatId, setChildCatId] = useState<any>(ccid);
   const [country, setCountry] = useState("");
   const [status, setStatus] = useState("");
   const [isReturnable, setIsReturnable] = useState(false);
@@ -117,8 +122,8 @@ const FiltersSidebar: React.FC<FilterProps> = ({
         purchaseType: purchaseType || null,
         isSingleProduct: isSingle || null,
         categoryId: catId || null,
-        subCategoryId: subCatId || null,
-        childCategories: childCatId || null,
+        subCategoryId: scid || subCatId || null,
+        childCategories: ccid || childCatId || null,
         targetCustomer: buyerType || null,
         countryOfOrigin: country || null,
         status: status || null,
@@ -187,8 +192,8 @@ const FiltersSidebar: React.FC<FilterProps> = ({
       purchaseType: purchaseType || null,
       isSingleProduct: isSingle || null,
       categoryId: catId || null,
-      subCategoryId: subCatId || null,
-      childCategories: childCatId || null,
+      subCategoryId: scid || subCatId || null,
+      childCategories: ccid || childCatId || null,
       targetCustomer: buyerType || null,
       countryOfOrigin: country || null,
       status: status || null,
@@ -329,11 +334,13 @@ const FiltersSidebar: React.FC<FilterProps> = ({
       </div>
       <div className="max-h-[1030px] overflow-y-scroll no-scrollbar">
         {/* CATEGORIES FILTER */}
-        <CategoryFiltersList
+        {/* <CategoryFiltersList
           onCategorySelectionChange={filterWithChildCategories}
           onChangeParentSelectionChange={filterWithCategories}
           refresh={refreshp}
-        />
+          ccid={ccid}
+          scid={scid}
+        /> */}
 
         {/* PRICE RANGE FILTER */}
         <div className="mt-2 mb-4 border-b border-borderGray">

@@ -30,6 +30,7 @@ interface Props {
 }
 
 const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid, scid }) => {
+  console.log('ccid, scid', ccid) 
   const searchParams = useSearchParams();
   const buyerInfo = sessionStorage.getItem("buyerUserInfo") as any;
   const prefferedPlan = JSON.parse(buyerInfo ?? '{}')?.preferredPlan;
@@ -150,8 +151,8 @@ const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid
         purchaseType: purchaseType || null,
         isSingleProduct: isSingle || null,
         categoryId: catId || null,
-        subCategoryId: subCatId || null,
-        childCategories: childCatId || null,
+        subCategoryId: scid || subCatId || null,
+        childCategories: ccid || childCatId || null,
         targetCustomer: buyerType || null,
         countryOfOrigin: country || null,
         status: status || null,
@@ -251,6 +252,8 @@ const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid
           onSubCategorySelectionChange={filterWithSubCategories}
           onPirceRangeChange={filterWithPrice}
           onSelectAttributeChange={filterWithAttrs}
+          ccid={ccid}
+          scid={scid}
         />
       </div>
 
@@ -272,6 +275,8 @@ const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid
               onSubCategorySelectionChange={filterWithSubCategories}
               onPirceRangeChange={filterWithPrice}
               onSelectAttributeChange={filterWithAttrs}
+              ccid={ccid}
+              scid={scid}
             />
           </SheetContent>
         </Sheet>

@@ -3,12 +3,18 @@ import { writeFileSync } from 'fs';
 import { Builder } from 'xml2js';
 import path from 'path';
 
+interface Category {
+  _id: string;
+  name: string;
+  seoSlug: string;
+  subCategories?: Category[];
+  childCategories?: Category[];
+}
+
 interface SlugData {
   products: string[];
   vendors: string[];
-  categories: string[];
-  subcategories: string[];
-  childCategories: string[];
+  categories: Category[];
   blogs: string[];
 }
 
@@ -20,39 +26,165 @@ interface SitemapUrl {
 }
 
 
-const staticUrls = [
-  { loc: `${process.env.NEXT_PUBLIC_PROD_URL}`, lastmod: new Date().toISOString(), changefreq: 'daily', priority: '1.0' },
-  { loc: `${process.env.NEXT_PUBLIC_PROD_URL}`, lastmod: new Date().toISOString(), changefreq: 'monthly', priority: '0.8' },
-  { loc: `${process.env.NEXT_PUBLIC_PROD_URL}`, lastmod: new Date().toISOString(), changefreq: 'monthly', priority: '0.8' },
-  // Add more static URLs as needed
+const staticUrls: SitemapUrl[] = [
+  { 
+    loc: `${process.env.NEXT_PUBLIC_PROD_URL}`, 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'daily', 
+    priority: '1.0' 
+  },
+  { 
+    loc: `${process.env.NEXT_PUBLIC_PROD_URL}/products`, 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'daily', 
+    priority: '0.9' 
+  },
+  { 
+    loc: `${process.env.NEXT_PUBLIC_PROD_URL}/categories`, 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'weekly', 
+    priority: '0.8' 
+  },
+  { 
+    loc: `${process.env.NEXT_PUBLIC_PROD_URL}/vendors`, 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'weekly', 
+    priority: '0.8' 
+  },
+  { 
+    loc: `${process.env.NEXT_PUBLIC_PROD_URL}/blogs`, 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'weekly', 
+    priority: '0.7' 
+  },
+  { 
+    loc: `${process.env.NEXT_PUBLIC_PROD_URL}/about`, 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: '0.6' 
+  },
+  { 
+    loc: `${process.env.NEXT_PUBLIC_PROD_URL}/contact`, 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: '0.6' 
+  },
+  { 
+    loc: `${process.env.NEXT_PUBLIC_PROD_URL}/faq`, 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: '0.6' 
+  },
+  { 
+    loc: `${process.env.NEXT_PUBLIC_PROD_URL}/privacy-policy`, 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: '0.5' 
+  },
+  { 
+    loc: `${process.env.NEXT_PUBLIC_PROD_URL}/terms-conditions`, 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: '0.5' 
+  },
 ];
 // Fetch function to get the URLs dynamically
 async function getSiteMapUrls(): Promise<SitemapUrl[]> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAllSlugs`);
-    const data: SlugData = await response.json();
+    // Fetch category tree for hierarchical URLs
+    const categoryResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/categories/getProductCategoryTree`);
+    const categoryData = await categoryResponse.json();
+    
+    // Fetch simple slugs for other URLs
+    const slugsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/getAllSlugs`);
+    const slugsData = await slugsResponse.json();
 
-    const { products, vendors, categories, subcategories, childCategories, blogs } = data;
+    const { products, vendors, blogs } = slugsData;
+    const categories = categoryData.data || [];
 
-    // Combine all categories into a single array of slugs
-    const allSlugs = [
-      ...products.map((slug) => `/${slug}`),
-      ...vendors.map((slug) => `/vendors/${slug}`),
-      ...categories.map((slug) => `/categories/${slug}`),
-      ...subcategories.map((slug) => `/subcategories/${slug}`),
-      ...childCategories.map((slug) => `/childCategories/${slug}`),
-      ...blogs.map((slug) => `/blogs/${slug}`),
-    ];
+    console.log("categories", categories);
 
-    // Map the slugs to the structure expected by next-sitemap
-    const additionalUrls: SitemapUrl[] = allSlugs.map((loc) => ({
-      loc:`${process.env.NEXT_PUBLIC_PROD_URL}${loc}`,
-      lastmod: new Date().toISOString(), // Optional: Add a last modified date
-      changefreq: 'weekly', // You can adjust this based on your needs
-      priority: '0.5', // Adjust priority as necessary
-    }));
+    const dynamicUrls: SitemapUrl[] = [];
 
-    return additionalUrls;
+    // Generate hierarchical category URLs
+    categories.forEach((category: Category) => {
+      if (category) {
+        // Subcategory URLs
+        if (category.subCategories && Array.isArray(category.subCategories)) {
+          category.subCategories.forEach((subCategory: Category) => {
+            console.log("subCategory", subCategory.seoSlug);  
+            if (subCategory && subCategory.seoSlug) {
+              // Subcategory level URL with scid parameter
+              dynamicUrls.push({
+                loc: `${process.env.NEXT_PUBLIC_PROD_URL}/products/${subCategory.seoSlug}?scid=${subCategory._id}`,
+                lastmod: new Date().toISOString(),
+                changefreq: 'weekly',
+                priority: '0.8',
+              });
+
+              // Child category URLs
+              if (subCategory.childCategories && Array.isArray(subCategory.childCategories)) {
+                subCategory.childCategories.forEach((childCategory: Category) => {
+                  if (childCategory && childCategory.seoSlug) {
+                    // Full hierarchical URL with ccid parameter
+                    dynamicUrls.push({
+                      loc: `${process.env.NEXT_PUBLIC_PROD_URL}/products/${category.seoSlug}/${subCategory.seoSlug}/${childCategory.seoSlug}?ccid=${childCategory._id}`,
+                      lastmod: new Date().toISOString(),
+                      changefreq: 'weekly',
+                      priority: '0.8',
+                    });
+                  }
+                });
+              }
+            }
+          });
+        }
+      }
+    });
+
+    // Product URLs
+    if (Array.isArray(products)) {
+      products.forEach((slug: string) => {
+        if (slug && typeof slug === 'string') {
+          dynamicUrls.push({
+            loc: `${process.env.NEXT_PUBLIC_PROD_URL}/${slug}`,
+            lastmod: new Date().toISOString(),
+            changefreq: 'weekly',
+            priority: '0.8',
+          });
+        }
+      });
+    }
+
+    // Vendor URLs
+    if (Array.isArray(vendors)) {
+      vendors.forEach((slug: string) => {
+        if (slug && typeof slug === 'string') {
+          dynamicUrls.push({
+            loc: `${process.env.NEXT_PUBLIC_PROD_URL}/vendors/${slug}`,
+            lastmod: new Date().toISOString(),
+            changefreq: 'weekly',
+            priority: '0.7',
+          });
+        }
+      });
+    }
+
+    // Blog URLs
+    if (Array.isArray(blogs)) {
+      blogs.forEach((slug: string) => {
+        if (slug && typeof slug === 'string') {
+          dynamicUrls.push({
+            loc: `${process.env.NEXT_PUBLIC_PROD_URL}/blogs/${slug}`,
+            lastmod: new Date().toISOString(),
+            changefreq: 'monthly',
+            priority: '0.5',
+          });
+        }
+      });
+    }
+
+    return dynamicUrls;
   } catch (error) {
     console.error('Error fetching slugs:', error);
     return [];

@@ -7,7 +7,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import FilterHTML from "./FilterHTML";
 
 interface VendorFiltersListProps {
-  onCategorySelectionChange: (data: { childId: string, subCategoryId: string | null }) => void; // Function prop to handle selected child and subcategory
+  onCategorySelectionChange: (selectedCats: string[]) => void; // Function prop to handle selected vendors
   onChangeParentSelectionChange: (selectedParentid: string[]) => void;
   refresh: any;
 }
@@ -47,16 +47,19 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
 
   const fetchCategories = async () => {
     try {
-      const result = await callApi(getEndpoint.default.PRODUCTS_CATEGORIES, "GET");
+      const result = await callApi(
+        getEndpoint.default.PRODUCTS_CATEGORIES,
+        "GET"
+      );
       if (!Array.isArray(result?.data) || result.data.length === 0) {
         throw new Error("No categories found");
       }
-  
+
       // Get all subcategories from all categories (filter out empty/undefined subcategories)
       const allSubCategories = (result.data as any[]).flatMap(
-        category => category.subCategories || []
+        (category) => category.subCategories || []
       );
-  
+
       setCategoriesData(allSubCategories);
       setFilteredCategories(allSubCategories);
       setCatCount(allSubCategories.length);
@@ -114,15 +117,15 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
       const updatedCats = prevSelectedCats.includes(id)
         ? prevSelectedCats.filter((catId) => catId !== id)
         : [...prevSelectedCats, id];
-
+      onCategorySelectionChange(updatedCats);
       // Find the parent subcategory id for the selected child
       const parentCategory = categoriesData.find((cat: any) =>
         cat.childCategories?.some((child: any) => child._id === id)
       );
-      const subCategoryId = parentCategory ? parentCategory._id : null;
 
       // Send both child and subcategory id to parent
-      onCategorySelectionChange({ childId: id, subCategoryId });
+
+      // Check if the parent category should be unselected if any child is unselected
 
       // Check if the parent category should be unselected if any child is unselected
       if (parentCategory) {
@@ -176,6 +179,7 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
           const newSelectedCats = [
             ...Array.from(new Set([...prevSelectedCats, ...updatedCats])),
           ];
+          onCategorySelectionChange(newSelectedCats);
           // Do NOT call onCategorySelectionChange here, as it now expects an object for single child selection only
           return newSelectedCats;
         });
@@ -190,6 +194,8 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
                 (child: any) => child._id === catId
               )
           );
+          onCategorySelectionChange(updatedCats);
+
           // Do NOT call onCategorySelectionChange here, as it now expects an object for single child selection only
           return updatedCats;
         });
@@ -201,14 +207,14 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
 
   useEffect(() => {
     fetchCategories();
-  }, []);  // Run once when the component mounts
+  }, []); // Run once when the component mounts
 
   useEffect(() => {
     if (!categoriesData.length) return; // Ensure categories are loaded before proceeding.
 
     // If `scid` exists, select the parent category and its children
     if (scid) {
-      onSelectParentCat(scid);  // This will select the parent and its children
+      onSelectParentCat(scid); // This will select the parent and its children
     }
 
     // If `ccid` exists, select the specific child category without selecting the parent
@@ -219,10 +225,10 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
 
       if (parentCategory) {
         setOpenCategory(parentCategory?.name);
-        onSelectCat(ccid, "direct");  // Select only the child category
+        onSelectCat(ccid, "direct"); // Select only the child category
       }
     }
-  }, [scid, ccid, categoriesData]);  // Depend on categoriesData, scid, and ccid.
+  }, [scid, ccid, categoriesData]); // Depend on categoriesData, scid, and ccid.
 
   return (
     <FilterHTML

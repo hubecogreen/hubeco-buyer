@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { Filter } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -29,11 +29,17 @@ interface Props {
   scid?: string | string[];
 }
 
-const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid, scid }) => {
+const ProductsList: React.FC<Props> = ({
+  catSlug,
+  subCatSlug,
+  childCatSlug,
+  ccid,
+  scid,
+}) => {
   const searchParams = useSearchParams();
   const buyerInfo = sessionStorage.getItem("buyerUserInfo") as any;
-  const prefferedPlan = JSON.parse(buyerInfo ?? '{}')?.preferredPlan;
-  const buyerType = JSON.parse(buyerInfo ?? '{}')?.buyerInfo?.buyerType;
+  const prefferedPlan = JSON.parse(buyerInfo ?? "{}")?.preferredPlan;
+  const buyerType = JSON.parse(buyerInfo ?? "{}")?.buyerInfo?.buyerType;
 
   // State Management
   const [totalPage, setTotalPage] = useState(0);
@@ -71,8 +77,8 @@ const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid
     if (catSlug) setCatId(catSlug);
     if (subCatSlug) setSubCatId(subCatSlug);
     if (childCatSlug) setChildCatId(childCatSlug);
-    if (scid) setSubCatId(typeof scid === 'string' ? scid : scid[0]);
-    if (ccid) setChildCatId(typeof ccid === 'string' ? ccid : ccid[0]);
+    if (scid) setSubCatId(typeof scid === "string" ? scid : scid[0]);
+    if (ccid) setChildCatId(typeof ccid === "string" ? ccid : ccid[0]);
   }, [catSlug, subCatSlug, childCatSlug, ccid, scid]);
 
   // Reset options on path change
@@ -83,7 +89,7 @@ const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid
       setChildCatId(searchParams?.get("ccid") || null);
     };
     // resetOptions();
-  }, [pathname,searchParams]);
+  }, [pathname, searchParams]);
 
   // Fetch products when filters change
   useEffect(() => {
@@ -96,9 +102,8 @@ const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid
     childCatId,
     priceRangeObj,
     selectedAttributes,
-    sortBy
+    sortBy,
   ]);
-
 
   // Fetch products when search term changes
   useEffect(() => {
@@ -145,7 +150,8 @@ const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid
         page: page ?? null,
         limit,
         searchTerm: searchTerm || null,
-        planType: planType === 'FREE' || planType === 'PAID' ? planType : undefined,
+        planType:
+          planType === "FREE" || planType === "PAID" ? planType : undefined,
         brandId: brandCode || null,
         purchaseType: purchaseType || null,
         isSingleProduct: isSingle || null,
@@ -157,11 +163,11 @@ const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid
         status: status || null,
         isReturnable: isReturnable || null,
         isCancellable: isCancellable || null,
-        priceRange: priceRangeObj ? priceRangeObj.join('-') : null,
+        priceRange: priceRangeObj ? priceRangeObj.join("-") : null,
         isRefundable: isRefundable || null,
         vendorIdOrSlug: vendorCode || null,
         PriceSort: sortBy || null,
-        productAttributes: selectedAttributes || null
+        productAttributes: selectedAttributes || null,
       };
 
       const apiUrl = buildUrl(getEndpoint.default.PRODUCTSLIST, params);
@@ -176,12 +182,10 @@ const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid
       }
     } catch (err) {
       handleApiError(err);
-    } 
-    finally {
+    } finally {
       setGridLoading(false);
     }
   };
-
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -224,11 +228,10 @@ const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid
     setSubCatId(subCategories);
   };
 
-  const filterWithChildCategories = (data: { childId: string, subCategoryId: string | null }) => {
-    setChildCatId(data.childId);
-    setSubCatId(data.subCategoryId);
+  const filterWithChildCategories = (childCategories: string) => {
+    // console.log("params from fun", childCategories);
+    setChildCatId(childCategories);
   };
-
   const filterWithPrice = (data: any) => {
     setPriceRangeObj(data);
   };

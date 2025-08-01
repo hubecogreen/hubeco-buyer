@@ -14,9 +14,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     const blogData = await res.json();
     if (!blogData) return {};
     return {
-      title: blogData.title,
+      title: blogData.metaTitle,
       description: blogData.metaDescriptions,
-      keywords: blogData.metaKeywords,
+      // keywords: blogData.metaKeywords,
       authors: blogData.author?.firstName ? [{ name: blogData.author.firstName }] : undefined,
       alternates: {
         canonical: `https://hubeco.market/blogs/${blogData.slug}`,

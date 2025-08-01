@@ -70,7 +70,7 @@ const BuildingCard = ({
         width={380}
         height={360}
         onError={e => {
-          e.currentTarget.src = '/images/product-placeholder.jpg'
+          e.currentTarget.src = '/images/product-placeholder.webp'
         }}
         loading="lazy"
       />

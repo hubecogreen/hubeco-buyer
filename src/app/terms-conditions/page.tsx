@@ -72,7 +72,7 @@ export default function Page() {
         <div
           className="md:px-20 px-10 relative bg-cover bg-center h-[200px] flex items-center justify-start text-white"
           style={{
-            backgroundImage: 'url("images/about/aboutBanner1.png")',
+            backgroundImage: 'url("images/about/aboutBanner1.webp")',
           }}
         >
           <Link

@@ -113,35 +113,35 @@ export default function Page() {
 
   const accordionItems = [
     {
-      imgSrc: "images/about/aboutEnv.png",
+      imgSrc: "images/about/aboutEnv.webp",
       alt: "sustain",
       title: "What is hubeco?",
       description:
         "Hubeco is an online marketplace dedicated to providing a wide range of sustainable building materials. Our platform connects builders, architects, and homeowners with trusted suppliers and manufacturers committed to eco-friendly construction practices.",
     },
     {
-      imgSrc: "images/about/aboutEnergy.png",
+      imgSrc: "images/about/aboutEnergy.webp",
       alt: "energy",
       title: "How do I create an account?",
       description:
         "To create an account, click on the 'Sign Up' button at the top right corner of our homepage and follow the prompts to enter your details. You can choose to register as a buyer or a vendor.",
     },
     {
-      imgSrc: "images/about/aboutHeart.png",
+      imgSrc: "images/about/aboutHeart.webp",
       alt: "healthy",
       title: "Can I track my order?",
       description:
         "Yes, you will receive a tracking number from your vendor once your materials are shipped. You can check the shipping status on the designated carrier’s website.",
     },
     {
-      imgSrc: "images/about/aboutDurable.png",
+      imgSrc: "images/about/aboutDurable.webp",
       alt: "durable",
       title: "How do I become a vendor on hubeco.market?",
       description:
         "To become a vendor, visit our Vendor Registration page, fill out the application form with your business details, and submit it. Our team will review your application and get back to you with the next steps.",
     },
     {
-      imgSrc: "images/about/aboutDurable.png",
+      imgSrc: "images/about/aboutDurable.webp",
       alt: "durable",
       title: "What makes your products sustainable?",
       description:
@@ -150,25 +150,25 @@ export default function Page() {
   ];
   const valueItems = [
     {
-      imgSrc: "images/social/social.png",
+      imgSrc: "images/social/social.webp",
       alt: "facebook",
       title: "Facebook",
       description: "Hubeco Trail Name",
     },
     {
-      imgSrc: "images/social/twitter.png",
+      imgSrc: "images/social/twitter.webp",
       alt: "Twitter",
       title: "Twitter",
       description: "Hubeco Trail Name",
     },
     {
-      imgSrc: "images/social/instagram.png",
+      imgSrc: "images/social/instagram.webp",
       alt: "Instagram",
       title: "Instagram",
       description: "Hubeco Trail Name",
     },
     {
-      imgSrc: "images/social/linkedIn.png",
+      imgSrc: "images/social/linkedIn.webp",
       alt: "LinkedIn",
       title: "LinkedIn",
       description: "Hubeco Trail Name",
@@ -176,13 +176,13 @@ export default function Page() {
   ];
 
   const images = [
-    "/images/contact/slider1.png",
-    "/images/contact/slider2.png",
-    "/images/contact/slider5.jpg",
-    "/images/contact/slider3.png",
-    "/images/contact/slider4.png",
-    "/images/contact/slider6.jpg",
-    "/images/contact/slider7.jpg",
+    "/images/contact/slider1.webp",
+    "/images/contact/slider2.webp",
+    "/images/contact/slider5.webp",
+    "/images/contact/slider3.webp",
+    "/images/contact/slider4.webp",
+    "/images/contact/slider6.webp",
+    "/images/contact/slider7.webp",
 
     // Add more image paths here
   ];
@@ -268,7 +268,7 @@ export default function Page() {
       {/* <Header /> */}
       <div className="banner-section w-full h-102 mx-lg">
         <div
-          style={{ backgroundImage: "url('images/about/aboutBanner1.png')" }}
+          style={{ backgroundImage: "url('images/about/aboutBanner1.webp')" }}
           className="relative bg-cover bg-center h-[200px] flex items-center justify-start text-white md:px-[80px] px-[60px]"
         >
           <Link
@@ -294,7 +294,7 @@ export default function Page() {
           </Link>
         </div>
         <div className="bg-white  md:py-20">
-          <div className="md:flex flex-col lg:flex-row items-start justify-start space-y-4 lg:space-x-4 lg:space-y-0 bg-cover bg-no-repeat bg-center bg-[url('/images/home/contactbg.png')]">
+          <div className="md:flex flex-col lg:flex-row items-start justify-start space-y-4 lg:space-x-4 lg:space-y-0 bg-cover bg-no-repeat bg-center bg-[url('/images/home/contactbg.webp')]">
             <div className="md:w-11/12 mx-auto md:flex">
               <div className="md:w-1/2 w-full md:overflow-auto p-4">
                 <h1 className="md:text-3xl text-2xl  text-center md:text-left font-bold md:mb-4 text-black">
@@ -568,7 +568,7 @@ export default function Page() {
                       height={204.47}
                       width={239.66}
                       onError={e => {
-                        e.currentTarget.src = '/images/product-placeholder.jpg'
+                        e.currentTarget.src = '/images/product-placeholder.webp'
                       }}
                       loading="lazy"
                       style={{height:204.5}}
@@ -603,7 +603,6 @@ export default function Page() {
                       )
                     }
                   >
-                    {/* <img src={item.imgSrc} alt={item.alt} /> */}
                     <FaFacebookF
                       className="bg-secondary group-hover:bg-primary p-4 rounded-md   font-semibold"
                       size={60}
@@ -631,7 +630,6 @@ export default function Page() {
                       )
                     }
                   >
-                    {/* <img src={item.imgSrc} alt={item.alt} /> */}
                     <FaYoutube
                       className=" bg-secondary group-hover:bg-primary p-4 rounded-md   font-semibold"
                       size={60}
@@ -658,7 +656,6 @@ export default function Page() {
                       )
                     }
                   >
-                    {/* <img src={item.imgSrc} alt={item.alt} /> */}
                     <FaInstagram
                       className=" bg-secondary group-hover:bg-primary p-4 rounded-md   font-semibold"
                       size={60}
@@ -685,7 +682,6 @@ export default function Page() {
                       )
                     }
                   >
-                    {/* <img src={item.imgSrc} alt={item.alt} /> */}
                     <FaLinkedinIn
                       className=" bg-secondary group-hover:bg-primary p-4 rounded-md   font-semibold"
                       size={60}
@@ -719,13 +715,13 @@ export default function Page() {
           <div className="flex flex-col lg:flex-row items-start justify-start lg:space-x-4 mx-auto max-w-[90%] lg:max-w-[80%] h-[650px]">
             <div className="hidden lg:flex justify-center items-center p-4 mb-10">
               <Image
-                src="images/contact/contactFaq.png"
+                src="images/contact/contactFaq.webp"
                 alt="banner1"
                 className="w-full max-w-lg mx-auto h-[500px] rounded-[10px]"
                 width={512}
                 height={500}
                 onError={e => {
-                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                  e.currentTarget.src = '/images/product-placeholder.webp'
                 }}
                 loading="lazy"
               />

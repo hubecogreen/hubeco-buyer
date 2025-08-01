@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import { Filter } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -22,9 +23,13 @@ import {
 
 interface Props {
   catSlug?: string;
+  subCatSlug?: string;
+  childCatSlug?: string;
+  ccid?: string | string[];
+  scid?: string | string[];
 }
 
-const ProductsList: React.FC<Props> = () => {
+const ProductsList: React.FC<Props> = ({ catSlug, subCatSlug, childCatSlug, ccid, scid }) => {
   const searchParams = useSearchParams();
   const buyerInfo = sessionStorage.getItem("buyerUserInfo") as any;
   const prefferedPlan = JSON.parse(buyerInfo ?? '{}')?.preferredPlan;
@@ -61,6 +66,15 @@ const ProductsList: React.FC<Props> = () => {
   const { callApi } = useApi();
   const pathname = usePathname();
 
+  // Set initial state from props if provided
+  useEffect(() => {
+    if (catSlug) setCatId(catSlug);
+    if (subCatSlug) setSubCatId(subCatSlug);
+    if (childCatSlug) setChildCatId(childCatSlug);
+    if (scid) setSubCatId(typeof scid === 'string' ? scid : scid[0]);
+    if (ccid) setChildCatId(typeof ccid === 'string' ? ccid : ccid[0]);
+  }, [catSlug, subCatSlug, childCatSlug, ccid, scid]);
+
   // Reset options on path change
   useEffect(() => {
     const resetOptions = () => {
@@ -73,11 +87,6 @@ const ProductsList: React.FC<Props> = () => {
 
   // Fetch products when filters change
   useEffect(() => {
-    // // console.log(childCatId,subCatId,catId,"params")
-    // return;
-    console.log("Filters changed:", {
-      searchParams,vendorCode, catId, subCatId, childCatId, priceRangeObj, selectedAttributes, sortBy
-    });
     getProducts(1);
   }, [
     // searchParams,
@@ -215,9 +224,9 @@ const ProductsList: React.FC<Props> = () => {
     setSubCatId(subCategories);
   };
 
-  const filterWithChildCategories = (childCategories: string) => {
-    // console.log("params from fun", childCategories);
-    setChildCatId(childCategories);
+  const filterWithChildCategories = (data: { childId: string, subCategoryId: string | null }) => {
+    setChildCatId(data.childId);
+    setSubCatId(data.subCategoryId);
   };
 
   const filterWithPrice = (data: any) => {

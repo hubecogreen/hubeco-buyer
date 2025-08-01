@@ -44,19 +44,14 @@ export default function Page() {
     <div className="category-section pb-10 text-center text-black bg-white shadow-[8px_4px_8px_8px_rgba(149,157,165,0.2)]">
         <div className="container mx-auto py-10">
         <div className="flex justify-center">
-          {/* <img
-            src="/images/Thankyou.jpg"
-            alt="Thank you"
-            style={{ height: "200px", width: "300px" }}
-          /> */}
-         {/* <Lottie animationData={animationData} loop={true} style={{ width: 300, height: 300 }} /> */}
+
          <Image 
          src='/gif/Hubeco.gif' 
          alt="Welcome" 
          width={300} 
          height={300}
          onError={e => {
-          e.currentTarget.src = '/images/product-placeholder.jpg'
+          e.currentTarget.src = '/images/product-placeholder.webp'
         }}
         loading="lazy"
          />

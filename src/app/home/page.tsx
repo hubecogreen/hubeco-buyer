@@ -17,9 +17,9 @@ export default function Home() {
   const isClient = useClient()
   
   const images = [
-    "/images/home/bannerNew.png",
-    "/images/home/bannerNew.png",
-    "/images/home/bannerNew.png",
+    "/images/home/bannerNew.webp",
+    "/images/home/bannerNew.webp",
+    "/images/home/bannerNew.webp",
     // Add more image paths here
   ];
 
@@ -81,7 +81,7 @@ export default function Home() {
       >
         <WorksSection />
       </div>
-      <div className="projects-section mx-auto relative bg-cover bg-no-repeat bg-top pt-[30px] bg-[url('/images/home/bg5.png')]">
+      <div className="projects-section mx-auto relative bg-cover bg-no-repeat bg-top pt-[30px] bg-[url('/images/home/bg5.webp')]">
         <ProjectsSection />
       </div>
 

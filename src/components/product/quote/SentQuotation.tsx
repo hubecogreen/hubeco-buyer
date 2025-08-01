@@ -411,12 +411,12 @@ export default function SentQuotation({
                 width={40}
                 height={40}
                 onError={e => {
-                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                  e.currentTarget.src = '/images/product-placeholder.webp'
                 }}
                 loading="lazy"
               />
               <Image
-                src="/images/Button.png"
+                src="/images/Button.webp"
                 alt=""
                 className="cursor-pointer"
                 onClick={() => {
@@ -426,7 +426,7 @@ export default function SentQuotation({
                 width={40}  
                 height={40}
                 onError={e => {
-                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                  e.currentTarget.src = '/images/product-placeholder.webp'
                 }}
                 loading="lazy"
               />

@@ -20,7 +20,7 @@ interface Vendor {
   items: string;
 }
 
-const FALLBACK_IMAGE = "/images/product-placeholder.jpg";
+const FALLBACK_IMAGE = "/images/product-placeholder.webp";
 
 const VendorsList = () => {
   const [vendors, setVendors] = useState([]);
@@ -159,20 +159,20 @@ const VendorsList = () => {
                 {vendor?.businessInfo?.logo ? (
                   <Image
                     // src={`https://assets.hubeco.market/${vendor.displayImage}`}
-                    // src={vendor?.businessInfo?.logo ?  (assetURL+'/'+vendor?.businessInfo?.logo).includes('//admin') ? (assetURL+'/'+vendor?.businessInfo?.logo).replace('//admin', '/admin') : `${assetURL}/${vendor?.businessInfo?.logo}` : '/images/product-placeholder.jpg'}
+                    // src={vendor?.businessInfo?.logo ?  (assetURL+'/'+vendor?.businessInfo?.logo).includes('//admin') ? (assetURL+'/'+vendor?.businessInfo?.logo).replace('//admin', '/admin') : `${assetURL}/${vendor?.businessInfo?.logo}` : '/images/product-placeholder.webp'}
 
                     src={
                       vendor?.businessInfo?.logo
                         ? normalizePath(
                             `${assetURL}/${vendor?.businessInfo?.logo}`
                           )
-                        : "/images/product-placeholder.jpg"
+                        : "/images/product-placeholder.webp"
                     }
                     alt={vendor.businessInfo.companyName}
                     width={150}
                     height={150}
                     onError={(e) => {
-                      e.currentTarget.src = "/images/product-placeholder.jpg";
+                      e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
                     loading="lazy"
                     className="  object-contain h-full "

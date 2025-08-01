@@ -1,4 +1,4 @@
-// components/BlogsSection.tsx
+"use client"
 import styles from "./BlogsSection.module.css";
 import { useEffect, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
@@ -163,7 +163,7 @@ const BlogsSection = () => {
                     width={400}
                     height={300}
                     onError={(e) => {
-                      e.currentTarget.src = "/images/failedToLoadImage.jpg";
+                      e.currentTarget.src = "/images/failedToLoadImage.webp";
                     }}
                     loading="lazy"
                   />

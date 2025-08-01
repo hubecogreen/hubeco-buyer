@@ -79,7 +79,7 @@ const VerifyEmail:React.FC<VerfiyEmailProps> = ({ mobileNumber }) => {
     <div className="relative">
       <div
         className="bg-cover bg-center"
-        style={{ backgroundImage: "url(images/auth/auth.png)" }}
+        style={{ backgroundImage: "url(images/auth/auth.webp)" }}
       >
         <div className="bg-opacity-90 h-full flex items-center justify-center py-20 md:py-20">
           <div className="text-center md:p-10 md:pt-10 py-10 md:py-15 max-w-md md:max-w-lg text-white bg-white">

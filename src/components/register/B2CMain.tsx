@@ -11,6 +11,7 @@ import B2CPlans from "./B2CPlans";
 import { setCookie } from "cookies-next";
 import React from "react";
 import { B2CContextProvider } from "./context";
+import Image from "next/image";
 
 interface B2CProps {
   mobileParam?: any;
@@ -21,8 +22,8 @@ const B2CMain: React.FC<B2CProps> = ({ mobileParam }) => {
   // const mobileParam=searchParams.get('mobile');
 
   const steps = [
-    { label: "Personal Information", img: "/images/register/personal.png" },
-    { label: "Plans", img: "/images/register/company.png" },
+    { label: "Personal Information", img: "/images/register/personal.webp" },
+    { label: "Plans", img: "/images/register/company.webp" },
   ];
 
   const [activeStep, setActiveStep] = useState(0);
@@ -52,7 +53,7 @@ const B2CMain: React.FC<B2CProps> = ({ mobileParam }) => {
           <div>
             {activeStep === 0 && (
               <B2CPersonal
-                imgSrc="/images/user.png" // Use your default image URL here
+                imgSrc="/images/user.webp" // Use your default image URL here
                 nextStep={handleNextStep}
               />
             )}
@@ -101,7 +102,7 @@ const B2CMain: React.FC<B2CProps> = ({ mobileParam }) => {
                       // onClick={() => setActiveStep(index)}
                     >
                       <div className="h-12 w-12 mb-2 md:mb-0 md:mr-2">
-                        <img src={step.img} alt="Image" />
+                        <Image src={step.img} alt="Image" width={48} height={48} />
                       </div>
                       <div
                         className={`${styles.stepLabel} text-center md:text-left`}

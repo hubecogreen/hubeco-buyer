@@ -9,7 +9,7 @@ const BuyerJoinUs = () => {
     <div className="relative">
     <div
       className="bg-cover bg-center h-96"
-      style={{ backgroundImage: "url(images/vendor-register/joinbg.png)" }}
+      style={{ backgroundImage: "url(images/vendor-register/joinbg.webp)" }}
     >
       <div className="bg-opacity-90 h-full flex items-center justify-center py-20">
         <div className="text-center p-4 max-w-4xl text-white">

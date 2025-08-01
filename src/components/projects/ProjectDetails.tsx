@@ -60,7 +60,11 @@ interface Blog {
   name: string;
 }
 
-const ProjectDetails: React.FC = ({ id }: any) => {
+interface ProjectDetailsProps {
+  id: string;
+}
+
+const ProjectDetails: React.FC<ProjectDetailsProps> = ({ id }) => {
   //// // console.log('id',id)
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
   const swiperRef = useRef(null);
@@ -174,17 +178,7 @@ const ProjectDetails: React.FC = ({ id }: any) => {
               </h1>
             </div>
             <div className="block md:flex gap-1">
-              {/* {projectData?.certificate?.organization?.authorityName !==
-                "Others" && (
-                <img
-                  src={`${assetURL}/${projectData?.certificate?.organization?.logo}`}
-                  alt="project"
-                  className={`${styles.imageLogo} max-h-[50px] max-w-[50px] rounded`}
-                  onError={(e) => {
-                    e.currentTarget.src = "/images/product-placeholder.jpg";
-                  }}
-                />
-              )} */}
+
               {projectData?.certificate?.greenCertificateNumber &&
                 projectData?.certificate?.organization && (
                   <CustomButton
@@ -207,14 +201,14 @@ const ProjectDetails: React.FC = ({ id }: any) => {
                 ? `${assetURL}/${projectData.thumbnail}` // Use thumbnail if available
                 : projectData?.images?.length > 0 // Check if images array exists and has elements
                   ? `${assetURL}/${projectData.images[0]}` // Use first image if thumbnail is absent
-                  : "/images/failedToLoadImage.jpg"
+                  : "/images/failedToLoadImage.webp"
             }
             alt="blog"
             className={`${styles.image}  rounded`}
             width={430}
             height={330}
             onError={(e) => {
-              e.currentTarget.src = "/images/failedToLoadImage.jpg"; // Error handler for failed image load
+              e.currentTarget.src = "/images/failedToLoadImage.webp"; // Error handler for failed image load
             }}
             loading="lazy"
           />
@@ -255,7 +249,7 @@ const ProjectDetails: React.FC = ({ id }: any) => {
                       width={430}
                       height={300}
                       onError={(e) => {
-                        e.currentTarget.src = "/images/failedToLoadImage.jpg";
+                        e.currentTarget.src = "/images/failedToLoadImage.webp";
                       }}
                       loading="lazy"
                     />
@@ -314,7 +308,7 @@ const ProjectDetails: React.FC = ({ id }: any) => {
                           height={300}
                           onError={(e) => {
                             e.currentTarget.src =
-                              "/images/failedToLoadImage.jpg";
+                              "/images/failedToLoadImage.webp";
                           }}
                           loading="lazy"
                         />
@@ -552,7 +546,7 @@ const ProjectDetails: React.FC = ({ id }: any) => {
                               height={75}
                               onError={(e) => {
                                 e.currentTarget.src =
-                                  "/images/projects/document.png";
+                                  "/images/projects/document.webp";
                                 e.currentTarget.style.width = "75px"; // Set the width you want
                                 e.currentTarget.style.height = "75px"; // Set the height you want
                               }}
@@ -578,74 +572,6 @@ const ProjectDetails: React.FC = ({ id }: any) => {
                   </div>
                 </TabPanel>
 
-                {/* <TabPanel>
-                  <div className="flex justify-center">
-                    <div className="flex flex-col justify-between w-[175px] h-[200px] border-2 md:m-8 items-center md:p-2 md:px-3">
-                      <div className="block md:flex items-center pt-7 pb-2">
-                        <img
-                          src={`${assetURL}/${projectData?.certificate?.certificateImg}`}
-                          alt="project"
-                          className={`${styles.imageLogo} max-h-[100px] max-w-[100px] rounded`}
-                          onError={(e) => {
-                            e.currentTarget.src =
-                              "/images/projects/document.png";
-                            e.currentTarget.style.width = "75px"; // Set the width you want
-                            e.currentTarget.style.height = "60px"; // Set the height you want
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <p className="md:ml-2 pt-4">Green Certificate</p>
-                      </div>
-                      <div className="pt-2 pb-5">
-                        <PreviewLink
-                          url={`${assetURL}/${projectData?.certificate.certificateImg}`}
-                        />
-                      </div>
-                    </div>
-                    <div className="pt-20">
-                      <div className="flex text-[#0A080A] leading-5 mb-4">
-                        <strong className=" font-bold">
-                          Organization Name:{" "}
-                        </strong>
-                        <p className="ml-2 font-normal ">
-                          {
-                            projectData?.certificate?.organization
-                              ?.authorityName
-                          }
-                          {projectData?.certificate?.preferredTitle && (
-                            <> -{projectData?.certificate?.preferredTitle}</>
-                          )}
-                        </p>
-                      </div>
-                      {projectData?.certificate?.organization?.authorityName !==
-                        "Others" && (
-                        <>
-                          <div className="flex text-[#0A080A] leading-5 mb-4">
-                            <strong className=" font-bold">
-                              Certificate Number:{" "}
-                            </strong>
-                            <p className="ml-2 font-normal ">
-                              {projectData?.certificate?.greenCertificateNumber}
-                            </p>
-                          </div>
-                          <div className="flex text-[#0A080A] leading-5 mb-4">
-                            <strong className="font-bold">
-                              Certificate Validity:{" "}
-                            </strong>
-                            <p className="ml-2 font-normal">
-                              {projectData?.certificate?.validity
-                                ? new Date(projectData.certificate.validity)
-                                    .toLocaleDateString("en-GB") // Converts to 'dd/mm/yyyy' format
-                                    .replace(/\//g, "-") // Replaces '/' with '-'
-                                : "-"}
-                            </p>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </TabPanel> */}
                 {projectData?.certificate?.organization?.authorityName ===
                   "Others" ? (
                   <TabPanel>
@@ -661,7 +587,7 @@ const ProjectDetails: React.FC = ({ id }: any) => {
 
                             onError={(e) => {
                               e.currentTarget.src =
-                                "/images/projects/document.png";
+                                "/images/projects/document.webp";
                               e.currentTarget.style.width = "75px"; // Set the width you want
                               e.currentTarget.style.height = "60px"; // Set the height you want
                             }}
@@ -712,7 +638,7 @@ const ProjectDetails: React.FC = ({ id }: any) => {
 
                             onError={(e) => {
                               e.currentTarget.src =
-                                "/images/projects/document.png";
+                                "/images/projects/document.webp";
                               e.currentTarget.style.width = "75px"; // Set the width you want
                               e.currentTarget.style.height = "60px"; // Set the height you want
                             }}

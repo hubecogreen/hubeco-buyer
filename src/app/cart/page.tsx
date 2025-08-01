@@ -328,7 +328,7 @@ const Cart = () => {
           className="md:px-20 px-10"
           style={{
             position: "relative",
-            backgroundImage: 'url("images/about/aboutBanner1.png")',
+            backgroundImage: 'url("images/about/aboutBanner1.webp")',
             backgroundSize: "cover",
             backgroundPosition: "center",
             height: "200px",

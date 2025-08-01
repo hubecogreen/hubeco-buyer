@@ -1466,11 +1466,11 @@ const Checkout = () => {
                 <Image
                   width={225}
                   height={112}
-                  src="/images/checkout/SVG.png"
+                  src="/images/checkout/SVG.webp"
                   alt="Image"
                   className="text-center"
                   onError={e => {
-                    e.currentTarget.src = '/images/product-placeholder.jpg'
+                    e.currentTarget.src = '/images/product-placeholder.webp'
                   }}
                   loading="lazy"
                 />
@@ -1530,19 +1530,19 @@ const Checkout = () => {
                       //           product?.productInfo?.image
                       //         ).replace("//admin", "/admin")
                       //       : `${assetURL}/${product?.productInfo?.image}`
-                      //     : "/images/product-placeholder.jpg"
+                      //     : "/images/product-placeholder.webp"
                       // }
                       src={
                         product?.productInfo?.image
                           ? normalizePath(`${assetURL}/${product.productInfo.image}`)
-                          : "/images/product-placeholder.jpg"
+                          : "/images/product-placeholder.webp"
                       }
                       alt={product?.productInfo?.productName}
                       width={100}
                       height={100}
                       className="w-16 h-16 object-cover mr-4"
                       onError={e => {
-                        e.currentTarget.src = '/images/product-placeholder.jpg'
+                        e.currentTarget.src = '/images/product-placeholder.webp'
                       }}
                       loading="lazy"
                       // onClick={()=>onClickImage(product?.product?.slug)}

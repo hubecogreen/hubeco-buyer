@@ -24,28 +24,28 @@ import styles from "./Vendor.module.css";
 const Benefits = () => {
   const accordionItems = [
     {
-      imgSrc: "images/vendor-register/target.png",
+      imgSrc: "images/vendor-register/target.webp",
       alt: "Reach",
       title: "Reach a Targeted Audience ",
       description:
         "Connect with customers specifically looking for green building materials.",
     },
     {
-      imgSrc: "images/vendor-register/boost.png",
+      imgSrc: "images/vendor-register/boost.webp",
       alt: "Boost",
       title: "Boost Your Sales",
       description:
         "Increase your visibility and sales through our well-established marketplace.",
     },
     {
-      imgSrc: "images/vendor-register/build.png",
+      imgSrc: "images/vendor-register/build.webp",
       alt: "Build",
       title: "Build Your Brand",
       description:
         "Enhance your brand reputation by aligning with a platform dedicated to sustainability.",
     },
     {
-      imgSrc: "images/vendor-register/onboarding.png",
+      imgSrc: "images/vendor-register/onboarding.webp",
       alt: "durable",
       title: "Seamless Onboarding",
       description:
@@ -66,9 +66,9 @@ const Benefits = () => {
   };
 
   const images = [
-    "/images/vendor-register/vendorBanner.png",
-    "/images/vendor-register/vendorBanner.png",
-    "/images/vendor-register/vendorBanner.png",
+    "/images/vendor-register/vendorBanner.webp",
+    "/images/vendor-register/vendorBanner.webp",
+    "/images/vendor-register/vendorBanner.webp",
     // Add more image paths here
   ];
 
@@ -78,13 +78,13 @@ const Benefits = () => {
         className={`${styles.secondSection} flex flex-col lg:flex-row items-start justify-between py-8 md:py-16 px-4 lg:px-8 mx-auto max-w-screen-xl lg:p-4`}
       >
         <Image
-          src="images/vendor-register/benefits.png"
+          src="images/vendor-register/benefits.webp"
           alt="banner1"
           className="w-full lg:w-1/2 h-auto mx-auto lg:mx-0"
           width={712}
           height={557.83}
           onError={e => {
-            e.currentTarget.src = '/images/product-placeholder.jpg'
+            e.currentTarget.src = '/images/product-placeholder.webp'
           }}
           loading="lazy"
         />
@@ -116,7 +116,7 @@ const Benefits = () => {
                             width={32}
                             height={32}
                             onError={e => {
-                              e.currentTarget.src = '/images/product-placeholder.jpg';
+                              e.currentTarget.src = '/images/product-placeholder.webp';
                             }}
                             loading="lazy"
                           />

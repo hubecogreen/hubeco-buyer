@@ -5,6 +5,7 @@ import React from "react";
 import Script from "next/script";
 import MainLayout from "@/components/home/MainLayout";
 import WhatsAppWidget from "@/components/WhatsApp";
+import Image from "next/image";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -12,6 +13,7 @@ const poppins = Poppins({
   display: "swap",
   subsets: ["latin"],
   variable: "--poppins",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Hubeco",
     images: [
       {
-        url: "/images/Admin-2.png",
+        url: "/images/Admin-2.webp",
         alt: "Hubeco Logo",
       },
     ],
@@ -50,6 +52,33 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.variable}>
       <head>
+        {/* <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" /> */}
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://assets-uat.hubeco.market" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://assets.hubeco.market" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.clarity.ms" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://snap.licdn.com" crossOrigin="anonymous" />
+        
+        {/* DNS prefetch for faster resource loading */}
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://px.ads.linkedin.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.clarity.ms" />
+        
+        {/* Preload critical carousel images for LCP and Speed Index */}
+        <link rel="preload" href="/images/home/latest/homebanner-roads.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/images/home/latest/9.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/images/home/latest/f.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/images/home/latest/8.webp" as="image" type="image/webp" />
+        
+        {/* Preload critical background images */}
+        <link rel="preload" href="/images/home/bg1.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/images/Admin-2.webp" as="image" type="image/webp" />
+        
+        {/* Preload critical CSS for faster rendering */}
+        <link rel="preload" href="/globals.css" as="style" />
+        
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
@@ -83,6 +112,23 @@ export default function RootLayout({
             gtag('config', 'G-REE72KGV61');
           `}
         </Script>
+        
+        {/* Service Worker Registration for Enhanced Caching */}
+        <Script id="service-worker" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                  .then(function(registration) {
+                    console.log('SW registered: ', registration);
+                  })
+                  .catch(function(registrationError) {
+                    console.log('SW registration failed: ', registrationError);
+                  });
+              });
+            }
+          `}
+        </Script>
       </head>
       <body className={poppins.className}>
         {/* Google Tag Manager (noscript) */}
@@ -112,9 +158,9 @@ export default function RootLayout({
           src="https://snap.licdn.com/li.lms-analytics/insight.min.js"
         />
         <noscript>
-          <img
-            height="1"
-            width="1"
+          <Image
+            height={1}
+            width={1}
             style={{ display: "none" }}
             alt=""
             src="https://px.ads.linkedin.com/collect/?pid=8360633&fmt=gif"

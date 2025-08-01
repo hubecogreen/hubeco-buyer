@@ -35,9 +35,9 @@ const EmptyProducts:React.FC<Props> = ({ searchterm}) => {
         <div className=" mx-auto  bg-[#F4F4F4] p-4 md:mt-1 mb-5">
           <div className="flex justify-center p-10">
 
-            <Image src="/images/wishlist/cartimage.png" alt="Image" width={300} height={300}
+            <Image src="/images/wishlist/cartimage.webp" alt="Image" width={300} height={300}
             onError={e => {
-              e.currentTarget.src = '/images/product-placeholder.jpg'
+              e.currentTarget.src = '/images/product-placeholder.webp'
             }}
             loading="lazy"/>
           </div>

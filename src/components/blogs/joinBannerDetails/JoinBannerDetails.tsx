@@ -14,8 +14,8 @@ const JoinBannerDetails = () => {
     // ></section>
     <div className="relative">
       <div
-        className="bg-[url('/images/blogsection/joinBanner.png')] bg-cover bg-center h-60 md:h-60 lg:h-60"
-        // style={{ backgroundImage: "url(/images/blogsection/joinBanner.png)" }}
+        className="bg-[url('/images/blogsection/joinBanner.webp')] bg-cover bg-center h-60 md:h-60 lg:h-60"
+        // style={{ backgroundImage: "url(/images/blogsection/joinBanner.webp)" }}
       >
         <div className="bg-opacity-90 h-full flex items-center justify-center py-10 md:py-20">
           <div className="text-center p-4 max-w-lg md:max-w-2xl lg:max-w-4xl text-white">

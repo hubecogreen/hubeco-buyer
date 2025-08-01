@@ -25,27 +25,27 @@ type ExpandedIndex = number | null | undefined;
 export default function Page() {
   const accordionItems = [
     {
-      imgSrc: "images/about/aboutEnv.png",
+      imgSrc: "images/about/aboutEnv.webp",
       alt: "sustain",
       title: "Environmentally Responsible",
       description: "Sourced from sustainable practices and recycled content.",
     },
     {
-      imgSrc: "images/about/aboutEnergy.png",
+      imgSrc: "images/about/aboutEnergy.webp",
       alt: "energy",
       title: "Energy Efficient",
       description:
         "Designed to reduce energy consumption and enhance building performance.",
     },
     {
-      imgSrc: "images/about/aboutHeart.png",
+      imgSrc: "images/about/aboutHeart.webp",
       alt: "healthy",
       title: "Healthy",
       description:
         " Low in VOCs and free from harmful chemicals, promoting better indoor air quality.",
     },
     {
-      imgSrc: "images/about/aboutDurable.png",
+      imgSrc: "images/about/aboutDurable.webp",
       alt: "durable",
       title: "Durable",
       description:
@@ -58,28 +58,28 @@ export default function Page() {
   const router = useRouter();
   const valueItems = [
     {
-      imgSrc: "images/about/sustain.png",
+      imgSrc: "images/about/sustain.webp",
       alt: "sustain",
       title: "Sustainability",
       description:
         "We prioritize materials and practices that reduce environmental impact and promote long-term ecological balance.",
     },
     {
-      imgSrc: "images/about/trans.png",
+      imgSrc: "images/about/trans.webp",
       alt: "transparency",
       title: "Transparency",
       description:
         "We believe in providing clear, accurate information about our products, including their environmental impact and sourcing practices.",
     },
     {
-      imgSrc: "images/about/quality.png",
+      imgSrc: "images/about/quality.webp",
       alt: "quality",
       title: "Quality",
       description:
         "We are committed to offering only the highest quality products that meet rigorous standards for performance and sustainability.",
     },
     {
-      imgSrc: "images/about/community.png",
+      imgSrc: "images/about/community.webp",
       alt: "community",
       title: "Community",
       description:
@@ -104,7 +104,7 @@ export default function Page() {
       
       <div className="banner-section h-102">
         <div className="relative bg-cover bg-center h-[200px] flex items-center justify-start text-white px-20" 
-             style={{backgroundImage: 'url("images/about/aboutBanner1.png")'}}>
+             style={{backgroundImage: 'url("images/about/aboutBanner1.webp")'}}>
           <Link
             href="/"
             className="text-white flex items-center no-underline px-2.5 py-1 rounded"
@@ -124,7 +124,7 @@ export default function Page() {
 
         <div
           className="bg-white w-full flex items-center justify-center md:py-20 py-5 bg-cover bg-no-repeat bg-center relative"
-          style={{backgroundImage: "url('/images/about/aboutWavesBg.png')"}}
+          style={{backgroundImage: "url('/images/about/aboutWavesBg.webp')"}}
         >
           <div className="text-center p-4 text-black">
             <h1 className="text-4xl font-bold mb-4">ABOUT</h1>
@@ -185,7 +185,7 @@ export default function Page() {
                                 width={32}
                                 height={32}
                                 onError={e => {
-                                  e.currentTarget.src = 'images/product-placeholder.jpg'
+                                  e.currentTarget.src = 'images/product-placeholder.webp'
                                 }}
                                 loading="lazy"
                               />
@@ -225,13 +225,13 @@ export default function Page() {
               className=" lg:flex justify-center items-center p-2 lg:p-4"
             >
               <Image
-                src="images/about/aboutBanner2.png"
+                src="images/about/aboutBanner2.webp"
                 alt="banner1"
                 className="w-full rounded-md md:w-full max-w-lg mx-auto"
                 height={512}
                 width={512}
                 onError={e => {
-                  e.currentTarget.src = 'images/product-placeholder.jpg'
+                  e.currentTarget.src = 'images/product-placeholder.webp'
                 }}
                 loading="lazy"
               />
@@ -258,7 +258,7 @@ export default function Page() {
                       width={30}
                       height={25}
                       onError={e => {
-                        e.currentTarget.src = 'images/product-placeholder.jpg'
+                        e.currentTarget.src = 'images/product-placeholder.webp'
                       }}
                       loading="lazy"
                       // className="md:h-[25px] md:w-[30px] h-[25px] w-[25px] "
@@ -278,13 +278,13 @@ export default function Page() {
             </div>
             <div className="w-full lg:w-3/12 py-5 flex justify-center items-center">
               <Image
-                src="images/about/values.jpg"
+                src="images/about/values.webp"
                 alt="banner1"
                 className=" w-full  h-auto rounded-md max-w-xs lg:max-w-sm mx-auto"
                 width={332.69}
                 height={332.69}
                 onError={e => {
-                  e.currentTarget.src = 'images/product-placeholder.jpg'
+                  e.currentTarget.src = 'images/product-placeholder.webp'
                 }}
                 loading="lazy"
               />
@@ -299,7 +299,7 @@ export default function Page() {
                       height={25}
                       width={40}
                       onError={e => {
-                        e.currentTarget.src = 'images/product-placeholder.jpg'
+                        e.currentTarget.src = 'images/product-placeholder.webp'
                       }}
                       loading="lazy"
                       // className="rotate-on-hover"
@@ -331,17 +331,17 @@ export default function Page() {
 
         <div
           className="bg-white w-full flex flex-col lg:flex-row items-start justify-center py-12 md:px-16 px-4 lg:px-20 space-y-8 lg:space-y-0 lg:space-x-4 bg-cover bg-no-repeat bg-center relative"
-          style={{backgroundImage: "url('/images/about/aboutWavesBg2.png')"}}
+          style={{backgroundImage: "url('/images/about/aboutWavesBg2.webp')"}}
         >
           <div className="flex flex-col items-start lg:w-1/2">
             <Image
-              src="images/about/aboutBanner3.png"
+              src="images/about/aboutBanner3.webp"
               alt="banner1"
               className="h-64 lg:h-72 w-full rounded-md md:w-4/5 lg:w-full"
               width={668.28}
               height={288}
               onError={e => {
-                e.currentTarget.src = 'images/product-placeholder.jpg'
+                e.currentTarget.src = 'images/product-placeholder.webp'
               }}
               loading="lazy"
             />
@@ -359,13 +359,13 @@ export default function Page() {
           </div>
           <div className="flex flex-col items-start lg:w-1/2 md:pl-5">
             <Image
-              src="images/about/aboutBanner4.png"
+              src="images/about/aboutBanner4.webp"
               alt="banner2"
               className="h-64 lg:h-72 w-full rounded-md md:w-4/5 lg:w-full"
               width={648.53}
               height={288}
               onError={e => {
-                e.currentTarget.src = 'images/product-placeholder.jpg'
+                e.currentTarget.src = 'images/product-placeholder.webp'
               }}
               loading="lazy"
             />
@@ -389,7 +389,7 @@ export default function Page() {
         <div className="relative">
           <div
             className="bg-cover bg-center h-auto md:h-80 lg:h-96"
-            style={{ backgroundImage: "url(images/about/aboutBanner5.png)" }}
+            style={{ backgroundImage: "url(images/about/aboutBanner5.webp)" }}
           >
             <div className="bg-opacity-90 h-full flex items-center justify-center py-10 md:py-20">
               <div className="text-center p-4 max-w-lg md:max-w-2xl lg:max-w-4xl text-white">
@@ -440,7 +440,7 @@ export default function Page() {
 
         <div
           className="bg-white w-full flex items-center justify-center p-6 md:p-20 bg-cover bg-no-repeat bg-center relative pb-20"
-          style={{backgroundImage: "url('/images/about/aboutWavesBg2.png')"}}
+          style={{backgroundImage: "url('/images/about/aboutWavesBg2.webp')"}}
         >
           <div className="w-full">
             <div className="flex w-full justify-between bg-secondaryBg rounded mobile-sm:mb-20 mobile-sm:flex-wrap sm:flex-nowrap h-[500px] md:h-[450px]">
@@ -479,13 +479,13 @@ export default function Page() {
               </div>
               <div className="w-full md:w-fit flex items-center justify-center md:h-[450px] h-fit-content">
                 <Image
-                  src="images/about/profile-pic.jpg"
+                  src="images/about/profile-pic.webp"
                   alt="banner1"
                   style={{ width: "100%", height: "100%" }}
                   width={317.81}
                   height={450}
                   onError={e => {
-                    e.currentTarget.src = 'images/product-placeholder.jpg'
+                    e.currentTarget.src = 'images/product-placeholder.webp'
                   }}
                   loading="lazy"
                   className="md:w-auto md:max-w-full rounded-r"

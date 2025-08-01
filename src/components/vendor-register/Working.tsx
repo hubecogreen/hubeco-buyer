@@ -12,13 +12,13 @@ const Working = () => {
                   <div className="flex items-start mt-4 lg:mt-5">
                     <div className="p-1.5 rounded-md h-10 flex items-center justify-center">
                       <Image
-                        src="/images/vendor-register/add.png"
+                        src="/images/vendor-register/add.webp"
                         alt="User add"
                         className="w-20 md:w-10"
                         width={32}
                         height={32}
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                       />
@@ -37,13 +37,13 @@ const Working = () => {
                   <div className="flex items-start">
                     <div className="p-1.5 rounded-md h-10 flex items-center justify-center">
                       <Image
-                        src="/images/vendor-register/verify.png"
+                        src="/images/vendor-register/verify.webp"
                         alt="User Verify"
                         className="w-16 md:w-8"
                         width={32}
                         height={32}
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                       />
@@ -62,13 +62,13 @@ const Working = () => {
                   <div className="flex items-start">
                     <div className="p-1.5 rounded-md h-10 flex items-center justify-center">
                       <Image
-                        src="/images/vendor-register/settings.png"
+                        src="/images/vendor-register/settings.webp"
                         alt="Set up"
                         className="w-20 md:w-10"
                         width={32}
                         height={32}
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                       />
@@ -87,13 +87,13 @@ const Working = () => {
                   <div className="flex items-start">
                     <div className="p-1.5 rounded-md flex items-center justify-center h-10">
                       <Image
-                        src="/images/vendor-register/sell.png"
+                        src="/images/vendor-register/sell.webp"
                         alt="Sell"
                         className="w-20 md:w-10"
                         width={32}
                         height={32}
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                       />
@@ -116,13 +116,13 @@ const Working = () => {
                   How it works
                 </h1>
                 <Image
-                  src="/images/vendor-register/work.png"
+                  src="/images/vendor-register/work.webp"
                   alt="How it Works"
                   className="w-full h-auto xl:w-128 xl:h-128"
                   width={32}
                         height={32}
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                 />

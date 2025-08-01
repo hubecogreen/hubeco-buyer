@@ -15,9 +15,9 @@ import useClient from "../hooks/useClient";
 
 export default function Home() {
   const images = [
-    "/images/home/bannerNew.png",
-    "/images/home/bannerNew.png",
-    "/images/home/bannerNew.png",
+    "/images/home/bannerNew.webp",
+    "/images/home/bannerNew.webp",
+    "/images/home/bannerNew.webp",
     // Add more image paths here
   ];
 

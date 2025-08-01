@@ -201,7 +201,7 @@ const ResetPassword:React.FC<Resetprops> = ({token}) => {
     <div className="relative">
       <div
          className="bg-cover bg-center py-2"
-         style={{ backgroundImage: "url(/images/auth/auth.png)" }}
+         style={{ backgroundImage: "url(/images/auth/auth.webp)" }}
       >
         <div className="bg-white max-w-md md:max-w-lg mx-auto h-full my-16 flex items-center rounded-lg justify-center py-5 md:py-5">
           

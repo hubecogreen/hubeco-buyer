@@ -900,11 +900,11 @@ reset1()
             height={100}
             width={100}
             onError={e => {
-              e.currentTarget.src = '/images/user.png'
+              e.currentTarget.src = '/images/user.webp'
             }}
             loading="lazy"
             className="rounded"
-            src={file != null ? URL.createObjectURL(file) :buyerInfo?.displayImage ? `${assetURL}/${buyerInfo?.displayImage}`: '/images/user.png'}
+            src={file != null ? URL.createObjectURL(file) :buyerInfo?.displayImage ? `${assetURL}/${buyerInfo?.displayImage}`: '/images/user.webp'}
             alt="Profile"
           />
           <div className="flex flex-grow flex-col gap-4">

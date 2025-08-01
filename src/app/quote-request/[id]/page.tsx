@@ -420,19 +420,19 @@ const QuoteDetails = ({ id }: any) => {
                       //           product.variantId.thumbnail
                       //         ).replace("//admin", "/admin")
                       //       : `${assetUrl}/${product.variantId.thumbnail}`
-                      //     : "/images/product-placeholder.jpg"
+                      //     : "/images/product-placeholder.webp"
                       // }
                       src={
                         product.variantId.thumbnail
                           ? normalizePath(`${assetUrl}/${product.variantId.thumbnail}`)
-                          : "/images/product-placeholder.jpg"
+                          : "/images/product-placeholder.webp"
                       }
                       alt={product.variantId.variantName}
                       className="w-16 h-16 object-cover rounded mr-4"
                       height={16}
                       width={16}
                       onError={(e) => {
-                        e.currentTarget.src = "/images/product-placeholder.jpg";
+                        e.currentTarget.src = "/images/product-placeholder.webp";
                       }}
                       loading="lazy"
                     />

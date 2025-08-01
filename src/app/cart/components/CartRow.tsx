@@ -362,7 +362,6 @@ export default function CartRow({
   //   return data;
   // }
   
-console.log('check availability',  shipErr)
 
   return (
     <>
@@ -390,7 +389,7 @@ console.log('check availability',  shipErr)
               width={200}
               height={200}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
               onClick={() => onClickImage()}

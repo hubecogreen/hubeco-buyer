@@ -317,14 +317,14 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                                       "/admin"
                                     )
                                   : `${assetURL}/${product?.image}`
-                                : "/images/product-placeholder.jpg"
+                                : "/images/product-placeholder.webp"
                             }
                             alt={product?.name}
                             width={30}
                             height={30}
                             onError={(e) => {
                               e.currentTarget.src =
-                                "/images/product-placeholder.jpg";
+                                "/images/product-placeholder.webp";
                             }}
                             loading="lazy"
                             className="w-[30px] h-[30px] rounded"
@@ -382,21 +382,21 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                               //           subCategory?.image
                               //         ).replace("//admin", "/admin")
                               //       : `${assetURL}/${subCategory?.image}`
-                              //     : "/images/product-placeholder.jpg"
+                              //     : "/images/product-placeholder.webp"
                               // }
                               src={
                                 subCategory?.image
                                   ? normalizePath(
                                       `${assetURL}/${subCategory?.image}`
                                     )
-                                  : "/images/product-placeholder.jpg"
+                                  : "/images/product-placeholder.webp"
                               }
                               alt={subCategory?.name}
                               width={30}
                               height={30}
                               onError={(e) => {
                                 e.currentTarget.src =
-                                  "/images/product-placeholder.jpg";
+                                  "/images/product-placeholder.webp";
                               }}
                               loading="lazy"
                               className="w-[30px] h-[30px] rounded"
@@ -450,7 +450,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                                         childCategory?.image
                                       ).replace("//admin", "/admin")
                                     : `${assetURL}/${childCategory?.image}`
-                                  : "/images/product-placeholder.jpg"
+                                  : "/images/product-placeholder.webp"
                               }
                               alt={childCategory?.name}
                               width={30}
@@ -508,21 +508,21 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                                 //           vendor?.businessInfo?.logo
                                 //         ).replace("//admin", "/admin")
                                 //       : `${assetURL}/${vendor?.businessInfo?.logo}`
-                                //     : "/images/product-placeholder.jpg"
+                                //     : "/images/product-placeholder.webp"
                                 // }
                                 src={
                                   vendor?.businessInfo?.logo
                                     ? normalizePath(
                                         `${assetURL}/${vendor?.businessInfo?.logo}`
                                       )
-                                    : "/images/product-placeholder.jpg"
+                                    : "/images/product-placeholder.webp"
                                 }
                                 alt={vendor?.businessInfo?.companyName}
                                 width={30}
                                 height={30}
                                 onError={(e) => {
                                   e.currentTarget.src =
-                                    "/images/product-placeholder.jpg";
+                                    "/images/product-placeholder.webp";
                                 }}
                                 loading="lazy"
                                 className="w-[30px] h-[30px] rounded"

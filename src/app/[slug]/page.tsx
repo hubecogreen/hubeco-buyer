@@ -1,5 +1,90 @@
 import ProductPreview from "@/components/product/ProductPage";
 import { normalizePath } from "@/lib/utils";
+import React from "react";
+
+// Organization Schema component
+function OrganizationSchema() {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Hubeco Market",
+    alternateName: "Hubeco MarketPlace",
+    url: "https://hubeco.market",
+    logo: "https://hubeco.market/images/Logo-2.webp",
+    sameAs: [
+      "https://www.facebook.com/people/HubecoMarket/61566048633254",
+      "https://www.instagram.com/hubeco.market/",
+      "https://www.linkedin.com/company/hubeco-market/",
+      "https://www.youtube.com/@hubeco.marketplace"
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+91 9985544055",
+      contactType: "Customer Service",
+      areaServed: "IN",
+      availableLanguage: ["English"]
+    }
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
+  );
+}
+
+// Breadcrumb Schema component
+function BreadcrumbSchema({ breadcrumbs }: { breadcrumbs: { name: string, url: string }[] }): JSX.Element {
+  const itemListElements = breadcrumbs.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name.charAt(0).toUpperCase() + item.name.slice(1),
+    item: item.url,
+  }));
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: typeof window !== 'undefined' ? window.location.origin : 'https://hubeco.market',
+      },
+      ...itemListElements,
+    ],
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+    />
+  );
+}
+
+function ProductSchema({ product }: { product: any }) {
+  if (!product) return null;
+  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
+  const schema = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    name: product.productName || product.variantName,
+    image: Array.isArray(product.images)
+      ? product.images.map((img: string) => assetURL + img)
+      : [],
+    description: product.description || product.meta?.description || "",
+    sku: product.variantSku,
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "INR",
+      price: product.platformPrice || product.discountedPrice || product.price,
+      url: typeof window !== 'undefined' ? window.location.href : "",
+    },
+  };
+  return (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+  );
+}
 
 export async function generateMetadata({
   params,
@@ -20,9 +105,12 @@ export async function generateMetadata({
     const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
     const metaImages = product?.meta?.metaImage || [];
 
-    const title = `${(product?.variantName && product.variantName !== "Default")
-      ? product.variantName
-      : product?.productName} | Hubeco`;
+    const title = `${
+      product?.meta?.metaTitle ||
+      ((product?.variantName && product.variantName !== "Default")
+        ? product.variantName
+        : product?.productName)
+    } | Hubeco`;
     const description =
       product?.meta?.description ||
       product?.description ||
@@ -46,7 +134,7 @@ export async function generateMetadata({
           })
         : [
             {
-              url: "/images/Admin-2.png",
+              url: "/images/Admin-2.webp",
               alt: "Hubeco Logo",
             },
           ];
@@ -92,4 +180,33 @@ export async function generateMetadata({
   }
 }
 
-export default ProductPreview;
+// Fetch product data for schema in the page component
+async function getProductData(slug: string) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/shop/${slug}`,
+    { cache: "force-cache" }
+  );
+  if (!res.ok) return null;
+  const productData = await res.json();
+  return productData?.selectedVariant || productData?.product?.variants[0];
+}
+
+const Page = async ({ params }: { params: { slug: string } }) => {
+  const product = await getProductData(params.slug);
+  // Example breadcrumbs for a product page
+  const breadcrumbs = [
+    { name: 'Products', url: `https://hubeco.market/products` },
+    // You can add more dynamic segments here if you have category/subcategory info
+    { name: product?.productName || product?.variantName || params.slug, url: `https://hubeco.market/${params.slug}` },
+  ];
+  return (
+    <>
+      <OrganizationSchema />
+      <BreadcrumbSchema breadcrumbs={breadcrumbs} />
+      <ProductSchema product={product} />
+      <ProductPreview {...params} />
+    </>
+  );
+};
+
+export default Page;

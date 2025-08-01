@@ -133,7 +133,7 @@ setLoading(true)
       </head>
    {/* <Header /> */} 
     <div className="relative">
-    <div className="bg-cover bg-center bg-[url('/images/auth/auth.png')]">
+    <div className="bg-cover bg-center bg-[url('/images/auth/auth.webp')]">
 
         <div className="bg-opacity-90 h-full flex items-center justify-center py-20 md:py-20">
           <div className="text-center py-10 md:py-15 max-w-md md:max-w-lg  text-white bg-white">

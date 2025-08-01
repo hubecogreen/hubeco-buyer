@@ -197,7 +197,7 @@ export default function QuoteDetailsDialog() {
                     width={10}
                     height={10}
                     onError={(e) => {
-                      e.currentTarget.src = "/images/product-placeholder.jpg";
+                      e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
                     loading="lazy"
                     onClick={() => {
@@ -206,13 +206,13 @@ export default function QuoteDetailsDialog() {
                     }}
                   />
                   <Image
-                    src="/images/Button.png"
+                    src="/images/Button.webp"
                     alt=""
                     className="cursor-pointer"
                     width={10}
                     height={10}
                     onError={(e) => {
-                      e.currentTarget.src = "/images/product-placeholder.jpg";
+                      e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
                     loading="lazy"
                     onClick={() => {
@@ -254,14 +254,14 @@ export default function QuoteDetailsDialog() {
                       //           product.variantId.thumbnail
                       //         ).replace("//admin", "/admin")
                       //       : `${assetUrl}/${product.variantId.thumbnail}`
-                      //     : "/images/product-placeholder.jpg"
+                      //     : "/images/product-placeholder.webp"
                       // }
                       src={
                         product.variantId.thumbnail
                           ? normalizePath(
                               `${assetUrl}/${product.variantId.thumbnail}`
                             )
-                          : "/images/product-placeholder.jpg"
+                          : "/images/product-placeholder.webp"
                       }
                       alt={product.variantId.variantName}
                       // boxSize="24"
@@ -270,7 +270,7 @@ export default function QuoteDetailsDialog() {
                       mr={6}
                       className="border border-gray-200 w-16 h-16 object-cover rounded mr-4"
                       onError={(e) => {
-                        e.currentTarget.src = "/images/product-placeholder.jpg";
+                        e.currentTarget.src = "/images/product-placeholder.webp";
                       }}
                       loading="lazy"
                     />
@@ -637,10 +637,10 @@ export default function QuoteDetailsDialog() {
                   <Image
                     src={
                       selectedView.products[0].certificate.endsWith(".pdf")
-                        ? "/images/pdflogo.png"
+                        ? "/images/pdflogo.webp"
                         : selectedView.products[0].certificate
                         ? `${assetUrl}/${selectedView.products[0].certificate}`
-                        : "/images/product-placeholder.jpg"
+                        : "/images/product-placeholder.webp"
                     }
                     boxSize="70px"
                     rounded="md"

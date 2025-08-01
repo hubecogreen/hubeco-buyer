@@ -55,7 +55,7 @@ export default function Home() {
       <div
         className="benefits-section mx-auto pb-4 pt-10 md:pt-[60px] bg-cover bg-no-repeat bg-[center_190%] h-[500px] bg-white"
         style={{
-          backgroundImage: "url('/images/buyer-register/benefitsVector.png')",
+          backgroundImage: "url('/images/buyer-register/benefitsVector.webp')",
         }}
       >
         <div>

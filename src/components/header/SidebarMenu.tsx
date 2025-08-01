@@ -320,7 +320,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className={`${styles.sidebar} ${isOpen ? styles.open : ""} w-[400%] bg-[url('/images/home/sidebarBg.png')] bg-cover bg-bottom bg-no-repeat !z-[99999]`}
+      className={`${styles.sidebar} ${isOpen ? styles.open : ""} w-[400%] bg-[url('/images/home/sidebarBg.webp')] bg-cover bg-bottom bg-no-repeat !z-[99999]`}
     >
       <div className="flex justify-end p-4 w-full md:w-11/12">
         <AiOutlineClose

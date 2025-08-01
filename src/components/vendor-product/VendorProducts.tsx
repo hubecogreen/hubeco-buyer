@@ -118,7 +118,7 @@ interface Blog {
 //       <div className="relative">
 //         <Image
 //           // src={`https://assets.hubeco.market/${product.image}`}
-//           src={product.image ?  (assetURL+'/'+product.image).includes('//admin') ? (assetURL+'/'+product.image).replace('//admin', '/admin') : `${assetURL}/${product.image}` : '/images/product-placeholder.jpg'}
+//           src={product.image ?  (assetURL+'/'+product.image).includes('//admin') ? (assetURL+'/'+product.image).replace('//admin', '/admin') : `${assetURL}/${product.image}` : '/images/product-placeholder.webp'}
 
 //           alt={product.productName}
 //           className="w-full h-[314px] object-cover px-4 pt-10"

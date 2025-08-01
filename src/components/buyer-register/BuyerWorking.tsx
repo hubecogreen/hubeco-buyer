@@ -12,13 +12,13 @@ const BuyerWorking = () => {
                   <div className="flex items-start mt-4 lg:mt-4">
                     <div className="p-1.5 rounded-md h-10 flex items-center justify-center">
                       <Image
-                        src="/images/buyer-register/signup.png"
+                        src="/images/buyer-register/signup.webp"
                         alt="User add"
                         className="w-16 md:w-10"
                         width={32}
                         height={32}
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                       />
@@ -37,13 +37,13 @@ const BuyerWorking = () => {
                   <div className="flex items-start">
                     <div className="p-1.5 rounded-md h-10 flex items-center justify-center">
                       <Image
-                        src="/images/buyer-register/create.png"
+                        src="/images/buyer-register/create.webp"
                         alt="User Verify"
                         className="w-12 md:w-8"
                         width={32}
                         height={32}
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                       />
@@ -62,13 +62,13 @@ const BuyerWorking = () => {
                   <div className="flex items-start">
                     <div className="p-1.5 rounded-md h-10 flex items-center justify-center">
                       <Image
-                        src="/images/buyer-register/explore.png"
+                        src="/images/buyer-register/explore.webp"
                         alt="Set up"
                         className="w-16 md:w-10"
                         width={32}
                         height={32}
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                       />
@@ -87,13 +87,13 @@ const BuyerWorking = () => {
                   <div className="flex items-start">
                     <div className="p-1.5 rounded-md flex items-center justify-center h-10">
                       <Image
-                        src="/images/buyer-register/shopping.png"
+                        src="/images/buyer-register/shopping.webp"
                         alt="Sell"
                         className="w-16 md:w-10"
                         width={32}
                         height={32}
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                       />
@@ -116,13 +116,13 @@ const BuyerWorking = () => {
                   How it works
                 </h1>
                 <Image
-                  src="/images/buyer-register/7-30.jpg"
+                  src="/images/buyer-register/7-30.webp"
                   alt="How it Works"
                   className="w-full h-auto xl:w-128 xl:h-128"
                   width={585}
                   height={460}
                   onError={e => {
-                    e.currentTarget.src = '/images/product-placeholder.jpg'
+                    e.currentTarget.src = '/images/product-placeholder.webp'
                   }}
                   loading="lazy"
                 />

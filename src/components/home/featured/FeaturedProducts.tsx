@@ -146,7 +146,7 @@ const FeaturedProducts = () => {
         {productsData.sort(() => Math.random() - 0.5).slice(0, 6).map((product:any, index:any) => 
         {
           return(
-          <ProductCard key={index} product={product} />
+          <ProductCard key={index} product={product} index={index} />
         )}
         )}
       </div>
@@ -161,7 +161,7 @@ const FeaturedProducts = () => {
           <ProductCard key={index} product={product} />
         ))} */}
           {productsData.slice(0, 6).map((product:any, index:any) => (
-          <ProductCard key={index} product={product} />
+          <ProductCard key={index} product={product} index={index} />
         ))}
       </div>
 

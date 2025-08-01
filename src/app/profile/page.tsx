@@ -122,15 +122,15 @@ export default function Page() {
   };
 
   const stepsB2B = [
-    { label: "Personal Information", img: "/images/register/personal.png" },
-    { label: "Company Details", img: "/images/register/company.png" },
-    { label: "Shipping Address", img: "/images/register/shipping.png" },
-    { label: "Account Settings", img: "/images/register/account.png" },
+    { label: "Personal Information", img: "/images/register/personal.webp" },
+    { label: "Company Details", img: "/images/register/company.webp" },
+    { label: "Shipping Address", img: "/images/register/shipping.webp" },
+    { label: "Account Settings", img: "/images/register/account.webp" },
   ];
   const stepsB2C = [
-    { label: "Personal Information", img: "/images/register/personal.png" },
-    { label: "Shipping Address", img: "/images/register/shipping.png" },
-    { label: "Account Settings", img: "/images/register/account.png" },
+    { label: "Personal Information", img: "/images/register/personal.webp" },
+    { label: "Shipping Address", img: "/images/register/shipping.webp" },
+    { label: "Account Settings", img: "/images/register/account.webp" },
   ];
 
   //s// console.log('getvaluessss',getValues1())
@@ -145,7 +145,7 @@ export default function Page() {
           <div>
             {activeStep === 0 && (
               <B2B_editPersonal
-                imgSrc="/images/user.png" // Use your default image URL here
+                imgSrc="/images/user.webp" // Use your default image URL here
                 // mobileNumber={mobileParam}
                 nextStep={handleNextStep}
               />
@@ -187,7 +187,7 @@ export default function Page() {
           <div>
             {activeStep === 0 && (
               <B2C_editPersonal
-                imgSrc="/images/user.png" // Use your default image URL here
+                imgSrc="/images/user.webp" // Use your default image URL here
                 // mobileNumber={mobileParam}
                 nextStep={handleNextStep}
               />
@@ -261,35 +261,7 @@ export default function Page() {
                     Edit Profile
                   </h1>
                 </div>
-                {/* <div className={styles.stepper}>
-              <div className={styles.steps}>
-                {steps.map((step, index) => (
-                  <div
-                    key={index}
-                    className={`${styles.step} ${
-                      index === activeStep ? styles.activeStep : ""
-                    } flex flex-col md:flex-row items-center mb-4 md:mb-0`}
-                    onClick={() => handleAddParams(index,step?.label)}
-                  >
-                    <div className="h-12 w-12 mb-2 md:mb-0 md:mr-2">
-                      <img src={step.img} alt="Image" />
-                    </div>
-                    <div
-                      className={`${styles.stepLabel} text-center md:text-left`}
-                    >
-                      {step.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className={styles.stepContent}>
-                {userType!="" && userType === "B2B"
-                  ? renderStepB2BContent(activeStep)
-                  : renderStepB2CContent(activeStep)}
-                   
-              </div>
-              
-            </div> */}
+               
                 <div className={`${styles.stepper} flex md:flex-row flex-col`}>
                   {/* Stepper Steps */}
                   <div className={`${styles.steps} `}>
@@ -309,7 +281,7 @@ export default function Page() {
                             width={10}
                             height={10}
                             onError={e => {
-                              e.currentTarget.src = '/images/user.png'
+                              e.currentTarget.src = '/images/user.webp'
                             }}
                             loading="lazy"
                           />

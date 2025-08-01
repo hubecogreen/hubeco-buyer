@@ -291,7 +291,6 @@ const OrderTimeline: React.FC<TimelineProps> = ({
     // console.log("coming here");
     orderType = `${orderType}_cancelled`;
   } else if (orderType == "refund_processed") {
-    console.log("coming here 2");
     orderType = `${orderType}_${history[history.length - 1]?.currentStatus}`;
   }
   const flow = flowSequences[orderType] || (flowSequences.default as any);

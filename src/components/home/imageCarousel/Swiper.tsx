@@ -1,38 +1,40 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-// import styles from "./Swiper.module.css"; // Keep your existing styles
-import Image from "next/image"
+import Image from "next/image";
+
 const ImageSlider = () => {
   const images = [
-    "/images/home/latest/homebanner-roads.jpg",
-    "/images/home/latest/9.jpg",
-    // "/images/home/latest/3.jpg",
-    "/images/home/latest/f.png",
-    "/images/home/latest/8.jpg",
+    "/images/home/latest/homebanner-roads.webp",
+    "/images/home/latest/9.webp",
+    "/images/home/latest/f.webp",
+    "/images/home/latest/8.webp",
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const intervalRef = useRef(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     startAutoSlide();
-    //@ts-ignore
-    return () => clearInterval(intervalRef.current);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, []);
 
   const startAutoSlide = () => {
-     //@ts-ignore
     intervalRef.current = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 3000);
   };
 
   const stopAutoSlide = () => {
-     //@ts-ignore
-    clearInterval(intervalRef.current);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
   };
 
-  const handleDotClick = (index:any) => {
+  const handleDotClick = (index: number) => {
     setCurrentImageIndex(index);
     stopAutoSlide();
     startAutoSlide();
@@ -41,7 +43,7 @@ const ImageSlider = () => {
   return (
     <>
       <div
-        className="relative  w-full h-64 sm:h-80 md:h-96 lg:h-[30rem] xl:h-[36rem]"
+        className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[30rem] xl:h-[36rem]"
         onMouseEnter={stopAutoSlide}
         onMouseLeave={startAutoSlide}
       >
@@ -50,28 +52,35 @@ const ImageSlider = () => {
             <Image
               key={index}
               src={src}
-              alt={`Slide ${index}`}
-              width={500}
-              height={500}
-              onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg';
+              alt={`Slide ${index + 1}`}
+              width={1200}
+              height={675}
+              priority={index === 0}
+              quality={75}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              onError={(e) => {
+                e.currentTarget.src = '/images/product-placeholder.webp';
               }}
-              loading="lazy"
-              className={`absolute inset-0 object-cover w-full h-full transition-opacity duration-1000 ${
+              className={`absolute inset-0 object-cover w-full h-full transition-opacity duration-500 ${
                 index === currentImageIndex ? "opacity-100" : "opacity-0"
               }`}
+              sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 100vw"
+              fetchPriority={index === 0 ? "high" : "auto"}
+              decoding="async"
             />
           ))}
         </div>
-
       </div>
+      
       <div className="relative w-max mx-auto z-40 lg:bottom-2 lg:mt-4 xl:bottom-16 md:bottom-16 bottom-4 flex space-x-2">
         {images.map((_, index) => (
           <button
             key={index}
-            className={`w-3 h-3 rounded-full transition-all duration-500 ${
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentImageIndex ? "bg-primary w-8 h-3" : "bg-white"
             }`}
+            aria-label={`Go to slide ${index + 1}`}
             onClick={() => handleDotClick(index)}
           />
         ))}

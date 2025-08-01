@@ -13,7 +13,7 @@ const JoinSection = () => {
     //   style={{}}
     // ></section>
     <div className="relative">
-      <div className="bg-[url('/images/blogsection/banner.png')] bg-cover bg-center h-96 md:h-80 lg:h-96">
+      <div className="bg-[url('/images/blogsection/banner.webp')] bg-cover bg-center h-96 md:h-80 lg:h-96">
 
         <div className="bg-opacity-90 h-full flex items-center justify-center py-10 md:py-20">
           <div className="text-center p-4 max-w-lg md:max-w-2xl lg:max-w-4xl text-white">

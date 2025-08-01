@@ -323,7 +323,7 @@ export default function ChatBox({
                         width={40}
                         height={40}
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                       />
@@ -359,7 +359,7 @@ export default function ChatBox({
                         width={40}
                         height={40}
                         onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.jpg'
+                          e.currentTarget.src = '/images/product-placeholder.webp'
                         }}
                         loading="lazy"
                       />

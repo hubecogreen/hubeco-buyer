@@ -22,8 +22,8 @@ const config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        // 'login-bg': "url('/images/auth/auth.png')",
-        // 'plans-bg':"url('/images/about/aboutBanner1.png')",
+        // 'login-bg': "url('/images/auth/auth.webp')",
+        // 'plans-bg':"url('/images/about/aboutBanner1.webp')",
       },
       boxShadow:{
         'card-shadow':'0px 5px 20px 0px rgb(127 127 127 / 30%)',

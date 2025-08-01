@@ -21,21 +21,21 @@ type ExpandedIndex = number | null | undefined;
 export default function Page() {
   const accordionItems = [
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "What is hubeco?",
       description:
         "Hubeco is an online marketplace dedicated to providing a wide range of sustainable building materials. Our platform connects builders, architects, and homeowners with trusted suppliers and manufacturers committed to eco-friendly construction practices.",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "How do I create an account?",
       description:
         "To create an account, click on the 'Sign Up' button at the top right corner of our homepage and follow the prompts to enter your details. You can choose to register as a buyer or a vendor.",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "How can I contact customer support?",
       description:
@@ -45,28 +45,28 @@ export default function Page() {
 
   const accordionItems1 = [
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "How do I place an order?",
       description:
         "Browse our product catalog, add the desired items to your cart, and proceed to checkout. Follow the prompts to complete your purchase using our secure payment options.",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "What payment methods are accepted?",
       description:
         "We accept major credit cards, debit cards, and other secure payment methods like PayU and bank transfers.",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "Can I track my order?",
       description:
         "Yes, you will receive a tracking number from your vendor once your materials are shipped. You can check the shipping status on the designated carrier’s website",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "What is the return policy?",
       description: (
@@ -85,7 +85,7 @@ export default function Page() {
       ),
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "How can I leave a review for a product?",
       description:
@@ -95,14 +95,14 @@ export default function Page() {
 
   const accordionItems2 = [
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "How do I Become a Vendor on hubeco.market?",
       description:
         "To Become a Vendor, visit our Vendor Registration page, fill out the application form with your business details, and submit it. Our team will review your application and get back to you with the next steps.",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "What are the subscription plans available for vendors?",
       description: (
@@ -118,21 +118,21 @@ export default function Page() {
       ),
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "How do I list my products?",
       description:
         "Once your vendor account is approved, you can log in to your vendor module and start listing your products by adding product descriptions, images, pricing, and other details.",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "How do I manage my orders?",
       description:
         "You can manage your orders through your vendor module. Here, you can view, process, and update the status of all your orders, as well as manage inventory and track sales.",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "What support is available for vendors?",
       description:
@@ -142,21 +142,21 @@ export default function Page() {
 
   const accordionItems3 = [
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "How long does shipping take?",
       description:
         "Shipping times vary depending on the supplier and your location. Estimated delivery times will be provided at checkout. You can also track your order using the tracking number provided.",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "Do you ship Internationally?",
       description:
         "Currently, we ship within India. Please check our shipping policy or contact our customer support for more information on shipping options.",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "What are the shipping costs?",
       description:
@@ -166,14 +166,14 @@ export default function Page() {
 
   const accordionItems4 = [
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "What makes your products sustainable?",
       description:
         "Our products are sourced from manufacturers who use eco-friendly materials and sustainable practices. This includes recycled content, energy-efficient production methods, and certifications like Greepro, GRIHA, FSC and ISO.",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title:
         "How can I learn more about a product’s sustainability credentials?",
@@ -181,7 +181,7 @@ export default function Page() {
         "Each product listing includes detailed information about its sustainability credentials, such as certifications, material composition, and environmental impact. You can also contact our support team for additional information.",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "Are your products certified?",
       description:
@@ -191,14 +191,14 @@ export default function Page() {
 
   const accordionItems5 = [
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "I am having a trouble with the website what should I do?",
       description:
         "If you encounter any technical issues, please try clearing your browser cache or using a different browser. If the problem persists, contact our customer support team for assistance.",
     },
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "How do I reset my password",
       description:
@@ -207,7 +207,7 @@ export default function Page() {
   ];
   const accordionItems6 = [
     {
-      imgSrc: "images/faq/faq.png",
+      imgSrc: "images/faq/faq.webp",
       alt: "Image",
       title: "How can I provide feedback or suggestions",
       description:
@@ -305,7 +305,7 @@ export default function Page() {
       {/* <Header /> */}
       <div className="banner-section h-102">
         <div
-          style={{ backgroundImage: "url('images/about/aboutBanner1.png')" }}
+          style={{ backgroundImage: "url('images/about/aboutBanner1.webp')" }}
           className="md:px-20 px-5 relative bg-cover bg-center h-[200px] flex items-center justify-start text-white"
         >
           <Link
@@ -368,7 +368,7 @@ export default function Page() {
                                 width={32}
                                 height={32}
                                 onError={e => {
-                                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                                  e.currentTarget.src = '/images/product-placeholder.webp'
                                 }}
                                 loading="lazy"
                               />
@@ -434,7 +434,7 @@ export default function Page() {
                                 width={32}
                                 height={32}
                                 onError={e => {
-                                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                                  e.currentTarget.src = '/images/product-placeholder.webp'
                                 }}
                                 loading="lazy"
                               />
@@ -499,7 +499,7 @@ export default function Page() {
                                 width={32}
                                 height={32}
                                 onError={e => {
-                                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                                  e.currentTarget.src = '/images/product-placeholder.webp'
                                 }}
                                 loading="lazy"
                               />
@@ -565,7 +565,7 @@ export default function Page() {
                                 width={32}
                                 height={32}
                                 onError={e => {
-                                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                                  e.currentTarget.src = '/images/product-placeholder.webp'
                                 }}
                                 loading="lazy"
                               />
@@ -633,7 +633,7 @@ export default function Page() {
                                 width={32}
                                 height={32}
                                 onError={e => {
-                                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                                  e.currentTarget.src = '/images/product-placeholder.webp'
                                 }}
                                 loading="lazy"
                               />
@@ -699,7 +699,7 @@ export default function Page() {
                                 width={32}
                                 height={32}
                                 onError={e => {
-                                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                                  e.currentTarget.src = '/images/product-placeholder.webp'
                                 }}
                                 loading="lazy"
                               />
@@ -767,7 +767,7 @@ export default function Page() {
                                 width={32}
                                 height={32}
                                 onError={e => {
-                                  e.currentTarget.src = '/images/product-placeholder.jpg'
+                                  e.currentTarget.src = '/images/product-placeholder.webp'
                                 }}
                                 loading="lazy"
                               />

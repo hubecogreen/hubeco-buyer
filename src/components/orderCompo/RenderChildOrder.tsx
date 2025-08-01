@@ -116,14 +116,14 @@ const RenderChildOrder = (order: any, orderLength: any) => {
             src={
               order?.order?.item?.productImage
                 ? normalizePath(`${assetURL}/${order?.order?.item?.productImage}`)
-                : "/images/product-placeholder.jpg"
+                : "/images/product-placeholder.webp"
             }
             className="object-cover h-[120px] w-[120px]"
             alt={order?.order?.item?.productName}
             width={120}
             height={120}
             onError={e => {
-              e.currentTarget.src = '/images/product-placeholder.jpg'
+              e.currentTarget.src = '/images/product-placeholder.webp'
             }}
             loading="lazy"
           />

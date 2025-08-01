@@ -39,11 +39,8 @@ const VerifyEmail = (param: any) => {
   
   const paramdds = useParams()
 
-  console.log(paramdds, "-----")
 
   const slug = param.params.slug;
-
-  console.log('checkslug', slug)
   const [emailVerified, setEmailVerified] = React.useState(false);
   const [unauthenticated, setUnauthenticated] = React.useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -133,7 +130,7 @@ const VerifyEmail = (param: any) => {
       <div className="relative">
         <div
           className="bg-cover bg-center py-10"
-          style={{ backgroundImage: "url(/images/auth/auth.png)" }}
+          style={{ backgroundImage: "url(/images/auth/auth.webp)" }}
         >
           <div className="bg-white max-w-md md:max-w-lg mx-auto h-full flex items-center rounded-lg justify-center py-10 md:py-10">
             {unauthenticated == false && emailVerified == false && (

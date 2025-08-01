@@ -551,7 +551,7 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
             height={100}
             width={100}
             onError={(e) => {
-              e.currentTarget.src = "/images/user.png";
+              e.currentTarget.src = "/images/user.webp";
             }}
             loading="lazy"
             className="rounded"

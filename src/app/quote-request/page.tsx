@@ -183,7 +183,7 @@ const QuoteRequest = () => {
           className="md:px-20 px-5 py-5"
           style={{
             position: "relative",
-            backgroundImage: 'url("images/about/aboutBanner1.png")',
+            backgroundImage: 'url("images/about/aboutBanner1.webp")',
             backgroundSize: "cover",
             backgroundPosition: "center",
             height: "200px",
@@ -306,7 +306,7 @@ const QuoteRequest = () => {
                               width={16}
                               height={16}
                               onError={e => {
-                                e.currentTarget.src = '/images/product-placeholder.jpg'
+                                e.currentTarget.src = '/images/product-placeholder.webp'
                               }}
                               loading="lazy"
                             />

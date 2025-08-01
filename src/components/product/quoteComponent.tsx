@@ -83,12 +83,12 @@ export default function quoteComponent() {
                 <div className="flex items-center">
                   <Image
                     className="w-12 h-12 rounded"
-                    src="/images/products/sand.png"
+                    src="/images/products/sand.webp"
                     alt={product.name}
                     width={100}
                     height={100}
                     onError={e => {
-                      e.currentTarget.src = '/images/product-placeholder.jpg'
+                      e.currentTarget.src = '/images/product-placeholder.webp'
                     }}
                     loading="lazy"
                   />
@@ -287,12 +287,12 @@ export default function quoteComponent() {
               <div className="flex items-center">
                 <Image
                   className="w-12 h-12 rounded"
-                  src="/images/products/imageQuote.png"
+                  src="/images/products/imageQuote.webp"
                   alt={product.name}
                   width={100}
                   height={100}
                   onError={e => {
-                    e.currentTarget.src = '/images/product-placeholder.jpg'
+                    e.currentTarget.src = '/images/product-placeholder.webp'
                   }}
                   loading="lazy"
                 />
@@ -376,13 +376,13 @@ export default function quoteComponent() {
         <DialogContent className="sm:max-w-lg p-10">
           <div className="flex">
             <Image
-              src="/images/checkout/Group.png"
+              src="/images/checkout/Group.webp"
               alt="image"
               className="w-16 h-16"
               width={100}
               height={100}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy"
             />

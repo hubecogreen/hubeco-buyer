@@ -24,28 +24,28 @@ import styles from "./Banner.module.css";
 const BuyerBenefits = () => {
   const accordionItems = [
     {
-      imgSrc: "images/buyer-register/buy.png",
+      imgSrc: "images/buyer-register/buy.webp",
       alt: "Buy",
       title: "Wide Range of Products ",
       description:
         "Access a comprehensive selection of green building materials from trusted suppliers",
     },
     {
-      imgSrc: "images/buyer-register/competitive.png",
+      imgSrc: "images/buyer-register/competitive.webp",
       alt: "Price",
       title: "Competitive Pricing",
       description:
         "Enjoy competitive prices on high-quality, sustainable products.",
     },
     {
-      imgSrc: "images/buyer-register/user-friendly.png",
+      imgSrc: "images/buyer-register/user-friendly.webp",
       alt: "user-friendly",
       title: "User-Friendly Experience",
       description:
         "Our intuitive platform makes it easy to browse, compare, and purchase materials.",
     },
     {
-      imgSrc: "images/buyer-register/expert.png",
+      imgSrc: "images/buyer-register/expert.webp",
       alt: "Expert",
       title: "Expert Support",
       description:
@@ -66,9 +66,9 @@ const BuyerBenefits = () => {
   };
 
   const images = [
-    "/images/vendor-register/vendorBanner.png",
-    "/images/vendor-register/vendorBanner.png",
-    "/images/vendor-register/vendorBanner.png",
+    "/images/vendor-register/vendorBanner.webp",
+    "/images/vendor-register/vendorBanner.webp",
+    "/images/vendor-register/vendorBanner.webp",
     // Add more image paths here
   ];
 
@@ -78,13 +78,13 @@ const BuyerBenefits = () => {
         className={`${styles.secondSection} flex flex-col lg:flex-row items-start justify-between py-8 md:py-16 px-4 lg:px-8 mx-auto max-w-screen-xl lg:p-4`}
       >
         <Image
-          src="images/buyer-register/buyer.png"
+          src="images/buyer-register/buyer.webp"
           alt="banner1"
           className="w-full lg:w-1/2 h-auto mx-auto lg:mx-0"
           width={712}
           height={558}
           onError={e => {
-            e.currentTarget.src = '/images/product-placeholder.jpg'
+            e.currentTarget.src = '/images/product-placeholder.webp'
           }}
           loading="lazy"
         />
@@ -119,7 +119,7 @@ const BuyerBenefits = () => {
                             width={32}
                             height={32}
                             onError={(e) => {
-                              e.currentTarget.src = '/images/product-placeholder.jpg'
+                              e.currentTarget.src = '/images/product-placeholder.webp'
                             }}
                             loading="lazy"
                           />

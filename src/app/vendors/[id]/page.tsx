@@ -133,16 +133,16 @@ export default function Page({ params }: { params: { id: string } }) {
               src={
                 userValues?.logo
                   ? normalizePath(`${assetURL}/${userValues.logo}`)
-                  : "/images/product-placeholder.jpg"
+                  : "/images/product-placeholder.webp"
               }
-              // src={userValues.user.displayImage ?  (assetURL+'/'+userValues.user.displayImage).includes('//admin') ? (assetURL+'/'+userValues.user.displayImage).replace('//admin', '/admin') : `${assetURL}/${userValues.user.displayImage}` : '/images/product-placeholder.jpg'}
+              // src={userValues.user.displayImage ?  (assetURL+'/'+userValues.user.displayImage).includes('//admin') ? (assetURL+'/'+userValues.user.displayImage).replace('//admin', '/admin') : `${assetURL}/${userValues.user.displayImage}` : '/images/product-placeholder.webp'}
 
               className=" w-[100px] !h-fit"
               alt="vendor-product"
               width={60}
               height={60}
               onError={(e) => {
-                e.currentTarget.src = "/images/product-placeholder.jpg";
+                e.currentTarget.src = "/images/product-placeholder.webp";
               }}
               loading="lazy"
             />

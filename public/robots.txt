@@ -1,9 +1,10 @@
-# *
-User-agent: *
-Allow: /
+User-agent: * 
+ Disallow: /cart 
+ Disallow: /checkout 
+ Disallow: /account 
+ Disallow: /login 
+ Disallow: /register 
+ Disallow: /search 
+ Allow: / 
 
-# Host
-Host: https://hubeco.market
-
-# Sitemaps
-Sitemap: https://hubeco.market/sitemap.xml
+Sitemap: https://hubeco.market/sitemap.xml 

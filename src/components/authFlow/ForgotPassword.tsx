@@ -177,17 +177,17 @@ setLoading(true)
     <div className="relative">
       <div
         className="bg-cover bg-center"
-        style={{ backgroundImage: "url(images/auth/auth.png)" }}
+        style={{ backgroundImage: "url(images/auth/auth.webp)" }}
       >
         <div className="bg-opacity-90 h-full flex items-center justify-center py-20 md:py-20">
           <div className="text-center py-10 md:py-15 max-w-md md:max-w-lg  text-white bg-white">
             <h1 className="text-4xl md:text-3xl flex items-center justify-center font-bold mb-4 text-black">
               Forgot Password 
-              <Image src='/images/login/forgot-icon.png' className="w-[28px] h-[28px] ml-1" alt='Login' 
+              <Image src='/images/login/forgot-icon.webp' className="w-[28px] h-[28px] ml-1" alt='Login' 
               height={25} 
               width={25}
               onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.jpg'
+                e.currentTarget.src = '/images/product-placeholder.webp'
               }}
               loading="lazy" />
             </h1>

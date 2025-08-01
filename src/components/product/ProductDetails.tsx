@@ -1032,12 +1032,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           //           "/admin"
                           //         )
                           //       : `${assetURL}/${image}`
-                          //     : "/images/product-placeholder.jpg"
+                          //     : "/images/product-placeholder.webp"
                           // }
                           src={
                             image
                               ? normalizePath(`${assetPath}/${image}`)
-                              : "/images/product-placeholder.jpg"
+                              : "/images/product-placeholder.webp"
                           }
                           className="!w-[96px]  "
                           alt={`Thumbnail ${index + 1}`}
@@ -1045,7 +1045,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           height={96}
                           onError={(e) => {
                             e.currentTarget.src =
-                              "images/failedToLoadImage.jpg";
+                              "images/failedToLoadImage.webp";
                           }}
                           loading="lazy"
                         />
@@ -1081,7 +1081,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                   }
                                   return imageUrl;
                                 })()
-                              : "/images/product-placeholder.jpg"
+                              : "/images/product-placeholder.webp"
                           })`
                         : "none",
                       backgroundSize: `${ZOOM_LEVEL * 100}% ${
@@ -1105,7 +1105,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       //           images2[selectedImageIndex]
                       //         ).replace("//admin", "/admin")
                       //       : `${assetURL}/${images2[selectedImageIndex]}`
-                      //     : "/images/product-placeholder.jpg"
+                      //     : "/images/product-placeholder.webp"
                       // }
                       src={
                         images2 && images2[selectedImageIndex]
@@ -1119,14 +1119,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               }
                               return imageUrl;
                             })()
-                          : "/images/product-placeholder.jpg"
+                          : "/images/product-placeholder.webp"
                       }
                       alt={`Main Image ${selectedImageIndex + 1}`}
                       layout="responsive"
                       width={200}
                       height={200}
                       onError={(e) => {
-                        e.currentTarget.src = "images/failedToLoadImage.jpg";
+                        e.currentTarget.src = "images/failedToLoadImage.webp";
                       }}
                       loading="lazy"
                       onMouseEnter={handleMouseEnter}
@@ -1239,9 +1239,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     {" "}
                     ID #{productData?.HSN}
                   </p>
-                  <p className="md:text-[30px] md:max-w-[100%]  text-[24px] font-semibold text-md  text-black text-normal pr-[10px]">
+                  <h1 className="md:text-[30px] md:max-w-[100%]  text-[24px] font-semibold text-md  text-black text-normal pr-[10px]">
                     {isSingle ? totalProduct?.name : productData?.variantName}
-                  </p>
+                  </h1>
+                  <h1 className="md:text-[30px] md:max-w-[100%]  text-[24px] font-semibold text-md  text-black text-normal pr-[10px] sr-only">
+                    {productData?.meta?.metaTitle}
+                  </h1>
                 </div>
                 {productData?.status == "PUBLISHED" &&
                 productData?.deletedAt == null &&
@@ -1493,7 +1496,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           height={45}
                           onError={(e) => {
                             e.currentTarget.src =
-                              "images/failedToLoadImage.jpg";
+                              "images/failedToLoadImage.webp";
                           }}
                           loading="lazy"
                           className="w-[45px] h-[45px]"
@@ -1562,7 +1565,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                           //             ?.cancellationPolicyDoc
                                           //         ).replace("//admin", "/admin")
                                           //       : `${assetURL}/${totalProduct?.cancellationPolicy?.cancellationPolicyDoc}`
-                                          //     : "/images/product-placeholder.jpg"
+                                          //     : "/images/product-placeholder.webp"
                                           // }
                                           src={
                                             totalProduct?.cancellationPolicy
@@ -1570,12 +1573,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                               ? normalizePath(
                                                   `${assetURL}/${totalProduct.cancellationPolicy.cancellationPolicyDoc}`
                                                 )
-                                              : "/images/product-placeholder.jpg"
+                                              : "/images/product-placeholder.webp"
                                           }
                                           className="p-[10px] rounded "
                                           onError={(e) => {
                                             e.currentTarget.src =
-                                              "images/failedToLoadImage.jpg";
+                                              "images/failedToLoadImage.webp";
                                           }}
                                           loading="lazy"
                                           objectFit="cover"
@@ -1617,7 +1620,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         width={40}
                         height={40}
                         onError={(e) => {
-                          e.currentTarget.src = "images/failedToLoadImage.jpg";
+                          e.currentTarget.src = "images/failedToLoadImage.webp";
                         }}
                         loading="lazy"
                         className="w-[40px] h-[40px]"
@@ -1647,7 +1650,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           height={45}
                           onError={(e) => {
                             e.currentTarget.src =
-                              "images/failedToLoadImage.jpg";
+                              "images/failedToLoadImage.webp";
                           }}
                           loading="lazy"
                           className="w-[45px] h-[45px]"
@@ -1728,7 +1731,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                           //             ?.returnPolicyDoc
                                           //         ).replace("//admin", "/admin")
                                           //       : `${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`
-                                          //     : "/images/product-placeholder.jpg"
+                                          //     : "/images/product-placeholder.webp"
                                           // }
                                           src={
                                             totalProduct?.returnPolicy
@@ -1736,12 +1739,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                               ? normalizePath(
                                                   `${assetURL}/${totalProduct.returnPolicy.returnPolicyDoc}`
                                                 )
-                                              : "/images/product-placeholder.jpg"
+                                              : "/images/product-placeholder.webp"
                                           }
                                           className="p-[10px] rounded "
                                           onError={(e) => {
                                             e.currentTarget.src =
-                                              "images/failedToLoadImage.jpg";
+                                              "images/failedToLoadImage.webp";
                                           }}
                                           loading="lazy"
                                           objectFit="cover"
@@ -1785,7 +1788,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         width={45}
                         height={45}
                         onError={(e) => {
-                          e.currentTarget.src = "images/failedToLoadImage.jpg";
+                          e.currentTarget.src = "images/failedToLoadImage.webp";
                         }}
                         loading="lazy"
                         className="w-[45px] h-[45px]"
@@ -1815,7 +1818,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           height={45}
                           onError={(e) => {
                             e.currentTarget.src =
-                              "images/failedToLoadImage.jpg";
+                              "images/failedToLoadImage.webp";
                           }}
                           loading="lazy"
                           className="w-[45px] h-[45px]"
@@ -1885,7 +1888,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                           //             ?.refundPolicyDoc
                                           //         ).replace("//admin", "/admin")
                                           //       : `${assetURL}/${totalProduct?.refundPolicy?.refundPolicyDoc}`
-                                          //     : "/images/product-placeholder.jpg"
+                                          //     : "/images/product-placeholder.webp"
                                           // }
                                           src={
                                             totalProduct?.refundPolicy
@@ -1893,12 +1896,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                               ? normalizePath(
                                                   `${assetURL}/${totalProduct.refundPolicy.refundPolicyDoc}`
                                                 )
-                                              : "/images/product-placeholder.jpg"
+                                              : "/images/product-placeholder.webp"
                                           }
                                           className="p-[10px] rounded "
                                           onError={(e) => {
                                             e.currentTarget.src =
-                                              "images/failedToLoadImage.jpg";
+                                              "images/failedToLoadImage.webp";
                                           }}
                                           loading="lazy"
                                           objectFit="cover"
@@ -1974,7 +1977,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   {/* {vendorInfo?.logo ? (
                     <>
                       <Image
-                        // src={"/images/vendors/vendor.png"}
+                        // src={"/images/vendors/vendor.webp"}
                         src={
                           vendorInfo?.logo
                             ? (assetURL + "/" + vendorInfo?.logo).includes(
@@ -1985,7 +1988,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                   "/admin"
                                 )
                               : `${assetURL}/${vendorInfo?.logo}`
-                            : "/images/product-placeholder.jpg"
+                            : "/images/product-placeholder.webp"
                         }
                         style={{ border: "1px solid #f0f0f0" }}
                         className="!w-[60px] !h-[60px]  !z-[20] border-black border mr-3 rounded-full shadow-md"
@@ -2038,7 +2041,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         //     ? (totalProduct?.certificate?.organization?.logo).includes(
                         //         "https://"
                         //       )
-                        //       ? "/images/product-placeholder.jpg"
+                        //       ? "/images/product-placeholder.webp"
                         //       : (
                         //           assetURL +
                         //           "/" +
@@ -2050,25 +2053,25 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         //           totalProduct?.certificate?.organization?.logo
                         //         ).replace("//admin", "/admin")
                         //       : `${assetURL}/${totalProduct?.certificate?.organization?.logo}`
-                        //     : "/images/product-placeholder.jpg"
+                        //     : "/images/product-placeholder.webp"
                         // }
                         src={
                           totalProduct?.certificate?.organization?.logo
                             ? totalProduct.certificate.organization.logo.includes(
                                 "https://"
                               )
-                              ? "/images/product-placeholder.jpg"
+                              ? "/images/product-placeholder.webp"
                               : normalizePath(
                                   `${assetURL}/${totalProduct.certificate.organization.logo}`
                                 )
-                            : "/images/product-placeholder.jpg"
+                            : "/images/product-placeholder.webp"
                         }
                         alt="Vendor Name"
                         width={70}
                         height={70}
                         onError={(e) => {
                           e.currentTarget.src =
-                            "/images/product-placeholder.jpg";
+                            "/images/product-placeholder.webp";
                         }}
                         loading="lazy"
                         className="w-[60px] h-[60px] z-[20] relative rounded-full border border-[#f0f0f0] bg-white object-contain"
@@ -2142,19 +2145,19 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               //             ?.certificateImg
                               //         ).replace("//admin", "/admin")
                               //       : `${assetURL}/${totalProduct?.certificate?.certificateImg}`
-                              //     : "/images/product-placeholder.jpg"
+                              //     : "/images/product-placeholder.webp"
                               // }
                               src={
                                 totalProduct?.certificate?.certificateImg
                                   ? normalizePath(
                                       `${assetURL}/${totalProduct.certificate.certificateImg}`
                                     )
-                                  : "/images/product-placeholder.jpg"
+                                  : "/images/product-placeholder.webp"
                               }
                               className="p-[10px] rounded "
                               onError={(e) => {
                                 e.currentTarget.src =
-                                  "images/failedToLoadImage.jpg";
+                                  "images/failedToLoadImage.webp";
                               }}
                               loading="lazy"
                               objectFit="contain"
@@ -2393,7 +2396,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                 // src={`${assetURL}/${attachment?.value}`}
                                 // src={
                                 //   attachment?.value.endsWith(".pdf")
-                                //     ? "/images/pdflogo.png"
+                                //     ? "/images/pdflogo.webp"
                                 //     : attachment?.value
                                 //     ? (
                                 //         assetURL +
@@ -2406,16 +2409,16 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                 //           attachment?.value
                                 //         ).replace("//admin", "/admin")
                                 //       : `${assetURL}/${attachment?.value}`
-                                //     : "/images/product-placeholder.jpg"
+                                //     : "/images/product-placeholder.webp"
                                 // }
                                 src={
                                   attachment?.value?.endsWith(".pdf")
-                                    ? "/images/pdflogo.png"
+                                    ? "/images/pdflogo.webp"
                                     : attachment?.value
                                     ? normalizePath(
                                         `${assetURL}/${attachment.value}`
                                       )
-                                    : "/images/product-placeholder.jpg"
+                                    : "/images/product-placeholder.webp"
                                 }
                                 className="w-[70px] h-[70px] rounded"
                                 alt={attachment?.key}
@@ -2423,7 +2426,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                 height={70}
                                 onError={(e) => {
                                   e.currentTarget.src =
-                                    "images/failedToLoadImage.jpg";
+                                    "images/failedToLoadImage.webp";
                                 }}
                                 loading="lazy"
                               />
@@ -2522,7 +2525,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                       className="p-[10px] rounded "
                                       onError={(e) => {
                                         e.currentTarget.src =
-                                          "images/failedToLoadImage.jpg";
+                                          "images/failedToLoadImage.webp";
                                       }}
                                       loading="lazy"
                                       objectFit="cover"

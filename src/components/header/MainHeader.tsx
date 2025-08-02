@@ -205,14 +205,8 @@ const Header: React.FC<HeaderProps> = () => {
     setUserPopoverOpen(true);
   };
 
-  const handleMouseLeave = (e: MouseEvent) => {
-    // Check if the mouse leaves both icon and popover
-    if (
-      !iconRef.current?.contains(e.relatedTarget as Node) &&
-      !popoverRef.current?.contains(e.relatedTarget as Node)
-    ) {
-      setUserPopoverOpen(false);
-    }
+  const handleMouseLeave = () => {
+    setUserPopoverOpen(false);
   };
 
   const headerRef = useRef<HTMLElement | any>(null);
@@ -244,18 +238,7 @@ const Header: React.FC<HeaderProps> = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const icon = iconRef.current;
-    const popover = popoverRef.current;
-
-    icon?.addEventListener("mouseleave", handleMouseLeave);
-    popover?.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      icon?.removeEventListener("mouseleave", handleMouseLeave);
-      popover?.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
+  // Remove complex event listeners - using simple React events only
 
   useEffect(() => {
     if (token) {
@@ -423,12 +406,17 @@ const Header: React.FC<HeaderProps> = () => {
           <div
             ref={iconRef}
             onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             className={`${styles.icons} ${ token ? "w-max md:flex block md:mr-10 md:justify-end justify-end relative mobile-sm:left-[25px] md:left-[75px] items-center" : "md:w-[6%] w-max md:flex block md:justify-evenly justify-between md:mr-4 relative items-center"}  `}
             // style={{}}
           >
-          <PiUserCircleThin className="text-black " size={30} />
+          <PiUserCircleThin className="text-black hover:cursor-pointer" size={30} />
           </div>
-          <div ref={popoverRef}>
+          <div 
+            ref={popoverRef}
+            onMouseEnter={() => setUserPopoverOpen(true)}
+            onMouseLeave={() => setUserPopoverOpen(false)}
+          >
             <UserPopover
               isOpen={isUserPopoverOpen}
               userInfos={userInfo}

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 // import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -10,88 +10,21 @@ import "swiper/css/scrollbar";
 // import BlogCard from "@/components/blogCard/BlogCard";
 // import { headers } from "next/headers";
 import Image from "next/image";
+
 const WorksSection = () => {
   const [showBuyer, setShowBuyer] = useState<boolean>(true);
 
-  //   const colors = ["#009886", "#009886", "#009886"]; // Define your colors here
-  //   const [bgColor, setBgColor] = useState(colors[0]);
-
-  return (
-    <section className="md:flex block max-w-7xl md:my-14 my-4 px-5 pb-8 md:pb-0 shadow-md mx-auto items-start h-fit justify-center border border-[#dcdcdc] bg-[#F4F4F4]">
-      <div className="md:w-1/2 md:pt-14 pt-8 pr-2 md:pr-10 md:border-r md:border-[#eaeaea] md:border-solid">
-        <div className="md:pl-20">
-          <h1 className="text-center md:text-left text-2xl pt-5 md:text-4xl font-bold text-black mt-30">
-            How it works
-          </h1>
-          <p className="md:text-big text-md text-justify md:text-justify pt-5 mx-auto md:pr-[15px] text-fontGray ">
-            We are passionate about driving the transition towards sustainable
-            living by providing eco-friendly construction materials for both B2B
-            and B2C markets.
-          </p>
-          <div className="relative flex md:block items-center justify-start mb-5 md:mb-0 z-20 mt-10">
-            <h1
-              className={`md:text-6xl text-xl hover:cursor-pointer ${
-                showBuyer
-                  ? "border-b-2 border-secondary border-solid"
-                  : "border-0"
-              } md:border-0 pb-2 md:pb-0 font-bold ${
-                showBuyer ? "text-[#A92449]" : "text-[#C7C6C7]"
-              }`}
-              onClick={() => {
+  // Memoize click handlers
+  const handleBuyerClick = useCallback(() => {
                 setShowBuyer(true);
-              }}
-            >
-              Buyer
-            </h1>
-            <p></p>
-            <h1
-              className={`md:text-6xl text-xl hover:cursor-pointer ${
-                !showBuyer
-                  ? "border-b-2 border-secondary border-solid"
-                  : "border-0"
-              } md:border-0 pb-2 md:pb-0 font-bold md:mt-10 md:ml-0 ml-10 ${
-                !showBuyer ? "text-[#A92449]" : "text-[#C7C6C7]"
-              }`}
-              onClick={() => {
+  }, []);
+
+  const handleVendorClick = useCallback(() => {
                 setShowBuyer(false);
-              }}
-            >
-              Vendor
-            </h1>
-          </div>
-        </div>
-        <Image
-          src={"/images/home/latest/Vector.webp"}
-          alt="How it works illustration"
-          className="hidden md:block w-full -mt-10"
-          width={100}
-          height={100}
-          priority={true}
-          quality={85}
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-          onError={(e) => {
-            e.currentTarget.src = "/images/product-placeholder.webp";
-          }}
-        />
-      </div>
-      <div className="md:w-1/2 md:pr-20 md:pl-10 md:pt-14 pt-8">
-        <Image
-          src={"/images/home/latest/worksImg.webp"}
-          className="rounded-md w-full h-auto"
-          alt="How it works process illustration"
-          width={600}
-          height={600}
-          priority={true}
-          quality={85}
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-          onError={(e) => {
-            e.currentTarget.src = "/images/product-placeholder.webp";
-          }}
-        />
-        <div className="w-full">
-          {showBuyer ? (
+  }, []);
+
+  // Memoize buyer content to prevent re-rendering
+  const buyerContent = useMemo(() => (
             <div className="flex flex-col space-y-4 pt-5">
               <div className="flex items-start items-start mt-4 lg:mt-4">
                 <div className="p-1.5 rounded-md h-10 flex items-center justify-center">
@@ -202,7 +135,10 @@ const WorksSection = () => {
                 </div>
               </div>
             </div>
-          ) : (
+  ), []);
+
+  // Memoize vendor content to prevent re-rendering
+  const vendorContent = useMemo(() => (
             <div className="flex flex-col space-y-4 pt-5">
               <div className="flex items-start mt-4 lg:mt-4">
                 <div className="p-1.5 pt-0 rounded-md h-10 flex items-center justify-center">
@@ -286,7 +222,80 @@ const WorksSection = () => {
                 </div>
               </div>
             </div>
-          )}
+  ), []);
+
+  return (
+    <section className="md:flex block max-w-7xl md:my-14 my-4 px-5 pb-8 md:pb-0 shadow-md mx-auto items-start h-fit justify-center border border-[#dcdcdc] bg-[#F4F4F4]">
+      <div className="md:w-1/2 md:pt-14 pt-8 pr-2 md:pr-10 md:border-r md:border-[#eaeaea] md:border-solid">
+        <div className="md:pl-20">
+          <h1 className="text-center md:text-left text-2xl pt-5 md:text-4xl font-bold text-black mt-30">
+            How it works
+          </h1>
+          <p className="md:text-big text-md text-justify md:text-justify pt-5 mx-auto md:pr-[15px] text-fontGray ">
+            We are passionate about driving the transition towards sustainable
+            living by providing eco-friendly construction materials for both B2B
+            and B2C markets.
+          </p>
+          <div className="relative flex md:block items-center justify-start mb-5 md:mb-0 z-20 mt-10">
+            <h1
+              className={`md:text-6xl text-xl hover:cursor-pointer ${
+                showBuyer
+                  ? "border-b-2 border-secondary border-solid"
+                  : "border-0"
+              } md:border-0 pb-2 md:pb-0 font-bold ${
+                showBuyer ? "text-[#A92449]" : "text-[#C7C6C7]"
+              }`}
+              onClick={handleBuyerClick}
+            >
+              Buyer
+            </h1>
+            <p></p>
+            <h1
+              className={`md:text-6xl text-xl hover:cursor-pointer ${
+                !showBuyer
+                  ? "border-b-2 border-secondary border-solid"
+                  : "border-0"
+              } md:border-0 pb-2 md:pb-0 font-bold md:mt-10 md:ml-0 ml-10 ${
+                !showBuyer ? "text-[#A92449]" : "text-[#C7C6C7]"
+              }`}
+              onClick={handleVendorClick}
+            >
+              Vendor
+            </h1>
+          </div>
+        </div>
+        <Image
+          src={"/images/home/latest/Vector.webp"}
+          alt="How it works illustration"
+          className="hidden md:block w-full -mt-10"
+          width={100}
+          height={100}
+          priority={true}
+          quality={85}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+          onError={(e) => {
+            e.currentTarget.src = "/images/product-placeholder.webp";
+          }}
+        />
+      </div>
+      <div className="md:w-1/2 md:pr-20 md:pl-10 md:pt-14 pt-8">
+        <Image
+          src={"/images/home/latest/worksImg.webp"}
+          className="rounded-md w-full h-auto"
+          alt="How it works process illustration"
+          width={600}
+          height={600}
+          priority={true}
+          quality={85}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+          onError={(e) => {
+            e.currentTarget.src = "/images/product-placeholder.webp";
+          }}
+        />
+        <div className="w-full">
+          {showBuyer ? buyerContent : vendorContent}
         </div>
       </div>
     </section>

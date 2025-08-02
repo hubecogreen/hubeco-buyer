@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import "./BrandStyles.css";
 import * as getEndpoint from "../../../network/EndPoints";
 import toast from "react-hot-toast";
@@ -9,15 +9,15 @@ import { normalizePath } from "@/lib/utils";
 
 const BrandsSection: React.FC = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const hasCalledApi = useRef(false);
   const [brands, setBrands] = useState<any[]>([]);
   const { callApi } = useApi();
-  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
 
-  useEffect(() => {
-    getBrands();
-  }, []);
+  // Memoize asset URL to prevent recalculation
+  const assetURL = useMemo(() => process.env.NEXT_PUBLIC_ASSET_URL, []);
 
-  const handleApiError = async (err: any) => {
+  // Memoize API error handler
+  const handleApiError = useCallback(async (err: any) => {
     const result = err?.response;
     if (result?.status === 400) {
       toast.error("Categories Not Found");
@@ -26,9 +26,13 @@ const BrandsSection: React.FC = () => {
     } else {
       toast.error(result?.data?.message);
     }
-  };
+  }, []);
 
-  const getBrands = async () => {
+  // Memoize brands fetching
+  const getBrands = useCallback(async () => {
+    if (hasCalledApi.current) return;
+    
+    hasCalledApi.current = true;
     try {
       const result = await callApi(`${getEndpoint.default.VENDORS}?limit=10000`, "GET") as any;
       if (result?.data == null) {
@@ -39,9 +43,39 @@ const BrandsSection: React.FC = () => {
     } catch (error) {
       handleApiError(error);
     }
-  };
+  }, []);
 
-  useEffect(() => {
+  // Memoize mouse event handlers
+  const handleMouseEnter = useCallback(() => {
+    if (scrollerRef.current) {
+      scrollerRef.current.classList.add("paused");
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    if (scrollerRef.current) {
+      scrollerRef.current.classList.remove("paused");
+    }
+  }, []);
+
+  // Memoize brand logo URL
+  const getBrandLogoUrl = useCallback((vendor: any) => {
+    return vendor?.businessInfo?.logo
+      ? normalizePath(`${assetURL}/${vendor.businessInfo.logo}`)
+      : "/images/product-placeholder.webp";
+  }, [assetURL]);
+
+  // Memoize brand initials
+  const getBrandInitials = useCallback((companyName: string) => {
+    return companyName
+      .split(" ")
+      .slice(0, 2)
+      .map((word: string) => word[0])
+      .join("");
+  }, []);
+
+  // Memoize scroller setup
+  const setupScroller = useCallback(() => {
     const scroller = scrollerRef.current;
     if (scroller && brands.length > 5 && typeof window !== 'undefined' && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const scrollerInner = scroller.querySelector(".scrolling-wrapper");
@@ -53,9 +87,6 @@ const BrandsSection: React.FC = () => {
         scrollerInner?.appendChild(duplicatedItem);
       });
 
-      const handleMouseEnter = () => scroller.classList.add("paused");
-      const handleMouseLeave = () => scroller.classList.remove("paused");
-
       scroller.addEventListener("mouseenter", handleMouseEnter);
       scroller.addEventListener("mouseleave", handleMouseLeave);
 
@@ -64,7 +95,18 @@ const BrandsSection: React.FC = () => {
         scroller.removeEventListener("mouseleave", handleMouseLeave);
       };
     }
-  }, [brands]);
+  }, [brands.length, handleMouseEnter, handleMouseLeave]);
+
+  useEffect(() => {
+    if (!hasCalledApi.current) {
+      getBrands();
+    }
+  }, [getBrands]);
+
+  useEffect(() => {
+    const cleanup = setupScroller();
+    return cleanup;
+  }, [setupScroller]);
 
   return (
     <section className="relative w-full py-8 md:py-12 lg:py-16 bg-white">
@@ -92,7 +134,7 @@ const BrandsSection: React.FC = () => {
           >
             {brands.map((vendor: any, index: number) => (
               <div
-                key={index}
+                key={`${vendor._id || index}`}
                 className={`brand-slide flex items-center justify-center ${
                   brands.length > 5 ? "min-w-[210px] sm:min-w-[180px] md:min-w-[200px]" : ""
                 }`}
@@ -101,11 +143,7 @@ const BrandsSection: React.FC = () => {
                   {vendor?.businessInfo?.logo ? (
                     <div className="relative aspect-[3/2] w-full">
                       <Image
-                        src={
-                          vendor?.businessInfo?.logo
-                            ? normalizePath(`${assetURL}/${vendor?.businessInfo?.logo}`)
-                            : "/images/product-placeholder.webp"
-                        }
+                        src={getBrandLogoUrl(vendor)}
                         alt={`${vendor?.businessInfo?.companyName || 'Brand'} logo`}
                         fill
                         priority={index < 8} // Prioritize first 8 brand logos for LCP
@@ -122,11 +160,7 @@ const BrandsSection: React.FC = () => {
                     </div>
                   ) : (
                     <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-[#B906471A] text-[#B90647] text-xl sm:text-2xl md:text-3xl rounded-full uppercase">
-                      {vendor.businessInfo.companyName
-                        .split(" ")
-                        .slice(0, 2)
-                        .map((word: string) => word[0])
-                        .join("")}
+                      {getBrandInitials(vendor.businessInfo.companyName)}
                     </div>
                   )}
                 </div>

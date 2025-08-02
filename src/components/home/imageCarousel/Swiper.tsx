@@ -1,17 +1,36 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Image from "next/image";
 
 const ImageSlider = () => {
-  const images = [
+  const images = useMemo(() => [
     "/images/home/latest/homebanner-roads.webp",
     "/images/home/latest/9.webp",
     "/images/home/latest/f.webp",
     "/images/home/latest/8.webp",
-  ];
+  ], []);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Memoize auto slide functions to prevent unnecessary re-renders
+  const startAutoSlide = useCallback(() => {
+    intervalRef.current = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000);
+  }, [images.length]);
+
+  const stopAutoSlide = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+  }, []);
+
+  const handleDotClick = useCallback((index: number) => {
+    setCurrentImageIndex(index);
+    stopAutoSlide();
+    startAutoSlide();
+  }, [startAutoSlide, stopAutoSlide]);
 
   useEffect(() => {
     startAutoSlide();
@@ -20,25 +39,7 @@ const ImageSlider = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, []);
-
-  const startAutoSlide = () => {
-    intervalRef.current = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
-  };
-
-  const stopAutoSlide = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-  };
-
-  const handleDotClick = (index: number) => {
-    setCurrentImageIndex(index);
-    stopAutoSlide();
-    startAutoSlide();
-  };
+  }, [startAutoSlide]);
 
   return (
     <>
@@ -56,18 +57,19 @@ const ImageSlider = () => {
               width={1200}
               height={675}
               priority={index === 0}
-              quality={75}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              quality={85}
+              placeholder={index === 0 ? "blur" : "empty"}
+              blurDataURL={index === 0 ? "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==" : undefined}
               onError={(e) => {
                 e.currentTarget.src = '/images/product-placeholder.webp';
               }}
-              className={`absolute inset-0 object-cover w-full h-full transition-opacity duration-500 ${
+              className={`absolute inset-0 object-cover w-full h-full transition-opacity duration-300 ${
                 index === currentImageIndex ? "opacity-100" : "opacity-0"
               }`}
-              sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 100vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1200px"
               fetchPriority={index === 0 ? "high" : "auto"}
-              decoding="async"
+              decoding={index === 0 ? "sync" : "async"}
+              loading={index === 0 ? "eager" : "lazy"}
             />
           ))}
         </div>
@@ -77,11 +79,12 @@ const ImageSlider = () => {
         {images.map((_, index) => (
           <button
             key={index}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`w-3 h-3 rounded-full transition-all duration-200 ${
               index === currentImageIndex ? "bg-primary w-8 h-3" : "bg-white"
             }`}
             aria-label={`Go to slide ${index + 1}`}
             onClick={() => handleDotClick(index)}
+            type="button"
           />
         ))}
       </div>

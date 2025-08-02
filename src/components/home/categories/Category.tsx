@@ -1,18 +1,16 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { Autoplay, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import CustomButton from "@/components/customButton/CustomButton";
 import { GoArrowRight } from "react-icons/go";
 import styles from "./Category.module.css";
-// import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import store from "@/reduxStore";
 import { normalizePath } from "@/lib/utils";
 import * as getEndpoint from "../../../network/EndPoints";
 import toast from "react-hot-toast";
@@ -33,7 +31,23 @@ const CategorySection = () => {
   const [subCategories, setSubCategories] = useState<Category[]>([]);
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
 
-  const getCategories = async () => {
+  // Memoize asset URL to prevent recalculation
+  const assetURL = useMemo(() => process.env.NEXT_PUBLIC_ASSET_URL, []);
+
+  // Memoize API error handler
+  const handleApiError = useCallback(async (err: any) => {
+    const result = err?.response;
+    if (result?.status === 400) {
+      toast.error("Categories Not Found");
+    } else if (result?.status === 404) {
+      toast.error("Invalid Request");
+    } else {
+      toast.error(result?.data?.message);
+    }
+  }, []);
+
+  // Memoize categories fetching
+  const getCategories = useCallback(async () => {
     try {
       const result = (await callApi(
         getEndpoint.default.PRODUCTS_CATEGORIES,
@@ -52,41 +66,45 @@ const CategorySection = () => {
     } catch (error) {
       handleApiError(error);
     }
-  };
+  }, []);
 
-    const handleApiError = async (err: any) => {
-      const result = err?.response;
-      if (result?.status === 400) {
-        toast.error("Categories Not Found");
-      } else if (result?.status === 404) {
-        toast.error("Invalid Request");
-      } else {
-        toast.error(result?.data?.message);
-      }
-    };
-    
-  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
-
-  const handleMouseEnter = () => {
+  // Memoize mouse event handlers
+  const handleMouseEnter = useCallback(() => {
     const swiper = swiperRef.current?.swiper;
     if (swiper) {
       swiper.autoplay.stop();
     }
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     const swiper = swiperRef.current?.swiper;
     if (swiper) {
       swiper.autoplay.start();
     }
-  };
+  }, []);
 
-    useEffect(() => {
-      getCategories();
-      if (isDataLoaded && swiperRef.current && swiperRef.current.swiper) {
-        swiperRef.current.swiper.update();
-      }
-    }, [isDataLoaded]);
+  // Memoize navigation handlers
+  const handleCategoryClick = useCallback((category: any) => {
+    router.push(`/products/${category?.seoSlug}?scid=${category?._id}`);
+  }, [router]);
+
+  const handleShopNowClick = useCallback(() => {
+    router.push("/products");
+  }, [router]);
+
+  const handleViewAllClick = useCallback(() => {
+    router.push("/categories");
+  }, [router]);
+
+  useEffect(() => {
+    getCategories();
+  }, [getCategories]);
+
+  useEffect(() => {
+    if (isDataLoaded && swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.update();
+    }
+  }, [isDataLoaded]);
 
 
 
@@ -115,7 +133,7 @@ const CategorySection = () => {
           </h1>
           <CustomButton
             title={"Shop Now"}
-            onPress={() => router.push("/products")}
+            onPress={handleShopNowClick}
             className="bg-secondary mt-4 px-2 md:px-4 py-2 h-12 md:h-12 md:py-3 w-36 md:w-40 text-white hover:bg-primary"
             customStyles={{}}
             rightIcon={<GoArrowRight />}
@@ -148,7 +166,7 @@ const CategorySection = () => {
               },
             }}
             modules={[Autoplay]}
-            autoplay={{ delay: 1000 ,
+            autoplay={{ delay: 1500,
               pauseOnMouseEnter: true,
               disableOnInteraction: false}}
             loop={true}
@@ -164,9 +182,7 @@ const CategorySection = () => {
                   >
                     <div
                       className="relative hover:cursor-pointer w-full"
-                      onClick={() =>
-                        router.push(`/products?scid=${category?._id}`)
-                      }
+                      onClick={() => handleCategoryClick(category)}
                     >
                       <Image
                         src={
@@ -174,15 +190,19 @@ const CategorySection = () => {
                             ? normalizePath(`${assetURL}/${category?.image}`)
                             : "/images/product-placeholder.webp"
                         }
-                        alt={`Slide ${index}`}
+                        alt={`${category?.name || 'Category'} ${index + 1}`}
                         width={414}
                         height={414}
                         onError={(e) => {
                           e.currentTarget.src =
-                            "images/product-placeholder.webp";
+                            "/images/product-placeholder.webp";
                         }}
                         loading="lazy"
+                        quality={85}
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                         className="object-cover w-[414px] h-[414px] rounded-sm"
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 414px"
                       />
 
                       <div className="absolute w-[414px] inset-0 flex flex-row justify-between items-end bg-black h-[414px] opacity-20"></div>
@@ -194,7 +214,7 @@ const CategorySection = () => {
                         </p>
                         <CustomButton
                           title={"Shop Now"}
-                          onPress={() => router.push(`/products`)}
+                          onPress={handleShopNowClick}
                           className={`${styles.catButton} px-3 py-2 ml-5 mb-4 h-12 md:h-12 text-white font-semibold z-20 text-sm bg-secondary hover:bg-primary`}
                           customStyles={{
                             width: "150px",
@@ -222,7 +242,7 @@ const CategorySection = () => {
               justifySelf: "center",
               border: "1px solid white",
             }}
-            onPress={() => router.push("/categories")}
+            onPress={handleViewAllClick}
             rightIcon={<GoArrowRight />}
           />
         </div>

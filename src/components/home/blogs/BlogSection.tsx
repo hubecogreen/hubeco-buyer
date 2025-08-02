@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -12,6 +12,7 @@ import * as Webservices from "../../../network/WebServices";
 import * as getEndpoint from "../../../network/EndPoints";
 import { getCookie } from 'cookies-next'
 import { useRouter } from "next/navigation";
+
 const baseAPI = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 interface Blog {
@@ -46,7 +47,8 @@ const BlogsSection = () => {
   const [slidesToShow, setSlidesToShow] = useState(3)
   const router = useRouter()
 
-  const getData = (page = 1) => {
+  // Memoize API data fetching
+  const getData = useCallback((page = 1) => {
     const token = getCookie('token') as string  
     const url = `${getEndpoint.default.BLOGS}?limit=9&page=${page}`;
     Webservices.callGetApi(url, token)
@@ -73,7 +75,52 @@ const BlogsSection = () => {
       .catch((err) => {
         // consoleerror("API call failed: ", err);
       });
-  };
+  }, []);
+
+  // Memoize navigation handler
+  const handleSeeAllBlogs = useCallback(() => {
+    router.push('/blogs');
+  }, [router]);
+
+  // Memoize swiper content
+  const swiperContent = useMemo(() => (
+    <Swiper
+      spaceBetween={50}
+      slidesPerView={1}
+      breakpoints={{
+        640: {
+          slidesPerView: slidesToShow,
+        },
+      }}
+      pagination={{ clickable: true }}
+      autoplay={{ delay: 3000 }}
+      loop={true}
+      className="h-auto flex justify-center md:h-auto md:w-10/12 md:mx-auto max-w-[95%]"
+    >
+      {blogs.map((src, index) => (
+        <SwiperSlide
+          key={`${src._id || index}`}
+          className="md:w-full w-full h-full"
+        >
+          <div className="h-full">
+            <BlogCard
+              key={`${src._id || index}`}
+              //@ts-ignore
+              product={src}
+              index={index} // Pass index for priority loading
+              imageStyle={{
+                filter: "grayscale(100%)",
+                transition: "filter 0.8s ease-in-out",
+              }}
+              imageHoverStyle={{
+                filter: "grayscale(0%)",
+              }}
+            />
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  ), [blogs, slidesToShow]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -85,7 +132,7 @@ const BlogsSection = () => {
     }, 3000);
     getData();
     return () => clearInterval(interval); // Cleanup the interval on component unmount
-  }, []);
+  }, [getData]);
 
   return (
     <>
@@ -102,42 +149,7 @@ const BlogsSection = () => {
             </div>
           </div>
         
-          <Swiper
-            spaceBetween={50}
-            slidesPerView={1}
-            breakpoints={{
-              640: {
-                slidesPerView: slidesToShow,
-              },
-            }}
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 3000 }}
-            loop={true}
-            className="h-auto flex justify-center md:h-auto md:w-10/12 md:mx-auto max-w-[95%]"
-          >
-            {blogs.map((src, index) => (
-              <SwiperSlide
-                key={index}
-                className="md:w-full w-full h-full"
-              >
-                <div className="h-full">
-                  <BlogCard
-                    key={index}
-                    //@ts-ignore
-                    product={src}
-                    index={index} // Pass index for priority loading
-                    imageStyle={{
-                      filter: "grayscale(100%)",
-                      transition: "filter 0.8s ease-in-out",
-                    }}
-                    imageHoverStyle={{
-                      filter: "grayscale(0%)",
-                    }}
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          {swiperContent}
         
           <div className="flex flex-row justify-evenly items-center mx-auto max-w-[90%]">
             {/* Uncomment below if you want to use the grid layout instead */}
@@ -150,7 +162,7 @@ const BlogsSection = () => {
             <CustomButton
               title="See all Blogs and News"
               className="px-3 py-3 mx-auto h-12 md:h-12 font-semibold bg-secondary hover:bg-primary2 text-sm w-72 text-white border border-white"
-              onPress={() => router.push('/blogs')}
+              onPress={handleSeeAllBlogs}
               rightIcon={<GoArrowRight />}
             />
           </div>

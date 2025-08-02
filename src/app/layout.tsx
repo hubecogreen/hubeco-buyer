@@ -67,7 +67,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
         
         {/* Preload critical carousel images for LCP and Speed Index */}
-        <link rel="preload" href="/images/home/latest/homebanner-roads.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/images/home/latest/homebanner-roads.webp" as="image" type="image/webp" fetchPriority="high" />
         <link rel="preload" href="/images/home/latest/9.webp" as="image" type="image/webp" />
         <link rel="preload" href="/images/home/latest/f.webp" as="image" type="image/webp" />
         <link rel="preload" href="/images/home/latest/8.webp" as="image" type="image/webp" />
@@ -78,9 +78,11 @@ export default function RootLayout({
         
         {/* Preload critical CSS for faster rendering */}
         <link rel="preload" href="/globals.css" as="style" />
+        <link rel="preload" href="/globals.css" as="style" />
+        <noscript><link rel="stylesheet" href="/globals.css" /></noscript>
         
         {/* Google Tag Manager */}
-        <Script id="google-tag-manager" strategy="afterInteractive">
+        <Script id="google-tag-manager" strategy="lazyOnload">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -90,7 +92,7 @@ export default function RootLayout({
           `}
         </Script>
         {/* Microsoft Clarity */}
-        <Script id="clarity-script" strategy="afterInteractive">
+        <Script id="clarity-script" strategy="lazyOnload">
           {`
             (function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -102,9 +104,9 @@ export default function RootLayout({
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-REE72KGV61"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -114,7 +116,7 @@ export default function RootLayout({
         </Script>
         
         {/* Service Worker Registration for Enhanced Caching */}
-        <Script id="service-worker" strategy="afterInteractive">
+        <Script id="service-worker" strategy="lazyOnload">
           {`
             if ('serviceWorker' in navigator) {
               window.addEventListener('load', function() {
@@ -145,7 +147,7 @@ export default function RootLayout({
         <MainLayout isProd={isProd}>{children}</MainLayout>
 
         {/* LinkedIn Insight Tag */}
-        <Script id="linkedin-insight-init" strategy="afterInteractive">
+        <Script id="linkedin-insight-init" strategy="lazyOnload">
           {`
             _linkedin_partner_id = "8360633";
             window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
@@ -154,7 +156,7 @@ export default function RootLayout({
         </Script>
         <Script
           id="linkedin-insight"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="https://snap.licdn.com/li.lms-analytics/insight.min.js"
         />
         <noscript>

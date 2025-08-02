@@ -68,9 +68,9 @@ export default function RootLayout({
         
         {/* Preload critical carousel images for LCP and Speed Index */}
         <link rel="preload" href="/images/home/latest/homebanner-roads.webp" as="image" type="image/webp" fetchPriority="high" />
-        <link rel="preload" href="/images/home/latest/9.webp" as="image" type="image/webp" />
-        <link rel="preload" href="/images/home/latest/f.webp" as="image" type="image/webp" />
-        <link rel="preload" href="/images/home/latest/8.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/images/home/latest/9.webp" as="image" type="image/webp" fetchPriority="high" />
+        <link rel="preload" href="/images/home/latest/f.webp" as="image" type="image/webp" fetchPriority="high" />
+        <link rel="preload" href="/images/home/latest/8.webp" as="image" type="image/webp" fetchPriority="high" />
         
         {/* Preload critical background images */}
         <link rel="preload" href="/images/home/bg1.webp" as="image" type="image/webp" />

@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Lottie from 'lottie-react'
 import animationData from '../../../public/animations/failure.json'
 import Store from '../../reduxStore'
 import * as getEndpoint from '../../network/EndPoints'
@@ -11,6 +10,7 @@ import { CircularProgress, Divider } from '@chakra-ui/react'
 import { Button } from '@/components/ui/button'
 import { setCookie } from 'cookies-next'
 import useClient from '@/components/hooks/useClient'
+import LottieWrapper from '@/components/LottieWrapper'
 
 const PaymentFailed = () => {
   const token = Store.getState().user.token
@@ -107,7 +107,7 @@ const PaymentFailed = () => {
 
         {/* Failure Icon and Message */}
         <div className='mb-8'>
-          <Lottie animationData={animationData} loop={true} className='w-72 h-72 mx-auto' />
+          <LottieWrapper animationData={animationData} loop={true} className='w-72 h-72 mx-auto' />
 
           <h4  className='font-bold text-[#ED615B] mb-4 md:text-3xl text-xl'>
           Order Failed!

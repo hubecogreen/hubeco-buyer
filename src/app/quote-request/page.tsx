@@ -9,7 +9,6 @@ import { Loader } from "lucide-react";
 import { debounce } from "lodash";
 import dayjs from "dayjs";
 // import SearchInput from "@/components/sharedComponents/searchInput";
-import Lottie from "lottie-react";
 import animationData from "../../../public/animations/nodatafound.json";
 import { IoIosSearch } from "react-icons/io";
 // import { Button } from "@/components/ui/button";
@@ -17,6 +16,7 @@ import Image from "next/image"
 import BannerSection from "@/components/sharedComponents/BannerSection";
 import Link from "next/link";
 import { normalizePath } from "@/lib/utils";
+import LottieWrapper from "@/components/LottieWrapper";
 const assetUrl = process.env.NEXT_PUBLIC_ASSET_URL;
 
 const QuoteRequest = () => {
@@ -346,7 +346,7 @@ const QuoteRequest = () => {
                   ))
                 ) : (
                   <>
-                    <Lottie
+                    <LottieWrapper
                       animationData={animationData}
                       loop={true}
                       className="flex mx-auto justify-center items-center w-[400px] h-[400px]"

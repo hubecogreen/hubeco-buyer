@@ -7,8 +7,8 @@ import React, { useState } from "react";
 import CustomButton from "@/components/customButton/CustomButton";
 import { GoArrowRight } from "react-icons/go";
 import { useRouter } from "next/navigation";
-import Lottie from "lottie-react";
 import animationData from '../../../public/animations/animation.json'
+import LottieWrapper from "@/components/LottieWrapper";
 
 const Thankyou = () => {
 
@@ -43,7 +43,7 @@ const Thankyou = () => {
           <div className="bg-opacity-90 h-full flex items-center justify-center py-20 md:py-20">
             <div className="text-center py-10 md:py-15 max-w-md md:max-w-lg text-white bg-white pl-30">
               <div className="flex justify-center mb-4">
-              <Lottie animationData={animationData} loop={true} style={{ width: 400, height: 400 }} />;
+              <LottieWrapper animationData={animationData} loop={true} style={{ width: 400, height: 400 }} />;
               </div>
               <h1 className="text-4xl md:text-3xl font-bold mb-4 text-black">
                 Thank you !

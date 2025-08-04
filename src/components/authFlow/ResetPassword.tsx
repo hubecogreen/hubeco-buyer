@@ -18,10 +18,10 @@ import useApi from "../Fetcher/useAPI";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 // import Login from "./Login";
-import Lottie from "lottie-react";
 // import animationData from '../../../public/animations/verifyyouremail.json';
 import successAnimation from '../../../public/animations/emailverified.json';
 import animationDataFailed from '../../../public/animations/failed.json';
+import LottieWrapper from "../LottieWrapper";
 
 interface Resetprops{
 token?:string
@@ -322,7 +322,7 @@ const ResetPassword:React.FC<Resetprops> = ({token}) => {
         </div>
         ):(
           <div className='text-8xl p-4 flex justify-center flex-col items-center'>
-          <Lottie
+          <LottieWrapper
             loop
             animationData={successAnimation}
             className="w-[200px] h-[200px]"
@@ -336,7 +336,7 @@ const ResetPassword:React.FC<Resetprops> = ({token}) => {
         :
         (
           <div className='text-8xl p-4 flex justify-center flex-col items-center'>
-          <Lottie
+          <LottieWrapper
             loop
             animationData={animationDataFailed}
             className="w-[200px] h-[200px]"

@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";

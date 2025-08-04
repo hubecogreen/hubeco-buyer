@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 // import * as yup from "yup";
 import { CircularProgress, HStack, PinInput, PinInputField } from "@chakra-ui/react";

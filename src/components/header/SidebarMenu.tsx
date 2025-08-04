@@ -143,10 +143,12 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "auto";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = isOpen ? "hidden" : "auto";
+      return () => {
+        document.body.style.overflow = "auto";
+      };
+    }
   }, [isOpen]);
 
   const toggleMenu = (id: string) => {
@@ -180,7 +182,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
                   : item.level == 2 || item.level == 3
                   ? "mb-2"
                   : ""
-              } ${window.location.href.includes(item.link!) ? styles.parentItemActive : ""}`}
+              } ${typeof window !== 'undefined' && window.location.href.includes(item.link!) ? styles.parentItemActive : ""}`}
               onClick={() =>
                 item.submenu &&
                 item.submenu.length > 0 &&
@@ -283,7 +285,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
           >
             <div
               className={`flex justify-between items-center cursor-pointer text-sm mb-1 ${
-                window.location.href.includes(category?._id) ? styles.parentItemActive : ""
+                typeof window !== 'undefined' && window.location.href.includes(category?._id) ? styles.parentItemActive : ""
               }`}
             >
               {category?.name}

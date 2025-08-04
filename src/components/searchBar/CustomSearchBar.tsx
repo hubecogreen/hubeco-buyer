@@ -9,12 +9,12 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 // import { set } from "lodash";
-import Lottie from "lottie-react";
 import animationData from "../../../public/animations/nodatafound.json";
 import { Input } from "../ui/input";
 import { Search } from "lucide-react";
 import useClient from "../hooks/useClient";
 import { normalizePath } from "@/lib/utils";
+import LottieWrapper from "../LottieWrapper";
 
 interface CustomSearchBarProps {
   customStyles?: React.CSSProperties; // Custom styles object
@@ -274,7 +274,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
             <>
               <div className="flex items-center justify-center w-full">
                 <div className="flex flex-col items-center">
-                  <Lottie
+                  <LottieWrapper
                     animationData={animationData}
                     loop={true}
                     className="w-[200px] h-[200px]"

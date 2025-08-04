@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { GoArrowRight, GoBookmark, GoTrash } from "react-icons/go";
 import CustomButton from "../customButton/CustomButton";

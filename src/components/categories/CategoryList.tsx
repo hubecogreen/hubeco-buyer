@@ -8,7 +8,7 @@ import Link from "next/link";
 // import Pagination from "../pagination/Pagination";
 // import * as Webservices from "../../network/WebServices";
 import * as getEndpoint from "../../network/EndPoints";
-import Lottie from "lottie-react";
+import LottieWrapper from "../LottieWrapper";
 import animationData from "../../../public/animations/nodatafound.json";
 import styles from '../home/categories/Category.module.css';
 import CustomButton from "../customButton/CustomButton";
@@ -169,7 +169,7 @@ const CategoryList = () => {
 
       {categories.length === 0 && (
         <>
-          <Lottie
+          <LottieWrapper
             animationData={animationData}
             loop={true}
             className="flex mx-auto justify-center items-center w-[400px] h-[400px]"

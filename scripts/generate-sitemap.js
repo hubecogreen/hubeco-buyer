@@ -5,9 +5,15 @@
  * Usage: node scripts/generate-sitemap.js
  */
 
-const { writeFileSync } = require('fs');
-const { Builder } = require('xml2js');
+const fs = require('fs');
 const path = require('path');
+const { Builder } = require('xml2js');
+
+// Check if we're in a build environment and environment variables are not set
+if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_API_BASE_URL) {
+  console.log('Skipping sitemap generation during build - environment variables not set');
+  process.exit(0);
+}
 
 // Load environment variables - try multiple possible locations
 const envFiles = [
@@ -291,7 +297,7 @@ async function generateSitemap() {
     };
 
     // Convert to XML
-    const builder = new Builder({
+           const builder = new Builder({
       xmldec: { version: '1.0', encoding: 'UTF-8' },
       renderOpts: { pretty: true, indent: '  ', newline: '\n' }
     });
@@ -299,7 +305,7 @@ async function generateSitemap() {
 
     // Write to file
     const sitemapPath = path.join(process.cwd(), 'public', 'sitemap.xml');
-    writeFileSync(sitemapPath, xml, 'utf-8');
+    fs.writeFileSync(sitemapPath, xml, 'utf-8');
     
     console.log(`✅ Sitemap generated successfully at ${sitemapPath}`);
     console.log(`📊 Summary:`);
@@ -333,7 +339,7 @@ async function generateSitemap() {
       const xml = builder.buildObject(basicSitemap);
 
       const sitemapPath = path.join(process.cwd(), 'public', 'sitemap.xml');
-      writeFileSync(sitemapPath, xml, 'utf-8');
+      fs.writeFileSync(sitemapPath, xml, 'utf-8');
       
       console.log(`✅ Basic sitemap generated successfully at ${sitemapPath} with ${staticUrls.length} static URLs`);
       return true;

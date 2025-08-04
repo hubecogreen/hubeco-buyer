@@ -3,7 +3,7 @@ import { Component, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 // import { Button } from './ui/button';
 import Head from 'next/head';
-import Lottie from 'lottie-react';
+import LottieWrapper from './LottieWrapper';
 import animationData from '../../public/animations/failure.json'
 import Link from 'next/link';
 
@@ -46,7 +46,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
           {/* <Header /> */}
           <div className='flex items-center flex-col text-center bg-white'>
 
-            <Lottie animationData={animationData} loop={true} className='w-72 h-72 mx-auto' />
+            <LottieWrapper animationData={animationData} loop={true} className='w-72 h-72 mx-auto' />
 
             <div className='flex flex-col gap-2 w-[90vw] sm:w-auto mb-6'>
               {/* <h1 className='font-medium text-8xl text-gray-900'>404</h1> */}

@@ -51,8 +51,8 @@ const Header: React.FC<HeaderProps> = () => {
   const [refresh, setRefresh] = useState<number>(0);
   const token=getCookie('token');
   const dispatch=useDispatch();
-  const userInfo = sessionStorage.getItem('buyerUserInfo') as any;
-  const addInfo=JSON.parse(userInfo)?.addresses;
+  const userInfo = typeof window !== 'undefined' ? sessionStorage.getItem('buyerUserInfo') as any : null;
+  const addInfo = userInfo ? JSON.parse(userInfo)?.addresses : null;
   const iconRef = useRef<HTMLDivElement | null>(null);
   const popoverRef = useRef<HTMLDivElement | null>(null);
   const [cartData, setCartData] = useState([]);
@@ -67,8 +67,7 @@ const Header: React.FC<HeaderProps> = () => {
   const isClient = useClient()
   
   const pathname = usePathname();
-  const fullUrl =
-    typeof window !== "undefined" ? `${window.location.origin}${pathname}` : "";
+  const fullUrl = typeof window !== "undefined" ? `${window.location.origin}${pathname}` : "";
   const domainUrl = process.env.NEXT_PUBLIC_DEV_URL;
 
 
@@ -115,22 +114,22 @@ const Header: React.FC<HeaderProps> = () => {
 
 
   useEffect(()=>{
-    if (window){
-      window.addEventListener('selectedAddress', (event: any) => {
+    if (typeof window !== 'undefined'){
+      const handleSelectedAddress = (event: any) => {
         const address = event.detail;
         setTempCity(address?.city);
         setTempState(address?.state);
         setTempPincode(address?.postCode);
-      })
-          }
+      };
 
-          return ()=>{
-            if (window){
-              window.removeEventListener('selectedAddress', (event: any) => {
-                const address = event.detail;
-              })
-            }
-          }
+      window.addEventListener('selectedAddress', handleSelectedAddress);
+
+      return ()=>{
+        if (typeof window !== 'undefined'){
+          window.removeEventListener('selectedAddress', handleSelectedAddress);
+        }
+      }
+    }
   },[])
 
   const getCurrentLocation = () => {
@@ -187,12 +186,14 @@ const Header: React.FC<HeaderProps> = () => {
   };
 
   const toggleMenu = () => {
-    const body = document.querySelector("body") as any;
-    setMenuOpen(!isMenuOpen);
-    if (!isMenuOpen) {
-      body.style.overflow = "hidden"; // Disable scrolling
-    } else {
-      body.style.overflow = "auto"; // Enable scrolling
+    if (typeof document !== 'undefined') {
+      const body = document.querySelector("body") as any;
+      setMenuOpen(!isMenuOpen);
+      if (!isMenuOpen) {
+        body.style.overflow = "hidden"; // Disable scrolling
+      } else {
+        body.style.overflow = "auto"; // Enable scrolling
+      }
     }
     setRefresh(refresh + 1);
   };
@@ -211,31 +212,33 @@ const Header: React.FC<HeaderProps> = () => {
 
   const headerRef = useRef<HTMLElement | any>(null);
   useEffect(() => {
-    const header = headerRef.current;
-    let lastScrollY = window.pageYOffset;
+    if (typeof window !== 'undefined') {
+      const header = headerRef.current;
+      let lastScrollY = window.pageYOffset;
 
-    const handleScroll = () => {
-      const currentScrollY = window.pageYOffset;
+      const handleScroll = () => {
+        const currentScrollY = window.pageYOffset;
 
-      if (currentScrollY > 100) {
-        if (currentScrollY > lastScrollY) {
-          // Scrolling down, hide the header
-          header?.classList.add("hide-nav");
+        if (currentScrollY > 100) {
+          if (currentScrollY > lastScrollY) {
+            // Scrolling down, hide the header
+            header?.classList.add("hide-nav");
+          } else {
+            // Scrolling up, show the header
+            header?.classList.remove("hide-nav");
+          }
         } else {
-          // Scrolling up, show the header
+          // Scroll position is less than 100, show the header
           header?.classList.remove("hide-nav");
         }
-      } else {
-        // Scroll position is less than 100, show the header
-        header?.classList.remove("hide-nav");
-      }
 
-      lastScrollY = currentScrollY;
-    };
+        lastScrollY = currentScrollY;
+      };
 
-    window.addEventListener("scroll", handleScroll);
+      window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
   }, []);
 
   // Remove complex event listeners - using simple React events only
@@ -325,7 +328,9 @@ const Header: React.FC<HeaderProps> = () => {
 
   const onClickVendor = () => {
     if (showVendorLogin) {
-      window.open(`${vendorURL}`, "_blank");
+      if (typeof window !== 'undefined') {
+        window.open(`${vendorURL}`, "_blank");
+      }
     } else {
       router.push("/plans");
     }

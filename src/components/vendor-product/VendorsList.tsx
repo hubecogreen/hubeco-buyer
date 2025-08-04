@@ -8,10 +8,10 @@ import Link from "next/link";
 import Pagination from "../pagination/Pagination";
 import * as Webservices from "../../network/WebServices";
 import * as getEndpoint from "../../network/EndPoints";
-import Lottie from "lottie-react";
 import animationData from "../../../public/animations/nodatafound.json";
 import { Skeleton } from "../ui/skeleton";
 import { normalizePath } from "@/lib/utils";
+import LottieWrapper from "../LottieWrapper";
 
 interface Vendor {
   id: string;
@@ -223,7 +223,7 @@ const VendorsList = () => {
 
       {!loading && vendors.length === 0 && (
         <>
-          <Lottie
+          <LottieWrapper
             animationData={animationData}
             loop={true}
             className="mx-auto w-[400px] h-[400px]"

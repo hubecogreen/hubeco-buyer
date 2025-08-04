@@ -56,7 +56,6 @@ export default function RootLayout({
         {/* <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" /> */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://assets-uat.hubeco.market" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://assets.hubeco.market" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.clarity.ms" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://snap.licdn.com" crossOrigin="anonymous" />

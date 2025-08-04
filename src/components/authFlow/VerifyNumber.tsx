@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import CustomButton from "../customButton/CustomButton";
 import * as yup from "yup";

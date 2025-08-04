@@ -1,3 +1,4 @@
+"use client";
 // components/sidebar/Sidebar.tsx
 import { stat } from "fs";
 import React, { useEffect, useState } from "react";

@@ -1,41 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Add output configuration for better Amplify compatibility
-  output: 'standalone',
-  
-  // Disable image optimization for better Amplify compatibility
-  images: {
-    unoptimized: true,
-    disableStaticImages: true,
-    minimumCacheTTL: 63072000, // 2 years cache TTL
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "assets-uat.hubeco.market",
-        // hostname: 'assets.hubeco.market',
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "assets.hubeco.market",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "uat.hubeco.market",
-        port: "",
-        pathname: "/**",
-      },
-    ],
-  },
-  
+  // Configure for AWS Amplify deployment
+  trailingSlash: false,
+  poweredByHeader: false,
+  // Configure for proper SSR/SSG without static export
+  distDir: '.next',
+  // Disable static export since we have API routes
+  output: undefined,
   async headers() {
     return [
       {
@@ -48,7 +19,8 @@ const nextConfig = {
       {
         source: "/_next/image/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=63072000, immutable" }
+          { key: "Cache-Control", value: "public, max-age=63072000, immutable" },
+          { key: "Access-Control-Allow-Origin", value: "*" }
         ]
       },
       // Next.js build static chunks
@@ -99,10 +71,51 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  
+  images: {
+    // Enhanced image configuration for better caching and optimization
+    disableStaticImages: false, // Enable Next.js image optimization
+    unoptimized: false, // Enable image optimization
+    minimumCacheTTL: 63072000, // 2 years cache TTL
+    formats: ['image/webp', 'image/avif'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "assets-uat.hubeco.market",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "assets.hubeco.market",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "uat.hubeco.market",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "localhost",
+        port: "3000",
+        pathname: "/**",
+      },
+    ],
+    domains: [
+      'assets-uat.hubeco.market',
+      'assets.hubeco.market',
+      'uat.hubeco.market',
+      'localhost',
+    ],
+  },
   // Performance optimizations
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['react-icons', 'lodash', 'dayjs'],
   },
   
@@ -116,6 +129,11 @@ const nextConfig = {
   
   // Optimize font loading
   optimizeFonts: true,
+  
+  // Configure metadata base URL
+  env: {
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'https://uat.hubeco.market',
+  },
   
   webpack(config, { dev, isServer }) {
     config.module.rules.push({

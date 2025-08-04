@@ -1,12 +1,25 @@
-import Link from 'next/link';
+'use client';
 
-export default function NotFound() {
+import { useEffect } from 'react';
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  useEffect(() => {
+    // Log the error to an error reporting service
+    console.error(error);
+  }, [error]);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6 text-center">
         <div className="mb-4">
           <svg
-            className="mx-auto h-12 w-12 text-gray-400"
+            className="mx-auto h-12 w-12 text-red-500"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -15,23 +28,23 @@ export default function NotFound() {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
             />
           </svg>
         </div>
         <h2 className="text-lg font-semibold text-gray-900 mb-2">
-          Page not found
+          Something went wrong!
         </h2>
         <p className="text-gray-600 mb-4">
-          Sorry, we couldn't find the page you're looking for.
+          We're sorry, but something went wrong on our end. Please try again.
         </p>
-        <Link
-          href="/"
+        <button
+          onClick={reset}
           className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
         >
-          Go back home
-        </Link>
+          Try again
+        </button>
       </div>
     </div>
   );
-}
+} 

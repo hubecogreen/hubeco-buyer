@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import styles from "./coupon.module.css";
 import { AiFillCloseCircle } from "react-icons/ai";

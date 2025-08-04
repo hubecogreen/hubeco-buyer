@@ -1,7 +1,8 @@
+"use client";
 import React, { useState } from 'react'
 import Link from 'next/link' // Import Link from next/link
 import Image from 'next/image';
-const PreviewLink = ({ url }) => {
+const PreviewLink = ({ url }: { url: string }) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(true)
 
@@ -18,7 +19,7 @@ const PreviewLink = ({ url }) => {
     setLoading(false) // Stop loading when content (PDF or image) is fully loaded
   }
 
-  const fileType = url.split('.').pop().toLowerCase()
+  const fileType = url.split('.').pop()?.toLowerCase() || ''
 
   return (
     <>

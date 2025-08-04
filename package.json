@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "next-sitemap",
+    "postbuild": "npm run sitemap",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "sitemap": "npm run generate-sitemap"
   },

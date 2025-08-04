@@ -35,8 +35,8 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const PROD_URL = process.env.NEXT_PUBLIC_PROD_URL || 'https://hubeco.market';
 
 if (!API_BASE_URL) {
-  console.error('Error: NEXT_PUBLIC_API_BASE_URL environment variable is not set');
-  process.exit(1);
+  console.warn('Warning: NEXT_PUBLIC_API_BASE_URL environment variable is not set');
+  console.warn('Will generate sitemap with static URLs only');
 }
 
 // Static URLs that should always be included
@@ -105,6 +105,11 @@ const staticUrls = [
 
 async function fetchData() {
   try {
+    if (!API_BASE_URL) {
+      console.log('No API URL available, skipping dynamic data fetch');
+      return null;
+    }
+
     console.log('Fetching data from APIs...');
     
     // Fetch category tree for hierarchical URLs
@@ -117,7 +122,8 @@ async function fetchData() {
     });
 
     if (!categoryResponse.ok) {
-      throw new Error(`Category API responded with status: ${categoryResponse.status}`);
+      console.warn(`Category API responded with status: ${categoryResponse.status}, skipping dynamic data`);
+      return null;
     }
 
     const categoryData = await categoryResponse.json();
@@ -132,7 +138,8 @@ async function fetchData() {
     });
 
     if (!slugsResponse.ok) {
-      throw new Error(`Slugs API responded with status: ${slugsResponse.status}`);
+      console.warn(`Slugs API responded with status: ${slugsResponse.status}, skipping dynamic data`);
+      return null;
     }
 
     const slugsData = await slugsResponse.json();
@@ -151,7 +158,8 @@ async function fetchData() {
       blogs: slugsData.blogs || [],
     };
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.warn('Error fetching data:', error.message);
+    console.log('Will generate sitemap with static URLs only');
     return null;
   }
 }
@@ -256,7 +264,7 @@ async function generateSitemap() {
       dynamicUrls = generateDynamicUrls(data);
       console.log(`Generated ${dynamicUrls.length} dynamic URLs`);
     } else {
-      console.warn('No dynamic data fetched, generating sitemap with static URLs only');
+      console.log('No dynamic data fetched, generating sitemap with static URLs only');
     }
 
     const allUrls = [...staticUrls, ...dynamicUrls];
@@ -302,7 +310,37 @@ async function generateSitemap() {
     return true;
   } catch (error) {
     console.error('❌ Error generating sitemap:', error);
-    return false;
+    // Even if there's an error, try to create a basic sitemap with static URLs
+    try {
+      const basicSitemap = {
+        urlset: {
+          $: { 
+            xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9'
+          },
+          url: staticUrls.map((url) => ({
+            loc: url.loc,
+            lastmod: url.lastmod,
+            changefreq: url.changefreq,
+            priority: url.priority,
+          })),
+        },
+      };
+
+      const builder = new Builder({
+        xmldec: { version: '1.0', encoding: 'UTF-8' },
+        renderOpts: { pretty: true, indent: '  ', newline: '\n' }
+      });
+      const xml = builder.buildObject(basicSitemap);
+
+      const sitemapPath = path.join(process.cwd(), 'public', 'sitemap.xml');
+      writeFileSync(sitemapPath, xml, 'utf-8');
+      
+      console.log(`✅ Basic sitemap generated successfully at ${sitemapPath} with ${staticUrls.length} static URLs`);
+      return true;
+    } catch (fallbackError) {
+      console.error('❌ Failed to generate even basic sitemap:', fallbackError);
+      return false;
+    }
   }
 }
 

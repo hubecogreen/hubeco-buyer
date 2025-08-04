@@ -37,7 +37,7 @@ if (!envLoaded) {
   console.log('No .env file found, using system environment variables');
 }
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.hubeco.market'; 
 const PROD_URL = process.env.NEXT_PUBLIC_PROD_URL || 'https://hubeco.market';
 
 if (!API_BASE_URL) {

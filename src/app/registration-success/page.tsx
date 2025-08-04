@@ -2,13 +2,13 @@
 
 import React from 'react'
 
-import Lottie from 'lottie-react'
 import animationData from '../../../public/animations/payment-success.json'
 import { useDispatch } from 'react-redux'
 import { saveRefreshToken, saveToken, setUser } from '../../reduxStore/slices/userSlice'
 import { deleteCookie } from 'cookies-next'
 import CustomButton from '../../components/customButton/CustomButton'
 import { CircularProgress } from '@chakra-ui/react'
+import LottieWrapper from '@/components/LottieWrapper'
 
 const PaymentSuccessful = () => {
 
@@ -60,7 +60,7 @@ const PaymentSuccessful = () => {
       
 
         <div className='mb-8'>
-          <Lottie animationData={animationData} loop={true} className='w-72 h-72 mx-auto' />
+          <LottieWrapper animationData={animationData} loop={true} className='w-72 h-72 mx-auto' />
           <h4  className='font-bold text-2xl text-primary'>
             Registration Complete
           </h4>

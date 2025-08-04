@@ -4,11 +4,11 @@ import Footer from "@/components/footer/MainFooter";
 import Header from "@/components/header/MainHeader";
 
 import Head from "next/head";
-import Lottie from "lottie-react";
 import animationData from "../../../public/animations/welcome.json";
 import CustomButton from "../customButton/CustomButton";
 import { GoArrowRight } from "react-icons/go";
 import { useRouter } from "next/navigation";
+import LottieWrapper from "../LottieWrapper";
 
 export default function Page() {
   const router = useRouter();
@@ -22,7 +22,7 @@ export default function Page() {
         <div className="category-section pb-10 text-center text-black bg-white shadow-lg [box-shadow:rgba(149,157,165,0.2)_8px_4px_8px_8px]">
           <div className="container mx-auto py-10">
             <div className="flex justify-center">
-              <Lottie
+              <LottieWrapper
                 animationData={animationData}
                 loop={true}
                 className="w-[300px] h-[300px]"

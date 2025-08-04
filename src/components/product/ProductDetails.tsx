@@ -45,7 +45,7 @@ import {
 } from "@/reduxStore/slices/userSlice";
 import { TooltipArrow } from "@radix-ui/react-tooltip";
 import { getCookie, setCookie } from "cookies-next";
-import Lottie from "lottie-react";
+import LottieWrapper from "../LottieWrapper";
 import { useDispatch } from "react-redux";
 import animationData from "../../../public/animations/nodatafound.json";
 import AttributeDisplay from "./AttributeDisplay";
@@ -2372,7 +2372,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 >
                   {attachments && attachments?.length === 0 ? (
                     <>
-                      <Lottie
+                      <LottieWrapper
                         animationData={animationData}
                         loop={true}
                         className="flex mx-auto justify-center items-center md:w-[400px] md:h-[400px] w-[90%]"

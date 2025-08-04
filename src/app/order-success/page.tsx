@@ -2,7 +2,6 @@
 
 import React from "react";
 
-import Lottie from "lottie-react";
 import animationData from "../../../public/animations/payment-success.json";
 import useApi from "../../components/Fetcher/useAPI";
 import { useDispatch } from "react-redux";
@@ -20,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import * as getEndpoint from "@/network/EndPoints";
 import useRefreshToken from "@/components/hooks/useRefreshToken";
+import LottieWrapper from "@/components/LottieWrapper";
 
 const PaymentSuccessful = () => {
   const { callApi } = useApi();
@@ -96,7 +96,7 @@ const PaymentSuccessful = () => {
     <div className="flex flex-col items-center justify-center  md:h-screen pb-16 bg-green-50 text-center">
       <div>
         <div className="mb-1">
-          <Lottie
+          <LottieWrapper
             animationData={animationData}
             loop={true}
             className="w-64 h-64 mx-auto"

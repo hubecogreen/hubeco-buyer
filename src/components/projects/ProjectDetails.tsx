@@ -35,10 +35,10 @@ import * as Webservices from "../../network/WebServices";
 import * as getEndpoint from "../../network/EndPoints";
 import PreviewLink from "../PreviewLink";
 import { useRouter } from "next/navigation";
-import Lottie from "lottie-react";
 import animationData from "../../../public/animations/nodatafound.json";
 import Custom404 from "@/app/[...not-found]/page";
 import useClient from "../hooks/useClient";
+import LottieWrapper from "../LottieWrapper";
 // import Meta from "../sharedComponents/Meta";
 
 interface Blog {
@@ -492,7 +492,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ id }) => {
                   ) : (
                     // Render this if there are no products used
                     <>
-                      <Lottie
+                      <LottieWrapper
                         animationData={animationData}
                         loop={true}
                         className="flex justify-center items-center mx-auto w-[200px] h-[200px]"
@@ -515,7 +515,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ id }) => {
 
                     ) : (
                       <>
-                        <Lottie
+                        <LottieWrapper
                           animationData={animationData}
                           loop={true}
                           className="flex justify-center items-center mx-auto w-[200px] h-[200px]"

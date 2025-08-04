@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Building } from "lucide-react";
 import * as Webservices from "../../network/WebServices";
 import * as getEndpoint from "../../network/EndPoints";
-import Lottie from "lottie-react";
 import animationData from "../../../public/animations/nodatafound.json";
 import Pagination from "../pagination/Pagination";
 import Meta from "../sharedComponents/Meta";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import LottieWrapper from "../LottieWrapper";
 interface Blog {
   _id: string;
   title: string;
@@ -184,7 +184,7 @@ const VendorProjects = (id: any, search: any) => {
         <>
           {!loading && (
             <>
-              <Lottie
+              <LottieWrapper
                   animationData={animationData}
                   loop={true}
                   className="mx-auto w-[200px] h-[200px]"

@@ -7,7 +7,6 @@ import Pagination from "@/components/pagination/Pagination";
 import * as Webservices from "../../network/WebServices";
 import * as getEndpoint from "../../network/EndPoints";
 // import dayjs from "dayjs";
-import Lottie from "lottie-react";
 import animationData from "../../../public/animations/nodatafound.json";
 import { IoIosSearch } from "react-icons/io";
 import { PiMapPinLineLight } from "react-icons/pi";
@@ -15,6 +14,7 @@ import { PiMapPinLineLight } from "react-icons/pi";
 // import { CircularProgress } from "@chakra-ui/react";
 import Meta from "../sharedComponents/Meta";
 import { Skeleton } from "../ui/skeleton";
+import LottieWrapper from "../LottieWrapper";
 interface Blog {
   _id: string;
   title: string;
@@ -299,7 +299,7 @@ const PortfolioCard = () => {
           </div>
         ) : (
           <>
-            <Lottie
+            <LottieWrapper
   animationData={animationData}
   loop={true}
   className="flex mx-auto justify-center items-center w-[400px] h-[400px]"

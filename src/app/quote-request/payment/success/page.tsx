@@ -2,7 +2,6 @@
 
 import React from 'react'
 
-import Lottie from 'lottie-react'
 import animationData from '../../../../../public/animations/payment-success.json'
 import useApi from '../../../../components/Fetcher/useAPI'
 import { useDispatch } from 'react-redux'
@@ -11,6 +10,7 @@ import { useDispatch } from 'react-redux'
 // import { toast } from 'react-hot-toast'
 import CustomButton from '../../../../components/customButton/CustomButton'
 import { CircularProgress, Divider } from '@chakra-ui/react'
+import LottieWrapper from '@/components/LottieWrapper'
 
 const Page = () => {
   const { callApi } = useApi()
@@ -89,7 +89,7 @@ const Page = () => {
       <div >
 
         <div className='mb-1'>
-          <Lottie animationData={animationData} loop={true} className='w-64 h-64 mx-auto' />
+          <LottieWrapper animationData={animationData} loop={true} className='w-64 h-64 mx-auto' />
           <h4  className='font-bold text-primary mb-4 md:text-3xl text-xl'>
             Payment Successful!
           </h4>

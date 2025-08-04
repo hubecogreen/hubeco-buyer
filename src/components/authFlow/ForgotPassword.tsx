@@ -24,9 +24,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import Lottie from "lottie-react";
 import animationData from '../../../public/animations/verfiyemailpending.json'
 import { IoIosClose } from "react-icons/io";
+import LottieWrapper from "../LottieWrapper";
 
 
 
@@ -267,7 +267,7 @@ setLoading(true)
         
       
               <DialogHeader>
-                  <Lottie
+                  <LottieWrapper
                     className="flex justify-center self-center w-[100px] h-[100px]"
                     animationData={animationData}
                     loop={true}

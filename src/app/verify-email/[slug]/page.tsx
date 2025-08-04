@@ -8,7 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-hot-toast";
 import useApi from "@/components/Fetcher/useAPI";
 import axios from "axios";
-import Lottie from "lottie-react";
 import animationDataFailed from "../../../../public/animations/failed.json";
 // import Head from "next/head";
 // import Header from "@/components/header/MainHeader";
@@ -20,6 +19,7 @@ import { deleteCookie } from "cookies-next";
 // import { useDispatch } from "react-redux";
 // import { saveRefreshToken, saveToken, setUser } from "@/reduxStore/slices/userSlice";
 import Link from "next/link";
+import LottieWrapper from "@/components/LottieWrapper";
 
 const schema = yup.object({
   mobile: yup
@@ -136,7 +136,7 @@ const VerifyEmail = (param: any) => {
             {unauthenticated == false && emailVerified == false && (
               <>
                 <div className="flex flex-col gap-1 is-full justify-center items-center sm:is-auto md:is-full sm:max-is-[400px] md:max-is-[unset] mbs-11 sm:mbs-14 md:mbs-0">
-                  <Lottie
+                  <LottieWrapper
                     animationData={animationData}
                     loop={true}
                     className="w-[150px] h-[150px]"
@@ -176,7 +176,7 @@ const VerifyEmail = (param: any) => {
             )}
             {unauthenticated == false && emailVerified == true && (
               <div className="text-8xl p-4 flex justify-center flex-col items-center">
-                <Lottie
+                <LottieWrapper
                   loop
                   animationData={successAnimation}
                   className="w-[200px] h-[200px]"
@@ -196,7 +196,7 @@ const VerifyEmail = (param: any) => {
 
             {unauthenticated == true && (
               <div className="text-8xl p-4 flex justify-center flex-col items-center">
-                <Lottie
+                <LottieWrapper
                   loop
                   animationData={animationDataFailed}
                   className="w-[200px] h-[200px]"

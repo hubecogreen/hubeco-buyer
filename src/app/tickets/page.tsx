@@ -4,12 +4,12 @@ import React, { useState, useEffect, useCallback } from "react";
 import * as Webservices from "../../network/WebServices";
 import * as getEndpoint from "../../network/EndPoints";
 import { getCookie } from "cookies-next";
-// import { Button } from "@/components/ui/button";
-import Lottie from "lottie-react";
+// import { Button } from "@/components/ui/button"
 import animationData from "../../../public/animations/nodatafound.json";
 import { useRouter } from "next/navigation";
 import Pagination from "@/components/pagination/Pagination";
 import ViewMore from "@/components/product/quote/ViewMore";
+import LottieWrapper from "@/components/LottieWrapper";
 
 interface Ticket {
   id: string;
@@ -242,7 +242,7 @@ const Tickets: React.FC = () => {
               </div>
             ) : (
               <div className="flex flex-col justify-center items-center w-full mx-auto max-w-[40%] py-4">
-                <Lottie
+                <LottieWrapper
                   animationData={animationData}
                   loop={true}
                   className="flex mx-auto justify-center items-center w-full h-[200px]"

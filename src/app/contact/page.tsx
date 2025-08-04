@@ -35,12 +35,12 @@ import { AiFillHome } from "react-icons/ai";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Lottie from "lottie-react";
 import animationData from "../../../public/animations/thankyou.json";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter, FaYoutube } from "react-icons/fa6";
 import Image from "next/image";
 import { getCookie } from "cookies-next";
+import LottieWrapper from "@/components/LottieWrapper";
 type ExpandedIndex = number | null | undefined;
 const schema = yup.object({
   name: yup
@@ -508,7 +508,7 @@ export default function Page() {
                     <div className="inline-block max-w-full p-6 bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                       <div className="text-center py-10 md:py-15 text-white bg-white pl-30 w-[540px] h-[520px]">
                         <div className="flex justify-center">
-                          <Lottie
+                          <LottieWrapper
                             animationData={animationData}
                             loop={true}
                             className="w-[300px] h-[300px]"

@@ -18,10 +18,10 @@ import dayjs from "dayjs";
 // import remarkGfm from "remark-gfm";
 import { getCookie } from "cookies-next";
 // import { FaLinkedinIn } from "react-icons/fa6";
-import Lottie from "lottie-react";
 import animationData from '../../../../public/animations/nodatafound.json'
 import { CircularProgress, Spinner, Stack } from "@chakra-ui/react";
 import Image from "next/image";
+import LottieWrapper from "@/components/LottieWrapper";
 interface Blog {
   _id: string;
   title: string;
@@ -198,7 +198,7 @@ const BlogsDetails = ({ id }: any) => {
               </>
             ) : (
               <>
-                <Lottie
+                <LottieWrapper
                   animationData={animationData}
                   loop={true}
                   className="flex mx-auto justify-center items-center w-[90%] md:w-[400px] md:h-[400px]"

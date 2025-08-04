@@ -23,7 +23,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import Lottie from "lottie-react";
+import LottieWrapper from "../LottieWrapper";
 import animationData from '../../../public/animations/verfiyemailpending.json'
 import { IoIosClose } from "react-icons/io";
 import Link from "next/link";
@@ -355,7 +355,7 @@ setIsLoading(false)
   
 
         <DialogHeader>
-            <Lottie
+            <LottieWrapper
               className="flex justify-center self-center w-[100px] h-[100px]"
                 animationData={animationData}
                 loop={true}
@@ -383,7 +383,7 @@ setIsLoading(false)
       
         <DialogHeader >
   
-        <Lottie className="flex justify-center self-center" animationData={animationData} loop={true} style={{ width: 100, height: 100 }} />
+                    <LottieWrapper className="flex justify-center self-center" animationData={animationData} loop={true} style={{ width: 100, height: 100 }} />
           <DialogTitle className="text-center">Your Email is Not Verified</DialogTitle>
           <DialogDescription className="text-center">
           A verification link has been sent to your email. Please click on the link to verify your email.

@@ -2,36 +2,7 @@ import ProductPreview from "@/components/product/ProductPage";
 import { normalizePath } from "@/lib/utils";
 import React from "react";
 
-// Organization Schema component
-function OrganizationSchema() {
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Hubeco Market",
-    alternateName: "Hubeco MarketPlace",
-    url: "https://hubeco.market",
-    logo: "https://hubeco.market/images/Logo-2.webp",
-    sameAs: [
-      "https://www.facebook.com/people/HubecoMarket/61566048633254",
-      "https://www.instagram.com/hubeco.market/",
-      "https://www.linkedin.com/company/hubeco-market/",
-      "https://www.youtube.com/@hubeco.marketplace"
-    ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+91 9985544055",
-      contactType: "Customer Service",
-      areaServed: "IN",
-      availableLanguage: ["English"]
-    }
-  };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-    />
-  );
-}
+
 
 // Breadcrumb Schema component
 function BreadcrumbSchema({ breadcrumbs }: { breadcrumbs: { name: string, url: string }[] }): JSX.Element {
@@ -201,7 +172,6 @@ const Page = async ({ params }: { params: { slug: string } }) => {
   ];
   return (
     <>
-      <OrganizationSchema />
       <BreadcrumbSchema breadcrumbs={breadcrumbs} />
       <ProductSchema product={product} />
       <ProductPreview {...params} />

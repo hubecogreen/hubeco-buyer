@@ -17,6 +17,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_PROD_URL || 'https://hubeco.market'),
   title: "Buy Eco-Friendly, Low-Carbon Building Materials India Online",
   description:
     "Discover eco-friendly, low‑carbon building materials online in India. Shop sustainable supplies on Hubeco Marketplace and build smarter, greener projects today.",

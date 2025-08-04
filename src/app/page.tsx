@@ -1,6 +1,37 @@
 import HomePage from "@/components/home/HomePage";
 import { Metadata } from "next";
 
+// Organization Schema component
+function OrganizationSchema() {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Hubeco Market",
+    alternateName: "Hubeco MarketPlace",
+    url: "https://hubeco.market",
+    logo: "https://hubeco.market/images/Logo-2.webp",
+    sameAs: [
+      "https://www.facebook.com/people/HubecoMarket/61566048633254",
+      "https://www.instagram.com/hubeco.market/",
+      "https://www.linkedin.com/company/hubeco-market/",
+      "https://www.youtube.com/@hubeco.marketplace"
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+91 9985544055",
+      contactType: "Customer Service",
+      areaServed: "IN",
+      availableLanguage: ["English"]
+    }
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
+  );
+}
+
 export const metadata: Metadata = {
   title: "Buy Eco-Friendly, Low-Carbon Building Materials India Online",
   description:
@@ -25,11 +56,15 @@ export const metadata: Metadata = {
       },
     ],
   },
+  alternates: {
+    canonical: "https://hubeco.market/",
+  },
 };
 
 export default function MyApp() {
   return (
     <div className="bg-white ">
+      <OrganizationSchema />
       <HomePage />
     </div>
   );

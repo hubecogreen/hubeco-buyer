@@ -35,6 +35,16 @@ const nextConfig = {
   //   future: {
   //     webpack5: true,
   //   },
+  
+  // Disable automatic preloading to prevent unused resource warnings
+  experimental: {
+    optimizePackageImports: ['react-icons'],
+  },
+  
+  // Optimize resource loading
+  compress: true,
+  optimizeFonts: true,
+  
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -48,7 +58,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "assets-uat.hubeco.market",
+        hostname: "assets.hubeco.market",
         // hostname: 'assets.hubeco.market',
         port: "",
         pathname: "/**",

@@ -55,7 +55,7 @@ export default function RootLayout({
       <head>
         {/* <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" /> */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://assets-uat.hubeco.market" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://assets.hubeco.market" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.clarity.ms" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://snap.licdn.com" crossOrigin="anonymous" />
@@ -74,10 +74,8 @@ export default function RootLayout({
         
         {/* Preload critical background images */}
         <link rel="preload" href="/images/home/bg1.webp" as="image" type="image/webp" />
-        <link rel="preload" href="/images/Admin-2.webp" as="image" type="image/webp" />
         
         {/* Preload critical CSS for faster rendering */}
-        <link rel="preload" href="/globals.css" as="style" />
         <link rel="preload" href="/globals.css" as="style" />
         <noscript><link rel="stylesheet" href="/globals.css" /></noscript>
         

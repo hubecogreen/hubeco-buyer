@@ -141,7 +141,7 @@ const CategorySection = () => {
         </div>
         <div className="items-center justify-center px-8 text-center z-20 pt-10 md:pt-10">
           <p className="text-md md:text-big mx-auto text-black font-medium pt-5 text-justify md:text-justify max-w-[1390px]">
-            At hubeco,here we are revolutionizing the way you build. We offer a
+            At hubeco, we are revolutionizing the way you build. We offer a
             comprehensive range of green building materials to help you create
             eco-friendly, energy efficient, and sustainable structures. Our
             marketplace connects you with top manufacturers and suppliers

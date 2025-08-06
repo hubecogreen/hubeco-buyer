@@ -40,8 +40,6 @@ const detailsSchema = yup.object({
   companyName: yup
     .string()
     .required("Company Name is required")
-    .matches(/^[^\d]+$/, "Company Name cannot contain numbers")
-    .matches(/^[a-zA-Z0-9\s]*$/, "Special characters not allowed")
 
     // @ts-ignore
     .test(

@@ -77,15 +77,15 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
     getFeaturedProducts();
   }, []);
 
-  // Marquee-style continuous scrolling effect
+  // Simple auto-scroll effect
   useEffect(() => {
     if (!isOpen || featuredProducts.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentProductIndex((prevIndex) => {
-        return (prevIndex + 1) % (featuredProducts.length + 1);
+        return (prevIndex + 1) % featuredProducts.length;
       });
-    }, 3000); // Move every 3 seconds for continuous flow
+    }, 2000); // Move every 2 seconds
 
     return () => clearInterval(interval);
   }, [isOpen, featuredProducts.length]);
@@ -196,7 +196,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
       setIsFeaturedLoading(true);
       
       const result = await callApi(getEndpoint.default.PRODUCTSLIST, "GET") as any;
-      console.log(result?.data?.data, 'sakdjwjff');
+      console.log('API Response:', result?.data?.data);
 
       if (result?.data == null) {
         handleApiError(result?.errorData);
@@ -204,16 +204,42 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
         // Transform the API response to match our FeaturedProduct interface
         const products = result?.data?.data?.slice(0, 10).map((product: any) => ({
           _id: product._id,
-          name: product.productName,
+          name: product.productName || product.name || "Product",
           description: product.description || product.shortDescription || "Sustainable building material with enhanced properties.",
           image: product.image? `${process.env.NEXT_PUBLIC_ASSET_URL}/${product.image}` : "/images/product-placeholder.webp",
           slug: product.slug || product._id
         }));
         
+        console.log('Transformed products:', products);
         setFeaturedProducts(products);
       }
     } catch (e) {
       console.log("Error fetching featured products:", e);
+      // Fallback to mock data if API fails
+      const mockProducts = [
+        {
+          _id: "1",
+          name: "ECOTHERM –VP 230",
+          description: "Ecotherm Series exemplify Sustainability by Incorporating 30% recyclable bricks in production using 50% less clay compared to solid bricks.",
+          image: "/images/product-placeholder.webp",
+          slug: "ecotherm-vp-230"
+        },
+        {
+          _id: "2", 
+          name: "GREEN BUILD 500",
+          description: "Sustainable building material with enhanced thermal properties and reduced carbon footprint.",
+          image: "/images/product-placeholder.webp",
+          slug: "green-build-500"
+        },
+        {
+          _id: "3",
+          name: "ECO CEMENT PLUS",
+          description: "Environmentally friendly cement alternative with superior strength and durability.",
+          image: "/images/product-placeholder.webp", 
+          slug: "eco-cement-plus"
+        }
+      ];
+      setFeaturedProducts(mockProducts);
     } finally {
       setIsFeaturedLoading(false);
     }
@@ -233,11 +259,10 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
     setOpenedCategoryId(openedCategoryId === subCategoryId ? null : subCategoryId);
   };
 
-  // Create a marquee-style continuous loop
-  const getMarqueeProducts = () => {
+  // Simple product display
+  const getDisplayProducts = () => {
     if (featuredProducts.length === 0) return [];
-    // Create a seamless loop by repeating products multiple times
-    return [...featuredProducts, ...featuredProducts, ...featuredProducts];
+    return featuredProducts;
   };
 
   if (!isOpen) return null;
@@ -427,18 +452,19 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
                     <p className="text-white">Loading featured products...</p>
                   </div>
                 ) : featuredProducts && featuredProducts.length > 0 ? (
+                  console.log('Rendering products:', featuredProducts),
                   <div className="relative h-full">
                     <div 
-                      className="transition-transform duration-3000 ease-in-out"
+                      className="transition-transform duration-2000 ease-in-out"
                       style={{
-                        transform: `translateY(-${currentProductIndex * 33.33}%)`
+                        transform: `translateY(${currentProductIndex * 100}%)`
                       }}
                     >
-                      {getMarqueeProducts().map((product: any, index: number) => (
+                      {getDisplayProducts().map((product: any, index: number) => (
                         <div 
                           key={`${product._id}-${index}`} 
                           className="border-b border-gray-800 pb-4 mb-4"
-                          style={{ height: 'calc((500px - 120px) / 3)' }}
+                          style={{ height: 'calc((500px - 120px) / 2)' }}
                         >
                           <div className="flex items-start space-x-4 h-full">
                             <div className="w-16 h-16 bg-gray-700 rounded flex-shrink-0">
@@ -470,11 +496,11 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
                     
                     {/* Product indicators */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                      {Array.from({ length: Math.max(1, featuredProducts.length - 2) }, (_, index) => (
+                      {Array.from({ length: featuredProducts.length }, (_, index) => (
                         <button
                           key={index}
                           className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                            index === (currentProductIndex % featuredProducts.length) 
+                            index === currentProductIndex 
                               ? 'bg-[#B90647]' 
                               : 'bg-gray-600 hover:bg-gray-500'
                           }`}

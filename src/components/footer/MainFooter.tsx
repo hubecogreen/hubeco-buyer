@@ -30,7 +30,7 @@ const Footer = () => {
   const pathname = usePathname();
   const fullUrl =
     typeof window !== "undefined" ? `${window.location.origin}${pathname}` : "";
-  const domainUrl = process.env.NEXT_PUBLIC_DEV_URL;
+  const domainUrl = process.env.NEXT_PUBLIC_PROD_URL;
 
   useEffect(() => {
     if (fullUrl.includes(`${domainUrl}/plans`)) {

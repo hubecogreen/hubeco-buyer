@@ -31,8 +31,8 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
   const buySubscription = async (data: any) => {
     // console.log("regToken", data);
     setIsLoading(true);
-    const successPage = `${process.env.NEXT_PUBLIC_DEV_URL}/payment-success`;
-    const failedPage = `${process.env.NEXT_PUBLIC_DEV_URL}/payment-failed`;
+    const successPage = `${process.env.NEXT_PUBLIC_PROD_URL}/payment-success`;
+    const failedPage = `${process.env.NEXT_PUBLIC_PROD_URL}/payment-failed`;
 
     const payloadData = {
       quoteId: data.quoteId,

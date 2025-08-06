@@ -83,12 +83,14 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
 
     const interval = setInterval(() => {
       setCurrentProductIndex((prevIndex) => {
-        return (prevIndex + 1) % featuredProducts.length;
+        const maxIndex = Math.max(0, featuredProducts.length - 8);
+        return prevIndex >= maxIndex ? 0 : prevIndex + 1;
       });
-    }, 2000); // Move every 2 seconds
+    }, 2000); // Move every 3 seconds
 
     return () => clearInterval(interval);
   }, [isOpen, featuredProducts.length]);
+
 
   // Close dropdown on outside click - temporarily disabled for testing
   // useEffect(() => {
@@ -266,6 +268,9 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
   };
 
   if (!isOpen) return null;
+
+  console.log(featuredProducts, getDisplayProducts(), 'featuredProducts');
+
 
   return (
     <>
@@ -457,14 +462,14 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
                     <div 
                       className="transition-transform duration-2000 ease-in-out"
                       style={{
-                        transform: `translateY(${currentProductIndex * 100}%)`
+                        transform: `translateY(-${currentProductIndex * 33.33}%)`
                       }}
                     >
                       {getDisplayProducts().map((product: any, index: number) => (
                         <div 
                           key={`${product._id}-${index}`} 
                           className="border-b border-gray-800 pb-4 mb-4"
-                          style={{ height: 'calc((500px - 120px) / 2)' }}
+                          style={{ height: 'calc((500px - 120px) / 3)' }}
                         >
                           <div className="flex items-start space-x-4 h-full">
                             <div className="w-16 h-16 bg-gray-700 rounded flex-shrink-0">
@@ -491,21 +496,6 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
                             </div>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                    
-                    {/* Product indicators */}
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                      {Array.from({ length: featuredProducts.length }, (_, index) => (
-                        <button
-                          key={index}
-                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                            index === currentProductIndex 
-                              ? 'bg-[#B90647]' 
-                              : 'bg-gray-600 hover:bg-gray-500'
-                          }`}
-                          onClick={() => setCurrentProductIndex(index)}
-                        />
                       ))}
                     </div>
                   </div>

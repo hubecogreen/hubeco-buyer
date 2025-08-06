@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
-  const [isProductSegmentsOpen, setIsProductSegmentsOpen] = useState(false);
+  const [isProductSegmentsOpen, setIsProductSegmentsOpen] = useState<boolean>(false);
   const cartCountRedux = store.getState().user.cartCount;
   const cartCountV = getCookie("CartCount");
   const [isPopupOpen, setPopupOpen] = useState(false);
@@ -89,6 +89,16 @@ const Header: React.FC<HeaderProps> = () => {
       setShowVendorLogin(false);
     }
   }, [fullUrl]);
+
+  // Toggle function for product segments
+  const toggleProductSegments = () => {
+    console.log('Toggle called, current state:', isProductSegmentsOpen);
+    setIsProductSegmentsOpen(prev => {
+      const newState = !prev;
+      console.log('New state will be:', newState);
+      return newState;
+    });
+  };
 
   const { refreshTokens } = useRefreshToken();
   const { callApi } = useApi();
@@ -310,7 +320,7 @@ const Header: React.FC<HeaderProps> = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky}`}
     >
       <div
-        className={`w-full justify-center items-center bg-lightBgColor h-20 px-4 pb-10 ${
+        className={`w-full justify-center items-center bg-lightBgColor h-20 px-4 pt-4 pb-24 ${
           styles.stickyHeader
         } ${isSearchFocused ? styles.searchFocused : ""}`}
       >
@@ -337,11 +347,15 @@ const Header: React.FC<HeaderProps> = () => {
             <div className="hidden md:flex items-center space-x-6">
               <div className="relative">
                 <div 
-                  className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors"
-                  onClick={() => setIsProductSegmentsOpen(!isProductSegmentsOpen)}
+                  className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative z-20"
+                  onClick={toggleProductSegments}
+                  data-product-segments-button
                 >
-                  <span className="text-gray-800 font-medium">
+                  <span className={`font-medium relative ${isProductSegmentsOpen ? 'text-[#B90647]' : 'text-gray-800'}`}>
                     Product Segments
+                    {isProductSegmentsOpen && (
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                    )}
                   </span>
                   <svg
                     className={`w-4 h-4 text-gray-600 transition-transform duration-200 ${
@@ -392,34 +406,69 @@ const Header: React.FC<HeaderProps> = () => {
           {!isSearchFocused && (
             <div className="hidden md:flex items-center space-x-10">
               <Link 
-                href="/vendors"
-                className="text-gray-800 font-medium cursor-pointer hover:text-secondary transition-colors"
+                href="/brands"
+                className={`font-medium cursor-pointer transition-colors relative ${
+                  pathname === '/brands' 
+                    ? 'text-[#B90647]' 
+                    : 'text-gray-800 hover:text-secondary'
+                }`}
               >
                 Brands
+                {pathname === '/brands' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                )}
               </Link>
               <Link 
                 href="/blogs"
-                className="text-gray-800 font-medium cursor-pointer hover:text-secondary transition-colors"
+                className={`font-medium cursor-pointer transition-colors relative ${
+                  pathname === '/blogs' 
+                    ? 'text-[#B90647]' 
+                    : 'text-gray-800 hover:text-secondary'
+                }`}
               >
                 Blogs
+                {pathname === '/blogs' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                )}
               </Link>
               <Link 
                 href="/products"
-                className="text-gray-800 font-medium cursor-pointer hover:text-secondary transition-colors"
+                className={`font-medium cursor-pointer transition-colors relative ${
+                  pathname === '/products' 
+                    ? 'text-[#B90647]' 
+                    : 'text-gray-800 hover:text-secondary'
+                }`}
               >
                 Products
+                {pathname === '/products' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                )}
               </Link>
               <Link 
                 href="/about"
-                className="text-gray-800 font-medium cursor-pointer hover:text-secondary transition-colors"
+                className={`font-medium cursor-pointer transition-colors relative ${
+                  pathname === '/about' 
+                    ? 'text-[#B90647]' 
+                    : 'text-gray-800 hover:text-secondary'
+                }`}
               >
                 About Us
+                {pathname === '/about' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                )}
               </Link>
               <Link 
                 href="/contact"
-                className="text-gray-800 font-medium cursor-pointer hover:text-secondary transition-colors"
+                className={`font-medium cursor-pointer transition-colors relative ${
+                  pathname === '/contact' 
+                    ? 'text-[#B90647]' 
+                    : 'text-gray-800 hover:text-secondary'
+                }`}
               >
                 Contact Us
+                {pathname === '/contact' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                )}
               </Link>
             </div>
           )}

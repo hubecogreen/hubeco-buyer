@@ -418,7 +418,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                           if (onChange) onChange("");
                           if (onDropdownToggle) onDropdownToggle(false);
                           router.refresh();
-                          router.push(`/vendors/${vendor?.businessInfo?.slug}`);
+                          router.push(`/brands/${vendor?.businessInfo?.slug}`);
                         }}
                       >
                         <div className="flex justify-start items-center">

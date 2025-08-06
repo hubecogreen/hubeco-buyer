@@ -43,15 +43,18 @@ interface HeaderProps {}
 const Header: React.FC<HeaderProps> = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const cartCountRedux = store.getState().user.cartCount;
-  const cartCountV=getCookie('CartCount');
+  const cartCountV = getCookie("CartCount");
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isUserPopoverOpen, setUserPopoverOpen] = useState(false);
   const [cartCount, setCartCount] = useState<any>(cartCountV); // Example cart count
   const router = useRouter();
   const [refresh, setRefresh] = useState<number>(0);
-  const token=getCookie('token');
-  const dispatch=useDispatch();
-  const userInfo = typeof window !== 'undefined' ? sessionStorage.getItem('buyerUserInfo') as any : null;
+  const token = getCookie("token");
+  const dispatch = useDispatch();
+  const userInfo =
+    typeof window !== "undefined"
+      ? (sessionStorage.getItem("buyerUserInfo") as any)
+      : null;
   const addInfo = userInfo ? JSON.parse(userInfo)?.addresses : null;
   const iconRef = useRef<HTMLDivElement | null>(null);
   const popoverRef = useRef<HTMLDivElement | null>(null);
@@ -64,12 +67,12 @@ const Header: React.FC<HeaderProps> = () => {
   const [tempPincode, setTempPincode] = useState<any>(getCookie("culp"));
   const [showVendorLogin, setShowVendorLogin] = useState<any>(false);
   const [reloadH, setReloadH] = useState<any>(0);
-  const isClient = useClient()
-  
-  const pathname = usePathname();
-  const fullUrl = typeof window !== "undefined" ? `${window.location.origin}${pathname}` : "";
-  const domainUrl = process.env.NEXT_PUBLIC_PROD_URL;
+  const isClient = useClient();
 
+  const pathname = usePathname();
+  const fullUrl =
+    typeof window !== "undefined" ? `${window.location.origin}${pathname}` : "";
+  const domainUrl = process.env.NEXT_PUBLIC_PROD_URL;
 
   useEffect(() => {
     if (fullUrl.includes(`${domainUrl}/plans`)) {
@@ -82,8 +85,6 @@ const Header: React.FC<HeaderProps> = () => {
   const { refreshTokens } = useRefreshToken();
   const { callApi } = useApi();
 
-
-
   const getDefaultLoc = () => {
     if (addInfo && addInfo.length > 0) {
       addInfo.forEach((addy: any) => {
@@ -92,16 +93,14 @@ const Header: React.FC<HeaderProps> = () => {
           setTempPincode(addy?.postCode);
         }
       });
-    }else{
-      getCurrentLocation()
+    } else {
+      getCurrentLocation();
     }
   };
 
-
-
   useEffect(() => {
     router.refresh();
-    setCartCount(cartCountV)
+    setCartCount(cartCountV);
   }, [cartCountV]);
 
   useEffect(() => {
@@ -112,9 +111,8 @@ const Header: React.FC<HeaderProps> = () => {
     }
   }, [reloadH == 1]);
 
-
-  useEffect(()=>{
-    if (typeof window !== 'undefined'){
+  useEffect(() => {
+    if (typeof window !== "undefined") {
       const handleSelectedAddress = (event: any) => {
         const address = event.detail;
         setTempCity(address?.city);
@@ -122,15 +120,15 @@ const Header: React.FC<HeaderProps> = () => {
         setTempPincode(address?.postCode);
       };
 
-      window.addEventListener('selectedAddress', handleSelectedAddress);
+      window.addEventListener("selectedAddress", handleSelectedAddress);
 
-      return ()=>{
-        if (typeof window !== 'undefined'){
-          window.removeEventListener('selectedAddress', handleSelectedAddress);
+      return () => {
+        if (typeof window !== "undefined") {
+          window.removeEventListener("selectedAddress", handleSelectedAddress);
         }
-      }
+      };
     }
-  },[])
+  }, []);
 
   const getCurrentLocation = () => {
     if (navigator.geolocation) {
@@ -186,7 +184,7 @@ const Header: React.FC<HeaderProps> = () => {
   };
 
   const toggleMenu = () => {
-    if (typeof document !== 'undefined') {
+    if (typeof document !== "undefined") {
       const body = document.querySelector("body") as any;
       setMenuOpen(!isMenuOpen);
       if (!isMenuOpen) {
@@ -212,7 +210,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   const headerRef = useRef<HTMLElement | any>(null);
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const header = headerRef.current;
       let lastScrollY = window.pageYOffset;
 
@@ -328,7 +326,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   const onClickVendor = () => {
     if (showVendorLogin) {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         window.open(`${vendorURL}`, "_blank");
       }
     } else {
@@ -339,15 +337,12 @@ const Header: React.FC<HeaderProps> = () => {
   const onClickCart = () => {
     if (token) {
       router.push("/cart");
-      
     } else {
       router.push("/login");
     }
-  }
+  };
 
-
-  if(!isClient)
-    return <></>
+  if (!isClient) return <></>;
 
   return (
     <header
@@ -375,8 +370,8 @@ const Header: React.FC<HeaderProps> = () => {
               alt="Hubeco Logo"
               width={180}
               height={45}
-              onError={e => {
-                e.currentTarget.src = '/images/product-placeholder.webp'
+              onError={(e) => {
+                e.currentTarget.src = "/images/product-placeholder.webp";
               }}
               loading="lazy"
             />
@@ -388,36 +383,47 @@ const Header: React.FC<HeaderProps> = () => {
               width: "14%", // This remains inline as there's no Tailwind equivalent for percentage-based width in default classes
             }}
           >
-
             <div className="w-8 h-6">
               <CiLocationOn size={28} className="text-secondary" />
             </div>
-          {(tempCity && tempPincode) ? 
-           <div>
-              <p className="text-gray lg:text-[10px] text-[10px]">Delivery to</p>
-              {/* <p className="text-black text-xs">{setAddress?.city} {setAddress?.postCode}</p> */}
-              {tempCity && tempPincode && (
-                <p className="text-black lg:text-[10px] text-[10px]">
-                  {tempCity}, {tempPincode}
+            {tempCity && tempPincode ? (
+              <div>
+                <p className="text-gray lg:text-[10px] text-[10px]">
+                  Delivery to
                 </p>
-              )}
-            </div>
-             : <p className="text-gray lg:text-[10px] text-[10px] lg:px-5 px-3">Click here to add shipping address</p>}
+                {/* <p className="text-black text-xs">{setAddress?.city} {setAddress?.postCode}</p> */}
+                {tempCity && tempPincode && (
+                  <p className="text-black lg:text-[10px] text-[10px]">
+                    {tempCity}, {tempPincode}
+                  </p>
+                )}
+              </div>
+            ) : (
+              <p className="text-gray lg:text-[10px] text-[10px] lg:px-5 px-3">
+                Click here to add shipping address
+              </p>
+            )}
           </div>
           <div className="flex px-sm h-12 mobile-hide hidden md:block w-[47%]">
-
             <SearchBar placeholder={"Search for Products, Brands and more"} />
           </div>
           <div
             ref={iconRef}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className={`${styles.icons} ${ token ? "w-max md:flex block md:mr-10 md:justify-end justify-end relative mobile-sm:left-[25px] md:left-[75px] items-center" : "md:w-[6%] w-max md:flex block md:justify-evenly justify-between md:mr-4 relative items-center"}  `}
+            className={`${styles.icons} ${
+              token
+                ? "w-max md:flex block md:mr-10 md:justify-end justify-end relative mobile-sm:left-[25px] md:left-[75px] items-center"
+                : "md:w-[6%] w-max md:flex block md:justify-evenly justify-between md:mr-4 relative items-center"
+            }  `}
             // style={{}}
           >
-          <PiUserCircleThin className="text-black hover:cursor-pointer" size={30} />
+            <PiUserCircleThin
+              className="text-black hover:cursor-pointer"
+              size={30}
+            />
           </div>
-          <div 
+          <div
             ref={popoverRef}
             onMouseEnter={() => setUserPopoverOpen(true)}
             onMouseLeave={() => setUserPopoverOpen(false)}
@@ -428,27 +434,32 @@ const Header: React.FC<HeaderProps> = () => {
               onClose={() => setUserPopoverOpen(false)}
             />
           </div>
-          <div className={`${token ? 'md:right-[0px]' : 'md:right-[35px]'} relative md:top-[11px] z-[99999]`}>
-              <CiShoppingCart
-                className="text-black hover:cursor-pointer md:ml-4"
-                size={30}
-                onClick={onClickCart}
-              />
+          <div
+            className={`${
+              token ? "md:right-[0px]" : "md:right-[35px]"
+            } relative md:top-[11px] z-[99999]`}
+          >
+            <CiShoppingCart
+              className="text-black hover:cursor-pointer md:ml-4"
+              size={30}
+              onClick={onClickCart}
+            />
 
-              {Number(cartCountV) > 0 && (cartCountV !== '0' || cartCount !== null || cartCount !== undefined) && token ? (
-                <div
-                  className="absolute top-[-10px] right-[-10px] bg-[#439787] text-white rounded-full w-[20px] h-[20px] flex items-center justify-center text-[10px] font-bold"
-                >
-                  {cartCountV ? cartCountV : cartCount ? cartCount : ''}
-                </div>
-              ) : null}
-            </div>
+            {Number(cartCountV) > 0 &&
+            (cartCountV !== "0" ||
+              cartCount !== null ||
+              cartCount !== undefined) &&
+            token ? (
+              <div className="absolute top-[-10px] right-[-10px] bg-[#439787] text-white rounded-full w-[20px] h-[20px] flex items-center justify-center text-[10px] font-bold">
+                {cartCountV ? cartCountV : cartCount ? cartCount : ""}
+              </div>
+            ) : null}
+          </div>
 
           {/* <PiUserRectangleThin
               className="text-black md:hidden hover:cursor-pointer"
               size={28}
             /> */}
-         
 
           {/* <RiShieldUserLine
               className="text-black md:hidden hover:cursor-pointer"
@@ -458,33 +469,43 @@ const Header: React.FC<HeaderProps> = () => {
             <></>
           ) : (
             <>
-             {/* <PiUserFocusThin */}
-             <Image
-             alt="vendor"
-             className="text-black md:hidden mobile-sm:ml-2  hover:cursor-pointer"
-             src="/images/home/vendor.webp" 
-             width={28} height={16}
-             onError={e => {
-              e.currentTarget.src = '/images/product-placeholder.webp'
-            }}
-            loading="lazy"
-             onClick={() => router.push('/plans')}
-             />
-             {/* { <BsShop 
+              {/* <PiUserFocusThin */}
+              <Image
+                alt="vendor"
+                className="text-black md:hidden mobile-sm:ml-2  hover:cursor-pointer"
+                src="/images/home/vendor.webp"
+                width={28}
+                height={16}
+                onError={(e) => {
+                  e.currentTarget.src = "/images/product-placeholder.webp";
+                }}
+                loading="lazy"
+                onClick={() => {
+                  if (showVendorLogin) {
+                    if (typeof window !== "undefined") {
+                      window.open(`${vendorURL}`, "_blank");
+                    }
+                  } else {
+                    router.push("/plans");
+                  }
+                }}
+              />
+              {/* { <BsShop 
             className="text-black md:hidden mobile-sm:ml-2  hover:cursor-pointer"
             size={25}
             onClick={() => router.push('/plans')}
           /> } */}
-          <CustomButton
-              title={`${showVendorLogin ? "Vendor Login" : "Become a Vendor"}`}
-              className="text-base bg-secondary px-3 lg:text-sm hover:bg-primary h-12 mr-3 mobile-hide hidden md:flex text-white"
-              customStyles={{}}
-              rightIcon={<GoArrowRight />}
-              hoverBgColor=""
-              onPress={() => onClickVendor()}
-            />
+              <CustomButton
+                title={`${
+                  showVendorLogin ? "Vendor Login" : "Become a Vendor"
+                }`}
+                className="text-base bg-secondary px-3 lg:text-sm hover:bg-primary h-12 mr-3 mobile-hide hidden md:flex text-white"
+                customStyles={{}}
+                rightIcon={<GoArrowRight />}
+                hoverBgColor=""
+                onPress={() => onClickVendor()}
+              />
             </>
-            
           )}
 
           <div className="md:w-12 w-8 md:ml-2  md:flex items-center hidden">
@@ -501,7 +522,6 @@ const Header: React.FC<HeaderProps> = () => {
           </div>
         </div>
         <div className="flex h-10 mt-2 mobile-hide block md:hidden w-full">
-
           <SearchBar
             customStyles={{ fontSize: "14px" }}
             placeholder={"Search for Products, Brands and more"}
@@ -509,10 +529,7 @@ const Header: React.FC<HeaderProps> = () => {
         </div>
       </div>
 
-      <div
-        className="w-full flex justify-center items-center h-12 px-md md:flex hidden z-[99] bg-[#087a74]"
-      >
-
+      <div className="w-full flex justify-center items-center h-12 px-md md:flex hidden z-[99] bg-[#087a74]">
         <MegaMenu isOpen={false} />
       </div>
 

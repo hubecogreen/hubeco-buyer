@@ -77,45 +77,63 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
     getFeaturedProducts();
   }, []);
 
-  // Simple auto-scroll effect
+  // News ticker style continuous scrolling
   useEffect(() => {
     if (!isOpen || featuredProducts.length === 0) return;
 
-    const interval = setInterval(() => {
-      setCurrentProductIndex((prevIndex) => {
-        const maxIndex = Math.max(0, featuredProducts.length - 8);
-        return prevIndex >= maxIndex ? 0 : prevIndex + 1;
-      });
-    }, 2000); // Move every 3 seconds
+    let animationId: number;
+    let startTime: number;
+    const scrollSpeed = 50; // pixels per second
 
-    return () => clearInterval(interval);
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+      
+      setCurrentProductIndex((prevIndex) => {
+        const pixelsScrolled = (elapsed / 1000) * scrollSpeed;
+        const productHeight = 33.33; // percentage per product
+        const newIndex = Math.floor(pixelsScrolled / productHeight);
+        const totalProducts = featuredProducts.length - 2;
+        return newIndex % totalProducts;
+      });
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
   }, [isOpen, featuredProducts.length]);
 
 
   // Close dropdown on outside click - temporarily disabled for testing
-  // useEffect(() => {
-  //   if (!isOpen) return;
-  //   
-  //   function handleClickOutside(event: MouseEvent) {
-  //     const target = event.target as Node;
-  //     if (
-  //       dropdownRef.current &&
-  //       !dropdownRef.current.contains(target)
-  //     ) {
-  //       // Check if the click is on the Product Segments button
-  //       const productSegmentsButton = document.querySelector('[data-product-segments-button]');
-  //       if (productSegmentsButton && productSegmentsButton.contains(target)) {
-  //         return; // Don't close if clicking on the button itself
-  //       }
-  //       onClose();
-  //     }
-  //   }
-  //   
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, [isOpen, onClose]);
+  useEffect(() => {
+    if (!isOpen) return;
+    
+    function handleClickOutside(event: MouseEvent) {
+      const target = event.target as Node;
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(target)
+      ) {
+        // Check if the click is on the Product Segments button
+        const productSegmentsButton = document.querySelector('[data-product-segments-button]');
+        if (productSegmentsButton && productSegmentsButton.contains(target)) {
+          return; // Don't close if clicking on the button itself
+        }
+        onClose();
+      }
+    }
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, onClose]);
 
   // Close dropdown on escape key
   useEffect(() => {
@@ -217,31 +235,6 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
       }
     } catch (e) {
       console.log("Error fetching featured products:", e);
-      // Fallback to mock data if API fails
-      const mockProducts = [
-        {
-          _id: "1",
-          name: "ECOTHERM –VP 230",
-          description: "Ecotherm Series exemplify Sustainability by Incorporating 30% recyclable bricks in production using 50% less clay compared to solid bricks.",
-          image: "/images/product-placeholder.webp",
-          slug: "ecotherm-vp-230"
-        },
-        {
-          _id: "2", 
-          name: "GREEN BUILD 500",
-          description: "Sustainable building material with enhanced thermal properties and reduced carbon footprint.",
-          image: "/images/product-placeholder.webp",
-          slug: "green-build-500"
-        },
-        {
-          _id: "3",
-          name: "ECO CEMENT PLUS",
-          description: "Environmentally friendly cement alternative with superior strength and durability.",
-          image: "/images/product-placeholder.webp", 
-          slug: "eco-cement-plus"
-        }
-      ];
-      setFeaturedProducts(mockProducts);
     } finally {
       setIsFeaturedLoading(false);
     }
@@ -261,15 +254,16 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
     setOpenedCategoryId(openedCategoryId === subCategoryId ? null : subCategoryId);
   };
 
-  // Simple product display
-  const getDisplayProducts = () => {
+  // Create continuous marquee products
+  const getMarqueeProducts = () => {
     if (featuredProducts.length === 0) return [];
-    return featuredProducts;
+    // Duplicate the products array to create seamless loop
+    return [...featuredProducts, ...featuredProducts];
   };
 
   if (!isOpen) return null;
 
-  console.log(featuredProducts, getDisplayProducts(), 'featuredProducts');
+  console.log(featuredProducts, getMarqueeProducts(), 'featuredProducts');
 
 
   return (
@@ -279,234 +273,406 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({ isOpe
         ref={dropdownRef}
         className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
       >
-          <div className="w-full flex h-[500px] pointer-events-auto">
-            {/* Left Column - Main Categories */}
-            <div className="w-3/12 bg-black bg-opacity-90 p-8 border-r border-gray-800">
-              <div className="space-y-4 h-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
-                {mainCategories && mainCategories.length > 0 ? mainCategories.map((category, index) => (
-                  <div
-                    key={category._id}
-                    className={`flex items-center justify-between p-4 rounded transition-all duration-200 ${
-                      selectedCategory?._id === category._id ||
-                      (index === 0 && !selectedCategory)
-                        ? "bg-[#B90647] text-white"
-                        : category.subCategories && category.subCategories.length > 0
-                        ? "text-white hover:text-[#B90647] hover:bg-gray-800 cursor-pointer"
-                        : "text-white cursor-not-allowed"
-                    }`}
-                    onClick={() => category.subCategories && category.subCategories.length > 0 && handleCategoryClick(category)}
-                  >
-                    <span className="text-base font-medium">
-                      {category.name}
-                    </span>
-                    {category.subCategories && category.subCategories.length > 0 && (
-                      <GoArrowRight size={16} className="text-white" />
-                    )}
-                  </div>
-                )) : (
-                  <div className="flex items-center justify-center h-32">
-                    <p className="text-white">{isLoading ? "Loading categories..." : "No categories found"}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Middle Column - Split into 2 sub-columns */}
-            <div className="w-5/12 bg-black bg-opacity-90 border-r border-gray-800">
-              {(selectedCategory || (mainCategories && mainCategories.length > 0)) && (
-                <>
-                  {/* Header with category name and underline */}
-                  <div className="p-8 pb-4">
-                    <h2 className="text-xl font-bold text-white mb-2">
-                      {selectedCategory
-                        ? selectedCategory.name
-                        : mainCategories && mainCategories.length > 0 ? mainCategories[0]?.name : "Categories"}
-                    </h2>
-                    <div className="w-16 h-1 bg-[#B90647]"></div>
-                  </div>
-
-                  {/* Two sub-columns */}
-                  <div className="flex h-[calc(500px-120px)]">
-                    {/* Left sub-column - Subcategories */}
-                    <div className="w-1/2 p-8 pt-0 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
-                      <div className="space-y-3">
-                        {(selectedCategory
-                          ? selectedCategory.subCategories
-                          : mainCategories && mainCategories.length > 0 ? mainCategories[0]?.subCategories : []
-                        )?.slice(0, Math.ceil(((selectedCategory
-                          ? selectedCategory.subCategories
-                          : mainCategories && mainCategories.length > 0 ? mainCategories[0]?.subCategories : []
-                        )?.length || 0) / 2)).map((subCat, index) => (
-                          <div
-                            key={subCat._id}
-                            className={`p-3 cursor-pointer rounded transition-all duration-200 ${
-                              openedCategoryId === subCat._id
-                                ? "text-[#B90647] font-semibold"
-                                : "text-white hover:text-[#B90647]"
-                            }`}
-                            onClick={() => toggleSubCategory(subCat._id)}
-                          >
-                            <div className="flex items-center justify-between">
-                              <span className="text-sm">{subCat.name}</span>
-                              {subCat.childCategories && subCat.childCategories.length > 0 && (
-                                <ChevronRight
-                                  size={16}
-                                  className={`transition-transform duration-200 ${
-                                    openedCategoryId === subCat._id ? 'rotate-90' : ''
-                                  }`}
-                                />
-                              )}
-                            </div>
-                            
-                            {/* Child categories shown below when expanded */}
-                            {openedCategoryId === subCat._id && subCat.childCategories && subCat.childCategories.length > 0 && (
-                              <div className="mt-2 ml-4 space-y-2 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
-                                {subCat.childCategories.map((child) => (
-                                  <div
-                                    key={child._id}
-                                    className="p-2 cursor-pointer rounded text-white hover:text-[#B90647] transition-all duration-200"
-                                  >
-                                    <Link
-                                      href={`/products/${selectedCategory?.seoSlug || 'category'}/${subCat?.seoSlug || 'sub-category'}/${child?.seoSlug || 'child-category'}?ccid=${child._id}`}
-                                      className="text-xs"
-                                      onClick={() => {
-                                        onClose();
-                                        handleClick(child);
-                                      }}
-                                    >
-                                      {child.name}
-                                    </Link>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Right sub-column - Additional subcategories */}
-                    <div className="w-1/2 p-8 pt-0 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
-                      <div className="space-y-3">
-                        {/* Additional subcategories that are not expanded */}
-                        {(selectedCategory
-                          ? selectedCategory.subCategories
-                          : mainCategories && mainCategories.length > 0 ? mainCategories[0]?.subCategories : []
-                        )?.slice(Math.ceil(((selectedCategory
-                          ? selectedCategory.subCategories
-                          : mainCategories && mainCategories.length > 0 ? mainCategories[0]?.subCategories : []
-                        )?.length || 0) / 2)).map((subCat, index) => (
-                          <div
-                            key={subCat._id}
-                            className={`p-3 cursor-pointer rounded transition-all duration-200 ${
-                              openedCategoryId === subCat._id
-                                ? "text-[#B90647] font-semibold"
-                                : "text-white hover:text-[#B90647]"
-                            }`}
-                            onClick={() => toggleSubCategory(subCat._id)}
-                          >
-                            <div className="flex items-center justify-between">
-                              <span className="text-sm">{subCat.name}</span>
-                              {subCat.childCategories && subCat.childCategories.length > 0 && (
-                                <ChevronRight
-                                  size={16}
-                                  className={`transition-transform duration-200 ${
-                                    openedCategoryId === subCat._id ? 'rotate-90' : ''
-                                  }`}
-                                />
-                              )}
-                            </div>
-                            
-                            {/* Child categories shown below when expanded */}
-                            {openedCategoryId === subCat._id && subCat.childCategories && subCat.childCategories.length > 0 && (
-                              <div className="mt-2 ml-4 space-y-2 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
-                                {subCat.childCategories.map((child) => (
-                                  <div
-                                    key={child._id}
-                                    className="p-2 cursor-pointer rounded text-white hover:text-[#B90647] transition-all duration-200"
-                                  >
-                                    <Link
-                                      href={`/products/${selectedCategory?.seoSlug || 'category'}/${subCat?.seoSlug || 'sub-category'}/${child?.seoSlug || 'child-category'}?ccid=${child._id}`}
-                                      className="text-xs"
-                                      onClick={() => {
-                                        onClose();
-                                        handleClick(child);
-                                      }}
-                                    >
-                                      {child.name}
-                                    </Link>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </>
+        {/* Desktop Layout */}
+        <div className="hidden md:flex w-full h-[500px] pointer-events-auto">
+          {/* Left Column - Main Categories */}
+          <div className="w-3/12 bg-black bg-opacity-90 pt-6 border-r border-gray-800">
+            <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+              {mainCategories && mainCategories.length > 0 ? mainCategories.map((category, index) => (
+                <div
+                  key={category._id}
+                  className={`flex items-center justify-between p-4 rounded transition-all duration-200 ${
+                    selectedCategory?._id === category._id ||
+                    (index === 0 && !selectedCategory)
+                      ? "bg-[#B90647] text-white"
+                      : category.subCategories && category.subCategories.length > 0
+                      ? "text-white hover:text-[#B90647] hover:bg-gray-800 cursor-pointer"
+                      : "text-white cursor-not-allowed"
+                  }`}
+                  onClick={() => category.subCategories && category.subCategories.length > 0 && handleCategoryClick(category)}
+                >
+                  <span className="text-base font-medium">
+                    {category.name}
+                  </span>
+                  {category.subCategories && category.subCategories.length > 0 && (
+                    <GoArrowRight size={16} className="text-white" />
+                  )}
+                </div>
+              )) : (
+                <div className="flex items-center justify-center h-32">
+                  <p className="text-white">{isLoading ? "Loading categories..." : "No categories found"}</p>
+                </div>
               )}
             </div>
+          </div>
 
-            {/* Right Column - Featured Products */}
-            <div className="w-4/12 bg-black bg-opacity-90 p-8">
-              <h3 className="text-lg font-bold text-white mb-6">Featured Products</h3>
-              <div className="h-[calc(500px-120px)] overflow-hidden relative">
-                {isFeaturedLoading ? (
-                  <div className="flex items-center justify-center h-32">
-                    <p className="text-white">Loading featured products...</p>
-                  </div>
-                ) : featuredProducts && featuredProducts.length > 0 ? (
-                  console.log('Rendering products:', featuredProducts),
-                  <div className="relative h-full">
-                    <div 
-                      className="transition-transform duration-2000 ease-in-out"
-                      style={{
-                        transform: `translateY(-${currentProductIndex * 33.33}%)`
-                      }}
-                    >
-                      {getDisplayProducts().map((product: any, index: number) => (
-                        <div 
-                          key={`${product._id}-${index}`} 
-                          className="border-b border-gray-800 pb-4 mb-4"
-                          style={{ height: 'calc((500px - 120px) / 3)' }}
+          {/* Middle Column - Split into 2 sub-columns */}
+          <div className="w-5/12 bg-black bg-opacity-90 border-r border-gray-800">
+            {(selectedCategory || (mainCategories && mainCategories.length > 0)) && (
+              <>
+                {/* Header with category name and underline */}
+                <div className="p-8 pb-4">
+                  <h2 className="text-xl font-bold text-white mb-2">
+                    {selectedCategory
+                      ? selectedCategory.name
+                      : mainCategories && mainCategories.length > 0 ? mainCategories[0]?.name : "Categories"}
+                  </h2>
+                  <div className="w-16 h-1 bg-[#B90647]"></div>
+                </div>
+
+                {/* Two sub-columns */}
+                <div className="flex h-[calc(500px-120px)]">
+                  {/* Left sub-column - Subcategories */}
+                  <div className="w-1/2 p-8 pt-0 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                    <div>
+                      {(selectedCategory
+                        ? selectedCategory.subCategories
+                        : mainCategories && mainCategories.length > 0 ? mainCategories[0]?.subCategories : []
+                      )?.slice(0, Math.ceil(((selectedCategory
+                        ? selectedCategory.subCategories
+                        : mainCategories && mainCategories.length > 0 ? mainCategories[0]?.subCategories : []
+                      )?.length || 0) / 2)).map((subCat, index) => (
+                        <div
+                          key={subCat._id}
+                          className={`p-3 cursor-pointer rounded transition-all duration-200 ${
+                            openedCategoryId === subCat._id
+                              ? "text-[#B90647] font-semibold"
+                              : "text-white hover:text-[#B90647]"
+                          }`}
+                          onClick={() => toggleSubCategory(subCat._id)}
                         >
-                          <div className="flex items-start space-x-4 h-full">
-                            <div className="w-16 h-16 bg-gray-700 rounded flex-shrink-0">
-                              {product.image && (
-                                <Image
-                                  src={product.image}
-                                  alt={product.name}
-                                  width={64}
-                                  height={64}
-                                  className="w-full h-full object-cover rounded"
-                                  onError={(e) => {
-                                    e.currentTarget.src = "/images/product-placeholder.webp";
-                                  }}
-                                />
-                              )}
-                            </div>
-                            <div className="flex-1">
-                              <h4 className="text-sm font-bold text-white mb-2">
-                                {product.name}
-                              </h4>
-                              <p className="text-xs text-white leading-relaxed">
-                                {product.description}
-                              </p>
-                            </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm">{subCat.name}</span>
+                            {subCat.childCategories && subCat.childCategories.length > 0 && (
+                              <ChevronRight
+                                size={16}
+                                className={`transition-transform duration-200 ${
+                                  openedCategoryId === subCat._id ? 'rotate-90' : ''
+                                }`}
+                              />
+                            )}
                           </div>
+                          
+                          {/* Child categories shown below when expanded */}
+                          {openedCategoryId === subCat._id && subCat.childCategories && subCat.childCategories.length > 0 && (
+                            <div className="mt-2 ml-4 space-y-2 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                              {subCat.childCategories.map((child) => (
+                                <div
+                                  key={child._id}
+                                  className="p-2 cursor-pointer rounded text-white hover:text-[#B90647] transition-all duration-200"
+                                >
+                                  <Link
+                                    href={`/products/${selectedCategory?.seoSlug || 'category'}/${subCat?.seoSlug || 'sub-category'}/${child?.seoSlug || 'child-category'}?ccid=${child._id}`}
+                                    className="text-xs"
+                                    onClick={() => {
+                                      onClose();
+                                      handleClick(child);
+                                    }}
+                                  >
+                                    {child.name}
+                                  </Link>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       ))}
                     </div>
                   </div>
-                ) : (
-                  <div className="flex items-center justify-center h-32">
-                    <p className="text-white">No featured products</p>
+
+                  {/* Right sub-column - Additional subcategories */}
+                  <div className="w-1/2 p-8 pt-0 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                    <div>
+                      {/* Additional subcategories that are not expanded */}
+                      {(selectedCategory
+                        ? selectedCategory.subCategories
+                        : mainCategories && mainCategories.length > 0 ? mainCategories[0]?.subCategories : []
+                      )?.slice(Math.ceil(((selectedCategory
+                        ? selectedCategory.subCategories
+                        : mainCategories && mainCategories.length > 0 ? mainCategories[0]?.subCategories : []
+                      )?.length || 0) / 2)).map((subCat, index) => (
+                        <div
+                          key={subCat._id}
+                          className={`p-3 cursor-pointer rounded transition-all duration-200 ${
+                            openedCategoryId === subCat._id
+                              ? "text-[#B90647] font-semibold"
+                              : "text-white hover:text-[#B90647]"
+                          }`}
+                          onClick={() => toggleSubCategory(subCat._id)}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm">{subCat.name}</span>
+                            {subCat.childCategories && subCat.childCategories.length > 0 && (
+                              <ChevronRight
+                                size={16}
+                                className={`transition-transform duration-200 ${
+                                  openedCategoryId === subCat._id ? 'rotate-90' : ''
+                                }`}
+                              />
+                            )}
+                          </div>
+                          
+                          {/* Child categories shown below when expanded */}
+                          {openedCategoryId === subCat._id && subCat.childCategories && subCat.childCategories.length > 0 && (
+                            <div className="mt-2 ml-4 space-y-2 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                              {subCat.childCategories.map((child) => (
+                                <div
+                                  key={child._id}
+                                  className="p-2 cursor-pointer rounded text-white hover:text-[#B90647] transition-all duration-200"
+                                >
+                                  <Link
+                                    href={`/products/${selectedCategory?.seoSlug || 'category'}/${subCat?.seoSlug || 'sub-category'}/${child?.seoSlug || 'child-category'}?ccid=${child._id}`}
+                                    className="text-xs"
+                                    onClick={() => {
+                                      onClose();
+                                      handleClick(child);
+                                    }}
+                                  >
+                                    {child.name}
+                                  </Link>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                )}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Right Column - Featured Products */}
+          <div className="w-4/12 bg-black bg-opacity-90 p-8">
+            <h3 className="text-lg font-bold text-white mb-6">Featured Products</h3>
+            <div className="h-[calc(500px-120px)] overflow-hidden relative">
+              {isFeaturedLoading ? (
+                <div className="flex items-center justify-center h-32">
+                  <p className="text-white">Loading featured products...</p>
+                </div>
+              ) : featuredProducts && featuredProducts.length > 0 ? (
+                console.log('Rendering products:', featuredProducts),
+                <div className="relative h-full">
+                  <div 
+                    className="transition-none"
+                    style={{
+                      transform: `translateY(-${currentProductIndex * 33.33}%)`
+                    }}
+                  >
+                    {getMarqueeProducts().map((product: any, index: number) => (
+                      <div 
+                        key={`${product._id}-${index}`} 
+                        className="border-b border-gray-800 pb-4 mb-4"
+                        style={{ height: 'calc((500px - 120px) / 3)', minHeight: '120px' }}
+                      >
+                        <div className="flex items-start space-x-4 h-full">
+                          <div className="w-16 h-16 bg-gray-700 rounded flex-shrink-0">
+                            {product.image && (
+                              <Image
+                                src={product.image}
+                                alt={product.name}
+                                width={64}
+                                height={64}
+                                className="w-full h-full object-cover rounded"
+                                onError={(e) => {
+                                  e.currentTarget.src = "/images/product-placeholder.webp";
+                                }}
+                              />
+                            )}
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="text-sm font-bold text-white mb-2">
+                              {product.name}
+                            </h4>
+                            <p className="text-xs text-white leading-relaxed">
+                              {product.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center h-32">
+                  <p className="text-white">No featured products</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Layout */}
+        <div className="md:hidden w-full h-full pointer-events-auto bg-black bg-opacity-95">
+          <div className="flex flex-col h-full">
+            
+            {/* Mobile Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-800">
+              <h2 className="text-lg font-bold text-white">Product Segments</h2>
+              <button
+                onClick={onClose}
+                className="text-white hover:text-[#B90647] transition-colors"
+              >
+                <FiX size={24} />
+              </button>
+            </div>
+
+            {/* Mobile Categories Section */}
+            <div className="flex-1 overflow-y-auto">
+              <div className="p-4">
+                <h3 className="text-base font-bold text-white mb-4">Categories</h3>
+                <div className="space-y-2">
+                  {mainCategories && mainCategories.length > 0 ? mainCategories.map((category, index) => (
+                    <div
+                      key={category._id}
+                      className={`flex items-center justify-between p-3 rounded transition-all duration-200 ${
+                        selectedCategory?._id === category._id ||
+                        (index === 0 && !selectedCategory)
+                          ? "bg-[#B90647] text-white"
+                          : category.subCategories && category.subCategories.length > 0
+                          ? "text-white hover:text-[#B90647] hover:bg-gray-800 cursor-pointer"
+                          : "text-white cursor-not-allowed"
+                      }`}
+                      onClick={() => category.subCategories && category.subCategories.length > 0 && handleCategoryClick(category)}
+                    >
+                      <span className="text-sm font-medium">
+                        {category.name}
+                      </span>
+                      {category.subCategories && category.subCategories.length > 0 && (
+                        <GoArrowRight size={16} className="text-white" />
+                      )}
+                    </div>
+                  )) : (
+                    <div className="flex items-center justify-center h-32">
+                      <p className="text-white text-sm">{isLoading ? "Loading categories..." : "No categories found"}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Mobile Subcategories Section */}
+              {(selectedCategory || (mainCategories && mainCategories.length > 0)) && (
+                <div className="p-4 border-t border-gray-800">
+                  <h3 className="text-base font-bold text-white mb-4">
+                    {selectedCategory
+                      ? selectedCategory.name
+                      : mainCategories && mainCategories.length > 0 ? mainCategories[0]?.name : "Categories"}
+                  </h3>
+                  <div className="space-y-2">
+                    {(selectedCategory
+                      ? selectedCategory.subCategories
+                      : mainCategories && mainCategories.length > 0 ? mainCategories[0]?.subCategories : []
+                    )?.map((subCat, index) => (
+                      <div
+                        key={subCat._id}
+                        className={`p-3 cursor-pointer rounded transition-all duration-200 ${
+                          openedCategoryId === subCat._id
+                            ? "text-[#B90647] font-semibold"
+                            : "text-white hover:text-[#B90647]"
+                        }`}
+                        onClick={() => toggleSubCategory(subCat._id)}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm">{subCat.name}</span>
+                          {subCat.childCategories && subCat.childCategories.length > 0 && (
+                            <ChevronRight
+                              size={16}
+                              className={`transition-transform duration-200 ${
+                                openedCategoryId === subCat._id ? 'rotate-90' : ''
+                              }`}
+                            />
+                          )}
+                        </div>
+                        
+                        {/* Child categories shown below when expanded */}
+                        {openedCategoryId === subCat._id && subCat.childCategories && subCat.childCategories.length > 0 && (
+                          <div className="mt-2 ml-4 space-y-1">
+                            {subCat.childCategories.map((child) => (
+                              <div
+                                key={child._id}
+                                className="p-2 cursor-pointer rounded text-white hover:text-[#B90647] transition-all duration-200"
+                              >
+                                <Link
+                                  href={`/products/${selectedCategory?.seoSlug || 'category'}/${subCat?.seoSlug || 'sub-category'}/${child?.seoSlug || 'child-category'}?ccid=${child._id}`}
+                                  className="text-xs"
+                                  onClick={() => {
+                                    onClose();
+                                    handleClick(child);
+                                  }}
+                                >
+                                  {child.name}
+                                </Link>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Mobile Featured Products Section */}
+              <div className="p-4 border-t border-gray-800">
+                <h3 className="text-base font-bold text-white mb-4">Featured Products</h3>
+                <div className="h-48 overflow-hidden relative">
+                  {isFeaturedLoading ? (
+                    <div className="flex items-center justify-center h-32">
+                      <p className="text-white text-sm">Loading featured products...</p>
+                    </div>
+                  ) : featuredProducts && featuredProducts.length > 0 ? (
+                    <div className="relative h-full">
+                      <div 
+                        className="transition-none"
+                        style={{
+                          transform: `translateY(-${currentProductIndex * 33.33}%)`
+                        }}
+                      >
+                        {getMarqueeProducts().map((product: any, index: number) => (
+                          <div 
+                            key={`${product._id}-${index}`} 
+                            className="border-b border-gray-800 pb-3 mb-3"
+                            style={{ height: 'calc(192px / 3)', minHeight: '60px' }}
+                          >
+                            <div className="flex items-start space-x-3 h-full">
+                              <div className="w-12 h-12 bg-gray-700 rounded flex-shrink-0">
+                                {product.image && (
+                                  <Image
+                                    src={product.image}
+                                    alt={product.name}
+                                    width={48}
+                                    height={48}
+                                    className="w-full h-full object-cover rounded"
+                                    onError={(e) => {
+                                      e.currentTarget.src = "/images/product-placeholder.webp";
+                                    }}
+                                  />
+                                )}
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="text-xs font-bold text-white mb-1">
+                                  {product.name}
+                                </h4>
+                                <p className="text-xs text-white leading-relaxed line-clamp-2">
+                                  {product.description}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center h-32">
+                      <p className="text-white text-sm">No featured products</p>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </>
   );

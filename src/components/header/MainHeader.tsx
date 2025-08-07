@@ -49,6 +49,9 @@ const Header: React.FC<HeaderProps> = () => {
   const [searchValue, setSearchValue] = useState("");
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [isProductSegmentsOpen, setIsProductSegmentsOpen] = useState<boolean>(false);
+  const [rotatingPlaceholders, setRotatingPlaceholders] = useState<string[]>([]);
+  const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
   const cartCountRedux = store.getState().user.cartCount;
   const cartCountV = getCookie("CartCount");
   const [isPopupOpen, setPopupOpen] = useState(false);
@@ -90,7 +93,12 @@ const Header: React.FC<HeaderProps> = () => {
     }
   }, [fullUrl]);
 
-  // Toggle function for product segments
+  // Fetch categories on component mount
+  useEffect(() => {
+    getCategoriesForPlaceholders();
+  }, []);
+
+  // Toggle function for product segments (mobile)
   const toggleProductSegments = () => {
     console.log('Toggle called, current state:', isProductSegmentsOpen);
     setIsProductSegmentsOpen(prev => {
@@ -100,8 +108,82 @@ const Header: React.FC<HeaderProps> = () => {
     });
   };
 
+  // Hover handlers for desktop
+  const handleProductSegmentsMouseEnter = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+    setIsProductSegmentsOpen(true);
+  };
+
+  const handleProductSegmentsMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setIsProductSegmentsOpen(false);
+    }, 300); // 300ms delay before closing
+    setHoverTimeout(timeout);
+  };
+
   const { refreshTokens } = useRefreshToken();
   const { callApi } = useApi();
+
+  // Fetch categories for rotating placeholders
+  const getCategoriesForPlaceholders = async () => {
+    try {
+      const result = await callApi(getEndpoint.default.PRODUCTS_CATEGORIES, "GET") as any;
+      if (result?.data) {
+        const placeholders: string[] = [];
+        
+        // Add main categories
+        result.data.forEach((category: any) => {
+          placeholders.push(`Search for ${category.name}...`);
+          
+          // Add subcategories
+          if (category.subCategories) {
+            category.subCategories.forEach((subCat: any) => {
+              placeholders.push(`Search for ${subCat.name}...`);
+              
+              // Add child categories
+              if (subCat.childCategories) {
+                subCat.childCategories.forEach((childCat: any) => {
+                  placeholders.push(`Search for ${childCat.name}...`);
+                });
+              }
+            });
+          }
+        });
+        
+        setRotatingPlaceholders(placeholders);
+      }
+    } catch (error) {
+      console.log("Error fetching categories for placeholders:", error);
+      // Fallback placeholders
+      setRotatingPlaceholders([
+        "Search for Bricks...",
+        "Search for Cement...",
+        "Search for Steel...",
+        "Search for Tiles...",
+        "Search for Paint...",
+        "Search for Tools...",
+        "Search for Plumbing...",
+        "Search for Electrical..."
+      ]);
+    }
+  };
+
+  // Rotating placeholder effect with animation timing
+  useEffect(() => {
+    if (rotatingPlaceholders.length === 0) return;
+    
+    const interval = setInterval(() => {
+      console.log('Changing placeholder from MainHeader');
+      setCurrentPlaceholderIndex((prevIndex) => 
+        (prevIndex + 1) % rotatingPlaceholders.length
+      );
+    }, 2000); // Change every 2 seconds
+
+    return () => clearInterval(interval);
+  }, [rotatingPlaceholders.length]);
 
   const getDefaultLoc = () => {
     if (addInfo && addInfo.length > 0) {
@@ -343,12 +425,13 @@ const Header: React.FC<HeaderProps> = () => {
             </Link>
             
             
-            {/* Fixed Navigation Links - Never affected */}
+            {/* Desktop Navigation Links */}
             <div className="hidden md:flex items-center space-x-6">
               <div className="relative">
                 <div 
                   className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative z-20"
-                  onClick={toggleProductSegments}
+                  onMouseEnter={handleProductSegmentsMouseEnter}
+                  onMouseLeave={handleProductSegmentsMouseLeave}
                   data-product-segments-button
                 >
                   <span className={`font-medium relative ${isProductSegmentsOpen ? 'text-[#B90647]' : 'text-gray-800'}`}>
@@ -373,10 +456,15 @@ const Header: React.FC<HeaderProps> = () => {
                     />
                   </svg>
                 </div>
-                <ProductSegmentsDropdown 
-                  isOpen={isProductSegmentsOpen}
-                  onClose={() => setIsProductSegmentsOpen(false)}
-                />
+                <div 
+                  onMouseEnter={handleProductSegmentsMouseEnter}
+                  onMouseLeave={handleProductSegmentsMouseLeave}
+                >
+                  <ProductSegmentsDropdown 
+                    isOpen={isProductSegmentsOpen}
+                    onClose={() => setIsProductSegmentsOpen(false)}
+                  />
+                </div>
               </div>
               <Link 
                 href="/green-financing"
@@ -400,9 +488,67 @@ const Header: React.FC<HeaderProps> = () => {
                 </svg>
               </Link>
             </div>
+
+            {/* Mobile Navigation Links */}
+            <div className="md:hidden flex items-center space-x-4">
+              <div className="relative">
+                <div 
+                  className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative z-20"
+                  onClick={toggleProductSegments}
+                  data-product-segments-button
+                >
+                  <span className={`font-medium relative text-sm ${isProductSegmentsOpen ? 'text-[#B90647]' : 'text-gray-800'}`}>
+                    Product Segments
+                    {isProductSegmentsOpen && (
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                    )}
+                  </span>
+                  <svg
+                    className={`w-3 h-3 text-gray-600 transition-transform duration-200 ${
+                      isProductSegmentsOpen ? 'rotate-180' : ''
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+                <ProductSegmentsDropdown 
+                  isOpen={isProductSegmentsOpen}
+                  onClose={() => setIsProductSegmentsOpen(false)}
+                />
+              </div>
+              <Link 
+                href="/green-financing"
+                className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors"
+              >
+                <span className="text-gray-800 font-medium text-sm">
+                  Green Financing
+                </span>
+                <svg
+                  className="w-3 h-3 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </Link>
+            </div>
           </div>
 
-          {/* Additional Navigation Links - Only these get affected */}
+          {/* Desktop Additional Navigation Links */}
           {!isSearchFocused && (
             <div className="hidden md:flex items-center space-x-10">
               <Link 
@@ -473,8 +619,79 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
           )}
 
+          {/* Mobile Additional Navigation Links */}
+          {!isSearchFocused && (
+            <div className="md:hidden flex items-center space-x-6">
+              <Link 
+                href="/brands"
+                className={`font-medium cursor-pointer transition-colors relative text-sm ${
+                  pathname === '/brands' 
+                    ? 'text-[#B90647]' 
+                    : 'text-gray-800 hover:text-secondary'
+                }`}
+              >
+                Brands
+                {pathname === '/brands' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                )}
+              </Link>
+              <Link 
+                href="/blogs"
+                className={`font-medium cursor-pointer transition-colors relative text-sm ${
+                  pathname === '/blogs' 
+                    ? 'text-[#B90647]' 
+                    : 'text-gray-800 hover:text-secondary'
+                }`}
+              >
+                Blogs
+                {pathname === '/blogs' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                )}
+              </Link>
+              <Link 
+                href="/products"
+                className={`font-medium cursor-pointer transition-colors relative text-sm ${
+                  pathname === '/products' 
+                    ? 'text-[#B90647]' 
+                    : 'text-gray-800 hover:text-secondary'
+                }`}
+              >
+                Products
+                {pathname === '/products' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                )}
+              </Link>
+              <Link 
+                href="/about"
+                className={`font-medium cursor-pointer transition-colors relative text-sm ${
+                  pathname === '/about' 
+                    ? 'text-[#B90647]' 
+                    : 'text-gray-800 hover:text-secondary'
+                }`}
+              >
+                About
+                {pathname === '/about' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                )}
+              </Link>
+              <Link 
+                href="/contact"
+                className={`font-medium cursor-pointer transition-colors relative text-sm ${
+                  pathname === '/contact' 
+                    ? 'text-[#B90647]' 
+                    : 'text-gray-800 hover:text-secondary'
+                }`}
+              >
+                Contact
+                {pathname === '/contact' && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                )}
+              </Link>
+            </div>
+          )}
+
           {/* Center - Search Bar with Hamburger Menu */}
-          <div className="flex items-center space-x-4 max-w-2xl">
+          <div className="flex items-center space-x-2 md:space-x-4 max-w-2xl">
 
             <div className="relative">
               {!isSearchFocused ? (
@@ -484,25 +701,25 @@ const Header: React.FC<HeaderProps> = () => {
                   onClick={handleSearchFocus}
                 >
                   <button
-                    className="w-12 h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
+                    className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
                     onClick={handleSearchFocus}
                   >
                     <IoSearchOutline
                       className="text-gray-600"
-                      size={20}
+                      size={18}
                     />
                   </button>
                 </div>
               ) : (
-                <div className="flex items-center space-x-4 w-full">
-                  <div className="md:w-12 w-8 md:px-4 flex items-center">
+                <div className="flex items-center space-x-2 md:space-x-4 w-full">
+                  <div className="w-8 md:w-12 md:px-4 flex items-center">
                     <VscMenu
                       className="text-black hover:cursor-pointer font-light"
-                      size={26}
+                      size={24}
                       onClick={toggleMenu}
                     />
                   </div>
-                  <div className="relative">
+                  <div className="relative flex-1">
                     <SearchBar
                       isExpanded={true}
                       onFocus={handleSearchFocus}
@@ -512,6 +729,7 @@ const Header: React.FC<HeaderProps> = () => {
                       onChange={(value) => setSearchValue(value)}
                       showDropdown={showSearchDropdown}
                       onDropdownToggle={(show) => setShowSearchDropdown(show)}
+                      placeholder={rotatingPlaceholders[currentPlaceholderIndex] || "Search for Products..."}
                     />
                   </div>
                 </div>
@@ -520,7 +738,7 @@ const Header: React.FC<HeaderProps> = () => {
           </div>
 
           {/* Right side - User actions */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 md:space-x-4">
             <div
               ref={iconRef}
               onMouseEnter={handleMouseEnter}
@@ -529,7 +747,7 @@ const Header: React.FC<HeaderProps> = () => {
             >
               <PiUserCircleThin
                 className="text-black hover:cursor-pointer"
-                size={30}
+                size={26}
               />
             </div>
             
@@ -545,10 +763,10 @@ const Header: React.FC<HeaderProps> = () => {
               />
             </div>
             
-            <div className="relative pr-4">
+            <div className="relative pr-2 md:pr-4">
               <CiShoppingCart
                 className="text-black hover:cursor-pointer"
-                size={30}
+                size={26}
                 onClick={onClickCart}
               />
               {Number(cartCountV) > 0 &&
@@ -556,7 +774,7 @@ const Header: React.FC<HeaderProps> = () => {
                 cartCount !== null ||
                 cartCount !== undefined) &&
               token ? (
-                <div className="absolute top-[-10px] right-[-10px] bg-[#439787] text-white rounded-full w-[20px] h-[20px] flex items-center justify-center text-[10px] font-bold">
+                <div className="absolute top-[-8px] right-[-8px] md:top-[-10px] md:right-[-10px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[20px] md:h-[20px] flex items-center justify-center text-[8px] md:text-[10px] font-bold">
                   {cartCountV ? cartCountV : cartCount ? cartCount : ""}
                 </div>
               ) : null}
@@ -569,8 +787,8 @@ const Header: React.FC<HeaderProps> = () => {
                     alt="vendor"
                     className="text-black md:hidden mobile-sm:ml-2 hover:cursor-pointer"
                     src="/images/home/vendor.webp"
-                    width={28}
-                    height={16}
+                    width={24}
+                    height={14}
                     onError={(e) => {
                       e.currentTarget.src = "/images/product-placeholder.webp";
                     }}

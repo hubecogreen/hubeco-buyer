@@ -52,6 +52,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
   const [noSearch, setNoSearch] = useState(false);
   const [targetedCustomer, setTargetedCustomer] = useState<string>("not_set");
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
   const isClient = useClient();
 
@@ -71,16 +72,38 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // Rotate placeholders
+  // Rotate placeholders with animation
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentPlaceholderIndex((prev) => 
-        (prev + 1) % rotatingPlaceholders.length
-      );
-    }, 3000); // Change every 3 seconds
+      console.log('Animation triggered');
+      // Start animation
+      setIsAnimating(true);
+      
+      setTimeout(() => {
+        // Always change the placeholder, regardless of external or internal
+        if (placeholder && placeholder !== "Search products...") {
+          // For external placeholder, the parent will handle the rotation
+          // We just need to animate
+        } else {
+          setCurrentPlaceholderIndex((prev) => 
+            (prev + 1) % rotatingPlaceholders.length
+          );
+        }
+        setIsAnimating(false);
+      }, 600); // Animation duration
+    }, 2000); // Change every 2 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [placeholder, rotatingPlaceholders.length]);
+
+  // Animate when placeholder changes
+  useEffect(() => {
+    console.log('Placeholder changed, triggering animation');
+    setIsAnimating(true);
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 600);
+  }, [placeholder]);
 
   // Update searchQuery when value prop changes
   useEffect(() => {
@@ -247,7 +270,9 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
 
   if (!isClient) return null;
 
-  const currentPlaceholder = rotatingPlaceholders[currentPlaceholderIndex];
+  const currentPlaceholder = placeholder && placeholder !== "Search products..." 
+    ? placeholder 
+    : rotatingPlaceholders[currentPlaceholderIndex];
 
   return (
     <div
@@ -255,16 +280,31 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
       style={customStyles}
     >
       {/* Input Component */}
-      <Input
-        placeholder={currentPlaceholder}
-        value={searchQuery}
-        onChange={(e: any) => handleSearch(e)}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        className={`pl-3 !bg-white border-[1px] border-[#d9d9d9] border-solid md:text-base text-xs lg:text-sm w-full h-[47px] shadow-lg text-fontGray rounded-[5px] mr-[1px] ${
-          isExpanded ? 'w-full' : 'w-12 h-12 rounded-lg'
-        }`}
-      />
+      <div className="relative w-full">
+        <Input
+          placeholder=""
+          value={searchQuery}
+          onChange={(e: any) => handleSearch(e)}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          className={`pl-3 !bg-white border-[1px] border-[#d9d9d9] border-solid md:text-base text-xs lg:text-sm w-full h-[47px] shadow-lg text-fontGray rounded-[5px] mr-[1px] ${
+            isExpanded ? 'w-full' : 'w-12 h-12 rounded-lg'
+          }`}
+        />
+        
+        {/* Animated Placeholder */}
+        {!searchQuery && (
+          <div className="absolute inset-0 flex items-center pointer-events-none overflow-hidden">
+            <div 
+              className={`pl-3 text-gray-400 text-sm transition-all duration-1200 ease-out ${
+                isAnimating ? 'transform -translate-y-6 opacity-0' : 'transform translate-y-0 opacity-100'
+              }`}
+            >
+              {currentPlaceholder}
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* Search Icon */}
       <span className="absolute inset-y-0 right-3 flex items-center text-fontGray">

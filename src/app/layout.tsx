@@ -53,6 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.variable}>
       <head>
+        <meta name="robots" content="noindex, nofollow"/>
         {/* <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" /> */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://assets-uat.hubeco.market" crossOrigin="anonymous" />

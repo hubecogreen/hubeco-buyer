@@ -123,8 +123,8 @@ export async function generateMetadata({
         follow: true,
         nocache: false,
         googleBot: {
-          index: true,
-          follow: true,
+          index: false,
+          follow: false,
           noimageindex: false,
         },
       },

@@ -26,6 +26,10 @@ export const metadata: Metadata = {
       },
     ],
   },
+  robots: {
+    index: false,   // generates "noindex"
+    follow: false,  // generates "nofollow"
+  }
 };
 
 const Projects = () => {

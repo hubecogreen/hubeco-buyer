@@ -143,9 +143,9 @@ const BlogsSection = () => {
         >
           <div className="pb-10">
             <div className="items-center justify-center px-8 text-center z-20 md:pt-20 pt-4">
-              <h1 className="text-4xl font-bold mb-4 text-white mt-30">
+              <h2 className="text-4xl font-bold mb-4 text-white mt-30">
                 Blogs & News
-              </h1>
+              </h2>
             </div>
           </div>
         

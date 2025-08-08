@@ -291,9 +291,6 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                     <>
                       {/* Header */}
                       <div className="px-8 py-6 border-b border-gray-100">
-                      <h1 className="sr-only">
-                         Sustainable Products
-                        </h1>
                         <h2 className="text-2xl font-semibold text-gray-800">
                           {selectedCategory
                             ? selectedCategory.name

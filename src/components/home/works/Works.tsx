@@ -233,16 +233,16 @@ const WorksSection = () => {
     <section className="md:flex block max-w-7xl md:my-14 my-4 px-5 pb-8 md:pb-0 shadow-md mx-auto items-start h-fit justify-center border border-[#dcdcdc] bg-[#F4F4F4]">
       <div className="md:w-1/2 md:pt-14 pt-8 pr-2 md:pr-10 md:border-r md:border-[#eaeaea] md:border-solid">
         <div className="md:pl-20">
-          <h1 className="text-center md:text-left text-2xl pt-5 md:text-4xl font-bold text-black mt-30">
+          <h2 className="text-center md:text-left text-2xl pt-5 md:text-4xl font-bold text-black mt-30">
             How it works
-          </h1>
+          </h2>
           <p className="md:text-big text-md text-justify md:text-justify pt-5 mx-auto md:pr-[15px] text-fontGray ">
             We are passionate about driving the transition towards sustainable
             living by providing eco-friendly construction materials for both B2B
             and B2C markets.
           </p>
           <div className="relative flex md:block items-center justify-start mb-5 md:mb-0 z-20 mt-10">
-            <h1
+            <h2
               className={`md:text-6xl text-xl hover:cursor-pointer ${
                 showBuyer
                   ? "border-b-2 border-secondary border-solid"
@@ -253,9 +253,9 @@ const WorksSection = () => {
               onClick={handleBuyerClick}
             >
               Buyer
-            </h1>
+            </h2>
             <p></p>
-            <h1
+            <h2
               className={`md:text-6xl text-xl hover:cursor-pointer ${
                 !showBuyer
                   ? "border-b-2 border-secondary border-solid"
@@ -266,7 +266,7 @@ const WorksSection = () => {
               onClick={handleVendorClick}
             >
               Vendor
-            </h1>
+            </h2>
           </div>
         </div>
         <Image

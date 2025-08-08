@@ -112,9 +112,9 @@ const BrandsSection: React.FC = () => {
     <section className="relative w-full py-8 md:py-12 lg:py-16 bg-white">
       <div className="max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-12">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-black">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-black">
             Our Brands
-          </h1>
+          </h2>
         </div>
 
         <div

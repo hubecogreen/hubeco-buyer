@@ -350,13 +350,14 @@ const Footer = () => {
                 <Link href="#0" className="text-fontGray  text-sm cursor-default ">
                   Communication<br></br>
                   <span className="flex justify-start text-fontGray items-center cursor-default"> 
-                    Powered by
-                    <Image width={50} height={15}
+                    Powered by MSG91
+                    {/* <Image width={50} height={15}
                       onError={e => {
                         e.currentTarget.src = '/images/product-placeholder.webp'
                       }}
                       loading="lazy"
-                      src={"/images/msg91.svg"} className="ml-1 w-[50px] mt-[-5px] h-[15px]" alt={'MSG91'} /></span>
+                      src={"/images/msg91.svg"} className="ml-1 w-[50px] mt-[-5px] h-[15px]" alt={'MSG91'} /> */}
+                      </span>
                 </Link>
               </li>
             </ul>

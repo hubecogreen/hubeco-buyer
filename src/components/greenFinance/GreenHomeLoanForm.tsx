@@ -38,7 +38,7 @@ export default function GreenHomeLoanForm({
     setLoading(true);
     try {
       const res = await fetch(
-        "https://api-uat.hubeco.market/greenHomeLoan/apply",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/greenHomeLoan/apply`,
         {
           method: "POST",
           headers: {

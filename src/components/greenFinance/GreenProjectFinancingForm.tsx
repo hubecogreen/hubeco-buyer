@@ -65,7 +65,7 @@ export default function GreenProjectFinancingForm({
 
       setLoading(true);
       const res = await fetch(
-        "https://api-uat.hubeco.market/greenProjectFinancing/apply",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/greenProjectFinancing/apply`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

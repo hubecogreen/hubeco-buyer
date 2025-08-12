@@ -82,7 +82,6 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
     getFeaturedProducts();
   }, []);
 
-  // News ticker style continuous scrolling
   // useEffect(() => {
   //   if (!isOpen || featuredProducts.length === 0) return;
 
@@ -115,28 +114,28 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
   // }, [isOpen, featuredProducts.length]);
 
   // Close dropdown on outside click - temporarily disabled for testing
-  useEffect(() => {
-    if (!isOpen) return;
+  // useEffect(() => {
+  //   if (!isOpen) return;
 
-    function handleClickOutside(event: MouseEvent) {
-      const target = event.target as Node;
-      if (dropdownRef.current && !dropdownRef.current.contains(target)) {
-        // Check if the click is on the Product Segments button
-        const productSegmentsButton = document.querySelector(
-          "[data-product-segments-button]"
-        );
-        if (productSegmentsButton && productSegmentsButton.contains(target)) {
-          return; // Don't close if clicking on the button itself
-        }
-        onClose();
-      }
-    }
+  //   function handleClickOutside(event: MouseEvent) {
+  //     const target = event.target as Node;
+  //     if (dropdownRef.current && !dropdownRef.current.contains(target)) {
+  //       // Check if the click is on the Product Segments button
+  //       const productSegmentsButton = document.querySelector(
+  //         "[data-product-segments-button]"
+  //       );
+  //       if (productSegmentsButton && productSegmentsButton.contains(target)) {
+  //         return; // Don't close if clicking on the button itself
+  //       }
+  //       onClose();
+  //     }
+  //   }
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen, onClose]);
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [isOpen, onClose]);
 
   // Close dropdown on escape key
   useEffect(() => {
@@ -186,13 +185,6 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
     }
   };
 
-  const handleMouseEnter = (categoryId: string) => {
-    setHoveredCategoryId(categoryId);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredCategoryId(null);
-  };
 
   const getMenuCategories = async () => {
     try {
@@ -255,18 +247,13 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
 
   const handleCategoryClick = (category: any) => {
     setSelectedCategory(category);
+    setOpenedCategoryId(null); // Clear opened subcategory when main category changes
   };
 
   const handleClick = (menuItem?: any) => {
     if (menuItem) {
       router.push(`/products/${menuItem.seoSlug}?ccid=${menuItem._id}`);
     }
-  };
-
-  const toggleSubCategory = (subCategoryId: string) => {
-    setOpenedCategoryId(
-      openedCategoryId === subCategoryId ? null : subCategoryId
-    );
   };
 
   // Create continuous marquee products
@@ -288,7 +275,10 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
         className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
       >
         {/* Desktop Layout */}
-        <div className="hidden md:flex w-full h-[500px] pointer-events-auto">
+        <div 
+          className="hidden md:flex w-full h-[500px] pointer-events-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
           {/* Left Column - Main Categories */}
           <div className="w-3/12 bg-black bg-opacity-90 pt-6 border-r border-gray-800">
             <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
@@ -305,11 +295,11 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                         ? "text-white hover:text-[#B90647] hover:bg-gray-800 cursor-pointer"
                         : "text-white cursor-not-allowed"
                     }`}
-                    onClick={() =>
-                      category.subCategories &&
-                      category.subCategories.length > 0 &&
-                      handleCategoryClick(category)
-                    }
+                    onClick={() => {
+                      if (category.subCategories && category.subCategories.length > 0) {
+                        handleCategoryClick(category);
+                      }
+                    }}
                   >
                     <span className="text-base font-medium">
                       {category.name}
@@ -377,9 +367,17 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             className={`p-3 cursor-pointer rounded transition-all duration-200 ${
                               openedCategoryId === subCat._id
                                 ? "text-[#B90647] font-semibold"
-                                : "text-white hover:text-[#B90647]"
+                                : "text-white"
                             }`}
-                            onClick={() => toggleSubCategory(subCat._id)}
+                            onClick={(e) => {
+                              e.stopPropagation(); // Prevent popup from closing
+                              // Toggle subcategory expansion on click
+                              if (openedCategoryId === subCat._id) {
+                                setOpenedCategoryId(null);
+                              } else {
+                                setOpenedCategoryId(subCat._id);
+                              }
+                            }}
                           >
                             <div className="flex items-center justify-between">
                               <span className="text-sm">{subCat.name}</span>
@@ -458,9 +456,17 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             className={`p-3 cursor-pointer rounded transition-all duration-200 ${
                               openedCategoryId === subCat._id
                                 ? "text-[#B90647] font-semibold"
-                                : "text-white hover:text-[#B90647]"
+                                : "text-white"
                             }`}
-                            onClick={() => toggleSubCategory(subCat._id)}
+                            onClick={(e) => {
+                              e.stopPropagation(); // Prevent popup from closing
+                              // Toggle subcategory expansion on click
+                              if (openedCategoryId === subCat._id) {
+                                setOpenedCategoryId(null);
+                              } else {
+                                setOpenedCategoryId(subCat._id);
+                              }
+                            }}
                           >
                             <div className="flex items-center justify-between">
                               <span className="text-sm">{subCat.name}</span>
@@ -516,77 +522,6 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
               </>
             )}
           </div>
-
-          {/* Right Column - Featured Products */}
-          {/* <div className="w-4/12 bg-black bg-opacity-90 p-8">
-            <h3 className="text-lg font-bold text-white mb-6">
-              Featured Products
-            </h3>
-            <div className="h-[calc(500px-120px)] overflow-hidden relative">
-              {isFeaturedLoading ? (
-                <div className="flex items-center justify-center h-32">
-                  <p className="text-white">Loading featured products...</p>
-                </div>
-              ) : featuredProducts && featuredProducts.length > 0 ? (
-                (console.log("Rendering products:", featuredProducts),
-                (
-                  <div className="relative h-full">
-                    <div
-                      className="transition-none"
-                      style={{
-                        transform: `translateY(-${
-                          currentProductIndex * 33.33
-                        }%)`,
-                      }}
-                    >
-                      {getMarqueeProducts().map(
-                        (product: any, index: number) => (
-                          <div
-                            key={`${product._id}-${index}`}
-                            className="border-b border-gray-800 pb-4 mb-4"
-                            style={{
-                              height: "calc((500px - 120px) / 3)",
-                              minHeight: "120px",
-                            }}
-                          >
-                            <div className="flex items-start space-x-4 h-full">
-                              <div className="w-16 h-16 bg-gray-700 rounded flex-shrink-0">
-                                {product.image && (
-                                  <Image
-                                    src={product.image}
-                                    alt={product.name}
-                                    width={64}
-                                    height={64}
-                                    className="w-full h-full object-cover rounded"
-                                    onError={(e) => {
-                                      e.currentTarget.src =
-                                        "/images/product-placeholder.webp";
-                                    }}
-                                  />
-                                )}
-                              </div>
-                              <div className="flex-1">
-                                <h4 className="text-sm font-bold text-white mb-2">
-                                  {product.name}
-                                </h4>
-                                <p className="text-xs text-white leading-relaxed">
-                                  {product.description}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        )
-                      )}
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="flex items-center justify-center h-32">
-                  <p className="text-white">No featured products</p>
-                </div>
-              )}
-            </div>
-          </div> */}
           {/* Right Column - Featured Products */}
           <div className="w-4/12 bg-black bg-opacity-90 p-8">
             <h3 className="text-lg font-bold text-white mb-6">
@@ -634,9 +569,10 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             <h4 className="text-sm font-bold text-white mb-2">
                               {product.name}
                             </h4>
-                            <p className="text-xs text-white leading-relaxed">
-                              {product.description}
-                            </p>
+                            <p 
+                              className="text-xs text-white leading-relaxed"
+                              dangerouslySetInnerHTML={{ __html: product.description }}
+                            />
                           </div>
                         </div>
                       </div>
@@ -653,7 +589,10 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
         </div>
 
         {/* Mobile Layout */}
-        <div className="md:hidden w-full h-full pointer-events-auto bg-black bg-opacity-95">
+        <div 
+          className="md:hidden w-full h-full pointer-events-auto bg-black bg-opacity-95"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="flex flex-col h-full">
             {/* Mobile Header */}
             <div className="flex items-center justify-between p-4 border-b border-gray-800">
@@ -686,11 +625,11 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             ? "text-white hover:text-[#B90647] hover:bg-gray-800 cursor-pointer"
                             : "text-white cursor-not-allowed"
                         }`}
-                        onClick={() =>
-                          category.subCategories &&
-                          category.subCategories.length > 0 &&
-                          handleCategoryClick(category)
-                        }
+                        onClick={() => {
+                          if (category.subCategories && category.subCategories.length > 0) {
+                            handleCategoryClick(category);
+                          }
+                        }}
                       >
                         <span className="text-sm font-medium">
                           {category.name}
@@ -736,9 +675,17 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                         className={`p-3 cursor-pointer rounded transition-all duration-200 ${
                           openedCategoryId === subCat._id
                             ? "text-[#B90647] font-semibold"
-                            : "text-white hover:text-[#B90647]"
+                            : "text-white"
                         }`}
-                        onClick={() => toggleSubCategory(subCat._id)}
+                        onClick={(e) => {
+                          e.stopPropagation(); // Prevent popup from closing
+                          // Toggle subcategory expansion on click
+                          if (openedCategoryId === subCat._id) {
+                            setOpenedCategoryId(null);
+                          } else {
+                            setOpenedCategoryId(subCat._id);
+                          }
+                        }}
                       >
                         <div className="flex items-center justify-between">
                           <span className="text-sm">{subCat.name}</span>
@@ -790,76 +737,6 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
               )}
 
               {/* Mobile Featured Products Section */}
-              {/* <div className="p-4 border-t border-gray-800">
-                <h3 className="text-base font-bold text-white mb-4">
-                  Featured Products
-                </h3>
-                <div className="h-48 overflow-hidden relative">
-                  {isFeaturedLoading ? (
-                    <div className="flex items-center justify-center h-32">
-                      <p className="text-white text-sm">
-                        Loading featured products...
-                      </p>
-                    </div>
-                  ) : featuredProducts && featuredProducts.length > 0 ? (
-                    <div className="relative h-full">
-                      <div
-                        className="transition-none"
-                        style={{
-                          transform: `translateY(-${
-                            currentProductIndex * 33.33
-                          }%)`,
-                        }}
-                      >
-                        {getMarqueeProducts().map(
-                          (product: any, index: number) => (
-                            <div
-                              key={`${product._id}-${index}`}
-                              className="border-b border-gray-800 pb-3 mb-3"
-                              style={{
-                                height: "calc(192px / 3)",
-                                minHeight: "60px",
-                              }}
-                            >
-                              <div className="flex items-start space-x-3 h-full">
-                                <div className="w-12 h-12 bg-gray-700 rounded flex-shrink-0">
-                                  {product.image && (
-                                    <Image
-                                      src={product.image}
-                                      alt={product.name}
-                                      width={48}
-                                      height={48}
-                                      className="w-full h-full object-cover rounded"
-                                      onError={(e) => {
-                                        e.currentTarget.src =
-                                          "/images/product-placeholder.webp";
-                                      }}
-                                    />
-                                  )}
-                                </div>
-                                <div className="flex-1">
-                                  <h4 className="text-xs font-bold text-white mb-1">
-                                    {product.name}
-                                  </h4>
-                                  <p className="text-xs text-white leading-relaxed line-clamp-2">
-                                    {product.description}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          )
-                        )}
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center h-32">
-                      <p className="text-white text-sm">No featured products</p>
-                    </div>
-                  )}
-                </div>
-              </div> */}
-
-              {/* Mobile Featured Products Section */}
               <div className="p-4 border-t border-gray-800">
                 <h3 className="text-base font-bold text-white mb-4">
                   Featured Products
@@ -909,9 +786,10 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                                   <h4 className="text-xs font-bold text-white mb-1">
                                     {product.name}
                                   </h4>
-                                  <p className="text-xs text-white leading-relaxed line-clamp-2">
-                                    {product.description}
-                                  </p>
+                                  <p 
+                                    className="text-xs text-white leading-relaxed line-clamp-2"
+                                    dangerouslySetInnerHTML={{ __html: product.description }}
+                                  />
                                 </div>
                               </div>
                             </div>

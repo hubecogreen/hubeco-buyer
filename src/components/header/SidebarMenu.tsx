@@ -45,6 +45,13 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
   const menuData = {
     menu: [
       {
+        title: "Green Financing",
+        link: "/green-financing",
+        mb: true,
+        level: 1,
+        icon: "FaLeaf",
+      },
+      {
         title: "Products",
         link: "/products",
         mb: true,
@@ -99,6 +106,14 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
         level: 1,
         submenu: [],
         icon: "TbCategory",
+      },
+      {
+        title: "Become a Vendor",
+        link: "/plans",
+        mb: true,
+        level: 1,
+        submenu: [],
+        icon: "FaStore",
       },
     ],
   };

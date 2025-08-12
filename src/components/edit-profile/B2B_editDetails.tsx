@@ -79,31 +79,40 @@ const detailsSchema = yup.object({
     .matches(/^(?! )(?=.*[^ ]).{3,}(?<! )$/, "Enter valid name")
     .max(75, "Business Type  cannot exceed 75 characters"),
   gst: yup
-  .string()
-  .required('GST is required')
-  .matches(/^[0-9A-Za-z]*$/, 'Special Characters are not allowed') // Allows only numbers and uppercase letters
-  .test('valid-state-code', 'Invalid state code in GST', value =>
-    validGSTStateCodes.includes(value.substring(0, 2))
-  )
-  .test('no-multiple-spaces', 'Double spaces are not allowed', value => !/\s{2,}/.test(value))
+    .string()
+    .required("GST is required")
+    .matches(/^[0-9A-Za-z]*$/, "Special Characters are not allowed") // Allows only numbers and uppercase letters
+    .test("valid-state-code", "Invalid state code in GST", (value) =>
+      validGSTStateCodes.includes(value.substring(0, 2))
+    )
+    .test(
+      "no-multiple-spaces",
+      "Double spaces are not allowed",
+      (value) => !/\s{2,}/.test(value)
+    )
 
-  .matches(/^[0-9]{2}[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}[1-9]{1}[zZ]{1}[0-9A-Z]{1}$/, 'GST format is invalid.')
+    .matches(
+      /^[0-9]{2}[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}[1-9]{1}[zZ]{1}[0-9A-Z]{1}$/,
+      "GST format is invalid."
+    )
 
-  .trim('GST cannot have empty space at the start or end'),
+    .trim("GST cannot have empty space at the start or end"),
   tan: yup
-  .string()
-  .nullable()
-  .notRequired()
-  .test('is-valid', 'TAN format is invalid', (value: any) => {
-    if (!value) return true; // Skip validation if empty or null
-    const trimmedValue = value.trim().toUpperCase(); // Trim leading/trailing spaces
-    const isValidFormat = /^[A-Z]{4}\d{5}[A-Z]$/.test(trimmedValue);
-    const noSpecialChars = /^[A-Z0-9]*$/.test(trimmedValue);
-    const noMultipleSpaces = !/\s+/.test(trimmedValue);
-    const correctLength = trimmedValue.length === 10;
-    // console.log('cjwjrbent', value.toUpperCase(),isValidFormat ,noSpecialChars , noMultipleSpaces , correctLength,trimmedValue)
-    return isValidFormat && noSpecialChars && noMultipleSpaces && correctLength;
-  })
+    .string()
+    .nullable()
+    .notRequired()
+    .test("is-valid", "TAN format is invalid", (value: any) => {
+      if (!value) return true; // Skip validation if empty or null
+      const trimmedValue = value.trim().toUpperCase(); // Trim leading/trailing spaces
+      const isValidFormat = /^[A-Z]{4}\d{5}[A-Z]$/.test(trimmedValue);
+      const noSpecialChars = /^[A-Z0-9]*$/.test(trimmedValue);
+      const noMultipleSpaces = !/\s+/.test(trimmedValue);
+      const correctLength = trimmedValue.length === 10;
+      // console.log('cjwjrbent', value.toUpperCase(),isValidFormat ,noSpecialChars , noMultipleSpaces , correctLength,trimmedValue)
+      return (
+        isValidFormat && noSpecialChars && noMultipleSpaces && correctLength
+      );
+    })
     .trim("TAN cannot have empty space at the start or end"),
   pan: yup
     .string()
@@ -334,14 +343,13 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
   const handleDetailsSubmit = async (data: any) => {
     // // console.log('gereth',data)
     let status = false;
-    if(data?.tan && data?.tan?.length>0){
+    if (data?.tan && data?.tan?.length > 0) {
       if (tanExtractPathUrl.length == 0) {
-        setTanImageError("Please upload TAN Doc")
-  
-        status = true
+        setTanImageError("Please upload TAN Doc");
+
+        status = true;
       }
     }
-    
 
     if (gstExtractPathUrl.length == 0) {
       setGstImageError("Please upload GST Doc");
@@ -386,34 +394,35 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
     };
     // console.log("egrehtrjyku", payload);
 
-        try{
-          const result =(await callApi(getEndpoint.default.UPDATEBUYER,'PATCH',payload))
+    try {
+      const result = await callApi(
+        getEndpoint.default.UPDATEBUYER,
+        "PATCH",
+        payload
+      );
 
-          if(result.data==null)
-            {
-              handleApiError(result?.errorData,data)
-            }
-            else
-            {
-       // // console.log('resultPaqtch',result)
-          toast.success("Business Information Updated Successfully",{iconTheme: {
-            primary: '#439787',
-            secondary: '#FFFAEE',
-          }});
-          setCookie('companyAdded',true)
-          getBuyer(token)
-          setGstImageError('')
-          setPanImageError('')
-          setTanImageError('')
-            // nextStep()
-        }
-
-        }catch(e)
-        {
-    handleApiError(e,data)
-        }finally{
-        setIsLoading(false)
-        }
+      if (result.data == null) {
+        handleApiError(result?.errorData, data);
+      } else {
+        // // console.log('resultPaqtch',result)
+        toast.success("Business Information Updated Successfully", {
+          iconTheme: {
+            primary: "#439787",
+            secondary: "#FFFAEE",
+          },
+        });
+        setCookie("companyAdded", true);
+        getBuyer(token);
+        setGstImageError("");
+        setPanImageError("");
+        setTanImageError("");
+        // nextStep()
+      }
+    } catch (e) {
+      handleApiError(e, data);
+    } finally {
+      setIsLoading(false);
+    }
 
     //handleNextStep();
   };
@@ -456,8 +465,8 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
         if (response.status === 200) {
           await axios.put(response.data.url, selectedFile, {
             headers: {
-              'Content-Type': selectedFile.type
-            }
+              "Content-Type": selectedFile.type,
+            },
           });
         }
       })
@@ -649,123 +658,123 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
 
   return (
     <div className="lg:max-w-[56rem] md:max-w-[32rem] max-w-[18rem] mx-auto">
-    <form
-      autoComplete="off"
-      onSubmit={handleSubmit(handleDetailsSubmit, onError2)}
-    >
-         <div className="flex flex-wrap w-full">
-        <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
-            Company Name <span className="text-red">*</span>
-          </label>
-          <Controller
-            name="companyName"
-            control={control}
-            rules={{ required: "Company Name is required" }}
-            render={({ field: { onChange, value } }) => (
-              <CustomInput
-                placeholder="Enter your Company Name"
-                onChange={onChange}
-                value={value}
-                isTextArea={false}
-                customStyles={{
-                  borderRadius: "5px",
-                  border: "1px solid #ccc",
-                  color: "black",
-                }}
-                extraClassnames="custom-input"
-                errorMessage={errors.companyName?.message}
-              />
-            )}
-          />
-        </div>
-        <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
-            Business Type <span className="text-red">*</span>
-          </label>
-          <Controller
-            name="businessType"
-            control={control}
-            rules={{ required: "Business Type is required" }}
-            render={({ field: { onChange, value } }) => (
-              <Select
-                onValueChange={(e: any) => {
-                  // // console.log('othn re',e,others)
-                  if (e === "Others") {
-                    setOthers(true);
-                    // onChange(e)
-                    setBs(e);
-                  } else if (
+      <form
+        autoComplete="off"
+        onSubmit={handleSubmit(handleDetailsSubmit, onError2)}
+      >
+        <div className="flex flex-wrap w-full">
+          <div className={"md:w-3/6 w-full p-5 "}>
+            <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+              Company Name <span className="text-red">*</span>
+            </label>
+            <Controller
+              name="companyName"
+              control={control}
+              rules={{ required: "Company Name is required" }}
+              render={({ field: { onChange, value } }) => (
+                <CustomInput
+                  placeholder="Enter your Company Name"
+                  onChange={onChange}
+                  value={value}
+                  isTextArea={false}
+                  customStyles={{
+                    borderRadius: "5px",
+                    border: "1px solid #ccc",
+                    color: "black",
+                  }}
+                  extraClassnames="custom-input"
+                  errorMessage={errors.companyName?.message}
+                />
+              )}
+            />
+          </div>
+          <div className={"md:w-3/6 w-full p-5 "}>
+            <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+              Business Type <span className="text-red">*</span>
+            </label>
+            <Controller
+              name="businessType"
+              control={control}
+              rules={{ required: "Business Type is required" }}
+              render={({ field: { onChange, value } }) => (
+                <Select
+                  onValueChange={(e: any) => {
+                    // // console.log('othn re',e,others)
+                    if (e === "Others") {
+                      setOthers(true);
+                      // onChange(e)
+                      setBs(e);
+                    } else if (
+                      [
+                        "Private Limited",
+                        "Partnership",
+                        "Proprietorship",
+                        "LLP",
+                        "Listed Company",
+                      ].includes(e) == false
+                    ) {
+                      setOthers(true);
+                      // onChange(e)
+
+                      setBs(e);
+                    } else {
+                      setBs(e);
+
+                      setOthers(false);
+                    }
+                    onChange(e);
+                  }}
+                  value={
                     [
                       "Private Limited",
                       "Partnership",
                       "Proprietorship",
                       "LLP",
                       "Listed Company",
-                    ].includes(e) == false
-                  ) {
-                    setOthers(true);
-                    // onChange(e)
-
-                    setBs(e);
-                  } else {
-                    setBs(e);
-
-                    setOthers(false);
+                    ].includes(bs)
+                      ? bs
+                      : others
+                      ? "Others"
+                      : ""
                   }
-                  onChange(e);
-                }}
-                value={
-                  [
-                    "Private Limited",
-                    "Partnership",
-                    "Proprietorship",
-                    "LLP",
-                    "Listed Company",
-                  ].includes(bs)
-                    ? bs
-                    : others
-                    ? "Others"
-                    : ""
-                }
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select Business Type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem>Select Business Type</SelectItem>
-                    {Array.isArray(businessTypes) &&
-                      businessTypes.map((businessType: any) => (
-                        <SelectItem
-                          key={businessType.value}
-                          value={businessType.name}
-                        >
-                          {businessType.name}
-                        </SelectItem>
-                      ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select Business Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem>Select Business Type</SelectItem>
+                      {Array.isArray(businessTypes) &&
+                        businessTypes.map((businessType: any) => (
+                          <SelectItem
+                            key={businessType.value}
+                            value={businessType.name}
+                          >
+                            {businessType.name}
+                          </SelectItem>
+                        ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors && errors.businessType && !others && (
+              <p className="text-[#d22525] text-sm text-left">
+                {errors?.businessType?.message}
+              </p>
             )}
-          />
-          {errors && errors.businessType && !others && (
-            <p className="text-[#d22525] text-sm text-left">
-              {errors?.businessType?.message}
-            </p>
-          )}
-        </div>
-        {others ? (
-          <div className={"md:w-3/6 w-full p-5 "}>
-            <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
-              Other Business Type<span className="text-red">*</span>
-            </label>
-            {/* <Controller
+          </div>
+          {others ? (
+            <div className={"md:w-3/6 w-full p-5 "}>
+              <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                Other Business Type<span className="text-red">*</span>
+              </label>
+              {/* <Controller
             name="businessType"
             control={control}
             rules={{ required: "Other Business Type is required" }}
             render={({ field: { onChange, value } }) => ( */}
-            {/* <CustomInput
+              {/* <CustomInput
                 placeholder="Enter your Business Type"
                   
                   onChange={(e:any)=>{
@@ -786,58 +795,57 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
               />
             )}
           /> */}
-            <CustomInput
-              placeholder="Enter your Business Type"
-              onChange={(e: any) => {
-                handleBusinessTypeChange(e);
-              }}
-              value={others ? otherbusinessType : ""}
-              isTextArea={false}
-              customStyles={{
-                borderRadius: "5px",
-                border: "1px solid #ccc",
-                color: "black",
-              }}
-              extraClassnames="custom-input"
-              errorMessage={otherbusinessTypeErr}
-            />
-          </div>
-        ) : null}
-        
-</div>
-<div className="flex flex-wrap w-full">
-        {/* </div> */}
-        {/* <div style={{ display: "flex" }}> */}
-        <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
-            GST <span className="text-red">*</span>
-          </label>
-          <div className="flex juistify-between items-start">
-            <Controller
-              name="gst"
-              control={control}
-              rules={{ required: "GST is required" }}
-              render={({ field: { onChange, value } }) => (
-                <CustomInput
-                  placeholder="Enter your GST"
-                  onChange={(e: any) =>
-                    handleUppercaseChange("gst", e, onChange)
-                  }
-                  value={value}
-                  isTextArea={false}
-                  textInputStyle={{ textTransform: "uppercase" }}
-                  customStyles={{
-                    borderRadius: "5px",
-                    border: "1px solid #ccc",
-                    color: "black",
-                  }}
-                  extraClassnames="custom-input "
-                  errorMessage={errors.gst?.message}
-                />
-              )}
-            />
-            <div className="flex items-center w-[102px] ml-2">
-              {/* <input
+              <CustomInput
+                placeholder="Enter your Business Type"
+                onChange={(e: any) => {
+                  handleBusinessTypeChange(e);
+                }}
+                value={others ? otherbusinessType : ""}
+                isTextArea={false}
+                customStyles={{
+                  borderRadius: "5px",
+                  border: "1px solid #ccc",
+                  color: "black",
+                }}
+                extraClassnames="custom-input"
+                errorMessage={otherbusinessTypeErr}
+              />
+            </div>
+          ) : null}
+        </div>
+        <div className="flex flex-wrap w-full">
+          {/* </div> */}
+          {/* <div style={{ display: "flex" }}> */}
+          <div className={"md:w-3/6 w-full p-5 "}>
+            <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+              GST <span className="text-red">*</span>
+            </label>
+            <div className="flex juistify-between items-start">
+              <Controller
+                name="gst"
+                control={control}
+                rules={{ required: "GST is required" }}
+                render={({ field: { onChange, value } }) => (
+                  <CustomInput
+                    placeholder="Enter your GST"
+                    onChange={(e: any) =>
+                      handleUppercaseChange("gst", e, onChange)
+                    }
+                    value={value}
+                    isTextArea={false}
+                    textInputStyle={{ textTransform: "uppercase" }}
+                    customStyles={{
+                      borderRadius: "5px",
+                      border: "1px solid #ccc",
+                      color: "black",
+                    }}
+                    extraClassnames="custom-input "
+                    errorMessage={errors.gst?.message}
+                  />
+                )}
+              />
+              <div className="flex items-center w-[102px] ml-2">
+                {/* <input
                         type="file"
                         ref={fileInputRef}
                         onChange={(e) => handleFileInputChange(e, 'gst')}
@@ -852,98 +860,97 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   disabled={!!gstExtractPathUrl}
                   className="text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
                 >
+                  <FiUpload />
+                  Upload
+                  {/* <input type="file" hidden onChange={handleFileInputChange} /> */}
+                  <input
+                    type="file"
+                    {...register("gstDoc")}
+                    className="opacity-0 absolute left-0 leading-[32px] w-full cursor-pointer"
+                    onChange={(e) => handleFileInputChange(e, "gst")}
+                  />
+                  {}
+                </Button>
+              </div>
+            </div>
+            {(gstError || gstImageError) && (
+              <p className="text-red text-sm mt-1 text-left" color="error">
+                {gstError || gstImageError}
+              </p>
+            )}
+            {/* Uploaded File Preview and Remove Option */}
+            <div className="mt-2">
+              {gstExtractPathUrl.length === 0 ? (
+                ""
+              ) : (
+                <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
+                  <p className="truncate text-black text-[14px] w-[300px] mr-[10px]">
+                    {gstExtractPathUrl.split("/").pop()}
+                  </p>
+                  {gstExtractPathUrl.endsWith(".pdf") ? (
+                    <MdOutlineFileDownload
+                      size={20}
+                      width={20}
+                      height={20}
+                      className="cursor-pointer"
+                      onClick={() =>
+                        window.open(`${assetURL + "/" + gstExtractPathUrl}`)
+                      }
+                      // title="View file"
+                    />
+                  ) : (
+                    <IoEyeOutline
+                      size={20}
+                      width={20}
+                      height={20}
+                      className="cursor-pointer"
+                      onClick={() =>
+                        window.open(`${assetURL + "/" + gstExtractPathUrl}`)
+                      }
+                      // title="View file"
+                    />
+                  )}
 
-                <FiUpload />
-                Upload
-                {/* <input type="file" hidden onChange={handleFileInputChange} /> */}
-                <input
-                  type="file"
-                  {...register("gstDoc")}
-                  className="opacity-0 absolute left-0 leading-[32px] w-full cursor-pointer"
-                  onChange={(e) => handleFileInputChange(e, "gst")}
-                />
-                {}
-              </Button>
+                  <MdClose
+                    size={20}
+                    width={20}
+                    height={20}
+                    className="cursor-pointer"
+                    onClick={() => handleRemoveFile("gst")} // Pass 'gst' or other necessary data
+                    // title="Remove file"
+                  />
+                </div>
+              )}
             </div>
           </div>
-          {(gstError || gstImageError) && (
-            <p className="text-red text-sm mt-1 text-left" color="error">
-              {gstError || gstImageError}
-            </p>
-          )}
-          {/* Uploaded File Preview and Remove Option */}
-          <div className="mt-2">
-            {gstExtractPathUrl.length === 0 ? (
-              ""
-            ) : (
-              <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
-                <p
-                  className="truncate text-black text-[14px] w-[300px] mr-[10px]"
-
-                >
-                  {gstExtractPathUrl.split("/").pop()}
-                </p>
-                {gstExtractPathUrl.endsWith('.pdf')?
-                (
-                <MdOutlineFileDownload
-                  size={20}
-                  width={20}
-                  height={20}
-                  className="cursor-pointer"
-                  onClick={() => window.open(`${assetURL +'/'+ gstExtractPathUrl}`)}
-                  // title="View file"
-                />
-                ):(
-                  <IoEyeOutline
-                  size={20}
-                  width={20}
-                  height={20}
-                  className="cursor-pointer"
-                  onClick={() => window.open(`${assetURL +'/'+ gstExtractPathUrl}`)}
-                  // title="View file"
-                />
+          <div className={"md:w-3/6 w-full p-5 "}>
+            <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+              TAN
+            </label>
+            <div className="flex juistify-between items-start">
+              <Controller
+                name="tan"
+                control={control}
+                // rules={{ required: "TAN is required" }}
+                render={({ field: { onChange, value } }) => (
+                  <CustomInput
+                    placeholder="Enter your TAN"
+                    onChange={onChange}
+                    value={value}
+                    textInputStyle={{ textTransform: "uppercase" }}
+                    isTextArea={false}
+                    customStyles={{
+                      borderRadius: "5px",
+                      border: "1px solid #ccc",
+                      color: "black",
+                    }}
+                    extraClassnames="custom-input"
+                    errorMessage={errors.tan?.message}
+                  />
                 )}
-
-                <MdClose
-                  size={20}
-                  width={20}
-                  height={20}
-                  className="cursor-pointer"
-                  onClick={() => handleRemoveFile("gst")} // Pass 'gst' or other necessary data
-                  // title="Remove file"
-                />
-              </div>
-            )}
-          </div>
-        </div>
-        <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
-            TAN 
-          </label>
-          <div className="flex juistify-between items-start">
-            <Controller
-              name="tan"
-              control={control}
-              // rules={{ required: "TAN is required" }}
-              render={({ field: { onChange, value } }) => (
-                <CustomInput
-                  placeholder="Enter your TAN"
-                  onChange={onChange}
-                  value={value}
-                  textInputStyle={{ textTransform: "uppercase" }}
-                  isTextArea={false}
-                  customStyles={{
-                    borderRadius: "5px",
-                    border: "1px solid #ccc",
-                    color: "black",
-                  }}
-                  extraClassnames="custom-input"
-                  errorMessage={errors.tan?.message}
-                />
-              )}
-            />
-            <div className="flex items-center w-[102px] ml-2">
-              {/* <input
+              />
+              <div className="flex items-center w-[102px] ml-2">
+                {/* <input
                         type="file"
                         ref={fileInputRef}
                         onChange={(e) => handleFileInputChange(e, 'gst')}
@@ -958,102 +965,100 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   disabled={!!tanExtractPathUrl}
                   className="text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
                 >
+                  <FiUpload />
+                  Upload
+                  {/* <input type="file" hidden onChange={handleFileInputChange} /> */}
+                  <input
+                    type="file"
+                    {...register("tanDoc")}
+                    className="opacity-0 absolute left-0 leading-[32px] w-full cursor-pointer"
+                    onChange={(e) => handleFileInputChange(e, "tan")}
+                  />
+                  {}
+                </Button>
+              </div>
+            </div>
+            {(tanError || tanImageError) && (
+              <p className="text-red text-sm mt-1 text-left" color="error">
+                {tanError || tanImageError}
+              </p>
+            )}
+            {/* Uploaded File Preview and Remove Option */}
+            <div className="mt-2">
+              {tanExtractPathUrl.length === 0 ? (
+                ""
+              ) : (
+                <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
+                  <p className="truncate text-black text-[14px] w-[300px] mr-[10px]">
+                    {tanExtractPathUrl.split("/").pop()}
+                  </p>
+                  {tanExtractPathUrl.endsWith(".pdf") ? (
+                    <MdOutlineFileDownload
+                      size={20}
+                      width={20}
+                      height={20}
+                      className="cursor-pointer"
+                      onClick={() =>
+                        window.open(`${assetURL + "/" + tanExtractPathUrl}`)
+                      }
+                      // title="View file"
+                    />
+                  ) : (
+                    <IoEyeOutline
+                      size={20}
+                      width={20}
+                      height={20}
+                      className="cursor-pointer"
+                      onClick={() =>
+                        window.open(`${assetURL + "/" + tanExtractPathUrl}`)
+                      }
+                      // title="View file"
+                    />
+                  )}
 
-                <FiUpload />
-                Upload
-                {/* <input type="file" hidden onChange={handleFileInputChange} /> */}
-                <input
-                  type="file"
-                  {...register("tanDoc")}
-                  className="opacity-0 absolute left-0 leading-[32px] w-full cursor-pointer"
-                  onChange={(e) => handleFileInputChange(e, "tan")}
-                />
-                {}
-              </Button>
+                  <MdClose
+                    size={20}
+                    width={20}
+                    height={20}
+                    className="cursor-pointer"
+                    onClick={() => handleRemoveFile("tan")} // Pass 'gst' or other necessary data
+                    // title="Remove file"
+                  />
+                </div>
+              )}
             </div>
           </div>
-          {(tanError || tanImageError) && (
-            <p className="text-red text-sm mt-1 text-left" color="error">
-              {tanError || tanImageError}
-            </p>
-          )}
-          {/* Uploaded File Preview and Remove Option */}
-          <div className="mt-2">
-            {tanExtractPathUrl.length === 0 ? (
-              ""
-            ) : (
-              <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
-                <p
-                  className="truncate text-black text-[14px] w-[300px] mr-[10px]"
-
-                >
-                  {tanExtractPathUrl.split("/").pop()}
-                </p>
-                {tanExtractPathUrl.endsWith('.pdf')?
-                
-                ( 
-                <MdOutlineFileDownload
-                  size={20}
-                  width={20}
-                  height={20}
-                  className="cursor-pointer"
-                  onClick={() => window.open(`${assetURL +'/'+ tanExtractPathUrl}`)}
-                  // title="View file"
-                />
-                ):(
-                  <IoEyeOutline
-                  size={20}
-                  width={20}
-                  height={20}
-                  className="cursor-pointer"
-                  onClick={() => window.open(`${assetURL +'/'+ tanExtractPathUrl}`)}
-                  // title="View file"
-                />
-                )}
-
-                <MdClose
-                  size={20}
-                  width={20}
-                  height={20}
-                  className="cursor-pointer"
-                  onClick={() => handleRemoveFile("tan")} // Pass 'gst' or other necessary data
-                  // title="Remove file"
-                />
-              </div>
-            )}
-          </div>
-        </div>
         </div>
         <div className="flex flex-wrap w-full">
-        <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
-            PAN <span className="text-red">*</span>
-          </label>
-          <div className="flex juistify-between items-start">
-            <Controller
-              name="pan"
-              control={control}
-              rules={{ required: "PAN is required" }}
-              render={({ field: { onChange, value } }) => (
-                <CustomInput
-                  placeholder="Enter your PAN"
-                  onChange={onChange}
-                  value={value}
-                  isTextArea={false}
-                  textInputStyle={{ textTransform: "uppercase" }}
-                  customStyles={{
-                    borderRadius: "5px",
-                    border: "1px solid #ccc",
-                    color: "black",
-                  }}
-                  extraClassnames="custom-input"
-                  errorMessage={errors.pan?.message}
-                />
-              )}
-            />
+          <div className={"md:w-3/6 w-full p-5 "}>
+            <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+              PAN <span className="text-red">*</span>
+            </label>
+            <div className="flex juistify-between items-start">
+              <Controller
+                name="pan"
+                control={control}
+                rules={{ required: "PAN is required" }}
+                render={({ field: { onChange, value } }) => (
+                  <CustomInput
+                    placeholder="Enter your PAN"
+                    onChange={onChange}
+                    value={value}
+                    isTextArea={false}
+                    textInputStyle={{ textTransform: "uppercase" }}
+                    customStyles={{
+                      borderRadius: "5px",
+                      border: "1px solid #ccc",
+                      color: "black",
+                    }}
+                    extraClassnames="custom-input"
+                    errorMessage={errors.pan?.message}
+                  />
+                )}
+              />
 
-            <div className="flex items-center w-[102px] ml-2">
-              {/* <input
+              <div className="flex items-center w-[102px] ml-2">
+                {/* <input
                         type="file"
                         ref={fileInputRef}
                         onChange={(e) => handleFileInputChange(e, 'gst')}
@@ -1068,115 +1073,108 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   disabled={!!panExtractPathUrl}
                   className="text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
                 >
+                  <FiUpload />
+                  Upload
+                  {/* <input type="file" hidden onChange={handleFileInputChange} /> */}
+                  <input
+                    type="file"
+                    {...register("panDoc")}
+                    className="opacity-0 absolute left-0 leading-[32px] w-full cursor-pointer"
+                    onChange={(e) => handleFileInputChange(e, "pan")}
+                  />
+                  {}
+                </Button>
+              </div>
+            </div>
+            {(panError || panImageError) && (
+              <p className="text-red text-sm mt-1 text-left" color="error">
+                {panError || panImageError}
+              </p>
+            )}
+            {/* Uploaded File Preview and Remove Option */}
+            <div className="mt-2">
+              {panExtractPathUrl.length === 0 ? (
+                ""
+              ) : (
+                <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
+                  <p className="truncate text-black text-[14px] w-[300px] mr-[10px]">
+                    {panExtractPathUrl.split("/").pop()}
+                  </p>
+                  {panExtractPathUrl.endsWith(".pdf") ? (
+                    <MdOutlineFileDownload
+                      size={20}
+                      width={20}
+                      height={20}
+                      className="cursor-pointer"
+                      onClick={() =>
+                        window.open(`${assetURL + "/" + panExtractPathUrl}`)
+                      }
+                      // title="View file"
+                    />
+                  ) : (
+                    <IoEyeOutline
+                      size={20}
+                      width={20}
+                      height={20}
+                      className="cursor-pointer"
+                      onClick={() =>
+                        window.open(`${assetURL + "/" + panExtractPathUrl}`)
+                      }
+                      // title="View file"
+                    />
+                  )}
 
-                <FiUpload />
-                Upload
-                {/* <input type="file" hidden onChange={handleFileInputChange} /> */}
-                <input
-                  type="file"
-                  {...register("panDoc")}
-                  className="opacity-0 absolute left-0 leading-[32px] w-full cursor-pointer"
-                  onChange={(e) => handleFileInputChange(e, "pan")}
-                />
-                {}
-              </Button>
+                  <MdClose
+                    size={20}
+                    width={20}
+                    height={20}
+                    className="cursor-pointer"
+                    onClick={() => handleRemoveFile("pan")} // Pass 'gst' or other necessary data
+                    // title="Remove file"
+                  />
+                </div>
+              )}
             </div>
           </div>
-          {(panError || panImageError) && (
-            <p className="text-red text-sm mt-1 text-left" color="error">
-              {panError || panImageError}
-            </p>
-          )}
-          {/* Uploaded File Preview and Remove Option */}
-          <div className="mt-2">
-            {panExtractPathUrl.length === 0 ? (
-              ""
-            ) : (
-              <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
-                <p
-                  className="truncate text-black text-[14px] w-[300px] mr-[10px]"
-
-                >
-                  {panExtractPathUrl.split("/").pop()}
-                </p>
-                {panExtractPathUrl.endsWith('.pdf')?
-                
-                 ( <MdOutlineFileDownload
-                  size={20}
-                  width={20}
-                  height={20}
-                  className="cursor-pointer"
-                  onClick={() => window.open(`${assetURL +'/'+ panExtractPathUrl}`)}
-                  // title="View file"
+          <div className={"md:w-3/6 w-full p-5 "}>
+            <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+              Company Address <span className="text-red">*</span>
+            </label>
+            <Controller
+              name="companyAddress"
+              control={control}
+              rules={{ required: "Company Address is required" }}
+              render={({ field: { onChange, value } }) => (
+                <CustomInput
+                  placeholder="Enter your Company Address"
+                  onChange={onChange}
+                  value={value}
+                  isTextArea={false}
+                  customStyles={{
+                    borderRadius: "5px",
+                    border: "1px solid #ccc",
+                    color: "black",
+                  }}
+                  extraClassnames="custom-input"
+                  errorMessage={errors.companyAddress?.message}
                 />
-                 ):
-                (
-                  <IoEyeOutline
-                  size={20}
-                  width={20}
-                  height={20}
-                  className="cursor-pointer"
-                  onClick={() => window.open(`${assetURL +'/'+ panExtractPathUrl}`)}
-                  // title="View file"
-                />
-                )
-              }
-                
-
-                <MdClose
-                  size={20}
-                  width={20}
-                  height={20}
-                  className="cursor-pointer"
-                  onClick={() => handleRemoveFile("pan")} // Pass 'gst' or other necessary data
-                  // title="Remove file"
-                />
-              </div>
-            )}
+              )}
+            />
           </div>
         </div>
-        <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
-            Company Address <span className="text-red">*</span>
-          </label>
-          <Controller
-            name="companyAddress"
-            control={control}
-            rules={{ required: "Company Address is required" }}
-            render={({ field: { onChange, value } }) => (
-              <CustomInput
-                placeholder="Enter your Company Address"
-                onChange={onChange}
-                value={value}
-                isTextArea={false}
-                customStyles={{
-                  borderRadius: "5px",
-                  border: "1px solid #ccc",
-                  color: "black",
-                }}
-                extraClassnames="custom-input"
-                errorMessage={errors.companyAddress?.message}
-              />
-            )}
+        {/* </div> */}
+
+        <div className="block p-5">
+          <CustomButton
+            title={"Save"}
+            className="ml-3 bg-secondary hover:bg-primary h-12 md:h-12 md:w-32 w-30 md:text-md text-sm text-white"
+            customStyles={{}}
+            //onPress={onSubmit}
+            type="submit"
+            loading={isLoading}
           />
         </div>
-        </div>
-        {/* </div> */}
-    
-    
-
-      <div className="block p-5">
-        <CustomButton
-          title={"Save"}
-          className="ml-3 bg-secondary hover:bg-primary h-12 md:h-12 md:w-32 w-30 md:text-md text-sm text-white"
-          customStyles={{}}
-          //onPress={onSubmit}
-          type="submit"
-          loading={isLoading}
-        />
-      </div>
-      
-    </form>
+      </form>
     </div>
   );
 };

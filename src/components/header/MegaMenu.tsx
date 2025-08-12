@@ -168,7 +168,6 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
   };
 
   const handleCategoryClick = (category: any) => {
-
     if (category.childCategories?.length > 0) {
       setOpenedCategoryId((prev) => {
         const newId = prev === category._id ? null : category._id;
@@ -211,7 +210,9 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
             </button>
             <div
               ref={sidebarRef}
-              className={`${styles.allMenuPopup} ${sidebarOpen ? styles.open : ''} w-[1200px] bg-white shadow-lg z-50 rounded-lg overflow-hidden`}
+              className={`${styles.allMenuPopup} ${
+                sidebarOpen ? styles.open : ""
+              } w-[1200px] bg-white shadow-lg z-50 rounded-lg overflow-hidden`}
             >
               <div className="flex h-[500px]">
                 {/* Left Side - Search and Categories */}
@@ -240,38 +241,45 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                     }}
                   >
                     {mainCategories.map((category, index) => (
-                     <div
-                     key={category._id}
-                     className={`flex items-center justify-between p-4 rounded-lg mb-2 transition-all duration-200
+                      <div
+                        key={category._id}
+                        className={`flex items-center justify-between p-4 rounded-lg mb-2 transition-all duration-200
                        ${
                          selectedCategory?._id === category._id ||
                          (index === 0 && !selectedCategory)
                            ? "bg-teal-600 text-white shadow-sm"
                            : "bg-white hover:bg-gray-50 text-gray-700"
                        }
-                       ${category.subCategories && category.subCategories.length > 0 ? "cursor-pointer" : "cursor-default"}
+                       ${
+                         category.subCategories &&
+                         category.subCategories.length > 0
+                           ? "cursor-pointer"
+                           : "cursor-default"
+                       }
                      `}
-                     onMouseEnter={
-                       category.subCategories && category.subCategories.length > 0
-                         ? () => handleCategoryClick(category)
-                         : undefined
-                     }
-                   >
-                     <span className="text-sm font-medium">
-                       {category.name}
-                     </span>
-                     {category.subCategories && category.subCategories.length > 0 && (
-                       <GoArrowRight
-                         size={18}
-                         className={`transition-colors duration-200 ${
-                           selectedCategory?._id === category._id ||
-                           (index === 0 && !selectedCategory)
-                             ? "text-white"
-                             : "text-gray-400"
-                         }`}
-                       />
-                     )}
-                   </div>                     
+                        onMouseEnter={
+                          category.subCategories &&
+                          category.subCategories.length > 0
+                            ? () => handleCategoryClick(category)
+                            : undefined
+                        }
+                      >
+                        <span className="text-sm font-medium">
+                          {category.name}
+                        </span>
+                        {category.subCategories &&
+                          category.subCategories.length > 0 && (
+                            <GoArrowRight
+                              size={18}
+                              className={`transition-colors duration-200 ${
+                                selectedCategory?._id === category._id ||
+                                (index === 0 && !selectedCategory)
+                                  ? "text-white"
+                                  : "text-gray-400"
+                              }`}
+                            />
+                          )}
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -291,9 +299,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                     <>
                       {/* Header */}
                       <div className="px-8 py-6 border-b border-gray-100">
-                      <h1 className="sr-only">
-                         Sustainable Products
-                        </h1>
+                        <h1 className="sr-only">Sustainable Products</h1>
                         <h2 className="text-2xl font-semibold text-gray-800">
                           {selectedCategory
                             ? selectedCategory.name
@@ -330,9 +336,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                 onMouseEnter={() =>
                                   handleMouseEnter(subCat._id)
                                 }
-                                onClick={() =>
-                                  setOpenedCategoryId(subCat._id)
-                                }
+                                onClick={() => setOpenedCategoryId(subCat._id)}
                               >
                                 <span className="text-sm flex items-center justify-between">
                                   {subCat.name}
@@ -351,8 +355,6 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
 
                         {/* Child Categories Area with Background Pattern */}
                         <div className="flex-1 p-2 pr-2 overflow-y-auto bg-gradient-to-br from-pink-50 to-blue-50 relative">
-
-
                           {/* Content */}
                           <div className="relative z-10 p-3 w-full">
                             {(() => {
@@ -374,16 +376,27 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                     const itemsPerRow = 2;
 
                                     // 1. Calculate number of rows needed
-                                    const numRows = Math.ceil(children.length / itemsPerRow);
+                                    const numRows = Math.ceil(
+                                      children.length / itemsPerRow
+                                    );
 
                                     // 2. Build columns
-                                    const columns = Array.from({ length: itemsPerRow }, (_, colIdx) =>
-                                      children.filter((_, idx) => idx % itemsPerRow === colIdx)
+                                    const columns = Array.from(
+                                      { length: itemsPerRow },
+                                      (_, colIdx) =>
+                                        children.filter(
+                                          (_, idx) =>
+                                            idx % itemsPerRow === colIdx
+                                        )
                                     );
 
                                     // 3. Build rows from columns
-                                    const tableRows = Array.from({ length: numRows }, (_, rowIdx) =>
-                                      columns.map(col => col[rowIdx] || null)
+                                    const tableRows = Array.from(
+                                      { length: numRows },
+                                      (_, rowIdx) =>
+                                        columns.map(
+                                          (col) => col[rowIdx] || null
+                                        )
                                     );
 
                                     return (
@@ -398,29 +411,53 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                         <div className="w-full overflow-x-auto max-h-[350px] overflow-y-auto">
                                           <table className="w-full border-collapse">
                                             <tbody>
-                                              {tableRows.map((row, rowIndex) => (
-                                                <tr key={rowIndex} className="hover:bg-gray-50">
-                                                  {row.map((child, colIndex) => (
-                                                    <td
-                                                      key={child ? child._id : `empty-${colIndex}`}
-                                                      className="py-3 px-4 text-gray-600 align-top"
-                                                    >
-                                                      {child ? (
-                                                        <Link
-                                                          href={`/products/${currentCategory?.seoSlug || 'category'}/${subCat?.seoSlug || 'sub-category'}/${child?.seoSlug || 'child-category'}?ccid=${child._id}`}
-                                                          className="block hover:text-teal-600 transition-colors duration-200"
-                                                          onClick={() => {
-                                                            toggleSidebar();
-                                                            handleClick(child);
-                                                          }}
+                                              {tableRows.map(
+                                                (row, rowIndex) => (
+                                                  <tr
+                                                    key={rowIndex}
+                                                    className="hover:bg-gray-50"
+                                                  >
+                                                    {row.map(
+                                                      (child, colIndex) => (
+                                                        <td
+                                                          key={
+                                                            child
+                                                              ? child._id
+                                                              : `empty-${colIndex}`
+                                                          }
+                                                          className="py-3 px-4 text-gray-600 align-top"
                                                         >
-                                                          {child.name}
-                                                        </Link>
-                                                      ) : null}
-                                                    </td>
-                                                  ))}
-                                                </tr>
-                                              ))}
+                                                          {child ? (
+                                                            <Link
+                                                              href={`/products/${
+                                                                currentCategory?.seoSlug ||
+                                                                "category"
+                                                              }/${
+                                                                subCat?.seoSlug ||
+                                                                "sub-category"
+                                                              }/${
+                                                                child?.seoSlug ||
+                                                                "child-category"
+                                                              }?ccid=${
+                                                                child._id
+                                                              }`}
+                                                              className="block hover:text-teal-600 transition-colors duration-200"
+                                                              onClick={() => {
+                                                                toggleSidebar();
+                                                                handleClick(
+                                                                  child
+                                                                );
+                                                              }}
+                                                            >
+                                                              {child.name}
+                                                            </Link>
+                                                          ) : null}
+                                                        </td>
+                                                      )
+                                                    )}
+                                                  </tr>
+                                                )
+                                              )}
                                             </tbody>
                                           </table>
                                         </div>
@@ -464,7 +501,9 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                     </a>
                   </a> */}
                   <Link
-                    href={`/products/${menuItem?.seoSlug || 'sub-category'}?scid=${menuItem?._id}`}
+                    href={`/products/${
+                      menuItem?.seoSlug || "sub-category"
+                    }?scid=${menuItem?._id}`}
                     className={`block font-semibold text-md py-2 px-3 text-white flex items-center ${styles.parentMenuItemText}`}
                     onClick={handleClick}
                   >
@@ -491,7 +530,11 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                 </a>
                               </a> */}
                               <Link
-                                href={`/products/${menuItem?.seoSlug || 'sub-category'}/${subItem?.seoSlug || 'child-category'}?ccid=${subItem?._id}`}
+                                href={`/products/${
+                                  menuItem?.seoSlug || "sub-category"
+                                }/${
+                                  subItem?.seoSlug || "child-category"
+                                }?ccid=${subItem?._id}`}
                                 replace={true}
                                 className="block text-black text-sm my-1 px-2 py-1"
                                 onClick={handleClick}
@@ -554,7 +597,9 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                           <ViewMore text={menuItem?.name} length={30} />
                         </h4> */}
                         <Link
-                          href={`/products/${menuItem?.seoSlug || 'sub-category'}?scid=${menuItem?._id}`}
+                          href={`/products/${
+                            menuItem?.seoSlug || "sub-category"
+                          }?scid=${menuItem?._id}`}
                           className="font-medium text-base text-primary mb-1.5 cursor-pointer"
                         >
                           <ViewMore text={menuItem?.name} length={30} />
@@ -573,7 +618,11 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                             // </a>
                             <Link
                               key={itemIndex}
-                              href={`/products/${menuItem?.seoSlug || 'sub-category'}/${item?.seoSlug || 'child-category'}?ccid=${item?._id}`}
+                              href={`/products/${
+                                menuItem?.seoSlug || "sub-category"
+                              }/${item?.seoSlug || "child-category"}?ccid=${
+                                item?._id
+                              }`}
                               className="block text-black text-sm my-1"
                               onClick={handleClick}
                             >

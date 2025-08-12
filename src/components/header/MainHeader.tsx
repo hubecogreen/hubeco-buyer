@@ -48,8 +48,11 @@ const Header: React.FC<HeaderProps> = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
-  const [isProductSegmentsOpen, setIsProductSegmentsOpen] = useState<boolean>(false);
-  const [rotatingPlaceholders, setRotatingPlaceholders] = useState<string[]>([]);
+  const [isProductSegmentsOpen, setIsProductSegmentsOpen] =
+    useState<boolean>(false);
+  const [rotatingPlaceholders, setRotatingPlaceholders] = useState<string[]>(
+    []
+  );
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
   const cartCountRedux = store.getState().user.cartCount;
@@ -100,10 +103,10 @@ const Header: React.FC<HeaderProps> = () => {
 
   // Toggle function for product segments (mobile)
   const toggleProductSegments = () => {
-    console.log('Toggle called, current state:', isProductSegmentsOpen);
-    setIsProductSegmentsOpen(prev => {
+    console.log("Toggle called, current state:", isProductSegmentsOpen);
+    setIsProductSegmentsOpen((prev) => {
       const newState = !prev;
-      console.log('New state will be:', newState);
+      console.log("New state will be:", newState);
       return newState;
     });
   };
@@ -130,19 +133,22 @@ const Header: React.FC<HeaderProps> = () => {
   // Fetch categories for rotating placeholders
   const getCategoriesForPlaceholders = async () => {
     try {
-      const result = await callApi(getEndpoint.default.PRODUCTS_CATEGORIES, "GET") as any;
+      const result = (await callApi(
+        getEndpoint.default.PRODUCTS_CATEGORIES,
+        "GET"
+      )) as any;
       if (result?.data) {
         const placeholders: string[] = [];
-        
+
         // Add main categories
         result.data.forEach((category: any) => {
           placeholders.push(`Search for ${category.name}...`);
-          
+
           // Add subcategories
           if (category.subCategories) {
             category.subCategories.forEach((subCat: any) => {
               placeholders.push(`Search for ${subCat.name}...`);
-              
+
               // Add child categories
               if (subCat.childCategories) {
                 subCat.childCategories.forEach((childCat: any) => {
@@ -152,7 +158,7 @@ const Header: React.FC<HeaderProps> = () => {
             });
           }
         });
-        
+
         setRotatingPlaceholders(placeholders);
       }
     } catch (error) {
@@ -166,7 +172,7 @@ const Header: React.FC<HeaderProps> = () => {
         "Search for Paint...",
         "Search for Tools...",
         "Search for Plumbing...",
-        "Search for Electrical..."
+        "Search for Electrical...",
       ]);
     }
   };
@@ -174,11 +180,11 @@ const Header: React.FC<HeaderProps> = () => {
   // Rotating placeholder effect with animation timing
   useEffect(() => {
     if (rotatingPlaceholders.length === 0) return;
-    
+
     const interval = setInterval(() => {
-      console.log('Changing placeholder from MainHeader');
-      setCurrentPlaceholderIndex((prevIndex) => 
-        (prevIndex + 1) % rotatingPlaceholders.length
+      console.log("Changing placeholder from MainHeader");
+      setCurrentPlaceholderIndex(
+        (prevIndex) => (prevIndex + 1) % rotatingPlaceholders.length
       );
     }, 2000); // Change every 2 seconds
 
@@ -410,7 +416,10 @@ const Header: React.FC<HeaderProps> = () => {
           {/* Left side - Fixed elements (never affected) */}
           <div className="flex items-center justify-center space-x-6">
             {/* Mobile Logo */}
-            <Link href="/" className={`${styles.logo} w-80 h-8 md:hidden hover:cursor-pointer mr-[35px]`}>
+            <Link
+              href="/"
+              className={`${styles.logo} w-80 h-8 md:hidden hover:cursor-pointer mr-[35px]`}
+            >
               <Image
                 src="/images/Logo-2.webp"
                 className="h-[35px]"
@@ -423,18 +432,21 @@ const Header: React.FC<HeaderProps> = () => {
                 loading="lazy"
               />
             </Link>
-            
-            
+
             {/* Desktop Navigation Links */}
             <div className="hidden md:flex items-center space-x-6">
               <div className="relative">
-                <div 
+                <div
                   className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative z-20"
                   onMouseEnter={handleProductSegmentsMouseEnter}
                   onMouseLeave={handleProductSegmentsMouseLeave}
                   data-product-segments-button
                 >
-                  <span className={`font-medium relative ${isProductSegmentsOpen ? 'text-[#B90647]' : 'text-gray-800'}`}>
+                  <span
+                    className={`font-medium relative ${
+                      isProductSegmentsOpen ? "text-[#B90647]" : "text-gray-800"
+                    }`}
+                  >
                     Product Segments
                     {isProductSegmentsOpen && (
                       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
@@ -442,7 +454,7 @@ const Header: React.FC<HeaderProps> = () => {
                   </span>
                   <svg
                     className={`w-4 h-4 text-gray-600 transition-transform duration-200 ${
-                      isProductSegmentsOpen ? 'rotate-180' : ''
+                      isProductSegmentsOpen ? "rotate-180" : ""
                     }`}
                     fill="none"
                     stroke="currentColor"
@@ -456,17 +468,17 @@ const Header: React.FC<HeaderProps> = () => {
                     />
                   </svg>
                 </div>
-                <div 
+                <div
                   onMouseEnter={handleProductSegmentsMouseEnter}
                   onMouseLeave={handleProductSegmentsMouseLeave}
                 >
-                  <ProductSegmentsDropdown 
+                  <ProductSegmentsDropdown
                     isOpen={isProductSegmentsOpen}
                     onClose={() => setIsProductSegmentsOpen(false)}
                   />
                 </div>
               </div>
-              <Link 
+              <Link
                 href="/green-financing"
                 className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors"
               >
@@ -492,12 +504,16 @@ const Header: React.FC<HeaderProps> = () => {
             {/* Mobile Navigation Links */}
             <div className="md:hidden flex items-center space-x-4">
               <div className="relative">
-                <div 
+                <div
                   className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative z-20"
                   onClick={toggleProductSegments}
                   data-product-segments-button
                 >
-                  <span className={`font-medium relative text-sm ${isProductSegmentsOpen ? 'text-[#B90647]' : 'text-gray-800'}`}>
+                  <span
+                    className={`font-medium relative text-sm ${
+                      isProductSegmentsOpen ? "text-[#B90647]" : "text-gray-800"
+                    }`}
+                  >
                     Product Segments
                     {isProductSegmentsOpen && (
                       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
@@ -505,7 +521,7 @@ const Header: React.FC<HeaderProps> = () => {
                   </span>
                   <svg
                     className={`w-3 h-3 text-gray-600 transition-transform duration-200 ${
-                      isProductSegmentsOpen ? 'rotate-180' : ''
+                      isProductSegmentsOpen ? "rotate-180" : ""
                     }`}
                     fill="none"
                     stroke="currentColor"
@@ -519,12 +535,12 @@ const Header: React.FC<HeaderProps> = () => {
                     />
                   </svg>
                 </div>
-                <ProductSegmentsDropdown 
+                <ProductSegmentsDropdown
                   isOpen={isProductSegmentsOpen}
                   onClose={() => setIsProductSegmentsOpen(false)}
                 />
               </div>
-              <Link 
+              <Link
                 href="/green-financing"
                 className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors"
               >
@@ -551,68 +567,68 @@ const Header: React.FC<HeaderProps> = () => {
           {/* Desktop Additional Navigation Links */}
           {!isSearchFocused && (
             <div className="hidden md:flex items-center space-x-10">
-              <Link 
+              <Link
                 href="/brands"
                 className={`font-medium cursor-pointer transition-colors relative ${
-                  pathname === '/brands' 
-                    ? 'text-[#B90647]' 
-                    : 'text-gray-800 hover:text-secondary'
+                  pathname === "/brands"
+                    ? "text-[#B90647]"
+                    : "text-gray-800 hover:text-secondary"
                 }`}
               >
                 Brands
-                {pathname === '/brands' && (
+                {pathname === "/brands" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link>
-              <Link 
+              <Link
                 href="/blogs"
                 className={`font-medium cursor-pointer transition-colors relative ${
-                  pathname === '/blogs' 
-                    ? 'text-[#B90647]' 
-                    : 'text-gray-800 hover:text-secondary'
+                  pathname === "/blogs"
+                    ? "text-[#B90647]"
+                    : "text-gray-800 hover:text-secondary"
                 }`}
               >
                 Blogs
-                {pathname === '/blogs' && (
+                {pathname === "/blogs" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link>
-              <Link 
+              <Link
                 href="/products"
                 className={`font-medium cursor-pointer transition-colors relative ${
-                  pathname === '/products' 
-                    ? 'text-[#B90647]' 
-                    : 'text-gray-800 hover:text-secondary'
+                  pathname === "/products"
+                    ? "text-[#B90647]"
+                    : "text-gray-800 hover:text-secondary"
                 }`}
               >
                 Products
-                {pathname === '/products' && (
+                {pathname === "/products" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link>
-              <Link 
+              <Link
                 href="/about"
                 className={`font-medium cursor-pointer transition-colors relative ${
-                  pathname === '/about' 
-                    ? 'text-[#B90647]' 
-                    : 'text-gray-800 hover:text-secondary'
+                  pathname === "/about"
+                    ? "text-[#B90647]"
+                    : "text-gray-800 hover:text-secondary"
                 }`}
               >
                 About Us
-                {pathname === '/about' && (
+                {pathname === "/about" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link>
-              <Link 
+              <Link
                 href="/contact"
                 className={`font-medium cursor-pointer transition-colors relative ${
-                  pathname === '/contact' 
-                    ? 'text-[#B90647]' 
-                    : 'text-gray-800 hover:text-secondary'
+                  pathname === "/contact"
+                    ? "text-[#B90647]"
+                    : "text-gray-800 hover:text-secondary"
                 }`}
               >
                 Contact Us
-                {pathname === '/contact' && (
+                {pathname === "/contact" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link>
@@ -622,68 +638,68 @@ const Header: React.FC<HeaderProps> = () => {
           {/* Mobile Additional Navigation Links */}
           {!isSearchFocused && (
             <div className="md:hidden flex items-center space-x-6">
-              <Link 
+              <Link
                 href="/brands"
                 className={`font-medium cursor-pointer transition-colors relative text-sm ${
-                  pathname === '/brands' 
-                    ? 'text-[#B90647]' 
-                    : 'text-gray-800 hover:text-secondary'
+                  pathname === "/brands"
+                    ? "text-[#B90647]"
+                    : "text-gray-800 hover:text-secondary"
                 }`}
               >
                 Brands
-                {pathname === '/brands' && (
+                {pathname === "/brands" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link>
-              <Link 
+              <Link
                 href="/blogs"
                 className={`font-medium cursor-pointer transition-colors relative text-sm ${
-                  pathname === '/blogs' 
-                    ? 'text-[#B90647]' 
-                    : 'text-gray-800 hover:text-secondary'
+                  pathname === "/blogs"
+                    ? "text-[#B90647]"
+                    : "text-gray-800 hover:text-secondary"
                 }`}
               >
                 Blogs
-                {pathname === '/blogs' && (
+                {pathname === "/blogs" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link>
-              <Link 
+              <Link
                 href="/products"
                 className={`font-medium cursor-pointer transition-colors relative text-sm ${
-                  pathname === '/products' 
-                    ? 'text-[#B90647]' 
-                    : 'text-gray-800 hover:text-secondary'
+                  pathname === "/products"
+                    ? "text-[#B90647]"
+                    : "text-gray-800 hover:text-secondary"
                 }`}
               >
                 Products
-                {pathname === '/products' && (
+                {pathname === "/products" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link>
-              <Link 
+              <Link
                 href="/about"
                 className={`font-medium cursor-pointer transition-colors relative text-sm ${
-                  pathname === '/about' 
-                    ? 'text-[#B90647]' 
-                    : 'text-gray-800 hover:text-secondary'
+                  pathname === "/about"
+                    ? "text-[#B90647]"
+                    : "text-gray-800 hover:text-secondary"
                 }`}
               >
                 About
-                {pathname === '/about' && (
+                {pathname === "/about" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link>
-              <Link 
+              <Link
                 href="/contact"
                 className={`font-medium cursor-pointer transition-colors relative text-sm ${
-                  pathname === '/contact' 
-                    ? 'text-[#B90647]' 
-                    : 'text-gray-800 hover:text-secondary'
+                  pathname === "/contact"
+                    ? "text-[#B90647]"
+                    : "text-gray-800 hover:text-secondary"
                 }`}
               >
                 Contact
-                {pathname === '/contact' && (
+                {pathname === "/contact" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link>
@@ -692,10 +708,9 @@ const Header: React.FC<HeaderProps> = () => {
 
           {/* Center - Search Bar with Hamburger Menu */}
           <div className="flex items-center space-x-2 md:space-x-4 max-w-2xl">
-
             <div className="relative">
               {!isSearchFocused ? (
-                <div 
+                <div
                   ref={searchRef}
                   className="relative"
                   onClick={handleSearchFocus}
@@ -704,10 +719,7 @@ const Header: React.FC<HeaderProps> = () => {
                     className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
                     onClick={handleSearchFocus}
                   >
-                    <IoSearchOutline
-                      className="text-gray-600"
-                      size={18}
-                    />
+                    <IoSearchOutline className="text-gray-600" size={18} />
                   </button>
                 </div>
               ) : (
@@ -729,7 +741,10 @@ const Header: React.FC<HeaderProps> = () => {
                       onChange={(value) => setSearchValue(value)}
                       showDropdown={showSearchDropdown}
                       onDropdownToggle={(show) => setShowSearchDropdown(show)}
-                      placeholder={rotatingPlaceholders[currentPlaceholderIndex] || "Search for Products..."}
+                      placeholder={
+                        rotatingPlaceholders[currentPlaceholderIndex] ||
+                        "Search for Products..."
+                      }
                     />
                   </div>
                 </div>
@@ -750,8 +765,8 @@ const Header: React.FC<HeaderProps> = () => {
                 size={26}
               />
             </div>
-            
-            <div 
+
+            <div
               ref={popoverRef}
               onMouseEnter={() => setUserPopoverOpen(true)}
               onMouseLeave={() => setUserPopoverOpen(false)}
@@ -762,7 +777,7 @@ const Header: React.FC<HeaderProps> = () => {
                 onClose={() => setUserPopoverOpen(false)}
               />
             </div>
-            
+
             <div className="relative pr-2 md:pr-4">
               <CiShoppingCart
                 className="text-black hover:cursor-pointer"

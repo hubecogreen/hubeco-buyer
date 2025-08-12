@@ -1,8 +1,12 @@
 "use client";
+import { useState } from "react";
 import { GoArrowRight } from "react-icons/go";
 import Image from "next/image";
+import GreenHomeLoanForm from "./GreenHomeLoanForm"; // import the form
 
 export default function GreenHomeLoanSection() {
+  const [isHomeLoanFormOpen, setIsHomeLoanFormOpen] = useState(false);
+
   return (
     <div className="w-full bg-white py-16">
       <div className="max-w-[1450px] mx-auto px-6 lg:px-20">
@@ -22,10 +26,6 @@ export default function GreenHomeLoanSection() {
 
           {/* Right Content */}
           <div className="space-y-6">
-            {/* <h2 className="text-[32px] lg:text-[40px] font-extrabold text-black leading-tight tracking-tight">
-              Apply for Green Home Loan
-            </h2> */}
-
             <h3 className="text-3xl sm:text-3xl font-extrabold text-black leading-tight tracking-tight leading-10">
               Apply for Green Home Loan Turning Eco-Conscious Homes into Reality
               with Smarter, Greener Loans
@@ -40,7 +40,7 @@ export default function GreenHomeLoanSection() {
 
             <div className="pt-4">
               <button
-                onClick={() => console.log("Apply for Green Home Loan")}
+                onClick={() => setIsHomeLoanFormOpen(true)}
                 className="inline-flex items-center gap-3 border-2 border-[#B90647] text-[#B90647] px-7 py-3 rounded-lg text-[18px] font-semibold hover:bg-[#cc0f5c] hover:text-white transition-all duration-300"
               >
                 Apply for Green Home Loan
@@ -50,6 +50,12 @@ export default function GreenHomeLoanSection() {
           </div>
         </div>
       </div>
+
+      {/* Popup Form */}
+      <GreenHomeLoanForm
+        isOpen={isHomeLoanFormOpen}
+        onClose={() => setIsHomeLoanFormOpen(false)}
+      />
     </div>
   );
 }

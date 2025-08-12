@@ -1,8 +1,12 @@
 "use client";
+import { useState } from "react";
 import { GoArrowRight } from "react-icons/go";
 import Image from "next/image";
+import GreenProjectFinancingForm from "./GreenProjectFinancingForm"; // import the form
 
 export default function ReadyToBuildCTA() {
+  const [isProjectFormOpen, setIsProjectFormOpen] = useState(false);
+
   return (
     <div className="w-full px-[10px] py-[14px]">
       <div className="relative w-full max-w-[1440px] mx-auto h-[320px] overflow-hidden rounded-[64px]">
@@ -29,7 +33,7 @@ export default function ReadyToBuildCTA() {
           </p>
 
           <button
-            onClick={() => console.log("Apply for Green Project Financing")}
+            onClick={() => setIsProjectFormOpen(true)}
             className="inline-flex items-center gap-3 bg-[#B90647] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-[16px] sm:text-lg font-semibold hover:bg-[#B90647] transition-all duration-300"
           >
             Apply for Green Project Financing
@@ -37,6 +41,12 @@ export default function ReadyToBuildCTA() {
           </button>
         </div>
       </div>
+
+      {/* Popup Form */}
+      <GreenProjectFinancingForm
+        isOpen={isProjectFormOpen}
+        onClose={() => setIsProjectFormOpen(false)}
+      />
     </div>
   );
 }

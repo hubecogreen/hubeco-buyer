@@ -121,7 +121,7 @@ export default function Page({
 
   return (
     <div className="bg-white">
-      <MetaTitleH1 params={params} searchParams={searchParams} />
+      {/* <MetaTitleH1 params={params} searchParams={searchParams} /> */}
       <BannerSection
         link1={{ name: "Home", href: "/" }}
         link2={{ name: "Featured Sustainable Products", href: "/products" }}

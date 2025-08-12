@@ -38,6 +38,10 @@ export const metadata: Metadata = {
       },
     ],
   },
+  robots: {
+    index: false,   // generates "noindex"
+    follow: false,  // generates "nofollow"
+  }
 };
 
 
@@ -53,6 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.variable}>
       <head>
+        <meta name="robots" content="noindex, nofollow"/>
         {/* <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" /> */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://assets.hubeco.market" crossOrigin="anonymous" />

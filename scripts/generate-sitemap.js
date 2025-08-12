@@ -66,7 +66,7 @@ const staticUrls = [
     priority: '0.8' 
   },
   { 
-    loc: `${PROD_URL}/vendors`, 
+    loc: `${PROD_URL}/brands`, 
     lastmod: new Date().toISOString(), 
     changefreq: 'weekly', 
     priority: '0.8' 
@@ -232,7 +232,7 @@ function generateDynamicUrls(data) {
     vendors.forEach((slug) => {
       if (slug && typeof slug === 'string') {
         dynamicUrls.push({
-          loc: `${PROD_URL}/vendors/${slug}`,
+          loc: `${PROD_URL}/brands/${slug}`,
           lastmod: new Date().toISOString(),
           changefreq: 'weekly',
           priority: '0.7',

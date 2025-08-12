@@ -269,7 +269,7 @@ const Footer = () => {
               </li> */}
               <li className="text-fontGray py-xs">
                 <Link
-                  href="/vendors"
+                  href="/brands"
                   className="text-gray-600 hover:text-blue-700 text-sm font-light cursor-pointer"
                 >
                   Brands

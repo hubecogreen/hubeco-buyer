@@ -134,7 +134,7 @@ const VendorsList = () => {
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {vendors.map((vendor: any) => (
           <Link
-            href={`/vendors/${vendor.businessInfo?.slug}`}
+            href={`/brands/${vendor.businessInfo?.slug}`}
             key={vendor.businessInfo?.slug}
           >
             <div className="border rounded-md flex flex-col items-center justify-center p-6 w-full h-64 sm:h-52 lg:h-64 cursor-pointer hover:bg-slate-100 transform transition-transform duration-300 hover:scale-105">

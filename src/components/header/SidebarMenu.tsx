@@ -72,7 +72,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
       
       {
         title: "Brands",
-        link: "/vendors",
+        link: "/brands",
         mb: true,
         level: 1,
         icon: "TbCategory",

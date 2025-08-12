@@ -124,8 +124,8 @@ export default function Page({ params }: { params: { id: string } }) {
         </head>
         <BannerSection
           link1={{ name: "Home", href: "/" }}
-          link2={{ name: "Brands", href: "/vendors" }}
-          link3={{ name: `${userValues?.companyName}`, href: `/vendors/${id}` }}
+          link2={{ name: "Brands", href: "/brands" }}
+          link3={{ name: `${userValues?.companyName}`, href: `/brands/${id}` }}
         />
         <div className="block md:flex md:justify-between py-12 px-24">
           <div className="flex items-center space-x-2">

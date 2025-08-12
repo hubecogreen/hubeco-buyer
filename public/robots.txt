@@ -1,10 +1,2 @@
 User-agent: * 
- Disallow: /cart 
- Disallow: /checkout 
- Disallow: /account 
- Disallow: /login 
- Disallow: /register 
- Disallow: /search 
- Allow: / 
-
-Sitemap: https://hubeco.market/sitemap.xml 
+ Disallow: /

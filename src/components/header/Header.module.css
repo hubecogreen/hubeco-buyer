@@ -6,6 +6,7 @@
   justify-content: space-between;
   padding: 10px 20px;
   background-color: #F4F4F4;
+  padding-bottom: 20px;
   border-bottom: 1px solid #eaeaea;
   max-height: 106px;
   height: 106px;
@@ -14,7 +15,7 @@
 .logo {
   display: flex;
   align-items: center;
-  width: 13%
+  width: 25%
 }
 .sticky {
   position: fixed;
@@ -348,6 +349,30 @@ transition: left 2s ease; */
   visibility: visible;
   transform: perspective(600px) rotateX(0deg);
   transition: transform 0.5s, opacity 0.5s;
+}
+
+/* Search focus transitions */
+.searchFocused {
+  transition: all 0.3s ease-in-out;
+}
+
+.searchInput {
+  transition: all 0.3s ease-in-out;
+}
+
+.searchInput:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .searchFocused {
+    padding: 0 1rem;
+  }
+  
+  .searchInput {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
 }
 
 

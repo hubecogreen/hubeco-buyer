@@ -1977,7 +1977,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   {/* {vendorInfo?.logo ? (
                     <>
                       <Image
-                        // src={"/images/vendors/vendor.webp"}
+                        // src={"/images/brands/vendor.webp"}
                         src={
                           vendorInfo?.logo
                             ? (assetURL + "/" + vendorInfo?.logo).includes(

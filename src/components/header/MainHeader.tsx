@@ -133,29 +133,16 @@ const Header: React.FC<HeaderProps> = () => {
   const getCategoriesForPlaceholders = async () => {
     try {
       const result = (await callApi(
-        getEndpoint.default.PRODUCTS_CATEGORIES,
+        getEndpoint.default.PRODUCTSLIST,
         "GET"
       )) as any;
       if (result?.data) {
         const placeholders: string[] = [];
 
-        // Add main categories
-        result.data.forEach((category: any) => {
-          placeholders.push(`Search for ${category.name}...`);
-
-          // Add subcategories
-          if (category.subCategories) {
-            category.subCategories.forEach((subCat: any) => {
-              placeholders.push(`Search for ${subCat.name}...`);
-
-              // Add child categories
-              if (subCat.childCategories) {
-                subCat.childCategories.forEach((childCat: any) => {
-                  placeholders.push(`Search for ${childCat.name}...`);
-                });
-              }
-            });
-          }
+        console.log(result.data.data, "result.data.data");
+        // // Add main categories
+        result.data.data.forEach((category: any) => {
+          placeholders.push(`Search for ${category.productName}...`);
         });
 
         setRotatingPlaceholders(placeholders);
@@ -417,7 +404,7 @@ const Header: React.FC<HeaderProps> = () => {
             {/* Mobile Logo */}
             <Link
               href="/"
-              className={`${styles.logo} w-48 sm:w-64 h-8 md:hidden hover:cursor-pointer`}
+              className={`${styles.logo} w-48 sm:w-64 h-8 md:hidden hover:cursor-pointer pl-[4px]`}
             >
               <Image
                 src="/images/Logo-2.webp"
@@ -433,7 +420,7 @@ const Header: React.FC<HeaderProps> = () => {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <div className="hidden md:flex items-center space-x-6">
+            <div className="hidden md:flex items-center space-x-6 pl-[50px]">
               <div className="relative">
                 <div
                   className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative z-20"

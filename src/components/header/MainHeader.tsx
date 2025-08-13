@@ -611,7 +611,7 @@ const Header: React.FC<HeaderProps> = () => {
           {/* Mobile Additional Navigation Links - Removed, moved to hamburger menu */}
 
           {/* Center - Search Bar with Hamburger Menu */}
-          <div className="hidden md:flex items-center space-x-2 md:space-x-4 max-w-2xl">
+          {/* <div className="hidden md:flex items-center space-x-2 md:space-x-4 max-w-2xl">
             <div className="relative">
               {!isSearchFocused ? (
                 <div
@@ -651,6 +651,58 @@ const Header: React.FC<HeaderProps> = () => {
                       }
                     />
                   </div>
+                </div>
+              )}
+            </div>
+          </div> */}
+
+          {/* Center - Search Bar with Hamburger Menu */}
+          <div className="hidden md:flex items-center space-x-2 md:space-x-4 max-w-2xl">
+            <div className="relative">
+              {!isSearchFocused ? (
+                <div
+                  ref={searchRef}
+                  className="relative"
+                  onClick={handleSearchFocus}
+                >
+                  <button
+                    className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
+                    onClick={handleSearchFocus}
+                  >
+                    <IoSearchOutline className="text-gray-600" size={18} />
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-2 md:space-x-4 w-[500px]">
+                  <div className="w-8 md:w-12 md:px-4 flex items-center">
+                    <VscMenu
+                      className="text-black hover:cursor-pointer font-light"
+                      size={24}
+                      onClick={toggleMenu}
+                    />
+                  </div>
+                  <div className="relative flex-1">
+                    <SearchBar
+                      isExpanded={true}
+                      onFocus={handleSearchFocus}
+                      onBlur={handleSearchBlur}
+                      className="w-full"
+                      value={searchValue}
+                      onChange={(value) => setSearchValue(value)}
+                      showDropdown={showSearchDropdown}
+                      onDropdownToggle={(show) => setShowSearchDropdown(show)}
+                      placeholder={
+                        rotatingPlaceholders[currentPlaceholderIndex] ||
+                        "Search for Products..."
+                      }
+                    />
+                  </div>
+                  <button
+                    className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
+                    onClick={handleSearchClose}
+                  >
+                    <IoClose className="text-gray-600" size={18} />
+                  </button>
                 </div>
               )}
             </div>
@@ -726,7 +778,7 @@ const Header: React.FC<HeaderProps> = () => {
               onClick={toggleMenu}
             />
           </div>
-          
+
           {/* Search Bar */}
           <div className="flex-1 mx-3">
             <SearchBar

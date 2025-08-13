@@ -45,7 +45,7 @@ const endPoints = {
   BUY_SUBSCRIPTION:'subscriptionPlans/buysubscription',
   VERIFY_SUBSCRIPTION_PAYMENT:'subscriptionPlans/verifySubscriptionPayment',
 
-  //VENDORS API
+  //brands API
   VENDORS:'products/getPublicVendorListing',
   
   //Products API's

@@ -252,7 +252,7 @@ export default function GreenProjectFinancingForm({
               <label className="text-sm text-gray-600 leading-relaxed">
                 I agree to Hubeco{" "}
                 <Link 
-                  href="/termsOf-Use" 
+                  href="/green-financing-terms-of-use" 
                   className="text-blue-600 underline hover:text-blue-800"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -261,7 +261,7 @@ export default function GreenProjectFinancingForm({
                 </Link>{" "}
                 and{" "}
                 <Link 
-                  href="/privacyPolicy" 
+                  href="/green-financing-privacy-policy" 
                   className="text-blue-600 underline hover:text-blue-800"
                   target="_blank"
                   rel="noopener noreferrer"

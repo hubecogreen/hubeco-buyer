@@ -53,6 +53,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
   const [targetedCustomer, setTargetedCustomer] = useState<string>("not_set");
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
   const isClient = useClient();
 
@@ -71,11 +72,11 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
   // Ref for the dropdown
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const [clickedResult, setClickedResult] = useState(false);
 
   // Rotate placeholders with animation
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('Animation triggered');
       // Start animation
       setIsAnimating(true);
       
@@ -98,7 +99,6 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
 
   // Animate when placeholder changes
   useEffect(() => {
-    console.log('Placeholder changed, triggering animation');
     setIsAnimating(true);
     setTimeout(() => {
       setIsAnimating(false);
@@ -268,6 +268,13 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
     };
   }, [onDropdownToggle]);
 
+  // Cleanup loading state when component unmounts
+  useEffect(() => {
+    return () => {
+      setIsNavigating(false);
+    };
+  }, []);
+
   if (!isClient) return null;
 
   const currentPlaceholder = placeholder && placeholder !== "Search products..." 
@@ -279,6 +286,16 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
       className={`relative flex flex-col items-center h-full w-full ${className}`}
       style={customStyles}
     >
+      {/* Loading Overlay */}
+      {isNavigating && (
+        <div className="fixed inset-0 z-[9999] bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white rounded-lg p-6 flex flex-col items-center space-y-4">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#B90647]"></div>
+            <p className="text-gray-700 font-medium">Redirecting...</p>
+          </div>
+        </div>
+      )}
+
       {/* Input Component */}
       <div className="relative w-full">
         <Input
@@ -286,7 +303,14 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
           value={searchQuery}
           onChange={(e: any) => handleSearch(e)}
           onFocus={onFocus}
-          onBlur={onBlur}
+          onBlur={(e) => {
+            // Don't trigger blur if we just clicked a search result
+            if (!clickedResult) {
+              onBlur?.();
+            }
+            // Reset the flag after a short delay
+            setTimeout(() => setClickedResult(false), 100);
+          }}
           className={`pl-3 !bg-white border-[1px] border-[#d9d9d9] border-solid md:text-base text-xs lg:text-sm w-full h-[47px] shadow-lg text-fontGray rounded-[5px] mr-[1px] ${
             isExpanded ? 'w-full' : 'w-12 h-12 rounded-lg'
           }`}
@@ -345,12 +369,31 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                         key={index}
                         className="px-[10px] py-[10px] group hover:bg-gray-200 cursor-pointer border-b border-[#f4f4f4]"
                         onClick={() => {
+                          setClickedResult(true);
+                          setIsNavigating(true);
                           setIsDropdownOpen(false);
                           setSearchQuery("");
                           if (onChange) onChange("");
                           if (onDropdownToggle) onDropdownToggle(false);
-                          router.refresh();
-                          router.push(`/${product?.slug}`);
+                          
+                          // Try different navigation approaches
+                          setTimeout(() => {
+                            try {
+                              // First try Next.js router
+                              router.push(`/${product?.slug}`);
+                              
+                              // If router fails, fallback to window.location
+                              setTimeout(() => {
+                                if (window.location.pathname !== `/${product?.slug}`) {
+                                  console.log('Router failed, using window.location');
+                                  window.location.href = `/${product?.slug}`;
+                                }
+                              }, 500);
+                            } catch (error) {
+                              console.error('Navigation error:', error);
+                              window.location.href = `/${product?.slug}`;
+                            }
+                          }, 100);
                         }}
                       >
                         <div className="flex justify-start items-center">
@@ -403,12 +446,17 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                         key={index}
                         className="px-[10px] py-[10px] group hover:bg-gray-200 cursor-pointer border-b border-[#f4f4f4]"
                         onClick={() => {
+                          setClickedResult(true);
+                          setIsNavigating(true);
                           setIsDropdownOpen(false);
                           setSearchQuery("");
                           if (onChange) onChange("");
                           if (onDropdownToggle) onDropdownToggle(false);
-                          router.refresh();
-                          router.push(`/products/?scid=${subCategory?.id}`);
+                          
+                          // Use window.location for more reliable navigation
+                          setTimeout(() => {
+                            window.location.href = `/products/${subCategory?.seoSlug}?scid=${subCategory?.id}`;
+                          }, 100);
                         }}
                       >
                         <div className="flex justify-start items-center">
@@ -453,12 +501,17 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                         key={index}
                         className="px-[10px] py-[10px] group hover:bg-gray-200 cursor-pointer border-b border-[#f4f4f4]"
                         onClick={() => {
+                          setClickedResult(true);
+                          setIsNavigating(true);
                           setIsDropdownOpen(false);
                           setSearchQuery("");
                           if (onChange) onChange("");
                           if (onDropdownToggle) onDropdownToggle(false);
-                          router.refresh();
-                          router.push(`/brands/${vendor?.businessInfo?.slug}`);
+                          
+                          // Use window.location for more reliable navigation
+                          setTimeout(() => {
+                            window.location.href = `/brands/${vendor?.businessInfo?.slug}`;
+                          }, 100);
                         }}
                       >
                         <div className="flex justify-start items-center">

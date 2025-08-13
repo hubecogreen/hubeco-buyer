@@ -1,41 +1,81 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import toast from "react-hot-toast";
 
 interface GreenHomeLoanFormProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+// Fixed Yup validation schema
+const schema = yup.object({
+  name: yup
+    .string()
+    .required("Name is required")
+    .matches(/^[^\d]+$/, "Name cannot contain numbers")
+    .matches(/^[a-zA-Z\s]*$/, "Special characters not allowed")
+    .test(
+      "no-leading-space",
+      "Empty space at the start is not allowed",
+      (value: any) => value && value.trimLeft() === value
+    )
+    .test(
+      "no-multiple-spaces",
+      "Double spaces are not allowed",
+      (value: any) => value && !/\s{2,}/.test(value)
+    )
+    .min(3, "Name must be at least 3 characters")
+    .matches(/^(?! )(?=.*[^ ]).{3,}(?<! )$/, "Enter valid name")
+    .max(75, "Name cannot exceed 75 characters"),
+  phoneNumber: yup
+    .string()
+    .required("Phone Number is required")
+    .matches(/^[0-9]+$/, "Only numbers are allowed")
+    .min(10, "Phone Number must be 10 digits")
+    .max(10, "Phone Number must be 10 digits")
+    .matches(/^[6-9][0-9]*$/, "First number must be between 6 to 9"),
+  agreedToTerms: yup
+    .boolean()
+    .oneOf([true], "You must agree to the terms and conditions")
+});
+
+type FormData = yup.InferType<typeof schema>;
+
 export default function GreenHomeLoanForm({
   isOpen,
   onClose,
 }: GreenHomeLoanFormProps) {
-  const [formData, setFormData] = useState({
-    name: "",
-    phoneNumber: "",
-    agreedToTerms: false,
-  });
-
   const [loading, setLoading] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!formData.name || !formData.phoneNumber || !formData.agreedToTerms) {
-      alert("Please fill all fields and agree to terms");
-      return;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    clearErrors
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      name: "",
+      phoneNumber: "",
+      agreedToTerms: false
     }
+  });
 
+  // Reset form when modal opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      reset();
+      clearErrors();
+    }
+  }, [isOpen, reset, clearErrors]);
+
+  const handleSubmitForm = async (data: FormData) => {
     setLoading(true);
     try {
       const res = await fetch(
@@ -46,36 +86,42 @@ export default function GreenHomeLoanForm({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name: formData.name,
-            phoneNumber: `+91${formData.phoneNumber}`,
+            name: data.name,
+            phoneNumber: `+91${data.phoneNumber}`,
           }),
         }
       );
 
       if (res.ok) {
-        alert("Application submitted successfully!");
-        setFormData({ name: "", phoneNumber: "", agreedToTerms: false });
+        toast.success("Application submitted successfully!");
+        reset();
         onClose();
       } else {
         const errorData = await res.json();
-        alert(errorData.message || "Something went wrong. Please try again.");
+        toast.error(errorData.message || "Something went wrong. Please try again.");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("Network error. Please check your connection.");
+      toast.error("Network error. Please check your connection.");
     } finally {
       setLoading(false);
     }
   };
 
+  const handleClose = () => {
+    reset();
+    clearErrors();
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-3xl w-full max-w-[650px] mx-4 relative overflow-hidden">
-        {/* Header */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto">
+      <div className="bg-white rounded-3xl w-full max-w-[650px] mx-4 my-8 relative overflow-hidden max-h-[90vh] flex flex-col">
+        {/* Header - Fixed */}
         <div
-          className="relative px-6 py-8 text-white"
+          className="relative px-6 py-8 text-white flex-shrink-0"
           style={{
             backgroundImage: "url('/images/greenFinance/Green BG.png')",
             backgroundSize: "cover",
@@ -84,7 +130,7 @@ export default function GreenHomeLoanForm({
         >
           <div className="absolute inset-0 bg-black bg-opacity-30" />
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors z-10"
           >
             <IoClose size={24} />
@@ -94,9 +140,9 @@ export default function GreenHomeLoanForm({
           </h2>
         </div>
 
-        {/* Form */}
-        <div className="px-6 py-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Form - Scrollable */}
+        <div className="px-6 py-8 overflow-y-auto flex-1">
+          <form onSubmit={handleSubmit(handleSubmitForm)} className="space-y-6" noValidate>
             {/* Name */}
             <div>
               <label className="block text-gray-800 font-medium mb-2">
@@ -104,13 +150,14 @@ export default function GreenHomeLoanForm({
               </label>
               <input
                 type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
+                {...register("name")}
                 placeholder="Enter Your Name"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
                 required
               />
+              {errors.name && (
+                <p className="text-red text-xs mt-1 font-small">{errors.name.message}</p>
+              )}
             </div>
 
             {/* Phone */}
@@ -124,37 +171,74 @@ export default function GreenHomeLoanForm({
                 </div>
                 <input
                   type="tel"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleInputChange}
+                  {...register("phoneNumber")}
                   placeholder="Enter Phone Number"
                   className="flex-1 px-4 py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
                   required
+                  onKeyPress={(e) => {
+                    if (!/[0-9]/.test(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
+                  onPaste={(e) => {
+                    e.preventDefault();
+                    const pastedText = e.clipboardData.getData('text');
+                    if (/^[0-9]+$/.test(pastedText)) {
+                      const target = e.target as HTMLInputElement;
+                      const start = target.selectionStart || 0;
+                      const end = target.selectionEnd || 0;
+                      const value = target.value;
+                      const newValue = value.substring(0, start) + pastedText + value.substring(end);
+                      if (newValue.length <= 10) {
+                        target.value = newValue;
+                        target.setSelectionRange(start + pastedText.length, start + pastedText.length);
+                      }
+                    }
+                  }}
+                  maxLength={10}
                 />
               </div>
+              {errors.phoneNumber && (
+                <p className="text-red text-xs mt-1 font-small">
+                  {errors.phoneNumber.message}
+                </p>
+              )}
             </div>
 
             {/* Terms */}
             <div className="flex items-start space-x-3">
               <input
                 type="checkbox"
-                name="agreedToTerms"
-                checked={formData.agreedToTerms}
-                onChange={handleInputChange}
+                {...register("agreedToTerms")}
                 className="mt-1 w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
                 required
               />
               <label className="text-sm text-gray-600 leading-relaxed">
                 I agree to Hubeco{" "}
-                <Link href="/termsOf-Use" className="text-blue-600 underline">
+                <Link 
+                  href="/termsOf-Use" 
+                  className="text-blue-600 underline hover:text-blue-800"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Terms of Use
                 </Link>{" "}
                 and{" "}
-                <Link href="/privacyPolicy" className="text-blue-600 underline">
+                <Link 
+                  href="/privacyPolicy" 
+                  className="text-blue-600 underline hover:text-blue-800"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Privacy Policy
                 </Link>
               </label>
             </div>
+            {errors.agreedToTerms && (
+              <p className="text-red text-xs mt-1 font-small">
+                {errors.agreedToTerms.message}
+              </p>
+            )}
 
             {/* Submit */}
             <button

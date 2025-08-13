@@ -46,7 +46,6 @@ const Header: React.FC<HeaderProps> = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [isProductSegmentsOpen, setIsProductSegmentsOpen] =
     useState<boolean>(false);
   const [rotatingPlaceholders, setRotatingPlaceholders] = useState<string[]>(
@@ -168,7 +167,6 @@ const Header: React.FC<HeaderProps> = () => {
     if (rotatingPlaceholders.length === 0) return;
 
     const interval = setInterval(() => {
-      console.log("Changing placeholder from MainHeader");
       setCurrentPlaceholderIndex(
         (prevIndex) => (prevIndex + 1) % rotatingPlaceholders.length
       );
@@ -248,17 +246,15 @@ const Header: React.FC<HeaderProps> = () => {
   };
 
   const handleSearchBlur = () => {
-    // Small delay to allow for click events
+    // Longer delay to allow for click events on search results
     setTimeout(() => {
       setIsSearchFocused(false);
-      setShowSearchDropdown(false);
-    }, 100);
+    }, 300); // Increased from 100ms to 300ms
   };
 
   const handleSearchClose = () => {
     setIsSearchFocused(false);
     setSearchValue("");
-    setShowSearchDropdown(false);
   };
 
   const headerRef = useRef<HTMLElement | any>(null);
@@ -466,11 +462,18 @@ const Header: React.FC<HeaderProps> = () => {
               </div>
               <Link
                 href="/green-financing"
-                className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors"
+                className={`flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative ${
+                  pathname === "/green-financing"
+                    ? "text-[#B90647]"
+                    : "text-gray-800"
+                }`}
               >
-                <span className="text-gray-800 font-medium">
+                <span className="font-medium">
                   Green Financing
                 </span>
+                {pathname === "/green-financing" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                )}
               </Link>
             </div>
 
@@ -483,7 +486,7 @@ const Header: React.FC<HeaderProps> = () => {
                   data-product-segments-button
                 >
                   <span
-                    className={`font-medium relative text-sm ${
+                    className={`font-medium relative text-xs pl-4 ${
                       isProductSegmentsOpen ? "text-[#B90647]" : "text-gray-800"
                     }`}
                   >
@@ -513,14 +516,6 @@ const Header: React.FC<HeaderProps> = () => {
                   onClose={() => setIsProductSegmentsOpen(false)}
                 />
               </div>
-              <Link
-                href="/green-financing"
-                className="flex items-center space-x-1 cursor-pointer text-gray-800"
-              >
-                <span className="text-gray-800 font-medium text-sm">
-                  Green Financing
-                </span>
-              </Link>
             </div>
           </div>
 
@@ -650,7 +645,6 @@ const Header: React.FC<HeaderProps> = () => {
                 <div
                   ref={searchRef}
                   className="relative"
-                  onClick={handleSearchFocus}
                 >
                   <button
                     className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
@@ -676,8 +670,6 @@ const Header: React.FC<HeaderProps> = () => {
                       className="w-full"
                       value={searchValue}
                       onChange={(value) => setSearchValue(value)}
-                      showDropdown={showSearchDropdown}
-                      onDropdownToggle={(show) => setShowSearchDropdown(show)}
                       placeholder={
                         rotatingPlaceholders[currentPlaceholderIndex] ||
                         "Search for Products..."
@@ -775,8 +767,6 @@ const Header: React.FC<HeaderProps> = () => {
               className="w-full"
               value={searchValue}
               onChange={(value) => setSearchValue(value)}
-              showDropdown={showSearchDropdown}
-              onDropdownToggle={(show) => setShowSearchDropdown(show)}
               placeholder={
                 rotatingPlaceholders[currentPlaceholderIndex] ||
                 "Search for Products..."

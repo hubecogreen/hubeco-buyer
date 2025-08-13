@@ -744,7 +744,7 @@ const Header: React.FC<HeaderProps> = () => {
                   title={`${
                     showVendorLogin ? "Vendor Login" : "Become a Vendor"
                   }`}
-                  className="text-base bg-secondary px-3 lg:text-sm hover:bg-primary h-12 mr-3 mobile-hide hidden md:flex text-white p-[30px]"
+                  className="text-base bg-secondary px-4 lg:px-6 hover:bg-primary h-12 mr-4 hidden md:flex text-white font-medium z-10"
                   customStyles={{}}
                   rightIcon={<GoArrowRight />}
                   hoverBgColor=""

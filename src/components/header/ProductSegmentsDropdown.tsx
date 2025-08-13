@@ -565,7 +565,10 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                               />
                             )}
                           </div>
-                          <div className="flex-1">
+                          <div className="flex-1 cursor-pointer" onClick={() => {
+                            router.push(`/${product.slug}`);
+                            onClose();
+                          }}>
                             <h4 className="text-sm font-bold text-white mb-2">
                               {product.name}
                             </h4>

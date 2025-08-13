@@ -5,7 +5,7 @@ import GreenHomeLoanSection from "@/components/greenFinance/greenHome-loan";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Green Financing | Your App Name",
+  title: "Green Financing | Hubeco",
   description:
     "Empowering Sustainable Construction with accessible Green Capital",
 };

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import * as yup from "yup";
 import { validGSTStateCodes } from "@/lib/commondata";
+import Link from "next/link";
 
 interface GreenProjectFinancingFormProps {
   isOpen: boolean;
@@ -190,13 +191,13 @@ export default function GreenProjectFinancingForm({
               />
               <label className="text-sm text-gray-600 leading-relaxed">
                 I agree to Hubeco{" "}
-                <a href="#" className="text-blue-600 underline">
+                <Link href="/termsOf-Use" className="text-blue-600 underline">
                   Terms of Use
-                </a>{" "}
+                </Link>{" "}
                 and{" "}
-                <a href="#" className="text-blue-600 underline">
+                <Link href="/privacyPolicy" className="text-blue-600 underline">
                   Privacy Policy
-                </a>
+                </Link>
               </label>
             </div>
 

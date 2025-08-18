@@ -20,7 +20,7 @@ type Props = {
 function BannerSection({ link1, link2, link3 }: Props) {
   return (
     <div className="banner-section">
-      <div className="relative  md:flex block md:justify-start justify-center items-center md:px-20 px-3 bg-[url('/images/about/aboutBanner1.webp')] bg-cover bg-center h-[100px] md:h-[200px] flex items-center justify-start text-white">
+      <div className="relative  md:flex block md:justify-start justify-center items-center md:px-20 px-3 bg-[url('/images/about/aboutBanner1.webp')] bg-cover bg-center h-[100px] md:h-[200px] flex items-center justify-start text-white mt-[120px] md:mt-[85px]">
         <Link
           href={link1.href}
           className="text-white flex md:text-md text-sm items-center p-2 rounded"

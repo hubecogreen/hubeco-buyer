@@ -48,6 +48,7 @@ const ProductsList: React.FC<Props> = ({
   const [limit, setLimit] = useState(30);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [gridLoading, setGridLoading] = useState(true);
+  const [h1Tag, setH1Tag] = useState<string>("Sustainable Products");
 
   // Filter States
   const [planType, setPlanType] = useState<string>(prefferedPlan || "");
@@ -72,6 +73,45 @@ const ProductsList: React.FC<Props> = ({
   const { callApi } = useApi();
   const pathname = usePathname();
 
+  // Function to fetch H1 tag from API
+  const fetchH1Tag = async () => {
+    const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+    
+    try {
+      if (childCatId) {
+        // Fetch from child category
+        const res = await fetch(`${baseURL}/childCategories/getChildCategoryByIdPublic/${childCatId}`, {
+          cache: 'no-store',
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data?.h1Tag) {
+            setH1Tag(data.h1Tag);
+            return;
+          }
+        }
+      } else if (subCatId) {
+        // Fetch from subcategory
+        const res = await fetch(`${baseURL}/subcategories/getSubcategoryByIdPublic/${subCatId}`, {
+          cache: 'no-store',
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data?.h1Tag) {
+            setH1Tag(data.h1Tag);
+            return;
+          }
+        }
+      }
+      
+      // If no H1 tag found, keep default "Sustainable Products"
+      setH1Tag("Sustainable Products");
+    } catch (err) {
+      console.error("Error fetching h1Tag:", err);
+      setH1Tag("Sustainable Products");
+    }
+  };
+
   // Set initial state from props if provided
   useEffect(() => {
     if (catSlug) setCatId(catSlug);
@@ -80,6 +120,11 @@ const ProductsList: React.FC<Props> = ({
     if (scid) setSubCatId(typeof scid === "string" ? scid : scid[0]);
     if (ccid) setChildCatId(typeof ccid === "string" ? ccid : ccid[0]);
   }, [catSlug, subCatSlug, childCatSlug, ccid, scid]);
+
+  // Fetch H1 tag when category IDs change
+  useEffect(() => {
+    fetchH1Tag();
+  }, [catId, subCatId, childCatId]);
 
   // Reset options on path change
   useEffect(() => {
@@ -258,7 +303,7 @@ const ProductsList: React.FC<Props> = ({
       </div>
 
       {/* Mobile/Tablet Filter Button and Sheet */}
-      <div className="lg:hidden fixed bottom-4 right-4 z-50">
+      <div className="lg:hidden fixed bottom-4 left-4 z-50">
         <Sheet>
           <SheetTrigger asChild>
             <button
@@ -283,9 +328,9 @@ const ProductsList: React.FC<Props> = ({
       {/* Main Content */}
       <div className="col-span-12 lg:col-span-9">
         <div className="block md:flex md:justify-between mb-8 px-4 items-center">
-          <h2 className="text-black font-bold text-2xl md:text-3xl">
-            Sustainable Products
-          </h2>
+          <h1 className="text-black font-bold text-2xl md:text-3xl">
+            {h1Tag}
+          </h1>
           <div className="flex justify-end items-center">
             <div className="h-[40px] md:flex w-full md:w-56 mt-4 md:mt-0 mobile-sm:hidden">
               <SearchInput

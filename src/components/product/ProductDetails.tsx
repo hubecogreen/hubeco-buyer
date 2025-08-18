@@ -837,35 +837,35 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
       setDeliveyAvailable(false);
       return;
     }
-  
+
     if (pincode > 0 && pincode.length === 6) {
       const res = (await callApi(`pincodeInfo/${pincode}`, "GET")) as any;
-  
+
       let state = "";
       let city = "";
       setShowMssg(true);
       setDeliveyAvailable(false);
-  
+
       if (res?.data?.length > 0) {
         const components = res.data[0]?.address_components || [];
-  
+
         for (const component of components) {
           const types = component.types || [];
-  
+
           if (types.includes("administrative_area_level_1")) {
             state = component.long_name;
           }
-  
+
           if (types.includes("locality")) {
             city = component.long_name;
           }
         }
-  
+
         const cityZones = totalProduct?.deliveryZonesCities || [];
         const stateZones = totalProduct?.deliveryZones || [];
-  
+
         let isDeliveryAvailable = false;
-  
+
         // ✅ Rule 1: If cities are defined, match must happen at city level only
         if (cityZones.length > 0) {
           if (city && cityZones.includes(city)) {
@@ -878,7 +878,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
             isDeliveryAvailable = true;
           }
         }
-  
+
         setDeliveyAvailable(isDeliveryAvailable);
       }
     } else {
@@ -886,8 +886,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
       setDeliveyAvailable(false);
     }
   };
-  
-  
+
+
 
   function checkBuyerLogin() {
     const buyer = sessionStorage.getItem("buyerUserInfo");
@@ -968,30 +968,27 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
       <BannerSection
         link1={{ name: "Home", href: "/" }}
         link2={{
-          name: `${
-            totalProduct &&
+          name: `${totalProduct &&
             totalProduct?.categoryId &&
             totalProduct?.categoryId?.name
-              ? totalProduct?.categoryId?.name
-              : ""
-          }`,
+            ? totalProduct?.categoryId?.name
+            : ""
+            }`,
           href: "/products",
         }}
         link3={{
-          name: `${
-            totalProduct &&
+          name: `${totalProduct &&
             totalProduct?.subCategoryId &&
             totalProduct?.subCategoryId[0]?.name
-              ? totalProduct?.subCategoryId[0]?.name
-              : ""
-          }`,
-          href: `/products?scid=${
-            totalProduct &&
+            ? totalProduct?.subCategoryId[0]?.name
+            : ""
+            }`,
+          href: `/products?scid=${totalProduct &&
             totalProduct?.subCategoryId &&
             totalProduct?.subCategoryId[0]?._id
-              ? totalProduct?.subCategoryId[0]?._id
-              : ""
-          }`,
+            ? totalProduct?.subCategoryId[0]?._id
+            : ""
+            }`,
         }}
       />
       {productLoading ? (
@@ -1002,9 +999,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
         <>
           <div
             ref={secondSectionRef}
-            className={`relative bg-white w-full px-4 pt-8 pb-4 md:px-24 md:pt-12 md:block lg:flex ${
-              isScrollLocked ? "no-scroll overscroll-none" : ""
-            }`}
+            className={`relative bg-white w-full px-4 pt-8 pb-4 md:px-24 md:pt-12 md:block lg:flex ${isScrollLocked ? "no-scroll overscroll-none" : ""
+              }`}
           >
             <div className={`lg:w-1/2 w-full h-full lg:sticky top-0  `}>
               <div className="flex  lg:sticky top-0">
@@ -1015,10 +1011,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       <button
                         key={index}
                         className={` border  shadow-sm   
-                          ${
-                            selectedImageIndex === index
-                              ? "border-secondary"
-                              : "border-borderGray"
+                          ${selectedImageIndex === index
+                            ? "border-secondary"
+                            : "border-borderGray"
                           }
                         `}
                         onClick={() => handleThumbnailClick(index)}
@@ -1058,35 +1053,32 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 <div className="relative w-full ">
                   <div
                     ref={secondSectionRef}
-                    className={`relative md:w-full p-[15px] md:mx-0 mx-0 w-full md:p-[85px] border border-borderGray ${
-                      zoomable ? "overflow-hidden" : ""
-                    }`}
+                    className={`relative md:w-full p-[15px] md:mx-0 mx-0 w-full md:p-[85px] border border-borderGray ${zoomable ? "overflow-hidden" : ""
+                      }`}
                     style={{
                       backgroundImage: zoomable
-                        ? `url(${
-                            images2 && images2[selectedImageIndex]
-                              ? (() => {
-                                  const imageUrl = `${assetURL}/${images2[selectedImageIndex]}`;
-                                  if (imageUrl.includes("//admin")) {
-                                    return imageUrl.replace(
-                                      "//admin",
-                                      "/admin"
-                                    );
-                                  }
-                                  if (imageUrl.includes("//staff")) {
-                                    return imageUrl.replace(
-                                      "//staff",
-                                      "/staff"
-                                    );
-                                  }
-                                  return imageUrl;
-                                })()
-                              : "/images/product-placeholder.webp"
-                          })`
+                        ? `url(${images2 && images2[selectedImageIndex]
+                          ? (() => {
+                            const imageUrl = `${assetURL}/${images2[selectedImageIndex]}`;
+                            if (imageUrl.includes("//admin")) {
+                              return imageUrl.replace(
+                                "//admin",
+                                "/admin"
+                              );
+                            }
+                            if (imageUrl.includes("//staff")) {
+                              return imageUrl.replace(
+                                "//staff",
+                                "/staff"
+                              );
+                            }
+                            return imageUrl;
+                          })()
+                          : "/images/product-placeholder.webp"
+                        })`
                         : "none",
-                      backgroundSize: `${ZOOM_LEVEL * 100}% ${
-                        ZOOM_LEVEL * 100
-                      }%`,
+                      backgroundSize: `${ZOOM_LEVEL * 100}% ${ZOOM_LEVEL * 100
+                        }%`,
                       backgroundPosition: `${position.x}% ${position.y}%`,
                       transition: "background-position 0.1s ease-out",
                     }}
@@ -1110,15 +1102,15 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       src={
                         images2 && images2[selectedImageIndex]
                           ? (() => {
-                              const imageUrl = `${assetURL}/${images2[selectedImageIndex]}`;
-                              if (imageUrl.includes("//admin")) {
-                                return imageUrl.replace("//admin", "/admin");
-                              }
-                              if (imageUrl.includes("//staff")) {
-                                return imageUrl.replace("//staff", "/staff");
-                              }
-                              return imageUrl;
-                            })()
+                            const imageUrl = `${assetURL}/${images2[selectedImageIndex]}`;
+                            if (imageUrl.includes("//admin")) {
+                              return imageUrl.replace("//admin", "/admin");
+                            }
+                            if (imageUrl.includes("//staff")) {
+                              return imageUrl.replace("//staff", "/staff");
+                            }
+                            return imageUrl;
+                          })()
                           : "/images/product-placeholder.webp"
                       }
                       alt={`Main Image ${selectedImageIndex + 1}`}
@@ -1132,30 +1124,27 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
                       onMouseMove={handleMouseMove}
-                      className={`${
-                        zoomable ? "opacity-0" : "opacity-100"
-                      }  max-w-[380px] max-h-[360px] object-contain `}
+                      className={`${zoomable ? "opacity-0" : "opacity-100"
+                        }  max-w-[380px] max-h-[360px] object-contain `}
                     />
                     {/* </div> */}
 
                     {/* Slider Controls */}
                     <button
                       onClick={prevImage}
-                      className={`${
-                        zoomable
-                          ? "hidden"
-                          : " flex absolute w-8 h-8  items-center justify-center bg-white border border-secondary rounded-full shadow-2xl top-1/2 left-2 transform -translate-y-1/2"
-                      } `}
+                      className={`${zoomable
+                        ? "hidden"
+                        : " flex absolute w-8 h-8  items-center justify-center bg-white border border-secondary rounded-full shadow-2xl top-1/2 left-2 transform -translate-y-1/2"
+                        } `}
                     >
                       <BsChevronLeft color="#A92449" className="bg-secodary" />
                     </button>
                     <button
                       onClick={nextImage}
-                      className={`${
-                        zoomable
-                          ? "hidden"
-                          : " flex absolute w-8 h-8  items-center justify-center bg-white border border-secondary rounded-full shadow-2xl top-1/2 right-2 transform -translate-y-1/2"
-                      }`}
+                      className={`${zoomable
+                        ? "hidden"
+                        : " flex absolute w-8 h-8  items-center justify-center bg-white border border-secondary rounded-full shadow-2xl top-1/2 right-2 transform -translate-y-1/2"
+                        }`}
                     >
                       <BsChevronRight color="#A92449" className="bg-secodary" />
                     </button>
@@ -1163,9 +1152,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   <div className="md:relative fixed flex justify-evenly md:justify-center items-center border-t md:shadow-none shadow-2xl  md:border-0 py-[10px] md:p-[0px] bg-white md:bg-transparent bottom-0 w-full flex md:grid md:grid-cols-2 md:gap-4 md:mt-8">
                     {(totalProduct?.purchaseType == "MULTI" ||
                       totalProduct?.purchaseType == "QUOTE") &&
-                    productData?.status == "PUBLISHED" &&
-                    productData?.deletedAt == null &&
-                    productData?.isActive ? (
+                      productData?.status == "PUBLISHED" &&
+                      productData?.deletedAt == null &&
+                      productData?.isActive ? (
                       <Button
                         className="flex bg-[#F5E7EC] w-[45%] md:w-full rounded hover:bg-primary shadow-xs group"
                         onClick={() => {
@@ -1173,7 +1162,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             setIsOpen(true);
                           }
                         }}
-                        // onClick={() => router.push("/coming-soon")}
+                      // onClick={() => router.push("/coming-soon")}
                       >
                         <FiFileText
                           // color="#A92449"
@@ -1189,9 +1178,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     )}
                     {(totalProduct?.purchaseType == "MULTI" ||
                       totalProduct?.purchaseType == "ONLINE") &&
-                    productData?.status == "PUBLISHED" &&
-                    productData?.deletedAt == null &&
-                    productData?.isActive ? (
+                      productData?.status == "PUBLISHED" &&
+                      productData?.deletedAt == null &&
+                      productData?.isActive ? (
                       <Button
                         disabled={loadingCartButton}
                         onClick={() => addToCart(productData?._id)}
@@ -1239,21 +1228,20 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     {" "}
                     ID #{productData?.HSN}
                   </p>
-                  <h1 className="md:text-[30px] md:max-w-[100%]  text-[24px] font-semibold text-md  text-black text-normal pr-[10px]">
-                    {isSingle ? totalProduct?.name : productData?.variantName}
-                  </h1>
                   <h1 className="md:text-[30px] md:max-w-[100%]  text-[24px] font-semibold text-md  text-black text-normal pr-[10px] sr-only">
                     {productData?.meta?.metaTitle}
                   </h1>
+                  <h2 className="md:text-[30px] md:max-w-[100%]  text-[24px] font-semibold text-md  text-black text-normal pr-[10px]">
+                    {isSingle ? totalProduct?.name : productData?.variantName}
+                  </h2>
                 </div>
                 {productData?.status == "PUBLISHED" &&
-                productData?.deletedAt == null &&
-                productData?.isActive ? (
+                  productData?.deletedAt == null &&
+                  productData?.isActive ? (
                   <div
                     // onClick={handleClick}
-                    className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group ${
-                      isClicked ? "bg-secondary" : "bg-white"
-                    }`}
+                    className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group ${isClicked ? "bg-secondary" : "bg-white"
+                      }`}
                   >
                     {isClicked ? (
                       <>
@@ -1262,7 +1250,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           className="group-hover:text-white cursor-pointer z-50"
                           size={25}
                           onClick={() => deleteWishlist(productData?._id)}
-                          // onClick={() => router.push("/coming-soon")}
+                        // onClick={() => router.push("/coming-soon")}
                         />
                       </>
                     ) : (
@@ -1272,7 +1260,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           className="group-hover:text-white cursor-pointer z-50"
                           size={25}
                           onClick={() => addToWishlist(productData?._id)}
-                          // onClick={() => router.push("/coming-soon")}
+                        // onClick={() => router.push("/coming-soon")}
                         />
                       </>
                     )}
@@ -1324,28 +1312,28 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             productData?.MRP,
                             productData?.discountedPrice
                           ) > 0 && (
-                            <p className="md:text-xl text-md text-primary text-normal ml-3 ">
-                              ({" "}
-                              {calculateDiscountPercentage(
-                                productData?.MRP,
-                                productData?.discountedPrice
-                              )}
-                              % OFF)
-                            </p>
-                          )}
+                              <p className="md:text-xl text-md text-primary text-normal ml-3 ">
+                                ({" "}
+                                {calculateDiscountPercentage(
+                                  productData?.MRP,
+                                  productData?.discountedPrice
+                                )}
+                                % OFF)
+                              </p>
+                            )}
                         </div>
                         <p className="md:text-3xl text-2xl text-black text-normal mt-2 flex justify-start items-center">
                           ₹{" "}
                           <span className="md:text-3xl text-2xl text-black font-semibold text-normal flex justify-start items-center">
                             {productData?.platformPrice
                               ? formatCurrencyInIndianStyle(
-                                  productData?.platformPrice
-                                )
+                                productData?.platformPrice
+                              )
                               : productData?.discountedPrice +
-                                taxValue(
-                                  productData?.MRP,
-                                  productData?.tax?.igst
-                                ).toFixed(2)}
+                              taxValue(
+                                productData?.MRP,
+                                productData?.tax?.igst
+                              ).toFixed(2)}
                             <span className="text-[18px] font-regular text-fontGray ml-2">
                               /{productData?.unitOfMeasure} MRP
                             </span>
@@ -1366,8 +1354,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               {/* Price Section End*/}
               {/* Quantity Section Start */}
               {productData?.status == "PUBLISHED" &&
-              productData?.deletedAt == null &&
-              productData?.isActive ? (
+                productData?.deletedAt == null &&
+                productData?.isActive ? (
                 <>
                   <p className="text-md text-fontGray text-normal mt-3 mb-3">
                     Quantity
@@ -1429,15 +1417,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     Status
                   </p>
                   {productData?.status == "PUBLISHED" &&
-                  productData?.deletedAt == null &&
-                  productData?.isActive ? (
+                    productData?.deletedAt == null &&
+                    productData?.isActive ? (
                     <>
                       <p
-                        className={`${
-                          availableStockVal > minQty
-                            ? "text-primary"
-                            : "text-secondary"
-                        } text-md text-normal mt-3  border border-borderGray w-fit p-2`}
+                        className={`${availableStockVal > minQty
+                          ? "text-primary"
+                          : "text-secondary"
+                          } text-md text-normal mt-3  border border-borderGray w-fit p-2`}
                       >
                         {availableStockVal > minQty
                           ? "In Stock"
@@ -1482,14 +1469,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               )}
               {/* Variations Section End */}
 
-              {}
+              { }
               {/* Polcies Date Start */}
               <div className="md:flex block  mt-3 h-fit justify-start items-center md:gap-6 ">
                 {totalProduct?.isCancellable == true ? (
                   <>
                     {totalProduct?.cancellationPolicy &&
-                    // totalProduct?.cancellationPolicy?.cancellationPolicyDoc &&
-                    totalProduct?.cancellationPolicy?.isActive == true ? (
+                      // totalProduct?.cancellationPolicy?.cancellationPolicyDoc &&
+                      totalProduct?.cancellationPolicy?.isActive == true ? (
                       <div className="justify-start items-center py-3 flex flex-row items-center  ">
                         <Image
                           width={45}
@@ -1571,8 +1558,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                             totalProduct?.cancellationPolicy
                                               ?.cancellationPolicyDoc
                                               ? normalizePath(
-                                                  `${assetURL}/${totalProduct.cancellationPolicy.cancellationPolicyDoc}`
-                                                )
+                                                `${assetURL}/${totalProduct.cancellationPolicy.cancellationPolicyDoc}`
+                                              )
                                               : "/images/product-placeholder.webp"
                                           }
                                           className="p-[10px] rounded "
@@ -1642,8 +1629,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 {totalProduct?.isReturnable == true ? (
                   <>
                     {totalProduct?.returnPolicy &&
-                    // totalProduct?.returnPolicy?.returnPolicyDoc &&
-                    totalProduct?.returnPolicy?.allowReturn == true ? (
+                      // totalProduct?.returnPolicy?.returnPolicyDoc &&
+                      totalProduct?.returnPolicy?.allowReturn == true ? (
                       <div className="justify-start items-center py-3 flex flex-row   ">
                         <Image
                           width={45}
@@ -1737,8 +1724,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                             totalProduct?.returnPolicy
                                               ?.returnPolicyDoc
                                               ? normalizePath(
-                                                  `${assetURL}/${totalProduct.returnPolicy.returnPolicyDoc}`
-                                                )
+                                                `${assetURL}/${totalProduct.returnPolicy.returnPolicyDoc}`
+                                              )
                                               : "/images/product-placeholder.webp"
                                           }
                                           className="p-[10px] rounded "
@@ -1807,11 +1794,11 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 {(totalProduct?.isReturnable == true ||
                   totalProduct?.isCancellable == true ||
                   totalProduct?.isRefundable == true) &&
-                totalProduct?.isRefundable == true ? (
+                  totalProduct?.isRefundable == true ? (
                   <>
                     {totalProduct?.refundPolicy &&
-                    // totalProduct?.refundPolicy?.refundPolicyDoc &&
-                    totalProduct?.refundPolicy?.isActive == true ? (
+                      // totalProduct?.refundPolicy?.refundPolicyDoc &&
+                      totalProduct?.refundPolicy?.isActive == true ? (
                       <div className="justify-start items-center py-3 flex flex-row items-center  ">
                         <Image
                           width={45}
@@ -1894,8 +1881,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                             totalProduct?.refundPolicy
                                               ?.refundPolicyDoc
                                               ? normalizePath(
-                                                  `${assetURL}/${totalProduct.refundPolicy.refundPolicyDoc}`
-                                                )
+                                                `${assetURL}/${totalProduct.refundPolicy.refundPolicyDoc}`
+                                              )
                                               : "/images/product-placeholder.webp"
                                           }
                                           className="p-[10px] rounded "
@@ -2031,8 +2018,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 </div>
                 <div className="flex justify-start items-center md:w-[40%] md:mt-0 mobile-sm:mt-4">
                   {totalProduct?.certificate?.organization &&
-                  totalProduct?.certificate?.organization?.logo &&
-                  totalProduct?.certificate?.organization?.authorityName !=
+                    totalProduct?.certificate?.organization?.logo &&
+                    totalProduct?.certificate?.organization?.authorityName !=
                     "Others" ? (
                     <div className="w-fit">
                       <Image
@@ -2058,12 +2045,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         src={
                           totalProduct?.certificate?.organization?.logo
                             ? totalProduct.certificate.organization.logo.includes(
-                                "https://"
-                              )
+                              "https://"
+                            )
                               ? "/images/product-placeholder.webp"
                               : normalizePath(
-                                  `${assetURL}/${totalProduct.certificate.organization.logo}`
-                                )
+                                `${assetURL}/${totalProduct.certificate.organization.logo}`
+                              )
                             : "/images/product-placeholder.webp"
                         }
                         alt="Vendor Name"
@@ -2150,8 +2137,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               src={
                                 totalProduct?.certificate?.certificateImg
                                   ? normalizePath(
-                                      `${assetURL}/${totalProduct.certificate.certificateImg}`
-                                    )
+                                    `${assetURL}/${totalProduct.certificate.certificateImg}`
+                                  )
                                   : "/images/product-placeholder.webp"
                               }
                               className="p-[10px] rounded "
@@ -2192,9 +2179,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   <p className="text-md text-fontGray flex items-center justify-start text-normal font-normal mt-6 ">
                     Delivery
                     {pincode &&
-                    pincode.length > 0 &&
-                    pincode.length == 6 &&
-                    showMssg ? (
+                      pincode.length > 0 &&
+                      pincode.length == 6 &&
+                      showMssg ? (
                       <>
                         {deliveyAvailable ? (
                           <span className="text-primary text-md font-semibold ml-2">
@@ -2222,21 +2209,20 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         }
                       }}
                       className="border border-borderGray text-[16px] text-black rounded-none h-10 md:h-10 md:w-[250px] w-[250px] md:text-md text-xs"
-                      // customStyles={{
-                      //   border: "1px solid #BCBCBC",
-                      //   color: "#333",
-                      // }}
-                      // leftIcon={<CiLocationOn size={20} />}
+                    // customStyles={{
+                    //   border: "1px solid #BCBCBC",
+                    //   color: "#333",
+                    // }}
+                    // leftIcon={<CiLocationOn size={20} />}
 
-                      // extraClassnames="w-fit h-8 text-xs rounded-sm"
+                    // extraClassnames="w-fit h-8 text-xs rounded-sm"
                     />
                     <Button
                       title={"Apply"}
                       variant="link"
                       disabled={pincode.length == 6 ? false : true}
-                      className={`text-secondary relative right-[70px] ${
-                        pincode.length == 6 ? "opacity-100" : "opacity-50"
-                      } `}
+                      className={`text-secondary relative right-[70px] ${pincode.length == 6 ? "opacity-100" : "opacity-50"
+                        } `}
                       onClick={() => CheckDelivery(pincode)}
                     >
                       Check
@@ -2415,10 +2401,10 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                   attachment?.value?.endsWith(".pdf")
                                     ? "/images/pdflogo.webp"
                                     : attachment?.value
-                                    ? normalizePath(
+                                      ? normalizePath(
                                         `${assetURL}/${attachment.value}`
                                       )
-                                    : "/images/product-placeholder.webp"
+                                      : "/images/product-placeholder.webp"
                                 }
                                 className="w-[70px] h-[70px] rounded"
                                 alt={attachment?.key}
@@ -2574,9 +2560,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
       <div className=" md:hidden mobile-sm:flex">
         {(totalProduct?.purchaseType == "MULTI" ||
           totalProduct?.purchaseType == "QUOTE") &&
-        productData?.status == "PUBLISHED" &&
-        productData?.deletedAt == null &&
-        productData?.isActive ? (
+          productData?.status == "PUBLISHED" &&
+          productData?.deletedAt == null &&
+          productData?.isActive ? (
           <>
             <Button
               className="flex bg-[#F5E7EC] w-[45%] md:w-full rounded hover:bg-primary shadow-xs group"
@@ -2619,9 +2605,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
         )}
         {(totalProduct?.purchaseType == "MULTI" ||
           totalProduct?.purchaseType == "ONLINE") &&
-        productData?.status == "PUBLISHED" &&
-        productData?.deletedAt == null &&
-        productData?.isActive ? (
+          productData?.status == "PUBLISHED" &&
+          productData?.deletedAt == null &&
+          productData?.isActive ? (
           <Button
             disabled={loadingCartButton}
             onClick={() => addToCart(productData?._id)}

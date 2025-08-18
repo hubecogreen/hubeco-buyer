@@ -1,5 +1,11 @@
 "use client";
-import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -57,11 +63,11 @@ const CategorySection = () => {
         handleApiError(result.errorData);
       } else {
         // Extract all subcategories from all categories
-        const allSubCategories = result.data.flatMap((category: Category) => 
-          category.subCategories || []
+        const allSubCategories = result.data.flatMap(
+          (category: Category) => category.subCategories || []
         );
         setSubCategories(allSubCategories);
-        setIsDataLoaded(true); 
+        setIsDataLoaded(true);
       }
     } catch (error) {
       handleApiError(error);
@@ -84,9 +90,12 @@ const CategorySection = () => {
   }, []);
 
   // Memoize navigation handlers
-  const handleCategoryClick = useCallback((category: any) => {
-    router.push(`/products/${category?.seoSlug}?scid=${category?._id}`);
-  }, [router]);
+  const handleCategoryClick = useCallback(
+    (category: any) => {
+      router.push(`/products/${category?.seoSlug}?scid=${category?._id}`);
+    },
+    [router]
+  );
 
   const handleShopNowClick = useCallback(() => {
     router.push("/products");
@@ -106,13 +115,14 @@ const CategorySection = () => {
     }
   }, [isDataLoaded]);
 
-
-
-
   return (
     <section className="relative w-full items-center justify-center bg-white overflow-hidden">
       <div className="overflow-hidden bg-[url('/images/home/bg1.webp')] bg-contain bg-top bg-no-repeat">
         <div className="flex flex-col items-center  justify-center text-white  px-4 md:px-12">
+          <h1 className="sr-only">
+            Welcome to hubeco Where every choice is a step towards
+            Sustainability
+          </h1>
           <h2
             className={`${styles.textAnimate} text-2xl md:text-3xl font-normal mb-4 text-secondary drop-shadow-md`}
           >
@@ -121,16 +131,16 @@ const CategorySection = () => {
               hubeco
             </span>
           </h2>
-          <h1
+          <h2
             className={`${styles.gradientText} ${styles.textAnimate} text-xl md:text-4xl font-bold mb-4 text-black`}
           >
             Where every choice is a
-          </h1>
-          <h1
+          </h2>
+          <h2
             className={`${styles.gradientText} ${styles.textAnimate} text-xl md:text-4xl font-bold mb-4 text-black`}
           >
             step towards Sustainability
-          </h1>
+          </h2>
           <CustomButton
             title={"Shop Now"}
             onPress={handleShopNowClick}
@@ -155,82 +165,86 @@ const CategorySection = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-            {isDataLoaded && subCategories.length > 0 ? (
-          <Swiper
-            ref={swiperRef}
-            spaceBetween={15}
-            slidesPerView={1}
-            breakpoints={{
-              640: {
-                slidesPerView: 3.4,
-              },
-            }}
-            modules={[Autoplay]}
-            autoplay={{ delay: 1500,
-              pauseOnMouseEnter: true,
-              disableOnInteraction: false}}
-            loop={true}
-            className="swiper-container w-full flex justify-center items-center"
-          >
-            {subCategories &&
-              subCategories?.map((category: any, index: any) => {
-                // console.log('cewrbetn',`${assetURL}/${category?.image}`)
-                return (
-                  <SwiperSlide
-                    key={index}
-                    className={`w-full category-slide w-full ${styles.categorySlide}`}
-                  >
-                    <div
-                      className="relative hover:cursor-pointer w-full"
-                      onClick={() => handleCategoryClick(category)}
+          {isDataLoaded && subCategories.length > 0 ? (
+            <Swiper
+              ref={swiperRef}
+              spaceBetween={15}
+              slidesPerView={1}
+              breakpoints={{
+                640: {
+                  slidesPerView: 3.4,
+                },
+              }}
+              modules={[Autoplay]}
+              autoplay={{
+                delay: 1500,
+                pauseOnMouseEnter: true,
+                disableOnInteraction: false,
+              }}
+              loop={true}
+              className="swiper-container w-full flex justify-center items-center"
+            >
+              {subCategories &&
+                subCategories?.map((category: any, index: any) => {
+                  // console.log('cewrbetn',`${assetURL}/${category?.image}`)
+                  return (
+                    <SwiperSlide
+                      key={index}
+                      className={`w-full category-slide w-full ${styles.categorySlide}`}
                     >
-                      <Image
-                        src={
-                          category?.image
-                            ? normalizePath(`${assetURL}/${category?.image}`)
-                            : "/images/product-placeholder.webp"
-                        }
-                        alt={`${category?.name || 'Category'} ${index + 1}`}
-                        width={414}
-                        height={414}
-                        onError={(e) => {
-                          e.currentTarget.src =
-                            "/images/product-placeholder.webp";
-                        }}
-                        loading="lazy"
-                        quality={85}
-                        placeholder="blur"
-                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                        className="object-cover w-[414px] h-[414px] rounded-sm"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 414px"
-                      />
-
-                      <div className="absolute w-[414px] inset-0 flex flex-row justify-between items-end bg-black h-[414px] opacity-20"></div>
-                      <div className="absolute w-full inset-0 flex flex-col items-start justify-end text-white bg-opacity-50">
-                        <p
-                          className={`${styles.cattitle} text-2xl mb-6 text-white font-bold ml-5 z-20 cat-text`}
-                        >
-                          {category?.name}
-                        </p>
-                        <CustomButton
-                          title={"Shop Now"}
-                          onPress={handleShopNowClick}
-                          className={`${styles.catButton} px-3 py-2 ml-5 mb-4 h-12 md:h-12 text-white font-semibold z-20 text-sm bg-secondary hover:bg-primary`}
-                          customStyles={{
-                            width: "150px",
-                            border: "1px solid white",
+                      <div
+                        className="relative hover:cursor-pointer w-full"
+                        onClick={() => handleCategoryClick(category)}
+                      >
+                        <Image
+                          src={
+                            category?.image
+                              ? normalizePath(`${assetURL}/${category?.image}`)
+                              : "/images/product-placeholder.webp"
+                          }
+                          alt={`${category?.name || "Category"} ${index + 1}`}
+                          width={414}
+                          height={414}
+                          onError={(e) => {
+                            e.currentTarget.src =
+                              "/images/product-placeholder.webp";
                           }}
-                          rightIcon={<GoArrowRight />}
+                          loading="lazy"
+                          quality={85}
+                          placeholder="blur"
+                          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                          className="object-cover w-[414px] h-[414px] rounded-sm"
+                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 414px"
                         />
+
+                        <div className="absolute w-[414px] inset-0 flex flex-row justify-between items-end bg-black h-[414px] opacity-20"></div>
+                        <div className="absolute w-full inset-0 flex flex-col items-start justify-end text-white bg-opacity-50">
+                          <p
+                            className={`${styles.cattitle} text-2xl mb-6 text-white font-bold ml-5 z-20 cat-text`}
+                          >
+                            {category?.name}
+                          </p>
+                          <CustomButton
+                            title={"Shop Now"}
+                            onPress={handleShopNowClick}
+                            className={`${styles.catButton} px-3 py-2 ml-5 mb-4 h-12 md:h-12 text-white font-semibold z-20 text-sm bg-secondary hover:bg-primary`}
+                            customStyles={{
+                              width: "150px",
+                              border: "1px solid white",
+                            }}
+                            rightIcon={<GoArrowRight />}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </SwiperSlide>
-                );
-              })}
-          </Swiper>
-         ) : (
-          <div className="w-full text-center py-10"><CustomLoader/></div>
-        )}
+                    </SwiperSlide>
+                  );
+                })}
+            </Swiper>
+          ) : (
+            <div className="w-full text-center py-10">
+              <CustomLoader />
+            </div>
+          )}
         </div>
         <div className="align-center justify-center pt-10 pb-0">
           <CustomButton
@@ -252,5 +266,3 @@ const CategorySection = () => {
 };
 
 export default CategorySection;
-
-

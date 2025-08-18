@@ -143,9 +143,9 @@ const FeaturedProducts = () => {
     <section className="relative w-full items-center justify-center bg-secondaryBg">
       <div className="md:pb-10">
         <div className="items-center justify-center px-8 text-center z-20 pt-10 md:pt-20">
-          <h1 className="text-2xl md:text-4xl font-bold mb-4 text-black mt-30">
+          <h2 className="text-2xl md:text-4xl font-bold mb-4 text-black mt-30">
             Featured Sustainable Products
-          </h1>
+          </h2>
           <p className="text-md md:text-big max-w-4xl mx-auto text-fontGray md:pt-5">
             Discover our latest eco-friendly and sustainable materials.
           </p>

@@ -390,24 +390,31 @@ const Header: React.FC<HeaderProps> = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky}`}
     >
       <div
-        className={`w-full justify-center items-center bg-lightBgColor h-auto md:h-20 px-4 pt-4 pb-6 md:pb-24 ${
+        className={`w-full justify-center items-center bg-lightBgColor h-auto md:h-22 px-4 pt-1 pb-1 md:pb-22 ${
           styles.stickyHeader
         } ${isSearchFocused ? styles.searchFocused : ""}`}
       >
         <div className="flex justify-between items-center py-2 md:py-4">
           {/* Left side - Fixed elements (never affected) */}
-          <div className="flex items-center justify-center space-x-3 md:space-x-6">
+          <div className="flex items-center space-x-3 md:space-x-6">
+            <div className="flex items-center md:hidden ">
+              <VscMenu
+                className="text-black cursor-pointer font-light text-gray-800"
+                size={20}
+                onClick={toggleMenu}
+              />
+            </div>
             {/* Mobile Logo */}
             <Link
               href="/"
-              className={`${styles.logo} w-48 sm:w-64 h-8 md:hidden hover:cursor-pointer pl-[4px]`}
+              className={`${styles.logo} w-48 sm:w-64 h-8 md:h-10 lg:h-12 hover:cursor-pointer`}
             >
               <Image
                 src="/images/Logo-2.webp"
-                className="h-8 w-auto object-contain"
+                className="h-8 md:h-10 lg:h-12 w-auto object-contain"
                 alt="Hubeco Logo"
                 width={200}
-                height={35}
+                height={50}
                 onError={(e) => {
                   e.currentTarget.src = "/images/product-placeholder.webp";
                 }}
@@ -415,8 +422,17 @@ const Header: React.FC<HeaderProps> = () => {
               />
             </Link>
 
-            {/* Desktop Navigation Links */}
-            <div className="hidden md:flex items-center space-x-6 pl-[50px]">
+            {/* Tablet Hamburger Menu - Visible on tablet, hidden on mobile and desktop */}
+            <div className="hidden md:flex lg:hidden">
+              <VscMenu
+                className="text-black cursor-pointer font-light text-gray-800"
+                size={24}
+                onClick={toggleMenu}
+              />
+            </div>
+
+            {/* Desktop Navigation Links - Hidden on tablet, only visible on large screens */}
+            <div className="hidden lg:flex items-center space-x-6">
               <div className="relative">
                 <div
                   className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative z-20"
@@ -468,9 +484,7 @@ const Header: React.FC<HeaderProps> = () => {
                     : "text-gray-800"
                 }`}
               >
-                <span className="font-medium">
-                  Green Financing
-                </span>
+                <span className="font-medium">Green Financing</span>
                 {pathname === "/green-financing" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
@@ -478,7 +492,7 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
 
             {/* Mobile Navigation Links */}
-            <div className="md:hidden flex items-center space-x-3">
+            {/* <div className="md:hidden flex items-center space-x-3">
               <div className="relative">
                 <div
                   className="flex items-center space-x-1 cursor-pointer text-gray-800 relative z-20"
@@ -516,12 +530,12 @@ const Header: React.FC<HeaderProps> = () => {
                   onClose={() => setIsProductSegmentsOpen(false)}
                 />
               </div>
-            </div>
+            </div> */}
           </div>
 
-          {/* Desktop Additional Navigation Links */}
+          {/* Desktop Additional Navigation Links - Hidden on tablet, only visible on large screens */}
           {!isSearchFocused && (
-            <div className="hidden md:flex items-center space-x-10">
+            <div className="hidden lg:flex items-center space-x-10">
               <Link
                 href="/brands"
                 className={`font-medium cursor-pointer transition-colors relative ${
@@ -638,16 +652,27 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
           </div> */}
 
-          {/* Center - Search Bar with Hamburger Menu */}
-          <div className="hidden md:flex items-center space-x-2 md:space-x-4 max-w-2xl">
-            <div className="relative">
+          {/* Center - Search Bar with Hamburger Menu - Hidden on tablet, only visible on large screens */}
+          <div className="hidden md:flex lg:flex items-center space-x-2 md:space-x-4 max-w-2xl">
+            <div className="relative flex-1 lg:hidden mr-20">
+              <SearchBar
+                isExpanded={true}
+                onFocus={handleSearchFocus}
+                onBlur={handleSearchBlur}
+                className="w-full"
+                value={searchValue}
+                onChange={(value) => setSearchValue(value)}
+                placeholder={
+                  rotatingPlaceholders[currentPlaceholderIndex] ||
+                  "Search for Products..."
+                }
+              />
+            </div>
+            <div className="relative md:hidden lg:flex">
               {!isSearchFocused ? (
-                <div
-                  ref={searchRef}
-                  className="relative"
-                >
+                <div ref={searchRef} className="relative">
                   <button
-                    className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
+                    className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors md:mr-4 md:ml-2"
                     onClick={handleSearchFocus}
                   >
                     <IoSearchOutline className="text-gray-600" size={18} />
@@ -689,6 +714,7 @@ const Header: React.FC<HeaderProps> = () => {
 
           {/* Right side - User actions */}
           <div className="flex items-center space-x-2 md:space-x-4">
+            {/* Profile Icon - Visible on all screen sizes */}
             <div
               ref={iconRef}
               onMouseEnter={handleMouseEnter}
@@ -713,6 +739,7 @@ const Header: React.FC<HeaderProps> = () => {
               />
             </div>
 
+            {/* Cart Icon - Visible on all screen sizes */}
             <div className="relative pr-2 md:pr-4">
               <CiShoppingCart
                 className="text-black hover:cursor-pointer"
@@ -730,34 +757,58 @@ const Header: React.FC<HeaderProps> = () => {
               ) : null}
             </div>
 
+            {/* Vendor Button/Icon - Different for mobile vs tablet vs desktop */}
             {!token && (
               <>
+                {/* Desktop - Full button */}
                 <CustomButton
                   title={`${
                     showVendorLogin ? "Vendor Login" : "Become a Vendor"
                   }`}
-                  className="text-base bg-secondary px-4 lg:px-6 hover:bg-primary h-12 mr-4 hidden md:flex text-white font-medium"
+                  className="text-base bg-secondary px-4 lg:px-2 hover:bg-primary h-12 mr-4 hidden lg:flex text-white font-medium"
                   customStyles={{}}
                   rightIcon={<GoArrowRight />}
                   hoverBgColor=""
                   onPress={() => onClickVendor()}
                 />
+
+                {/* Tablet - Compact button */}
+                <CustomButton
+                  title={`${
+                    showVendorLogin ? "Vendor Login" : "Become a Vendor"
+                  }`}
+                  className="text-sm bg-secondary px-3 hover:bg-primary h-10 mr-2 hidden md:flex lg:hidden text-white font-medium"
+                  customStyles={{}}
+                  rightIcon={<GoArrowRight />}
+                  hoverBgColor=""
+                  onPress={() => onClickVendor()}
+                />
+
+                {/* Mobile - Icon only */}
+                <Link
+                  href="/plans"
+                  className="md:hidden p-2"
+                  onClick={() => onClickVendor()}
+                >
+                  <Image
+                    alt="vendor"
+                    className="w-6 h-6"
+                    src="/images/home/vendor.webp"
+                    width={20}
+                    height={20}
+                    onError={(e) => {
+                      e.currentTarget.src = "/images/product-placeholder.webp";
+                    }}
+                    loading="lazy"
+                  />
+                </Link>
               </>
             )}
           </div>
         </div>
 
-        {/* Second Line - Mobile Only: Search Bar and Hamburger Menu */}
+        {/* Second Line - Mobile Only: Search Bar */}
         <div className="md:hidden flex items-center justify-between py-2 border-t border-gray-200">
-          {/* Hamburger Menu */}
-          <div className="flex items-center">
-            <VscMenu
-              className="text-black cursor-pointer font-light text-gray-800"
-              size={20}
-              onClick={toggleMenu}
-            />
-          </div>
-
           {/* Search Bar */}
           <div className="flex-1 mx-3">
             <SearchBar
@@ -772,23 +823,6 @@ const Header: React.FC<HeaderProps> = () => {
                 "Search for Products..."
               }
             />
-          </div>
-
-          {/* Vendor Icon - Beside search bar on mobile */}
-          <div className="flex items-center">
-            <Link href="/plans" className="p-1">
-              <Image
-                alt="vendor"
-                className="text-black hover:cursor-pointer w-6 h-6"
-                src="/images/home/vendor.webp"
-                width={26}
-                height={26}
-                onError={(e) => {
-                  e.currentTarget.src = "/images/product-placeholder.webp";
-                }}
-                loading="lazy"
-              />
-            </Link>
           </div>
         </div>
       </div>

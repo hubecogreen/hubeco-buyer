@@ -17,31 +17,17 @@ const schema = yup.object({
   name: yup
     .string()
     .required("Name is required")
-    .matches(/^[^\d]+$/, "Name cannot contain numbers")
-    .matches(/^[a-zA-Z\s]*$/, "Special characters not allowed")
-    .test(
-      "no-leading-space",
-      "Empty space at the start is not allowed",
-      (value: any) => value && value.trimLeft() === value
-    )
     .test(
       "no-multiple-spaces",
       "Double spaces are not allowed",
       (value: any) => value && !/\s{2,}/.test(value)
-    )
-    .min(3, "Name must be at least 3 characters")
-    .matches(/^(?! )(?=.*[^ ]).{3,}(?<! )$/, "Enter valid name")
-    .max(75, "Name cannot exceed 75 characters"),
+    ),
   phoneNumber: yup
     .string()
-    .required("Phone Number is required")
-    .matches(/^[0-9]+$/, "Only numbers are allowed")
-    .min(10, "Phone Number must be 10 digits")
-    .max(10, "Phone Number must be 10 digits")
-    .matches(/^[6-9][0-9]*$/, "First number must be between 6 to 9"),
+    .required("Phone Number is required"),
   agreedToTerms: yup
     .boolean()
-    .oneOf([true], "You must agree to the terms and conditions")
+    .oneOf([true], "You must agree to the terms and conditions"),
 });
 
 type FormData = yup.InferType<typeof schema>;
@@ -57,14 +43,14 @@ export default function GreenHomeLoanForm({
     handleSubmit,
     formState: { errors },
     reset,
-    clearErrors
+    clearErrors,
   } = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       name: "",
       phoneNumber: "",
-      agreedToTerms: false
-    }
+      agreedToTerms: false,
+    },
   });
 
   // Reset form when modal opens/closes
@@ -98,7 +84,9 @@ export default function GreenHomeLoanForm({
         onClose();
       } else {
         const errorData = await res.json();
-        toast.error(errorData.message || "Something went wrong. Please try again.");
+        toast.error(
+          errorData.message || "Something went wrong. Please try again."
+        );
       }
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -123,12 +111,12 @@ export default function GreenHomeLoanForm({
         <div
           className="relative px-6 py-8 text-white flex-shrink-0"
           style={{
-            backgroundImage: "url('/images/greenFinance/Green BG.png')",
+            backgroundImage: "url('/images/greenFinance/Form-BG.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-30" />
+          <div className="absolute inset-0  bg-opacity-30" />
           <button
             onClick={handleClose}
             className="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors z-10"
@@ -141,8 +129,12 @@ export default function GreenHomeLoanForm({
         </div>
 
         {/* Form - Scrollable */}
-        <div className="px-6 py-8 overflow-y-auto flex-1">
-          <form onSubmit={handleSubmit(handleSubmitForm)} className="space-y-6" noValidate>
+        <div className="px-20 py-20 overflow-y-auto flex-1">
+          <form
+            onSubmit={handleSubmit(handleSubmitForm)}
+            className="space-y-6"
+            noValidate
+          >
             {/* Name */}
             <div>
               <label className="block text-gray-800 font-medium mb-2">
@@ -156,7 +148,9 @@ export default function GreenHomeLoanForm({
                 required
               />
               {errors.name && (
-                <p className="text-red text-xs mt-1 font-small">{errors.name.message}</p>
+                <p className="text-red text-xs mt-1 font-small">
+                  {errors.name.message}
+                </p>
               )}
             </div>
 
@@ -175,27 +169,6 @@ export default function GreenHomeLoanForm({
                   placeholder="Enter Phone Number"
                   className="flex-1 px-4 py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
                   required
-                  onKeyPress={(e) => {
-                    if (!/[0-9]/.test(e.key)) {
-                      e.preventDefault();
-                    }
-                  }}
-                  onPaste={(e) => {
-                    e.preventDefault();
-                    const pastedText = e.clipboardData.getData('text');
-                    if (/^[0-9]+$/.test(pastedText)) {
-                      const target = e.target as HTMLInputElement;
-                      const start = target.selectionStart || 0;
-                      const end = target.selectionEnd || 0;
-                      const value = target.value;
-                      const newValue = value.substring(0, start) + pastedText + value.substring(end);
-                      if (newValue.length <= 10) {
-                        target.value = newValue;
-                        target.setSelectionRange(start + pastedText.length, start + pastedText.length);
-                      }
-                    }
-                  }}
-                  maxLength={10}
                 />
               </div>
               {errors.phoneNumber && (
@@ -215,8 +188,8 @@ export default function GreenHomeLoanForm({
               />
               <label className="text-sm text-gray-600 leading-relaxed">
                 I agree to Hubeco{" "}
-                <Link 
-                  href="/green-financing-terms-of-use" 
+                <Link
+                  href="/green-financing-terms-of-use"
                   className="text-blue-600 underline hover:text-blue-800"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -224,8 +197,8 @@ export default function GreenHomeLoanForm({
                   Terms of Use
                 </Link>{" "}
                 and{" "}
-                <Link 
-                  href="/green-financing-privacy-policy" 
+                <Link
+                  href="/green-financing-privacy-policy"
                   className="text-blue-600 underline hover:text-blue-800"
                   target="_blank"
                   rel="noopener noreferrer"

@@ -264,7 +264,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                             : undefined
                         }
                       >
-                        <span className="text-sm font-medium">
+                        <span className="text-sm font-medium ">
                           {category.name}
                         </span>
                         {category.subCategories &&
@@ -331,14 +331,14 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                   hoveredCategoryId === subCat._id ||
                                   (index === 0 && !hoveredCategoryId)
                                     ? "text-teal-600 bg-white font-medium"
-                                    : "text-gray-700 hover:text-teal-600 hover:bg-white"
+                                    : "text-[#B5B5B5] hover:text-teal-600 hover:bg-white"
                                 }`}
                                 onMouseEnter={() =>
                                   handleMouseEnter(subCat._id)
                                 }
                                 onClick={() => setOpenedCategoryId(subCat._id)}
                               >
-                                <span className="text-sm flex items-center justify-between">
+                                <span className="text-sm flex items-center justify-between text-teal-600">
                                   {subCat.name}
                                   {subCat.childCategories &&
                                     subCat.childCategories.length > 0 && (

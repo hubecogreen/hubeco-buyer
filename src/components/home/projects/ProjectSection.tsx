@@ -190,9 +190,9 @@ const ProjectsSection = () => {
     >
       <div className="pb-2 md:pb-10">
         <div className="items-center justify-center px-8 text-center z-20 md:pt-7">
-          <h1 className="text-2xl md:text-4xl font-bold mb-4 text-black mt-30">
+          <h2 className="text-2xl md:text-4xl font-bold mb-4 text-black mt-30">
             Green Projects
-          </h1>
+          </h2>
           <p className="md:text-big text-md w-full md:max-w-5xl mx-auto text-fontGray md:pt-5">
             Browse the green building projects where our eco-friendly materials
             are deployed

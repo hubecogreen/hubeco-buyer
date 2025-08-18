@@ -12,9 +12,6 @@ import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import useClient from "../hooks/useClient";
 
-
-
-
 const MainLayout = ({
   children,
   isProd,
@@ -22,12 +19,9 @@ const MainLayout = ({
   children: React.ReactNode;
   isProd: boolean;
 }) => {
+  const isClient = useClient();
 
-  const isClient = useClient()
-
-  if(!isClient)
-    return <></>
-
+  if (!isClient) return <></>;
 
   return (
     <>
@@ -40,7 +34,7 @@ const MainLayout = ({
           <MeDetails>
             <ChakraProvider>
               <Header />
-              <div className="mt-[110px]">
+              <div className="mt-[85px]">
                 <PrivateRoute>{children}</PrivateRoute>
               </div>
               <Footer />

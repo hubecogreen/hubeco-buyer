@@ -42,6 +42,7 @@ const schema = yup.object({
     .matches(/^[6-9][0-9]*$/, "First number must be between 6 to 9"),
   gstin: yup
     .string()
+    .transform((val) => (val ? val.toUpperCase() : ""))
     .required("GST is required")
     .matches(/^[0-9A-Za-z]*$/, "Special Characters are not allowed")
     .test("valid-state-code", "Invalid state code in GST", (value) =>
@@ -59,7 +60,7 @@ const schema = yup.object({
     .trim("GST cannot have empty space at the start or end"),
   agreedToTerms: yup
     .boolean()
-    .oneOf([true], "You must agree to the terms and conditions")
+    .oneOf([true], "You must agree to the terms and conditions"),
 });
 
 type FormData = yup.InferType<typeof schema>;
@@ -75,15 +76,15 @@ export default function GreenProjectFinancingForm({
     handleSubmit,
     formState: { errors },
     reset,
-    clearErrors
+    clearErrors,
   } = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       name: "",
       phoneNumber: "",
       gstin: "",
-      agreedToTerms: false
-    }
+      agreedToTerms: false,
+    },
   });
 
   // Reset form when modal opens/closes
@@ -139,12 +140,12 @@ export default function GreenProjectFinancingForm({
         <div
           className="relative px-6 py-8 text-white flex-shrink-0"
           style={{
-            backgroundImage: "url('/images/greenFinance/Green BG.png')",
+            backgroundImage: "url('/images/greenFinance/Form-BG.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-30" />
+          <div className="absolute inset-0 bg-opacity-30" />
           <button
             onClick={handleClose}
             className="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors z-10"
@@ -157,8 +158,12 @@ export default function GreenProjectFinancingForm({
         </div>
 
         {/* Form - Scrollable */}
-        <div className="px-6 py-8 overflow-y-auto flex-1">
-          <form onSubmit={handleSubmit(handleSubmitForm)} className="space-y-6" noValidate>
+        <div className="px-20 py-20 overflow-y-auto flex-1">
+          <form
+            onSubmit={handleSubmit(handleSubmitForm)}
+            className="space-y-6"
+            noValidate
+          >
             {/* Name */}
             <div>
               <label className="block text-gray-800 font-medium mb-2">
@@ -172,7 +177,9 @@ export default function GreenProjectFinancingForm({
                 required
               />
               {errors.name && (
-                <p className="text-red text-xs mt-1 font-small">{errors.name.message}</p>
+                <p className="text-red text-xs mt-1 font-small">
+                  {errors.name.message}
+                </p>
               )}
             </div>
 
@@ -198,18 +205,24 @@ export default function GreenProjectFinancingForm({
                   }}
                   onPaste={(e) => {
                     e.preventDefault();
-                    const pastedText = e.clipboardData.getData('text');
+                    const pastedText = e.clipboardData.getData("text");
                     if (/^[0-9]+$/.test(pastedText)) {
                       const target = e.target as HTMLInputElement;
                       const start = target.selectionStart || 0;
                       const end = target.selectionEnd || 0;
                       const value = target.value;
-                      const newValue = value.substring(0, start) + pastedText + value.substring(end);
+                      const newValue =
+                        value.substring(0, start) +
+                        pastedText +
+                        value.substring(end);
                       if (newValue.length <= 10) {
                         target.value = newValue;
-                        target.setSelectionRange(start + pastedText.length, start + pastedText.length);
+                        target.setSelectionRange(
+                          start + pastedText.length,
+                          start + pastedText.length
+                        );
                         // Trigger react-hook-form update
-                        const event = new Event('input', { bubbles: true });
+                        const event = new Event("input", { bubbles: true });
                         target.dispatchEvent(event);
                       }
                     }
@@ -235,9 +248,14 @@ export default function GreenProjectFinancingForm({
                 placeholder="Enter GSTIN"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
                 required
+                onInput={(e) => {
+                  e.currentTarget.value = e.currentTarget.value.toUpperCase();
+                }}
               />
               {errors.gstin && (
-                <p className="text-red text-xs mt-1 font-small">{errors.gstin.message}</p>
+                <p className="text-red text-xs mt-1 font-small">
+                  {errors.gstin.message}
+                </p>
               )}
             </div>
 
@@ -251,8 +269,8 @@ export default function GreenProjectFinancingForm({
               />
               <label className="text-sm text-gray-600 leading-relaxed">
                 I agree to Hubeco{" "}
-                <Link 
-                  href="/green-financing-terms-of-use" 
+                <Link
+                  href="/green-financing-terms-of-use"
                   className="text-blue-600 underline hover:text-blue-800"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -260,8 +278,8 @@ export default function GreenProjectFinancingForm({
                   Terms of Use
                 </Link>{" "}
                 and{" "}
-                <Link 
-                  href="/green-financing-privacy-policy" 
+                <Link
+                  href="/green-financing-privacy-policy"
                   className="text-blue-600 underline hover:text-blue-800"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -300,7 +318,7 @@ export default function GreenProjectFinancingForm({
                 className="h-8 w-auto"
               />
             </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -185,7 +185,6 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
     }
   };
 
-
   const getMenuCategories = async () => {
     try {
       setIsLoading(true);
@@ -275,12 +274,12 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
         className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
       >
         {/* Desktop Layout */}
-        <div 
-          className="hidden md:flex w-full h-[500px] pointer-events-auto"
+        <div
+          className="hidden md:flex w-full h-[560px] pointer-events-auto relative top-[0px]"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Left Column - Main Categories */}
-          <div className="w-3/12 bg-black bg-opacity-90 pt-6 border-r border-gray-800">
+          <div className="w-3/12 bg-black bg-opacity-90 pt-0 border-r-[1.52px] border-[#404040]">
             <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
               {mainCategories && mainCategories.length > 0 ? (
                 mainCategories.map((category, index) => (
@@ -296,7 +295,10 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                         : "text-white cursor-not-allowed"
                     }`}
                     onClick={() => {
-                      if (category.subCategories && category.subCategories.length > 0) {
+                      if (
+                        category.subCategories &&
+                        category.subCategories.length > 0
+                      ) {
                         handleCategoryClick(category);
                       }
                     }}
@@ -323,7 +325,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
           </div>
 
           {/* Middle Column - Split into 2 sub-columns */}
-          <div className="w-5/12 bg-black bg-opacity-90 border-r border-gray-800">
+          <div className="w-5/12 bg-black bg-opacity-90 border-r-[1.52px] border-[#404040]">
             {(selectedCategory ||
               (mainCategories && mainCategories.length > 0)) && (
               <>
@@ -364,10 +366,10 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                         .map((subCat, index) => (
                           <div
                             key={subCat._id}
-                            className={`p-3 cursor-pointer rounded transition-all duration-200 ${
+                            className={`p-2 cursor-pointer rounded transition-all duration-200 ${
                               openedCategoryId === subCat._id
                                 ? "text-[#B90647] font-semibold"
-                                : "text-white"
+                                : "text-[#B5B5B5] font-light hover:text-[#B90647]"
                             }`}
                             onClick={(e) => {
                               e.stopPropagation(); // Prevent popup from closing
@@ -380,7 +382,9 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             }}
                           >
                             <div className="flex items-center justify-between">
-                              <span className="text-sm">{subCat.name}</span>
+                              <span className="text-sm  font-light ">
+                                {subCat.name}
+                              </span>
                               {subCat.childCategories &&
                                 subCat.childCategories.length > 0 && (
                                   <ChevronRight
@@ -402,7 +406,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                                   {subCat.childCategories.map((child) => (
                                     <div
                                       key={child._id}
-                                      className="p-2 cursor-pointer rounded text-white hover:text-[#B90647] transition-all duration-200"
+                                      className="p-0 cursor-pointer rounded text-white hover:text-[#ffffff] transition-all duration-200 font-light"
                                     >
                                       <Link
                                         href={`/products/${
@@ -453,10 +457,10 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                         .map((subCat, index) => (
                           <div
                             key={subCat._id}
-                            className={`p-3 cursor-pointer rounded transition-all duration-200 ${
+                            className={`p-2 cursor-pointer rounded transition-all duration-200 ${
                               openedCategoryId === subCat._id
                                 ? "text-[#B90647] font-semibold"
-                                : "text-white"
+                                : "text-[#B5B5B5] font-light hover:text-[#B90647]"
                             }`}
                             onClick={(e) => {
                               e.stopPropagation(); // Prevent popup from closing
@@ -469,7 +473,9 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             }}
                           >
                             <div className="flex items-center justify-between">
-                              <span className="text-sm">{subCat.name}</span>
+                              <span className="text-sm font-light">
+                                {subCat.name}
+                              </span>
                               {subCat.childCategories &&
                                 subCat.childCategories.length > 0 && (
                                   <ChevronRight
@@ -491,7 +497,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                                   {subCat.childCategories.map((child) => (
                                     <div
                                       key={child._id}
-                                      className="p-2 cursor-pointer rounded text-white hover:text-[#B90647] transition-all duration-200"
+                                      className="p-0 cursor-pointer rounded text-white  transition-all duration-200 font-light"
                                     >
                                       <Link
                                         href={`/products/${
@@ -523,7 +529,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
             )}
           </div>
           {/* Right Column - Featured Products */}
-          <div className="w-4/12 bg-black bg-opacity-90 p-8">
+          {/* <div className="w-4/12 bg-black bg-opacity-90 p-8">
             <h3 className="text-lg font-bold text-white mb-6">
               Featured Products
             </h3>
@@ -588,11 +594,83 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                 </div>
               )}
             </div>
+          </div> */}
+
+          <div className="w-4/12 bg-black bg-opacity-90 p-8">
+            <h3 className="text-lg font-bold text-white mb-6">
+              Featured Products
+            </h3>
+            <div className="h-[calc(400px-120px)] overflow-hidden relative">
+              {isFeaturedLoading ? (
+                <div className="flex items-center justify-center h-32">
+                  <p className="text-white">Loading featured products...</p>
+                </div>
+              ) : featuredProducts && featuredProducts.length > 0 ? (
+                <div className="relative h-full">
+                  <div
+                    className="animate-marquee"
+                    style={{
+                      animationDuration: `${featuredProducts.length * 3}s`,
+                    }}
+                  >
+                    {getMarqueeProducts().map((product: any, index: number) => (
+                      <div
+                        key={`${product._id}-${index}`}
+                        className="border-b border-[#404040] pb-4 mb-4"
+                        style={{
+                          height: "calc((400px - 180px) / 3)",
+                          minHeight: "80px",
+                        }}
+                      >
+                        <div className="flex items-start space-x-4 h-full">
+                          <div className="w-16 h-16 bg-gray-700 rounded flex-shrink-0">
+                            {product.image && (
+                              <Image
+                                src={product.image}
+                                alt={product.name}
+                                width={64}
+                                height={64}
+                                className="w-full h-full object-cover rounded"
+                                onError={(e) => {
+                                  e.currentTarget.src =
+                                    "/images/product-placeholder.webp";
+                                }}
+                              />
+                            )}
+                          </div>
+                          <div
+                            className="flex-1 cursor-pointer"
+                            onClick={() => {
+                              router.push(`/${product.slug}`);
+                              onClose();
+                            }}
+                          >
+                            <h4 className="text-sm font-medium text-[#EEEEEE] mb-2">
+                              {product.name}
+                            </h4>
+                            <p
+                              className="text-xs text-[#EEEEEE] leading-relaxed line-clamp-4 font-normal"
+                              dangerouslySetInnerHTML={{
+                                __html: product.description,
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center h-32">
+                  <p className="text-white">No featured products</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         {/* Mobile Layout */}
-        <div 
+        <div
           className="md:hidden w-full h-full pointer-events-auto bg-black bg-opacity-95"
           onClick={(e) => e.stopPropagation()}
         >
@@ -629,7 +707,10 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             : "text-white cursor-not-allowed"
                         }`}
                         onClick={() => {
-                          if (category.subCategories && category.subCategories.length > 0) {
+                          if (
+                            category.subCategories &&
+                            category.subCategories.length > 0
+                          ) {
                             handleCategoryClick(category);
                           }
                         }}
@@ -789,9 +870,11 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                                   <h4 className="text-xs font-bold text-white mb-1">
                                     {product.name}
                                   </h4>
-                                  <p 
+                                  <p
                                     className="text-xs text-white leading-relaxed line-clamp-2"
-                                    dangerouslySetInnerHTML={{ __html: product.description }}
+                                    dangerouslySetInnerHTML={{
+                                      __html: product.description,
+                                    }}
                                   />
                                 </div>
                               </div>

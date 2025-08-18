@@ -390,13 +390,20 @@ const Header: React.FC<HeaderProps> = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky}`}
     >
       <div
-        className={`w-full justify-center items-center bg-lightBgColor h-auto md:h-20 px-4 pt-4 pb-6 md:pb-24 ${
+        className={`w-full justify-center items-center bg-lightBgColor h-auto md:h-20 px-4 pt-1 pb-5 md:pb-22 ${
           styles.stickyHeader
         } ${isSearchFocused ? styles.searchFocused : ""}`}
       >
         <div className="flex justify-between items-center py-2 md:py-4">
           {/* Left side - Fixed elements (never affected) */}
           <div className="flex items-center justify-center space-x-3 md:space-x-6">
+            <div className="flex items-center md:hidden ">
+              <VscMenu
+                className="text-black cursor-pointer font-light text-gray-800"
+                size={20}
+                onClick={toggleMenu}
+              />
+            </div>
             {/* Mobile Logo */}
             <Link
               href="/"
@@ -407,7 +414,7 @@ const Header: React.FC<HeaderProps> = () => {
                 className="h-8 w-auto object-contain"
                 alt="Hubeco Logo"
                 width={200}
-                height={35}
+                height={50}
                 onError={(e) => {
                   e.currentTarget.src = "/images/product-placeholder.webp";
                 }}
@@ -468,9 +475,7 @@ const Header: React.FC<HeaderProps> = () => {
                     : "text-gray-800"
                 }`}
               >
-                <span className="font-medium">
-                  Green Financing
-                </span>
+                <span className="font-medium">Green Financing</span>
                 {pathname === "/green-financing" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
@@ -478,7 +483,7 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
 
             {/* Mobile Navigation Links */}
-            <div className="md:hidden flex items-center space-x-3">
+            {/* <div className="md:hidden flex items-center space-x-3">
               <div className="relative">
                 <div
                   className="flex items-center space-x-1 cursor-pointer text-gray-800 relative z-20"
@@ -516,7 +521,7 @@ const Header: React.FC<HeaderProps> = () => {
                   onClose={() => setIsProductSegmentsOpen(false)}
                 />
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Desktop Additional Navigation Links */}
@@ -642,10 +647,7 @@ const Header: React.FC<HeaderProps> = () => {
           <div className="hidden md:flex items-center space-x-2 md:space-x-4 max-w-2xl">
             <div className="relative">
               {!isSearchFocused ? (
-                <div
-                  ref={searchRef}
-                  className="relative"
-                >
+                <div ref={searchRef} className="relative">
                   <button
                     className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
                     onClick={handleSearchFocus}
@@ -730,6 +732,22 @@ const Header: React.FC<HeaderProps> = () => {
               ) : null}
             </div>
 
+            <div className="flex items-center">
+              <Link href="/plans" className="p-1">
+                <Image
+                  alt="vendor"
+                  className="text-black hover:cursor-pointer w-6 h-6"
+                  src="/images/home/vendor.webp"
+                  width={26}
+                  height={26}
+                  onError={(e) => {
+                    e.currentTarget.src = "/images/product-placeholder.webp";
+                  }}
+                  loading="lazy"
+                />
+              </Link>
+            </div>
+
             {!token && (
               <>
                 <CustomButton
@@ -750,13 +768,13 @@ const Header: React.FC<HeaderProps> = () => {
         {/* Second Line - Mobile Only: Search Bar and Hamburger Menu */}
         <div className="md:hidden flex items-center justify-between py-2 border-t border-gray-200">
           {/* Hamburger Menu */}
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <VscMenu
               className="text-black cursor-pointer font-light text-gray-800"
               size={20}
               onClick={toggleMenu}
             />
-          </div>
+          </div> */}
 
           {/* Search Bar */}
           <div className="flex-1 mx-3">
@@ -775,7 +793,7 @@ const Header: React.FC<HeaderProps> = () => {
           </div>
 
           {/* Vendor Icon - Beside search bar on mobile */}
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <Link href="/plans" className="p-1">
               <Image
                 alt="vendor"
@@ -789,7 +807,7 @@ const Header: React.FC<HeaderProps> = () => {
                 loading="lazy"
               />
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
 

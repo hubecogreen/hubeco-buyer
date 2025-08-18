@@ -127,8 +127,8 @@ export async function generateMetadata({
         canonical: canonicalUrl,
       },
       robots: {
-        index: true,
-        follow: true,
+        index: false,
+        follow: false,
         nocache: false,
         googleBot: {
           index: true,

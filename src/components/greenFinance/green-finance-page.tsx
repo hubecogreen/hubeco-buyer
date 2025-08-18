@@ -13,7 +13,7 @@ export default function GreenFinancingSection() {
     <>
       <div className="relative w-full h-[500px] overflow-hidden rounded-[48px] mx-auto max-w-[1440px] top-8">
         {/* Background Image */}
-        <div className="absolute inset-0 md:m-4">
+        <div className="absolute inset-0 m-4">
           <Image
             src="/images/greenFinance/greenFinanceBanner.webp"
             alt="Modern sustainable home interior"

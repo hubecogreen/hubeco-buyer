@@ -148,7 +148,7 @@ export default function Page() {
               <span className="background-color:white;font-family:Poppins;font-size:6.0pt;">
                 <span dir="ltr" lang="EN-GB" className="line-height:115%;">
                   These Terms of Use (the “<strong>Terms</strong>
-                  ”) constitute a legally binding agreement between
+                  ”) constitute a legally binding agreement between 
                 </span>
               </span>
               <span className="background-color:#FAFAFA;font-family:Poppins;font-size:6.0pt;">

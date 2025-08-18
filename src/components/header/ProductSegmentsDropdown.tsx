@@ -76,6 +76,14 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
   const threshold = breakpoint === "tablet" ? 9 : 9;
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Function to check if a category is active based on URL
+  const isCategoryActive = (categoryId: string) => {
+    if (typeof window !== "undefined") {
+      return window.location.href.includes(categoryId);
+    }
+    return false;
+  };
+
   useEffect(() => {
     getCategories();
     getMenuCategories();
@@ -197,6 +205,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
       } else {
         console.log(result?.data, "checkncknnd");
         setMainCategories(result?.data);
+        setSelectedCategory(result?.data[0]);
       }
     } catch (e) {
       handleApiError(e);
@@ -249,10 +258,11 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
     setOpenedCategoryId(null); // Clear opened subcategory when main category changes
   };
 
+  console.log(selectedCategory, "this is selectedCategory");
   const handleClick = (menuItem?: any) => {
-    if (menuItem) {
-      router.push(`/products/${menuItem.seoSlug}?ccid=${menuItem._id}`);
-    }
+    // if (menuItem) {
+    //   router.push(`/products/${menuItem.seoSlug}?ccid=${menuItem._id}`);
+    // }
   };
 
   // Create continuous marquee products
@@ -280,7 +290,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
         >
           {/* Left Column - Main Categories */}
           <div className="w-3/12 bg-black bg-opacity-90 pt-0 border-r-[1.52px] border-[#404040]">
-            <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+            <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 pt-10">
               {mainCategories && mainCategories.length > 0 ? (
                 mainCategories.map((category, index) => (
                   <div
@@ -342,7 +352,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                 </div>
 
                 {/* Two sub-columns */}
-                <div className="flex h-[calc(500px-120px)]">
+                <div className="flex h-[calc(400px-120px)]">
                   {/* Left sub-column - Subcategories */}
                   <div className="w-1/2 p-8 pt-0 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
                     <div>
@@ -367,7 +377,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                           <div
                             key={subCat._id}
                             className={`p-2 cursor-pointer rounded transition-all duration-200 ${
-                              openedCategoryId === subCat._id
+                              openedCategoryId === subCat._id || isCategoryActive(subCat._id)
                                 ? "text-[#B90647] font-semibold"
                                 : "text-[#B5B5B5] font-light hover:text-[#B90647]"
                             }`}
@@ -406,7 +416,9 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                                   {subCat.childCategories.map((child) => (
                                     <div
                                       key={child._id}
-                                      className="p-0 cursor-pointer rounded text-white hover:text-[#ffffff] transition-all duration-200 font-light"
+                                      className={`p-0 cursor-pointer rounded text-white transition-all duration-200 font-light ${
+                                        isCategoryActive(child._id) ? "text-[#B90647] font-semibold" : ""
+                                      }`}
                                     >
                                       <Link
                                         href={`/products/${
@@ -458,7 +470,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                           <div
                             key={subCat._id}
                             className={`p-2 cursor-pointer rounded transition-all duration-200 ${
-                              openedCategoryId === subCat._id
+                              openedCategoryId === subCat._id || isCategoryActive(subCat._id)
                                 ? "text-[#B90647] font-semibold"
                                 : "text-[#B5B5B5] font-light hover:text-[#B90647]"
                             }`}
@@ -757,7 +769,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                       <div
                         key={subCat._id}
                         className={`p-3 cursor-pointer rounded transition-all duration-200 ${
-                          openedCategoryId === subCat._id
+                          openedCategoryId === subCat._id || isCategoryActive(subCat._id)
                             ? "text-[#B90647] font-semibold"
                             : "text-white"
                         }`}
@@ -794,7 +806,9 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                               {subCat.childCategories.map((child) => (
                                 <div
                                   key={child._id}
-                                  className="p-2 cursor-pointer rounded text-white hover:text-[#B90647] transition-all duration-200"
+                                  className={`p-2 cursor-pointer rounded text-white hover:text-[#B90647] transition-all duration-200 ${
+                                    isCategoryActive(child._id) ? "text-[#B90647] font-semibold" : ""
+                                  }`}
                                 >
                                   <Link
                                     href={`/products/${

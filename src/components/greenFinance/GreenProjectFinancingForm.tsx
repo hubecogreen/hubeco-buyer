@@ -18,28 +18,14 @@ const schema = yup.object({
   name: yup
     .string()
     .required("Name is required")
-    .matches(/^[^\d]+$/, "Name cannot contain numbers")
-    .matches(/^[a-zA-Z\s]*$/, "Special characters not allowed")
-    .test(
-      "no-leading-space",
-      "Empty space at the start is not allowed",
-      (value: any) => value && value.trimLeft() === value
-    )
     .test(
       "no-multiple-spaces",
       "Double spaces are not allowed",
       (value: any) => value && !/\s{2,}/.test(value)
-    )
-    .min(3, "Name must be at least 3 characters")
-    .matches(/^(?! )(?=.*[^ ]).{3,}(?<! )$/, "Enter valid name")
-    .max(75, "Name cannot exceed 75 characters"),
+    ),
   phoneNumber: yup
     .string()
-    .required("Phone Number is required")
-    .matches(/^[0-9]+$/, "Only numbers are allowed")
-    .min(10, "Phone Number must be 10 digits")
-    .max(10, "Phone Number must be 10 digits")
-    .matches(/^[6-9][0-9]*$/, "First number must be between 6 to 9"),
+    .required("Phone Number is required"),
   gstin: yup
     .string()
     .transform((val) => (val ? val.toUpperCase() : ""))
@@ -198,36 +184,6 @@ export default function GreenProjectFinancingForm({
                   placeholder="Enter Phone Number"
                   className="flex-1 px-4 py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
                   required
-                  onKeyPress={(e) => {
-                    if (!/[0-9]/.test(e.key)) {
-                      e.preventDefault();
-                    }
-                  }}
-                  onPaste={(e) => {
-                    e.preventDefault();
-                    const pastedText = e.clipboardData.getData("text");
-                    if (/^[0-9]+$/.test(pastedText)) {
-                      const target = e.target as HTMLInputElement;
-                      const start = target.selectionStart || 0;
-                      const end = target.selectionEnd || 0;
-                      const value = target.value;
-                      const newValue =
-                        value.substring(0, start) +
-                        pastedText +
-                        value.substring(end);
-                      if (newValue.length <= 10) {
-                        target.value = newValue;
-                        target.setSelectionRange(
-                          start + pastedText.length,
-                          start + pastedText.length
-                        );
-                        // Trigger react-hook-form update
-                        const event = new Event("input", { bubbles: true });
-                        target.dispatchEvent(event);
-                      }
-                    }
-                  }}
-                  maxLength={10}
                 />
               </div>
               {errors.phoneNumber && (

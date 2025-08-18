@@ -57,8 +57,8 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
   const isClient = useClient();
 
-  // Rotating placeholders
-  const rotatingPlaceholders = [
+  // Dynamic rotating placeholders - fetch from API or use defaults
+  const [rotatingPlaceholders, setRotatingPlaceholders] = useState([
     "Search for Bricks...",
     "Search for Cement...",
     "Search for Steel...",
@@ -67,7 +67,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
     "Search for Tools...",
     "Search for Plumbing...",
     "Search for Electrical...",
-  ];
+  ]);
 
   // Ref for the dropdown
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -80,30 +80,25 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
       // Start animation
       setIsAnimating(true);
       
+      // After animation completes, change the placeholder
       setTimeout(() => {
-        // Always change the placeholder, regardless of external or internal
-        if (placeholder && placeholder !== "Search products...") {
-          // For external placeholder, the parent will handle the rotation
-          // We just need to animate
-        } else {
-          setCurrentPlaceholderIndex((prev) => 
-            (prev + 1) % rotatingPlaceholders.length
-          );
-        }
+        setCurrentPlaceholderIndex((prev) => 
+          (prev + 1) % rotatingPlaceholders.length
+        );
         setIsAnimating(false);
-      }, 600); // Animation duration
+      }, 1000); // Match the CSS animation duration
     }, 2000); // Change every 2 seconds
 
     return () => clearInterval(interval);
-  }, [placeholder, rotatingPlaceholders.length]);
+  }, [rotatingPlaceholders.length]);
 
-  // Animate when placeholder changes
+  // Trigger initial animation after mount
   useEffect(() => {
-    setIsAnimating(true);
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 600);
-  }, [placeholder]);
+    const timer = setTimeout(() => {
+      setIsAnimating(true);
+    }, 1000); // Start first animation after 1 second
+    return () => clearTimeout(timer);
+  }, []);
 
   // Update searchQuery when value prop changes
   useEffect(() => {
@@ -114,6 +109,39 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
   useEffect(() => {
     setIsDropdownOpen(showDropdown);
   }, [showDropdown]);
+
+  // Fetch dynamic placeholders from API on component mount
+  useEffect(() => {
+    getDynamicPlaceholders();
+  }, []);
+
+  // Function to fetch dynamic placeholders
+  const getDynamicPlaceholders = async () => {
+    try {
+      const result = (await callApi(
+        getEndpoint.default.PRODUCTSLIST,
+        "GET"
+      )) as any;
+      if (result?.data?.data && result.data.data.length > 0) {
+        const placeholders: string[] = [];
+        
+        // Take first 10 products for placeholders
+        result.data.data.slice(0, 10).forEach((product: any) => {
+          if (product.productName && product.productName !== "N/A") {
+            placeholders.push(`Search for ${product.productName}...`);
+          }
+        });
+        
+        // If we got placeholders from API, use them
+        if (placeholders.length > 0) {
+          setRotatingPlaceholders(placeholders);
+        }
+      }
+    } catch (error) {
+      console.log("Error fetching dynamic placeholders:", error);
+      // Keep default placeholders if API fails
+    }
+  };
 
   const handleApiError = async (err: any, value: any) => {
     const result = err?.response;
@@ -319,12 +347,12 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
         {/* Animated Placeholder */}
         {!searchQuery && (
           <div className="absolute inset-0 flex items-center pointer-events-none overflow-hidden">
-            <div 
-              className={`pl-3 text-gray-400 text-sm transition-all duration-1200 ease-out ${
-                isAnimating ? 'transform -translate-y-6 opacity-0' : 'transform translate-y-0 opacity-100'
-              }`}
-            >
-              {currentPlaceholder}
+            <div className="pl-3 text-gray-400 text-sm">
+              <div 
+                className={`${isAnimating ? 'slide-up-continuous' : ''} transition-all duration-1000 ease-in-out`}
+              >
+                {currentPlaceholder}
+              </div>
             </div>
           </div>
         )}
@@ -552,6 +580,24 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
           )}
         </div>
       )}
+      
+      {/* CSS Animation for continuous sliding from bottom */}
+      <style jsx>{`
+        @keyframes slideUpFromBottom {
+          0% {
+            transform: translateY(32px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+        
+        .slide-up-continuous {
+          animation: slideUpFromBottom 1s ease-out forwards;
+        }
+      `}</style>
     </div>
   );
 };

@@ -38,9 +38,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
   }
 
   const [allCategories, setAllCategories] = useState<Category[]>([]);
+  const [seoCategorySlug, setSeoCategorySlug] = useState<string>("");
   const { callApi } = useApi();
-  const categoriesRedux = store.getState().masterData.categories;
-  const catTimeRedux = store.getState().masterData.catetime;
 
   const menuData = {
     menu: [
@@ -66,17 +65,18 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
       //   icon: "FaCubesStacked",
       // },
       {
-        title: "Categories",
+        title: "Product Segments",
         link: "/categories",
         mb: true,
         level: 1,
         icon: "FaCubesStacked",
-        submenu: allCategories.filter(cat => 
-          (cat.subCategories && cat.subCategories.length > 0) || 
-          (cat.childCategories && cat.childCategories.length > 0)
+        submenu: allCategories.filter(
+          (cat) =>
+            (cat.subCategories && cat.subCategories.length > 0) ||
+            (cat.childCategories && cat.childCategories.length > 0)
         ),
       },
-      
+
       {
         title: "Brands",
         link: "/brands",
@@ -158,7 +158,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
   }, []);
 
   useEffect(() => {
-    if (typeof document !== 'undefined') {
+    if (typeof document !== "undefined") {
       document.body.style.overflow = isOpen ? "hidden" : "auto";
       return () => {
         document.body.style.overflow = "auto";
@@ -177,7 +177,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
       <ul className="flex flex-col gap-1">
         {menu?.map((item: MenuItem) => (
           <li
-            className={`${item?.title == "Categories" ? "md:hidden" : ""}`}
+            className={`${item?.title == "Product Segments" ? "" : ""}`}
             key={item.title}
             onClick={() => {
               if (item.submenu && item.submenu.length > 0) {
@@ -197,7 +197,12 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
                   : item.level == 2 || item.level == 3
                   ? "mb-2"
                   : ""
-              } ${typeof window !== 'undefined' && window.location.href.includes(item.link!) ? styles.parentItemActive : ""}`}
+              } ${
+                typeof window !== "undefined" &&
+                window.location.href.includes(item.link!)
+                  ? styles.parentItemActive
+                  : ""
+              }`}
               onClick={() =>
                 item.submenu &&
                 item.submenu.length > 0 &&
@@ -215,7 +220,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
                   openMenus[item.title] ? styles.open : ""
                 } pl-4 flex flex-col gap-2`}
               >
-                {item?.title == "Categories"
+                {item?.title == "Product Segments"
                   ? renderCategoryItems(item.submenu)
                   : renderMenuItems(item.submenu)}
               </ul>
@@ -233,9 +238,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
       <ul className="flex flex-col gap-1">
         {categories.map((category: any) => {
           // Show category if it has either subCategories or childCategories
-          const hasSubCategories = category.subCategories && category.subCategories.length > 0;
-          const hasChildCategories = category.childCategories && category.childCategories.length > 0;
-          
+          const hasSubCategories =
+            category.subCategories && category.subCategories.length > 0;
+          const hasChildCategories =
+            category.childCategories && category.childCategories.length > 0;
+
           if (!hasSubCategories && !hasChildCategories) {
             return null;
           }
@@ -247,20 +254,20 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
                   openMenus[category._id] ? styles.parentItemActive : ""
                 }`}
               >
-                <span 
-                  // onClick={() => {
-                  //   if (onClose) onClose();
-                  // }}
+                <span
+                  onClick={() => {
+                    setSeoCategorySlug(category.seoSlug || "");
+                    console.log("Main category selected:", category?.seoSlug);
+                  }}
                 >
                   {category?.name}
                 </span>
-                {(hasSubCategories || hasChildCategories) && (
-                  openMenus[category._id] ? (
+                {(hasSubCategories || hasChildCategories) &&
+                  (openMenus[category._id] ? (
                     <FaAngleUp onClick={() => toggleMenu(category._id)} />
                   ) : (
                     <FaAngleDown onClick={() => toggleMenu(category._id)} />
-                  )
-                )}
+                  ))}
               </div>
               {(hasSubCategories || hasChildCategories) && (
                 <ul
@@ -269,10 +276,12 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
                   } pl-4 flex flex-col gap-2`}
                 >
                   {/* Show subCategories if they exist */}
-                  {hasSubCategories && renderChildCategories(category.subCategories, 'sub')}
-                  
+                  {hasSubCategories &&
+                    renderChildCategories(category.subCategories, "sub")}
+
                   {/* Show childCategories if they exist */}
-                  {hasChildCategories && renderChildCategories(category.childCategories, 'child')}
+                  {hasChildCategories &&
+                    renderChildCategories(category.childCategories, category.seoSlug, "child")}
                 </ul>
               )}
             </li>
@@ -282,51 +291,75 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
     );
   };
 
-  const renderChildCategories = (categories: any, type: 'sub' | 'child') => {
+  const renderChildCategories = (categories: any, seoSlug?: string, type?: "sub" | "child") => {
     if (!categories || categories.length === 0) return null;
-    
+
+    console.log(categories, "check what categories are coming");
+    console.log("Type being passed:", type);
     return (
       <>
         {categories.map((category: any) => (
-          <li
+          <li 
             key={category?._id}
             onClick={() => {
-              const url = type === 'sub' 
-                ? `/products?scid=${category?._id}`
-                : `/products?ccid=${category?._id}`;
-              router.push(url);
-              if (onClose) onClose();
+              // Handle subcategory click
+              if (type === "sub") {
+                const url = `/products/${category?.seoSlug}?scid=${category?._id}`;
+                console.log("Subcategory clicked - Generated URL:", url, "category:", category?.name);
+                router.push(url);
+                if (onClose) onClose();
+              }
             }}
           >
             <div
               className={`flex justify-between items-center cursor-pointer text-sm mb-1 ${
-                typeof window !== 'undefined' && window.location.href.includes(category?._id) ? styles.parentItemActive : ""
+                typeof window !== "undefined" &&
+                window.location.href.includes(category?._id)
+                  ? styles.parentItemActive
+                  : ""
               }`}
+              onClick={(e) => {
+                // Prevent event bubbling to parent li
+                e.stopPropagation();
+                
+                // Handle child category click
+                if (type === "child") {
+                  const url = `/products/${seoCategorySlug}/${seoSlug}/${category?.seoSlug}?ccid=${category?._id}`;
+                  console.log("Child category clicked - Generated URL:", url, "category:", category?.name);
+                  router.push(url);
+                  if (onClose) onClose();
+                }
+              }}
             >
               {category?.name}
-              {category.childCategories && category.childCategories.length > 0 && (
-                openMenus[`child-${category._id}`] ? (
-                  <FaAngleUp onClick={(e) => {
-                    e.stopPropagation();
-                    toggleMenu(`child-${category._id}`);
-                  }} />
+              {category.childCategories &&
+                category.childCategories.length > 0 &&
+                (openMenus[`child-${category._id}`] ? (
+                  <FaAngleUp
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleMenu(`child-${category._id}`);
+                    }}
+                  />
                 ) : (
-                  <FaAngleDown onClick={(e) => {
-                    e.stopPropagation();
-                    toggleMenu(`child-${category._id}`);
-                  }} />
-                )
-              )}
+                  <FaAngleDown
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleMenu(`child-${category._id}`);
+                    }}
+                  />
+                ))}
             </div>
-            {category.childCategories && category.childCategories.length > 0 && (
-              <ul
-                className={`${styles.submenu} ${
-                  openMenus[`child-${category._id}`] ? styles.open : ""
-                } pl-4 flex flex-col gap-2`}
-              >
-                {renderChildCategories(category.childCategories, 'child')}
-              </ul>
-            )}
+            {category.childCategories &&
+              category.childCategories.length > 0 && (
+                <ul
+                  className={`${styles.submenu} ${
+                    openMenus[`child-${category._id}`] ? styles.open : ""
+                  } pl-4 flex flex-col gap-2`}
+                >
+                  {renderChildCategories(category.childCategories, category.seoSlug, "child")}
+                </ul>
+              )}
           </li>
         ))}
       </>
@@ -337,7 +370,9 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className={`${styles.sidebar} ${isOpen ? styles.open : ""} w-[400%] bg-[url('/images/home/sidebarBg.webp')] bg-cover bg-bottom bg-no-repeat !z-[99999]`}
+      className={`${styles.sidebar} ${
+        isOpen ? styles.open : ""
+      } w-[400%] bg-[url('/images/home/sidebarBg.webp')] bg-cover bg-bottom bg-no-repeat !z-[99999]`}
     >
       <div className="flex justify-end p-4 w-full md:w-11/12">
         <AiOutlineClose

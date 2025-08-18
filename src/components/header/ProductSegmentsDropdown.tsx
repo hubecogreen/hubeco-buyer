@@ -271,11 +271,11 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
       {/* Main dropdown content */}
       <div
         ref={dropdownRef}
-        className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
+        className="fixed inset-0 z-50 pointer-events-none"
       >
         {/* Desktop Layout */}
         <div
-          className="hidden md:flex w-full h-[560px] pointer-events-auto relative top-[0px]"
+          className="hidden md:flex w-full h-[400px] pointer-events-auto absolute top-[85px] left-0"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Left Column - Main Categories */}

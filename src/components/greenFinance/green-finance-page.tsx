@@ -18,7 +18,7 @@ export default function GreenFinancingSection() {
             src="/images/greenFinance/greenFinanceBanner.webp"
             alt="Modern sustainable home interior"
             fill
-            className="object-cover rounded-[48px]"
+            className="object-fit rounded-[48px]"
             priority
           />
           <div className="absolute inset-0 bg-black/50 rounded-[48px]" />

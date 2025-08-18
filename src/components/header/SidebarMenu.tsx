@@ -374,6 +374,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
         isOpen ? styles.open : ""
       } w-[400%] bg-[url('/images/home/sidebarBg.webp')] bg-cover bg-bottom bg-no-repeat !z-[99999]`}
     >
+      <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black/10 to-transparent rounded-r-[48px]" />
       <div className="flex justify-end p-4 w-full md:w-11/12">
         <AiOutlineClose
           size={28}

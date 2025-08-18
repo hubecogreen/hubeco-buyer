@@ -158,7 +158,7 @@ export default function GreenProjectFinancingForm({
         </div>
 
         {/* Form - Scrollable */}
-        <div className="px-20 py-20 overflow-y-auto flex-1">
+        <div className="px-8 md:px-20 py-20 overflow-y-auto flex-1">
           <form
             onSubmit={handleSubmit(handleSubmitForm)}
             className="space-y-6"

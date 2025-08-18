@@ -73,6 +73,20 @@ export default function GreenProjectFinancingForm({
     },
   });
 
+  // Prevent background scrolling when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup function to restore scrolling when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   // Reset form when modal opens/closes
   useEffect(() => {
     if (isOpen) {

@@ -661,7 +661,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                               {product.name}
                             </h4>
                             <p
-                              className="text-xs text-[#EEEEEE] leading-relaxed line-clamp-4 font-normal"
+                              className="text-xs text-[#EEEEEE] leading-relaxed line-clamp-2 font-normal"
                               dangerouslySetInnerHTML={{
                                 __html: product.description,
                               }}

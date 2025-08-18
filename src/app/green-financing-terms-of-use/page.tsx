@@ -43,10 +43,10 @@ export default function Page() {
               <span className="font-family:Poppins;font-size:6.0pt;">
                 <i>
                   <span dir="ltr" lang="EN-GB" className="line-height:115%;">
-                    Effective from:
+                   Terms of Use Effective from: 
                   </span>
                 </i>
-                <span dir="ltr" lang="EN-GB" className="line-height:115%;">
+                <span dir="ltr" lang="EN-GB" className="line-height:115%; pl-1">
                   August 1, 2025
                 </span>
               </span>

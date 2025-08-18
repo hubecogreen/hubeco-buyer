@@ -362,7 +362,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className={"w-full md:w-1/5 md:py-0 py-5"}>
+          <div className={"w-full md:w-1/5 lg:w-1/5 md:py-0 py-5"}>
             <h4 className="text-black text-xl mb-7">Contact Us</h4>
             <p className="text-fontGray text-sm font-light pt-2 text-justify">
               Have a question or need to get in touch? Leave us a message and we
@@ -408,7 +408,7 @@ const Footer = () => {
                   href="https://maps.app.goo.gl/UbAKuXkfXee5TUn79"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-3 text-black text-xs font-normal whitespace-nowrap"
+                  className="ml-3 text-black text-xs font-normal"
                 >
                   Hubeco Green Ventures Pvt Ltd<br></br>
                   Awfis Space Solutions Ltd, NSL Icon<br></br>

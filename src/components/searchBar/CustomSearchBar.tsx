@@ -128,7 +128,10 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
         // Take first 10 products for placeholders
         result.data.data.slice(0, 10).forEach((product: any) => {
           if (product.productName && product.productName !== "N/A") {
-            placeholders.push(`Search for ${product.productName}...`);
+            const truncatedName = product.productName.length > 10 
+              ? product.productName.substring(0, 10) + '...' 
+              : product.productName;
+            placeholders.push(`Search for ${truncatedName}...`);
           }
         });
         

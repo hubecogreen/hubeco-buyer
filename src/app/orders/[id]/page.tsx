@@ -306,8 +306,8 @@ export default function OrdersPage({ params }: any) {
           </div>
           {/* Order Id Section End */}
           {/* Order Details Grid Start */}
-          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 mt-3 md:flex md:flex-row md:justify-between md:items-start">
-            <div className=" md:w-[60%] w-full">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 mt-3 lg:flex lg:flex-row lg:justify-between lg:items-start">
+            <div className=" lg:w-[60%] w-full">
               <div className="w-full shadow-md    border border-borderGray   ">
                 {orderData &&
                   orderData?.orders &&
@@ -1011,7 +1011,7 @@ export default function OrdersPage({ params }: any) {
 
               {/* Refund Intitae  Section End */}
             </div>
-            <div className=" md:w-[38%] w-full">
+            <div className=" lg:w-[38%] w-full">
               <div className="w-full    p-3  border border-borderGray shadow-md">
                 <p className="text-lg text-black font-semibold pl-3 mb-3">
                   Shipping Activity

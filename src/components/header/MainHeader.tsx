@@ -792,7 +792,7 @@ const Header: React.FC<HeaderProps> = () => {
                 cartCount !== null ||
                 cartCount !== undefined) &&
               token ? (
-                <div className="absolute top-[-8px] right-[-8px] md:top-[-10px] md:right-[-10px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[20px] md:h-[20px] flex items-center justify-center text-[8px] md:text-[10px] font-bold">
+                <div className="absolute top-[-8px] right-[-8px] md:top-[-10px] md:right-[2px] lg:top-[-12px] lg:right-[-12px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[20px] md:h-[20px] flex items-center justify-center text-[8px] md:text-[10px] font-bold">
                   {cartCountV ? cartCountV : cartCount ? cartCount : ""}
                 </div>
               ) : null}

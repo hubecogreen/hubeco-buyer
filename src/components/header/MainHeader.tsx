@@ -57,6 +57,7 @@ const Header: React.FC<HeaderProps> = () => {
   const cartCountV = getCookie("CartCount");
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isUserPopoverOpen, setUserPopoverOpen] = useState(false);
+  const [isUserPopoverClicked, setIsUserPopoverClicked] = useState(false);
   const [cartCount, setCartCount] = useState<any>(cartCountV);
   const router = useRouter();
   const [refresh, setRefresh] = useState<number>(0);
@@ -141,7 +142,10 @@ const Header: React.FC<HeaderProps> = () => {
         console.log(result.data.data, "result.data.data");
         // // Add main categories
         result.data.data.forEach((category: any) => {
-          placeholders.push(`Search for ${category.productName}...`);
+          const truncatedName = category.productName?.length > 14
+            ? category.productName.substring(0, 14) + '...'
+            : category.productName;
+          placeholders.push(`Search for ${truncatedName}...`);
         });
 
         setRotatingPlaceholders(placeholders);
@@ -234,11 +238,20 @@ const Header: React.FC<HeaderProps> = () => {
   };
 
   const handleMouseEnter = () => {
-    setUserPopoverOpen(true);
+    if (!isUserPopoverClicked) {
+      setUserPopoverOpen(true);
+    }
   };
 
   const handleMouseLeave = () => {
+    if (!isUserPopoverClicked) {
+      setUserPopoverOpen(false);
+    }
+  };
+
+  const closeUserPopover = () => {
     setUserPopoverOpen(false);
+    setIsUserPopoverClicked(false);
   };
 
   const handleSearchFocus = () => {
@@ -291,6 +304,28 @@ const Header: React.FC<HeaderProps> = () => {
       getWishlist();
     }
   }, []);
+
+  // Close popover when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        iconRef.current &&
+        !iconRef.current.contains(event.target as Node) &&
+        popoverRef.current &&
+        !popoverRef.current.contains(event.target as Node)
+      ) {
+        closeUserPopover();
+      }
+    };
+
+    if (isUserPopoverOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isUserPopoverOpen]);
 
   const handleWishlistApiError = async (err: any) => {
     const result = err?.response;
@@ -396,7 +431,7 @@ const Header: React.FC<HeaderProps> = () => {
       >
         <div className="flex justify-between items-center py-2 md:py-4">
           {/* Left side - Fixed elements (never affected) */}
-          <div className="flex items-center space-x-3 md:space-x-6">
+          <div className={`flex items-center ${token ? 'space-x-4 md:space-x-10' : 'space-x-3 md:space-x-6'}`}>
             <div className="flex items-center md:hidden ">
               <VscMenu
                 className="text-black cursor-pointer font-light text-gray-800"
@@ -535,7 +570,7 @@ const Header: React.FC<HeaderProps> = () => {
 
           {/* Desktop Additional Navigation Links - Hidden on tablet, only visible on large screens */}
           {!isSearchFocused && (
-            <div className="hidden lg:flex items-center space-x-10">
+            <div className={`hidden lg:flex items-center ${token ? 'space-x-14' : 'space-x-10'}`}>
               <Link
                 href="/brands"
                 className={`font-medium cursor-pointer transition-colors relative ${
@@ -716,10 +751,17 @@ const Header: React.FC<HeaderProps> = () => {
           <div className="flex items-center space-x-2 md:space-x-4">
             {/* Profile Icon - Visible on all screen sizes */}
             <div
-              ref={iconRef}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              className="relative"
+                              ref={iconRef}
+                onClick={() => {
+                  if (isUserPopoverOpen) {
+                    setUserPopoverOpen(false);
+                    setIsUserPopoverClicked(false);
+                  } else {
+                    setUserPopoverOpen(true);
+                    setIsUserPopoverClicked(true);
+                  }
+                }}
+                className="relative"
             >
               <PiUserCircleThin
                 className="text-black hover:cursor-pointer"
@@ -727,15 +769,14 @@ const Header: React.FC<HeaderProps> = () => {
               />
             </div>
 
-            <div
-              ref={popoverRef}
-              onMouseEnter={() => setUserPopoverOpen(true)}
-              onMouseLeave={() => setUserPopoverOpen(false)}
-            >
+                          <div
+                ref={popoverRef}
+                onMouseLeave={() => closeUserPopover()}
+              >
               <UserPopover
                 isOpen={isUserPopoverOpen}
                 userInfos={userInfo}
-                onClose={() => setUserPopoverOpen(false)}
+                                  onClose={() => closeUserPopover()}
               />
             </div>
 
@@ -751,7 +792,7 @@ const Header: React.FC<HeaderProps> = () => {
                 cartCount !== null ||
                 cartCount !== undefined) &&
               token ? (
-                <div className="absolute top-[-8px] right-[-8px] md:top-[-10px] md:right-[-10px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[20px] md:h-[20px] flex items-center justify-center text-[8px] md:text-[10px] font-bold">
+                <div className="absolute top-[-8px] right-[-8px] md:top-[-10px] md:right-[2px] lg:top-[-12px] lg:right-[-12px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[20px] md:h-[20px] flex items-center justify-center text-[8px] md:text-[10px] font-bold">
                   {cartCountV ? cartCountV : cartCount ? cartCount : ""}
                 </div>
               ) : null}
@@ -803,6 +844,10 @@ const Header: React.FC<HeaderProps> = () => {
                   />
                 </Link>
               </>
+            )}
+
+            {token && (
+              <div className="relative w-10 md:w-18"></div>
             )}
           </div>
         </div>

@@ -142,7 +142,7 @@ const BlogsSection = () => {
 
       </div>
       {blogData.length > 0 ? (
-      <div className="grid gap-4 sm:grid-cols-3 md:grid-cols-3 sm:gap-x-4 md:gap-x-8 sm:gap-y-6 md:gap-y-12 mb-8 md:mb-8">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-4 lg:gap-x-8 sm:gap-y-6 lg:gap-y-12 mb-8 lg:mb-8">
         
          { blogData.map((item:any) => 
             { 

@@ -44,13 +44,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
   const menuData = {
     menu: [
       {
-        title: "Green Financing",
-        link: "/green-financing",
-        mb: true,
-        level: 1,
-        icon: "FaLeaf",
-      },
-      {
         title: "Products",
         link: "/products",
         mb: true,
@@ -76,7 +69,13 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
             (cat.childCategories && cat.childCategories.length > 0)
         ),
       },
-
+      {
+        title: "Green Financing",
+        link: "/green-financing",
+        mb: true,
+        level: 1,
+        icon: "FaLeaf",
+      },
       {
         title: "Brands",
         link: "/brands",
@@ -168,7 +167,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
 
   const toggleMenu = (id: string) => {
     setOpenMenus((prev) => ({ ...prev, [id]: !prev[id] }));
-    
   };
 
   const router = useRouter();
@@ -265,15 +263,19 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
                 </span>
                 {(hasSubCategories || hasChildCategories) &&
                   (openMenus[category._id] ? (
-                    <FaAngleUp onClick={() => {
-                      toggleMenu(category._id);
-                      setSeoCategorySlug(category.seoSlug || "");
-                    }} />
+                    <FaAngleUp
+                      onClick={() => {
+                        toggleMenu(category._id);
+                        setSeoCategorySlug(category.seoSlug || "");
+                      }}
+                    />
                   ) : (
-                    <FaAngleDown onClick={() => {
-                      toggleMenu(category._id);
-                      setSeoCategorySlug(category.seoSlug || "");
-                    }} />
+                    <FaAngleDown
+                      onClick={() => {
+                        toggleMenu(category._id);
+                        setSeoCategorySlug(category.seoSlug || "");
+                      }}
+                    />
                   ))}
               </div>
               {(hasSubCategories || hasChildCategories) && (
@@ -281,7 +283,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
                   className={`${styles.submenu} ${
                     openMenus[category._id] ? styles.open : ""
                   } pl-4 flex flex-col gap-2`}
-                  
                 >
                   {/* Show subCategories if they exist */}
                   {hasSubCategories &&
@@ -289,7 +290,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
 
                   {/* Show childCategories if they exist */}
                   {hasChildCategories &&
-                    renderChildCategories(category.childCategories, category.seoSlug, "child")}
+                    renderChildCategories(
+                      category.childCategories,
+                      category.seoSlug,
+                      "child"
+                    )}
                 </ul>
               )}
             </li>
@@ -299,7 +304,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
     );
   };
 
-  const renderChildCategories = (categories: any, seoSlug?: string, type?: "sub" | "child") => {
+  const renderChildCategories = (
+    categories: any,
+    seoSlug?: string,
+    type?: "sub" | "child"
+  ) => {
     if (!categories || categories.length === 0) return null;
 
     console.log(categories, "check what categories are coming");
@@ -307,13 +316,18 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
     return (
       <>
         {categories.map((category: any) => (
-          <li 
+          <li
             key={category?._id}
             onClick={() => {
               // Handle subcategory click
               if (type === "sub") {
                 const url = `/products/${category?.seoSlug}?scid=${category?._id}`;
-                console.log("Subcategory clicked - Generated URL:", url, "category:", category?.name);
+                console.log(
+                  "Subcategory clicked - Generated URL:",
+                  url,
+                  "category:",
+                  category?.name
+                );
                 router.push(url);
                 if (onClose) onClose();
               }
@@ -329,11 +343,16 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
               onClick={(e) => {
                 // Prevent event bubbling to parent li
                 e.stopPropagation();
-                
+
                 // Handle child category click
                 if (type === "child") {
                   const url = `/products/${seoCategorySlug}/${seoSlug}/${category?.seoSlug}?ccid=${category?._id}`;
-                  console.log("Child category clicked - Generated URL:", url, "category:", category?.name);
+                  console.log(
+                    "Child category clicked - Generated URL:",
+                    url,
+                    "category:",
+                    category?.name
+                  );
                   router.push(url);
                   if (onClose) onClose();
                 }
@@ -365,7 +384,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
                     openMenus[`child-${category._id}`] ? styles.open : ""
                   } pl-4 flex flex-col gap-2`}
                 >
-                  {renderChildCategories(category.childCategories, category.seoSlug, "child")}
+                  {renderChildCategories(
+                    category.childCategories,
+                    category.seoSlug,
+                    "child"
+                  )}
                 </ul>
               )}
           </li>

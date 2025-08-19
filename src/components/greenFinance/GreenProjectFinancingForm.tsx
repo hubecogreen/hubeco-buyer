@@ -115,7 +115,7 @@ export default function GreenProjectFinancingForm({
         throw new Error("Failed to submit application");
       }
 
-      toast.success("Application submitted successfully!");
+      toast.success("Form submitted successfully!");
       reset();
       onClose();
     } catch (err: any) {

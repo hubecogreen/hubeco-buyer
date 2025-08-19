@@ -91,7 +91,7 @@ export async function generateMetadata({
         : product?.productName)
     } | Hubeco`;
     const description =
-      product?.meta?.description ||
+      product?.meta?.metaDescription ||
       product?.description ||
       "Marketplace for green building materials. India's biggest online store for green building materials...";
 

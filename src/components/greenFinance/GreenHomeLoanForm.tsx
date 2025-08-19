@@ -93,7 +93,7 @@ export default function GreenHomeLoanForm({
       );
 
       if (res.ok) {
-        toast.success("Application submitted successfully!");
+        toast.success("Form submitted successfully!");
         reset();
         onClose();
       } else {

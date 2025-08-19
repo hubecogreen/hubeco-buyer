@@ -968,27 +968,25 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
       <BannerSection
         link1={{ name: "Home", href: "/" }}
         link2={{
-          name: `${totalProduct &&
-            totalProduct?.categoryId &&
-            totalProduct?.categoryId?.name
-            ? totalProduct?.categoryId?.name
-            : ""
-            }`,
+          name: `${totalProduct?.categoryId?.name || ""}`,
           href: "/products",
         }}
         link3={{
-          name: `${totalProduct &&
-            totalProduct?.subCategoryId &&
-            totalProduct?.subCategoryId[0]?.name
-            ? totalProduct?.subCategoryId[0]?.name
-            : ""
-            }`,
-          href: `/products?scid=${totalProduct &&
-            totalProduct?.subCategoryId &&
-            totalProduct?.subCategoryId[0]?._id
-            ? totalProduct?.subCategoryId[0]?._id
-            : ""
-            }`,
+          name: `${totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0 ? totalProduct.subCategoryId[0]?.name || "" : ""}`,
+          href: totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0 
+            ? `/products/${totalProduct.subCategoryId[0]?.seoSlug || ""}?scid=${totalProduct.subCategoryId[0]?._id || ""}`
+            : "/products",
+        }}
+        link4={{
+          name: `${totalProduct?.childCategories && Array.isArray(totalProduct.childCategories) && totalProduct.childCategories.length > 0 ? totalProduct.childCategories[0]?.name || "" : ""}`,
+          href: totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0 && 
+                 totalProduct?.childCategories && Array.isArray(totalProduct.childCategories) && totalProduct.childCategories.length > 0
+            ? `/products/${totalProduct.categoryId?.seoSlug || ""}/${totalProduct.subCategoryId[0]?.seoSlug || ""}/${totalProduct.childCategories[0]?.seoSlug || ""}?ccid=${totalProduct.childCategories[0]?._id || ""}`
+            : "/products",
+        }}
+        link5={{
+          name: `${isSingle ? totalProduct?.name : productData?.variantName}`,
+          href: `/${isSingle ? totalProduct?.slug : productData?.slug}`,
         }}
       />
       {productLoading ? (

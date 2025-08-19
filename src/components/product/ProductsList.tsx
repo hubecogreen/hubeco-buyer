@@ -76,13 +76,16 @@ const ProductsList: React.FC<Props> = ({
   // Function to fetch H1 tag from API
   const fetchH1Tag = async () => {
     const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-    
+
     try {
       if (childCatId) {
         // Fetch from child category
-        const res = await fetch(`${baseURL}/childCategories/getChildCategoryByIdPublic/${childCatId}`, {
-          cache: 'no-store',
-        });
+        const res = await fetch(
+          `${baseURL}/childCategories/getChildCategoryByIdPublic/${childCatId}`,
+          {
+            cache: "no-store",
+          }
+        );
         if (res.ok) {
           const data = await res.json();
           if (data?.h1Tag) {
@@ -92,9 +95,12 @@ const ProductsList: React.FC<Props> = ({
         }
       } else if (subCatId) {
         // Fetch from subcategory
-        const res = await fetch(`${baseURL}/subcategories/getSubcategoryByIdPublic/${subCatId}`, {
-          cache: 'no-store',
-        });
+        const res = await fetch(
+          `${baseURL}/subcategories/getSubcategoryByIdPublic/${subCatId}`,
+          {
+            cache: "no-store",
+          }
+        );
         if (res.ok) {
           const data = await res.json();
           if (data?.h1Tag) {
@@ -103,7 +109,7 @@ const ProductsList: React.FC<Props> = ({
           }
         }
       }
-      
+
       // If no H1 tag found, keep default "Sustainable Products"
       setH1Tag("Sustainable Products");
     } catch (err) {
@@ -328,7 +334,7 @@ const ProductsList: React.FC<Props> = ({
       {/* Main Content */}
       <div className="col-span-12 lg:col-span-9">
         <div className="block md:flex md:justify-between mb-8 px-4 items-center">
-          <h1 className="text-black font-bold text-2xl md:text-3xl">
+          <h1 className="text-black font-bold text-2xl md:text-3xl mt-[20px] md:mt-0">
             {h1Tag}
           </h1>
           <div className="flex justify-end items-center">

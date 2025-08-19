@@ -128,7 +128,10 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
         // Take first 10 products for placeholders
         result.data.data.slice(0, 10).forEach((product: any) => {
           if (product.productName && product.productName !== "N/A") {
-            placeholders.push(`Search for ${product.productName}...`);
+            const truncatedName = product.productName.length > 10 
+              ? product.productName.substring(0, 10) + '...' 
+              : product.productName;
+            placeholders.push(`Search for ${truncatedName}...`);
           }
         });
         
@@ -409,17 +412,21 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                             try {
                               // First try Next.js router
                               router.push(`/${product?.slug}`);
+                           
                               
                               // If router fails, fallback to window.location
                               setTimeout(() => {
                                 if (window.location.pathname !== `/${product?.slug}`) {
                                   console.log('Router failed, using window.location');
                                   window.location.href = `/${product?.slug}`;
+                                  setIsNavigating(false);
                                 }
                               }, 500);
                             } catch (error) {
                               console.error('Navigation error:', error);
                               window.location.href = `/${product?.slug}`;
+                            }finally{
+                              setIsNavigating(false);
                             }
                           }, 100);
                         }}
@@ -484,6 +491,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                           // Use window.location for more reliable navigation
                           setTimeout(() => {
                             window.location.href = `/products/${subCategory?.seoSlug}?scid=${subCategory?.id}`;
+                            setIsNavigating(false);
                           }, 100);
                         }}
                       >
@@ -539,6 +547,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                           // Use window.location for more reliable navigation
                           setTimeout(() => {
                             window.location.href = `/brands/${vendor?.businessInfo?.slug}`;
+                            setIsNavigating(false);
                           }, 100);
                         }}
                       >

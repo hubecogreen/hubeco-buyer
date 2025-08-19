@@ -143,7 +143,7 @@ export default function GreenHomeLoanForm({
         </div>
 
         {/* Form - Scrollable */}
-        <div className="px-20 py-20 overflow-y-auto flex-1">
+        <div className="md:px-20 px-8 py-20 overflow-y-auto flex-1">
           <form
             onSubmit={handleSubmit(handleSubmitForm)}
             className="space-y-6"
@@ -170,18 +170,18 @@ export default function GreenHomeLoanForm({
 
             {/* Phone */}
             <div>
-              <label className="block text-gray-800 font-medium mb-2">
+              <label className="block text-gray-800 font-medium mb-2 text-sm md:text-base">
                 Phone Number*
               </label>
               <div className="flex">
-                <div className="flex items-center px-4 py-3 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50">
+                <div className="flex items-center justify-center px-3 py-2 sm:px-4 sm:py-3 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 text-sm sm:text-base">
                   <span className="text-gray-600">+91</span>
                 </div>
                 <input
                   type="tel"
                   {...register("phoneNumber")}
                   placeholder="Enter Phone Number"
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
+                  className="flex-1 px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent text-sm sm:text-base w-[20px]"
                   required
                 />
               </div>

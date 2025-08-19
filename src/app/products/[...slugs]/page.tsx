@@ -98,6 +98,10 @@ async function getH1Tag(params: { slugs?: string[] }, searchParams: { [key: stri
   const ccid = searchParams.ccid;
   const scid = searchParams.scid;
   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+  if (!ccid && !scid) {
+    return 'Featured Sustainable Products';
+  }
   
   try {
     if (scid && typeof scid === 'string') {
@@ -110,7 +114,6 @@ async function getH1Tag(params: { slugs?: string[] }, searchParams: { [key: stri
       const res = await fetch(`${baseURL}/childCategories/getChildCategoryByIdPublic/${ccid}`);
       if (res.ok) {
         const data = await res.json();
-        console.log(data, "data h1tag");
         return data?.h1Tag || 'Featured Sustainable Products';
       }
     }
@@ -153,13 +156,11 @@ export default async function Page({
   return (
     <div className="bg-white">
       {/* <MetaTitleH1 params={params} searchParams={searchParams} /> */}
-      <BannerSection
-        link1={{ name: "Home", href: "/" }}
-        link2={{ name: h1tag, href: "/products" }}
-      />
-
       {/* <BreadCrumb breadcrumbs={breadcrumbs} /> */}
-      <ProductsList />
+      <ProductsList 
+        initialH1Tag={h1tag}
+        searchParams={searchParams}
+      />
     </div>
   );
 }

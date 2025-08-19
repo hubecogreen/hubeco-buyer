@@ -48,6 +48,8 @@ const Header: React.FC<HeaderProps> = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isProductSegmentsOpen, setIsProductSegmentsOpen] =
     useState<boolean>(false);
+  const [isProductSegmentsClicked, setIsProductSegmentsClicked] =
+    useState(false);
   const [rotatingPlaceholders, setRotatingPlaceholders] = useState<string[]>(
     []
   );
@@ -100,6 +102,13 @@ const Header: React.FC<HeaderProps> = () => {
     getCategoriesForPlaceholders();
   }, []);
 
+  // Reset clicked state when dropdown closes
+  useEffect(() => {
+    if (!isProductSegmentsOpen) {
+      setIsProductSegmentsClicked(false);
+    }
+  }, [isProductSegmentsOpen]);
+
   // Toggle function for product segments (mobile)
   const toggleProductSegments = () => {
     console.log("Toggle called, current state:", isProductSegmentsOpen);
@@ -112,6 +121,11 @@ const Header: React.FC<HeaderProps> = () => {
 
   // Hover handlers for desktop
   const handleProductSegmentsMouseEnter = () => {
+    // Don't open on hover if it was clicked (tablet behavior)
+    if (isProductSegmentsClicked) {
+      return;
+    }
+
     if (hoverTimeout) {
       clearTimeout(hoverTimeout);
       setHoverTimeout(null);
@@ -120,6 +134,11 @@ const Header: React.FC<HeaderProps> = () => {
   };
 
   const handleProductSegmentsMouseLeave = () => {
+    // Don't close on mouse leave if it was clicked (tablet behavior)
+    if (isProductSegmentsClicked) {
+      return;
+    }
+
     const timeout = setTimeout(() => {
       setIsProductSegmentsOpen(false);
     }, 300); // 300ms delay before closing
@@ -142,9 +161,10 @@ const Header: React.FC<HeaderProps> = () => {
         console.log(result.data.data, "result.data.data");
         // // Add main categories
         result.data.data.forEach((category: any) => {
-          const truncatedName = category.productName?.length > 14
-            ? category.productName.substring(0, 14) + '...'
-            : category.productName;
+          const truncatedName =
+            category.productName?.length > 14
+              ? category.productName.substring(0, 14) + "..."
+              : category.productName;
           placeholders.push(`Search for ${truncatedName}...`);
         });
 
@@ -319,11 +339,11 @@ const Header: React.FC<HeaderProps> = () => {
     };
 
     if (isUserPopoverOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isUserPopoverOpen]);
 
@@ -429,10 +449,14 @@ const Header: React.FC<HeaderProps> = () => {
           styles.stickyHeader
         } ${isSearchFocused ? styles.searchFocused : ""}`}
       >
-        <div className="flex justify-between items-center py-2 md:py-4">
+        <div className="flex justify-between items-center py-2 md:py-4 min-w-0">
           {/* Left side - Fixed elements (never affected) */}
-          <div className={`flex items-center ${token ? 'space-x-4 md:space-x-10' : 'space-x-3 md:space-x-6'}`}>
-            <div className="flex items-center md:hidden ">
+          <div
+            className={`flex items-center min-w-0 ${
+              token ? "space-x-4 md:space-x-8" : "space-x-3 md:space-x-6"
+            }`}
+          >
+            <div className="flex items-center md:hidden flex-shrink-0">
               <VscMenu
                 className="text-black cursor-pointer font-light text-gray-800"
                 size={20}
@@ -442,7 +466,8 @@ const Header: React.FC<HeaderProps> = () => {
             {/* Mobile Logo */}
             <Link
               href="/"
-              className={`${styles.logo} w-48 sm:w-64 h-8 md:h-10 lg:h-12 hover:cursor-pointer`}
+              className={`${styles.logo} w-48 sm:w-64 h-8 md:h-10 lg:h-12 hover:cursor-pointer flex-shrink-0 min-w-0`}
+              style={{ minWidth: "145px", maxWidth: "145px" }}
             >
               <Image
                 src="/images/Logo-2.webp"
@@ -457,22 +482,30 @@ const Header: React.FC<HeaderProps> = () => {
               />
             </Link>
 
-            {/* Tablet Hamburger Menu - Visible on tablet, hidden on mobile and desktop */}
-            <div className="hidden md:flex lg:hidden">
+            {/* Tablet Hamburger Menu - Hidden since we show desktop navigation on tablet */}
+            {/* <div className="hidden md:flex lg:hidden">
               <VscMenu
                 className="text-black cursor-pointer font-light text-gray-800"
                 size={24}
                 onClick={toggleMenu}
               />
-            </div>
+            </div> */}
 
-            {/* Desktop Navigation Links - Hidden on tablet, only visible on large screens */}
-            <div className="hidden lg:flex items-center space-x-6">
+            {/* Desktop Navigation Links - Visible on tablet and large screens */}
+            <div
+              className={`hidden md:flex items-center space-x-6 md:space-x-14 lg:space-x-6 flex-shrink-0 ${
+                isSearchFocused ? "lg:flex md:hidden" : ""
+              }`}
+            >
               <div className="relative">
                 <div
-                  className="flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative z-20"
+                  className="flex items-center space-x-1 cursor-pointer hover:text-secondary md:pl-6 lg:pl-0 transition-colors relative z-20"
                   onMouseEnter={handleProductSegmentsMouseEnter}
                   onMouseLeave={handleProductSegmentsMouseLeave}
+                  onClick={() => {
+                    setIsProductSegmentsClicked(true);
+                    setIsProductSegmentsOpen(!isProductSegmentsOpen);
+                  }}
                   data-product-segments-button
                 >
                   <span
@@ -507,17 +540,23 @@ const Header: React.FC<HeaderProps> = () => {
                 >
                   <ProductSegmentsDropdown
                     isOpen={isProductSegmentsOpen}
-                    onClose={() => setIsProductSegmentsOpen(false)}
+                    onClose={() => {
+                      setIsProductSegmentsOpen(false);
+                      setIsProductSegmentsClicked(false);
+                    }}
                   />
                 </div>
               </div>
               <Link
                 href="/green-financing"
-                className={`flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative ${
+                className={`flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative pr-5 ${
                   pathname === "/green-financing"
                     ? "text-[#B90647]"
                     : "text-gray-800"
                 }`}
+                style={{
+                  marginLeft: "35px",
+                }}
               >
                 <span className="font-medium">Green Financing</span>
                 {pathname === "/green-financing" && (
@@ -568,12 +607,16 @@ const Header: React.FC<HeaderProps> = () => {
             </div> */}
           </div>
 
-          {/* Desktop Additional Navigation Links - Hidden on tablet, only visible on large screens */}
+          {/* Desktop Additional Navigation Links - Visible on tablet and large screens, but hide some items on tablet */}
           {!isSearchFocused && (
-            <div className={`hidden lg:flex items-center ${token ? 'space-x-14' : 'space-x-10'}`}>
+            <div
+              className={`hidden md:flex items-center ${
+                token ? "space-x-14" : "space-x-10"
+              }`}
+            >
               <Link
                 href="/brands"
-                className={`font-medium cursor-pointer transition-colors relative ${
+                className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/brands"
                     ? "text-[#B90647]"
                     : "text-gray-800 hover:text-secondary"
@@ -586,7 +629,7 @@ const Header: React.FC<HeaderProps> = () => {
               </Link>
               <Link
                 href="/blogs"
-                className={`font-medium cursor-pointer transition-colors relative ${
+                className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/blogs"
                     ? "text-[#B90647]"
                     : "text-gray-800 hover:text-secondary"
@@ -599,7 +642,7 @@ const Header: React.FC<HeaderProps> = () => {
               </Link>
               <Link
                 href="/products"
-                className={`font-medium cursor-pointer transition-colors relative ${
+                className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/products"
                     ? "text-[#B90647]"
                     : "text-gray-800 hover:text-secondary"
@@ -612,7 +655,7 @@ const Header: React.FC<HeaderProps> = () => {
               </Link>
               <Link
                 href="/about"
-                className={`font-medium cursor-pointer transition-colors relative ${
+                className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/about"
                     ? "text-[#B90647]"
                     : "text-gray-800 hover:text-secondary"
@@ -625,7 +668,7 @@ const Header: React.FC<HeaderProps> = () => {
               </Link>
               <Link
                 href="/contact"
-                className={`font-medium cursor-pointer transition-colors relative ${
+                className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/contact"
                     ? "text-[#B90647]"
                     : "text-gray-800 hover:text-secondary"
@@ -687,23 +730,9 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
           </div> */}
 
-          {/* Center - Search Bar with Hamburger Menu - Hidden on tablet, only visible on large screens */}
+          {/* Center - Search Bar with Hamburger Menu - Visible on tablet and large screens */}
           <div className="hidden md:flex lg:flex items-center space-x-2 md:space-x-4 max-w-2xl">
-            <div className="relative flex-1 lg:hidden mr-20">
-              <SearchBar
-                isExpanded={true}
-                onFocus={handleSearchFocus}
-                onBlur={handleSearchBlur}
-                className="w-full"
-                value={searchValue}
-                onChange={(value) => setSearchValue(value)}
-                placeholder={
-                  rotatingPlaceholders[currentPlaceholderIndex] ||
-                  "Search for Products..."
-                }
-              />
-            </div>
-            <div className="relative md:hidden lg:flex">
+            <div className="relative md:flex lg:flex">
               {!isSearchFocused ? (
                 <div ref={searchRef} className="relative">
                   <button
@@ -714,10 +743,10 @@ const Header: React.FC<HeaderProps> = () => {
                   </button>
                 </div>
               ) : (
-                <div className="flex items-center space-x-2 md:space-x-4 w-[500px]">
-                  <div className="w-8 md:w-12 md:px-4 flex items-center">
+                <div className="flex items-center space-x-2 md:space-x-4 w-full md:w-[400px] lg:w-[500px]">
+                  <div className="hidden md:hidden lg:flex">
                     <VscMenu
-                      className="text-black hover:cursor-pointer font-light"
+                      className="text-black cursor-pointer font-light text-gray-800"
                       size={24}
                       onClick={toggleMenu}
                     />
@@ -751,17 +780,17 @@ const Header: React.FC<HeaderProps> = () => {
           <div className="flex items-center space-x-2 md:space-x-4">
             {/* Profile Icon - Visible on all screen sizes */}
             <div
-                              ref={iconRef}
-                onClick={() => {
-                  if (isUserPopoverOpen) {
-                    setUserPopoverOpen(false);
-                    setIsUserPopoverClicked(false);
-                  } else {
-                    setUserPopoverOpen(true);
-                    setIsUserPopoverClicked(true);
-                  }
-                }}
-                className="relative"
+              ref={iconRef}
+              onClick={() => {
+                if (isUserPopoverOpen) {
+                  setUserPopoverOpen(false);
+                  setIsUserPopoverClicked(false);
+                } else {
+                  setUserPopoverOpen(true);
+                  setIsUserPopoverClicked(true);
+                }
+              }}
+              className="relative"
             >
               <PiUserCircleThin
                 className="text-black hover:cursor-pointer"
@@ -769,14 +798,11 @@ const Header: React.FC<HeaderProps> = () => {
               />
             </div>
 
-                          <div
-                ref={popoverRef}
-                onMouseLeave={() => closeUserPopover()}
-              >
+            <div ref={popoverRef} onMouseLeave={() => closeUserPopover()}>
               <UserPopover
                 isOpen={isUserPopoverOpen}
                 userInfos={userInfo}
-                                  onClose={() => closeUserPopover()}
+                onClose={() => closeUserPopover()}
               />
             </div>
 
@@ -792,7 +818,7 @@ const Header: React.FC<HeaderProps> = () => {
                 cartCount !== null ||
                 cartCount !== undefined) &&
               token ? (
-                <div className="absolute top-[-8px] right-[-8px] md:top-[-10px] md:right-[2px] lg:top-[-12px] lg:right-[-12px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[20px] md:h-[20px] flex items-center justify-center text-[8px] md:text-[10px] font-bold">
+                <div className="absolute top-[-8px] right-[2px] md:top-[-10px] md:right-[2px] lg:top-[-12px] lg:right-[2px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[20px] md:h-[20px] flex items-center justify-center text-[8px] md:text-[10px] font-bold">
                   {cartCountV ? cartCountV : cartCount ? cartCount : ""}
                 </div>
               ) : null}
@@ -813,17 +839,24 @@ const Header: React.FC<HeaderProps> = () => {
                   onPress={() => onClickVendor()}
                 />
 
-                {/* Tablet - Compact button */}
-                <CustomButton
-                  title={`${
-                    showVendorLogin ? "Vendor Login" : "Become a Vendor"
-                  }`}
-                  className="text-sm bg-secondary px-3 hover:bg-primary h-10 mr-2 hidden md:flex lg:hidden text-white font-medium"
-                  customStyles={{}}
-                  rightIcon={<GoArrowRight />}
-                  hoverBgColor=""
-                  onPress={() => onClickVendor()}
-                />
+                {/* Tablet - Icon only (like mobile) */}
+                <Link
+                  href="/plans"
+                  className="hidden md:flex lg:hidden p-2"
+                  onClick={() => onClickVendor()}
+                >
+                  <Image
+                    alt="vendor"
+                    className="w-6 h-6"
+                    src="/images/home/vendor.webp"
+                    width={20}
+                    height={20}
+                    onError={(e) => {
+                      e.currentTarget.src = "/images/product-placeholder.webp";
+                    }}
+                    loading="lazy"
+                  />
+                </Link>
 
                 {/* Mobile - Icon only */}
                 <Link
@@ -846,9 +879,16 @@ const Header: React.FC<HeaderProps> = () => {
               </>
             )}
 
-            {token && (
-              <div className="relative w-10 md:w-18"></div>
-            )}
+            {token && <div className="relative w-10 md:w-18"></div>}
+
+            {/* Tablet Hamburger Menu - Show after vendor image */}
+            <div className="hidden md:flex lg:hidden">
+              <VscMenu
+                className="text-black cursor-pointer font-light text-gray-800"
+                size={24}
+                onClick={toggleMenu}
+              />
+            </div>
           </div>
         </div>
 

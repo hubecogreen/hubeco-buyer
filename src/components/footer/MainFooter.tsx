@@ -346,20 +346,7 @@ const Footer = () => {
                   FAQ&#39;s
                 </Link>
               </li>
-              <li className="text-fontGray py-xs cursor-default">
-                <Link href="#0" className="text-fontGray  text-sm cursor-default ">
-                  Communication<br></br>
-                  <span className="flex justify-start text-fontGray items-center cursor-default"> 
-                    Powered by MSG91
-                    {/* <Image width={50} height={15}
-                      onError={e => {
-                        e.currentTarget.src = '/images/product-placeholder.webp'
-                      }}
-                      loading="lazy"
-                      src={"/images/msg91.svg"} className="ml-1 w-[50px] mt-[-5px] h-[15px]" alt={'MSG91'} /> */}
-                      </span>
-                </Link>
-              </li>
+            
             </ul>
           </div>
           <div className={"w-full md:w-1/5 lg:w-1/5 md:py-0 py-5"}>

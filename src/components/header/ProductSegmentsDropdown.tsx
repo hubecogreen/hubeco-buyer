@@ -270,6 +270,10 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
     setHoveredSubCategoryId(subCategoryId);
   };
 
+    const handleSubCategoryLeave = (subCategoryId: string) => {
+    setHoveredSubCategoryId('');
+  };
+
   console.log(selectedCategory, "this is selectedCategory");
   const handleClick = (menuItem?: any) => {
     // if (menuItem) {
@@ -410,6 +414,9 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                                 handleSubCategoryHover(subCat._id);
                               }
                             }}
+                            onMouseLeave={() => {
+                              handleSubCategoryLeave(subCat._id);
+                            }}
                             onDoubleClick={() => {
                               // Redirect to subcategory page on double click
                               if (subCat.seoSlug) {
@@ -523,6 +530,9 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                               ) {
                                 handleSubCategoryHover(subCat._id);
                               }
+                            }}
+                            onMouseLeave={() => {
+                              handleSubCategoryLeave(subCat._id);
                             }}
                           >
                             <div className="flex items-center justify-between">
@@ -772,6 +782,9 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                           ) {
                             handleSubCategoryHover(subCat._id);
                           }
+                        }}
+                        onMouseLeave={() => {
+                          handleSubCategoryLeave(subCat._id);
                         }}
                       >
                         <div className="flex items-center justify-between">

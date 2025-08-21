@@ -774,7 +774,7 @@ const Header: React.FC<HeaderProps> = () => {
           </div>
 
           {/* Right side - User actions */}
-          <div className="flex items-center space-x-2 md:space-x-2 lg:space-x-4">
+          <div className="flex items-center md:space-x-2 lg:space-x-4">
             {/* Profile Icon - Visible on all screen sizes */}
             <div
               ref={iconRef}
@@ -858,7 +858,7 @@ const Header: React.FC<HeaderProps> = () => {
                 {/* Mobile - Icon only */}
                 <Link
                   href="/plans"
-                  className="md:hidden p-2"
+                  className="md:hidden"
                   onClick={() => onClickVendor()}
                 >
                   <Image

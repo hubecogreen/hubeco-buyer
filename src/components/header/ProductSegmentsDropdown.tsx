@@ -414,7 +414,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                               // Redirect to subcategory page on double click
                               if (subCat.seoSlug) {
                                 router.push(
-                                  `/products/${subCat.seoSlug}?scid=${subCat._id}`
+                                  `/products/${selectedCategory?.seoSlug}/${subCat.seoSlug}?scid=${subCat._id}`
                                 );
                                 onClose();
                               }
@@ -422,8 +422,11 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                           >
                             <div className="flex items-center justify-between">
                               <Link
-                                href={`/products/${subCat.seoSlug}?scid=${subCat._id}`}
+                                href={`/products/${selectedCategory?.seoSlug}/${subCat.seoSlug}?scid=${subCat._id}`}
                                 className="text-sm  font-light "
+                                onClick={() => {
+                                  onClose();
+                                }}
                               >
                                 {subCat.name}
                               </Link>
@@ -524,8 +527,11 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                           >
                             <div className="flex items-center justify-between">
                               <Link
-                                href={`/products/${subCat.seoSlug}?scid=${subCat._id}`}
+                                href={`/products/${selectedCategory?.seoSlug}/${subCat.seoSlug}?scid=${subCat._id}`}
                                 className="text-sm font-light"
+                                onClick={() => {
+                                  onClose();
+                                }}
                               >
                                 {subCat.name}
                               </Link>
@@ -770,8 +776,11 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                       >
                         <div className="flex items-center justify-between">
                           <Link
-                            href={`/products/${subCat.seoSlug}?scid=${subCat._id}`}
+                            href={`/products/${selectedCategory?.seoSlug}/${subCat.seoSlug}?scid=${subCat._id}`}
                             className="text-sm"
+                            onClick={() => {
+                              onClose();
+                            }}
                           >
                             {subCat.name}
                           </Link>

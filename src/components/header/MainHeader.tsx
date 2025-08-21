@@ -502,7 +502,7 @@ const Header: React.FC<HeaderProps> = () => {
                   data-product-segments-button
                 >
                   <span
-                    className={`font-medium relative text-sm md:text-sm lg:text-base md:ml-[25px] ${
+                    className={`font-medium relative text-sm md:text-sm lg:text-base md:ml-[25px] lg:ml-[2px] ${
                       isProductSegmentsOpen ? "text-[#B90647]" : "text-gray-800"
                     }`}
                   >

@@ -323,17 +323,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
             onClick={() => {
               console.log("category raejsjnsj", category);
               // Handle subcategory click
-              if (type !== "child") {
-                const url = `/products/${category?.seoSlug}?scid=${category?._id}`;
-                console.log(
-                  "Subcategory clicked - Generated URL:",
-                  url,
-                  "category:",
-                  category?.name
-                );
-                router.push(url);
-                if (onClose) onClose();
-              }
             }}
           >
             <div
@@ -359,7 +348,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
                   router.push(url);
                   if (onClose) onClose();
                 } else {
-                  const url = `/products/${category?.seoSlug}?scid=${category?._id}`;
+                  const url = `/products/${seoSlug}/${category?.seoSlug}?scid=${category?._id}`;
                   router.push(url);
                   if (onClose) onClose();
                 }

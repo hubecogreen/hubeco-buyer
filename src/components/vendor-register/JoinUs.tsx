@@ -28,7 +28,7 @@ const JoinUs = () => {
             <div className="flex items-center justify-center">
               <div className="flex flex-col md:flex-row gap-4">
                 <CustomButton
-                  title={"Become a Vendor"}
+                  title={"Vendor Connect"}
                   className="text-white font-semibold h-12 md:h-12 md:w-40 w-30 md:text-md text-sm"
                   customStyles={{
                     border: "1px solid #FFFFFF",

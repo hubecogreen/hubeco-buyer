@@ -409,7 +409,7 @@ export default function Page() {
                       onPress={() => {
                         router.push("/plans");
                       }}
-                      title={"Become a Vendor"}
+                      title={"Vendor Connect"}
                       className="text-white bg-secondary hover:bg-primary font-semibold h-12 w-full md:w-40 text-sm md:text-md"
                       customStyles={{
                         border: "1px solid #FFFFFF",

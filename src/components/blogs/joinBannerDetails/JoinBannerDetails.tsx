@@ -31,7 +31,7 @@ const JoinBannerDetails = () => {
             <div className="flex items-center justify-center">
               <div className="flex flex-col md:flex-row gap-4">
                 <CustomButton
-                  title={"Become a Vendor"}
+                  title={"Vendor Connect"}
                   className="text-white font-semibold h-12 w-full md:w-40 text-sm md:text-md"
                   customStyles={{
                     border: "1px solid #FFFFFF",

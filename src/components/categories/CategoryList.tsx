@@ -114,7 +114,7 @@ const CategoryList = () => {
             return(
           <Link
           key={index}
-          href={`/products?scid=${category?._id}`}
+          href={`/products/${category?.seoSlug}?scid=${category?._id}`}
             // href={`/brands/${vendor.businessInfo?.slug}`}
             // key={vendor.businessInfo?.slug}
           >

@@ -26,6 +26,7 @@ import CustomLoader from "@/components/sharedComponents/loader";
 interface Category {
   _id: string;
   name: string;
+  seoSlug?: string;
   subCategories?: Category[];
   childCategories?: Category[];
 }
@@ -62,11 +63,15 @@ const CategorySection = () => {
       if (result.data == null) {
         handleApiError(result.errorData);
       } else {
-        // Extract all subcategories from all categories
-        const allSubCategories = result.data.flatMap(
-          (category: Category) => category.subCategories || []
+        // Extract all subcategories with their parent category info
+        const allSubCategoriesWithParent = result.data.flatMap(
+          (category: Category) => 
+            (category.subCategories || []).map((subCat: any) => ({
+              ...subCat,
+              parentCategorySlug: category.seoSlug
+            }))
         );
-        setSubCategories(allSubCategories);
+        setSubCategories(allSubCategoriesWithParent);
         setIsDataLoaded(true);
       }
     } catch (error) {
@@ -92,7 +97,17 @@ const CategorySection = () => {
   // Memoize navigation handlers
   const handleCategoryClick = useCallback(
     (category: any) => {
-      router.push(`/products/${category?.seoSlug}?scid=${category?._id}`);
+      // Use both category and subcategory slugs for better SEO
+      if (category?.parentCategorySlug && category?.seoSlug) {
+        const url = `/products/${category.parentCategorySlug}/${category.seoSlug}?scid=${category._id}`;
+        console.log("Navigating to:", url);
+        router.push(url);
+      } else {
+        // Fallback to original structure if parent category slug is missing
+        const url = `/products/${category?.seoSlug}?scid=${category?._id}`;
+        console.log("Fallback navigation to:", url);
+        router.push(url);
+      }
     },
     [router]
   );

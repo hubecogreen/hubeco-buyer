@@ -238,7 +238,7 @@ const Footer = () => {
               />
               <CustomButton
                 title={`${
-                  showVendorLogin ? "Vendor Login" : "Become a Vendor"
+                  showVendorLogin ? "Vendor Login" : "Vendor Connect"
                 }`}
                 onPress={() => onClickVendor()}
                 className="ml-3 bg-secondary hover:cursor-pointer  text-white h-12 md:h-12 md:w-48  w-40 md:text-md text-sm  hover:bg-primary"

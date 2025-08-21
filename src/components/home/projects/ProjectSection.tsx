@@ -64,7 +64,7 @@ const ProjectsSection = () => {
 
   // Memoize desktop grid content
   const desktopGridContent = useMemo(() => (
-    <div className="md:flex hidden">
+    <div className="lg:flex hidden">
       <div className={`${styles.container3}`}>
         <div className={`${styles.gridItem}`}>
           <Image
@@ -137,7 +137,7 @@ const ProjectsSection = () => {
   // Memoize mobile swiper content
   const mobileSwiperContent = useMemo(() => (
     <div
-      className="md:w-full w-11/12 md:mt-20 mt-4 flex ml-5 md:ml-20 overflow-hidden block md:hidden"
+      className="lg:w-full w-11/12 lg:mt-20 mt-4 flex ml-5 lg:ml-20 overflow-hidden block lg:hidden"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -186,14 +186,14 @@ const ProjectsSection = () => {
 
   return (
     <section
-      className="relative w-full md:w-[80%] w-[98%] items-center justify-center mx-auto projectsGrid"
+      className="relative w-full lg:w-[80%] w-[98%] items-center justify-center mx-auto projectsGrid"
     >
-      <div className="pb-2 md:pb-10">
-        <div className="items-center justify-center px-8 text-center z-20 md:pt-7">
-          <h2 className="text-2xl md:text-4xl font-bold mb-4 text-black mt-30">
+      <div className="pb-2 lg:pb-10">
+        <div className="items-center justify-center px-8 text-center z-20 lg:pt-7">
+          <h2 className="text-2xl lg:text-4xl font-bold mb-4 text-black mt-30">
             Green Projects
           </h2>
-          <p className="md:text-big text-md w-full md:max-w-5xl mx-auto text-fontGray md:pt-5">
+          <p className="lg:text-big text-md w-full lg:max-w-5xl mx-auto text-fontGray lg:pt-5">
             Browse the green building projects where our eco-friendly materials
             are deployed
           </p>

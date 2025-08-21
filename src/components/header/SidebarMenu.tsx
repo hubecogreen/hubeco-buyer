@@ -107,7 +107,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
         icon: "TbCategory",
       },
       {
-        title: "Become a Vendor",
+        title: "Vendor Connect",
         link: "/plans",
         mb: true,
         level: 1,
@@ -286,7 +286,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
                 >
                   {/* Show subCategories if they exist */}
                   {hasSubCategories &&
-                    renderChildCategories(category.subCategories, "sub")}
+                    renderChildCategories(
+                      category.subCategories,
+                      category.seoSlug,
+                      "sub"
+                    )}
 
                   {/* Show childCategories if they exist */}
                   {hasChildCategories &&
@@ -311,26 +315,14 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
   ) => {
     if (!categories || categories.length === 0) return null;
 
-    console.log(categories, "check what categories are coming");
-    console.log("Type being passed:", type);
     return (
       <>
         {categories.map((category: any) => (
           <li
             key={category?._id}
             onClick={() => {
+              console.log("category raejsjnsj", category);
               // Handle subcategory click
-              if (type === "sub") {
-                const url = `/products/${category?.seoSlug}?scid=${category?._id}`;
-                console.log(
-                  "Subcategory clicked - Generated URL:",
-                  url,
-                  "category:",
-                  category?.name
-                );
-                router.push(url);
-                if (onClose) onClose();
-              }
             }}
           >
             <div
@@ -353,6 +345,10 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
                     "category:",
                     category?.name
                   );
+                  router.push(url);
+                  if (onClose) onClose();
+                } else {
+                  const url = `/products/${seoSlug}/${category?.seoSlug}?scid=${category?._id}`;
                   router.push(url);
                   if (onClose) onClose();
                 }

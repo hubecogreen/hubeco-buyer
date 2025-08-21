@@ -110,10 +110,26 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
     setIsDropdownOpen(showDropdown);
   }, [showDropdown]);
 
-  // Fetch dynamic placeholders from API on component mount
+  // Fetch dynamic placeholders and categories from API on component mount
   useEffect(() => {
     getDynamicPlaceholders();
+    getCategories();
   }, []);
+
+  // Function to fetch categories for enhancing subcategory data
+  const getCategories = async () => {
+    try {
+      const result = (await callApi(
+        getEndpoint.default.PRODUCTS_CATEGORIES,
+        "GET"
+      )) as any;
+      if (result?.data && result.data.length > 0) {
+        setCategories(result.data);
+      }
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
 
   // Function to fetch dynamic placeholders
   const getDynamicPlaceholders = async () => {
@@ -235,8 +251,25 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
               (item: any) => item.type === myKeys[3]
             );
 
+            // Enhance subcategories with parent category information if available
+            const enhancedSubCategories = subCategories.map((subCat: any) => {
+              // Try to find the parent category from the categories data
+              const parentCategory = categories.find((cat: any) => 
+                cat.subCategories?.some((sub: any) => sub._id === subCat.id)
+              );
+              
+              if (parentCategory) {
+                return {
+                  ...subCat,
+                  parentCategoryName: parentCategory.name,
+                  parentCategorySlug: parentCategory.seoSlug
+                };
+              }
+              return subCat;
+            });
+
             setProducts(products);
-            setSubCategories(subCategories);
+            setSubCategories(enhancedSubCategories);
             setChildCategories(childCategories);
             setVendors(vendors);
           } else {
@@ -490,7 +523,18 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                           
                           // Use window.location for more reliable navigation
                           setTimeout(() => {
-                            window.location.href = `/products/${subCategory?.seoSlug}?scid=${subCategory?.id}`;
+                            // For search results, we may not have parent category info
+                            // Use the enhanced URL structure if available, otherwise fallback
+                            if (subCategory?.parentCategorySlug && subCategory?.seoSlug) {
+                              const url = `/products/${subCategory.parentCategorySlug}/${subCategory.seoSlug}?scid=${subCategory?.id}`;
+                              console.log('Enhanced URL:', url);
+                              window.location.href = url;
+                            } else {
+                              // Fallback to original structure for search results
+                              const url = `/products/${subCategory?.seoSlug}?scid=${subCategory?.id}`;
+                              console.log('Fallback URL:', url);
+                              window.location.href = url;
+                            }
                             setIsNavigating(false);
                           }, 100);
                         }}

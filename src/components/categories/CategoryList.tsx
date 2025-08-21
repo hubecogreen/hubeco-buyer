@@ -10,7 +10,7 @@ import Link from "next/link";
 import * as getEndpoint from "../../network/EndPoints";
 import LottieWrapper from "../LottieWrapper";
 import animationData from "../../../public/animations/nodatafound.json";
-import styles from '../home/categories/Category.module.css';
+import styles from "../home/categories/Category.module.css";
 import CustomButton from "../customButton/CustomButton";
 import { GoArrowRight } from "react-icons/go";
 import { useRouter } from "next/navigation";
@@ -18,7 +18,10 @@ import store from "@/reduxStore";
 import { toast } from "react-hot-toast";
 import useApi from "../Fetcher/useAPI";
 import { useDispatch } from "react-redux";
-import { saveCategories, saveCatTime } from "@/reduxStore/slices/masterDataSlice";
+import {
+  saveCategories,
+  saveCatTime,
+} from "@/reduxStore/slices/masterDataSlice";
 import { normalizePath } from "@/lib/utils";
 
 interface Category {
@@ -37,19 +40,18 @@ const CategoryList = () => {
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-  const categories=store.getState().masterData.categories;
+  const categories = store.getState().masterData.categories;
   const [categoriesData, setCategoriesData] = useState<any>(categories);
-  const router=useRouter();
-  const {callApi}=useApi();
-  const dispatch=useDispatch();
- 
+  const router = useRouter();
+  const { callApi } = useApi();
+  const dispatch = useDispatch();
+
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
 
   useEffect(() => {
     getCategories();
   }, []);
 
- 
   const handleApiError = async (err: any) => {
     const result = err?.response;
     if (result?.status === 400) {
@@ -63,7 +65,6 @@ const CategoryList = () => {
 
   const handleSearch = (e: any) => {
     setSearchTerm(e.target.value);
-
   };
 
   const getCategories = async () => {
@@ -76,11 +77,19 @@ const CategoryList = () => {
         handleApiError(result.errorData);
       } else {
         const cuurentTime = new Date();
-       // // console.log("first time", cuurentTime);
+        // // console.log("first time", cuurentTime);
 
-        setCategoriesData(result?.data[0]?.subCategories || []);
+        // Extract subcategories with their parent category info
+        const subCategoriesWithParent = (
+          result?.data[0]?.subCategories || []
+        ).map((subCat: any) => ({
+          ...subCat,
+          parentCategoryName: result?.data[0]?.name,
+          parentCategorySlug: result?.data[0]?.seoSlug,
+        }));
 
-        dispatch(saveCategories(result?.data[0]?.subCategories || []));
+        setCategoriesData(subCategoriesWithParent);
+        dispatch(saveCategories(subCategoriesWithParent));
         dispatch(saveCatTime(cuurentTime));
       }
     } catch (error) {
@@ -91,37 +100,43 @@ const CategoryList = () => {
   return (
     <div className="px-4 md:px-24 mt-8 md:mt-10">
       <div className="block md:flex md:justify-between mb-6">
-        <h2 className="text-black font-bold text-2xl md:text-3xl">Categories</h2>
+        <h2 className="text-black font-bold text-2xl md:text-3xl">
+          Categories
+        </h2>
         <div className="h-12 flex w-full md:w-96 mt-4 md:mt-0 opacity-0 hidden">
-        <input
-          className="focus:outline-none border border-gray-300 rounded-l-md p-2 w-full max-w-[400px]"
-          type="text"
-          placeholder="Search"
-          value={searchTerm}
-          onChange={(e: any) => handleSearch(e)}
-        />
+          <input
+            className="focus:outline-none border border-gray-300 rounded-l-md p-2 w-full max-w-[400px]"
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={(e: any) => handleSearch(e)}
+          />
 
           <div className="hidden bg-pink p-3 h-12 flex items-center justify-center rounded-r-md">
-            <IoIosSearch className="h-5 w-6 text-white" onClick={() => handleSearch(searchTerm)} />
+            <IoIosSearch
+              className="h-5 w-6 text-white"
+              onClick={() => handleSearch(searchTerm)}
+            />
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8">
-        {categories.map((category:any,index:any) => 
-        {
-           // // console.log('vvret',category)
-            return(
-          <Link
-          key={index}
-          href={`/products/${category?.seoSlug}?scid=${category?._id}`}
-            // href={`/brands/${vendor.businessInfo?.slug}`}
-            // key={vendor.businessInfo?.slug}
-          >
-            <div className="border rounded-md flex flex-col items-center justify-center  w-full  cursor-pointer hover:bg-slate-100 transform transition-transform duration-300 hover:scale-105">
-              
-            <div className="relative w-full" onClick={() => router.push(`/products`)}>
-            <Image
+        {categories.map((category: any, index: any) => {
+          // // console.log('vvret',category)
+          return (
+            <Link
+              key={index}
+              href={`/products/${category?.parentCategorySlug}/${category?.seoSlug}?scid=${category?._id}`}
+              // href={`/brands/${vendor.businessInfo?.slug}`}
+              // key={vendor.businessInfo?.slug}
+            >
+              <div className="border rounded-md flex flex-col items-center justify-center  w-full  cursor-pointer hover:bg-slate-100 transform transition-transform duration-300 hover:scale-105">
+                <div
+                  className="relative w-full"
+                  onClick={() => router.push(`/products`)}
+                >
+                  <Image
                     // src={category?.image}
                     // src={category?.image ?  (assetURL+'/'+category?.image).includes('//admin') ? (assetURL+'/'+category?.image).replace('//admin', '/admin') : `${assetURL}/${category?.image}` : '/images/product-placeholder.webp'}
                     src={
@@ -132,16 +147,13 @@ const CategoryList = () => {
                     alt={`Slide ${index}`}
                     width={300}
                     height={300}
-                    onError={e => {
-                      e.currentTarget.src = '/images/product-placeholder.webp'
+                    onError={(e) => {
+                      e.currentTarget.src = "/images/product-placeholder.webp";
                     }}
                     loading="lazy"
-                    
                     className={`rounded-[5px] object-cover  w-full h-[300px]  bg-black`}
                   />
-                  <div className="absolute w-full inset-0 flex flex-row justify-between items-end bg-black h-[300px] opacity-40">
-
-                  </div>
+                  <div className="absolute w-full inset-0 flex flex-row justify-between items-end bg-black h-[300px] opacity-40"></div>
                   <div className="absolute  w-full inset-0 flex flex-row justify-between items-end justify-end text-white ">
                     <p
                       className={`${styles.cattitle} text-xl mb-6 text-white font-bold ml-5 z-20 cat-text`}
@@ -160,12 +172,11 @@ const CategoryList = () => {
                     />
                   </div>
                 </div>
-            </div>
-          </Link>
-        )}
-        )}
+              </div>
+            </Link>
+          );
+        })}
       </div>
-
 
       {categories.length === 0 && (
         <>
@@ -186,8 +197,6 @@ const CategoryList = () => {
           <p>Error loading Categories: {error}</p>
         </div>
       )}
-
-      
     </div>
   );
 };

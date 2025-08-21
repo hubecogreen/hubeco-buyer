@@ -448,7 +448,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                               hoveredSubCategoryId === subCat._id) &&
                               subCat.childCategories &&
                               subCat.childCategories.length > 0 && (
-                                <div className="mt-1 ml-4 space-y-1 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                                <div className="mt-1 space-y-1 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
                                   {subCat.childCategories.map((child) => (
                                     <div
                                       key={child._id}

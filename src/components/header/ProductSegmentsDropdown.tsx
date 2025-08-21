@@ -401,8 +401,6 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             }`}
                             onClick={(e) => {
                               e.stopPropagation(); // Prevent popup from closing
-                              // Toggle subcategory expansion on click
-                              onClose();
                             }}
                             onMouseEnter={() => {
                               if (
@@ -514,8 +512,6 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             }`}
                             onClick={(e) => {
                               e.stopPropagation(); // Prevent popup from closing
-                              // Redirect to subcategory page on click
-                              onClose();
                             }}
                             onMouseEnter={() => {
                               if (
@@ -762,9 +758,6 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             : "text-white"
                         }`}
                         onClick={(e) => {
-                          e.stopPropagation(); // Prevent popup from closing
-                          // Redirect to subcategory page on click
-                          onClose();
                         }}
                         onMouseEnter={() => {
                           if (

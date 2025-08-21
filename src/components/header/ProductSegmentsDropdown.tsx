@@ -50,6 +50,9 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
     null
   );
   const [openedCategoryId, setOpenedCategoryId] = useState<string | null>(null);
+  const [hoveredSubCategoryId, setHoveredSubCategoryId] = useState<
+    string | null
+  >(null);
   const [mainCategories, setMainCategories] = useState<Category[]>([]);
   const [subCategories, setSubCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
@@ -258,6 +261,15 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
     setOpenedCategoryId(null); // Clear opened subcategory when main category changes
   };
 
+  const handleCategoryHover = (category: any) => {
+    setSelectedCategory(category);
+    setOpenedCategoryId(null); // Clear opened subcategory when main category changes
+  };
+
+  const handleSubCategoryHover = (subCategoryId: string) => {
+    setHoveredSubCategoryId(subCategoryId);
+  };
+
   console.log(selectedCategory, "this is selectedCategory");
   const handleClick = (menuItem?: any) => {
     // if (menuItem) {
@@ -279,23 +291,20 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
   return (
     <>
       {/* Main dropdown content */}
-      <div
-        ref={dropdownRef}
-        className="fixed inset-0 z-50 pointer-events-none"
-      >
+      <div ref={dropdownRef} className="fixed inset-0 z-50 pointer-events-none">
         {/* Desktop Layout */}
         <div
-          className="hidden md:flex w-full h-[400px] pointer-events-auto absolute top-[85px] left-0"
+          className="hidden md:flex w-full h-[480px] pointer-events-auto absolute top-[85px] left-0"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Left Column - Main Categories */}
           <div className="w-3/12 bg-black bg-opacity-90 pt-0 border-r-[1.52px] border-[#404040]">
-            <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 pt-10">
+            <div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 pt-8">
               {mainCategories && mainCategories.length > 0 ? (
                 mainCategories.map((category, index) => (
                   <div
                     key={category._id}
-                    className={`flex items-center justify-between p-4 rounded transition-all duration-200 ${
+                    className={`flex items-center justify-between p-3 transition-all duration-200 ${
                       selectedCategory?._id === category._id ||
                       (index === 0 && !selectedCategory)
                         ? "bg-[#B90647] text-white"
@@ -310,6 +319,14 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                         category.subCategories.length > 0
                       ) {
                         handleCategoryClick(category);
+                      }
+                    }}
+                    onMouseEnter={() => {
+                      if (
+                        category.subCategories &&
+                        category.subCategories.length > 0
+                      ) {
+                        handleCategoryHover(category);
                       }
                     }}
                   >
@@ -351,10 +368,10 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                   <div className="w-16 h-1 bg-[#B90647]"></div>
                 </div>
 
-                {/* Two sub-columns */}
-                <div className="flex h-[calc(400px-120px)]">
-                  {/* Left sub-column - Subcategories */}
-                  <div className="w-1/2 p-8 pt-0 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                {/* Single column on tablet, two columns on desktop */}
+                <div className="flex h-[calc(480px-120px)]">
+                  {/* Single column on tablet, left column on desktop */}
+                  <div className="w-full lg:w-1/2 p-8 pt-0 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
                     <div>
                       {(selectedCategory
                         ? selectedCategory.subCategories
@@ -370,37 +387,54 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                               : mainCategories && mainCategories.length > 0
                               ? mainCategories[0]?.subCategories
                               : []
-                            )?.length || 0) / 2
+                            )?.length || 0) / (window.innerWidth >= 1024 ? 1.2 : 1)
                           )
                         )
                         .map((subCat, index) => (
                           <div
                             key={subCat._id}
-                            className={`p-2 cursor-pointer rounded transition-all duration-200 ${
-                              openedCategoryId === subCat._id || isCategoryActive(subCat._id)
+                            className={`p-1 cursor-pointer  rounded transition-all duration-200 ${
+                              openedCategoryId === subCat._id ||
+                              isCategoryActive(subCat._id)
                                 ? "text-[#B90647] font-semibold"
                                 : "text-[#B5B5B5] font-light hover:text-[#B90647]"
                             }`}
                             onClick={(e) => {
                               e.stopPropagation(); // Prevent popup from closing
                               // Toggle subcategory expansion on click
-                              if (openedCategoryId === subCat._id) {
-                                setOpenedCategoryId(null);
-                              } else {
-                                setOpenedCategoryId(subCat._id);
+                              onClose();
+                            }}
+                            onMouseEnter={() => {
+                              if (
+                                subCat.childCategories &&
+                                subCat.childCategories.length > 0
+                              ) {
+                                handleSubCategoryHover(subCat._id);
+                              }
+                            }}
+                            onDoubleClick={() => {
+                              // Redirect to subcategory page on double click
+                              if (subCat.seoSlug) {
+                                router.push(
+                                  `/products/${subCat.seoSlug}?scid=${subCat._id}`
+                                );
+                                onClose();
                               }
                             }}
                           >
                             <div className="flex items-center justify-between">
-                              <span className="text-sm  font-light ">
+                              <Link
+                                href={`/products/${subCat.seoSlug}?scid=${subCat._id}`}
+                                className="text-sm  font-light "
+                              >
                                 {subCat.name}
-                              </span>
+                              </Link>
                               {subCat.childCategories &&
                                 subCat.childCategories.length > 0 && (
                                   <ChevronRight
                                     size={16}
                                     className={`transition-transform duration-200 ${
-                                      openedCategoryId === subCat._id
+                                      openedCategoryId === subCat._id || hoveredSubCategoryId === subCat._id
                                         ? "rotate-90"
                                         : ""
                                     }`}
@@ -409,15 +443,18 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             </div>
 
                             {/* Child categories shown below when expanded */}
-                            {openedCategoryId === subCat._id &&
+                            {(openedCategoryId === subCat._id ||
+                              hoveredSubCategoryId === subCat._id) &&
                               subCat.childCategories &&
                               subCat.childCategories.length > 0 && (
-                                <div className="mt-2 ml-4 space-y-2 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                                <div className="mt-1 ml-4 space-y-1 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
                                   {subCat.childCategories.map((child) => (
                                     <div
                                       key={child._id}
                                       className={`p-0 cursor-pointer rounded text-white transition-all duration-200 font-light ${
-                                        isCategoryActive(child._id) ? "text-[#B90647] font-semibold" : ""
+                                        isCategoryActive(child._id)
+                                          ? "text-[#B90647] font-semibold"
+                                          : ""
                                       }`}
                                     >
                                       <Link
@@ -446,8 +483,8 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                     </div>
                   </div>
 
-                  {/* Right sub-column - Additional subcategories */}
-                  <div className="w-1/2 p-8 pt-0 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                  {/* Right column - Only visible on desktop (lg and above) */}
+                  <div className="hidden lg:block w-1/2 p-8 pt-0 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
                     <div>
                       {/* Additional subcategories that are not expanded */}
                       {(selectedCategory
@@ -463,37 +500,45 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                               : mainCategories && mainCategories.length > 0
                               ? mainCategories[0]?.subCategories
                               : []
-                            )?.length || 0) / 2
+                            )?.length || 0) / 1.2
                           )
                         )
                         .map((subCat, index) => (
                           <div
                             key={subCat._id}
-                            className={`p-2 cursor-pointer rounded transition-all duration-200 ${
-                              openedCategoryId === subCat._id || isCategoryActive(subCat._id)
+                            className={`p-1 cursor-pointer rounded transition-all duration-200 ${
+                              openedCategoryId === subCat._id ||
+                              isCategoryActive(subCat._id)
                                 ? "text-[#B90647] font-semibold"
                                 : "text-[#B5B5B5] font-light hover:text-[#B90647]"
                             }`}
                             onClick={(e) => {
                               e.stopPropagation(); // Prevent popup from closing
-                              // Toggle subcategory expansion on click
-                              if (openedCategoryId === subCat._id) {
-                                setOpenedCategoryId(null);
-                              } else {
-                                setOpenedCategoryId(subCat._id);
+                              // Redirect to subcategory page on click
+                              onClose();
+                            }}
+                            onMouseEnter={() => {
+                              if (
+                                subCat.childCategories &&
+                                subCat.childCategories.length > 0
+                              ) {
+                                handleSubCategoryHover(subCat._id);
                               }
                             }}
                           >
                             <div className="flex items-center justify-between">
-                              <span className="text-sm font-light">
+                              <Link
+                                href={`/products/${subCat.seoSlug}?scid=${subCat._id}`}
+                                className="text-sm font-light"
+                              >
                                 {subCat.name}
-                              </span>
+                              </Link>
                               {subCat.childCategories &&
                                 subCat.childCategories.length > 0 && (
                                   <ChevronRight
                                     size={16}
                                     className={`transition-transform duration-200 ${
-                                      openedCategoryId === subCat._id
+                                      openedCategoryId === subCat._id || hoveredSubCategoryId === subCat._id
                                         ? "rotate-90"
                                         : ""
                                     }`}
@@ -502,10 +547,11 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             </div>
 
                             {/* Child categories shown below when expanded */}
-                            {openedCategoryId === subCat._id &&
+                            {(openedCategoryId === subCat._id ||
+                              hoveredSubCategoryId === subCat._id) &&
                               subCat.childCategories &&
                               subCat.childCategories.length > 0 && (
-                                <div className="mt-2 ml-4 space-y-2 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                                <div className="mt-1 space-y-1 max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
                                   {subCat.childCategories.map((child) => (
                                     <div
                                       key={child._id}
@@ -540,79 +586,12 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
               </>
             )}
           </div>
-          {/* Right Column - Featured Products */}
-          {/* <div className="w-4/12 bg-black bg-opacity-90 p-8">
-            <h3 className="text-lg font-bold text-white mb-6">
-              Featured Products
-            </h3>
-            <div className="h-[calc(500px-120px)] overflow-hidden relative">
-              {isFeaturedLoading ? (
-                <div className="flex items-center justify-center h-32">
-                  <p className="text-white">Loading featured products...</p>
-                </div>
-              ) : featuredProducts && featuredProducts.length > 0 ? (
-                <div className="relative h-full">
-                  <div
-                    className="animate-marquee"
-                    style={{
-                      animationDuration: `${featuredProducts.length * 3}s`, // Adjust speed based on number of products
-                    }}
-                  >
-                    {getMarqueeProducts().map((product: any, index: number) => (
-                      <div
-                        key={`${product._id}-${index}`}
-                        className="border-b border-gray-800 pb-4 mb-4"
-                        style={{
-                          height: "calc((500px - 120px) / 3)",
-                          minHeight: "120px",
-                        }}
-                      >
-                        <div className="flex items-start space-x-4 h-full">
-                          <div className="w-16 h-16 bg-gray-700 rounded flex-shrink-0">
-                            {product.image && (
-                              <Image
-                                src={product.image}
-                                alt={product.name}
-                                width={64}
-                                height={64}
-                                className="w-full h-full object-cover rounded"
-                                onError={(e) => {
-                                  e.currentTarget.src =
-                                    "/images/product-placeholder.webp";
-                                }}
-                              />
-                            )}
-                          </div>
-                          <div className="flex-1 cursor-pointer" onClick={() => {
-                            router.push(`/${product.slug}`);
-                            onClose();
-                          }}>
-                            <h4 className="text-sm font-bold text-white mb-2">
-                              {product.name}
-                            </h4>
-                            <p 
-                              className="text-xs text-white leading-relaxed line-clamp-4"
-                              dangerouslySetInnerHTML={{ __html: product.description }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <div className="flex items-center justify-center h-32">
-                  <p className="text-white">No featured products</p>
-                </div>
-              )}
-            </div>
-          </div> */}
 
           <div className="w-4/12 bg-black bg-opacity-90 p-8">
             <h3 className="text-lg font-bold text-white mb-6">
               Featured Products
             </h3>
-            <div className="h-[calc(400px-120px)] overflow-hidden relative">
+            <div className="h-[calc(480px-120px)] overflow-hidden relative">
               {isFeaturedLoading ? (
                 <div className="flex items-center justify-center h-32">
                   <p className="text-white">Loading featured products...</p>
@@ -726,6 +705,14 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             handleCategoryClick(category);
                           }
                         }}
+                        onMouseEnter={() => {
+                          if (
+                            category.subCategories &&
+                            category.subCategories.length > 0
+                          ) {
+                            handleCategoryHover(category);
+                          }
+                        }}
                       >
                         <span className="text-sm font-medium">
                           {category.name}
@@ -769,28 +756,38 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                       <div
                         key={subCat._id}
                         className={`p-3 cursor-pointer rounded transition-all duration-200 ${
-                          openedCategoryId === subCat._id || isCategoryActive(subCat._id)
+                          openedCategoryId === subCat._id ||
+                          isCategoryActive(subCat._id)
                             ? "text-[#B90647] font-semibold"
                             : "text-white"
                         }`}
                         onClick={(e) => {
                           e.stopPropagation(); // Prevent popup from closing
-                          // Toggle subcategory expansion on click
-                          if (openedCategoryId === subCat._id) {
-                            setOpenedCategoryId(null);
-                          } else {
-                            setOpenedCategoryId(subCat._id);
+                          // Redirect to subcategory page on click
+                          onClose();
+                        }}
+                        onMouseEnter={() => {
+                          if (
+                            subCat.childCategories &&
+                            subCat.childCategories.length > 0
+                          ) {
+                            handleSubCategoryHover(subCat._id);
                           }
                         }}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="text-sm">{subCat.name}</span>
+                          <Link
+                            href={`/products/${subCat.seoSlug}?scid=${subCat._id}`}
+                            className="text-sm"
+                          >
+                            {subCat.name}
+                          </Link>
                           {subCat.childCategories &&
                             subCat.childCategories.length > 0 && (
                               <ChevronRight
                                 size={16}
                                 className={`transition-transform duration-200 ${
-                                  openedCategoryId === subCat._id
+                                  openedCategoryId === subCat._id || hoveredSubCategoryId === subCat._id
                                     ? "rotate-90"
                                     : ""
                                 }`}
@@ -799,15 +796,18 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                         </div>
 
                         {/* Child categories shown below when expanded */}
-                        {openedCategoryId === subCat._id &&
+                        {(openedCategoryId === subCat._id ||
+                          hoveredSubCategoryId === subCat._id) &&
                           subCat.childCategories &&
                           subCat.childCategories.length > 0 && (
-                            <div className="mt-2 ml-4 space-y-1">
+                            <div className="mt-2 space-y-1">
                               {subCat.childCategories.map((child) => (
                                 <div
                                   key={child._id}
                                   className={`p-2 cursor-pointer rounded text-white hover:text-[#B90647] transition-all duration-200 ${
-                                    isCategoryActive(child._id) ? "text-[#B90647] font-semibold" : ""
+                                    isCategoryActive(child._id)
+                                      ? "text-[#B90647] font-semibold"
+                                      : ""
                                   }`}
                                 >
                                   <Link

@@ -107,7 +107,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
         icon: "TbCategory",
       },
       {
-        title: "Become a Vendor",
+        title: "Vendor Connect",
         link: "/plans",
         mb: true,
         level: 1,

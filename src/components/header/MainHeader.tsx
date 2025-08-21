@@ -445,7 +445,7 @@ const Header: React.FC<HeaderProps> = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky}`}
     >
       <div
-        className={`w-full justify-center items-center bg-lightBgColor h-auto md:h-20 lg:h-22 px-4 pt-1 pb-1 md:pb-20 lg:pb-22 ${
+        className={`w-full justify-center items-center bg-lightBgColor h-auto md:h-20 lg:h-22 px-4 pt-2 pb-3 md:pb-20 lg:pb-22 ${
           styles.stickyHeader
         } ${isSearchFocused ? styles.searchFocused : ""}`}
       >
@@ -453,21 +453,23 @@ const Header: React.FC<HeaderProps> = () => {
           {/* Left side - Fixed elements (never affected) */}
           <div
             className={`flex items-center min-w-0 ${
-              token ? "space-x-4 md:space-x-6 lg:space-x-8" : "space-x-3 md:space-x-4 lg:space-x-6"
+              token
+                ? "space-x-4 md:space-x-6 lg:space-x-8"
+                : "space-x-2 md:space-x-4 lg:space-x-6"
             }`}
           >
             <div className="flex items-center md:hidden flex-shrink-0">
               <VscMenu
                 className="text-black cursor-pointer font-light text-gray-800"
-                size={20}
+                size={26}
                 onClick={toggleMenu}
               />
             </div>
             {/* Mobile Logo */}
             <Link
               href="/"
-              className={`${styles.logo} w-48 sm:w-64 h-8 md:h-9 lg:h-10 xl:h-12 hover:cursor-pointer flex-shrink-0 min-w-0`}
-              style={{ minWidth: "145px", maxWidth: "145px" }}
+              className={`${styles.logo} w-48 sm:w-64 h-8 md:h-9 lg:h-10 xl:h-12 hover:cursor-pointer flex-shrink-0 min-w-0 lg:pb-2`}
+              style={{ minWidth: "175px", maxWidth: "180px" }}
             >
               <Image
                 src="/images/Logo-2.webp"
@@ -499,7 +501,7 @@ const Header: React.FC<HeaderProps> = () => {
             >
               <div className="relative">
                 <div
-                  className="flex items-center space-x-1 cursor-pointer hover:text-secondary md:pl-2 lg:pl-0 transition-colors relative z-20"
+                  className="flex items-center space-x-1 cursor-pointer hover:text-secondary md:pl-2 lg:pl-0 transition-colors relative z-20 lg:pl-2"
                   onMouseEnter={handleProductSegmentsMouseEnter}
                   onMouseLeave={handleProductSegmentsMouseLeave}
                   onClick={() => {
@@ -554,14 +556,16 @@ const Header: React.FC<HeaderProps> = () => {
                     ? "text-[#B90647]"
                     : "text-gray-800"
                 }`}
-                style={{
-                  marginLeft: "20px",
-                }}
+                style={{ marginLeft: "20px" }}
               >
-                <span className="font-medium text-sm md:text-base">Green Financing</span>
-                {pathname === "/green-financing" && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
-                )}
+                <span className="font-medium text-sm md:text-base relative">
+                  Green Financing
+                  {pathname === "/green-financing" && (
+                    // Underline is absolutely positioned in 'span', so it won't extend to the right padding
+                    <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-[#B90647]"></span>
+                  )}
+                </span>
+                {/* You can add icons or other elements here */}
               </Link>
             </div>
 
@@ -611,7 +615,9 @@ const Header: React.FC<HeaderProps> = () => {
           {!isSearchFocused && (
             <div
               className={`hidden md:flex items-center ${
-                token ? "space-x-8 md:space-x-10 lg:space-x-14" : "space-x-6 md:space-x-8 lg:space-x-10"
+                token
+                  ? "space-x-8 md:space-x-10 lg:space-x-14"
+                  : "space-x-6 md:space-x-8 lg:space-x-10"
               }`}
             >
               <Link
@@ -794,7 +800,7 @@ const Header: React.FC<HeaderProps> = () => {
             >
               <PiUserCircleThin
                 className="text-black hover:cursor-pointer"
-                size={26}
+                size={30}
               />
             </div>
 
@@ -810,7 +816,7 @@ const Header: React.FC<HeaderProps> = () => {
             <div className="relative pr-2 md:pr-3 lg:pr-4">
               <CiShoppingCart
                 className="text-black hover:cursor-pointer"
-                size={26}
+                size={30}
                 onClick={onClickCart}
               />
               {Number(cartCountV) > 0 &&
@@ -830,7 +836,7 @@ const Header: React.FC<HeaderProps> = () => {
                 {/* Desktop - Full button */}
                 <CustomButton
                   title={`${
-                    showVendorLogin ? "Vendor Login" : "Become a Vendor"
+                    showVendorLogin ? "Vendor Login" : "Vendor Connect"
                   }`}
                   className="text-base bg-secondary px-4 lg:px-2 hover:bg-primary h-12 mr-4 hidden lg:flex text-white font-medium"
                   customStyles={{}}
@@ -866,7 +872,7 @@ const Header: React.FC<HeaderProps> = () => {
                 >
                   <Image
                     alt="vendor"
-                    className="w-6 h-6"
+                    className="w-7 h-7"
                     src="/images/home/vendor.webp"
                     width={20}
                     height={20}
@@ -893,7 +899,7 @@ const Header: React.FC<HeaderProps> = () => {
         </div>
 
         {/* Second Line - Mobile Only: Search Bar */}
-        <div className="md:hidden flex items-center justify-between py-2 border-t border-gray-200">
+        <div className="md:hidden flex items-center justify-between py-2">
           {/* Search Bar */}
           <div className="flex-1 mx-3">
             <SearchBar

@@ -56,14 +56,44 @@ export default function GreenHomeLoanForm({
   // Prevent background scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
+      // Store the current scroll position
+      const scrollY = window.scrollY;
+      
+      // Prevent scrolling on body and html
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      
+      // Also prevent scrolling on html element for better mobile support
+      document.documentElement.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      // Restore scrolling
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.documentElement.style.overflow = '';
+      
+      // Restore scroll position
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     }
 
     // Cleanup function to restore scrolling when component unmounts
     return () => {
-      document.body.style.overflow = 'unset';
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.documentElement.style.overflow = '';
+      
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     };
   }, [isOpen]);
 
@@ -119,8 +149,11 @@ export default function GreenHomeLoanForm({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto">
-      <div className="bg-white rounded-3xl w-full max-w-[650px] mx-4 my-8 relative overflow-hidden max-h-[90vh] flex flex-col">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden touch-none"
+      style={{ touchAction: 'none' }}
+    >
+      <div className="bg-white rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[95vh] flex flex-col">
         {/* Header - Fixed */}
         <div
           className="relative px-6 py-8 text-white flex-shrink-0"
@@ -143,7 +176,19 @@ export default function GreenHomeLoanForm({
         </div>
 
         {/* Form - Scrollable */}
-        <div className="md:px-20 px-8 py-20 overflow-y-auto flex-1">
+        <div 
+          className="md:px-20 px-8 py-20 overflow-y-auto flex-1 overscroll-contain"
+          style={{ 
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }}
+        >
+          <style jsx>{`
+            div::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
           <form
             onSubmit={handleSubmit(handleSubmitForm)}
             className="space-y-6"

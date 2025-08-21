@@ -48,10 +48,11 @@
 }
 
 .logo img {
-  /* height: 45px; */
+  height: 45px;
   max-width: 234px;
   width: 100%;
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .logo span {

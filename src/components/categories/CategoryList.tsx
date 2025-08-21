@@ -114,8 +114,8 @@ const CategoryList = () => {
             return(
           <Link
           key={index}
-          href={`/products?scid=${category?._id}`}
-            // href={`/vendors/${vendor.businessInfo?.slug}`}
+          href={`/products/${category?.seoSlug}?scid=${category?._id}`}
+            // href={`/brands/${vendor.businessInfo?.slug}`}
             // key={vendor.businessInfo?.slug}
           >
             <div className="border rounded-md flex flex-col items-center justify-center  w-full  cursor-pointer hover:bg-slate-100 transform transition-transform duration-300 hover:scale-105">

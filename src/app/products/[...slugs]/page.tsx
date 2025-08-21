@@ -94,7 +94,37 @@ function capitalizeFirstLetter(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
-export default function Page({
+async function getH1Tag(params: { slugs?: string[] }, searchParams: { [key: string]: string | string[] | undefined }) {
+  const ccid = searchParams.ccid;
+  const scid = searchParams.scid;
+  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+  if (!ccid && !scid) {
+    return 'Featured Sustainable Products';
+  }
+  
+  try {
+    if (scid && typeof scid === 'string') {
+      const res = await fetch(`${baseURL}/subcategories/getSubcategoryByIdPublic/${scid}`);
+      if (res.ok) {
+        const data = await res.json();
+        return data?.h1Tag || 'Featured Sustainable Products';
+      }
+    } else if (ccid && typeof ccid === 'string') {
+      const res = await fetch(`${baseURL}/childCategories/getChildCategoryByIdPublic/${ccid}`);
+      if (res.ok) {
+        const data = await res.json();
+        return data?.h1Tag || 'Featured Sustainable Products';
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching h1tag:', error);
+  }
+  
+  return 'Featured Sustainable Products';
+}
+
+export default async function Page({
   params,
   searchParams
 }: {
@@ -117,18 +147,20 @@ export default function Page({
     });
   }
 
+  // Fetch h1tag from API
+  const h1tag = await getH1Tag(params, searchParams);
+
+  console.log(h1tag, "h1tag");
   // Do NOT add ccid or scid as breadcrumbs
 
   return (
     <div className="bg-white">
       {/* <MetaTitleH1 params={params} searchParams={searchParams} /> */}
-      <BannerSection
-        link1={{ name: "Home", href: "/" }}
-        link2={{ name: "Featured Sustainable Products", href: "/products" }}
-      />
-
       {/* <BreadCrumb breadcrumbs={breadcrumbs} /> */}
-      <ProductsList />
+      <ProductsList 
+        initialH1Tag={h1tag}
+        searchParams={searchParams}
+      />
     </div>
   );
 }

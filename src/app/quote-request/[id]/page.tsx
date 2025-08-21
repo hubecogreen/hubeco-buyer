@@ -354,8 +354,8 @@ const QuoteDetails = ({ id }: any) => {
         </div>
 
         {/* Product Details */}
-        <div className="flex gap-5 md:flex-nowrap flex-wrap">
-          <div className="w-full md:w-4/5 shadow-lg">
+        <div className="flex gap-5 lg:flex-nowrap flex-wrap">
+          <div className="w-full lg:w-4/5 shadow-lg">
             <div className="bg-gray-100 rounded-md mb-8 h-full">
               <div className="h-[10%]">
                 <h2 className="text-lg font-medium py-3 pl-4 mb-2 sm:gap-0 gap-2">
@@ -489,7 +489,7 @@ const QuoteDetails = ({ id }: any) => {
             </div>
           </div>
 
-          <div className="w-full md:w-2/5">
+          <div className="w-full md:mt-24 lg:mt-0 lg:w-2/5">
             <ChatBox
               // canChat={IfAtLeastOnePaymentDone(initialState?.paymentsSchedule)}
               canChat={true}

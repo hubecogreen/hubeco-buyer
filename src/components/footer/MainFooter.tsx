@@ -238,7 +238,7 @@ const Footer = () => {
               />
               <CustomButton
                 title={`${
-                  showVendorLogin ? "Vendor Login" : "Become a Vendor"
+                  showVendorLogin ? "Vendor Login" : "Vendor Connect"
                 }`}
                 onPress={() => onClickVendor()}
                 className="ml-3 bg-secondary hover:cursor-pointer  text-white h-12 md:h-12 md:w-48  w-40 md:text-md text-sm  hover:bg-primary"
@@ -269,7 +269,7 @@ const Footer = () => {
               </li> */}
               <li className="text-fontGray py-xs">
                 <Link
-                  href="/vendors"
+                  href="/brands"
                   className="text-gray-600 hover:text-blue-700 text-sm font-light cursor-pointer"
                 >
                   Brands
@@ -346,23 +346,10 @@ const Footer = () => {
                   FAQ&#39;s
                 </Link>
               </li>
-              <li className="text-fontGray py-xs cursor-default">
-                <Link href="#0" className="text-fontGray  text-sm cursor-default ">
-                  Communication<br></br>
-                  <span className="flex justify-start text-fontGray items-center cursor-default"> 
-                    Powered by MSG91
-                    {/* <Image width={50} height={15}
-                      onError={e => {
-                        e.currentTarget.src = '/images/product-placeholder.webp'
-                      }}
-                      loading="lazy"
-                      src={"/images/msg91.svg"} className="ml-1 w-[50px] mt-[-5px] h-[15px]" alt={'MSG91'} /> */}
-                      </span>
-                </Link>
-              </li>
+            
             </ul>
           </div>
-          <div className={"w-full md:w-1/5 md:py-0 py-5"}>
+          <div className={"w-full md:w-1/5 lg:w-1/5 md:py-0 py-5"}>
             <h4 className="text-black text-xl mb-7">Contact Us</h4>
             <p className="text-fontGray text-sm font-light pt-2 text-justify">
               Have a question or need to get in touch? Leave us a message and we
@@ -408,7 +395,7 @@ const Footer = () => {
                   href="https://maps.app.goo.gl/UbAKuXkfXee5TUn79"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-3 text-black text-xs font-normal whitespace-nowrap"
+                  className="ml-3 text-black text-xs font-normal"
                 >
                   Hubeco Green Ventures Pvt Ltd<br></br>
                   Awfis Space Solutions Ltd, NSL Icon<br></br>

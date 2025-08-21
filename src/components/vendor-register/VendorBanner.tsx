@@ -67,7 +67,7 @@ const ImageSlider = () => {
                 construction.
               </p>
               <CustomButton
-                title={"Become a Vendor"}
+                title={"Vendor Connect"}
                 className="bg-secondary mt-4 px-2 md:px-4 py-2 h-12 md:h-12 md:py-3 w-36 md:w-40 text-white hover:bg-primary"
                 customStyles={{ width: "200px", height: "40px" }}
                 rightIcon={<GoArrowRight />}

@@ -12,6 +12,7 @@ import SearchInput from "../sharedComponents/searchInput";
 import EmptyProducts from "./EmptyProducts";
 import { Skeleton } from "../ui/skeleton";
 import { usePathname, useSearchParams } from "next/navigation";
+import BannerSection from "../sharedComponents/BannerSection";
 import {
   Select,
   SelectContent,
@@ -27,6 +28,8 @@ interface Props {
   childCatSlug?: string;
   ccid?: string | string[];
   scid?: string | string[];
+  initialH1Tag?: string;
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 const ProductsList: React.FC<Props> = ({
@@ -35,6 +38,8 @@ const ProductsList: React.FC<Props> = ({
   childCatSlug,
   ccid,
   scid,
+  initialH1Tag,
+  searchParams: pageSearchParams,
 }) => {
   const searchParams = useSearchParams();
   const buyerInfo = sessionStorage.getItem("buyerUserInfo") as any;
@@ -48,7 +53,7 @@ const ProductsList: React.FC<Props> = ({
   const [limit, setLimit] = useState(30);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [gridLoading, setGridLoading] = useState(true);
-  const [h1Tag, setH1Tag] = useState<string>("Sustainable Products");
+  const [h1Tag, setH1Tag] = useState<string>("Featured Sustainable Products");
 
   // Filter States
   const [planType, setPlanType] = useState<string>(prefferedPlan || "");
@@ -73,16 +78,36 @@ const ProductsList: React.FC<Props> = ({
   const { callApi } = useApi();
   const pathname = usePathname();
 
+  // Update h1tag when searchParams change
+  useEffect(() => {
+    const currentCcid = searchParams.get('ccid');
+    const currentScid = searchParams.get('scid');
+    
+    // If no category parameters are present, reset to default
+    if (!currentCcid && !currentScid) {
+      setH1Tag('Featured Sustainable Products');
+      return;
+    }
+    
+    // If we have parameters, fetch the appropriate h1tag
+    fetchH1Tag();
+  }, [searchParams]);
+
   // Function to fetch H1 tag from API
   const fetchH1Tag = async () => {
     const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-    
+    const currentCcid = searchParams.get('ccid');
+    const currentScid = searchParams.get('scid');
+
     try {
-      if (childCatId) {
+      if (currentCcid) {
         // Fetch from child category
-        const res = await fetch(`${baseURL}/childCategories/getChildCategoryByIdPublic/${childCatId}`, {
-          cache: 'no-store',
-        });
+        const res = await fetch(
+          `${baseURL}/childCategories/getChildCategoryByIdPublic/${currentCcid}`,
+          {
+            cache: "no-store",
+          }
+        );
         if (res.ok) {
           const data = await res.json();
           if (data?.h1Tag) {
@@ -90,11 +115,14 @@ const ProductsList: React.FC<Props> = ({
             return;
           }
         }
-      } else if (subCatId) {
+      } else if (currentScid) {
         // Fetch from subcategory
-        const res = await fetch(`${baseURL}/subcategories/getSubcategoryByIdPublic/${subCatId}`, {
-          cache: 'no-store',
-        });
+        const res = await fetch(
+          `${baseURL}/subcategories/getSubcategoryByIdPublic/${currentScid}`,
+          {
+            cache: "no-store",
+          }
+        );
         if (res.ok) {
           const data = await res.json();
           if (data?.h1Tag) {
@@ -103,12 +131,12 @@ const ProductsList: React.FC<Props> = ({
           }
         }
       }
-      
-      // If no H1 tag found, keep default "Sustainable Products"
-      setH1Tag("Sustainable Products");
+
+      // If no H1 tag found, use initialH1Tag or default
+      setH1Tag('Featured Sustainable Products');
     } catch (err) {
       console.error("Error fetching h1Tag:", err);
-      setH1Tag("Sustainable Products");
+      setH1Tag('Featured Sustainable Products');
     }
   };
 
@@ -121,10 +149,7 @@ const ProductsList: React.FC<Props> = ({
     if (ccid) setChildCatId(typeof ccid === "string" ? ccid : ccid[0]);
   }, [catSlug, subCatSlug, childCatSlug, ccid, scid]);
 
-  // Fetch H1 tag when category IDs change
-  useEffect(() => {
-    fetchH1Tag();
-  }, [catId, subCatId, childCatId]);
+
 
   // Reset options on path change
   useEffect(() => {
@@ -290,7 +315,12 @@ const ProductsList: React.FC<Props> = ({
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 px-4 md:px-24 md:pt-16 pt-6">
+    <>
+      <BannerSection
+        link1={{ name: "Home", href: "/" }}
+        link2={{ name: h1Tag, href: "/products" }}
+      />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 px-4 md:px-24 md:pt-16 pt-6">
       {/* Desktop Filter Sidebar */}
       <div className="hidden lg:block col-span-3">
         <FiltersSidebar
@@ -328,7 +358,7 @@ const ProductsList: React.FC<Props> = ({
       {/* Main Content */}
       <div className="col-span-12 lg:col-span-9">
         <div className="block md:flex md:justify-between mb-8 px-4 items-center">
-          <h1 className="text-black font-bold text-2xl md:text-3xl">
+          <h1 className="text-black font-bold text-2xl md:text-3xl mt-[20px] md:mt-0">
             {h1Tag}
           </h1>
           <div className="flex justify-end items-center">
@@ -388,6 +418,7 @@ const ProductsList: React.FC<Props> = ({
         </div>
       </div>
     </div>
+    </>
   );
 };
 

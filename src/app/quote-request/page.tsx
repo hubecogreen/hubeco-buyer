@@ -206,7 +206,7 @@ const QuoteRequest = () => {
       />
 
       <div className="container mx-auto p-5 md:p-10">
-        <div className="flex flex-col md:flex-row gap-5 md:gap-10">
+        <div className="flex flex-col lg:flex-row gap-5 md:gap-10">
           <Sidebar
             activeSection={activeSection}
             handleSectionClick={setActiveSection}

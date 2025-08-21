@@ -1,0 +1,61 @@
+"use client";
+import { useState } from "react";
+import { GoArrowRight } from "react-icons/go";
+import Image from "next/image";
+import GreenHomeLoanForm from "./GreenHomeLoanForm"; // import the form
+
+export default function GreenHomeLoanSection() {
+  const [isHomeLoanFormOpen, setIsHomeLoanFormOpen] = useState(false);
+
+  return (
+    <div className="w-full bg-white py-16">
+      <div className="max-w-[1450px] mx-auto px-6 lg:px-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Image */}
+          <div className="relative">
+            <div className="relative h-96 w-full rounded-2xl overflow-hidden">
+              <Image
+                src="/images/greenFinance/loan_section.webp"
+                alt="Modern eco-conscious home with large windows"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Right Content */}
+          <div className="space-y-6">
+            <h3 className="text-3xl sm:text-3xl font-extrabold text-black leading-tight tracking-tight leading-10">
+              Apply for Green Home Loan Turning Eco-Conscious Homes into Reality
+              with Smarter, Greener Loans
+            </h3>
+
+            <p className="text-[18px] text-gray-600 leading-relaxed font-normal">
+              Buying a home is one of the most important decisions you will
+              make. At Hubeco, we make it easier to choose a home that’s
+              healthier, energy-efficient, and future ready with financing that
+              rewards your commitment to sustainability.
+            </p>
+
+            <div className="pt-4">
+              <button
+                onClick={() => setIsHomeLoanFormOpen(true)}
+                className="inline-flex items-center gap-3 border-2 border-[#B90647] text-[#B90647] px-7 py-3 rounded-lg text-[18px] font-semibold hover:bg-[#cc0f5c] hover:text-white transition-all duration-300"
+              >
+                Apply for Green Home Loan
+                <GoArrowRight className="text-xl" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Popup Form */}
+      <GreenHomeLoanForm
+        isOpen={isHomeLoanFormOpen}
+        onClose={() => setIsHomeLoanFormOpen(false)}
+      />
+    </div>
+  );
+}

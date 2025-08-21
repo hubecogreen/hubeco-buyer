@@ -274,7 +274,6 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
     setHoveredSubCategoryId('');
   };
 
-  console.log(selectedCategory, "this is selectedCategory");
   const handleClick = (menuItem?: any) => {
     // if (menuItem) {
     //   router.push(`/products/${menuItem.seoSlug}?ccid=${menuItem._id}`);

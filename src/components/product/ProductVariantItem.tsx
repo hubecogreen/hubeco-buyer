@@ -18,11 +18,12 @@ const ProductVariantItem = ({
   setQuantityForQuote,
   removeSelectedProductForQuote,
   isSingle,
+  quantity= elem.minBuyQty
 }: any) => {
   const [tooltipMsg, setTooltipMsg] = useState<string>();
   const [showQtyTip, setShowQtyTip] = useState<boolean>(false);
   const [quantityForQuote, setQuantityForQuoteSingle] = useState(
-    elem.minBuyQty
+    quantity
   );
   const [timeoutID, setTimeoutID] = useState<NodeJS.Timeout>();
 

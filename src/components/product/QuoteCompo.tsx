@@ -40,6 +40,7 @@ interface Props {
   setProductSelectedForQuote: any;
   combinations: any;
   productData: any;
+  quantity?:any;
 }
 
 const assetPath = process.env.NEXT_PUBLIC_ASSET_URL;
@@ -56,6 +57,7 @@ export default function QuoteCompo({
   setProductSelectedForQuote,
   combinations,
   productData,
+  quantity
 }: Props) {
   const [newSelectedVariant, setNewSelectedVariant] = useState<any>("");
   const [searchTerms, setSearchTerms] = useState<{ [key: string]: string }>({});
@@ -340,6 +342,7 @@ export default function QuoteCompo({
                 removeSelectedProductForQuote={removeSelectedProductForQuote}
                 setTooltipMsg={setTooltipMsg}
                 tooltipMsg={tooltipMsg}
+                quantity={quantity}
                 setShowQtyTip={setShowQtyTip}
                 showQtyTip={showQtyTip}
                 setMinQuantityForQuote={setMinQuantityForQuote}
@@ -355,6 +358,7 @@ export default function QuoteCompo({
                         elem={elem}
                         index={index}
                         assetPath={assetPath}
+                        quantity={quantity}
                         quantityForQuote={quantityForQuote}
                         setQuantityForQuote={setQuantityForQuote}
                         removeSelectedProductForQuote={

@@ -608,7 +608,7 @@ const Header: React.FC<HeaderProps> = () => {
               className={`hidden md:flex items-center ${
                 token
                   ? "space-x-8 md:space-x-10 lg:space-x-14"
-                  : "space-x-6 md:space-x-8 lg:space-x-10"
+                  : "space-x-6 md:space-x-8 lg:space-x-8"
               }`}
             >
               <Link
@@ -830,7 +830,7 @@ const Header: React.FC<HeaderProps> = () => {
                     showVendorLogin ? "Vendor Login" : "Vendor Connect"
                   }`}
                   className="text-base bg-secondary px-4 lg:px-2 hover:bg-primary h-12 mr-4 hidden lg:flex text-white font-medium"
-                  customStyles={{}}
+                  customStyles={{ marginRight:'30px'}}
                   rightIcon={<GoArrowRight />}
                   hoverBgColor=""
                   onPress={() => onClickVendor()}
@@ -879,7 +879,7 @@ const Header: React.FC<HeaderProps> = () => {
             {token && <div className="relative w-10 md:w-12 lg:w-18"></div>}
 
             {/* Tablet Hamburger Menu - Show after vendor image */}
-            <div className="hidden md:flex lg:hidden">
+            <div className="hidden md:flex lg:hidden" style={{marginRight:'18px'}}>
               <VscMenu
                 className="text-black cursor-pointer font-light text-gray-800"
                 size={22}

@@ -2587,6 +2587,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
             <QuoteCompo
               isOpen={isOpen}
               setIsOpen={setIsOpen}
+              quantity={quantity}
               totalProduct={totalProduct}
               productSelectedForQuote={productSelectedForQuote}
               setQuantityForQuote={setQuantityForQuote}

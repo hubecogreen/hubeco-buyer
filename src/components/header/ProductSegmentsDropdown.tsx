@@ -270,8 +270,8 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
     setHoveredSubCategoryId(subCategoryId);
   };
 
-    const handleSubCategoryLeave = (subCategoryId: string) => {
-    setHoveredSubCategoryId('');
+  const handleSubCategoryLeave = (subCategoryId: string) => {
+    setHoveredSubCategoryId("");
   };
 
   const handleClick = (menuItem?: any) => {
@@ -390,7 +390,8 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                               : mainCategories && mainCategories.length > 0
                               ? mainCategories[0]?.subCategories
                               : []
-                            )?.length || 0) / (window.innerWidth >= 1024 ? 1.2 : 1)
+                            )?.length || 0) /
+                              (window.innerWidth >= 1024 ? 1.2 : 1)
                           )
                         )
                         .map((subCat, index) => (
@@ -441,10 +442,19 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                                   <ChevronRight
                                     size={16}
                                     className={`transition-transform duration-200 ${
-                                      openedCategoryId === subCat._id || hoveredSubCategoryId === subCat._id
+                                      openedCategoryId === subCat._id ||
+                                      hoveredSubCategoryId === subCat._id
                                         ? "rotate-90"
                                         : ""
                                     }`}
+                                    onClick={() => {
+                                      if (
+                                        subCat.childCategories &&
+                                        subCat.childCategories.length > 0
+                                      ) {
+                                        handleSubCategoryHover(subCat._id);
+                                      }
+                                    }}
                                   />
                                 )}
                             </div>
@@ -549,7 +559,8 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                                   <ChevronRight
                                     size={16}
                                     className={`transition-transform duration-200 ${
-                                      openedCategoryId === subCat._id || hoveredSubCategoryId === subCat._id
+                                      openedCategoryId === subCat._id ||
+                                      hoveredSubCategoryId === subCat._id
                                         ? "rotate-90"
                                         : ""
                                     }`}
@@ -772,8 +783,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             ? "text-[#B90647] font-semibold"
                             : "text-white"
                         }`}
-                        onClick={(e) => {
-                        }}
+                        onClick={(e) => {}}
                         onMouseEnter={() => {
                           if (
                             subCat.childCategories &&
@@ -801,7 +811,8 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                               <ChevronRight
                                 size={16}
                                 className={`transition-transform duration-200 ${
-                                  openedCategoryId === subCat._id || hoveredSubCategoryId === subCat._id
+                                  openedCategoryId === subCat._id ||
+                                  hoveredSubCategoryId === subCat._id
                                     ? "rotate-90"
                                     : ""
                                 }`}

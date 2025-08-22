@@ -733,7 +733,7 @@ const Header: React.FC<HeaderProps> = () => {
               {!isSearchFocused ? (
                 <div ref={searchRef} className="relative">
                   <button
-                    className="w-10 h-10 md:w-10 md:h-10 lg:w-12 lg:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors md:mr-1 lg:mr-4 md:ml-0 lg:ml-2"
+                    className={`w-10 h-10 md:w-10 md:h-10 lg:w-12 lg:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors md:mr-1 ${token? "lg:mr-0" : "lg:mr-4"}   md:ml-0 lg:ml-2`}
                     onClick={handleSearchFocus}
                   >
                     <IoSearchOutline className="text-gray-600" size={18} />

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Empower Sustainability with Green Financing | Hubeco",
   description:
     "Explore green financing loan options with Hubeco. Access sustainable funding solutions that support eco-friendly projects and smart investments.",
+  alternates: {
+    canonical: "https://hubeco.market/green-financing",
+  },
 };
 
 export default function GreenFinancePage() {

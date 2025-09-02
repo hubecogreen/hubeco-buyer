@@ -461,7 +461,7 @@ const QuoteDetails = ({ id }: any) => {
                           <Button
                             onClick={() =>
                               handleDownload(
-                                `${assetUrl}/${initialState?.purchaseOrder}`, `Hubeco PO_${initialState?.purchaseOrderNumber}`
+                                `${assetUrl}/${initialState?.purchaseOrder}`,  buyer?.buyerInfo?.buyerType === 'B2B' ? `Purchase Order ${initialState?.purchaseOrderNumber}`: `Order ${initialState?.purchaseOrderNumber}`
                               )
                             }
                             variant={"outline"}

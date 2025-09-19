@@ -32,11 +32,11 @@ interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setQuantityForQuote: any;
   setProductSelectedForQuote: any;
-  address:any;
-  addressId:any;
-  pincode:any;
-  products:any;
-  vendorId:any
+  address: any;
+  addressId: any;
+  pincode: any;
+  products: any;
+  vendorId: any;
 }
 
 export default function QuoteCompo({
@@ -48,8 +48,7 @@ export default function QuoteCompo({
   addressId,
   pincode,
   products,
-  vendorId
-
+  vendorId,
 }: Props) {
   const [newSelectedVariant, setNewSelectedVariant] = useState<any>("");
   const [clickedOnSubmitQuote, setClickedOnSubmitQuote] = useState(false);
@@ -68,14 +67,8 @@ export default function QuoteCompo({
   const { callApi } = useApi();
   const [quoteLoading, setQuoteLoading] = useState(false);
   const router = useRouter();
- 
 
-
-
-
-
-
-  async function handleQuoteSubmit() { 
+  async function handleQuoteSubmit() {
     if (checkErrorsForQuote("mainSubmit")) {
       return;
     }
@@ -83,20 +76,18 @@ export default function QuoteCompo({
       notesError.length > 1 ||
       submissionInstructionError.length > 1 ||
       addressError.length > 1
-    ) { 
-   
+    ) {
       return;
     }
 
     setClickedOnSubmitQuote(true);
-   
+
     setQuoteLoading(true);
-    
 
     const payload = {
       products: products,
       vendorId: vendorId,
-      addressId:addressId,
+      addressId: addressId,
       address: address,
       pincode: Number(pincode),
       submissionDate: quoteDueDate,
@@ -121,14 +112,10 @@ export default function QuoteCompo({
     }
   }
 
-
-
-
   function checkErrorsForQuote(call: string) {
     let status = false;
 
     if (call == "mainSubmit") {
-      
       if (quoteDueDate == "" || quoteDueDate == null) {
         setDueDateError("Please select a due date");
         status = true;
@@ -150,8 +137,6 @@ export default function QuoteCompo({
       //   setNotesError("");
       // }
     } else if (call == "fromEffect" && clickedOnSubmitQuote) {
-      
-
       if (quoteDueDate == "" || quoteDueDate == null) {
         setDueDateError("Please select a due date");
         status = true;
@@ -173,7 +158,6 @@ export default function QuoteCompo({
       //   setNotesError("");
       // }
     }
-
 
     return status;
   }
@@ -207,8 +191,7 @@ export default function QuoteCompo({
     setIsOpen(false);
     //@ts-ignore
     router.push(window.location.pathname, undefined, { shallow: true });
-   }
-
+  }
 
   return (
     <>
@@ -218,16 +201,15 @@ export default function QuoteCompo({
           handleClose();
         }}
       >
-        <DialogContent className={`max-w-lg h-fit pb-12 ${addOpen && "hidden"}`}>
+        <DialogContent
+          className={`max-w-lg h-fit pb-12 ${addOpen && "hidden"}`}
+        >
           <DialogHeader>
             <DialogTitle className="text-xl font-bold">
               Request Quote
             </DialogTitle>
           </DialogHeader>
           <div className="h-fit scrollbar overflow-y-auto mb-7 pr-2">
-           
-           
-
             {/* Date Picker */}
             <div className="mb-1">
               <label className="block font-semibold text-sm mb-1">
@@ -258,11 +240,7 @@ export default function QuoteCompo({
                 placeholder="Submission Instructions"
                 className="border w-full rounded px-3 py-2 focus:outline-none"
                 onChange={(e) => {
-                  if (e.target.value.length > 100) {
-                    setSubmissionInstructionError(
-                      "Submission instruction should be less than 100 characters"
-                    );
-                  } else if (e.target.value.length < 3) {
+                  if (e.target.value.length < 3) {
                     setSubmissionInstructionError(
                       "Submission instruction should be at least 3 characters"
                     );

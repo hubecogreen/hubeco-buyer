@@ -40,7 +40,7 @@ interface Props {
   setProductSelectedForQuote: any;
   combinations: any;
   productData: any;
-  quantity?:any;
+  quantity?: any;
 }
 
 const assetPath = process.env.NEXT_PUBLIC_ASSET_URL;
@@ -57,7 +57,7 @@ export default function QuoteCompo({
   setProductSelectedForQuote,
   combinations,
   productData,
-  quantity
+  quantity,
 }: Props) {
   const [newSelectedVariant, setNewSelectedVariant] = useState<any>("");
   const [searchTerms, setSearchTerms] = useState<{ [key: string]: string }>({});
@@ -120,7 +120,6 @@ export default function QuoteCompo({
       submissionInstructionError.length > 1 ||
       addressError.length > 1
     ) {
-
       return;
     }
 
@@ -156,9 +155,8 @@ export default function QuoteCompo({
         toast.error(res?.errorData?.response?.data?.message);
       } else {
         toast.error("failed to submit quote request");
-
       }
-      // console.log(res,"Maharashtra"); 
+      // console.log(res,"Maharashtra");
     } catch (err: any) {
       toast.error("failed to submit quote request");
     } finally {
@@ -315,7 +313,6 @@ export default function QuoteCompo({
     router.push(window.location.pathname, undefined, { shallow: true });
   }
 
-
   return (
     <>
       <Dialog
@@ -324,7 +321,9 @@ export default function QuoteCompo({
           handleClose();
         }}
       >
-        <DialogContent className={`max-w-lg h-full pb-12 ${addOpen && "hidden"}`}>
+        <DialogContent
+          className={`max-w-lg h-full pb-12 ${addOpen && "hidden"}`}
+        >
           <DialogHeader>
             <DialogTitle className="text-xl font-bold">
               Request Quote
@@ -410,7 +409,7 @@ export default function QuoteCompo({
                         type="radio"
                         id={address.id}
                         name="address"
-                        className="flex [accent-color:#B90647]"// Tailwind doesn't support accentColor directly
+                        className="flex [accent-color:#B90647]" // Tailwind doesn't support accentColor directly
                         defaultChecked={address.id === selectedAddress.id}
                         onChange={(e) => setSelectedAddress(address)}
                       />
@@ -429,7 +428,9 @@ export default function QuoteCompo({
                   );
                 })
               ) : (
-                <div className="my-3 w-full text-center justify-center items-center text-[#B90647]" >No address found</div>
+                <div className="my-3 w-full text-center justify-center items-center text-[#B90647]">
+                  No address found
+                </div>
               )}
               <span className="text-red text-xs">{addressError}</span>
             </div>
@@ -464,11 +465,7 @@ export default function QuoteCompo({
                 placeholder="Submission Instructions"
                 className="border w-full rounded px-3 py-2 focus:outline-none"
                 onChange={(e) => {
-                  if (e.target.value.length > 250) {
-                    setSubmissionInstructionError(
-                      "Submission instruction should be less than 250 characters"
-                    );
-                  } else if (e.target.value.length < 3) {
+                  if (e.target.value.length < 3) {
                     setSubmissionInstructionError(
                       "Submission instruction should be at least 3 characters"
                     );
@@ -484,9 +481,7 @@ export default function QuoteCompo({
               </span>
             </div>
             <div className="mb-1">
-              <label className="block font-semibold text-sm mb-1">
-                Notes
-              </label>
+              <label className="block font-semibold text-sm mb-1">Notes</label>
               <textarea
                 placeholder="Type here"
                 className="border w-full rounded px-3 py-2 focus:outline-none"

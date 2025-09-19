@@ -34,7 +34,7 @@ const ViewMore: React.FC<ViewMoreProps> = ({ text, length = 25, className, maxHe
               overflowY="auto"
               className="scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
               whiteSpace="pre-wrap"
-              wordBreak="break-words"
+              wordBreak="break-word"
             >
               {text}
             </PopoverBody>

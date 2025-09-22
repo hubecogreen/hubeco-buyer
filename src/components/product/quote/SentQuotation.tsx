@@ -218,7 +218,7 @@ export default function SentQuotation({
                         // window.open(`${assetURL}/${order?.buyerInvoiceLink}`, "_blank")
                         handleDownload(
                           `${assetURL}/${initialState?.quoteDetailsInvoice?.pdfUrl}`,
-                          `Hubeco Invoice_${quote?.quotationId}`
+                          `Quote_Request_${quote?.quotationId}`
                         )
                       }
                       variant={"outline"}

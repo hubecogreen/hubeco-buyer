@@ -187,7 +187,7 @@ function generateDynamicUrls(data) {
           if (subCategory && subCategory.seoSlug) {
             // Subcategory level URL with scid parameter
             dynamicUrls.push({
-              loc: `${PROD_URL}/products/${subCategory.seoSlug}?scid=${subCategory._id}`,
+              loc: `${PROD_URL}/products/${category.seoSlug}/${subCategory.seoSlug}?scid=${subCategory._id}`,
               lastmod: new Date().toISOString(),
               changefreq: 'weekly',
               priority: '0.8',

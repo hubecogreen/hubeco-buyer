@@ -974,7 +974,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
         link3={{
           name: `${totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0 ? totalProduct.subCategoryId[0]?.name || "" : ""}`,
           href: totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0 
-            ? `/products/${totalProduct.subCategoryId[0]?.seoSlug || ""}?scid=${totalProduct.subCategoryId[0]?._id || ""}`
+            ? `/products/${totalProduct?.categoryId?.seoSlug}/${totalProduct.subCategoryId[0]?.seoSlug || ""}?scid=${totalProduct.subCategoryId[0]?._id || ""}`
             : "/products",
         }}
         link4={{

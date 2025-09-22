@@ -5,9 +5,12 @@ import GreenHomeLoanSection from "@/components/greenFinance/greenHome-loan";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Green Financing | Hubeco",
+  title: "Empower Sustainability with Green Financing | Hubeco",
   description:
-    "Empowering Sustainable Construction with accessible Green Capital",
+    "Explore green financing loan options with Hubeco. Access sustainable funding solutions that support eco-friendly projects and smart investments.",
+  alternates: {
+    canonical: "https://hubeco.market/green-financing",
+  },
 };
 
 export default function GreenFinancePage() {

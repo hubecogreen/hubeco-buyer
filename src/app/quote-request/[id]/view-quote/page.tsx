@@ -424,9 +424,11 @@ export default function QuoteDetailsDialog() {
                         <Text className="text-gray-600 text-sm font-medium mb-1">
                           Notes
                         </Text>
-                        <Text className="text-gray-900">
-                          {selectedView?.products[index]?.notes}
-                        </Text>
+                        <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+                          <Text className="text-gray-900 whitespace-pre-wrap break-words text-wrap">
+                            {selectedView?.products[index]?.notes}
+                          </Text>
+                        </div>
                       </div>
                     )}
 
@@ -435,9 +437,11 @@ export default function QuoteDetailsDialog() {
                         <Text className="text-gray-600 text-sm font-medium mb-1">
                           Warranty
                         </Text>
-                        <Text className="text-gray-900">
-                          {selectedView?.products[index]?.warranty}
-                        </Text>
+                        <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+                          <Text className="text-gray-900 whitespace-pre-wrap break-words text-wrap">
+                            {selectedView?.products[index]?.warranty}
+                          </Text>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -517,27 +521,33 @@ export default function QuoteDetailsDialog() {
               <h3 className=" text-gray-600 text-sm font-medium mb-1">
                 Delivery Terms
               </h3>
-              <p className="text-gray-700 whitespace-pre-wrap break-words text-wrap line-clamp-6">
-                {selectedView?.deliveryTerms || "-"}
-              </p>
+              <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+                <p className="text-gray-700 whitespace-pre-wrap break-words text-wrap">
+                  {selectedView?.deliveryTerms || "-"}
+                </p>
+              </div>
             </div>
 
             <div className="  rounded-lg bg-white  w-full  p-6">
               <h3 className=" text-gray-600 text-sm font-medium mb-1">
                 Payment Terms
               </h3>
-              <p className="text-gray-700  whitespace-pre-wrap break-words text-wrap line-clamp-6">
-                {selectedView?.paymentTerms || "-"}
-              </p>
+              <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+                <p className="text-gray-700  whitespace-pre-wrap break-words text-wrap">
+                  {selectedView?.paymentTerms || "-"}
+                </p>
+              </div>
             </div>
 
             <div className="  rounded-lg bg-white p-6  w-full  md:col-span-2">
               <h3 className=" text-gray-600 text-sm font-medium mb-1">
                 Other Terms and Conditions
               </h3>
-              <p className="text-gray-700 whitespace-pre-wrap break-words text-wrap line-clamp-6">
-                {selectedView?.otherTerms || "-"}
-              </p>
+              <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+                <p className="text-gray-700 whitespace-pre-wrap break-words text-wrap">
+                  {selectedView?.otherTerms || "-"}
+                </p>
+              </div>
             </div>
           </div>
         </div>

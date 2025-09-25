@@ -177,16 +177,16 @@ export default function SentQuotation({
               <th className="p-4 whitespace-nowrap text-left">Quotation</th>
               <th className="p-4 whitespace-nowrap text-left">Unit Price</th>
               <th className="p-4 whitespace-nowrap text-left">
-                Offered Quantity
+                Qty
               </th>
               <th className="p-4 whitespace-nowrap text-left">
-                Tax Percentage
+                Tax
               </th>
               <th className="p-4 whitespace-nowrap text-left">
                 Delivery Terms
               </th>
               <th className="p-4 whitespace-nowrap text-left">
-                Other Terms and Conditions
+                Other Terms
               </th>
               <th className="p-4 whitespace-nowrap text-left">Grand Total</th>
               <th className="p-4 whitespace-nowrap text-left">Status</th>
@@ -218,7 +218,7 @@ export default function SentQuotation({
                         // window.open(`${assetURL}/${order?.buyerInvoiceLink}`, "_blank")
                         handleDownload(
                           `${assetURL}/${initialState?.quoteDetailsInvoice?.pdfUrl}`,
-                          `Hubeco Invoice_${quote?.quotationId}`
+                          `Hubeco_${quote?.quotationId}`
                         )
                       }
                       variant={"outline"}

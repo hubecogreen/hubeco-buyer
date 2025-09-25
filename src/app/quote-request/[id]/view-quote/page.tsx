@@ -109,15 +109,19 @@ export default function QuoteDetailsDialog() {
   }
 
   function getTheVals() {
+    if (!selectedView?.products || !initialState.products) {
+      return [];
+    }
+    
     const vals: any[] = [];
-    selectedView?.products.map((product: any, index: number) => {
-      const ids = selectedView?.products.map((p: any) => p.variantId);
-      const stats = initialState.products.filter((p: any) =>
-        ids.includes(p.variantId._id)
-      );
+    const selectedVariantIds = selectedView.products.map((p: any) => p.variantId._id);
+    
+    // Filter products that match the selected variant IDs
+    const matchingProducts = initialState.products.filter((p: any) =>
+      selectedVariantIds.includes(p.variantId._id)
+    );
 
-      vals.push(...stats);
-    });
+    vals.push(...matchingProducts);
     return vals;
   }
 

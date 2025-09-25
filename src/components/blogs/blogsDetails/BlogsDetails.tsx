@@ -240,7 +240,7 @@ const BlogsDetails = ({ id }: any) => {
 
                       <div className="w-full">
                         <Image
-                          src={`${assetURL}${item?.thumbnail}`}
+                    src={`${assetURL}${item.thumbnail.includes('/admin/') ? item.thumbnail : item.thumbnail.replace('admin/', '/admin/')}`}
                           alt={`Thumbnail for ${item?.title}`}
                           width={339.33}
                           height={300}

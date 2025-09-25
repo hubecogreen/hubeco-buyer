@@ -59,14 +59,9 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
 
   // Dynamic rotating placeholders - fetch from API or use defaults
   const [rotatingPlaceholders, setRotatingPlaceholders] = useState([
-    "Search for Bricks...",
-    "Search for Cement...",
-    "Search for Steel...",
-    "Search for Tiles...",
-    "Search for Paint...",
-    "Search for Tools...",
-    "Search for Plumbing...",
-    "Search for Electrical...",
+    "Search for categories...",
+    "Search for products...",
+    "Search for vendors...",
   ]);
 
   // Ref for the dropdown
@@ -131,29 +126,57 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
     }
   };
 
-  // Function to fetch dynamic placeholders
+  // Function to fetch dynamic placeholders from categories
   const getDynamicPlaceholders = async () => {
     try {
       const result = (await callApi(
-        getEndpoint.default.PRODUCTSLIST,
+        getEndpoint.default.PRODUCTS_CATEGORIES,
         "GET"
       )) as any;
-      if (result?.data?.data && result.data.data.length > 0) {
+      if (result?.data && result.data.length > 0) {
         const placeholders: string[] = [];
         
-        // Take first 10 products for placeholders
-        result.data.data.slice(0, 10).forEach((product: any) => {
-          if (product.productName && product.productName !== "N/A") {
-            const truncatedName = product.productName.length > 10 
-              ? product.productName.substring(0, 10) + '...' 
-              : product.productName;
+        // Collect category names (main categories, subcategories, and child categories)
+        result.data.forEach((category: any) => {
+          // Add main category name
+          if (category.name && category.name !== "N/A") {
+            const truncatedName = category.name.length > 20 
+              ? category.name.substring(0, 20) + '...' 
+              : category.name;
             placeholders.push(`Search for ${truncatedName}...`);
+          }
+          
+          // Add subcategory names
+          if (category.subCategories && category.subCategories.length > 0) {
+            category.subCategories.forEach((subCat: any) => {
+              if (subCat.name && subCat.name !== "N/A") {
+                const truncatedName = subCat.name.length > 20 
+                  ? subCat.name.substring(0, 20) + '...' 
+                  : subCat.name;
+                placeholders.push(`Search for ${truncatedName}...`);
+              }
+              
+              // Add child category names
+              if (subCat.childCategories && subCat.childCategories.length > 0) {
+                subCat.childCategories.forEach((childCat: any) => {
+                  if (childCat.name && childCat.name !== "N/A") {
+                    const truncatedName = childCat.name.length > 20 
+                      ? childCat.name.substring(0, 20) + '...' 
+                      : childCat.name;
+                    placeholders.push(`Search for ${truncatedName}...`);
+                  }
+                });
+              }
+            });
           }
         });
         
+        // Remove duplicates and limit to first 8 placeholders to avoid too many
+        const uniquePlaceholders = [...new Set(placeholders)].slice(0, 8);
+        
         // If we got placeholders from API, use them
-        if (placeholders.length > 0) {
-          setRotatingPlaceholders(placeholders);
+        if (uniquePlaceholders.length > 0) {
+          setRotatingPlaceholders(uniquePlaceholders);
         }
       }
     } catch (error) {
@@ -268,9 +291,40 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
               return subCat;
             });
 
+            // Enhance child categories with parent category and subcategory information
+            const enhancedChildCategories = childCategories.map((childCat: any) => {
+              // Find the parent subcategory and its parent category
+              let parentSubCategory = null;
+              let parentCategory = null;
+              
+              for (const cat of categories) {
+                if (cat.subCategories) {
+                  for (const subCat of cat.subCategories) {
+                    if (subCat.childCategories?.some((child: any) => child._id === childCat.id)) {
+                      parentSubCategory = subCat;
+                      parentCategory = cat;
+                      break;
+                    }
+                  }
+                  if (parentSubCategory && parentCategory) break;
+                }
+              }
+              
+              if (parentCategory && parentSubCategory) {
+                return {
+                  ...childCat,
+                  parentCategoryName: parentCategory.name,
+                  parentCategorySlug: parentCategory.seoSlug,
+                  parentSubCategoryName: parentSubCategory.name,
+                  parentSubCategorySlug: parentSubCategory.seoSlug
+                };
+              }
+              return childCat;
+            });
+
             setProducts(products);
             setSubCategories(enhancedSubCategories);
-            setChildCategories(childCategories);
+            setChildCategories(enhancedChildCategories);
             setVendors(vendors);
           } else {
             setNoSearch(true);
@@ -424,9 +478,152 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
             </>
           ) : (
             <>
-              {/* Products Section */}
+              {/* Child Categories Section - Priority 1 */}
+              {childCategories.length > 0 && (
+                <div>
+                  <h3 className="text-md font-semibold p-2 mt-1 text-[#B90647]">
+                    Child Categories
+                  </h3>
+                  {childCategories.map((childCategory, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="px-[10px] py-[10px] group hover:bg-gray-200 cursor-pointer border-b border-[#f4f4f4]"
+                        onClick={() => {
+                          setClickedResult(true);
+                          setIsNavigating(true);
+                          setIsDropdownOpen(false);
+                          setSearchQuery("");
+                          if (onChange) onChange("");
+                          if (onDropdownToggle) onDropdownToggle(false);
+                          
+                          setTimeout(() => {
+                            // Build the full hierarchy URL for child categories
+                            if (childCategory?.parentCategorySlug && childCategory?.parentSubCategorySlug && childCategory?.seoSlug) {
+                              const url = `/products/${childCategory.parentCategorySlug}/${childCategory.parentSubCategorySlug}/${childCategory.seoSlug}?ccid=${childCategory?.id}`;
+                              console.log('Child category URL:', url);
+                              window.location.href = url;
+                            } else {
+                              // Fallback to original structure if hierarchy data is not available
+                              router.refresh();
+                              router.push(`/products/?ccid=${childCategory?.id}`);
+                            }
+                            setIsNavigating(false);
+                          }, 100);
+                        }}
+                      >
+                        <div className="flex justify-start items-center">
+                          {childCategory && childCategory?.image && (
+                            <Image
+                              src={
+                                childCategory && childCategory?.image
+                                  ? (
+                                      assetURL +
+                                      "/" +
+                                      childCategory?.image
+                                    ).includes("//admin")
+                                    ? (
+                                        assetURL +
+                                        "/" +
+                                        childCategory?.image
+                                      ).replace("//admin", "/admin")
+                                    : `${assetURL}/${childCategory?.image}`
+                                  : "/images/product-placeholder.webp"
+                              }
+                              alt={childCategory?.name}
+                              width={30}
+                              height={30}
+                              className="w-[30px] h-[30px] rounded"
+                            />
+                          )}
+                          <div>
+                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
+                              {childCategory?.name}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Sub Categories Section - Priority 2 */}
+              {subCategories.length > 0 && (
+                <div>
+                  <h3 className="text-md font-semibold p-2 mt-1 text-[#B90647]">
+                    Sub Categories
+                  </h3>
+                  {subCategories.map((subCategory, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="px-[10px] py-[10px] group hover:bg-gray-200 cursor-pointer border-b border-[#f4f4f4]"
+                        onClick={() => {
+                          setClickedResult(true);
+                          setIsNavigating(true);
+                          setIsDropdownOpen(false);
+                          setSearchQuery("");
+                          if (onChange) onChange("");
+                          if (onDropdownToggle) onDropdownToggle(false);
+                          
+                          // Use window.location for more reliable navigation
+                          setTimeout(() => {
+                            // For search results, we may not have parent category info
+                            // Use the enhanced URL structure if available, otherwise fallback
+                            if (subCategory?.parentCategorySlug && subCategory?.seoSlug) {
+                              const url = `/products/${subCategory.parentCategorySlug}/${subCategory.seoSlug}?scid=${subCategory?.id}`;
+                              console.log('Enhanced URL:', url);
+                              window.location.href = url;
+                            } else {
+                              // Fallback to original structure for search results
+                              const url = `/products/${subCategory?.seoSlug}?scid=${subCategory?.id}`;
+                              console.log('Fallback URL:', url);
+                              window.location.href = url;
+                            }
+                            setIsNavigating(false);
+                          }, 100);
+                        }}
+                      >
+                        <div className="flex justify-start items-center">
+                          {subCategory && subCategory?.image && (
+                            <Image
+                              src={
+                                subCategory?.image
+                                  ? normalizePath(
+                                      `${assetURL}/${subCategory?.image}`
+                                    )
+                                  : "/images/product-placeholder.webp"
+                              }
+                              alt={subCategory?.name}
+                              width={30}
+                              height={30}
+                              onError={(e) => {
+                                e.currentTarget.src =
+                                  "/images/product-placeholder.webp";
+                              }}
+                              loading="lazy"
+                              className="w-[30px] h-[30px] rounded"
+                            />
+                          )}
+                          <div>
+                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
+                              {subCategory?.name}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Products Section - Priority 3 */}
               {products.length > 0 && (
                 <div>
+                  <h3 className="text-md font-semibold p-2 mt-1 text-[#B90647]">
+                    Products
+                  </h3>
                   {products.map((product: any, index: any) => {
                     return (
                       <div
@@ -505,10 +702,13 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                 </div>
               )}
 
-              {/* Sub Categories Section */}
-              {subCategories.length > 0 && (
+              {/* Main Categories Section - Priority 4 */}
+              {categories.length > 0 && (
                 <div>
-                  {subCategories.map((subCategory, index) => {
+                  <h3 className="text-md font-semibold p-2 mt-1 text-[#B90647]">
+                    Main Categories
+                  </h3>
+                  {categories.map((category, index) => {
                     return (
                       <div
                         key={index}
@@ -521,35 +721,23 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                           if (onChange) onChange("");
                           if (onDropdownToggle) onDropdownToggle(false);
                           
-                          // Use window.location for more reliable navigation
                           setTimeout(() => {
-                            // For search results, we may not have parent category info
-                            // Use the enhanced URL structure if available, otherwise fallback
-                            if (subCategory?.parentCategorySlug && subCategory?.seoSlug) {
-                              const url = `/products/${subCategory.parentCategorySlug}/${subCategory.seoSlug}?scid=${subCategory?.id}`;
-                              console.log('Enhanced URL:', url);
-                              window.location.href = url;
-                            } else {
-                              // Fallback to original structure for search results
-                              const url = `/products/${subCategory?.seoSlug}?scid=${subCategory?.id}`;
-                              console.log('Fallback URL:', url);
-                              window.location.href = url;
-                            }
+                            window.location.href = `/products/${category?.seoSlug}?cid=${category?._id}`;
                             setIsNavigating(false);
                           }, 100);
                         }}
                       >
                         <div className="flex justify-start items-center">
-                          {subCategory && subCategory?.image && (
+                          {category && category?.image && (
                             <Image
                               src={
-                                subCategory?.image
+                                category?.image
                                   ? normalizePath(
-                                      `${assetURL}/${subCategory?.image}`
+                                      `${assetURL}/${category?.image}`
                                     )
                                   : "/images/product-placeholder.webp"
                               }
-                              alt={subCategory?.name}
+                              alt={category?.name}
                               width={30}
                               height={30}
                               onError={(e) => {
@@ -562,7 +750,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                           )}
                           <div>
                             <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
-                              {subCategory?.name}
+                              {category?.name}
                             </p>
                           </div>
                         </div>
@@ -572,9 +760,12 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                 </div>
               )}
 
-              {/* Vendors Section */}
+              {/* Vendors Section - Priority 5 */}
               {vendors.length > 0 && (
                 <div>
+                  <h3 className="text-md font-semibold p-2 mt-1 text-[#B90647]">
+                    Vendors
+                  </h3>
                   {vendors.map((vendor, index) => {
                     return (
                       <div

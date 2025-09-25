@@ -152,36 +152,60 @@ const Header: React.FC<HeaderProps> = () => {
   const getCategoriesForPlaceholders = async () => {
     try {
       const result = (await callApi(
-        getEndpoint.default.PRODUCTSLIST,
+        getEndpoint.default.PRODUCTS_CATEGORIES,
         "GET"
       )) as any;
-      if (result?.data) {
+      if (result?.data && result.data.length > 0) {
         const placeholders: string[] = [];
 
-        console.log(result.data.data, "result.data.data");
-        // // Add main categories
-        result.data.data.forEach((category: any) => {
-          const truncatedName =
-            category.productName?.length > 14
-              ? category.productName.substring(0, 14) + "..."
-              : category.productName;
-          placeholders.push(`Search for ${truncatedName}...`);
+        console.log(result.data, "categories data");
+        
+        // Collect category names (main categories, subcategories, and child categories)
+        result.data.forEach((category: any) => {
+          // Add main category name
+          if (category.name && category.name !== "N/A") {
+            const truncatedName = category.name.length > 20 
+              ? category.name.substring(0, 20) + '...' 
+              : category.name;
+            placeholders.push(`Search for ${truncatedName}...`);
+          }
+          
+          // Add subcategory names
+          if (category.subCategories && category.subCategories.length > 0) {
+            category.subCategories.forEach((subCat: any) => {
+              if (subCat.name && subCat.name !== "N/A") {
+                const truncatedName = subCat.name.length > 20 
+                  ? subCat.name.substring(0, 20) + '...' 
+                  : subCat.name;
+                placeholders.push(`Search for ${truncatedName}...`);
+              }
+              
+              // Add child category names
+              if (subCat.childCategories && subCat.childCategories.length > 0) {
+                subCat.childCategories.forEach((childCat: any) => {
+                  if (childCat.name && childCat.name !== "N/A") {
+                    const truncatedName = childCat.name.length > 20 
+                      ? childCat.name.substring(0, 20) + '...' 
+                      : childCat.name;
+                    placeholders.push(`Search for ${truncatedName}...`);
+                  }
+                });
+              }
+            });
+          }
         });
 
-        setRotatingPlaceholders(placeholders);
+        // Remove duplicates and limit to first 8 placeholders
+        const uniquePlaceholders = [...new Set(placeholders)].slice(0, 8);
+        setRotatingPlaceholders(uniquePlaceholders);
       }
     } catch (error) {
       console.log("Error fetching categories for placeholders:", error);
       // Fallback placeholders
       setRotatingPlaceholders([
-        "Search for Bricks...",
-        "Search for Cement...",
-        "Search for Steel...",
-        "Search for Tiles...",
-        "Search for Paint...",
-        "Search for Tools...",
-        "Search for Plumbing...",
-        "Search for Electrical...",
+        "Search for categories...",
+        "Search for products...",
+        "Search for vendors...",
       ]);
     }
   };

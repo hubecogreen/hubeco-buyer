@@ -52,16 +52,39 @@ const AttributeFilters: React.FC<VendorFiltersListProps> = ({
   const [priceRangeObj, setPriceRangeObj] = useState<any>([]);
   const [sortBy, setSortBy] = useState("");
 
-  useEffect(() => {
-    getFliters();
-  }, [catId, subCatId, check,childCatId]);
+  // useEffect(() => {
+  //   getFliters();
+  // }, [catId, subCatId, check,childCatId]);
 
-  useEffect(() => {
-    if (refresh) {
+  // useEffect(() => {
+  //   if (refresh) {
+  //     setSelectedAttributes([]);
+  //     getFliters(true);
+  //   }
+  // }, [refresh,check]);
+
+
+  // Debounced filter fetching when category states change
+useEffect(() => {
+  const timeout = setTimeout(() => {
+    getFliters();
+  }, 300); // wait 400ms before firing API
+
+  return () => clearTimeout(timeout); // cancel previous timer if any dep changes again
+}, [catId, subCatId, check, childCatId]);
+
+// Debounced refresh handling
+useEffect(() => {
+  if (refresh) {
+    const timeout = setTimeout(() => {
       setSelectedAttributes([]);
       getFliters(true);
-    }
-  }, [refresh,check,]);
+    }, 400); // debounce refresh call as well
+
+    return () => clearTimeout(timeout);
+  }
+}, [refresh, check]);
+
 
   const buildUrl = (baseUrl: string, params: Record<string, any>) => {
     const queryParams = new URLSearchParams();

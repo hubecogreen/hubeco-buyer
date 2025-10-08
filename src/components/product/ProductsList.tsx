@@ -161,24 +161,45 @@ const ProductsList: React.FC<Props> = ({
     // resetOptions();
   }, [pathname, searchParams]);
 
-  // Fetch products when filters change
-  useEffect(() => {
-    getProducts(1);
-  }, [
-    // searchParams,
-    vendorCode,
-    catId,
-    subCatId,
-    childCatId,
-    priceRangeObj,
-    selectedAttributes,
-    sortBy,
-  ]);
+  // // Fetch products when filters change
+  // useEffect(() => {
+  //   getProducts(1);
+  // }, [
+  //   // searchParams,
+  //   vendorCode,
+  //   catId,
+  //   subCatId,
+  //   childCatId,
+  //   priceRangeObj,
+  //   selectedAttributes,
+  //   sortBy,
+  // ]);
 
-  // Fetch products when search term changes
-  useEffect(() => {
+  // // Fetch products when search term changes
+  // useEffect(() => {
+  //   getProducts(1);
+  // }, [searchTerm]);
+
+
+  // Debounced API call when filters or search term change
+useEffect(() => {
+  const timeout = setTimeout(() => {
     getProducts(1);
-  }, [searchTerm]);
+  }, 300); // waits 500ms after the last change before calling API
+
+  // cleanup if filters change again before 500ms
+  return () => clearTimeout(timeout);
+}, [
+  vendorCode,
+  catId,
+  subCatId,
+  childCatId,
+  priceRangeObj,
+  selectedAttributes,
+  sortBy,
+  searchTerm,
+]);
+
 
   const handleApiError = async (err: any) => {
     const result = err?.response;

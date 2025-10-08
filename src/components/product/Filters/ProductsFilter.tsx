@@ -78,16 +78,15 @@ const FiltersSidebar: React.FC<FilterProps> = ({
 
   const { callApi } = useApi();
 
-  useEffect(() => {
+useEffect(() => {
+  const timeout = setTimeout(() => {
     getFliters();
-  }, [
-    catId,
-    subCatId,
-    childCatId,
-    selectedAttributes,
-    // priceRangeObj,
-    // vendorCode,
-  ]);
+  }, 300); // wait 400ms after last change
+
+  // Cleanup previous timeout if any dependency changes again
+  return () => clearTimeout(timeout);
+}, [catId, subCatId, childCatId, selectedAttributes]);
+
 
   // useEffect(() => {
   //   // Update price range whenever minPrice or maxPrice changes

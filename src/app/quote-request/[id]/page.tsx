@@ -330,7 +330,7 @@ const QuoteDetails = ({ id }: any) => {
         }}
       />
 
-      <div className="px-4 md:px-28 mt-8 md:mt-10">
+      <div className="px-4 md:px-6 mt-8 md:mt-10">
         {/* Header Section */}
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
@@ -355,7 +355,7 @@ const QuoteDetails = ({ id }: any) => {
 
         {/* Product Details */}
         <div className="flex gap-5 lg:flex-nowrap flex-wrap">
-          <div className="w-full lg:w-4/5 shadow-lg">
+          <div className="w-full lg:w-5/5 shadow-lg">
             <div className="bg-gray-100 rounded-md mb-8 h-full">
               <div className="h-[10%]">
                 <h2 className="text-lg font-medium py-3 pl-4 mb-2 sm:gap-0 gap-2">
@@ -446,7 +446,7 @@ const QuoteDetails = ({ id }: any) => {
                         </h3>
                       </div>
 
-                      <div className="flex space-x-8 text-[#2F2B3DB2] text-sm md:ml-[9.5rem]">
+                      <div className="flex space-x-8 text-[#2F2B3DB2] text-sm md:ml-[20rem]">
                         <div className="max-w-md"></div>
 
                         <div>

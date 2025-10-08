@@ -177,7 +177,7 @@ export default function SentQuotation({
               <th className="p-4 whitespace-nowrap text-left">Quotation</th>
               <th className="p-4 whitespace-nowrap text-left">Unit Price</th>
               <th className="p-4 whitespace-nowrap text-left">
-                Qty
+                Qty 
               </th>
               <th className="p-4 whitespace-nowrap text-left">
                 Tax
@@ -218,7 +218,7 @@ export default function SentQuotation({
                         // window.open(`${assetURL}/${order?.buyerInvoiceLink}`, "_blank")
                         handleDownload(
                           `${assetURL}/${initialState?.quoteDetailsInvoice?.pdfUrl}`,
-                          `Hubeco_${quote?.quotationId}`
+                          `Hubeco_${initialState?.quoteId}`
                         )
                       }
                       variant={"outline"}

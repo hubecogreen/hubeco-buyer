@@ -503,6 +503,7 @@ const QuoteDetails = ({ id }: any) => {
               refer="Quote"
               width="md"
               closeText="At least one payment should be completed to access chat with vendor"
+              height="64"
             />
           </div>
         </div>

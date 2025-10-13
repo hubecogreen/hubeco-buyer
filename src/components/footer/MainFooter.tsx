@@ -20,13 +20,26 @@ import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { FaXTwitter, FaLinkedinIn } from "react-icons/fa6";
 import { IoLocationOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
+
+const useAuth = () => {
+  const userInfo = useSelector((state: any) => state.user?.userInfo || {});
+  const rehydrated = useSelector((state: any) => state._persist?.rehydrated);
+
+  // Only authenticated if Redux is ready and userInfo exists
+  const isAuthenticated = rehydrated && userInfo && Object.keys(userInfo).length > 0;
+
+  return { isAuthenticated, userInfo, rehydrated };
+};
 
 const Footer = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const router = useRouter();
   const currentYear = new Date().getFullYear();
   const [showVendorLogin, setShowVendorLogin] = useState<any>(false);
-
+  const { isAuthenticated, rehydrated } = useAuth();
+  // Wait until Redux state is ready to avoid blink
+  if (!rehydrated) return null;
   const pathname = usePathname();
   const fullUrl =
     typeof window !== "undefined" ? `${window.location.origin}${pathname}` : "";
@@ -67,8 +80,15 @@ const Footer = () => {
       router.push("/plans");
     }
   };
-
-  return (
+  const handleProtectedLinkClick = (path: string) => {
+    if (isAuthenticated) {
+      router.push(path);
+    } else {
+      router.push("/login"); // Go directly to login if not authenticated
+    }
+  };  
+  if (!rehydrated) return null;
+  return (    
     <footer className="w-full justify-center bg-white md:mt-10 ">
       <div>
         {showScrollTop && (
@@ -237,9 +257,8 @@ const Footer = () => {
                 rightIcon={<GoArrowRight />}
               />
               <CustomButton
-                title={`${
-                  showVendorLogin ? "Vendor Login" : "Vendor Connect"
-                }`}
+                title={`${showVendorLogin ? "Vendor Login" : "Vendor Connect"
+                  }`}
                 onPress={() => onClickVendor()}
                 className="ml-3 bg-secondary hover:cursor-pointer  text-white h-12 md:h-12 md:w-48  w-40 md:text-md text-sm  hover:bg-primary"
                 customStyles={{}}
@@ -321,23 +340,27 @@ const Footer = () => {
                   My Account
                 </Link>
               </li>
-              <li className="text-fontGray py-xs">
-                <Link
-                  href="/orders"
+              <li
+                className="text-fontGray py-xs"
+                onClick={() => handleProtectedLinkClick("/orders")}
+              >
+                <span
                   className="text-fontGray hover:text-primary hover:cursor-pointer text-sm"
                 >
                   Orders
-                </Link>
+                </span>
               </li>
-              <li className="text-fontGray py-xs">
-                <Link
-                  href="/orders"
+              {/* 💡 MODIFIED: Returns - Intercepts click */}
+              <li
+                className="text-fontGray py-xs"
+                onClick={() => handleProtectedLinkClick("/orders")}
+              >
+                <span
                   className="text-fontGray hover:text-primary hover:cursor-pointer text-sm"
                 >
                   Returns
-                </Link>
+                </span>
               </li>
-
               <li className="text-fontGray py-xs">
                 <Link
                   href="/faq"
@@ -346,7 +369,7 @@ const Footer = () => {
                   FAQ&#39;s
                 </Link>
               </li>
-             
+
             </ul>
           </div>
           <div className={"w-full md:w-1/5 lg:w-1/5 md:py-0 py-5"}>

@@ -435,6 +435,7 @@ export default function Page({ params }: any) {
               width="[640px]"
               canChat={isCompleted(ticketData?.status)}
               closeText="You will no longer be able to chat once the ticket is closed"
+              height="96"
             />
             {/* <RefundNotification /> */}
           </div>

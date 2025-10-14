@@ -727,7 +727,7 @@ export default function OrdersPage({ params }: any) {
                           onClick={() =>
                             // window.open(`${assetURL}/${order?.buyerInvoiceLink}`, "_blank")
                             handleDownload(
-                              `${assetURL}/${selectedOrder?.purchaseOrder}`, buyer?.buyerInfo?.buyerType === 'B2B' ? `Purchase Order ${selectedOrder?.purchaseOrderNumber}`: `Order ${selectedOrder?.purchaseOrderNumber}`
+                              `${assetURL}/${selectedOrder?.purchaseOrder}`,buyer?.buyerInfo?.buyerType === 'B2B' ? `Purchase Order ${selectedOrder?.purchaseOrderNumber}` : `Order ${selectedOrder?.purchaseOrderNumber}`
                             )
                           }
                           variant={"outline"}

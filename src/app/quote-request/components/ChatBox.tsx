@@ -45,6 +45,7 @@ interface Props {
   transactionList?: string;
   canChat: boolean;
   closeText: string;
+  height:string;
 }
 
 export default function ChatBox({
@@ -58,6 +59,7 @@ export default function ChatBox({
   transactionList,
   canChat,
   closeText,
+  height
 }: Props) {
   const { socket } = useSocket();
   const { callApi } = useApi();
@@ -69,6 +71,7 @@ export default function ChatBox({
   const [text, setText] = useState("");
   const { getBuyer } = useGetBuyer();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [showOverlay, setShowOverlay] = useState<boolean>(true);
   const [metadata, setMetadata] = useState<{
     currentPage: number;
     hasNextPage: boolean;
@@ -93,10 +96,17 @@ export default function ChatBox({
     };
     socket?.emit("message", payeload); // Emit the message to
     setText("");
+    setShowOverlay(false);
+    if (messagesList.length > 0) {
+      setShowOverlay(false);
+    }
   };
 
   useEffect(() => {
     scrollToBottom();
+    // if (messagesList.length > 0) {
+    //   setShowOverlay(false);
+    // }    
   }, [messagesList]);
 
   const scrollToBottom = () => {
@@ -125,10 +135,9 @@ export default function ChatBox({
     try {
       const id = window.location.pathname.split("/")[2];
       const res = (await callApi(
-        `${chatEndPoint}/${id}?limit=${metadata.limit}&page=${
-          metadata.totalPages > metadata.currentPage + 1
-            ? metadata.currentPage + 1
-            : metadata.totalPages
+        `${chatEndPoint}/${id}?limit=${metadata.limit}&page=${metadata.totalPages > metadata.currentPage + 1
+          ? metadata.currentPage + 1
+          : metadata.totalPages
         }`,
         "GET"
       )) as any;
@@ -245,8 +254,8 @@ export default function ChatBox({
       ...messagesList.map((msg: any) => ({ ...msg, type: "message" })),
       ...(Array.isArray(transactionList) && transactionList.length > 0
         ? transactionList
-            .filter((txn: any) => txn.adminChangedStatus) // Filter transactions with adminChangedStatus true
-            .map((txn: any) => ({ ...txn, type: "transaction" }))
+          .filter((txn: any) => txn.adminChangedStatus) // Filter transactions with adminChangedStatus true
+          .map((txn: any) => ({ ...txn, type: "transaction" }))
         : []),
     ];
     return combined.sort(
@@ -273,10 +282,10 @@ export default function ChatBox({
     <div
       className={`bg-white w-full max-w-${width} rounded-lg shadow-lg p-4 relative`}
     >
-      <h6 className="border-b text-lg p-3">{receiver.name || "Receiver"}</h6>
+      <h6 className="border-b text-sm p-3">{receiver.name || "Receiver"}</h6>
       <div
         ref={scrollRef}
-        className="scrollableDiv overflow-y-auto h-96 space-y-4 scrollbar slim-scroll pr-5 "
+        className={`scrollableDiv overflow-y-auto h-${height} space-y-4 scrollbar slim-scroll pr-5 `}
         id="scrollableDiv"
       >
         <InfiniteScroll
@@ -306,13 +315,12 @@ export default function ChatBox({
               {groupedMessages[dateKey].map((message, index) => (
                 <div
                   key={index}
-                  className={`flex mb-2 ${
-                    message.senderId === myId
-                      ? "justify-end"
-                      : message?.isAQuery == true
+                  className={`flex mb-2 ${message.senderId === myId
+                    ? "justify-end"
+                    : message?.isAQuery == true
                       ? "justify-end"
                       : "justify-start"
-                  }`}
+                    }`}
                 >
                   <div className="flex items-start space-x-2">
                     {message.senderId !== myId && receiver.displayImage && message.isAQuery !== true && (
@@ -330,15 +338,14 @@ export default function ChatBox({
                     )}
                     <div className="flex flex-col">
                       <div
-                        className={`${
-                          message.senderId === myId
-                            ? "bg-[#009886] text-white"
-                            : message?.isAQuery == false
+                        className={`${message.senderId === myId
+                          ? "bg-[#009886] text-white"
+                          : message?.isAQuery == false
                             ? "bg-[#EEFFFD] text-primary"
                             : message?.isAQuery == true
-                            ? "bg-[#B906471A] text-secondary"
-                            : "bg-secondaryBg text-gray-900"
-                        } rounded-lg px-4 py-2 max-w-xs`}
+                              ? "bg-[#B906471A] text-secondary"
+                              : "bg-secondaryBg text-gray-900"
+                          } rounded-lg px-4 py-2 max-w-xs`}
                       >
                         <p className="text-sm">
                           {" "}
@@ -391,6 +398,38 @@ export default function ChatBox({
         <div className="absolute top-0 left-0 w-full h-full bg-gray-500/60 flex justify-center items-center text-white font-bold backdrop-blur-sm z-10">
           <p className="text-center text-white text-semibold px-10">
             {closeText}
+          </p>
+        </div>
+      )}
+      {/* 👇 ADDED: Overlay for No Messages Yet */}
+      {canChat && mergedMessages.length === 0 && showOverlay && (
+        <div
+          className="absolute top-0 left-0 w-full h-full bg-white/95 flex flex-col justify-center items-center z-10 p-4"
+          style={{ backdropFilter: 'blur(1px)' }}
+        >
+          {/* Chat Icon - Replicated look from Vendor component */}
+          <div
+            className='w-12 h-12 bg-[#009886] rounded-lg flex items-center justify-center mb-4 shadow-lg cursor-pointer transition transform hover:scale-105'
+            onClick={() => setShowOverlay(false)}
+          >
+            <svg width='20' height='20' fill='white' viewBox='0 0 24 24'>
+              <path
+                d='M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z'
+                stroke='currentColor'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                fill='none'
+              />
+            </svg>
+          </div>
+
+          {/* Content */}
+          <h6 className='font-semibold text-lg text-gray-800 mb-1 text-center'>
+            No Messages Yet
+          </h6>
+          <p className='text-gray-600 text-sm text-center max-w-xs'>
+            Start a conversation with your vendor/buyer to discuss RFQs, delivery or pricing
           </p>
         </div>
       )}

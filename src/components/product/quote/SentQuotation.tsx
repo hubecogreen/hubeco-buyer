@@ -89,8 +89,7 @@ export default function SentQuotation({
 
       if (res.data !== null) {
         toast.success(
-          `Quotation ${
-            isOpen == "reject" ? "Rejected" : "Accepted"
+          `Quotation ${isOpen == "reject" ? "Rejected" : "Accepted"
           } successfully`
         );
 
@@ -168,323 +167,97 @@ export default function SentQuotation({
   };
 
   return (
-    <div className="mb-8 mt-10">
-      <h2 className="text-lg font-bold mb-3">Recently Sent Quotations</h2>
-      <div className="bg-gray-100 rounded-md pt-4 overflow-y-auto scrollbar w-full">
-        <table className="w-full table-auto border-collapse ">
-          <thead className="bg-secondaryBg  text-left ">
+    <div className="mb-8 mt-6">
+      <h2 className="text-[15px] font-semibold text-[#2F2B3D] mb-3">
+        Delivery Terms & Conditions
+      </h2>
+
+      <div
+        className="bg-white border border-[#E5E7EB] rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A] overflow-y-auto scrollbar w-full "
+        style={{ opacity: 1 }}
+      >
+        <table className="w-full border-collapse text-sm table-auto">
+          <thead className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
             <tr>
-              <th className="p-4 whitespace-nowrap text-left">Quotation</th>
-              <th className="p-4 whitespace-nowrap text-left">Unit Price</th>
-              <th className="p-4 whitespace-nowrap text-left">
-                Qty 
+              <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">
+                Quotation ID
               </th>
-              <th className="p-4 whitespace-nowrap text-left">
-                Tax
+              <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">
+                Product Name
               </th>
-              <th className="p-4 whitespace-nowrap text-left">
+              <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">
                 Delivery Terms
               </th>
-              <th className="p-4 whitespace-nowrap text-left">
+              <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">
                 Other Terms
               </th>
-              <th className="p-4 whitespace-nowrap text-left">Grand Total</th>
-              <th className="p-4 whitespace-nowrap text-left">Status</th>
+              <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">
+                Quote Actions
+              </th>
             </tr>
           </thead>
+
           <tbody>
-            {initialState.quotations.map((quote: any, index: any) => (
-              <tr key={index} className="border-b">
-                <td className="p-4">
-                  <Link
-                    href={`/quote-request/${initialState._id}/view-quote?id=${quote.quotationId}`}
-                    className="text-blue-500 font-bold cursor-pointer text-[#009886]"
-                    onClick={() => {
-                      setSelectedView(quote);
-                      setQuoteOpen(true);
-                    }}
-                  >
-                    {/* {quote.quotationId} */}
-                    <div className="flex justify-start items-center cursor-pointer">
-                      <p className="font-medium">View Quote</p>
-                    </div>
-                  </Link>
-                  <p className="text-xs text-gray-500 pt-2">
-                    {dayjs(quote.createdAt).format("DD-MM-YYYY")}
-                  </p>
-                  {initialState?.quoteDetailsInvoice?.pdfUrl && (
-                    <Button
-                      onClick={() =>
-                        // window.open(`${assetURL}/${order?.buyerInvoiceLink}`, "_blank")
-                        handleDownload(
-                          `${assetURL}/${initialState?.quoteDetailsInvoice?.pdfUrl}`,
-                          `Hubeco_${initialState?.quoteId}`
-                        )
-                      }
-                      variant={"outline"}
-                      className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-secondary text-secondary rounded-none bg:white hover:bg-white hover:text-secondary"
-                    >
-                      <MdOutlineFileDownload color="#9B314A" /> Download Quote
-                    </Button>
-                  )}
-                </td>
-                <td className="p-4">
-                  <div className="flex flex-col gap-2">
-                    {Array.isArray(quote.products) &&
-                    quote.products.length > 0 ? (
-                      quote.products.map((elem: any, index: number) => (
-                        <div
-                          key={elem.id}
-                          className={`flex items-start ${
-                            index === quote.products.length - 1
-                              ? ""
-                              : "border-b border-gray-200 pb-2"
-                          }`}
+            {initialState.quotations.map((quote: any, index: any) => {
+              const firstProduct = quote.products?.[0];
+              return (
+                <tr key={index} className="border-b border-[#E5E7EB]">
+                  <td className="py-3 px-4 text-[#2F2B3D] font-medium">
+                    {quote.quotationId}
+                  </td>
+
+                  <td className="py-3 px-4 text-[#2F2B3D] font-semibold">
+                    {firstProduct?.variantId?.variantName ||
+                      firstProduct?.variantId?.productName ||
+                      "N/A"}
+                  </td>
+
+                  <td className="py-3 px-4 text-[#6B7280] max-w-[400px] truncate">
+                    {quote.deliveryTerms ||
+                      "No delivery terms provided"}
+                  </td>
+                  <td className="py-3 px-4 text-[#6B7280] max-w-[400px] truncate">
+                    {quote.otherTerms || "No other terms provided"}
+                  </td>
+
+                  <td className="py-3 px-4">
+                    <div className="flex items-center gap-2">
+                      <Button
+                        onClick={() =>
+                          handleDownload(
+                            `${assetURL}/${initialState?.quoteDetailsInvoice?.pdfUrl}`,
+                            `Hubeco_${initialState?.quoteId}`
+                          )
+                        }
+                        className="bg-[#B90647] text-white text-sm font-semibold px-4 py-2 rounded-[6px] hover:bg-[#9B314A]"
+                      >
+                        Download Quote
+                      </Button>
+
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="border border-[#B90647] text-[#B90647] text-sm font-semibold px-4 py-2 rounded-[6px] hover:bg-[#FFF1F4]"
+                      >
+                        <Link
+                          href={`/quote-request/${initialState._id}/view-quote?id=${quote.quotationId}`}
+                          onClick={() => {
+                            setSelectedView(quote);
+                            setQuoteOpen(true);
+                          }}
                         >
-                          <span>
-                            {elem?.unitPrice ? `${elem.unitPrice}` : "N/A"}
-                          </span>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-gray-500 text-sm">
-                        No products available.
-                      </p>
-                    )}
-                  </div>
-                </td>
-                <td className="p-4">
-                  <div className="flex flex-col gap-2">
-                    {Array.isArray(quote.products) &&
-                    quote.products.length > 0 ? (
-                      quote.products.map((elem: any, index: number) => (
-                        <div
-                          key={elem.id}
-                          className={`flex items-start ${
-                            index === quote.products.length - 1
-                              ? ""
-                              : "border-b border-gray-200 pb-2"
-                          }`}
-                        >
-                          <span>
-                            {elem?.quantity ? `${elem.quantity}` : "N/A"}
-                          </span>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-gray-500 text-sm">
-                        No products available.
-                      </p>
-                    )}
-                  </div>
-                </td>
-                <td className="p-4">
-                  <div className="flex flex-col  space-y-2">
-                    {Array.isArray(quote.products) &&
-                    quote.products.length > 0 ? (
-                      quote.products.map((elem: any, index: number) => (
-                        <div
-                          key={elem.id}
-                          className={`flex flex-col ${
-                            index === quote.products.length - 1
-                              ? ""
-                              : "border-b border-gray-200 pb-2"
-                          }`}
-                        >
-                          {elem.cgst !== -1 && (
-                            <p className=" flex justify-start text-sm gap-3">
-                              <span>CGST:</span>
-                              <span>
-                                {elem?.cgst ? `${elem.cgst}%` : "N/A"}
-                              </span>
-                            </p>
-                          )}
-                          {elem.sgst !== -1 && (
-                            <p className=" flex justify-start text-sm gap-3">
-                              <span>SGST:</span>
-                              <span>
-                                {elem?.sgst ? `${elem.sgst}%` : "N/A"}
-                              </span>
-                            </p>
-                          )}
-                          {elem?.igst !== -1 && (
-                            <p className=" flex justify-start text-sm gap-3">
-                              <span>IGST:</span>
-                              <span>
-                                {elem?.igst ? `${elem.igst}%` : "N/A"}
-                              </span>
-                            </p>
-                          )}
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-gray-500 text-sm">
-                        No products available.
-                      </p>
-                    )}
-                  </div>
-                </td>
-                <td className="p-4">
-                  <ViewMore
-                    text={quote.deliveryTerms || "-"}
-                    length={60}
-                    className="w-full"
-                  />
-                </td>
-                <td className="p-4">
-                  <ViewMore
-                    text={quote.otherTerms || "-"}
-                    length={60}
-                    className="w-full"
-                  />
-                </td>
-                <td className="p-4 min-w-[220px]">
-                  <div className="flex flex-col space-y-2">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 pr-3">
-                        Taxable Amount:
-                      </span>
-                      <span className="font-medium">
-                        <span className="text-xl font-normal font-mono">₹</span>
-                        {Array.isArray(quote.products) && reducePrice(quote)}
-                      </span>
+                          View Quote
+                        </Link>
+                      </Button>
                     </div>
-
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">
-                        GST (
-                        {quote.products[0].cgst === -1 ? "IGST" : "CGST + SGST"}
-                        ):
-                      </span>
-                      <span className="font-medium">
-                        <span className="text-xl font-normal font-mono">₹</span>
-
-                        {Array.isArray(quote.products) &&
-                          formatCurrencyInIndianStyle(
-                            quote.products.reduce(
-                              (total: any, product: { totalAmount: any }) =>
-                                total + product.taxableAmount,
-                              0
-                            )
-                          )}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Shipping Cost:</span>
-                      <span className="font-medium">
-                        <span className="text-xl font-normal font-mono">₹</span>
-
-                        {Array.isArray(quote.products) &&
-                          formatCurrencyInIndianStyle(
-                            quote.products.reduce(
-                              (total: any, product: { shippingCost: any }) =>
-                                total + product.shippingCost,
-                              0
-                            )
-                          )}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Other Cost:</span>
-                      <span className="font-medium">
-                        <span className="text-xl font-normal font-mono">₹</span>
-                        {Array.isArray(quote.products) &&
-                          formatCurrencyInIndianStyle(
-                            quote.products.reduce(
-                              (total: any, product: { otherCost: any }) =>
-                                total + product.otherCost,
-                              0
-                            )
-                          )}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between pt-2 border-t border-gray-200">
-                      <span className="font-semibold">Grand Total:</span>
-                      <span className="font-bold">
-                        <span className="text-xl font-normal font-mono">₹</span>
-
-                        {formatCurrencyInIndianStyle(quote.grandTotal)}
-                      </span>
-                    </div>
-                    {Array.isArray(quote.products) &&
-                      quote.products.some((elem) => elem.roundValue !== 0) && (
-                        <div className="justify-between items-center flex">
-                          <div className="inline text-xs font-medium">
-                            Amount rounded off to
-                          </div>
-                          <div className="flex flex-row">
-                            <span className="font-mono mr-0 inline">₹</span>
-                            <span className="inline-flex flex-col text-xs items-start w-full pt-[2px]">
-                              {quote.products
-                                .reduce(
-                                  (total: any, product: { roundValue: any }) =>
-                                    Number(total) + Number(product.roundValue),
-                                  0
-                                )
-                                .toFixed(2)}
-                            </span>
-                          </div>
-                        </div>
-                      )}
-                  </div>
-                </td>
-                <td className="p-4">
-                  {quote.status !== "Pending" ? (
-                    <button
-                      className={`font-semibold cursor-default px-4 py-2 w-full ${
-                        quote.status === "Rejected"
-                          ? "bg-[#B9064729] text-[#B90647]"
-                          : "bg-[#00988629] text-[#009886]"
-                      }`}
-                    >
-                      {quote.status === "Approved" ? "Accepted" : quote.status}
-                    </button>
-                  ) : (
-                    <div className="flex gap-3 justify-center">
-                      <Image
-                        src="/images/Button.svg"
-                        alt=""
-                        className="cursor-pointer"
-                        onClick={() => {
-                          setSelectedQuote(quote);
-                          setIsOpen("reject");
-                        }}
-                        width={40}
-                        height={40}
-                        onError={(e) => {
-                          e.currentTarget.src =
-                            "/images/product-placeholder.webp";
-                        }}
-                        loading="lazy"
-                      />
-                      <Image
-                        src="/images/Button.webp"
-                        alt=""
-                        className="cursor-pointer"
-                        onClick={() => {
-                          setSelectedQuote(quote);
-                          setIsOpen("accept");
-                        }}
-                        width={40}
-                        height={40}
-                        onError={(e) => {
-                          e.currentTarget.src =
-                            "/images/product-placeholder.webp";
-                        }}
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-                </td>
-              </tr>
-            ))}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
+
         <AlertDialog open={isOpen !== ""}>
-          {/* <AlertDialogOverlay className="" style={{ backgroundCoslor: 'rgba(0, 0, 0, 0.5)' }} /> */}
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle className="text-center pb-5 text-[#B90647]">
@@ -511,9 +284,7 @@ export default function SentQuotation({
                 }}
                 onChange={(e) => {
                   if (e.length > 10000) {
-                    setErrorOnRemark(
-                      "Remarks should be less than 10000 characters"
-                    );
+                    setErrorOnRemark("Remarks should be less than 10000 characters");
                   } else if (e.length < 3) {
                     setErrorOnRemark("Remarks should be at least 3 characters");
                   } else {
@@ -522,9 +293,7 @@ export default function SentQuotation({
                   setRemarks(e);
                 }}
               />
-              {errorOnRemark && (
-                <p className="text-red text-sm">{errorOnRemark}</p>
-              )}
+              {errorOnRemark && <p className="text-red text-sm">{errorOnRemark}</p>}
             </AlertDialogHeader>
             <AlertDialogFooter className="flex sm:justify-center justify-center w-full items-center">
               <AlertDialogCancel
@@ -539,14 +308,10 @@ export default function SentQuotation({
               </AlertDialogCancel>
               <CustomButton
                 title={"Yes"}
-                className="ml-3 bg-secondary hover:bg-primary  h-12 md:h-12 md:w-24  w-24 md:text-md text-sm text-white "
-                customStyles={{}}
-                // onPress={() => deleteAddress(address.id)}
-                type="submit"
+                className="ml-3 bg-secondary hover:bg-primary h-12 md:h-12 md:w-24 w-24 md:text-md text-sm text-white"
                 onPress={() => {
                   handleQuoteAction();
                 }}
-                //  loading={isLoading}
               />
             </AlertDialogFooter>
           </AlertDialogContent>
@@ -554,4 +319,5 @@ export default function SentQuotation({
       </div>
     </div>
   );
+
 }

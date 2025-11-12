@@ -8,21 +8,21 @@ import BannerSection from "@/components/sharedComponents/BannerSection";
 
 import ChatBox from "../components/ChatBox";
 
-// import {
-//   AlertDialog,
-//   AlertDialogCancel,
-//   AlertDialogContent,
-//   AlertDialogDescription,
-//   AlertDialogFooter,
-//   AlertDialogHeader,
-//   AlertDialogTitle,
-// } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
-// import CustomButton from "@/components/customButton/CustomButton";
+import CustomButton from "@/components/customButton/CustomButton";
 
-// import { BsExclamationCircle } from "react-icons/bs";
+import { BsExclamationCircle } from "react-icons/bs";
 
-// import CustomInput from "@/components/customInput/CustomTextField";
+import CustomInput from "@/components/customInput/CustomTextField";
 
 // import {
 //   Dialog,
@@ -39,7 +39,7 @@ import useApi from "@/components/Fetcher/useAPI";
 
 import useRefreshToken from "@/components/hooks/useRefreshToken";
 
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 
 import NotFoundPage from "../../../components/404/page";
 
@@ -64,6 +64,7 @@ import { MdOutlineFileDownload } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import useGetBuyer from "@/components/hooks/useGetBuyer";
 import { normalizePath } from "@/lib/utils";
+import { relative } from "path";
 // import {
 //   TooltipContent,
 //   TooltipProvider,
@@ -123,7 +124,6 @@ const QuoteDetails = ({ id }: any) => {
 
     setLoading(false);
   };
-
   const getStatusStyles = (status: string) => {
     const statusStyles = [
       {
@@ -225,7 +225,7 @@ const QuoteDetails = ({ id }: any) => {
 
   function getStatus(status: string) {
     const data = {
-      completed: "Completed",
+      completed: "Quotation Approved",
       closed: "Closed",
       pending: "Pending",
       requested: "Requested",
@@ -250,7 +250,6 @@ const QuoteDetails = ({ id }: any) => {
     }
   }, []);
 
-  
   useEffect(() => {
     getBuyer();
   }, []);
@@ -273,12 +272,13 @@ const QuoteDetails = ({ id }: any) => {
       if (!response.ok) {
         throw new Error("Failed to download file");
       }
-  
+
       const blob = await response.blob();
-  
+
       // Use provided custom file name
-      const fileName = customFileName || url.split("/").pop() || "downloaded-file";
-  
+      const fileName =
+        customFileName || url.split("/").pop() || "downloaded-file";
+
       const blobUrl = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = blobUrl;
@@ -286,7 +286,7 @@ const QuoteDetails = ({ id }: any) => {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-  
+
       window.URL.revokeObjectURL(blobUrl);
     } catch (error: any) {
       // As fallback, open in a new tab
@@ -294,7 +294,6 @@ const QuoteDetails = ({ id }: any) => {
       // console.error("Download failed:", error?.message);
     }
   };
-  
 
   if (loading) {
     return (
@@ -308,9 +307,49 @@ const QuoteDetails = ({ id }: any) => {
     return <NotFoundPage />;
   }
 
-
   const buyerUserInfo = sessionStorage.getItem("buyerUserInfo");
   const buyer = buyerUserInfo ? JSON.parse(buyerUserInfo) : null;
+
+  const handleQuoteAction = async () => {
+    if (errorOnRemark.length > 1) return;
+    if (remarks.length === 0) {
+      setErrorOnRemark("Please enter remarks");
+      return;
+    } else {
+      setErrorOnRemark("");
+    }
+
+    try {
+      setLoadingOnAction(true);
+      const quoteId = window.location.href.split("quote-request/")[1];
+      const id = quoteId.split("/view-quote")[0] || quoteId.split("/")[0];
+      const payload = {
+        id: id,
+        reason: remarks,
+        action: isOpen,
+      };
+      const res = (await callApi("quotes/handleQuoteAction", "POST", payload)) as any;
+
+      if (res.data !== null) {
+        toast.success(
+          `Quotation ${isOpen === "reject" ? "Rejected" : "Accepted"} successfully`
+        );
+        setRemarks("");
+        setErrorOnRemark("");
+        window.location.reload();
+      } else {
+        toast.error(`${isOpen === "reject" ? "Rejection" : "Acceptance"} failed`);
+      }
+    } catch (err: any) {
+      toast.error(`${isOpen === "reject" ? "Rejection" : "Acceptance"} failed`);
+    } finally {
+      setLoadingOnAction(false);
+      setIsOpen("");
+    }
+  };
+
+
+
 
   return (
     <>
@@ -330,168 +369,433 @@ const QuoteDetails = ({ id }: any) => {
         }}
       />
 
-      <div className="px-4 md:px-6 mt-8 md:mt-10">
+      <div className="max-w-[1440px] mx-auto px-[40px] mt-0">
         {/* Header Section */}
-
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-          <div>
-            <h1 className="text-2xl md:text-4xl font-bold pb-3">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 bg-white border-b border-[#E5E7EB] shadow-[0px_1px_2px_0px_#0000000D] px-4 md:px-[40px] py-4 md:py-[20px] w-full max-w-[1440px] mx-auto rounded-none">
+          {/* Left side — Quote ID and Status inline */}
+          <div className="flex flex-wrap items-center gap-2 md:gap-3">
+            <h1 className="text-lg md:text-[22px] font-bold text-[#2F2B3D] leading-[26px] md:leading-[28px] tracking-[0.2px] break-words">
               {initialState.quoteId}
             </h1>
 
-            <span
-              className={`font-semibold text-lg capitalize ${getStatusStyles(
-                initialState.status
-              )}`}
-            >
+            <span className="text-xs md:text-sm font-semibold text-[#009886] border border-[#009886] px-2 md:px-3 py-[2px] md:py-1 rounded-md whitespace-nowrap">
               {getStatus(initialState.status)
                 ? getStatus(initialState.status)
                 : initialState.status.includes("_")
-                ? initialState.status.split("_").join(" ")
-                : initialState.status}
+                  ? initialState.status.split("_").join(" ")
+                  : initialState.status}
             </span>
           </div>
+
+          {/* Right side — Download button */}
+          {initialState?.purchaseOrder && (
+            <Button
+              onClick={() =>
+                handleDownload(
+                  `${assetUrl}/${initialState?.purchaseOrder}`,
+                  buyer?.buyerInfo?.buyerType === "B2B"
+                    ? `Purchase Order ${initialState?.purchaseOrderNumber}`
+                    : `Order ${initialState?.purchaseOrderNumber}`
+                )
+              }
+              className="flex items-center justify-center gap-1 md:gap-2 bg-[#009886] text-white hover:bg-[#007c6d] font-semibold rounded-md px-3 md:px-4 py-2 mt-3 md:mt-0 text-sm md:text-base w-full sm:w-auto"
+            >
+              {buyer?.buyerInfo?.buyerType === "B2B"
+                ? "Download Purchase Order"
+                : "Download Order"}
+              <MdOutlineFileDownload size={18} />
+            </Button>
+          )}
         </div>
 
-        {/* Product Details */}
-        <div className="flex gap-5 lg:flex-nowrap flex-wrap">
-          <div className="w-full lg:w-5/5 shadow-lg">
-            <div className="bg-gray-100 rounded-md mb-8 h-full">
-              <div className="h-[10%]">
-                <h2 className="text-lg font-medium py-3 pl-4 mb-2 sm:gap-0 gap-2">
-                  Product Details
-                </h2>
-              </div>
-              <div className=" bg-secondaryBg">
-                <div className="flex h-[15%] flex-wrap justify-between bg-secondaryBg  mb-6  p-4">
-                  <div>
-                    <h2 className="text-lg font-bold">
-                      {initialState.quoteId}
-                    </h2>
+        {/* Product Details + Cost Breakdown + ChatBox layout */}
+        <div className="flex flex-col lg:flex-row gap-6 items-stretch mb-8">
+          <div className="overflow-visible">
+            {/* LEFT SECTION: Product, Cost, and Payment stacked */}
+            <div className="flex flex-col gap-5 flex-1">
+              {/* Top Row: Product + Cost Breakdown side by side */}
+              <div className="flex flex-col sm:flex-row lg:flex-nowrap gap-5 w-full">
+                {/* Product Details Card */}
+                <div className="w-full lg:w-auto">
+                  <div
+                    className="bg-white border border-[#E5E7EB] rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A] p-5 flex flex-col gap-3 w-full sm:w-[526px] min-h-[424.56px]"
+                  >
+
+                    {initialState.products.map((product: any) => (
+                      <div key={product._id} className="flex flex-col gap-3">
+                        {/* Product Image */}
+                        <div className="overflow-hidden border border-[#009886]/30 rounded-[10px] w-full h-[219px]">
+                          <Image
+                            src={
+                              product.variantId.thumbnail
+                                ? normalizePath(
+                                  `${assetUrl}/${product.variantId.thumbnail}`
+                                )
+                                : "/images/product-placeholder.webp"
+                            }
+                            alt={product.variantId.variantName}
+                            className="object-cover w-full h-full"
+                            width={486}
+                            height={219}
+                            onError={(e) => {
+                              e.currentTarget.src =
+                                "/images/product-placeholder.webp";
+                            }}
+                            loading="lazy"
+                          />
+                        </div>
+
+                        {/* Product Title */}
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h2 className="text-base md:text-lg font-bold text-[#2F2B3D]">
+                            Product Details:
+                          </h2>
+                          <p className="font-semibold text-[#2F2B3D] text-base break-words">
+                            {product.variantId.variantName === "Default"
+                              ? product.variantId.productName
+                              : product.variantId.variantName}
+                          </p>
+                        </div>
+
+                        {/* Info Grid */}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-3 gap-x-4 text-sm text-[#2F2B3D]">
+                          <div>
+                            <p className="text-gray-500 font-medium">Quote ID</p>
+                            <p className="font-semibold break-all">
+                              {initialState.quoteId}
+                            </p>
+                          </div>
+
+                          <div>
+                            <p className="text-gray-500 font-medium">
+                              Quote Requested by
+                            </p>
+                            <p className="font-semibold break-words">
+                              {initialState?.vendorInformation?.companyName ||
+                                "N/A"}
+                            </p>
+                          </div>
+
+                          <div>
+                            <p className="text-gray-500 font-medium">
+                              Quote Requested on
+                            </p>
+                            <p className="font-semibold">
+                              {dayjs(initialState.submissionDate).format(
+                                "DD - MM - YYYY"
+                              )}
+                            </p>
+                          </div>
+
+                          <div>
+                            <p className="text-gray-500 font-medium">
+                              Quote Created on
+                            </p>
+                            <p className="font-semibold">
+                              {dayjs(initialState.createdAt).format(
+                                "DD - MM - YYYY"
+                              )}
+                            </p>
+                          </div>
+
+                          {/* Dynamic Unit Price fix */}
+                          <div>
+                            <p className="text-gray-500 font-medium">
+                              Unit Price
+                            </p>
+                            <p className="font-semibold">
+                              ₹
+                              {(() => {
+                                const quote = initialState?.quotations?.[0];
+                                if (
+                                  quote &&
+                                  Array.isArray(quote.products) &&
+                                  quote.products.length > 0
+                                ) {
+                                  const match = quote.products.find(
+                                    (qProd: any) =>
+                                      qProd.variantId?._id ===
+                                      product.variantId?._id ||
+                                      qProd.productId === product._id
+                                  );
+                                  if (match?.unitPrice) {
+                                    return new Intl.NumberFormat("en-IN").format(
+                                      match.unitPrice
+                                    );
+                                  }
+                                }
+                                return product.variantId?.price
+                                  ? new Intl.NumberFormat("en-IN").format(
+                                    product.variantId.price
+                                  )
+                                  : "N/A";
+                              })()}
+                            </p>
+                          </div>
+
+                          {/* Quantity */}
+                          <div>
+                            <p className="text-gray-500 font-medium">Quantity</p>
+                            <p className="font-semibold">
+                              {(() => {
+                                const quote = initialState?.quotations?.[0];
+                                if (
+                                  quote &&
+                                  Array.isArray(quote.products) &&
+                                  quote.products.length > 0
+                                ) {
+                                  const match = quote.products.find(
+                                    (qProd: any) =>
+                                      qProd.variantId?._id ===
+                                      product.variantId?._id ||
+                                      qProd.productId === product._id
+                                  );
+                                  if (match?.quantity) return match.quantity;
+                                }
+                                return product.quantity || "N/A";
+                              })()}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
+                </div>
 
-                  <div className="flex flex-col">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="font-normal text-gray-500 whitespace-nowrap">
-                          Quote Requested By :
-                        </p>
-                      </div>
+                {/* Middle Section: Cost Breakdown */}
+                <div className="flex flex-col gap-5 flex-shrink-0 w-full sm:w-[350px]">
+                  <div
+                    className="bg-white rounded-[8px] border border-[#E5E7EB] shadow-[0px_2px_4px_0px_#0000001A] p-[15px] w-full sm:w-[350px] min-h-[424.56px]"
+                  >
+                    {/* --- Cost Breakdown header + Approve/Reject section --- */}
+                    <div className="flex items-center justify-between mb-3">
+                      <h2 className="text-lg font-semibold text-[#2F2B3D]">
+                        Cost Breakdown
+                      </h2>
+                      {/* ✅ Right (Accept) & Wrong (Reject) buttons OR Status label */}
+                      {initialState?.quotations?.[0]?.status === "Pending" ? (
+                        <div className="flex items-center gap-2">
+                          {/* ❌ Reject Button */}
+                          <Image
+                            src="/images/Button.svg"
+                            alt="Reject"
+                            width={36}
+                            height={36}
+                            className="cursor-pointer"
+                            onClick={() => {
+                              setSelectedQuote(initialState.quotations[0]);
+                              setIsOpen("reject");
+                            }}
+                          />
 
-                      <div>
-                        <p className="px-3 font-semibold text-gray-500 whitespace-nowrap">
-                          {dayjs(initialState.submissionDate).format(
-                            "DD-MM-YYYY"
-                          )}
-                        </p>
-                      </div>
+                          {/* ✅ Accept Button */}
+                          <Image
+                            src="/images/Button.webp"
+                            alt="Accept"
+                            width={36}
+                            height={36}
+                            className="cursor-pointer"
+                            onClick={() => {
+                              setSelectedQuote(initialState.quotations[0]);
+                              setIsOpen("accept");
+                            }}
+                          />
+                        </div>
+                      ) : initialState?.quotations?.[0]?.status === "Approved" ||
+                        initialState?.quotations?.[0]?.status === "Rejected" ? (
+                        <button
+                          className={`font-semibold px-3 py-1 rounded-md ${initialState?.quotations?.[0]?.status === "Rejected"
+                              ? "bg-[#B9064729] text-[#B90647]"
+                              : "bg-[#00988629] text-[#009886]"
+                            }`}
+                        >
+                          {initialState?.quotations?.[0]?.status === "Approved"
+                            ? "Accepted"
+                            : "Rejected"}
+                        </button>
+                      ) : null}
                     </div>
 
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="font-normal text-gray-500 whitespace-nowrap">
-                          Quote Created On :
-                        </p>
-                      </div>
+                    {(() => {
+                      const quote = initialState?.quotations?.[0];
 
-                      <div>
-                        <p className="px-3 font-semibold text-gray-500 whitespace-nowrap">
-                          {dayjs(initialState.createdAt).format("DD-MM-YYYY")}
-                        </p>
-                      </div>
-                    </div>
+                      if (!quote || !Array.isArray(quote.products) || quote.products.length === 0) {
+                        return (
+                          <div className="flex flex-col items-center justify-center text-center h-full">
+                            <div>
+                              <h2 className="text-base font-semibold text-[#2F2B3D] mb-3">
+                                Cost Breakdown
+                              </h2>
+                              <Clock className="text-[#B90647] mb-3 w-8 h-8 animate-pulse mx-auto" />
+                              <p className="text-sm text-[#2F2B3DB2] font-medium leading-relaxed">
+                                Quotation Received and <br /> under review
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      }
+                      const formatCurrency = (amount: number): string => {
+                        const rounded = Math.round(amount * 100) / 100;
+                        const options: Intl.NumberFormatOptions =
+                          rounded % 1 === 0
+                            ? {}
+                            : {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2,
+                            };
+                        return new Intl.NumberFormat("en-IN", options).format(
+                          rounded
+                        );
+                      };
+                      const unitPrice = quote.products.reduce(
+                        (total: number, item: any) =>
+                          total + Number(item.unitPrice || 0),
+                        0
+                      );
+                      const quantity = quote.products.reduce(
+                        (total: number, item: any) =>
+                          total + Number(item.quantity || 0),
+                        0
+                      );
+                      const taxable = quote.products.reduce(
+                        (total: number, item: any) =>
+                          total +
+                          Number(item.unitPrice || 0) *
+                          Number(item.quantity || 0),
+                        0
+                      );
+                      const gst = quote.products.reduce(
+                        (total: number, item: any) =>
+                          total + Number(item.taxableAmount || 0),
+                        0
+                      );
+                      const shipping = quote.products.reduce(
+                        (total: number, item: any) =>
+                          total + Number(item.shippingCost || 0),
+                        0
+                      );
+                      const other = quote.products.reduce(
+                        (total: number, item: any) =>
+                          total + Number(item.otherCost || 0),
+                        0
+                      );
+                      const grandTotal =
+                        Number(quote.grandTotal) ||
+                        taxable + gst + shipping + other;
+
+                      return (
+                        <div className="flex flex-col gap-4 text-sm text-[#2F2B3D] leading-relaxed">
+                          <div className="flex justify-between">
+                            <p className="text-[#2F2B3DB2]">Unit Price</p>
+                            <p className="font-semibold">
+                              ₹{formatCurrency(unitPrice)}
+                            </p>
+                          </div>
+                          <div className="flex justify-between">
+                            <p className="text-[#2F2B3DB2]">Quantity</p>
+                            <p className="font-semibold">
+                              {formatCurrency(quantity)}
+                            </p>
+                          </div>
+                          <div className="flex justify-between">
+                            <p className="text-[#2F2B3DB2]">Taxable Amount</p>
+                            <p className="font-semibold">
+                              ₹{formatCurrency(taxable)}
+                            </p>
+                          </div>
+                          <div className="flex justify-between">
+                            <p className="text-[#2F2B3DB2]">Shipping Cost</p>
+                            <p className="font-semibold">
+                              ₹{formatCurrency(shipping)}
+                            </p>
+                          </div>
+                          <div className="flex justify-between">
+                            <p className="text-[#2F2B3DB2]">Other Cost</p>
+                            <p className="font-semibold">
+                              ₹{formatCurrency(other)}
+                            </p>
+                          </div>
+                          {/* ✅ Fixed Tax Section (keeps height same for IGST-only or CGST+SGST) */}
+                          <div className="flex flex-col gap-2 min-h-[70px]">
+                            {Array.isArray(quote.products) &&
+                              quote.products.map((product: any, index: number) => (
+                                <React.Fragment key={index}>
+                                  {product.cgst !== -1 && (
+                                    <div className="flex justify-between text-sm">
+                                      <p className="text-[#2F2B3DB2]">CGST ({product.cgst}%)</p>
+                                      <p className="font-semibold">
+                                        ₹
+                                        {formatCurrency(
+                                          (product.unitPrice * product.quantity * (product.cgst || 0)) /
+                                          100
+                                        )}
+                                      </p>
+                                    </div>
+                                  )}
+
+                                  {product.sgst !== -1 && (
+                                    <div className="flex justify-between text-sm">
+                                      <p className="text-[#2F2B3DB2]">SGST ({product.sgst}%)</p>
+                                      <p className="font-semibold">
+                                        ₹
+                                        {formatCurrency(
+                                          (product.unitPrice * product.quantity * (product.sgst || 0)) /
+                                          100
+                                        )}
+                                      </p>
+                                    </div>
+                                  )}
+
+                                  {product.igst !== -1 && (
+                                    <div className="flex justify-between text-sm">
+                                      <p className="text-[#2F2B3DB2]">IGST ({product.igst}%)</p>
+                                      <p className="font-semibold">
+                                        ₹
+                                        {formatCurrency(
+                                          (product.unitPrice * product.quantity * (product.igst || 0)) /
+                                          100
+                                        )}
+                                      </p>
+                                    </div>
+                                  )}
+                                </React.Fragment>
+                              ))}
+                          </div>
+                          <hr className="my-3 border-[#E5E7EB]" />
+                          <div className="flex justify-between text-base font-bold text-[#2F2B3D]">
+                            <p>Grand Total</p>
+                            <p>₹{formatCurrency(grandTotal)}</p>
+                          </div>
+                        </div>
+                      );
+                    })()}
                   </div>
                 </div>
               </div>
-              <div className="space-y-4 overflow-x-auto scrollbar pt-[40px] md:pt-0 min-h-[70%] pl-5">
-                {initialState.products.map((product: any) => (
-                  <div key={product._id} className="flex items-start ">
-                    <Image
-                      // src={
-                      //   product.variantId.thumbnail
-                      //     ? (
-                      //         assetUrl +
-                      //         "/" +
-                      //         product.variantId.thumbnail
-                      //       ).includes("//admin")
-                      //       ? (
-                      //           assetUrl +
-                      //           "/" +
-                      //           product.variantId.thumbnail
-                      //         ).replace("//admin", "/admin")
-                      //       : `${assetUrl}/${product.variantId.thumbnail}`
-                      //     : "/images/product-placeholder.webp"
-                      // }
-                      src={
-                        product.variantId.thumbnail
-                          ? normalizePath(`${assetUrl}/${product.variantId.thumbnail}`)
-                          : "/images/product-placeholder.webp"
-                      }
-                      alt={product.variantId.variantName}
-                      className="w-16 h-16 object-cover rounded mr-4"
-                      height={16}
-                      width={16}
-                      onError={(e) => {
-                        e.currentTarget.src = "/images/product-placeholder.webp";
-                      }}
-                      loading="lazy"
-                    />
-
-                    <div className="flex">
-                      <div className="flex flex-col">
-                        <h3 className="font-bold line-clamp-3 whitespace-pre-wrap text-wrap w-[250px] truncate">
-                          {product.variantId.variantName == "Default"
-                            ? product.variantId.productName
-                            : `${product.variantId.variantName}`}
-                        </h3>
-                      </div>
-
-                      <div className="flex space-x-8 text-[#2F2B3DB2] text-sm md:ml-[20rem]">
-                        <div className="max-w-md"></div>
-
-                        <div>
-                          <p className="font-light">Quantity</p>
-
-                          <p className="font-medium text-[#2F2B3DE5] pb-2">
-                            {product.quantity}
-                          </p>
-                        </div>
-                        {initialState?.purchaseOrder &&(
-                        <div>
-                          <Button
-                            onClick={() =>
-                              handleDownload(
-                                `${assetUrl}/${initialState?.purchaseOrder}`,buyer?.buyerInfo?.buyerType === 'B2B' ? `Purchase Order ${initialState?.purchaseOrderNumber}` : `Order ${initialState?.purchaseOrderNumber}`
-                              )
-                            }
-                            variant={"outline"}
-                            className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-secondary text-secondary rounded-none bg:white hover:bg-white hover:text-secondary"
-                          >
-                              {buyer?.buyerInfo?.buyerType === "B2C" ? (
-                            <>
-                              <MdOutlineFileDownload color="#9B314A" />
-                              Download Order
-                            </>
-                          ) : (
-                            <>
-                              <MdOutlineFileDownload color="#9B314A" />
-                              Download Purchase Order
-                            </>
-                          )}
-                          </Button>
-                        </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
-          </div>
 
-          <div className="w-full md:mt-24 lg:mt-0 lg:w-2/5">
+
+            {/* ChatBox beside Product + Cost Breakdown */}
+            {/* <div
+            className="w-full sm:w-[439px] flex flex-col justify-between bg-white border border-[#E5E7EB] rounded-[8px] shadow-[0px_4px_6px_0px_#0000001A,0px_10px_15px_0px_#0000001A] flex-1 self-stretch"
+            style={{
+              height: "424.56px",
+              position: "relative",
+            }}
+          >
+            </div> */}
+
+
+          </div>
+          {/* ✅ Payment Schedule BELOW both Product + Cost */}
+          <div
+            className="w-full sm:w-[439px] lg:h-[424.56px] sm:h-[200px] flex flex-col justify-between bg-white border border-[#E5E7EB] rounded-[8px]  flex-1 self-stretch"
+            style={{
+              height: "424.56px",
+              position: "relative",
+            }}
+          >
             <ChatBox
-              // canChat={IfAtLeastOnePaymentDone(initialState?.paymentsSchedule)}
               canChat={true}
               sender={{ name: "User1", displayImage: "" }}
               receiver={{
@@ -507,35 +811,100 @@ const QuoteDetails = ({ id }: any) => {
             />
           </div>
         </div>
-
-        {/* Recently Sent Quotation */}
-
-        {initialState.quotations && initialState.quotations.length > 0 ? (
-          <SentQuotation
-            initialState={initialState}
-            setSelectedQuote={setSelectedQuote}
-            setQuoteOpen={setQuoteOpen}
-            setSelectedView={setSelectedView}
-          />
-        ) : (
-          <div className="flex justify-center items-center h-28 w-full">
-            {" "}
-            <WaitingCard line="Waiting for vendor to send the quotation request." />
+        <div className="w-full overflow-x-auto">
+          <div className="min-w-[600px]">
+            {initialState.quotations && initialState.quotations.length > 0 ? (
+              <SentQuotation
+                initialState={initialState}
+                setSelectedQuote={setSelectedQuote}
+                setQuoteOpen={setQuoteOpen}
+                setSelectedView={setSelectedView}
+              />
+            ) : (
+              <div className="flex justify-center items-center h-28 w-full">
+                <WaitingCard line="Waiting for vendor to send the quotation request." />
+              </div>
+            )}
           </div>
-        )}
-
-        {/* Payment Schedule */}
-
-        {initialState.paymentsSchedule?.length > 0 ? (
-          <PaymentSchedule
-            initialState={initialState}
-            setIsLoading={setIsLoading}
-          />
-        ) : initialState.quotations?.length > 0 ? (
-          <div className="flex justify-center items-center h-28 w-full">
-            <WaitingCard line="After accepting the quotation request, the vendor will provide the payment schedule here." />
+        </div>
+        <div className="w-full overflow-x-auto mt-4">
+          <div className="min-w-[600px]">
+            {initialState.paymentsSchedule?.length > 0 ? (
+              <PaymentSchedule
+                initialState={initialState}
+                setIsLoading={setIsLoading}
+              />
+            ) : initialState.quotations?.length > 0 ? (
+              <div className="flex justify-center items-center h-28 w-full">
+                <WaitingCard line="After accepting the quotation request, the vendor will provide the payment schedule here." />
+              </div>
+            ) : null}
           </div>
-        ) : null}
+        </div>
+
+
+
+        <AlertDialog open={isOpen !== ""}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle className="text-center pb-5 text-[#B90647]">
+                Are you sure you want to {isOpen} this quotation?
+              </AlertDialogTitle>
+              <BsExclamationCircle
+                className="w-full flex justify-center items-center text-center mb-8"
+                color="#B90647"
+                size={45}
+              />
+              <AlertDialogDescription className="text-center pt-4">
+                {isOpen !== "reject"
+                  ? ""
+                  : "Rejecting this quotation will notify the vendor that you are not interested in the quoted price. You may provide a reason for the rejection."}
+              </AlertDialogDescription>
+
+              <CustomInput
+                placeholder="Remarks"
+                required
+                isTextArea={true}
+                customStyles={{
+                  borderRadius: "5px",
+                  border: "1px solid #ccc",
+                  color: "black",
+                }}
+                onChange={(e) => {
+                  if (e.length > 10000) {
+                    setErrorOnRemark("Remarks should be less than 10000 characters");
+                  } else if (e.length < 3) {
+                    setErrorOnRemark("Remarks should be at least 3 characters");
+                  } else {
+                    setErrorOnRemark("");
+                  }
+                  setRemarks(e);
+                }}
+              />
+              {errorOnRemark && <p className="text-red text-sm">{errorOnRemark}</p>}
+            </AlertDialogHeader>
+
+            <AlertDialogFooter className="flex sm:justify-center justify-center w-full items-center">
+              <AlertDialogCancel
+                onClick={() => {
+                  setIsOpen("");
+                  setRemarks("");
+                  setErrorOnRemark("");
+                }}
+                className="md:h-12 h-8 md:w-24"
+              >
+                No
+              </AlertDialogCancel>
+
+              <CustomButton
+                title={"Yes"}
+                className="ml-3 bg-secondary hover:bg-primary h-12 md:h-12 md:w-24 w-24 md:text-md text-sm text-white"
+                onPress={handleQuoteAction}
+              />
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
       </div>
     </>
   );

@@ -9,6 +9,8 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "next/image";
+import { FiSend } from "react-icons/fi";
+import { Minus } from "lucide-react";
 export interface messageType {
   isAQuery: boolean;
   details: any;
@@ -280,120 +282,166 @@ export default function ChatBox({
 
   return (
     <div
-      className={`bg-white w-full max-w-${width} rounded-lg shadow-lg p-4 relative`}
+      className={`bg-white w-full max-w-${width} rounded-lg shadow-lg flex flex-col h-full relative`}
+
     >
-      <h6 className="border-b text-sm p-3">{receiver.name || "Receiver"}</h6>
+      <div className="bg-[#B90647] text-white rounded-t-lg px-5 py-3 flex justify-between items-start sticky top-0 shadow-sm">
+        {/* Left side — name and time */}
+        <div>
+          <h6 className="text-lg font-semibold leading-tight">
+            {receiver.name || "Receiver"}
+          </h6>
+          {/* <p className="text-sm text-gray-200">
+          {formattedDay}, {formattedTime}
+        </p> */}
+        </div>
+
+        {/* Right side — minimize icon */}
+        {/* <button
+          className="text-white hover:text-gray-200 transition"
+          title="Minimize"
+        >
+          <Minus size={20} strokeWidth={3} />
+        </button> */}
+      </div>
       <div
         ref={scrollRef}
-        className={`scrollableDiv overflow-y-auto h-${height} space-y-4 scrollbar slim-scroll pr-5 `}
+        className="scrollableDiv flex-1 overflow-y-auto space-y-4 scrollbar slim-scroll pr-5"
         id="scrollableDiv"
+        style={{
+          paddingTop: "8px",
+          paddingBottom: "8px",
+        }}
       >
-        <InfiniteScroll
-          dataLength={mergedMessages.length}
-          next={fetchMoreMessages}
-          hasMore={metadata.hasNextPage}
-          loader={
-            <div className="flex justify-center mt-0.5 mb-0.5">
-              <CircularProgress size={18} />
-            </div>
-          }
-          scrollableTarget="scrollableDiv"
-        >
-          {Object.keys(groupedMessages).map((dateKey) => (
-            <div key={dateKey}>
-              <div
-                style={{
-                  textAlign: "center",
-                  marginTop: "2px",
-                  marginBottom: "2px",
-                }}
-              >
-                <Badge color="secondaryBg" className="bg-secondaryBg">
-                  {formatDateHeader(dateKey)}
-                </Badge>
+        {mergedMessages.length === 0 ? (
+          // 🟢 When there are no chats, show this placeholder
+          <div className="flex flex-col justify-center items-center text-center text-gray-500 h-full py-10">
+            {<Image
+              src="\images\Chat.svg" // optional decorative image
+              alt="No chats yet"
+              width={45}
+              height={45}
+              className="mb-4 opacity-80"
+            />}
+            <p className="text-sm text-gray-600 max-w-[260px] mt-1">
+              Start a conversation with your vendor to discuss RFQs, delivery, or pricing.
+            </p>
+          </div>
+        ) : (
+          <InfiniteScroll
+            dataLength={mergedMessages.length}
+            next={fetchMoreMessages}
+            hasMore={metadata.hasNextPage}
+            loader={
+              <div className="flex justify-center mt-0.5 mb-0.5">
+                <CircularProgress size={18} />
               </div>
-              {groupedMessages[dateKey].map((message, index) => (
+            }
+            scrollableTarget="scrollableDiv"
+          >
+            {Object.keys(groupedMessages).map((dateKey) => (
+              <div key={dateKey}>
                 <div
-                  key={index}
-                  className={`flex mb-2 ${message.senderId === myId
-                    ? "justify-end"
-                    : message?.isAQuery == true
-                      ? "justify-end"
-                      : "justify-start"
-                    }`}
+                  style={{
+                    textAlign: "center",
+                    marginTop: "2px",
+                    marginBottom: "2px",
+                  }}
                 >
-                  <div className="flex items-start space-x-2">
-                    {message.senderId !== myId && receiver.displayImage && message.isAQuery !== true && (
-                      <Image
-                        className="w-10 h-10 rounded-full"
-                        src={receiver.displayImage}
-                        alt={receiver.name || "Receiver"}
-                        width={40}
-                        height={40}
-                        onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.webp'
-                        }}
-                        loading="lazy"
-                      />
-                    )}
-                    <div className="flex flex-col">
-                      <div
-                        className={`${message.senderId === myId
-                          ? "bg-[#009886] text-white"
-                          : message?.isAQuery == false
-                            ? "bg-[#EEFFFD] text-primary"
-                            : message?.isAQuery == true
-                              ? "bg-[#B906471A] text-secondary"
-                              : "bg-secondaryBg text-gray-900"
-                          } rounded-lg px-4 py-2 max-w-xs`}
-                      >
-                        <p className="text-sm">
-                          {" "}
-                          {message.type === "transaction"
-                            ? message.details
-                            : message.content}
-                        </p>
-                        <p className="text-xs ml-auto text-right">
-                          {formatTime(message.createdAt)}
-                        </p>
-                      </div>
-                    </div>
-                    {message.senderId === myId && sender.displayImage && (
-                      <Image
-                        className="w-10 h-10 rounded-full"
-                        src={sender.displayImage}
-                        alt={sender.name || "Sender"}
-                        width={40}
-                        height={40}
-                        onError={e => {
-                          e.currentTarget.src = '/images/product-placeholder.webp'
-                        }}
-                        loading="lazy"
-                      />
-                    )}
-                  </div>
+                  <Badge color="secondaryBg" className="bg-secondaryBg">
+                    {formatDateHeader(dateKey)}
+                  </Badge>
                 </div>
-              ))}
-            </div>
-          ))}
-        </InfiniteScroll>
+                {groupedMessages[dateKey].map((message, index) => (
+                  <div
+                    key={index}
+                    className={`flex mb-2 ${message.senderId === myId
+                      ? "justify-end"
+                      : message?.isAQuery == true
+                        ? "justify-end"
+                        : "justify-start"
+                      }`}
+                  >
+                    <div className="flex items-start space-x-2">
+                      {message.senderId !== myId &&
+                        receiver.displayImage &&
+                        message.isAQuery !== true && (
+                          <Image
+                            className="w-10 h-10 rounded-full"
+                            src={receiver.displayImage}
+                            alt={receiver.name || "Receiver"}
+                            width={40}
+                            height={40}
+                            onError={(e) => {
+                              e.currentTarget.src = "/images/product-placeholder.webp";
+                            }}
+                            loading="lazy"
+                          />
+                        )}
+                      <div className="flex flex-col">
+                        <div
+                          className={`${message.senderId === myId
+                            ? "bg-[#009886] text-white"
+                            : message?.isAQuery == false
+                              ? "bg-[#EEFFFD] text-primary"
+                              : message?.isAQuery == true
+                                ? "bg-[#B906471A] text-secondary"
+                                : "bg-secondaryBg text-gray-900"
+                            } rounded-lg px-4 py-2 max-w-xs`}
+                        >
+                          <p className="text-sm">
+                            {message.type === "transaction"
+                              ? message.details
+                              : message.content}
+                          </p>
+                          <p className="text-xs ml-auto text-right">
+                            {formatTime(message.createdAt)}
+                          </p>
+                        </div>
+                      </div>
+                      {message.senderId === myId && sender.displayImage && (
+                        <Image
+                          className="w-10 h-10 rounded-full"
+                          src={sender.displayImage}
+                          alt={sender.name || "Sender"}
+                          width={40}
+                          height={40}
+                          onError={(e) => {
+                            e.currentTarget.src = "/images/product-placeholder.webp";
+                          }}
+                          loading="lazy"
+                        />
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </InfiniteScroll>
+        )}
       </div>
-      <div className="border-t mt-4 pt-4 flex gap-2 items-center max-w-full flex-wrap">
-        <input
-          type="text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && handleSend(text)}
-          className="flex-grow px-4 py-2 border rounded-full focus:outline-none focus:border-[#009886]"
-          placeholder="Type your message here..."
-        />
-        <button
-          onClick={() => handleSend(text)}
-          className="ml-2 bg-[#009886] text-white px-4 py-2 rounded-full"
-        >
-          Send
-        </button>
+      <div className="border-t p-3 flex items-center gap-2 w-full">
+        <div className="flex w-full items-center sm:flex-row flex-row">
+          <input
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            onKeyPress={(e) => e.key === "Enter" && handleSend(text)}
+            placeholder="Type your message here..."
+            className="border rounded-full px-4 py-2 focus:outline-none focus:border-[#009886]
+                 w-[80%] sm:w-full transition-all duration-200"
+          />
+          <button
+            onClick={() => handleSend(text)}
+            className="bg-[#B90647] hover:bg-[#9b043d] text-white px-4 py-2 rounded-full font-semibold
+                 flex items-center justify-center gap-1 ml-2 w-[20%] sm:w-auto transition-all duration-200"
+          >
+            <span className="hidden sm:inline">Send</span>
+            <FiSend className="text-white text-lg sm:ml-1" />
+          </button>
+        </div>
       </div>
+
       {canChat == false && (
         <div className="absolute top-0 left-0 w-full h-full bg-gray-500/60 flex justify-center items-center text-white font-bold backdrop-blur-sm z-10">
           <p className="text-center text-white text-semibold px-10">

@@ -188,7 +188,7 @@ const ProjectsSection = () => {
     <section
       className="relative w-full lg:w-[80%] w-[98%] items-center justify-center mx-auto projectsGrid"
     >
-      <div className="pb-2 lg:pb-10">
+      {/* <div className="pb-2 lg:pb-10">
         <div className="items-center justify-center px-8 text-center z-20 lg:pt-7">
           <h2 className="text-2xl lg:text-4xl font-bold mb-4 text-black mt-30">
             Green Projects
@@ -201,7 +201,7 @@ const ProjectsSection = () => {
       </div>
       
       {desktopGridContent}
-      {mobileSwiperContent}
+      {mobileSwiperContent} */}
       
       {/* <div className=" align-center justify-center md:mt-0 mt-10 py-10">
         <CustomButton

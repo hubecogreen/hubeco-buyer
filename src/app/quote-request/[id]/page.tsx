@@ -446,10 +446,10 @@ const QuoteDetails = ({ id }: any) => {
                         </div>
 
                         {/* Product Title */}
-                        <div className="flex flex-wrap items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-2 pb-[15x]">
                           <h2 className="text-base md:text-lg font-bold text-[#2F2B3D]">
                             Product Details:
-                          </h2>
+                          </h2><br/>
                           <p className="font-semibold text-[#2F2B3D] text-base break-words">
                             {product.variantId.variantName === "Default"
                               ? product.variantId.productName
@@ -607,8 +607,8 @@ const QuoteDetails = ({ id }: any) => {
                           {false && (
                             <button
                               className={`font-semibold px-3 py-1 rounded-md ${initialState?.quotations?.[0]?.status === "Rejected"
-                                  ? "bg-[#B9064729] text-[#B90647]"
-                                  : "bg-[#00988629] text-[#009886]"
+                                ? "bg-[#B9064729] text-[#B90647]"
+                                : "bg-[#00988629] text-[#009886]"
                                 }`}
                             >
                               {initialState?.quotations?.[0]?.status === "Approved"
@@ -691,7 +691,7 @@ const QuoteDetails = ({ id }: any) => {
                           <div className="flex justify-between">
                             <p className="text-[#2F2B3DB2]">Unit Price</p>
                             <p className="font-semibold">
-                             <span className="rupee">₹</span>{formatCurrency(unitPrice)}
+                              <span className="rupee">₹</span>{formatCurrency(unitPrice)}
                             </p>
                           </div>
                           <div className="flex justify-between">
@@ -751,7 +751,7 @@ const QuoteDetails = ({ id }: any) => {
 
                                   {product.igst !== -1 && (
                                     <div className="flex justify-between text-sm">
-                                      <p className="text-[#2F2B3DB2]">IGST ({product.igst}%)</p>
+                                      <p className="pb-2 text-[#2F2B3DB2]">IGST ({product.igst}%)</p>
                                       <p className="font-semibold">
                                         <span className="rupee">₹</span>
                                         {formatCurrency(
@@ -764,8 +764,8 @@ const QuoteDetails = ({ id }: any) => {
                                 </React.Fragment>
                               ))}
                           </div>
-                          <hr className="my-3 border-[#E5E7EB]" />
-                          <div className="flex justify-between text-base font-bold text-[#2F2B3D]">
+                          <hr className="border-[#E5E7EB]" />
+                          <div className="flex justify-between text-base font-bold text-[#2F2B3D] pb-0">
                             <p>Grand Total</p>
                             <p>₹{formatCurrency(grandTotal)}</p>
                           </div>
@@ -844,7 +844,6 @@ const QuoteDetails = ({ id }: any) => {
             ) : null}
           </div>
         </div>
-
 
 
         <AlertDialog open={isOpen !== ""}>

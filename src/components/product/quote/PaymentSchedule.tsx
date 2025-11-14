@@ -198,7 +198,7 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
                 </td>
 
                 <td className="py-3 px-4 font-semibold text-[#009886]">
-                  ₹{formatCurrencyInIndianStyle(payment.amount)}
+                  <span className="rupee">₹</span>{formatCurrencyInIndianStyle(payment.amount)}
                 </td>
 
                 <td className="py-3 px-4">

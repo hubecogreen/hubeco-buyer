@@ -207,9 +207,9 @@ export default function SentQuotation({
                   </td>
 
                   <td className="py-3 px-4 text-[#2F2B3D] font-semibold">
-                    {firstProduct?.variantId?.variantName ||
-                      firstProduct?.variantId?.productName ||
-                      "N/A"}
+                    {firstProduct?.variantId?.variantName === "Default"
+                      ? firstProduct?.variantId?.productName
+                      : firstProduct?.variantId?.variantName}
                   </td>
 
                   <td className="py-3 px-4 text-[#6B7280] max-w-[400px] truncate">

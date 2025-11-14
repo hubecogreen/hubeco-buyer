@@ -231,7 +231,7 @@ const QuoteDetails = ({ id }: any) => {
       requested: "Requested",
       quotation_sent: "Quotation received",
       quotation_rejected: "Quotation rejected",
-      quotation_approved: "Quotation approved",
+      quotation_approved: "Quotation Approved",
       partial_payment_made: "Partial payment made",
       payment_scheduled: "Payment scheduled",
       payment_cleared: "Payment cleared",
@@ -504,7 +504,7 @@ const QuoteDetails = ({ id }: any) => {
                               Unit Price
                             </p>
                             <p className="font-semibold">
-                              ₹
+                              <span className="rupee">₹</span>
                               {(() => {
                                 const quote = initialState?.quotations?.[0];
                                 if (
@@ -601,21 +601,24 @@ const QuoteDetails = ({ id }: any) => {
                             }}
                           />
                         </div>
-                      ) : initialState?.quotations?.[0]?.status === "Approved" ||
-                        initialState?.quotations?.[0]?.status === "Rejected" ? (
-                        <button
-                          className={`font-semibold px-3 py-1 rounded-md ${initialState?.quotations?.[0]?.status === "Rejected"
-                              ? "bg-[#B9064729] text-[#B90647]"
-                              : "bg-[#00988629] text-[#009886]"
-                            }`}
-                        >
-                          {initialState?.quotations?.[0]?.status === "Approved"
-                            ? "Accepted"
-                            : "Rejected"}
-                        </button>
-                      ) : null}
+                      ) : (
+                        <>
+                          {/* HIDE STATUS BADGE — KEEP FOR FUTURE USE */}
+                          {false && (
+                            <button
+                              className={`font-semibold px-3 py-1 rounded-md ${initialState?.quotations?.[0]?.status === "Rejected"
+                                  ? "bg-[#B9064729] text-[#B90647]"
+                                  : "bg-[#00988629] text-[#009886]"
+                                }`}
+                            >
+                              {initialState?.quotations?.[0]?.status === "Approved"
+                                ? "Accepted"
+                                : "Rejected"}
+                            </button>
+                          )}
+                        </>
+                      )}
                     </div>
-
                     {(() => {
                       const quote = initialState?.quotations?.[0];
 
@@ -688,7 +691,7 @@ const QuoteDetails = ({ id }: any) => {
                           <div className="flex justify-between">
                             <p className="text-[#2F2B3DB2]">Unit Price</p>
                             <p className="font-semibold">
-                              ₹{formatCurrency(unitPrice)}
+                             <span className="rupee">₹</span>{formatCurrency(unitPrice)}
                             </p>
                           </div>
                           <div className="flex justify-between">
@@ -698,21 +701,21 @@ const QuoteDetails = ({ id }: any) => {
                             </p>
                           </div>
                           <div className="flex justify-between">
-                            <p className="text-[#2F2B3DB2]">Taxable Amount</p>
-                            <p className="font-semibold">
-                              ₹{formatCurrency(taxable)}
-                            </p>
-                          </div>
-                          <div className="flex justify-between">
                             <p className="text-[#2F2B3DB2]">Shipping Cost</p>
                             <p className="font-semibold">
-                              ₹{formatCurrency(shipping)}
+                              <span className="rupee">₹</span>{formatCurrency(shipping)}
                             </p>
                           </div>
                           <div className="flex justify-between">
                             <p className="text-[#2F2B3DB2]">Other Cost</p>
                             <p className="font-semibold">
-                              ₹{formatCurrency(other)}
+                              <span className="rupee">₹</span>{formatCurrency(other)}
+                            </p>
+                          </div>
+                          <div className="flex justify-between">
+                            <p className="text-[#2F2B3DB2]">Total Amount</p>
+                            <p className="font-semibold">
+                              <span className="rupee">₹</span>{formatCurrency(taxable)}
                             </p>
                           </div>
                           {/* ✅ Fixed Tax Section (keeps height same for IGST-only or CGST+SGST) */}
@@ -724,7 +727,7 @@ const QuoteDetails = ({ id }: any) => {
                                     <div className="flex justify-between text-sm">
                                       <p className="text-[#2F2B3DB2]">CGST ({product.cgst}%)</p>
                                       <p className="font-semibold">
-                                        ₹
+                                        <span className="rupee">₹</span>
                                         {formatCurrency(
                                           (product.unitPrice * product.quantity * (product.cgst || 0)) /
                                           100
@@ -737,7 +740,7 @@ const QuoteDetails = ({ id }: any) => {
                                     <div className="flex justify-between text-sm">
                                       <p className="text-[#2F2B3DB2]">SGST ({product.sgst}%)</p>
                                       <p className="font-semibold">
-                                        ₹
+                                        <span className="rupee">₹</span>
                                         {formatCurrency(
                                           (product.unitPrice * product.quantity * (product.sgst || 0)) /
                                           100
@@ -750,7 +753,7 @@ const QuoteDetails = ({ id }: any) => {
                                     <div className="flex justify-between text-sm">
                                       <p className="text-[#2F2B3DB2]">IGST ({product.igst}%)</p>
                                       <p className="font-semibold">
-                                        ₹
+                                        <span className="rupee">₹</span>
                                         {formatCurrency(
                                           (product.unitPrice * product.quantity * (product.igst || 0)) /
                                           100

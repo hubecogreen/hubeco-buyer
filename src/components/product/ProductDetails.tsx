@@ -2402,93 +2402,99 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
         </>
       )}
 
-      {/* </div> */}
-      <div className=" md:hidden mobile-sm:flex">
-        {(totalProduct?.purchaseType == "MULTI" ||
-          totalProduct?.purchaseType == "QUOTE") &&
-          productData?.status == "PUBLISHED" &&
-          productData?.deletedAt == null &&
-          productData?.isActive ? (
-          <>
-            <Button
-              className="flex bg-[#F5E7EC] w-[45%] md:w-full rounded hover:bg-primary shadow-xs group"
-              onClick={() => {
-                if (!checkBuyerLogin()) {
-                  return;
-                }
-                setIsOpen(true);
-                let productForQuote = totalProduct;
-                // productForQuote.variants.slice(0, 1)
-                productForQuote.variants;
-                // setProductSelectedForQuote(productForQuote);
-              }}
-            >
-              <FiFileText
-                // color="#A92449"
-                size={18}
-                className="text-current text-secondary group-hover:text-white"
-              />
-              <p className="text-secondary text-md text-medium ml-3 group-hover:text-white">
-                Request Quote
-              </p>
-            </Button>
-            <QuoteCompo
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-              quantity={quantity}
-              totalProduct={totalProduct}
-              productSelectedForQuote={productSelectedForQuote}
-              setQuantityForQuote={setQuantityForQuote}
-              setMinQuantityForQuote={setMinQuantityForQuote}
-              minQuantityForQuote={minQuantityForQuote}
-              quantityForQuote={quantityForQuote}
-              setProductSelectedForQuote={setProductSelectedForQuote}
-              combinations={combinations}
-              productData={productData}
-            />
-          </>
-        ) : (
-          <></>
-        )}
-        {(totalProduct?.purchaseType == "MULTI" ||
-          totalProduct?.purchaseType == "ONLINE") &&
-          productData?.status == "PUBLISHED" &&
-          productData?.deletedAt == null &&
-          productData?.isActive ? (
-          <Button
-            disabled={loadingCartButton}
-            onClick={() => addToCart(productData?._id)}
-            className="flex w-[45%] md:w-full bg-secondary rounded hover:bg-primary shadow-xs group"
-          >
-            {loadingCartButton ? (
-              <>
-                <CircularProgress
-                  // isIndeterminate
-                  color="#ffffff"
-                  size={6}
-                />
-              </>
-            ) : (
-              <>
-                {" "}
-                <BsCartPlus
-                  color="#fff"
-                  size={18}
-                  className="text-current group-hover:text-white"
-                />
-                <p className="text-white text-md text-medium ml-3 group-hover:text-white">
-                  Add to Cart
-                </p>
-              </>
-            )}
-          </Button>
-        ) : (
-          ""
-        )}
-        {/* </div>  */}
-      </div>
+   
     </div>
   );
 };
 
 export default ProductDetails;
+
+
+
+
+
+   {/* </div> */}
+      // <div className=" md:hidden mobile-sm:flex">
+      //   {(totalProduct?.purchaseType == "MULTI" ||
+      //     totalProduct?.purchaseType == "QUOTE") &&
+      //     productData?.status == "PUBLISHED" &&
+      //     productData?.deletedAt == null &&
+      //     productData?.isActive ? (
+      //     <>
+      //       <Button
+      //         className="flex bg-[#F5E7EC] w-[45%] md:w-full rounded hover:bg-primary shadow-xs group"
+      //         onClick={() => {
+      //           if (!checkBuyerLogin()) {
+      //             return;
+      //           }
+      //           setIsOpen(true);
+      //           let productForQuote = totalProduct;
+      //           // productForQuote.variants.slice(0, 1)
+      //           productForQuote.variants;
+      //           // setProductSelectedForQuote(productForQuote);
+      //         }}
+      //       >
+      //         <FiFileText
+      //           // color="#A92449"
+      //           size={18}
+      //           className="text-current text-secondary group-hover:text-white"
+      //         />
+      //         <p className="text-secondary text-md text-medium ml-3 group-hover:text-white">
+      //           Request Quote
+      //         </p>
+      //       </Button>
+      //       <QuoteCompo
+      //         isOpen={isOpen}
+      //         setIsOpen={setIsOpen}
+      //         quantity={quantity}
+      //         totalProduct={totalProduct}
+      //         productSelectedForQuote={productSelectedForQuote}
+      //         setQuantityForQuote={setQuantityForQuote}
+      //         setMinQuantityForQuote={setMinQuantityForQuote}
+      //         minQuantityForQuote={minQuantityForQuote}
+      //         quantityForQuote={quantityForQuote}
+      //         setProductSelectedForQuote={setProductSelectedForQuote}
+      //         combinations={combinations}
+      //         productData={productData}
+      //       />
+      //     </>
+      //   ) : (
+      //     <></>
+      //   )}
+      //   {(totalProduct?.purchaseType == "MULTI" ||
+      //     totalProduct?.purchaseType == "ONLINE") &&
+      //     productData?.status == "PUBLISHED" &&
+      //     productData?.deletedAt == null &&
+      //     productData?.isActive ? (
+      //     <Button
+      //       disabled={loadingCartButton}
+      //       onClick={() => addToCart(productData?._id)}
+      //       className="flex w-[45%] md:w-full bg-secondary rounded hover:bg-primary shadow-xs group"
+      //     >
+      //       {loadingCartButton ? (
+      //         <>
+      //           <CircularProgress
+      //             // isIndeterminate
+      //             color="#ffffff"
+      //             size={6}
+      //           />
+      //         </>
+      //       ) : (
+      //         <>
+      //           {" "}
+      //           <BsCartPlus
+      //             color="#fff"
+      //             size={18}
+      //             className="text-current group-hover:text-white"
+      //           />
+      //           <p className="text-white text-md text-medium ml-3 group-hover:text-white">
+      //             Add to Cart
+      //           </p>
+      //         </>
+      //       )}
+      //     </Button>
+      //   ) : (
+      //     ""
+      //   )}
+      //   {/* </div>  */}
+      // </div>

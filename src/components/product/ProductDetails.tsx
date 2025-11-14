@@ -1000,85 +1000,93 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
             className={`relative bg-[#F9FAFB] w-full px-4 pt-8 pb-4 md:px-24 md:pt-12 md:block lg:flex ${isScrollLocked ? "no-scroll overscroll-none" : ""
               }`}
           >
-            <div className={`lg:w-1/2 md:w-[606px] h-[618px] lg:sticky top-0  pr-[10px] `}>
+            <div className={`lg:w-1/2 md:w-[606px] lg:sticky top-0  pr-[10px] `}>
               <div className="  lg:sticky top-0">
               
 
             {/* Main Image with Slider */}
-<div className="relative  h-[618px]">
+<div className="relative">
 
   {/* Main Image */}
- <div className="h-[384px]  relative overflow-hidden">
-  <div
-    ref={secondSectionRef}
-    className={`relative w-full h-full p-[15px] md:p-[85px] border border-borderGray ${
-      zoomable ? "overflow-hidden" : ""
-    }`}
-    style={{
-      backgroundImage: zoomable
-        ? `url(${
-            images2 && images2[selectedImageIndex]
-              ? (() => {
-                  const imageUrl = `${assetURL}/${images2[selectedImageIndex]}`;
-                  if (imageUrl.includes("//admin")) return imageUrl.replace("//admin", "/admin");
-                  if (imageUrl.includes("//staff")) return imageUrl.replace("//staff", "/staff");
-                  return imageUrl;
-                })()
-              : "/images/product-placeholder.webp"
-          })`
-        : "none",
-      backgroundSize: `${ZOOM_LEVEL * 100}% ${ZOOM_LEVEL * 100}%`,
-      backgroundPosition: `${position.x}% ${position.y}%`,
-      transition: "background-position 0.1s ease-out",
-    }}
-  >
-    {/* MAIN IMAGE FIXED HEIGHT */}
-    <Image
-      src={
-        images2 && images2[selectedImageIndex]
-          ? (() => {
-              const imageUrl = `${assetURL}/${images2[selectedImageIndex]}`;
-              if (imageUrl.includes("//admin")) return imageUrl.replace("//admin", "/admin");
-              if (imageUrl.includes("//staff")) return imageUrl.replace("//staff", "/staff");
-              return imageUrl;
-            })()
-          : "/images/product-placeholder.webp"
-      }
-      alt={`Main Image ${selectedImageIndex + 1}`}
-      fill
-      className={`${zoomable ? "opacity-0" : "opacity-100"} object-contain w-full h-full`}
-      onError={(e) => (e.currentTarget.src = "images/failedToLoadImage.webp")}
-      loading="lazy"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
-    />
+<div
+  className={`
+    relative overflow-hidden 
+    h-[384px] 
+    ${images2?.length === 1 ? "md:h-[618px]" : "md:h-[384px]"}
+  `}
+>
 
-    {/* Slider Controls */}
-    {!zoomable && (
-      <>
-        <button
-          onClick={prevImage}
-          className="flex absolute w-8 h-8 items-center justify-center bg-white border border-secondary rounded-full shadow-2xl top-1/2 left-2 transform -translate-y-1/2"
-        >
-          <BsChevronLeft color="#A92449" />
-        </button>
+    <div
+      ref={secondSectionRef}
+      className={`relative w-full h-full p-[15px] md:p-[85px] border border-borderGray ${
+        zoomable ? "overflow-hidden" : ""
+      }`}
+      style={{
+        backgroundImage: zoomable
+          ? `url(${
+              images2 && images2[selectedImageIndex]
+                ? (() => {
+                    const imageUrl = `${assetURL}/${images2[selectedImageIndex]}`;
+                    if (imageUrl.includes("//admin")) return imageUrl.replace("//admin", "/admin");
+                    if (imageUrl.includes("//staff")) return imageUrl.replace("//staff", "/staff");
+                    return imageUrl;
+                  })()
+                : "/images/product-placeholder.webp"
+            })`
+          : "none",
+        backgroundSize: `${ZOOM_LEVEL * 100}% ${ZOOM_LEVEL * 100}%`,
+        backgroundPosition: `${position.x}% ${position.y}%`,
+        transition: "background-position 0.1s ease-out",
+      }}
+    >
+      {/* Main Image */}
+      <Image
+        src={
+          images2 && images2[selectedImageIndex]
+            ? (() => {
+                const imageUrl = `${assetURL}/${images2[selectedImageIndex]}`;
+                if (imageUrl.includes("//admin")) return imageUrl.replace("//admin", "/admin");
+                if (imageUrl.includes("//staff")) return imageUrl.replace("//staff", "/staff");
+                return imageUrl;
+              })()
+            : "/images/product-placeholder.webp"
+        }
+        alt={`Main Image ${selectedImageIndex + 1}`}
+        fill
+        className={`${zoomable ? "opacity-0" : "opacity-100"} object-contain w-full h-full`}
+        onError={(e) => (e.currentTarget.src = "images/failedToLoadImage.webp")}
+        loading="lazy"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
+      />
 
-        <button
-          onClick={nextImage}
-          className="flex absolute w-8 h-8 items-center justify-center bg-white border border-secondary rounded-full shadow-2xl top-1/2 right-2 transform -translate-y-1/2"
-        >
-          <BsChevronRight color="#A92449" />
-        </button>
-      </>
-    )}
+      {/* Arrows only if >1 image */}
+      {!zoomable && images2?.length > 1 && (
+        <>
+          <button
+            onClick={prevImage}
+            className="flex absolute w-8 h-8 items-center justify-center bg-white border border-secondary rounded-full shadow-2xl top-1/2 left-2 transform -translate-y-1/2"
+          >
+            <BsChevronLeft color="#A92449" />
+          </button>
+
+          <button
+            onClick={nextImage}
+            className="flex absolute w-8 h-8 items-center justify-center bg-white border border-secondary rounded-full shadow-2xl top-1/2 right-2 transform -translate-y-1/2"
+          >
+            <BsChevronRight color="#A92449" />
+          </button>
+        </>
+      )}
+    </div>
   </div>
-</div>
 
-
-  {/* Horizontal Thumbnails */}
+  {/* Thumbnails only if >1 */}
+ {/* Thumbnails only if >1 images */}
+{images2?.length > 1 && (
   <div className="md:w-[606px] h-[218px] flex gap-4 overflow-x-auto no-scrollbar mt-4">
-    {images2?.map((image, index) => (
+    {images2.map((image, index) => (
       <button
         key={index}
         className={`border w-[187px] h-[218px] flex-shrink-0 ${
@@ -1098,7 +1106,10 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
       </button>
     ))}
   </div>
+)}
+
 </div>
+
 
               </div>
             </div>

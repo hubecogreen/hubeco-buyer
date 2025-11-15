@@ -973,14 +973,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
         }}
         link3={{
           name: `${totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0 ? totalProduct.subCategoryId[0]?.name || "" : ""}`,
-          href: totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0 
+          href: totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0
             ? `/products/${totalProduct?.categoryId?.seoSlug}/${totalProduct.subCategoryId[0]?.seoSlug || ""}?scid=${totalProduct.subCategoryId[0]?._id || ""}`
             : "/products",
         }}
         link4={{
           name: `${totalProduct?.childCategories && Array.isArray(totalProduct.childCategories) && totalProduct.childCategories.length > 0 ? totalProduct.childCategories[0]?.name || "" : ""}`,
-          href: totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0 && 
-                 totalProduct?.childCategories && Array.isArray(totalProduct.childCategories) && totalProduct.childCategories.length > 0
+          href: totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0 &&
+            totalProduct?.childCategories && Array.isArray(totalProduct.childCategories) && totalProduct.childCategories.length > 0
             ? `/products/${totalProduct.categoryId?.seoSlug || ""}/${totalProduct.subCategoryId[0]?.seoSlug || ""}/${totalProduct.childCategories[0]?.seoSlug || ""}?ccid=${totalProduct.childCategories[0]?._id || ""}`
             : "/products",
         }}
@@ -1002,803 +1002,797 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
           >
             <div className={`lg:w-1/2 md:w-[606px] lg:sticky top-0  pr-[10px] `}>
               <div className="  lg:sticky top-0">
-              
 
-            {/* Main Image with Slider */}
-<div className="relative">
 
-  {/* Main Image */}
-<div
-  className={`
+                {/* Main Image with Slider */}
+                <div className="relative">
+
+                  {/* Main Image */}
+                  <div
+                    className={`
     relative overflow-hidden 
     h-[384px] 
     ${images2?.length === 1 ? "md:h-[618px]" : "md:h-[384px]"}
   `}
->
+                  >
 
-    <div
-      ref={secondSectionRef}
-      className={`relative w-full h-full p-[15px] md:p-[85px] border border-borderGray ${
-        zoomable ? "overflow-hidden" : ""
-      }`}
-      style={{
-        backgroundImage: zoomable
-          ? `url(${
-              images2 && images2[selectedImageIndex]
-                ? (() => {
-                    const imageUrl = `${assetURL}/${images2[selectedImageIndex]}`;
-                    if (imageUrl.includes("//admin")) return imageUrl.replace("//admin", "/admin");
-                    if (imageUrl.includes("//staff")) return imageUrl.replace("//staff", "/staff");
-                    return imageUrl;
-                  })()
-                : "/images/product-placeholder.webp"
-            })`
-          : "none",
-        backgroundSize: `${ZOOM_LEVEL * 100}% ${ZOOM_LEVEL * 100}%`,
-        backgroundPosition: `${position.x}% ${position.y}%`,
-        transition: "background-position 0.1s ease-out",
-      }}
-    >
-      {/* Main Image */}
-      <Image
-        src={
-          images2 && images2[selectedImageIndex]
-            ? (() => {
-                const imageUrl = `${assetURL}/${images2[selectedImageIndex]}`;
-                if (imageUrl.includes("//admin")) return imageUrl.replace("//admin", "/admin");
-                if (imageUrl.includes("//staff")) return imageUrl.replace("//staff", "/staff");
-                return imageUrl;
-              })()
-            : "/images/product-placeholder.webp"
-        }
-        alt={`Main Image ${selectedImageIndex + 1}`}
-        fill
-        className={`${zoomable ? "opacity-0" : "opacity-100"} object-contain w-full h-full`}
-        onError={(e) => (e.currentTarget.src = "images/failedToLoadImage.webp")}
-        loading="lazy"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onMouseMove={handleMouseMove}
-      />
+                    <div
+                      ref={secondSectionRef}
+                      className={`relative w-full h-full p-[15px] md:p-[85px] border border-borderGray ${zoomable ? "overflow-hidden" : ""
+                        }`}
+                      style={{
+                        backgroundImage: zoomable
+                          ? `url(${images2 && images2[selectedImageIndex]
+                            ? (() => {
+                              const imageUrl = `${assetURL}/${images2[selectedImageIndex]}`;
+                              if (imageUrl.includes("//admin")) return imageUrl.replace("//admin", "/admin");
+                              if (imageUrl.includes("//staff")) return imageUrl.replace("//staff", "/staff");
+                              return imageUrl;
+                            })()
+                            : "/images/product-placeholder.webp"
+                          })`
+                          : "none",
+                        backgroundSize: `${ZOOM_LEVEL * 100}% ${ZOOM_LEVEL * 100}%`,
+                        backgroundPosition: `${position.x}% ${position.y}%`,
+                        transition: "background-position 0.1s ease-out",
+                      }}
+                    >
+                      {/* Main Image */}
+                      <Image
+                        src={
+                          images2 && images2[selectedImageIndex]
+                            ? (() => {
+                              const imageUrl = `${assetURL}/${images2[selectedImageIndex]}`;
+                              if (imageUrl.includes("//admin")) return imageUrl.replace("//admin", "/admin");
+                              if (imageUrl.includes("//staff")) return imageUrl.replace("//staff", "/staff");
+                              return imageUrl;
+                            })()
+                            : "/images/product-placeholder.webp"
+                        }
+                        alt={`Main Image ${selectedImageIndex + 1}`}
+                        fill
+                        className={`${zoomable ? "opacity-0" : "opacity-100"} object-contain w-full h-full`}
+                        onError={(e) => (e.currentTarget.src = "images/failedToLoadImage.webp")}
+                        loading="lazy"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        onMouseMove={handleMouseMove}
+                      />
 
-      {/* Arrows only if >1 image */}
-      {!zoomable && images2?.length > 1 && (
-        <>
-          <button
-            onClick={prevImage}
-            className="flex absolute w-8 h-8 items-center justify-center bg-white border border-secondary rounded-full shadow-2xl top-1/2 left-2 transform -translate-y-1/2"
-          >
-            <BsChevronLeft color="#A92449" />
-          </button>
+                      {/* Arrows only if >1 image */}
+                      {!zoomable && images2?.length > 1 && (
+                        <>
+                          <button
+                            onClick={prevImage}
+                            className="flex absolute w-8 h-8 items-center justify-center bg-white border border-secondary rounded-full shadow-2xl top-1/2 left-2 transform -translate-y-1/2"
+                          >
+                            <BsChevronLeft color="#A92449" />
+                          </button>
 
-          <button
-            onClick={nextImage}
-            className="flex absolute w-8 h-8 items-center justify-center bg-white border border-secondary rounded-full shadow-2xl top-1/2 right-2 transform -translate-y-1/2"
-          >
-            <BsChevronRight color="#A92449" />
-          </button>
-        </>
-      )}
-    </div>
-  </div>
+                          <button
+                            onClick={nextImage}
+                            className="flex absolute w-8 h-8 items-center justify-center bg-white border border-secondary rounded-full shadow-2xl top-1/2 right-2 transform -translate-y-1/2"
+                          >
+                            <BsChevronRight color="#A92449" />
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
 
-  {/* Thumbnails only if >1 */}
- {/* Thumbnails only if >1 images */}
-{images2?.length > 1 && (
-  <div className="md:w-[606px] h-[218px] flex gap-4 overflow-x-auto no-scrollbar mt-4">
-    {images2.map((image, index) => (
-      <button
-        key={index}
-        className={`border w-[187px] h-[218px] flex-shrink-0 ${
-          selectedImageIndex === index ? "border-secondary" : "border-borderGray"
-        }`}
-        onClick={() => handleThumbnailClick(index)}
-      >
-        <Image
-          src={image ? normalizePath(`${assetPath}/${image}`) : "/images/product-placeholder.webp"}
-          alt={`Thumbnail ${index + 1}`}
-          width={187}
-          height={218}
-          className="object-contain"
-          loading="lazy"
-          onError={(e) => (e.currentTarget.src = "images/failedToLoadImage.webp")}
-        />
-      </button>
-    ))}
-  </div>
-)}
+                  {/* Thumbnails only if >1 */}
+                  {/* Thumbnails only if >1 images */}
+                  {images2?.length > 1 && (
+                    <div className="md:w-[606px] h-[218px] flex gap-4 overflow-x-auto no-scrollbar mt-4">
+                      {images2.map((image, index) => (
+                        <button
+                          key={index}
+                          className={`border w-[187px] h-[218px] flex-shrink-0 ${selectedImageIndex === index ? "border-secondary" : "border-borderGray"
+                            }`}
+                          onClick={() => handleThumbnailClick(index)}
+                        >
+                          <Image
+                            src={image ? normalizePath(`${assetPath}/${image}`) : "/images/product-placeholder.webp"}
+                            alt={`Thumbnail ${index + 1}`}
+                            width={187}
+                            height={218}
+                            className="object-contain"
+                            loading="lazy"
+                            onError={(e) => (e.currentTarget.src = "images/failedToLoadImage.webp")}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  )}
 
-</div>
+                </div>
 
 
               </div>
             </div>
 
             <div
-  ref={rightDivRef}
-  className="lg:w-1/2 w-full lg:mt-0 md:mt-8 mt-4 md:pl-[10px] no-scrollbar overflow-y-auto h-fit"
->
-<div className="md:h-[384px]">
-  {/* TITLE + WISHLIST */}
-  <div className="flex justify-between items-start">
-    <div>
-      <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-black text-normal pr-[10px] sr-only">
-        {productData?.meta?.metaTitle}
-      </h1>
+              ref={rightDivRef}
+              className="lg:w-1/2 w-full lg:mt-0 md:mt-8 mt-4 md:pl-[10px] no-scrollbar overflow-y-auto h-fit"
+            >
+              <div className="md:h-[384px]">
+                {/* TITLE + WISHLIST */}
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-black text-normal pr-[10px] sr-only">
+                      {productData?.meta?.metaTitle}
+                    </h1>
 
-      <h2 className="md:text-[30px] text-[24px] font-semibold text-md text-secondary pr-[10px]">
-        {isSingle ? totalProduct?.name : productData?.variantName}
-      </h2>
-    </div>
+                    <h2 className="md:text-[30px] text-[24px] font-semibold text-md text-secondary pr-[10px]">
+                      {isSingle ? totalProduct?.name : productData?.variantName}
+                    </h2>
+                  </div>
 
-    {productData?.status == "PUBLISHED" &&
-      productData?.deletedAt == null &&
-      productData?.isActive && (
-        <div
-          className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group ${
-            isClicked ? "bg-secondary" : "bg-white"
-          }`}
-        >
-          {isClicked ? (
-            <CiBookmark
-              color="#ffffff"
-              className="group-hover:text-white cursor-pointer z-50"
-              size={25}
-              onClick={() => deleteWishlist(productData?._id)}
-            />
-          ) : (
-            <CiBookmark
-              color="#A92449"
-              className="group-hover:text-white cursor-pointer z-50"
-              size={25}
-              onClick={() => addToWishlist(productData?._id)}
-            />
-          )}
-        </div>
-      )}
-  </div>
-
-  {/* STATUS + SKU WRAPPER */}
-  <div className={`flex flex-row items-center  gap-4 ${totalProduct?.purchaseType === "QUOTE" ? "my-4" : "my-2"}`}>
-
-    {/* STATUS */}
-    {productData?.status == "PUBLISHED" &&
-    productData?.deletedAt == null &&
-    productData?.isActive ? (
-      <p
-        className={`${
-          availableStockVal > minQty ? "text-primary" : "text-secondary"
-        } text-[14px] bg-green-100 rounded-full px-3 py-2 w-fit`}
-      >
-        {availableStockVal > minQty ? "In Stock" : "Out of Stock"}
-      </p>
-    ) : (
-      <p className="text-secondary text-md text-normal border border-secondary w-fit p-2 rounded">
-        Not Available
-      </p>
-    )}
-
-    {/* SKU */}
-    <p className="text-[14px] text-black font-normal w-fit px-2 py-2">
-      SKU: {productData?.variantSku}
-    </p>
-  </div>
-
-
-                 {/* Price Section Start*/}
-              <div className="mt-3">
-                {/* {totalProduct?.purchaseType === "QUOTE" ? ( */}
-                {totalProduct?.purchaseType === "QUOTE" ? (
-                  <></>
-                ) : productData?.MRP && productData?.discountedPrice ? (
-                  <div className="block justify-start items-center">
-                    {productData?.MRP === productData?.discountedPrice ? (
-                      <p className="md:text-3xl text-2xl text-black font-semibold text-normal flex justify-start items-center ">
-                        <span className="md:text-3xl text-2xl text-black mr-1 font-normal font-mono">
-                          ₹
-                        </span>{" "}
-                        {formatCurrencyInIndianStyle(
-                          productData?.platformPrice
+                  {productData?.status == "PUBLISHED" &&
+                    productData?.deletedAt == null &&
+                    productData?.isActive && (
+                      <div
+                        className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group ${isClicked ? "bg-secondary" : "bg-white"
+                          }`}
+                      >
+                        {isClicked ? (
+                          <CiBookmark
+                            color="#ffffff"
+                            className="group-hover:text-white cursor-pointer z-50"
+                            size={25}
+                            onClick={() => deleteWishlist(productData?._id)}
+                          />
+                        ) : (
+                          <CiBookmark
+                            color="#A92449"
+                            className="group-hover:text-white cursor-pointer z-50"
+                            size={25}
+                            onClick={() => addToWishlist(productData?._id)}
+                          />
                         )}
-                        <span className="text-[18px] font-regular text-fontGray ml-2">
-                          /{productData?.unitOfMeasure}
-                        </span>
-                        <span className="text-[18px] font-regular text-primary ml-2">
-                          MRP
-                        </span>
-                      </p>
-                    ) : (
-                      <>
-                        <div className="flex justify-start items-center">
-                          <p className="md:text-[20px] text-md text-[#c5c5c5] line-through font-light  text-normal flex justify-start items-center">
-                            <span className="text-xl text-[#01B6A3] mr-1 font-normal font-mono">
-                              ₹
-                            </span>{" "}
-                            {productData?.MRP +
-                              taxValue(
-                                productData?.MRP,
-                                productData?.tax?.igst
-                              )}
-                            {"  "}
-                            <span className="text-[18px] font-regular text-[#c5c5c5] ">
-                              {"     "}/{productData?.unitOfMeasure} MRP
-                            </span>
-                          </p>
-                          {calculateDiscountPercentage(
-                            productData?.MRP,
-                            productData?.discountedPrice
-                          ) > 0 && (
-                              <p className="md:text-xl text-md text-primary text-normal ml-3 ">
-                                ({" "}
-                                {calculateDiscountPercentage(
-                                  productData?.MRP,
-                                  productData?.discountedPrice
-                                )}
-                                % OFF)
-                              </p>
-                            )}
-                        </div>
-                        <p className="md:text-3xl text-2xl text-black text-normal mt-2 flex justify-start items-center">
-                          ₹{" "}
-                          <span className="md:text-3xl text-2xl text-black font-semibold text-normal flex justify-start items-center">
-                            {productData?.platformPrice
-                              ? formatCurrencyInIndianStyle(
-                                productData?.platformPrice
-                              )
-                              : productData?.discountedPrice +
-                              taxValue(
-                                productData?.MRP,
-                                productData?.tax?.igst
-                              ).toFixed(2)}
-                            <span className="text-[18px] font-regular text-fontGray ml-2">
-                              /{productData?.unitOfMeasure} MRP
-                            </span>
+                      </div>
+                    )}
+                </div>
+
+                {/* STATUS + SKU WRAPPER */}
+                <div className={`flex flex-row items-center  gap-4 ${totalProduct?.purchaseType === "QUOTE" ? "my-4" : "my-2"}`}>
+
+                  {/* STATUS */}
+                  {productData?.status == "PUBLISHED" &&
+                    productData?.deletedAt == null &&
+                    productData?.isActive ? (
+                    <p
+                      className={`${availableStockVal > minQty ? "text-primary" : "text-secondary"
+                        } text-[14px] bg-green-100 rounded-full px-3 py-2 w-fit`}
+                    >
+                      {availableStockVal > minQty ? "In Stock" : "Out of Stock"}
+                    </p>
+                  ) : (
+                    <p className="text-secondary text-md text-normal border border-secondary w-fit p-2 rounded">
+                      Not Available
+                    </p>
+                  )}
+
+                  {/* SKU */}
+                  <p className="text-[14px] text-black font-normal w-fit px-2 py-2">
+                    SKU: {productData?.variantSku}
+                  </p>
+                </div>
+
+
+                {/* Price Section Start*/}
+                <div className="mt-3">
+                  {/* {totalProduct?.purchaseType === "QUOTE" ? ( */}
+                  {totalProduct?.purchaseType === "QUOTE" ? (
+                    <></>
+                  ) : productData?.MRP && productData?.discountedPrice ? (
+                    <div className="block justify-start items-center">
+                      {productData?.MRP === productData?.discountedPrice ? (
+                        <p className="md:text-3xl text-2xl text-black font-semibold text-normal flex justify-start items-center ">
+                          <span className="md:text-3xl text-2xl text-black mr-1 font-normal font-mono">
+                            ₹
+                          </span>{" "}
+                          {formatCurrencyInIndianStyle(
+                            productData?.platformPrice
+                          )}
+                          <span className="text-[18px] font-regular text-fontGray ml-2">
+                            /{productData?.unitOfMeasure}
+                          </span>
+                          <span className="text-[18px] font-regular text-primary ml-2">
+                            MRP
                           </span>
                         </p>
-                      </>
-                    )}
-                  </div>
-                ) : (
-                  <></>
-                )}
-              </div>
-              {totalProduct?.purchaseType !== "QUOTE" && (
-                <p className="text-[13px] text-primary text-normal mt-2">
-                  Inclusive of all taxes
-                </p>
-              )}
-              {/* Price Section End*/}
-
-
-
-
-  {/* MATERIAL + QUANTITY SECTION (GREY BOX WRAPPER) */}
-  <div
-  className={`bg-white rounded-xl  ${
-    totalProduct?.purchaseType !== "QUOTE"
-      ? "py-[10px] mt-3 md:px-[24px] px-[10px]"
-      : "md:p-[24px] p-[10px] mt-2"
-  }`}
->
-  {/* QUANTITY + VARIATIONS ROW */}
-  {productData?.status == "PUBLISHED" &&
-    productData?.deletedAt == null &&
-    productData?.isActive && (
-      <div className="flex md:flex-row flex-col w-full md:gap-6 gap-2">
-        {/* QUANTITY - LEFT SIDE (50%) */}
-        <div className="md:w-1/2 w-full">
-          <p className="text-md text-fontGray mb-3">Quantity</p>
-
-          <TooltipProvider>
-            <Tooltip open={showQtyTip}>
-              <TooltipTrigger asChild>
-                <div className="flex items-center justify-between border border-borderGray w-full bg-white rounded-lg">
-                  <Button
-                    type="button"
-                    onClick={handleDecrement}
-                    className="pl-4 pr-0 py-2 bg-transparent text-lg hover:bg-transparent text-secondary"
-                    disabled={quantity <= minQty}
-                  >
-                    -
-                  </Button>
-
-                  <Input
-                    type="number"
-                    value={quantity}
-                    onChange={(e) => handleChange(e)}
-                    className="w-24 pl-0 text-center custom-input"
-                  />
-
-                  <Button
-                    type="button"
-                    onClick={handleIncrement}
-                    className="pr-4 pl-0 py-2 text-lg bg-transparent hover:bg-transparent text-secondary"
-                    disabled={quantity >= maxQty}
-                  >
-                    +
-                  </Button>
+                      ) : (
+                        <>
+                          <div className="flex justify-start items-center">
+                            <p className="md:text-[20px] text-md text-[#c5c5c5] line-through font-light  text-normal flex justify-start items-center">
+                              <span className="text-xl text-[#01B6A3] mr-1 font-normal font-mono">
+                                ₹
+                              </span>{" "}
+                              {productData?.MRP +
+                                taxValue(
+                                  productData?.MRP,
+                                  productData?.tax?.igst
+                                )}
+                              {"  "}
+                              <span className="text-[18px] font-regular text-[#c5c5c5] ">
+                                {"     "}/{productData?.unitOfMeasure} MRP
+                              </span>
+                            </p>
+                            {calculateDiscountPercentage(
+                              productData?.MRP,
+                              productData?.discountedPrice
+                            ) > 0 && (
+                                <p className="md:text-xl text-md text-primary text-normal ml-3 ">
+                                  ({" "}
+                                  {calculateDiscountPercentage(
+                                    productData?.MRP,
+                                    productData?.discountedPrice
+                                  )}
+                                  % OFF)
+                                </p>
+                              )}
+                          </div>
+                          <p className="md:text-3xl text-2xl text-black text-normal mt-2 flex justify-start items-center">
+                            ₹{" "}
+                            <span className="md:text-3xl text-2xl text-black font-semibold text-normal flex justify-start items-center">
+                              {productData?.platformPrice
+                                ? formatCurrencyInIndianStyle(
+                                  productData?.platformPrice
+                                )
+                                : productData?.discountedPrice +
+                                taxValue(
+                                  productData?.MRP,
+                                  productData?.tax?.igst
+                                ).toFixed(2)}
+                              <span className="text-[18px] font-regular text-fontGray ml-2">
+                                /{productData?.unitOfMeasure} MRP
+                              </span>
+                            </span>
+                          </p>
+                        </>
+                      )}
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
-              </TooltipTrigger>
-
-              <TooltipContent
-                side="bottom"
-                sideOffset={5}
-                className="border-transparent px-0 bg-black z-20 max-w-[270px]"
-              >
-                <TooltipArrow className="fill-black" />
-                {tooltipMsg && (
-                  <p className="text-sm text-white font-medium py-2 px-2">
-                    {tooltipMsg}
+                {totalProduct?.purchaseType !== "QUOTE" && (
+                  <p className="text-[13px] text-primary text-normal mt-2">
+                    Inclusive of all taxes
                   </p>
                 )}
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-
-        {/* VARIATIONS - RIGHT SIDE (50%) */}
-        <div className="md:w-1/2 w-full">
-          {!isSingle &&
-            totalProduct?.productAttributes &&
-            combinations && (
-              <AttributeDisplay
-                attributes={combinations}
-                currentAttributes={productData?.attributes}
-              />
-            )}
-        </div>
-      </div>
-    )}
-
-  {/* BUTTONS BELOW */}
-  <div className="flex gap-4 mt-6 md:flex-row flex-col">
-    {/* REQUEST QUOTE BUTTON */}
-    {(totalProduct?.purchaseType == "MULTI" ||
-      totalProduct?.purchaseType == "QUOTE") &&
-      productData?.status == "PUBLISHED" &&
-      productData?.deletedAt == null &&
-      productData?.isActive && (
-        <Button
-          className={`bg-primary rounded shadow-xs group py-[15px] ${
-            // If only this button exists → full width
-            (totalProduct?.purchaseType === "QUOTE" &&
-              !(totalProduct?.purchaseType === "MULTI")) ||
-            totalProduct?.purchaseType === "QUOTE"
-              ? "w-full"
-              : "md:w-1/2 w-full"
-          }`}
-          onClick={() => {
-            if (checkBuyerLogin()) {
-              setIsOpen(true);
-            }
-          }}
-        >
-          <p className="text-white text-md text-medium ml-3">Request for Quote</p>
-        </Button>
-      )}
-
-    {/* ADD TO CART BUTTON */}
-    {(totalProduct?.purchaseType == "MULTI" ||
-      totalProduct?.purchaseType == "ONLINE") &&
-      productData?.status == "PUBLISHED" &&
-      productData?.deletedAt == null &&
-      productData?.isActive && (
-        <Button
-          disabled={loadingCartButton}
-          onClick={() => addToCart(productData?._id)}
-          className={`bg-secondary rounded shadow-xs group py-[15px] hover:bg-secondary bg-opacity-100 hover:bg-opacity-85 transition ${
-            // if only add to cart is present → full width
-            totalProduct?.purchaseType === "ONLINE" ? "w-full" : "md:w-1/2 w-full"
-          }`}
-        >
-          {loadingCartButton ? (
-            <CircularProgress color="#ffffff" size={6} />
-          ) : (
-            <>
-              <BsCartPlus color="#fff" size={18} />
-              <p className="text-white text-md text-medium ml-3">Add to Cart</p>
-            </>
-          )}
-        </Button>
-      )}
-  </div>
-</div>
+                {/* Price Section End*/}
 
 
 
- </div>
 
-  {/* SELLER DETAILS */}
-  <div className="">
-  <p className="text-md text-fontGray text-normal mt-3 mb-2">Seller Details</p>
+                {/* MATERIAL + QUANTITY SECTION (GREY BOX WRAPPER) */}
+                <div
+                  className={`bg-white rounded-xl  ${totalProduct?.purchaseType !== "QUOTE"
+                      ? "py-[10px] mt-3 md:px-[24px] px-[10px]"
+                      : "md:p-[24px] p-[10px] mt-2"
+                    }`}
+                >
+                  {/* QUANTITY + VARIATIONS ROW */}
+                  {productData?.status == "PUBLISHED" &&
+                    productData?.deletedAt == null &&
+                    productData?.isActive && (
+                      <div className="flex md:flex-row flex-col w-full md:gap-6 gap-2">
+                        {/* QUANTITY - LEFT SIDE (50%) */}
+                        <div className="md:w-1/2 w-full">
+                          <p className="text-md text-fontGray mb-3">Quantity</p>
 
-  <div className="md:flex flex flex-col md:flex-row justify-between md:items-center items-start gap-4">
-    <div className="flex justify-start items-center md:mr-2 md:max-w-[60%]">
-      <div>
-        <p className="text-[15px] font-semibold capitalize text-black">
-          {vendorInfo?.companyName}
-        </p>
-        <p className="text-[13px] font-normal text-fontGray">
-          Vendor ID : {vendorInfo?.vendorCode}
-        </p>
-      </div>
-    </div>
+                          <TooltipProvider>
+                            <Tooltip open={showQtyTip}>
+                              <TooltipTrigger asChild>
+                                <div className="flex items-center justify-between border border-borderGray w-full bg-white rounded-lg">
+                                  <Button
+                                    type="button"
+                                    onClick={handleDecrement}
+                                    className="pl-4 pr-0 py-2 bg-transparent text-lg hover:bg-transparent text-secondary"
+                                    disabled={quantity <= minQty}
+                                  >
+                                    -
+                                  </Button>
 
-    {/* CERTIFICATION */}
-   <div className="flex justify-end items-center md:w-[40%] md:mt-0 mobile-sm:mt-2 my-2">
+                                  <Input
+                                    type="number"
+                                    value={quantity}
+                                    onChange={(e) => handleChange(e)}
+                                    className="w-24 pl-0 text-center custom-input"
+                                  />
 
-  {/* CERTIFICATE LOGO */}
-  {totalProduct?.certificate?.organization?.logo &&
-    totalProduct?.certificate?.organization?.authorityName !== "Others" && (
-      <div className="w-fit z-10">
-        <Image
-          src={
-            totalProduct?.certificate?.organization?.logo
-              ? totalProduct.certificate.organization.logo.includes("https://")
-                ? "/images/product-placeholder.webp"
-                : normalizePath(
-                    `${assetURL}/${totalProduct.certificate.organization.logo}`
-                  )
-              : "/images/product-placeholder.webp"
-          }
-          alt="Vendor Name"
-          width={70}
-          height={70}
-          onError={(e) =>
-            (e.currentTarget.src = "/images/product-placeholder.webp")
-          }
-          loading="lazy"
-          className="md:w-[60px] w-[80px] h-[60px] rounded-full border border-[#f0f0f0] bg-white object-contain"
-        />
-      </div>
-    )}
+                                  <Button
+                                    type="button"
+                                    onClick={handleIncrement}
+                                    className="pr-4 pl-0 py-2 text-lg bg-transparent hover:bg-transparent text-secondary"
+                                    disabled={quantity >= maxQty}
+                                  >
+                                    +
+                                  </Button>
+                                </div>
+                              </TooltipTrigger>
 
-  {/* CERTIFIED BUTTON */}
-  <div className="w-full md:w-auto">
+                              <TooltipContent
+                                side="bottom"
+                                sideOffset={5}
+                                className="border-transparent px-0 bg-black z-20 max-w-[270px]"
+                              >
+                                <TooltipArrow className="fill-black" />
+                                {tooltipMsg && (
+                                  <p className="text-sm text-white font-medium py-2 px-2">
+                                    {tooltipMsg}
+                                  </p>
+                                )}
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </div>
 
-    {totalProduct?.certificate?.certificateImg.endsWith(".pdf") ? (
-      // PDF BUTTON
-      <Button
-        onClick={() => window.open(totalProduct?.certificateLink, "_blank")}
-        className="text-white bg-primary hover:bg-secondary font-semibold h-[45px]
+                        {/* VARIATIONS - RIGHT SIDE (50%) */}
+                        <div className="md:w-1/2 w-full">
+                          {!isSingle &&
+                            totalProduct?.productAttributes &&
+                            combinations && (
+                              <AttributeDisplay
+                                attributes={combinations}
+                                currentAttributes={productData?.attributes}
+                              />
+                            )}
+                        </div>
+                      </div>
+                    )}
+
+                  {/* BUTTONS BELOW */}
+                  <div className="flex gap-4 mt-6 md:flex-row flex-col">
+                    {/* REQUEST QUOTE BUTTON */}
+                    {(totalProduct?.purchaseType == "MULTI" ||
+                      totalProduct?.purchaseType == "QUOTE") &&
+                      productData?.status == "PUBLISHED" &&
+                      productData?.deletedAt == null &&
+                      productData?.isActive && (
+                        <Button
+                          className={`bg-primary rounded shadow-xs group py-[15px] ${
+                            // If only this button exists → full width
+                            (totalProduct?.purchaseType === "QUOTE" &&
+                              !(totalProduct?.purchaseType === "MULTI")) ||
+                              totalProduct?.purchaseType === "QUOTE"
+                              ? "w-full"
+                              : "md:w-1/2 w-full"
+                            }`}
+                          onClick={() => {
+                            if (checkBuyerLogin()) {
+                              setIsOpen(true);
+                            }
+                          }}
+                        >
+                          <p className="text-white text-md text-medium ml-3">Request for Quote</p>
+                        </Button>
+                      )}
+
+                    {/* ADD TO CART BUTTON */}
+                    {(totalProduct?.purchaseType == "MULTI" ||
+                      totalProduct?.purchaseType == "ONLINE") &&
+                      productData?.status == "PUBLISHED" &&
+                      productData?.deletedAt == null &&
+                      productData?.isActive && (
+                        <Button
+                          disabled={loadingCartButton}
+                          onClick={() => addToCart(productData?._id)}
+                          className={`bg-secondary rounded shadow-xs group py-[15px] hover:bg-secondary bg-opacity-100 hover:bg-opacity-85 transition ${
+                            // if only add to cart is present → full width
+                            totalProduct?.purchaseType === "ONLINE" ? "w-full" : "md:w-1/2 w-full"
+                            }`}
+                        >
+                          {loadingCartButton ? (
+                            <CircularProgress color="#ffffff" size={6} />
+                          ) : (
+                            <>
+                              <BsCartPlus color="#fff" size={18} />
+                              <p className="text-white text-md text-medium ml-3">Add to Cart</p>
+                            </>
+                          )}
+                        </Button>
+                      )}
+                  </div>
+                </div>
+
+
+
+              </div>
+
+              {/* SELLER DETAILS */}
+              <div className="">
+                <p className="text-md text-fontGray text-normal mt-3 mb-2">Seller Details</p>
+
+                <div className="md:flex flex flex-col md:flex-row justify-between md:items-center items-start gap-4">
+                  <div className="flex justify-start items-center md:mr-2 md:max-w-[60%]">
+                    <div>
+                      <p className="text-[15px] font-semibold capitalize text-black">
+                        {vendorInfo?.companyName}
+                      </p>
+                      <p className="text-[13px] font-normal text-fontGray">
+                        Vendor ID : {vendorInfo?.vendorCode}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* CERTIFICATION */}
+                  <div className="flex justify-end items-center md:w-[40%] md:mt-0 mobile-sm:mt-2 my-2">
+
+                    {/* CERTIFICATE LOGO */}
+                    {totalProduct?.certificate?.organization?.logo &&
+                      totalProduct?.certificate?.organization?.authorityName !== "Others" && (
+                        <div className="w-fit z-10">
+                          <Image
+                            src={
+                              totalProduct?.certificate?.organization?.logo
+                                ? totalProduct.certificate.organization.logo.includes("https://")
+                                  ? "/images/product-placeholder.webp"
+                                  : normalizePath(
+                                    `${assetURL}/${totalProduct.certificate.organization.logo}`
+                                  )
+                                : "/images/product-placeholder.webp"
+                            }
+                            alt="Vendor Name"
+                            width={70}
+                            height={70}
+                            onError={(e) =>
+                              (e.currentTarget.src = "/images/product-placeholder.webp")
+                            }
+                            loading="lazy"
+                            className="md:w-[60px] w-[80px] h-[60px] rounded-full border border-[#f0f0f0] bg-white object-contain"
+                          />
+                        </div>
+                      )}
+
+                    {/* CERTIFIED BUTTON */}
+                    <div className="w-full md:w-auto">
+
+                      {totalProduct?.certificate?.certificateImg.endsWith(".pdf") ? (
+                        // PDF BUTTON
+                        <Button
+                          onClick={() => window.open(totalProduct?.certificateLink, "_blank")}
+                          className="text-white bg-primary hover:bg-secondary font-semibold h-[45px]
                    w-[90%] md:w-40 mx-auto md:mx-0
                    text-sm md:text-md flex items-center justify-center
                    md:relative md:right-[10px]"
-      >
-        <p className="text-white font-semibold text-md">Certified</p>
-      </Button>
-    ) : (
-      // IMAGE PREVIEW DIALOG
-      <Dialog>
-        <DialogTrigger asChild className="max-w-[90%]">
-          <Link
-            href="#"
-            className="text-white bg-primary hover:bg-secondary font-semibold h-[45px]
+                        >
+                          <p className="text-white font-semibold text-md">Certified</p>
+                        </Button>
+                      ) : (
+                        // IMAGE PREVIEW DIALOG
+                        <Dialog>
+                          <DialogTrigger asChild className="max-w-[90%]">
+                            <Link
+                              href="#"
+                              className="text-white bg-primary hover:bg-secondary font-semibold h-[45px]
                        w-[90%] md:w-40 mx-auto md:mx-0
                        text-sm md:text-md flex items-center justify-center
                        md:relative md:right-[10px]"
-          >
-            <p className="text-white font-semibold text-md">Certified</p>
-          </Link>
-        </DialogTrigger>
+                            >
+                              <p className="text-white font-semibold text-md">Certified</p>
+                            </Link>
+                          </DialogTrigger>
 
-        <DialogContent className="w-[98%] fixed h-[98%] lg:w-full">
-          <DialogClose className="flex justify-end absolute z-50 right-[15px] top-[15px]">
-            <IoCloseCircleSharp
-              color="white"
-              className="bg-bgGray rounded-full"
-              size={30}
-            />
-          </DialogClose>
+                          <DialogContent className="w-[98%] fixed h-[98%] lg:w-full">
+                            <DialogClose className="flex justify-end absolute z-50 right-[15px] top-[15px]">
+                              <IoCloseCircleSharp
+                                color="white"
+                                className="bg-bgGray rounded-full"
+                                size={30}
+                              />
+                            </DialogClose>
 
-          <div className="h-full w-full">
-            <Image
-              src={
-                totalProduct?.certificate?.certificateImg
-                  ? normalizePath(
-                      `${assetURL}/${totalProduct.certificate.certificateImg}`
-                    )
-                  : "/images/product-placeholder.webp"
-              }
-              className="p-[10px] rounded"
-              onError={(e) =>
-                (e.currentTarget.src =
-                  "images/failedToLoadImage.webp")
-              }
-              loading="lazy"
-              fill={true}
-              objectFit="contain"
-              alt="certificate"
-            />
-          </div>
-        </DialogContent>
-      </Dialog>
-    )}
+                            <div className="h-full w-full">
+                              <Image
+                                src={
+                                  totalProduct?.certificate?.certificateImg
+                                    ? normalizePath(
+                                      `${assetURL}/${totalProduct.certificate.certificateImg}`
+                                    )
+                                    : "/images/product-placeholder.webp"
+                                }
+                                className="p-[10px] rounded"
+                                onError={(e) =>
+                                (e.currentTarget.src =
+                                  "images/failedToLoadImage.webp")
+                                }
+                                loading="lazy"
+                                fill={true}
+                                objectFit="contain"
+                                alt="certificate"
+                              />
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                      )}
 
-  </div>
-</div>
-
-  </div>
-
-  {/* COUNTRY & DELIVERY */}
-  <div className="flex justify-start md:items-center items-start md:gap-8 gap-2 md:flex-row flex-col">
-  <p className="text-md text-fontGray md:mt-4 mt-1">
-    Country Of Origin :
-    <span className="text-secondary font-medium uppercase ml-1">
-      {totalProduct?.countryOfOrigin == "In"
-        ? "India"
-        : fetchCountryNameFromData(totalProduct?.countryOfOrigin)}
-    </span>
-  </p>
-
-
-              {/* Pincode Check Start */}
-              {totalProduct?.allIndiaDelivery == true ? (
-                <p className="text-md text-primary flex items-center justify-start text-normal font-semibold md:mt-3 mt-0 ">
-                  <TbMapPin2 className="mr-2 text-primary" size={26} />
-                  All India Delivery
-                </p>
-              ) : (
-                <div className="flex md:flex-row flex-col justify-between md:items-center items-start md:mt-4 mt-2 md:gap-3 ">
-                  <p className="text-md text-fontGray flex items-center justify-start text-normal font-normal  ">
-                    Delivery:
-                   
-                  </p>
-                  <div className="flex h-8 items-center justify-between w-fit  mt-2 md:mt-0">
-                    <Input
-                      placeholder="Enter Pincode"
-                      onChange={(e: any) => {
-                        if (e?.target?.value.length == 6) {
-                          setPincode(e?.target?.value);
-                          setShowMssg(false);
-                        } else {
-                          setPincode(e?.target?.value);
-                        }
-                      }}
-                      className="border border-borderGray text-[16px] text-black rounded-none h-10 md:h-10 md:w-[250px] w-[250px] md:text-md text-xs py-2 md:py-0"
-                    // customStyles={{
-                    //   border: "1px solid #BCBCBC",
-                    //   color: "#333",
-                    // }}
-                    // leftIcon={<CiLocationOn size={20} />}
-
-                    // extraClassnames="w-fit h-8 text-xs rounded-sm"
-                    />
-                    <Button
-                      title={"Apply"}
-                      variant="link"
-                      disabled={pincode.length == 6 ? false : true}
-                      className={`text-secondary relative right-[70px] ${pincode.length == 6 ? "opacity-100" : "opacity-50"
-                        } `}
-                      onClick={() => CheckDelivery(pincode)}
-                    >
-                      Check
-                    </Button>
+                    </div>
                   </div>
-                   {pincode &&
-                      pincode.length > 0 &&
-                      pincode.length == 6 &&
-                      showMssg ? (
+
+                </div>
+
+                {/* COUNTRY & DELIVERY */}
+                <div className="flex justify-start md:items-center items-start md:gap-8 gap-2 md:flex-row flex-col">
+                  <p className="text-md text-fontGray md:mt-4 mt-1">
+                    Country Of Origin :
+                    <span className="text-secondary font-medium uppercase ml-1">
+                      {totalProduct?.countryOfOrigin == "In"
+                        ? "India"
+                        : fetchCountryNameFromData(totalProduct?.countryOfOrigin)}
+                    </span>
+                  </p>
+
+
+                  {/* Pincode Check Start */}
+                  {totalProduct?.allIndiaDelivery == true ? (
+                    <p className="text-md text-primary flex items-center justify-start text-normal font-semibold md:mt-3 mt-0 ">
+                      <TbMapPin2 className="mr-2 text-primary" size={26} />
+                      All India Delivery
+                    </p>
+                  ) : (
+                    <div className="flex md:flex-row flex-col justify-between md:items-center items-start md:mt-4 mt-2 md:gap-3 ">
+                      <p className="text-md text-fontGray flex items-center justify-start text-normal font-normal  ">
+                        Delivery:
+
+                      </p>
+                      <div className="flex h-8 items-center justify-between w-fit  mt-2 md:mt-0">
+                        <Input
+                          placeholder="Enter Pincode"
+                          onChange={(e: any) => {
+                            if (e?.target?.value.length == 6) {
+                              setPincode(e?.target?.value);
+                              setShowMssg(false);
+                            } else {
+                              setPincode(e?.target?.value);
+                            }
+                          }}
+                          className="border border-borderGray text-[16px] text-black rounded-none h-10 md:h-10 md:w-[250px] w-[250px] md:text-md text-xs py-2 md:py-0"
+                        // customStyles={{
+                        //   border: "1px solid #BCBCBC",
+                        //   color: "#333",
+                        // }}
+                        // leftIcon={<CiLocationOn size={20} />}
+
+                        // extraClassnames="w-fit h-8 text-xs rounded-sm"
+                        />
+                        <Button
+                          title={"Apply"}
+                          variant="link"
+                          disabled={pincode.length == 6 ? false : true}
+                          className={`text-secondary relative right-[70px] ${pincode.length == 6 ? "opacity-100" : "opacity-50"
+                            } `}
+                          onClick={() => CheckDelivery(pincode)}
+                        >
+                          Check
+                        </Button>
+                      </div>
+                      {pincode &&
+                        pincode.length > 0 &&
+                        pincode.length == 6 &&
+                        showMssg ? (
+                        <>
+                          {deliveyAvailable ? (
+                            <span className="text-primary text-md font-semibold ml-2">
+                              Available
+                            </span>
+                          ) : (
+                            <span className="ml-2 text-primary text-md font-semibold ml-2">
+                              Not Available
+                            </span>
+                          )}
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  )}
+                </div>
+                {/* Pincode Check End */}
+                {/* Shipping Date Start */}
+                {deliveyAvailable ? (
+                  <>
+                    <p className="text-md text-secondary flex items-center justify-start text-normal font-semibold mt-6 md:pb-[40px] ">
+                      <MdOutlineLocalShipping
+                        className="mr-2 text-secondary"
+                        size={26}
+                      />{" "}
+                      Expected Shipping By :{" "}
+                      <span className="text-black text-normal font-semibold ml-2">
+                        {calculateShippingDate(
+                          productData?.readyForShippingInDay
+                        )}
+                      </span>
+                    </p>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {/* Shipping Date End */}
+
+                {/* POLICIES */}
+                <div className=" md:flex gap-6">
+
+                  {/* Polcies Date Start */}
+                  <div className="md:flex grid grid-cols-2   block  mt-3 h-fit md:justify-start justify-between items-center md:gap-6 ">
+                    {totalProduct?.isCancellable == true ? (
                       <>
-                        {deliveyAvailable ? (
-                          <span className="text-primary text-md font-semibold ml-2">
-                            Available
-                          </span>
+                        {totalProduct?.cancellationPolicy &&
+                          // totalProduct?.cancellationPolicy?.cancellationPolicyDoc &&
+                          totalProduct?.cancellationPolicy?.isActive == true ? (
+                          <div className="justify-start items-center py-3 flex flex-row items-center  ">
+                            <Image
+                              width={45}
+                              height={45}
+                              onError={(e) => {
+                                e.currentTarget.src =
+                                  "images/failedToLoadImage.webp";
+                              }}
+                              loading="lazy"
+                              className="w-[45px] h-[45px]"
+                              alt="cancelOrder"
+                              src={"/images/CancelS.svg"}
+                            />
+                            <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
+                              {totalProduct?.cancellationPolicy
+                                ?.cancellationPolicyDoc ? (
+                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[95px]">
+                                  {totalProduct?.cancellationPolicy?.cancellationPolicyDoc.endsWith(
+                                    ".pdf"
+                                  ) ? (
+                                    <Link
+                                      target="_blank"
+                                      href={`${assetURL}/${totalProduct?.cancellationPolicy?.cancellationPolicyDoc}`}
+                                      className="text-secondary text-sm font-normal"
+                                    >
+                                      Cancellation{" "}
+                                      <span className="text-black text-sm font-normal">
+                                        Available.
+                                      </span>
+                                    </Link>
+                                  ) : (
+                                    <>
+                                      <Dialog>
+                                        <DialogTrigger
+                                          asChild
+                                          className="max-w-[90%]"
+                                        >
+                                          {/* <Button variant="outline">View</Button> */}
+                                          <Link href="#" className="mr-3">
+                                            <p className="text-secondary text-sm font-normal">
+                                              Cancellation{" "}
+                                              <span className="text-black text-sm font-normal cursor-default">
+                                                Available
+                                              </span>
+                                            </p>
+                                          </Link>
+                                        </DialogTrigger>
+                                        <DialogContent className="w-[98%] fixed  h-[98%] lg:w-full ">
+                                          <DialogClose className="flex justify-end absolute z-50 right-[15px] top-[15px] w-full shadow-2xl">
+                                            <IoCloseCircleSharp
+                                              color="white"
+                                              size={30}
+                                            />
+                                          </DialogClose>
+                                          <div className="h-full w-full ">
+                                            <Image
+                                              // src={`${assetURL}/${totalProduct?.cancellationPolicy?.cancellationPolicyDoc}`}
+                                              // src={
+                                              //   totalProduct?.cancellationPolicy
+                                              //     ?.cancellationPolicyDoc
+                                              //     ? (
+                                              //         assetURL +
+                                              //         "/" +
+                                              //         totalProduct
+                                              //           ?.cancellationPolicy
+                                              //           ?.cancellationPolicyDoc
+                                              //       ).includes("//admin")
+                                              //       ? (
+                                              //           assetURL +
+                                              //           "/" +
+                                              //           totalProduct
+                                              //             ?.cancellationPolicy
+                                              //             ?.cancellationPolicyDoc
+                                              //         ).replace("//admin", "/admin")
+                                              //       : `${assetURL}/${totalProduct?.cancellationPolicy?.cancellationPolicyDoc}`
+                                              //     : "/images/product-placeholder.webp"
+                                              // }
+                                              src={
+                                                totalProduct?.cancellationPolicy
+                                                  ?.cancellationPolicyDoc
+                                                  ? normalizePath(
+                                                    `${assetURL}/${totalProduct.cancellationPolicy.cancellationPolicyDoc}`
+                                                  )
+                                                  : "/images/product-placeholder.webp"
+                                              }
+                                              className="p-[10px] rounded "
+                                              onError={(e) => {
+                                                e.currentTarget.src =
+                                                  "images/failedToLoadImage.webp";
+                                              }}
+                                              loading="lazy"
+                                              objectFit="cover"
+                                              alt={"cancelCertificate"}
+                                              fill={true}
+                                              width={200}
+                                              height={200}
+                                            />
+                                          </div>
+                                        </DialogContent>
+                                      </Dialog>
+                                    </>
+                                  )}
+                                </p>
+                              ) : (
+                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[95px]">
+                                  <div
+                                    // target="_blank"
+                                    // href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.cancellationPolicy?.cancellationPolicyDoc}`}
+                                    className="text-secondary text-sm font-normal"
+                                  >
+                                    Cancellation{" "}
+                                    <span className="text-black text-sm font-normal">
+                                      Available.
+                                    </span>
+                                  </div>
+                                </p>
+                              )}
+                            </div>
+                          </div>
                         ) : (
-                          <span className="ml-2 text-primary text-md font-semibold ml-2">
-                            Not Available
-                          </span>
+                          <> </>
                         )}
                       </>
                     ) : (
-                      <></>
-                    )}
-                </div>
-              )}
-              </div>
-              {/* Pincode Check End */}
-              {/* Shipping Date Start */}
-              {deliveyAvailable ? (
-                <>
-                  <p className="text-md text-secondary flex items-center justify-start text-normal font-semibold mt-6 md:pb-[40px] ">
-                    <MdOutlineLocalShipping
-                      className="mr-2 text-secondary"
-                      size={26}
-                    />{" "}
-                    Expected Shipping By :{" "}
-                    <span className="text-black text-normal font-semibold ml-2">
-                      {calculateShippingDate(
-                        productData?.readyForShippingInDay
-                      )}
-                    </span>
-                  </p>
-                </>
-              ) : (
-                <></>
-              )}
-              {/* Shipping Date End */}
-
-  {/* POLICIES */}
-  <div className="md:flex block  gap-6 ">
-
-     {/* Polcies Date Start */}
-              <div className="md:flex flex  flex-row  block  mt-3 h-fit md:justify-start justify-between items-center md:gap-6 ">
-                {totalProduct?.isCancellable == true ? (
-                  <>
-                    {totalProduct?.cancellationPolicy &&
-                      // totalProduct?.cancellationPolicy?.cancellationPolicyDoc &&
-                      totalProduct?.cancellationPolicy?.isActive == true ? (
-                      <div className="justify-start items-center py-3 flex flex-row items-center  ">
-                        <Image
-                          width={45}
-                          height={45}
-                          onError={(e) => {
-                            e.currentTarget.src =
-                              "images/failedToLoadImage.webp";
-                          }}
-                          loading="lazy"
-                          className="w-[45px] h-[45px]"
-                          alt="cancelOrder"
-                          src={"/images/CancelS.svg"}
-                        />
-                        <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
-                          {totalProduct?.cancellationPolicy
-                            ?.cancellationPolicyDoc ? (
-                            <p className="text-sm text-fontGray text-normal h-[45px] max-w-[95px]">
-                              {totalProduct?.cancellationPolicy?.cancellationPolicyDoc.endsWith(
-                                ".pdf"
-                              ) ? (
-                                <Link
-                                  target="_blank"
-                                  href={`${assetURL}/${totalProduct?.cancellationPolicy?.cancellationPolicyDoc}`}
-                                  className="text-secondary text-sm font-normal"
-                                >
-                                  Cancellation{" "}
-                                  <span className="text-black text-sm font-normal">
-                                    Available.
-                                  </span>
-                                </Link>
-                              ) : (
-                                <>
-                                  <Dialog>
-                                    <DialogTrigger
-                                      asChild
-                                      className="max-w-[90%]"
-                                    >
-                                      {/* <Button variant="outline">View</Button> */}
-                                      <Link href="#" className="mr-3">
-                                        <p className="text-secondary text-sm font-normal">
-                                          Cancellation{" "}
-                                          <span className="text-black text-sm font-normal cursor-default">
-                                            Available
-                                          </span>
-                                        </p>
-                                      </Link>
-                                    </DialogTrigger>
-                                    <DialogContent className="w-[98%] fixed  h-[98%] lg:w-full ">
-                                      <DialogClose className="flex justify-end absolute z-50 right-[15px] top-[15px] w-full shadow-2xl">
-                                        <IoCloseCircleSharp
-                                          color="white"
-                                          size={30}
-                                        />
-                                      </DialogClose>
-                                      <div className="h-full w-full ">
-                                        <Image
-                                          // src={`${assetURL}/${totalProduct?.cancellationPolicy?.cancellationPolicyDoc}`}
-                                          // src={
-                                          //   totalProduct?.cancellationPolicy
-                                          //     ?.cancellationPolicyDoc
-                                          //     ? (
-                                          //         assetURL +
-                                          //         "/" +
-                                          //         totalProduct
-                                          //           ?.cancellationPolicy
-                                          //           ?.cancellationPolicyDoc
-                                          //       ).includes("//admin")
-                                          //       ? (
-                                          //           assetURL +
-                                          //           "/" +
-                                          //           totalProduct
-                                          //             ?.cancellationPolicy
-                                          //             ?.cancellationPolicyDoc
-                                          //         ).replace("//admin", "/admin")
-                                          //       : `${assetURL}/${totalProduct?.cancellationPolicy?.cancellationPolicyDoc}`
-                                          //     : "/images/product-placeholder.webp"
-                                          // }
-                                          src={
-                                            totalProduct?.cancellationPolicy
-                                              ?.cancellationPolicyDoc
-                                              ? normalizePath(
-                                                `${assetURL}/${totalProduct.cancellationPolicy.cancellationPolicyDoc}`
-                                              )
-                                              : "/images/product-placeholder.webp"
-                                          }
-                                          className="p-[10px] rounded "
-                                          onError={(e) => {
-                                            e.currentTarget.src =
-                                              "images/failedToLoadImage.webp";
-                                          }}
-                                          loading="lazy"
-                                          objectFit="cover"
-                                          alt={"cancelCertificate"}
-                                          fill={true}
-                                          width={200}
-                                          height={200}
-                                        />
-                                      </div>
-                                    </DialogContent>
-                                  </Dialog>
-                                </>
-                              )}
-                            </p>
-                          ) : (
-                            <p className="text-sm text-fontGray text-normal h-[45px] max-w-[95px]">
-                              <div
-                                // target="_blank"
-                                // href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.cancellationPolicy?.cancellationPolicyDoc}`}
-                                className="text-secondary text-sm font-normal"
-                              >
-                                Cancellation{" "}
-                                <span className="text-black text-sm font-normal">
-                                  Available.
-                                </span>
-                              </div>
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    ) : (
-                      <> </>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <div className="justify-start items-center py-3 flex flex-row items-center  ">
-                      <Image
-                        width={40}
-                        height={40}
-                        onError={(e) => {
-                          e.currentTarget.src = "images/failedToLoadImage.webp";
-                        }}
-                        loading="lazy"
-                        className="w-[40px] h-[40px]"
-                        alt="cancelOrder"
-                        src={"/images/CancelS.svg"}
-                      />
-                      {/* <p className="text-sm text-primary text-normal   flex items-center justify-start uppercase">
+                      <>
+                        <div className="justify-start items-center py-3 flex flex-row items-center  ">
+                          <Image
+                            width={40}
+                            height={40}
+                            onError={(e) => {
+                              e.currentTarget.src = "images/failedToLoadImage.webp";
+                            }}
+                            loading="lazy"
+                            className="w-[40px] h-[40px]"
+                            alt="cancelOrder"
+                            src={"/images/CancelS.svg"}
+                          />
+                          {/* <p className="text-sm text-primary text-normal   flex items-center justify-start uppercase">
                         {" "}
                         Cancellation
                       </p> */}
-                      <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
-                        <p className="text-sm text-fontGray text-normal h-[45px]  max-w-[140px] ">
-                          Cancellation <br></br> Not Available
-                        </p>
-                      </div>
-                    </div>
-                  </>
-                )}
-                {totalProduct?.isReturnable == true ? (
-                  <>
-                    {totalProduct?.returnPolicy &&
-                      // totalProduct?.returnPolicy?.returnPolicyDoc &&
-                      totalProduct?.returnPolicy?.allowReturn == true ? (
-                      <div className="justify-start items-center py-3 flex flex-row   ">
-                        <Image
-                          width={45}
-                          height={45}
-                          onError={(e) => {
-                            e.currentTarget.src =
-                              "images/failedToLoadImage.webp";
-                          }}
-                          loading="lazy"
-                          className="w-[45px] h-[45px]"
-                          alt="cancelOrder"
-                          src={"/images/ReturnS.svg"}
-                        />
-                        <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
-                          {totalProduct?.returnPolicy?.returnPolicyDoc ? (
-                            <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
-                              {/* {totalProduct?.returnPolicy?.durationInDays} days{" "}
+                          <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
+                            <p className="text-sm text-fontGray text-normal h-[45px]  max-w-[140px] ">
+                              Cancellation <br></br> Not Available
+                            </p>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                    {totalProduct?.isReturnable == true ? (
+                      <>
+                        {totalProduct?.returnPolicy &&
+                          // totalProduct?.returnPolicy?.returnPolicyDoc &&
+                          totalProduct?.returnPolicy?.allowReturn == true ? (
+                          <div className="justify-start items-center py-3 flex flex-row   ">
+                            <Image
+                              width={45}
+                              height={45}
+                              onError={(e) => {
+                                e.currentTarget.src =
+                                  "images/failedToLoadImage.webp";
+                              }}
+                              loading="lazy"
+                              className="w-[45px] h-[45px]"
+                              alt="cancelOrder"
+                              src={"/images/ReturnS.svg"}
+                            />
+                            <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
+                              {totalProduct?.returnPolicy?.returnPolicyDoc ? (
+                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
+                                  {/* {totalProduct?.returnPolicy?.durationInDays} days{" "}
                             <Link
                               target="_blank"
                              // href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`}
@@ -1807,278 +1801,278 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               Return Policy.
                             </Link> */}
 
-                              {totalProduct?.returnPolicy?.returnPolicyDoc.endsWith(
-                                ".pdf"
-                              ) ? (
-                                <Link
-                                  target="_blank"
-                                  href={`${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`}
-                                  className="text-black text-sm font-normal "
-                                >
-                                  {totalProduct?.returnPolicy?.durationInDays}{" "}
-                                  days{" "}
-                                  <span className="text-secondary text-sm font-normal !cursor-pointer">
-                                    Return Policy
-                                  </span>
-                                  .
-                                </Link>
-                              ) : (
-                                <>
-                                  <Dialog>
-                                    <DialogTrigger
-                                      asChild
-                                      className="max-w-[90%]"
+                                  {totalProduct?.returnPolicy?.returnPolicyDoc.endsWith(
+                                    ".pdf"
+                                  ) ? (
+                                    <Link
+                                      target="_blank"
+                                      href={`${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`}
+                                      className="text-black text-sm font-normal "
                                     >
-                                      {/* <Button variant="outline">View</Button> */}
-                                      <Link href="#" className=" md:mr-3">
-                                        <p className="text-black text-sm font-normal cursor-default">
-                                          {
-                                            totalProduct?.returnPolicy
-                                              ?.durationInDays
-                                          }{" "}
-                                          days{" "}
-                                          <span className="text-secondary text-sm font-normal !cursor-pointer">
-                                            Return Policy.
-                                          </span>
-                                        </p>
-                                      </Link>
-                                    </DialogTrigger>
-                                    <DialogContent className="w-[98%] fixed  h-[98%] lg:w-full ">
-                                      <DialogClose className="flex justify-end absolute z-50 right-[15px] top-[15px] w-full shadow-2xl">
-                                        <IoCloseCircleSharp
-                                          color="white"
-                                          size={30}
-                                        />
-                                      </DialogClose>
-                                      <div className="h-full w-full ">
-                                        <Image
-                                          // src={`${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`}
-                                          // src={
-                                          //   totalProduct?.returnPolicy
-                                          //     ?.returnPolicyDoc
-                                          //     ? (
-                                          //         assetURL +
-                                          //         "/" +
-                                          //         totalProduct?.returnPolicy
-                                          //           ?.returnPolicyDoc
-                                          //       ).includes("//admin")
-                                          //       ? (
-                                          //           assetURL +
-                                          //           "/" +
-                                          //           totalProduct?.returnPolicy
-                                          //             ?.returnPolicyDoc
-                                          //         ).replace("//admin", "/admin")
-                                          //       : `${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`
-                                          //     : "/images/product-placeholder.webp"
-                                          // }
-                                          src={
-                                            totalProduct?.returnPolicy
-                                              ?.returnPolicyDoc
-                                              ? normalizePath(
-                                                `${assetURL}/${totalProduct.returnPolicy.returnPolicyDoc}`
-                                              )
-                                              : "/images/product-placeholder.webp"
-                                          }
-                                          className="p-[10px] rounded "
-                                          onError={(e) => {
-                                            e.currentTarget.src =
-                                              "images/failedToLoadImage.webp";
-                                          }}
-                                          loading="lazy"
-                                          objectFit="cover"
-                                          alt={"cancelCertificate"}
-                                          fill={true}
-                                          width={200}
-                                          height={200}
-                                        />
-                                      </div>
-                                    </DialogContent>
-                                  </Dialog>
-                                </>
+                                      {totalProduct?.returnPolicy?.durationInDays}{" "}
+                                      days{" "}
+                                      <span className="text-secondary text-sm font-normal !cursor-pointer">
+                                        Return Policy
+                                      </span>
+                                      .
+                                    </Link>
+                                  ) : (
+                                    <>
+                                      <Dialog>
+                                        <DialogTrigger
+                                          asChild
+                                          className="max-w-[90%]"
+                                        >
+                                          {/* <Button variant="outline">View</Button> */}
+                                          <Link href="#" className=" md:mr-3">
+                                            <p className="text-black text-sm font-normal cursor-default">
+                                              {
+                                                totalProduct?.returnPolicy
+                                                  ?.durationInDays
+                                              }{" "}
+                                              days{" "}
+                                              <span className="text-secondary text-sm font-normal !cursor-pointer">
+                                                Return Policy.
+                                              </span>
+                                            </p>
+                                          </Link>
+                                        </DialogTrigger>
+                                        <DialogContent className="w-[98%] fixed  h-[98%] lg:w-full ">
+                                          <DialogClose className="flex justify-end absolute z-50 right-[15px] top-[15px] w-full shadow-2xl">
+                                            <IoCloseCircleSharp
+                                              color="white"
+                                              size={30}
+                                            />
+                                          </DialogClose>
+                                          <div className="h-full w-full ">
+                                            <Image
+                                              // src={`${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`}
+                                              // src={
+                                              //   totalProduct?.returnPolicy
+                                              //     ?.returnPolicyDoc
+                                              //     ? (
+                                              //         assetURL +
+                                              //         "/" +
+                                              //         totalProduct?.returnPolicy
+                                              //           ?.returnPolicyDoc
+                                              //       ).includes("//admin")
+                                              //       ? (
+                                              //           assetURL +
+                                              //           "/" +
+                                              //           totalProduct?.returnPolicy
+                                              //             ?.returnPolicyDoc
+                                              //         ).replace("//admin", "/admin")
+                                              //       : `${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`
+                                              //     : "/images/product-placeholder.webp"
+                                              // }
+                                              src={
+                                                totalProduct?.returnPolicy
+                                                  ?.returnPolicyDoc
+                                                  ? normalizePath(
+                                                    `${assetURL}/${totalProduct.returnPolicy.returnPolicyDoc}`
+                                                  )
+                                                  : "/images/product-placeholder.webp"
+                                              }
+                                              className="p-[10px] rounded "
+                                              onError={(e) => {
+                                                e.currentTarget.src =
+                                                  "images/failedToLoadImage.webp";
+                                              }}
+                                              loading="lazy"
+                                              objectFit="cover"
+                                              alt={"cancelCertificate"}
+                                              fill={true}
+                                              width={200}
+                                              height={200}
+                                            />
+                                          </div>
+                                        </DialogContent>
+                                      </Dialog>
+                                    </>
+                                  )}
+                                </p>
+                              ) : (
+                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
+                                  <div
+                                    // target="_blank"
+                                    // href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`}
+                                    className="text-black text-sm font-normal "
+                                  >
+                                    {totalProduct?.returnPolicy?.durationInDays}{" "}
+                                    days{" "}
+                                    <span className="text-secondary text-sm font-normal">
+                                      Return Policy
+                                    </span>
+                                    .
+                                  </div>
+                                </p>
                               )}
-                            </p>
-                          ) : (
-                            <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
-                              <div
-                                // target="_blank"
-                                // href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`}
-                                className="text-black text-sm font-normal "
-                              >
-                                {totalProduct?.returnPolicy?.durationInDays}{" "}
-                                days{" "}
-                                <span className="text-secondary text-sm font-normal">
-                                  Return Policy
-                                </span>
-                                .
-                              </div>
-                            </p>
-                          )}
-                        </div>
-                      </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <> </>
+                        )}
+                      </>
                     ) : (
-                      <> </>
+                      <>
+                        <div className=" justify-start items-center py-3 flex flex-row items-center  ">
+                          <Image
+                            width={45}
+                            height={45}
+                            onError={(e) => {
+                              e.currentTarget.src = "images/failedToLoadImage.webp";
+                            }}
+                            loading="lazy"
+                            className="w-[45px] h-[45px]"
+                            alt="cancelOrder"
+                            src={"/images/ReturnS.svg"}
+                          />
+                          <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
+                            <p className="text-sm text-fontGray text-normal h-[45px]  max-w-[140px] ">
+                              Return<br></br> Not Available
+                            </p>
+                          </div>
+                        </div>
+                      </>
                     )}
-                  </>
-                ) : (
-                  <>
-                    <div className=" justify-start items-center py-3 flex flex-row items-center  ">
-                      <Image
-                        width={45}
-                        height={45}
-                        onError={(e) => {
-                          e.currentTarget.src = "images/failedToLoadImage.webp";
-                        }}
-                        loading="lazy"
-                        className="w-[45px] h-[45px]"
-                        alt="cancelOrder"
-                        src={"/images/ReturnS.svg"}
-                      />
-                      <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
-                        <p className="text-sm text-fontGray text-normal h-[45px]  max-w-[140px] ">
-                          Return<br></br> Not Available
-                        </p>
-                      </div>
-                    </div>
-                  </>
-                )}
 
-                {(totalProduct?.isReturnable == true ||
-                  totalProduct?.isCancellable == true ||
-                  totalProduct?.isRefundable == true) &&
-                  totalProduct?.isRefundable == true ? (
-                  <>
-                    {totalProduct?.refundPolicy &&
-                      // totalProduct?.refundPolicy?.refundPolicyDoc &&
-                      totalProduct?.refundPolicy?.isActive == true ? (
-                      <div className="justify-start items-center py-3 flex flex-row items-center  ">
-                        <Image
-                          width={45}
-                          height={45}
-                          onError={(e) => {
-                            e.currentTarget.src =
-                              "images/failedToLoadImage.webp";
-                          }}
-                          loading="lazy"
-                          className="w-[45px] h-[45px]"
-                          alt="cancelOrder"
-                          src={"/images/RefundS.svg"}
-                        />
-                        <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
-                          {totalProduct?.refundPolicy?.refundPolicyDoc ? (
-                            <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
-                              {totalProduct?.refundPolicy?.refundPolicyDoc.endsWith(
-                                ".pdf"
-                              ) ? (
-                                <Link
-                                  target="_blank"
-                                  href={`${assetURL}/${totalProduct?.refundPolicy?.refundPolicyDoc}`}
-                                  className="text-black text-sm font-normal cursor-default"
-                                >
-                                  {totalProduct?.refundPolicy?.durationInDays}{" "}
-                                  days{" "}
-                                  <span className="text-secondary text-sm font-normal !cursor-pointer">
-                                    {" "}
-                                    Refund Policy.
-                                  </span>
-                                </Link>
-                              ) : (
-                                <>
-                                  <Dialog>
-                                    <DialogTrigger
-                                      asChild
-                                      className="max-w-[90%]"
+                    {(totalProduct?.isReturnable == true ||
+                      totalProduct?.isCancellable == true ||
+                      totalProduct?.isRefundable == true) &&
+                      totalProduct?.isRefundable == true ? (
+                      <>
+                        {totalProduct?.refundPolicy &&
+                          // totalProduct?.refundPolicy?.refundPolicyDoc &&
+                          totalProduct?.refundPolicy?.isActive == true ? (
+                          <div className="justify-start items-center py-3 flex flex-row items-center  ">
+                            <Image
+                              width={45}
+                              height={45}
+                              onError={(e) => {
+                                e.currentTarget.src =
+                                  "images/failedToLoadImage.webp";
+                              }}
+                              loading="lazy"
+                              className="w-[45px] h-[45px]"
+                              alt="cancelOrder"
+                              src={"/images/RefundS.svg"}
+                            />
+                            <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
+                              {totalProduct?.refundPolicy?.refundPolicyDoc ? (
+                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
+                                  {totalProduct?.refundPolicy?.refundPolicyDoc.endsWith(
+                                    ".pdf"
+                                  ) ? (
+                                    <Link
+                                      target="_blank"
+                                      href={`${assetURL}/${totalProduct?.refundPolicy?.refundPolicyDoc}`}
+                                      className="text-black text-sm font-normal cursor-default"
                                     >
-                                      <Link href="#" className=" md:mr-3">
-                                        <p className="text-black text-sm font-normal cursor-default">
-                                          {
-                                            totalProduct?.refundPolicy
-                                              ?.durationInDays
-                                          }{" "}
-                                          days{" "}
-                                          <span className="text-secondary text-sm font-normal !cursor-pointer">
-                                            Refund Policy.
-                                          </span>
-                                        </p>
-                                      </Link>
-                                    </DialogTrigger>
-                                    <DialogContent className="w-[98%] fixed  h-[98%] lg:w-full ">
-                                      <DialogClose className="flex justify-end absolute z-50 right-[15px] top-[15px] w-full shadow-2xl">
-                                        <IoCloseCircleSharp
-                                          color="white"
-                                          size={30}
-                                        />
-                                      </DialogClose>
-                                      <div className="h-full w-full ">
-                                        <Image
-                                          // src={
-                                          //   totalProduct?.refundPolicy
-                                          //     ?.refundPolicyDoc
-                                          //     ? (
-                                          //         assetURL +
-                                          //         "/" +
-                                          //         totalProduct?.refundPolicy
-                                          //           ?.refundPolicyDoc
-                                          //       ).includes("//admin")
-                                          //       ? (
-                                          //           assetURL +
-                                          //           "/" +
-                                          //           totalProduct?.refundPolicy
-                                          //             ?.refundPolicyDoc
-                                          //         ).replace("//admin", "/admin")
-                                          //       : `${assetURL}/${totalProduct?.refundPolicy?.refundPolicyDoc}`
-                                          //     : "/images/product-placeholder.webp"
-                                          // }
-                                          src={
-                                            totalProduct?.refundPolicy
-                                              ?.refundPolicyDoc
-                                              ? normalizePath(
-                                                `${assetURL}/${totalProduct.refundPolicy.refundPolicyDoc}`
-                                              )
-                                              : "/images/product-placeholder.webp"
-                                          }
-                                          className="p-[10px] rounded "
-                                          onError={(e) => {
-                                            e.currentTarget.src =
-                                              "images/failedToLoadImage.webp";
-                                          }}
-                                          loading="lazy"
-                                          objectFit="cover"
-                                          alt={"cancelCertificate"}
-                                          fill={true}
-                                          width={200}
-                                          height={200}
-                                        />
-                                      </div>
-                                    </DialogContent>
-                                  </Dialog>
-                                </>
+                                      {totalProduct?.refundPolicy?.durationInDays}{" "}
+                                      days{" "}
+                                      <span className="text-secondary text-sm font-normal !cursor-pointer">
+                                        {" "}
+                                        Refund Policy.
+                                      </span>
+                                    </Link>
+                                  ) : (
+                                    <>
+                                      <Dialog>
+                                        <DialogTrigger
+                                          asChild
+                                          className="max-w-[90%]"
+                                        >
+                                          <Link href="#" className=" md:mr-3">
+                                            <p className="text-black text-sm font-normal cursor-default">
+                                              {
+                                                totalProduct?.refundPolicy
+                                                  ?.durationInDays
+                                              }{" "}
+                                              days{" "}
+                                              <span className="text-secondary text-sm font-normal !cursor-pointer">
+                                                Refund Policy.
+                                              </span>
+                                            </p>
+                                          </Link>
+                                        </DialogTrigger>
+                                        <DialogContent className="w-[98%] fixed  h-[98%] lg:w-full ">
+                                          <DialogClose className="flex justify-end absolute z-50 right-[15px] top-[15px] w-full shadow-2xl">
+                                            <IoCloseCircleSharp
+                                              color="white"
+                                              size={30}
+                                            />
+                                          </DialogClose>
+                                          <div className="h-full w-full ">
+                                            <Image
+                                              // src={
+                                              //   totalProduct?.refundPolicy
+                                              //     ?.refundPolicyDoc
+                                              //     ? (
+                                              //         assetURL +
+                                              //         "/" +
+                                              //         totalProduct?.refundPolicy
+                                              //           ?.refundPolicyDoc
+                                              //       ).includes("//admin")
+                                              //       ? (
+                                              //           assetURL +
+                                              //           "/" +
+                                              //           totalProduct?.refundPolicy
+                                              //             ?.refundPolicyDoc
+                                              //         ).replace("//admin", "/admin")
+                                              //       : `${assetURL}/${totalProduct?.refundPolicy?.refundPolicyDoc}`
+                                              //     : "/images/product-placeholder.webp"
+                                              // }
+                                              src={
+                                                totalProduct?.refundPolicy
+                                                  ?.refundPolicyDoc
+                                                  ? normalizePath(
+                                                    `${assetURL}/${totalProduct.refundPolicy.refundPolicyDoc}`
+                                                  )
+                                                  : "/images/product-placeholder.webp"
+                                              }
+                                              className="p-[10px] rounded "
+                                              onError={(e) => {
+                                                e.currentTarget.src =
+                                                  "images/failedToLoadImage.webp";
+                                              }}
+                                              loading="lazy"
+                                              objectFit="cover"
+                                              alt={"cancelCertificate"}
+                                              fill={true}
+                                              width={200}
+                                              height={200}
+                                            />
+                                          </div>
+                                        </DialogContent>
+                                      </Dialog>
+                                    </>
+                                  )}
+                                </p>
+                              ) : (
+                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
+                                  <div
+                                    //  target="_blank"
+                                    //  href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.refundPolicy?.refundPolicyDoc}`}
+                                    className="text-black text-sm font-normal cursor-default"
+                                  >
+                                    {totalProduct?.refundPolicy?.durationInDays}{" "}
+                                    days{" "}
+                                    <span className="text-secondary text-sm font-normal">
+                                      {" "}
+                                      Refund Policy.
+                                    </span>
+                                  </div>
+                                </p>
                               )}
-                            </p>
-                          ) : (
-                            <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
-                              <div
-                                //  target="_blank"
-                                //  href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.refundPolicy?.refundPolicyDoc}`}
-                                className="text-black text-sm font-normal cursor-default"
-                              >
-                                {totalProduct?.refundPolicy?.durationInDays}{" "}
-                                days{" "}
-                                <span className="text-secondary text-sm font-normal">
-                                  {" "}
-                                  Refund Policy.
-                                </span>
-                              </div>
-                            </p>
-                          )}
-                        </div>
-                      </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <> </>
+                        )}
+                      </>
                     ) : (
-                      <> </>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    {/* {" "}
+                      <>
+                        {/* {" "}
                     {(totalProduct?.isReturnable == true ||
                       totalProduct?.isCancellable == true) &&
                       totalProduct?.isRefundable == false && (
@@ -2099,16 +2093,16 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           </div>
                         </>
                       )} */}
-                  </>
-                )}
+                      </>
+                    )}
+                  </div>
+
+                  {/* Policies Date End */}
+
+                </div>
               </div>
-
-              {/* Policies Date End */}
-
-  </div>
-  </div>
-</div>
-</div>
+            </div>
+          </div>
 
           <div className="bg-[#F4F4F4] md:flex block w-full md:mx-auto  md:max-w-[90%] md:py-6 md:justify-center md:items-center py-8 px-4 ">
             <Tabs defaultValue="account" className="w-full">
@@ -2402,6 +2396,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
           {/* Similar Products End */}
 
+
+
+
           {/* Recently Viewed Products Start */}
           {recentProducts?.length > 0 && (
             <div className="md:px-20">
@@ -2413,7 +2410,23 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
         </>
       )}
 
-   
+      <QuoteCompo
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        quantity={quantity}
+        totalProduct={totalProduct}
+        productSelectedForQuote={productSelectedForQuote}
+        setQuantityForQuote={setQuantityForQuote}
+        setMinQuantityForQuote={setMinQuantityForQuote}
+        minQuantityForQuote={minQuantityForQuote}
+        quantityForQuote={quantityForQuote}
+        setProductSelectedForQuote={setProductSelectedForQuote}
+        combinations={combinations}
+        productData={productData}
+      />
+
+
+
     </div>
   );
 };
@@ -2422,90 +2435,90 @@ export default ProductDetails;
 
 
 
+//In mobile we can show request quote and add to cart button side by side even the product in scrolled
+//  {/* </div> */}
+//   <div className=" md:hidden mobile-sm:flex">
+//     {(totalProduct?.purchaseType == "MULTI" ||
+//       totalProduct?.purchaseType == "QUOTE") &&
+//       productData?.status == "PUBLISHED" &&
+//       productData?.deletedAt == null &&
+//       productData?.isActive ? (
+//       <>
+//         <Button
+//           className="flex bg-[#F5E7EC] w-[45%] md:w-full rounded hover:bg-primary shadow-xs group"
+//           onClick={() => {
+//             if (!checkBuyerLogin()) {
+//               return;
+//             }
+//             setIsOpen(true);
+//             let productForQuote = totalProduct;
+//             // productForQuote.variants.slice(0, 1)
+//             productForQuote.variants;
+//             // setProductSelectedForQuote(productForQuote);
+//           }}
+//         >
+//           <FiFileText
+//             // color="#A92449"
+//             size={18}
+//             className="text-current text-secondary group-hover:text-white"
+//           />
+//           <p className="text-secondary text-md text-medium ml-3 group-hover:text-white">
+//             Request Quote
+//           </p>
+//         </Button>
+//         <QuoteCompo
+//           isOpen={isOpen}
+//           setIsOpen={setIsOpen}
+//           quantity={quantity}
+//           totalProduct={totalProduct}
+//           productSelectedForQuote={productSelectedForQuote}
+//           setQuantityForQuote={setQuantityForQuote}
+//           setMinQuantityForQuote={setMinQuantityForQuote}
+//           minQuantityForQuote={minQuantityForQuote}
+//           quantityForQuote={quantityForQuote}
+//           setProductSelectedForQuote={setProductSelectedForQuote}
+//           combinations={combinations}
+//           productData={productData}
+//         />
+//       </>
+//     ) : (
+//       <></>
+//     )}
+//     {(totalProduct?.purchaseType == "MULTI" ||
+//       totalProduct?.purchaseType == "ONLINE") &&
+//       productData?.status == "PUBLISHED" &&
+//       productData?.deletedAt == null &&
+//       productData?.isActive ? (
+//       <Button
+//         disabled={loadingCartButton}
+//         onClick={() => addToCart(productData?._id)}
+//         className="flex w-[45%] md:w-full bg-secondary rounded hover:bg-primary shadow-xs group"
+//       >
+//         {loadingCartButton ? (
+//           <>
+//             <CircularProgress
+//               // isIndeterminate
+//               color="#ffffff"
+//               size={6}
+//             />
+//           </>
+//         ) : (
+//           <>
+//             {" "}
+//             <BsCartPlus
+//               color="#fff"
+//               size={18}
+//               className="text-current group-hover:text-white"
+//             />
+//             <p className="text-white text-md text-medium ml-3 group-hover:text-white">
+//               Add to Cart
+//             </p>
+//           </>
+//         )}
+//       </Button>
+//     ) : (
+//       ""
+//     )}
+//     {/* </div>  */}
+//   </div>
 
-
-   {/* </div> */}
-      // <div className=" md:hidden mobile-sm:flex">
-      //   {(totalProduct?.purchaseType == "MULTI" ||
-      //     totalProduct?.purchaseType == "QUOTE") &&
-      //     productData?.status == "PUBLISHED" &&
-      //     productData?.deletedAt == null &&
-      //     productData?.isActive ? (
-      //     <>
-      //       <Button
-      //         className="flex bg-[#F5E7EC] w-[45%] md:w-full rounded hover:bg-primary shadow-xs group"
-      //         onClick={() => {
-      //           if (!checkBuyerLogin()) {
-      //             return;
-      //           }
-      //           setIsOpen(true);
-      //           let productForQuote = totalProduct;
-      //           // productForQuote.variants.slice(0, 1)
-      //           productForQuote.variants;
-      //           // setProductSelectedForQuote(productForQuote);
-      //         }}
-      //       >
-      //         <FiFileText
-      //           // color="#A92449"
-      //           size={18}
-      //           className="text-current text-secondary group-hover:text-white"
-      //         />
-      //         <p className="text-secondary text-md text-medium ml-3 group-hover:text-white">
-      //           Request Quote
-      //         </p>
-      //       </Button>
-      //       <QuoteCompo
-      //         isOpen={isOpen}
-      //         setIsOpen={setIsOpen}
-      //         quantity={quantity}
-      //         totalProduct={totalProduct}
-      //         productSelectedForQuote={productSelectedForQuote}
-      //         setQuantityForQuote={setQuantityForQuote}
-      //         setMinQuantityForQuote={setMinQuantityForQuote}
-      //         minQuantityForQuote={minQuantityForQuote}
-      //         quantityForQuote={quantityForQuote}
-      //         setProductSelectedForQuote={setProductSelectedForQuote}
-      //         combinations={combinations}
-      //         productData={productData}
-      //       />
-      //     </>
-      //   ) : (
-      //     <></>
-      //   )}
-      //   {(totalProduct?.purchaseType == "MULTI" ||
-      //     totalProduct?.purchaseType == "ONLINE") &&
-      //     productData?.status == "PUBLISHED" &&
-      //     productData?.deletedAt == null &&
-      //     productData?.isActive ? (
-      //     <Button
-      //       disabled={loadingCartButton}
-      //       onClick={() => addToCart(productData?._id)}
-      //       className="flex w-[45%] md:w-full bg-secondary rounded hover:bg-primary shadow-xs group"
-      //     >
-      //       {loadingCartButton ? (
-      //         <>
-      //           <CircularProgress
-      //             // isIndeterminate
-      //             color="#ffffff"
-      //             size={6}
-      //           />
-      //         </>
-      //       ) : (
-      //         <>
-      //           {" "}
-      //           <BsCartPlus
-      //             color="#fff"
-      //             size={18}
-      //             className="text-current group-hover:text-white"
-      //           />
-      //           <p className="text-white text-md text-medium ml-3 group-hover:text-white">
-      //             Add to Cart
-      //           </p>
-      //         </>
-      //       )}
-      //     </Button>
-      //   ) : (
-      //     ""
-      //   )}
-      //   {/* </div>  */}
-      // </div>

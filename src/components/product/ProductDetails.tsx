@@ -147,6 +147,32 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
   const [vendorInfo, setvendorInfo] = useState<any>([]);
   const [searchTerms, setSearchTerms] = useState<{ [key: string]: string }>({});
   const [wishlistId, setWishlistId] = useState<string>("");
+  const [startIndex, setStartIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(3);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const update = () => setIsMobile(window.innerWidth < 768);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      if (window.innerWidth < 768) {
+        setVisibleCount(2);  // mobile
+      } else {
+        setVisibleCount(3);  // desktop
+      }
+    };
+
+    updateVisibleCount(); // run on first load
+    window.addEventListener("resize", updateVisibleCount);
+
+    return () => window.removeEventListener("resize", updateVisibleCount);
+  }, []);
 
   //Scroll Props
 
@@ -557,6 +583,18 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
       });
     }
   }, [productData, wishlistReduxData, isClicked]);
+
+  useEffect(() => {
+    if (selectedImageIndex < startIndex) {
+      setStartIndex(selectedImageIndex);
+    }
+
+    if (selectedImageIndex >= startIndex + visibleCount) {
+      setStartIndex(selectedImageIndex - visibleCount + 1);
+    }
+  }, [selectedImageIndex, visibleCount]);
+
+
 
   function calculateDiscountPercentage(
     mrp: number,
@@ -997,7 +1035,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
         <>
           <div
             ref={secondSectionRef}
-            className={`relative bg-[#F9FAFB] w-full px-4 pt-8 pb-4 md:px-24 md:pt-12 md:block lg:flex ${isScrollLocked ? "no-scroll overscroll-none" : ""
+            className={`relative  w-full px-4 pt-8 pb-4 md:px-24 md:pt-12 md:block lg:flex ${isScrollLocked ? "no-scroll overscroll-none" : ""
               }`}
           >
             <div className={`lg:w-1/2 md:w-[606px] lg:sticky top-0  pr-[10px] `}>
@@ -1060,7 +1098,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       />
 
                       {/* Arrows only if >1 image */}
-                      {!zoomable && images2?.length > 1 && (
+                      {/* {!zoomable && images2?.length > 1 && (
                         <>
                           <button
                             onClick={prevImage}
@@ -1076,38 +1114,78 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             <BsChevronRight color="#A92449" />
                           </button>
                         </>
-                      )}
+                      )} */}
                     </div>
                   </div>
 
                   {/* Thumbnails only if >1 */}
-                  {/* Thumbnails only if >1 images */}
                   {images2?.length > 1 && (
-                    <div className="md:w-[606px] h-[218px] flex gap-4 overflow-x-auto no-scrollbar mt-4">
-                      {images2.map((image, index) => (
-                        <button
-                          key={index}
-                          className={`border w-[187px] h-[218px] flex-shrink-0 ${selectedImageIndex === index ? "border-secondary" : "border-borderGray"
-                            }`}
-                          onClick={() => handleThumbnailClick(index)}
+                    <div className="flex items-center gap-1 mt-4 h-auto md:h-[218px]">
+
+                      {/* PREV BUTTON */}
+                      <button
+                        onClick={prevImage}
+                        className="flex w-6 h-6 items-center justify-center bg-white border border-secondary rounded-full shadow"
+                      >
+                        <BsChevronLeft color="#A92449" />
+                      </button>
+
+                      {/* FIXED-BOX FOR 3 THUMBNAILS (NO SCROLLBAR) */}
+                      <div className="overflow-hidden w-full md:w-[600px] h-[120px]  md:h-[218px]">
+                        {/* SLIDING TRACK */}
+                        <div
+                          className="flex gap-4 transition-transform duration-300"
+                          style={{
+                            transform: `translateX(-${startIndex * (isMobile ? (100 + 16) : (187 + 16))}px)`// 187px + 16px gap
+                          }}
                         >
-                          <Image
-                            src={image ? normalizePath(`${assetPath}/${image}`) : "/images/product-placeholder.webp"}
-                            alt={`Thumbnail ${index + 1}`}
-                            width={187}
-                            height={218}
-                            className="object-contain"
-                            loading="lazy"
-                            onError={(e) => (e.currentTarget.src = "images/failedToLoadImage.webp")}
-                          />
-                        </button>
-                      ))}
+                          {images2.map((image, index) => (
+                            <button
+                              key={index}
+                              className={`border 
+  w-[100px] h-[120px]        // MOBILE → fits 3 perfectly
+  md:w-[187px] md:h-[218px]  // DESKTOP
+  flex-shrink-0 
+  ${selectedImageIndex === index ? "border-secondary" : "border-borderGray"}`}
+
+                              onClick={() => {
+                                handleThumbnailClick(index);
+
+                                // auto adjust view if clicked item is outside visible 3
+                                if (index < startIndex) {
+                                  setStartIndex(index);
+                                } else if (index >= startIndex + visibleCount) {
+                                  setStartIndex(index - visibleCount + 1);
+                                }
+                              }}
+                            >
+                              <Image
+                                src={image ? normalizePath(`${assetPath}/${image}`) : "/images/product-placeholder.webp"}
+                                alt={`Thumbnail ${index + 1}`}
+                                width={187}
+                                height={218}
+                                className="object-contain"
+                                loading="lazy"
+                                onError={(e) => (e.currentTarget.src = "images/failedToLoadImage.webp")}
+                              />
+                            </button>
+                          ))}
+                        </div>
+
+                      </div>
+
+                      {/* NEXT BUTTON */}
+                      <button
+                        onClick={nextImage}
+                        className="flex w-6 h-6 items-center justify-center bg-white border border-secondary rounded-full shadow"
+                      >
+                        <BsChevronRight color="#A92449" />
+                      </button>
+
                     </div>
                   )}
 
                 </div>
-
-
               </div>
             </div>
 
@@ -1115,13 +1193,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               ref={rightDivRef}
               className="lg:w-1/2 w-full lg:mt-0 md:mt-8 mt-4 md:pl-[10px] no-scrollbar overflow-y-auto h-fit"
             >
+
               <div className="md:h-[384px]">
                 {/* TITLE + WISHLIST */}
                 <div className="flex justify-between items-start">
                   <div>
-                    <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-black text-normal pr-[10px] sr-only">
+                    {/* <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-black text-normal pr-[10px] sr-only">
                       {productData?.meta?.metaTitle}
-                    </h1>
+                    </h1>  */}
 
                     <h2 className="md:text-[30px] text-[24px] font-semibold text-md text-secondary pr-[10px]">
                       {isSingle ? totalProduct?.name : productData?.variantName}
@@ -1198,7 +1277,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           <span className="text-[18px] font-regular text-fontGray ml-2">
                             /{productData?.unitOfMeasure}
                           </span>
-                          <span className="text-[18px] font-regular text-primary ml-2">
+                          <span className="text-[18px] font-regular text-black ml-2">
                             MRP
                           </span>
                         </p>
@@ -1258,7 +1337,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   )}
                 </div>
                 {totalProduct?.purchaseType !== "QUOTE" && (
-                  <p className="text-[13px] text-primary text-normal mt-2">
+                  <p className="text-[13px] text-black text-normal mt-2">
                     Inclusive of all taxes
                   </p>
                 )}
@@ -1270,8 +1349,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 {/* MATERIAL + QUANTITY SECTION (GREY BOX WRAPPER) */}
                 <div
                   className={`bg-white rounded-xl  ${totalProduct?.purchaseType !== "QUOTE"
-                      ? "py-[10px] mt-3 md:px-[24px] px-[10px]"
-                      : "md:p-[24px] p-[10px] mt-2"
+                    ? "py-[10px] mt-3 md:px-[24px] px-[10px]"
+                    : "md:p-[24px] p-[10px] mt-2"
                     }`}
                 >
                   {/* QUANTITY + VARIATIONS ROW */}

@@ -1349,7 +1349,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 {/* MATERIAL + QUANTITY SECTION (GREY BOX WRAPPER) */}
                 <div
                   className={`bg-white rounded-xl  ${totalProduct?.purchaseType !== "QUOTE"
-                    ? "py-[10px] mt-3 md:px-[24px] px-[10px]"
+                    ? "py-[10px] mt-3 md:px-[0px] px-[0px]"
                     : "md:p-[24px] p-[10px] mt-2"
                     }`}
                 >

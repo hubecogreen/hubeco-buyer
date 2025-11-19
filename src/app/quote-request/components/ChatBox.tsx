@@ -450,12 +450,12 @@ export default function ChatBox({
         </div>
       )}
       {/* 👇 ADDED: Overlay for No Messages Yet */}
-      {canChat && mergedMessages.length === 0 && showOverlay && (
+      {/* {canChat && mergedMessages.length === 0 && showOverlay && (
         <div
           className="absolute top-0 left-0 w-full h-full bg-white/95 flex flex-col justify-center items-center z-10 p-4"
           style={{ backdropFilter: 'blur(1px)' }}
         >
-          {/* Chat Icon - Replicated look from Vendor component */}
+          
           <div
             className='w-12 h-12 bg-[#009886] rounded-lg flex items-center justify-center mb-4 shadow-lg cursor-pointer transition transform hover:scale-105'
             onClick={() => setShowOverlay(false)}
@@ -472,7 +472,7 @@ export default function ChatBox({
             </svg>
           </div>
 
-          {/* Content */}
+         
           <h6 className='font-semibold text-lg text-gray-800 mb-1 text-center'>
             No Messages Yet
           </h6>
@@ -480,7 +480,7 @@ export default function ChatBox({
             Start a conversation with your vendor/buyer to discuss RFQs, delivery or pricing
           </p>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

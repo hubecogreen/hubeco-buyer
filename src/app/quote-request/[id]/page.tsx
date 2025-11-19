@@ -229,7 +229,7 @@ const QuoteDetails = ({ id }: any) => {
       closed: "Closed",
       pending: "Pending",
       requested: "Requested",
-      quotation_sent: "Quotation received",
+      quotation_sent: "Quotation Received",
       quotation_rejected: "Quotation rejected",
       quotation_approved: "Quotation Approved",
       partial_payment_made: "Partial payment made",

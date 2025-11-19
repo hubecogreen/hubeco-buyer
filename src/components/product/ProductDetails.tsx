@@ -1056,7 +1056,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
                     <div
                       ref={secondSectionRef}
-                      className={`relative w-full h-full p-[15px] md:p-[85px] border border-borderGray ${zoomable ? "overflow-hidden" : ""
+                      className={`relative w-full h-full p-[15px] md:p-[85px] border border-borderGray rounded-lg ${zoomable ? "overflow-hidden" : ""
                         }`}
                       style={{
                         backgroundImage: zoomable
@@ -1146,6 +1146,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
   w-[100px] h-[120px]        // MOBILE → fits 3 perfectly
   md:w-[187px] md:h-[218px]  // DESKTOP
   flex-shrink-0 
+  rounded-lg
   ${selectedImageIndex === index ? "border-secondary" : "border-borderGray"}`}
 
                               onClick={() => {
@@ -1485,7 +1486,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               <div className="">
                 <p className="text-md text-fontGray text-normal mt-3 mb-2">Seller Details</p>
 
-                <div className="md:flex flex flex-col md:flex-row justify-between md:items-center items-start gap-4">
+                <div className="md:flex flex flex-col md:flex-row justify-start md:items-center items-start gap-4">
                   <div className="flex justify-start items-center md:mr-2 md:max-w-[60%]">
                     <div>
                       <p className="text-[15px] font-semibold capitalize text-black">
@@ -2183,10 +2184,10 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
             </div>
           </div>
 
-          <div className="bg-[#F4F4F4] md:flex block w-full md:mx-auto  md:max-w-[90%] md:py-6 md:justify-center md:items-center py-8 px-4 ">
+          <div className="bg-[#F4F4F4] md:flex block w-full md:mx-auto  md:max-w-[87.5%] md:py-6 md:justify-center md:items-center py-8 px-4 rounded-lg">
             <Tabs defaultValue="account" className="w-full">
-              <div className="lg:sticky   bg-[#F4F4F4] top-[128px]">
-                <TabsList className="border-b border-borderGray h-[45px] md:max-w-fit rounded-none md:mx-auto md:flex md:justify-center md:items-center pb-0 mb-6 max-w-[98%] overflow-x-scroll no-scrollbar">
+              <div className="lg:sticky   bg-[#F4F4F4] top-[128px] overflow-x-scroll no-scrollbar">
+                <TabsList className="border-b border-borderGray h-[45px] md:max-w-fit rounded-none md:mx-auto md:flex md:justify-center md:items-center pb-0 mb-6 overflow-x-scroll no-scrollbar">
                   <TabsTrigger
                     value="account"
                     className="px-4 text-md bg-transparent text-[#333333] border-b-2 border-transparent rounded-none data-[state=active]:border-secondary data-[state=active]:text-secondary data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
@@ -2306,7 +2307,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         //   `${assetURL}/${attachment?.value}`
                         // );
                         return (
-                          <div className="flex items-center justify-between w-full border border-[#efeded] px-[15px] py-[10px]">
+                          <div className="flex items-center justify-between w-full px-[15px] py-[10px]">
                             <div className="flex items-center">
                               <Image
                                 // src={`${assetURL}/${attachment?.value}`}

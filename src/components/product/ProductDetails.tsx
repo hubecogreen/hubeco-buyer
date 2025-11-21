@@ -1220,7 +1220,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       {productData?.meta?.metaTitle}
                     </h1>  */}
 
-                    <h2 className="md:text-[30px] text-[24px] font-semibold text-md text-secondary pr-[10px]">
+                    <h2 className="md:text-[30px] text-[24px] font-semibold text-md text-secondary pr-[10px] -mt-2">
                       {isSingle ? totalProduct?.name : productData?.variantName}
                     </h2>
                   </div>

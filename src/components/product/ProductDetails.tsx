@@ -879,13 +879,16 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
     if (pincode > 0 && pincode.length === 6) {
       const res = (await callApi(`pincodeInfo/${pincode}`, "GET")) as any;
 
-      let state = "";
-      let city = "";
       setShowMssg(true);
       setDeliveyAvailable(false);
 
       if (res?.data?.length > 0) {
         const components = res.data[0]?.address_components || [];
+
+        let state = "";
+        let locality = "";
+        let level2 = "";
+        let level3 = "";
 
         for (const component of components) {
           const types = component.types || [];
@@ -895,7 +898,15 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
           }
 
           if (types.includes("locality")) {
-            city = component.long_name;
+            locality = component.long_name;
+          }
+
+          if (types.includes("administrative_area_level_2")) {
+            level2 = component.long_name;
+          }
+
+          if (types.includes("administrative_area_level_3")) {
+            level3 = component.long_name;
           }
         }
 
@@ -904,14 +915,19 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
         let isDeliveryAvailable = false;
 
-        // ✅ Rule 1: If cities are defined, match must happen at city level only
+        // Check by priority: locality → level2 → level3
         if (cityZones.length > 0) {
-          if (city && cityZones.includes(city)) {
+          if (locality && cityZones.includes(locality)) {
+            isDeliveryAvailable = true;
+          } else if (level2 && cityZones.includes(level2)) {
+            isDeliveryAvailable = true;
+          } else if (level3 && cityZones.includes(level3)) {
             isDeliveryAvailable = true;
           }
         }
-        // ✅ Rule 2: If no cities defined, fallback to state check
-        else {
+
+        // Fallback to state if no cities defined
+        if (!isDeliveryAvailable && cityZones.length === 0) {
           if (state && stateZones.includes(state)) {
             isDeliveryAvailable = true;
           }
@@ -924,6 +940,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
       setDeliveyAvailable(false);
     }
   };
+
 
 
 

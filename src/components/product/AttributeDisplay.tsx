@@ -125,15 +125,15 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
         );
 
         return (
-          <div key={attributeName} className="mt-6 mb-3">
-            <p className="text-md text-fontGray text-normal mb-2 capitalize">
+          <div key={attributeName} className="w-full">
+            <p className="text-md text-fontGray text-normal mb-3 capitalize">
               {attributeName}
             </p>
             <Select
               onValueChange={(value) => onClickVariant(attributeName, value)}
               value={selectedAttributes && selectedAttributes[attributeName] || ""}
             >
-              <SelectTrigger className="border border-secondary px-4 py-2 rounded bg-white !w-[50%] !text-secondary">
+              <SelectTrigger className="border border-secondary px-4 py-2 rounded bg-white !text-secondary">
                 <SelectValue
                   placeholder={`Select ${attributeName}`}
                   className={`text-sm ${

@@ -151,253 +151,188 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
     return new Intl.NumberFormat("en-IN", options).format(roundedAmount);
   }
 
-  if(!isClient)
+  if (!isClient)
     return <></>
 
   return (
-    <div>
-      <div className="flex flex-row justify-between items-center">
-        <h2 className="text-lg font-bold mb-4">Payment Schedule</h2>
-        {/* <div className="flex flex-col space-y-1 p-3 rounded-md m-3 !bg-secondaryBg">
-          <div>
-            <p className="text-sm font-medium text-blue-600">Account name</p>
-            <p className="font-semibold text-gray-900 text-base">
-              HUBECO GREEN VENTURES PRIVATE LIMITED
-            </p>
-          </div>
+    <div className="mt-6">
+      <h2 className="text-[15px] font-semibold text-[#2F2B3D] mb-3">
+        Payment Schedule
+      </h2>
 
-          <div className="flex space-x-6">
-            <div>
-              <p className="text-sm font-medium text-blue-600">Account no</p>
-              <p className="font-semibold text-gray-900">99909705044055</p>
-            </div>
-
-            <div>
-              <p className="text-sm font-medium text-blue-600">IFSC Code</p>
-              <p className="font-semibold text-gray-900">HDFC0000317</p>
-            </div>
-          </div>
-        </div> */}
-      </div>
-      <div className="bg-gray-100 rounded-md overflow-y-auto scrollbar w-full">
-        <table className="w-full table-auto">
-          <thead className=" bg-secondaryBg  text-left">
+      <div
+        className="bg-white border border-[#E5E7EB] rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A]  overflow-y-auto scrollbar w-full"
+        style={{ opacity: 1 }}
+      >
+        <table className="w-full border-collapse text-sm table-auto">
+          <thead className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
             <tr>
-              <th className="p-6">Payment ID</th>
-              <th className="p-2">Payment For</th>
-              <th className="p-2">Note</th>
-              <th className="p-2">Payment Due Date</th>
-              <th className="p-2">Amount</th>
-              <th className="p-2">Payment Status</th>
-              <th className="p-2">Action</th>
+              <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">Payment ID</th>
+              <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">Payment For</th>
+              <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">Note</th>
+              <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">Due Date</th>
+              <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">Amount</th>
+              <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">Status</th>
+              <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {initialState.paymentsSchedule.map(
-              (payment: any, index: React.Key | null | undefined) => (
-                <tr key={index} className="border-t">
-                  <td className="p-5 pl-5 font-bold w-44">
-                    {payment.paymentScheduleId}
-                  </td>
-                  <td className="p-2 font-semibold w-60">{payment.title}</td>
-                  <td className="p-2 font-semibold w-60">{payment.notes}</td>
-                  <td className="p-2 font-semibold w-60">
-                    {(payment.due && dayjs(payment.due).format("DD-MM-YYYY")) ||
-                      ""}
-                  </td>
-                  <td className="p-2 font-semibold w-44">
-                    {" "}
-                    <span className="text-xl font-normal font-mono">
 
-                      {" "}
-                      ₹
-                    </span>
-                    {formatCurrencyInIndianStyle(payment.amount)}
-                  </td>
-                  <td
-                    className={`p-2 font-semibold capitalize w-44 ${
-                      payment.paymentStatus == "AWAITING"
-                        ? "text-yellow-500"
-                        : payment.paymentStatus == "COMPLETED"
-                        ? "text-[#009886]"
-                        : payment.paymentStatus == "INITIATED"
-                        ? "text-yellow-700"
-                        : "text-[#B90647]"
-                    }`}
+          <tbody>
+            {initialState.paymentsSchedule.map((payment: any, index: number) => (
+              <tr key={index} className="border-b border-[#E5E7EB]">
+                <td className="py-3 px-4 font-semibold text-[#2F2B3D]">
+                  {payment.paymentScheduleId}
+                </td>
+
+                <td className="py-3 px-4 font-semibold text-[#2F2B3D]">
+                  {payment.title}
+                </td>
+
+                <td className="py-3 px-4 text-[#6B7280] truncate max-w-[300px]">
+                  {payment.notes ||
+                    "Water-efficient toilet with dual flush mechanism........"}
+                </td>
+
+                <td className="py-3 px-4 font-semibold text-[#2F2B3D]">
+                  {payment.due ? dayjs(payment.due).format("DD-MM-YYYY") : ""}
+                </td>
+
+                <td className="py-3 px-4 font-semibold text-[#009886]">
+                  <span className="rupee">₹</span>{formatCurrencyInIndianStyle(payment.amount)}
+                </td>
+
+                <td className="py-3 px-4">
+                  <span
+                    className={`inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full
+                    ${payment.paymentStatus === "COMPLETED"
+                        ? "bg-[#E6F7F5] text-[#009886]"
+                        : payment.paymentStatus === "AWAITING"
+                          ? "bg-[#FFF4E5] text-[#F59E0B]"
+                          : "bg-[#FCE7EB] text-[#B90647]"
+                      }`}
                   >
-                    {payment.paymentStatus == "AWAITING"
-                      ? "Pending"
-                      : payment.paymentStatus == "COMPLETED"
+                    {payment.paymentStatus === "COMPLETED"
                       ? "Paid"
-                      : payment.paymentStatus == "INITIATED"
-                      ? "Initiated"
-                      : "Failed"}
-                  </td>
-                  <td className="p-2 w-44">
-                    {payment.paymentStatus == "COMPLETED" ? (
-                      <>
-                        <div className="flex flex-col gap-5">
-                          <div className="flex flex-col">
-                            {/* <span className="text-[#009886]">Paid</span> */}
-                            <ul className="text-xs text-[#2E2E2EB8]">
-                              {/** Apply grid to each list item */}
-                              <li className="whitespace-nowrap font-bold">
-                                Transaction Id:{" "}
-                                <span className="whitespace-pre-wrap font-normal">
-                                  {" "}
-                                  {payment.transactionId}
-                                </span>
-                              </li>
-                              <li className="whitespace-nowrap font-bold">
-                                Payment Mode:{" "}
-                                <span className="whitespace-pre-wrap font-normal">
-                                  {" "}
-                                  {payment.paymentMode}
-                                </span>
-                              </li>
-                              <li className="whitespace-nowrap font-bold">
-                                Payment Date:{" "}
-                                <span className="whitespace-pre-wrap font-normal">
-                                  {dayjs(payment.completedAt).format(
-                                    "DD-MM-YYYY"
-                                  )}
-                                </span>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="w-full h-8 border-2 border-[#b90647] flex items-center justify-center cursor-pointer">
-                            <button
-                              onClick={() =>
-                                downloadInvoice(
-                                  payment.paymentReceipt ||
-                                    "buyer/ab53b5a7-80b2-4bbb-b44c-7439e6f938d5/invoice-d7311495-7fb4-4114-a333-43e7b98eda17-quote-order"
-                                )
-                              }
-                              className="flex items-center justify-center"
-                            >
-                              <MdOutlineFileDownload
-                                className="text-[#b90647]"
-                                size={20}
-                              />
-                              <span className="flex px-2 text-[13px] text-secondary">
-                                Payment Receipt
-                              </span>
-                            </button>
-                          </div>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        {/* <div>
-                          <p className="whitespace-nowrap"> Account name</p>
-                          <p className="whitespace-nowrap font-semibold">
-                            HUBECO GREEN VENTURES PRIVATE LIMITED
-                          </p>
-                          <p className="whitespace-nowrap"> Account no: </p>
-                          <p className="whitespace-nowrap font-semibold">
-                            99909705044055
-                          </p>
-                          <p className="whitespace-nowrap"> IFSC Code: </p>
-                          <p className="whitespace-nowrap font-semibold">
-                            HDFC0000317
-                          </p>
-                        </div> */}
-                        <button
-                          onClick={() => {
-                            setIsOpen(true);
-                            setSelectedPayment(payment);
-                            // buySubscription(payment);
-                          }}
-                          // disabled={
-                          //   isDatePassed(payment.due) ||
-                          //   payment.paymentStatus == "COMPLETED"
-                          // }
-                          className={`bg-[#B90647] w-full text-xs text-white px-4 py-2 `}
-                        >
-                         {payment.applicablePaymentMethod  =="RTGS_NEFT"  ? <p> Click here for RTGS/NEFT Payment </p> : <p>
-                          Pay Now</p>}
-                        </button>
-                      </>
-                    )}
-                  </td>
-                </tr>
-              )
-            )}
+                      : payment.paymentStatus === "AWAITING"
+                        ? "Pending"
+                        : "Failed"}
+                  </span>
+                </td>
+
+                <td className="py-3 px-4">
+                  {payment.paymentStatus === "COMPLETED" ? (
+                    <button
+                      onClick={() =>
+                        downloadInvoice(
+                          payment.paymentReceipt ||
+                          "buyer/sample-invoice.pdf"
+                        )
+                      }
+                      className="bg-[#B90647] text-white text-sm font-semibold px-4 py-2 rounded-[6px] hover:bg-[#9B314A] flex items-center gap-1"
+                    >
+                      <MdOutlineFileDownload size={18} />
+                      Payment Receipt
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setIsOpen(true);
+                        setSelectedPayment(payment);
+                      }}
+                      className="bg-[#B90647] text-white text-sm font-semibold px-4 py-2 rounded-[6px] hover:bg-[#9B314A]"
+                    >
+                      {payment.applicablePaymentMethod === "RTGS_NEFT"
+                        ? "Click here for RTGS/NEFT Payment"
+                        : "Pay Now"}
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
+
       <AlertDialog open={isOpen}>
-      <AlertDialogContent className="max-w-md max-h-[100vh] overflow-auto">
-        <AlertDialogHeader className="space-y-6">
-          <AlertDialogTitle className="text-xl text-center text-[#B90647] ">
-          Choose your Payment Option
-          </AlertDialogTitle>
-          
-          <div className="space-y-6">
-            {/* Direct Bank Transfer Section */}
-            <div className="space-y-4">
-              <p className="text-gray-700">For directly remitting to Hubeco Bank Account – please use the following bank details:</p>
-              
-              <div className="space-y-1">
-                <p className="text-sm font-medium text-blue-600">Account name</p>
-                <p className="font-semibold text-gray-900">
-                  HUBECO GREEN VENTURES PRIVATE LIMITED
+        <AlertDialogContent className="max-w-md max-h-[100vh] overflow-auto">
+          <AlertDialogHeader className="space-y-6">
+            <AlertDialogTitle className="text-xl text-center text-[#B90647]">
+              Choose your Payment Option
+            </AlertDialogTitle>
+
+            <div className="space-y-6">
+              {/* Direct Bank Transfer Section */}
+              <div className="space-y-4">
+                <p className="text-gray-700">
+                  For directly remitting to Hubeco Bank Account – please use the following bank details:
                 </p>
-              </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <p className="text-sm font-medium text-blue-600">Account no</p>
-                  <p className="font-semibold text-gray-900">99909705044055</p>
+                <div className="space-y-1">
+                  <p className="text-sm font-medium text-blue-600">Account name</p>
+                  <p className="font-semibold text-gray-900">
+                    HUBECO GREEN VENTURES PRIVATE LIMITED
+                  </p>
                 </div>
 
-                <div className="space-y-2">
-                  <p className="text-sm font-medium text-blue-600">IFSC Code</p>
-                  <p className="font-semibold text-gray-900">HDFC0000317</p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium text-blue-600">Account no</p>
+                    <p className="font-semibold text-gray-900">99909705044055</p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium text-blue-600">IFSC Code</p>
+                    <p className="font-semibold text-gray-900">HDFC0000317</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Divider */}
-            <div className="relative flex items-center justify-center">
-              <div className="absolute w-full border-t border-gray-300" />
-              <div className="relative px-4 bg-white">
-                <span className="text-sm text-gray-500 uppercase">or</span>
+              {/* Divider */}
+              <div className="relative flex items-center justify-center">
+                <div className="absolute w-full border-t border-gray-300" />
+                <div className="relative px-4 bg-white">
+                  <span className="text-sm text-gray-500 uppercase">or</span>
+                </div>
+              </div>
+
+              {/* PayU Section */}
+              <div className="space-y-4">
+                <p className="text-gray-700">
+                  Please use PayU Payment Gateway for initiating{" "}
+                  {selectedPayment.applicablePaymentMethod === "RTGS_NEFT"
+                    ? "RTGS/NEFT Transfer"
+                    : "online payment methods"}
+                </p>
+
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                    buySubscription(selectedPayment);
+                  }}
+                  className="w-full px-4 py-3 text-white bg-[#B90647] rounded-md hover:bg-[#a00539] transition-colors"
+                >
+                  {selectedPayment.applicablePaymentMethod === "RTGS_NEFT"
+                    ? "Click here for RTGS/NEFT Payment"
+                    : "Pay Now"}
+                </button>
               </div>
             </div>
+          </AlertDialogHeader>
 
-            {/* PayU Section */}
-            <div className="space-y-4">
-              <p className="text-gray-700">Please use PayU Payment Gateway for initiating  {selectedPayment.applicablePaymentMethod  =="RTGS_NEFT" ?`RTGS/NEFT Transfer` : `online payment methods`  }</p>
-              
-              <button
-                onClick={() => {
-                  setIsOpen(true);
-                  buySubscription(selectedPayment);
-                }}
-                className={`w-full px-4 py-3 text-white bg-[#B90647] rounded-md hover:bg-[#a00539] transition-colors
-                  ${false ? "opacity-50 cursor-not-allowed" : ""}`}
-                
-              >
-                 {selectedPayment.applicablePaymentMethod  =="RTGS_NEFT"  ? <p> Click here for RTGS/NEFT Payment </p> : <p>
-                  Pay Now</p>}
-              </button>
-            </div>
-          </div>
-        </AlertDialogHeader>
+          <AlertDialogFooter className="flex justify-center mt-2 underline">
+            <AlertDialogCancel
+              onClick={() => setIsOpen(false)}
+              className="w-full h-12"
+            >
+              Close
+            </AlertDialogCancel>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
-        <AlertDialogFooter className="flex justify-center mt-2 underline">
-          <AlertDialogCancel
-            onClick={() => setIsOpen(false)}
-            className="w-full h-12"
-          >
-            Close
-          </AlertDialogCancel>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
     </div>
   );
+
 }
 
 {

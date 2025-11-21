@@ -219,3 +219,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 .scrollbar::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(0, 0, 0, 0.3);
 }
+
+.rupee {
+  font-family: "Inter", "Roboto", "Segoe UI", sans-serif !important;
+  font-weight: 500;
+}

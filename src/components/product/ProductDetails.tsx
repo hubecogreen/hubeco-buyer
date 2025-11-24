@@ -1214,11 +1214,11 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
               <div className="md:h-[384px]">
                 {/* TITLE + WISHLIST */}
-                <div className="flex justify-between items-start">
+                <div className="flex justify-between   items-start">
                   <div>
-                    {/* <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-black text-normal pr-[10px] sr-only">
+                    <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-black text-normal pr-[10px] sr-only">
                       {productData?.meta?.metaTitle}
-                    </h1>  */}
+                    </h1>
 
                     <h2 className="md:text-[30px] text-[24px] font-semibold text-md text-secondary pr-[10px] -mt-2">
                       {isSingle ? totalProduct?.name : productData?.variantName}
@@ -1259,8 +1259,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     productData?.deletedAt == null &&
                     productData?.isActive ? (
                     <p
-                      className={`${availableStockVal > minQty ? "text-primary" : "text-secondary"
-                        } text-[14px] bg-green-100 rounded-full px-3 py-2 w-fit`}
+                      className={`${availableStockVal > minQty ? "text-primary bg-green-100" : "text-secondary bg-red-100"
+                        } text-[14px]  rounded-full px-3 py-2 w-fit`}
                     >
                       {availableStockVal > minQty ? "In Stock" : "Out of Stock"}
                     </p>
@@ -1368,16 +1368,16 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 <div
                   className={`bg-white rounded-xl  ${totalProduct?.purchaseType !== "QUOTE"
                     ? "py-[10px] mt-3 md:px-[0px] px-[0px]"
-                    : "md:p-[24px] p-[10px] mt-2"
+                    : "md:py-[24px] p-[10px] mt-2"
                     }`}
                 >
                   {/* QUANTITY + VARIATIONS ROW */}
                   {productData?.status == "PUBLISHED" &&
                     productData?.deletedAt == null &&
                     productData?.isActive && (
-                      <div className="flex md:flex-row flex-col w-full md:gap-6 gap-2">
+                      <div className="flex md:flex-row flex-col  w-full  md:gap-6 gap-2 pb-4">
                         {/* QUANTITY - LEFT SIDE (50%) */}
-                        <div className="md:w-1/2 w-full">
+                        <div className="md:w-1/4 w-full">
                           <p className="text-md text-fontGray mb-3">Quantity</p>
 
                           <TooltipProvider>
@@ -1428,7 +1428,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         </div>
 
                         {/* VARIATIONS - RIGHT SIDE (50%) */}
-                        <div className="md:w-1/2 w-full">
+                        <div className="md:w-auto w-full">
                           {!isSingle &&
                             totalProduct?.productAttributes &&
                             combinations && (
@@ -1455,7 +1455,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             (totalProduct?.purchaseType === "QUOTE" &&
                               !(totalProduct?.purchaseType === "MULTI")) ||
                               totalProduct?.purchaseType === "QUOTE"
-                              ? "w-full"
+                              ? " md:w-1/2 w-full"
                               : "md:w-1/2 w-full"
                             }`}
                           onClick={() => {

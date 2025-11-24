@@ -264,7 +264,7 @@ const QuoteRequest = () => {
                           </div>
                           <div className="flex">
                             <h2 className="font-normal text-lg text-gray-600">
-                              Quote Requested by :
+                              Quote Requested On :
                             </h2>
                             <span className="font-bold px-3">
                               {dayjs(quote.submissionDate).format("DD-MM-YYYY")}

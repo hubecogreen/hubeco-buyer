@@ -1228,6 +1228,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   {productData?.status == "PUBLISHED" &&
                     productData?.deletedAt == null &&
                     productData?.isActive && (
+                      
                       <div
                         className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group ${isClicked ? "bg-secondary" : "bg-white"
                           }`}
@@ -1248,6 +1249,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           />
                         )}
                       </div>
+                      
                     )}
                 </div>
 
@@ -1259,11 +1261,16 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     productData?.deletedAt == null &&
                     productData?.isActive ? (
                     <p
-                      className={`${availableStockVal > minQty ? "text-primary bg-green-100" : "text-secondary bg-red-100"
-                        } text-[14px]  rounded-full px-3 py-2 w-fit`}
+                    className={`${availableStockVal < minQty ? "text-primary" : "text-secondary"
+                        } text-[14px] rounded-full px-3 py-2 w-fit`}
+                      style={{
+                        backgroundColor: availableStockVal < minQty ? "#DCFCE7" : "#FEE2E2",
+                       
+                      }}
                     >
-                      {availableStockVal > minQty ? "In Stock" : "Out of Stock"}
+                      {availableStockVal < minQty ? "In Stock" : "Out of Stock"}
                     </p>
+
                   ) : (
                     <p className="text-secondary text-md text-normal border border-secondary w-fit p-2 rounded">
                       Not Available
@@ -1501,12 +1508,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
               {/* SELLER DETAILS */}
               <div className="">
-                <p className="text-md text-fontGray text-normal mt-3 mb-2">Seller Details</p>
+                <p className="text-md text-fontGray font-semibold  text-normal mt-3 mb-2">Seller Details</p>
 
                 <div className="md:flex flex flex-col md:flex-row justify-start md:items-center items-start gap-4">
                   <div className="flex justify-start items-center md:mr-2 md:max-w-[60%]">
                     <div>
-                      <p className="text-[15px] font-semibold capitalize text-black">
+                      <p className="text-[15px] capitalize text-black">
                         {vendorInfo?.companyName}
                       </p>
                       <p className="text-[13px] font-normal text-fontGray">

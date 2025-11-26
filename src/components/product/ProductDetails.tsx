@@ -150,6 +150,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
   const [startIndex, setStartIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
   const [isMobile, setIsMobile] = useState(false);
+  const displayName = isSingle ? totalProduct?.name : productData?.variantName;
+  const isLongVariant =
+    (displayName && displayName.length > 17); // tweak threshold as you like
 
   useEffect(() => {
     const update = () => setIsMobile(window.innerWidth < 768);
@@ -1214,24 +1217,31 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
               <div className="md:h-[384px]">
                 {/* TITLE + WISHLIST */}
-                <div className="flex justify-between   items-start">
-                  <div>
+
+
+                <div
+                  className={`flex items-start ${isLongVariant
+                      ? "justify-between" // long name → wishlist extreme right (desktop & mobile)
+                      : "justify-between md:justify-start gap-3" // short name → desktop: two 50% blocks
+                    }`}
+                >
+                  <div className={`w-auto ${!isLongVariant ? "md:w-1/2" : "md:w-auto"}`}>
                     <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-black text-normal pr-[10px] sr-only">
                       {productData?.meta?.metaTitle}
                     </h1>
 
                     <h2 className="md:text-[30px] text-[24px] font-semibold text-md text-secondary pr-[10px] -mt-2">
-                      {isSingle ? totalProduct?.name : productData?.variantName}
+                      {displayName}
                     </h2>
                   </div>
 
-                  {productData?.status == "PUBLISHED" &&
+                  {productData?.status === "PUBLISHED" &&
                     productData?.deletedAt == null &&
                     productData?.isActive && (
-                      
                       <div
-                        className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group ${isClicked ? "bg-secondary" : "bg-white"
-                          }`}
+                        className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group
+     
+        ${isClicked ? "bg-secondary" : "bg-white"}`}
                       >
                         {isClicked ? (
                           <CiBookmark
@@ -1249,7 +1259,6 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           />
                         )}
                       </div>
-                      
                     )}
                 </div>
 
@@ -1261,14 +1270,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     productData?.deletedAt == null &&
                     productData?.isActive ? (
                     <p
-                    className={`${availableStockVal < minQty ? "text-primary" : "text-secondary"
+                      className={`${availableStockVal > minQty ? "text-primary" : "text-secondary"
                         } text-[14px] rounded-full px-3 py-2 w-fit`}
                       style={{
-                        backgroundColor: availableStockVal < minQty ? "#DCFCE7" : "#FEE2E2",
-                       
+                        backgroundColor: availableStockVal > minQty ? "#DCFCE7" : "#FEE2E2",
+
                       }}
                     >
-                      {availableStockVal < minQty ? "In Stock" : "Out of Stock"}
+                      {availableStockVal > minQty ? "In Stock" : "Out of Stock"}
                     </p>
 
                   ) : (

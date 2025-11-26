@@ -150,6 +150,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
   const [startIndex, setStartIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
   const [isMobile, setIsMobile] = useState(false);
+  const displayName = isSingle ? totalProduct?.name : productData?.variantName;
+  const isLongVariant =
+    (displayName && displayName.length > 17); // tweak threshold as you like
 
   useEffect(() => {
     const update = () => setIsMobile(window.innerWidth < 768);
@@ -1214,23 +1217,31 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
               <div className="md:h-[384px]">
                 {/* TITLE + WISHLIST */}
-                <div className="flex justify-between items-start">
-                  <div>
-                    {/* <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-black text-normal pr-[10px] sr-only">
+
+
+                <div
+                  className={`flex items-start ${isLongVariant
+                      ? "justify-between" // long name → wishlist extreme right (desktop & mobile)
+                      : "justify-between md:justify-start gap-3" // short name → desktop: two 50% blocks
+                    }`}
+                >
+                  <div className={`w-auto ${!isLongVariant ? "md:w-1/2" : "md:w-auto"}`}>
+                    <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-black text-normal pr-[10px] sr-only">
                       {productData?.meta?.metaTitle}
-                    </h1>  */}
+                    </h1>
 
                     <h2 className="md:text-[30px] text-[24px] font-semibold text-md text-secondary pr-[10px] -mt-2">
-                      {isSingle ? totalProduct?.name : productData?.variantName}
+                      {displayName}
                     </h2>
                   </div>
 
-                  {productData?.status == "PUBLISHED" &&
+                  {productData?.status === "PUBLISHED" &&
                     productData?.deletedAt == null &&
                     productData?.isActive && (
                       <div
-                        className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group ${isClicked ? "bg-secondary" : "bg-white"
-                          }`}
+                        className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group
+     
+        ${isClicked ? "bg-secondary" : "bg-white"}`}
                       >
                         {isClicked ? (
                           <CiBookmark
@@ -1260,10 +1271,15 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     productData?.isActive ? (
                     <p
                       className={`${availableStockVal > minQty ? "text-primary" : "text-secondary"
-                        } text-[14px] bg-green-100 rounded-full px-3 py-2 w-fit`}
+                        } text-[14px] rounded-full px-3 py-2 w-fit`}
+                      style={{
+                        backgroundColor: availableStockVal > minQty ? "#DCFCE7" : "#FEE2E2",
+
+                      }}
                     >
                       {availableStockVal > minQty ? "In Stock" : "Out of Stock"}
                     </p>
+
                   ) : (
                     <p className="text-secondary text-md text-normal border border-secondary w-fit p-2 rounded">
                       Not Available
@@ -1368,16 +1384,16 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 <div
                   className={`bg-white rounded-xl  ${totalProduct?.purchaseType !== "QUOTE"
                     ? "py-[10px] mt-3 md:px-[0px] px-[0px]"
-                    : "md:p-[24px] p-[10px] mt-2"
+                    : "md:py-[24px] p-[10px] mt-2"
                     }`}
                 >
                   {/* QUANTITY + VARIATIONS ROW */}
                   {productData?.status == "PUBLISHED" &&
                     productData?.deletedAt == null &&
                     productData?.isActive && (
-                      <div className="flex md:flex-row flex-col w-full md:gap-6 gap-2">
+                      <div className="flex md:flex-row flex-col  w-full  md:gap-6 gap-2 pb-4">
                         {/* QUANTITY - LEFT SIDE (50%) */}
-                        <div className="md:w-1/2 w-full">
+                        <div className="md:w-1/4 w-full">
                           <p className="text-md text-fontGray mb-3">Quantity</p>
 
                           <TooltipProvider>
@@ -1428,7 +1444,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         </div>
 
                         {/* VARIATIONS - RIGHT SIDE (50%) */}
-                        <div className="md:w-1/2 w-full">
+                        <div className="md:w-auto w-full">
                           {!isSingle &&
                             totalProduct?.productAttributes &&
                             combinations && (
@@ -1455,7 +1471,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             (totalProduct?.purchaseType === "QUOTE" &&
                               !(totalProduct?.purchaseType === "MULTI")) ||
                               totalProduct?.purchaseType === "QUOTE"
-                              ? "w-full"
+                              ? " md:w-1/2 w-full"
                               : "md:w-1/2 w-full"
                             }`}
                           onClick={() => {
@@ -1501,12 +1517,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
               {/* SELLER DETAILS */}
               <div className="">
-                <p className="text-md text-fontGray text-normal mt-3 mb-2">Seller Details</p>
+                <p className="text-md text-fontGray font-semibold  text-normal mt-3 mb-2">Seller Details</p>
 
                 <div className="md:flex flex flex-col md:flex-row justify-start md:items-center items-start gap-4">
                   <div className="flex justify-start items-center md:mr-2 md:max-w-[60%]">
                     <div>
-                      <p className="text-[15px] font-semibold capitalize text-black">
+                      <p className="text-[15px] capitalize text-black">
                         {vendorInfo?.companyName}
                       </p>
                       <p className="text-[13px] font-normal text-fontGray">

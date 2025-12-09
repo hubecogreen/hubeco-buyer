@@ -1,506 +1,200 @@
-// components/Footer.js
 "use client";
+
 import { GoArrowRight } from "react-icons/go";
 import CustomButton from "../customButton/CustomButton";
-// import styles from "./Footer.module.css";
 import { BsEnvelope } from "react-icons/bs";
 import Link from "next/link";
 import { IoIosArrowRoundUp } from "react-icons/io";
 import { FiPhone } from "react-icons/fi";
-// import { SlLocationPin } from "react-icons/sl";
-import {
-  FaFacebookF,
-  FaInstagram,
-  // FaLinkedin,
-  FaTwitter,
-  FaYoutube,
-} from "react-icons/fa";
-import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import Image from "next/image";
-import { FaXTwitter, FaLinkedinIn } from "react-icons/fa6";
+import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa6";
 import { IoLocationOutline } from "react-icons/io5";
+import Image from "next/image";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 const useAuth = () => {
   const userInfo = useSelector((state: any) => state.user?.userInfo || {});
   const rehydrated = useSelector((state: any) => state._persist?.rehydrated);
-
-  // Only authenticated if Redux is ready and userInfo exists
-  const isAuthenticated = rehydrated && userInfo && Object.keys(userInfo).length > 0;
-
+  const isAuthenticated =
+    rehydrated && userInfo && Object.keys(userInfo).length > 0;
   return { isAuthenticated, userInfo, rehydrated };
 };
 
 const Footer = () => {
-  const [showScrollTop, setShowScrollTop] = useState(false);
   const router = useRouter();
   const currentYear = new Date().getFullYear();
-  const [showVendorLogin, setShowVendorLogin] = useState<any>(false);
-  const { isAuthenticated, rehydrated } = useAuth();
-  // Wait until Redux state is ready to avoid blink
+  const { rehydrated } = useAuth();
   if (!rehydrated) return null;
-  const pathname = usePathname();
-  const fullUrl =
-    typeof window !== "undefined" ? `${window.location.origin}${pathname}` : "";
-  const domainUrl = process.env.NEXT_PUBLIC_PROD_URL;
 
-  useEffect(() => {
-    if (fullUrl.includes(`${domainUrl}/plans`)) {
-      setShowVendorLogin(true);
-    } else {
-      setShowVendorLogin(false);
-    }
-  }, [fullUrl]);
+  return (
+    <footer className="w-full bg-white flex justify-center md:mt-10 overflow-x-hidden">
+      <div className="w-full max-w-[1250px] flex flex-col">
 
-  const handleScroll = () => {
-    if (window.scrollY > 300) {
-      setShowScrollTop(true);
-    } else {
-      setShowScrollTop(false);
-    }
-  };
+        {/* TOP GREEN LINE */}
+        <div className="w-full flex justify-center mt-10">
+          <div className="w-[1200px] h-[1px] bg-[#069A66]" />
+        </div>
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+        {/* COPYRIGHT ROW */}
+        <div className="w-full flex justify-center pt-2">
+          <div className="w-full max-w-[1200px]">
+            {/* Mobile */}
+            <div className="md:hidden flex flex-col gap-2 px-4">
+              <p className="text-[12px] text-black font-light leading-tight">
+                Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt Ltd. All Rights Reserved
+              </p>
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const onClickVendor = () => {
-    if (showVendorLogin) {
-      window.open(`https://vendor.hubeco.market/login`, "_blank");
-    } else {
-      router.push("/plans");
-    }
-  };
-  const handleProtectedLinkClick = (path: string) => {
-    if (isAuthenticated) {
-      router.push(path);
-    } else {
-      router.push("/login"); // Go directly to login if not authenticated
-    }
-  };  
-  if (!rehydrated) return null;
-  return (    
-    <footer className="w-full justify-center bg-white md:mt-10 ">
-      <div>
-        {showScrollTop && (
-          <div className="w-full justify-center items-center ">
-            <div className="w-full justify-center flex mt-10 border-b border-[#eeeeee]">
-
-              <button
-                className="scroll-to-top md:w-20 rounded w-20 md:h-20 h-20 bg-secondary hover:bg-primary transition-all duration-500 text-white border-none flex items-center justify-center cursor-pointer align-self-center"
-                onClick={scrollToTop}
-              >
-                <IoIosArrowRoundUp size={24} />
-              </button>
-
+              <div className="flex flex-wrap gap-2 text-[12px] text-black">
+                <Link href="/privacy-policy">Privacy Policy</Link> |
+                <Link href="/terms-of-use">Terms of Use</Link> |
+                <Link href="/vendor-terms-sale">Terms of Sale</Link> |
+                <Link href="/returns-refunds-cancellations">Returns & Refunds</Link> |
+                <Link href="/shipping-delivery">Shipping Policy</Link>
+              </div>
             </div>
-            <p className="mt-1 w-full align-center text-center uppercase text-gray text-xs font-normal ">
-              Back to Top
-            </p>
-          </div>
-        )}
-      </div>
-      <div
-        className="w-full bg-white px-xl pt-10 md:pt-20 md:px-xxl bg-cover bg-center text-white"
-        style={{
-          backgroundImage: 'url("images/home/footer-bg-2.webp")',
-        }}
-      >
 
-        <div
-          className="max-w-screen-xl md:flex block  justify-between mx-auto md:pb-14 pb-5 "
-        >
-          <div className={"w-full  md:w-4/12 md:py-0 py-5"}>
-            <div className={"  align-center hover:cursor-pointer  "}>
-              <Image
-                src="/images/Logo-2.webp"
-                alt="Hubeco Logo"
-                className=" h-[45px]"
-                // width={234}
-                // height={45}
-                width={180}
-                height={45}
-                onError={e => {
-                  e.currentTarget.src = '/images/product-placeholder.webp'
-                }}
-                loading="lazy"
-                onClick={() => {
-                  router.push("/");
-                }}
-              />
-              <ul className="flex mt-8 mb-8">
-                <li
-                  className="align-middle bg-secondary hover:cursor-pointer hover:bg-primary  p-1.5 rounded"
-                  onClick={() =>
-                    window.open(
-                      "https://www.facebook.com/people/HubecoMarket/61566048633254/?mibextid=LQQJ4",
-                      "_blank"
-                    )
-                  }
-                >
-                  {/* <FaYoutube
-                    className="text-white hover:cursor-pointer font-semibold"
-                    size={20}
-                  /> */}
-                  <FaFacebookF
-                    className="text-white   font-semibold"
-                    size={20}
-                  />
-                  {/* <Image
-                    className="hover:cursor-pointer"
-                    width={28}
-                    height={28}
-                    alt="Facebook"
-                    src={"/images/contact/facebook.webp"}
-                  /> */}
-                </li>
-                <li
-                  className="align-middle bg-secondary hover:cursor-pointer hover:bg-primary  ml-4 p-1.5 rounded"
-                  onClick={() =>
-                    window.open(
-                      "https://www.youtube.com/@hubeco.marketplace",
-                      "_blank"
-                    )
-                  }
-                >
-                  <FaYoutube className="text-white  font-semibold" size={20} />
-                  {/* <Image
-                    className="hover:cursor-pointer"
-                    width={28}
-                    height={28}
-                    alt="Facebook"
-                    src={"/images/contact/twitter.webp"}
-                  /> */}
-                </li>
-                <li
-                  className="align-middle bg-secondary hover:cursor-pointer hover:bg-primary ml-4 p-1.5 rounded"
-                  onClick={() =>
-                    window.open(
-                      "https://www.instagram.com/hubeco.market/",
-                      "_blank"
-                    )
-                  }
-                >
-                  <FaInstagram
-                    className="text-white  font-semibold"
-                    size={20}
-                  />
-                  {/* <Image
-                    className="hover:cursor-pointer"
-                    width={28}
-                    height={28}
-                    alt="Facebook"
-                    src={"/images/contact/insta.webp"}
-                  /> */}
-                </li>
-                <li
-                  className="align-middle bg-secondary hover:cursor-pointer hover:bg-primary  ml-4 p-1.5 rounded"
-                  onClick={() =>
-                    window.open(
-                      "https://www.linkedin.com/company/hubeco-market/",
-                      "_blank"
-                    )
-                  }
-                >
-                  <FaLinkedinIn
-                    className="text-white  font-semibold"
-                    size={20}
-                  />
-                  {/* <Image
-                    className="hover:cursor-pointer"
-                    width={28}
-                    height={28}
-                    alt="Facebook"
-                    src={"/images/contact/linkedIn.webp"}
-                  /> */}
-                </li>
-                {/* <li className="align-middle bg-secondary hover:bg-primary ml-4 p-1.5 rounded">
-                  <FaInstagram
-                    className="text-white hover:cursor-pointer font-semibold"
-                    size={20}
-                  />
-                </li> */}
+            {/* Desktop */}
+            <div className="hidden md:flex justify-between items-center">
+              <p className="text-[12px] text-black font-light">
+                Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt Ltd. All Rights Reserved
+              </p>
+
+              <div className="flex gap-3 text-[12px] text-black">
+                <Link href="/privacy-policy">Privacy Policy</Link> |
+                <Link href="/terms-of-use">Terms of Use</Link> |
+                <Link href="/vendor-terms-sale">Terms of Sale</Link> |
+                <Link href="/returns-refunds-cancellations">Returns</Link> |
+                <Link href="/shipping-delivery">Shipping Policy</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* FOOTER CONTENT (Background Section) */}
+        <div className="w-full bg-cover bg-center bg-no-repeat mr-[0px]"
+          style={{ backgroundImage: "url('/images/home/footer-bg-2.webp')" }}>
+
+          {/* GREEN DIVIDER */}
+          <div className="w-full flex justify-start ml-[460px] pt-10">
+            <div className="w-[768px] h-[1px] bg-[#069A66]" />
+          </div>
+          
+
+          {/* FOUR COLUMNS */}
+          <div className="w-full flex justify-start max-w-[1200px] mx-auto  flex gap-[60px] pb-10 ml-[460px]">
+
+            {/* Column 1 */}
+            <div className="w-[112px] ">
+              <h4 className="text-[14px] text-[#069A66] mb-2">Products</h4>
+              <ul className="space-y-1">
+                <li><Link className="text-[#023A27]" href="/products">Bricks</Link></li>
+                <li><Link className="text-[#023A27]" href="/products">Adhesives</Link></li>
+                <li><Link className="text-[#023A27]" href="/products">Paints</Link></li>
+                <li><Link className="text-[#023A27]" href="/products">Tiles</Link></li>
+                <li><Link className="text-[#023A27]" href="/products">Bath Fittings</Link></li>
+                <li><Link className="text-[#023A27]" href="/products">Steel</Link></li>
               </ul>
             </div>
-            {/* <span>hubeco</span> */}
 
-            {/* 
-          <p className="text-black text-sm font-normal pr-xl mt-10">
-            <span className="text-primary">hubeco</span> is poised to unveil a
-            new chapter in construction that honours our planet. We are crafting
-            an experience that will change the way you think about buildings,
-            sustainable materials and solutions.
-          </p> */}
-            <div className={"flex align-center mt-12"}>
-              <CustomButton
-                title={"Login/Register"}
-                className="bg-white text-secondary hover:cursor-pointer  border border-solid border-secondary hover:border-primary font-semibold hover:text-white  h-12 md:h-12 md:w-40 w-40 md:text-md text-sm  hover:bg-primary"
-                customStyles={
-                  {
-                    // width: "170px",
-                    // border: "1px solid #A92449",
-                    // color: "#A92449",
-                  }
-                }
-                onPress={() => {
-                  router.push("/login");
-                }}
-                rightIcon={<GoArrowRight />}
-              />
-              <CustomButton
-                title={`${showVendorLogin ? "Vendor Login" : "Vendor Connect"
-                  }`}
-                onPress={() => onClickVendor()}
-                className="ml-3 bg-secondary hover:cursor-pointer  text-white h-12 md:h-12 md:w-48  w-40 md:text-md text-sm  hover:bg-primary"
-                customStyles={{}}
-                rightIcon={<GoArrowRight />}
-              />
+            {/* Column 2 */}
+            <div className="w-[112px]">
+              <h4 className="text-[14px] text-[#069A66] mb-2">Quick Links</h4>
+              <ul className="space-y-1">
+                <li><Link className="text-[#023A27]" href="/products">Products</Link></li>
+                <li><Link className="text-[#023A27]" href="/brands">Brands</Link></li>
+                <li><Link className="text-[#023A27]" href="/blogs">Blogs</Link></li>
+                <li><Link className="text-[#023A27]" href="/about">About</Link></li>
+                <li><Link className="text-[#023A27]" href="/contact">Contact Us</Link></li>
+              </ul>
             </div>
-          </div>
 
-          <div className={"w-full md:w-1/6 md:py-0 py-5"}>
-            <h4 className="text-black text-xl mb-7">Quick Links</h4>
-            <ul>
-              <li className="text-fontGray py-xs ">
-                <Link
-                  href="/products"
-                  className="text-gray-700 hover:cursor-pointer hover:text-[#2e3191] text-sm font-light"
-                >
-                  Products
-                </Link>
-              </li>
-              {/* <li className="text-fontGray py-xs">
-                <Link
-                  href="/projects"
-                  className="text-gray-600 hover:text-blue-700 text-sm font-light cursor-pointer"
-                >
-                  Projects
-                </Link>
-              </li> */}
-              <li className="text-fontGray py-xs">
-                <Link
-                  href="/brands"
-                  className="text-gray-600 hover:text-blue-700 text-sm font-light cursor-pointer"
-                >
-                  Brands
-                </Link>
-              </li>
+            {/* Column 3 */}
+            <div className="w-[150px]">
+              <h4 className="text-[14px] text-[#069A66] mb-2">Customer Support</h4>
+              <ul className="space-y-1">
+                <li><Link className="text-[#023A27]" href="/cart">Help Center</Link></li>
+                <li><Link className="text-[#023A27]" href="/profile?tab=profile">Order Tracking</Link></li>
+                <li><Link className="text-[#023A27]" href="/orders">Returns</Link></li>
+                <li><Link className="text-[#023A27]" href="/contact">Contact Us</Link></li>
+              </ul>
+            </div>
 
-              <li className="text-fontGray py-xs">
-                <Link
-                  href="/blogs"
-                  className="text-gray-600 hover:text-blue-700 text-sm font-light cursor-pointer"
-                >
-                  Blogs
-                </Link>
-              </li>
-              <li className="text-fontGray py-xs">
-                <Link
-                  href="/about"
-                  className="text-gray-600 hover:text-blue-700 text-sm font-light cursor-pointer"
-                >
-                  About
-                </Link>
-              </li>
-              <li className="text-fontGray py-xs">
-                <Link
-                  href="/contact"
-                  className="text-gray-600 hover:text-blue-700 text-sm font-light cursor-pointer"
-                >
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div className={"w-full md:w-1/6 md:py-0 py-5"}>
-            <h4 className="text-black text-xl mb-7">Customer Area</h4>
-            <ul>
-              <li className="text-fontGray py-xs">
-                <Link
-                  href="/cart"
-                  className="text-fontGray hover:text-primary text-sm cursor-pointer"
-                >
-                  My Cart
-                </Link>
-              </li>
-              <li className="text-fontGray py-xs">
-                <Link
-                  href="/profile?tab=profile"
-                  className="text-fontGray hover:text-primary hover:cursor-pointer text-sm"
-                >
-                  My Account
-                </Link>
-              </li>
-              <li
-                className="text-fontGray py-xs"
-                onClick={() => handleProtectedLinkClick("/orders")}
-              >
-                <span
-                  className="text-fontGray hover:text-primary hover:cursor-pointer text-sm"
-                >
-                  Orders
-                </span>
-              </li>
-              {/* 💡 MODIFIED: Returns - Intercepts click */}
-              <li
-                className="text-fontGray py-xs"
-                onClick={() => handleProtectedLinkClick("/orders")}
-              >
-                <span
-                  className="text-fontGray hover:text-primary hover:cursor-pointer text-sm"
-                >
-                  Returns
-                </span>
-              </li>
-              <li className="text-fontGray py-xs">
-                <Link
-                  href="/faq"
-                  className="text-fontGray hover:text-primary hover:cursor-pointer text-sm "
-                >
-                  FAQ&#39;s
-                </Link>
-              </li>
+            {/* Column 4 */}
+            <div className="w-[230px]">
+              <h4 className="text-[14px] text-[#069A66] mb-2">Contact Us</h4>
 
-            </ul>
-          </div>
-          <div className={"w-full md:w-1/5 lg:w-1/5 md:py-0 py-5"}>
-            <h4 className="text-black text-xl mb-7">Contact Us</h4>
-            <p className="text-fontGray text-sm font-light pt-2 text-justify">
-              Have a question or need to get in touch? Leave us a message and we
-              will get back to you shortly
-            </p>
-            <ul className="">
-              <li className="flex my-4 align-middle items-center">
-                <BsEnvelope
-                  className="text-secondary hover:cursor-pointer hover:text-primary font-normal"
-                  size={14}
-                />
-                <Link
-                  href="mailto:info@hubeco.market"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-4 text-black text-xs font-normal"
-                >
-                  info@hubeco.market
-                </Link>
-              </li>
-              <li className="flex my-4 align-middle items-center">
-                <FiPhone
-                  className="text-secondary hover:cursor-pointer hover:text-primary font-normal"
-                  size={14}
-                />
-                <Link
-                  href="tel:9985544055"
-                  // target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-4 text-black text-xs font-normal"
-                >
-                  +91 9985544055
-                </Link>
-              </li>
-              <li className="inline-flex my-1 align-middle items-start">
-                <IoLocationOutline
-                  size={20}
-                  height={20}
-                  width={20}
-                  className="text-secondary hover:cursor-pointer hover:text-primary font-normal z-20 "
-                />
+              <p className="text-[14px] text-black mb-3 leading-[20px]">
+                Have a question or need to get in touch? Leave us a message.
+              </p>
+
+              <p className="text-[14px] flex items-center gap-2 text-black mb-1">
+                <FiPhone size={14} /> +91 9985544055
+              </p>
+
+              <p className="text-[14px] flex items-center gap-2 text-black mb-3">
+                <BsEnvelope size={14} /> info@hubeco.market
+              </p>
+
+              <div className="flex items-start gap-2 text-black text-xs">
+                <IoLocationOutline size={20} />
                 <Link
                   href="https://maps.app.goo.gl/UbAKuXkfXee5TUn79"
                   target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-3 text-black text-xs font-normal"
+                  className="text-black"
                 >
-                  Hubeco Green Ventures Pvt Ltd<br></br>
-                  Awfis Space Solutions Ltd, NSL Icon<br></br>
-                  3rd Floor, Road No. 12, Anand Banjara Colony<br></br>
-                  <p className="flex flex-wrap text-wrap">
-                    {" "}
-                    Banjara Hills, Hyderabad, Telangana - 500034
-                  </p>
-                  <br></br>
+                  Hubeco Green Ventures Pvt Ltd <br />
+                  Awfis Space Solutions Ltd, NSL Icon <br />
+                  3rd Floor, Road No.12 <br />
+                  Banjara Hills, Hyderabad – 500034
                 </Link>
-              </li>
-            </ul>
+              </div>
+
+              {/* Social Icons */}
+              <ul className="flex mt-3 mb-8 gap-4">
+                <li
+                  className="w-[26px] h-[26px] bg-[#169B88] rounded flex justify-center items-center cursor-pointer"
+                  onClick={() => window.open("https://www.facebook.com/people/HubecoMarket/61566048633254/", "_blank")}
+                >
+                  <FaFacebookF size={14} className="text-white" />
+                </li>
+
+                <li
+                  className="w-[26px] h-[26px] bg-[#169B88] rounded flex justify-center items-center cursor-pointer"
+                  onClick={() => window.open("https://www.youtube.com/@hubeco.marketplace", "_blank")}
+                >
+                  <FaYoutube size={14} className="text-white" />
+                </li>
+
+                <li
+                  className="w-[26px] h-[26px] bg-[#169B88] rounded flex justify-center items-center cursor-pointer"
+                  onClick={() => window.open("https://www.instagram.com/hubeco.market/", "_blank")}
+                >
+                  <FaInstagram size={14} className="text-white" />
+                </li>
+
+                <li
+                  className="w-[26px] h-[26px] bg-[#169B88] rounded flex justify-center items-center cursor-pointer"
+                  onClick={() => window.open("https://www.linkedin.com/company/hubeco-market/", "_blank")}
+                >
+                  <FaLinkedinIn size={14} className="text-white" />
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div
-          className="copyright pt-xl md:flex justify-between max-w-screen-xl mx-auto pb-5 md:pd-1 border-t border-t-[#ededed]">
-          <div className="md:pb-0 pb-3 flex items-center justify-center">
-            <p className="text-fontGray text-xs font-light ">
-              Copyright © {currentYear}, Powered by Hubeco Green Ventures Pvt
-              Ltd. All rights reserved
-            </p>
-          </div>
-          <div className={"justify-center flex"}>
-            <ul className="flex flex-wrap">
-              <li className="text-fontGray">
-                <Link
-                  href="/privacy-policy"
-                  target="_blank"
-                  className="text-fontGray hover:text-primary text-xs px-sm"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li className="text-fontGray">
-                <Link href="#" className="text-fontGray text-xs ">|</Link>
-              </li>
-              <li className="text-fontGray">
-                <Link
-                  href="/terms-of-use"
-                  target="_blank"
-                  className="text-fontGray hover:text-primary text-xs px-sm"
-                >
-                  Terms of Use
-                </Link>
-              </li>
-              <li className="text-fontGray">
-                <Link href="#" className="text-fontGray text-xs ">|</Link>
-              </li>
-              <li className="text-fontGray">
-                <Link
-                  href="/vendor-terms-sale"
-                  target="_blank"
-                  className="text-fontGray hover:text-primary text-xs px-sm"
-                >
-                  Terms of Sale
-                </Link>
-              </li>
-              <li className="text-fontGray">
-                <Link href="#" className="text-fontGray text-xs ">|</Link>
-              </li>
-              <li className="text-fontGray">
-                <Link
-                  href="/returns-refunds-cancellations"
-                  target="_blank"
-                  className="text-fontGray hover:text-primary text-xs px-sm"
-                >
-                  Returns Refunds and Cancellations
-                </Link>
-              </li>
-              <li className="text-fontGray">
-                <Link href="#" className="text-fontGray text-xs ">|</Link>
-              </li>
-              <li className="text-fontGray">
-                <Link
-                  href="/shipping-delivery"
-                  target="_blank"
-                  className="text-fontGray hover:text-primary text-xs px-sm"
-                >
-                  Delivery and Shipping Policy
-                </Link>
-              </li>
-            </ul>
+
+        {/* BOTTOM LOGO */}
+        <div className="w-full flex  mt-5">
+          <div className="max-w-[1200px] ml-[10px] w-full flex justify-start">
+            <div className="w-[717px] h-[161px] relative">
+              <Image
+                src="/images/logo3.png"
+                alt="Hubeco Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
           </div>
         </div>
       </div>

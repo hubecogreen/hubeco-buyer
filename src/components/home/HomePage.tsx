@@ -5,6 +5,13 @@ import BrandsSection from "@/components/home/brands/BrandsSection";
 import ProjectsSection from "@/components/home/projects/ProjectSection";
 import BlogsSection from "@/components/home/blogs/BlogSection";
 import WorksSection from "@/components/home/works/Works";
+import ContactSection from "./contacts/ContactSection";
+import PartnersSection from "./partners/PartnersSection";
+import CallToActionSection from "./actions/CallToActionSection";
+import ProcureSection from "./procurement/ProcureSection";
+import TrustedBy from "./Trusts/TrustedBy";
+import GreenFinancing from "./financing/GreenFinancing";
+import CategoryList from "../categories/CategoryList";
 
 const HomePage = () => {
   return (
@@ -13,29 +20,46 @@ const HomePage = () => {
       <div className="banner-section mx-auto h-64 md:h-full max-w-full">
         <ImageSlider />
       </div>
-      
-      <div className="category-section pt-20 mx-auto pb-10">
-        <CategorySection />
-      </div>
-      
-      <div className="featured-section mx-auto md:pb-10 md:m-w-full">
-        <FeaturedProducts />
-      </div>
 
-      <div className="brands-section mx-auto">
-        <BrandsSection />
+      <div className="category-section">
+        <CategoryList />
       </div>
-      
-      <div className="works-section mx-auto">
+         <div className="works-section mx-auto bg-cream">
         <WorksSection />
       </div>
-      
-      <div className="projects-section mx-auto relative flex items-center justify-center pt-[30px] bg-[url('/images/home/bg5.webp')] bg-top bg-no-repeat bg-cover">
-        <ProjectsSection />
+      {/* <div className="featured-section mx-auto md:pb-10 md:m-w-full">
+        <FeaturedProducts />
+      </div> */}
+
+      {/* <div className="brands-section mx-auto">
+        <BrandsSection />
+      </div> */}
+      <div className="green-financing-section mx-auto">
+        <GreenFinancing />
+      </div>
+      <div className="trusted-section mx-auto">
+        <TrustedBy />
       </div>
 
-      <div className="blogs-section mx-auto">
+   
+
+      {/* <div className="projects-section mx-auto relative flex items-center justify-center pt-[30px] bg-[url('/images/home/bg5.webp')] bg-top bg-no-repeat bg-cover">
+        <ProjectsSection />
+      </div> */}
+      <div className="procure-section mx-auto pt-10">
+        <ProcureSection />
+      </div>
+      <div className="calltoaction-section mx-auto pt-10">
+        <CallToActionSection />
+      </div>
+      <div className="partners-section mx-auto">
+        <PartnersSection />
+      </div>
+      {/* <div className="blogs-section mx-auto">
         <BlogsSection />
+      </div> */}
+      <div className="contact-section mx-auto pt-10">
+        <ContactSection />
       </div>
     </div>
   );

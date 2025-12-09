@@ -103,9 +103,11 @@ const vendorContent = useMemo(
             Registration
           </h6>
           <p className="text-[18px] leading-6 text-lightGraytext">
+
             Sign up quickly with our simple <br/>
-            registration process to get <br/>
-            started as a vendor.
+             registration process to become a  <br/>
+             vendor on our platform.
+          
           </p>
         </div>
       </div>
@@ -123,9 +125,10 @@ const vendorContent = useMemo(
             Upload Products
           </h6>
           <p className="text-[18px] leading-6 text-lightGraytext">
-            Easily list your products with <br/>
-            complete specifications and <br/>
-            high-quality images.
+            Easily list your products with<br/>
+             detailed specifications,<br/>
+             certifications, sustainability<br/>
+             data, images and prices
           </p>
         </div>
       </div>
@@ -146,6 +149,27 @@ const vendorContent = useMemo(
             Reach a broad audience and <br/>
             receive quotation requests <br/>
             from active buyers.
+          </p>
+        </div>
+      </div>
+
+
+       <div className="flex items-start p-10 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
+        <div className="flex flex-col gap-5">
+          <Image
+            src="/images/home/howitwork/search-icon.png"
+            alt="start-selling"
+            height={52}
+            width={52}
+          />
+          <h6 className="font-medium text-[22px] text-black">
+            Monitor Sales & Revenue
+          </h6>
+          <p className="text-[18px] leading-6 text-lightGraytext">
+
+            Track your sales performance and <br/>
+             revenue analytics from your <br/>
+              comprehensive vendor dashboard
           </p>
         </div>
       </div>
@@ -201,7 +225,25 @@ const vendorContent = useMemo(
   `}
   customStyles={{ padding: "22px 62px", width: "384px" }}
   title="Buyer"
-  rightIcon={<HiOutlineArrowNarrowRight />}
+    rightIcon={
+    showBuyer 
+      ? (
+          <Image 
+            src="/images/home/howitwork/white-arrao-icon.png" 
+            alt="white arrow" 
+            width={30} 
+            height={30}
+          />
+        )
+      : (
+          <Image 
+            src="/images/home/howitwork/green-arrow-icon.png" 
+            alt="red arrow" 
+            width={30} 
+            height={30}
+          />
+        )
+  }
 />
 
 <CustomButton
@@ -220,8 +262,25 @@ const vendorContent = useMemo(
   `}
   customStyles={{ padding: "22px 62px", width: "384px" }}
   title="Vendor"
-  rightIcon={<HiOutlineArrowNarrowRight />}
-/>
+rightIcon={
+    !showBuyer 
+      ? (
+          <Image 
+            src="/images/home/howitwork/white-arrao-icon.png" 
+            alt="white arrow" 
+            width={30} 
+            height={30}
+          />
+        )
+      : (
+          <Image 
+            src="/images/home/howitwork/red-arrow-icon.png" 
+            alt="red arrow" 
+            width={30} 
+            height={30}
+          />
+        )
+  }/>
 
           </div>
         </div>

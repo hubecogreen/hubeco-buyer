@@ -415,7 +415,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
       )}
 
       {/* Input Component */}
-      <div className="relative w-full">
+      <div className="relative w-full ">
         <Input
           placeholder=""
           value={searchQuery}
@@ -429,7 +429,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
             // Reset the flag after a short delay
             setTimeout(() => setClickedResult(false), 100);
           }}
-          className={`pl-3 !bg-white border-[1px] border-[#d9d9d9] border-solid md:text-base text-xs lg:text-sm w-full h-[47px] shadow-lg text-fontGray rounded-[5px] mr-[1px] ${
+          className={`pl-3 bg-cream  border-[1px] border-[#E8E3C5] border-solid md:text-base text-xs lg:text-sm w-full h-[47px] shadow-lg text-fontGray rounded-[5px] mr-[1px] ${
             isExpanded ? 'w-full' : 'w-12 h-12 rounded-lg'
           }`}
         />
@@ -446,12 +446,15 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
             </div>
           </div>
         )}
+         <span className="absolute inset-y-0 right-3 top-[6px] flex items-center text-fontGray bg-primary w-[34px] h-[34px] rounded-md justify-center  ">
+        <Search size={16} color="#ffffff" className="text-secondary" />
+      </span>
       </div>
 
       {/* Search Icon */}
-      <span className="absolute inset-y-0 right-3 flex items-center text-fontGray">
-        <Search size={16} color="#A92449" className="text-secondary" />
-      </span>
+      <div>
+     
+      </div>
 
       {/* Render search results grouped by type */}
       {isDropdownOpen && (

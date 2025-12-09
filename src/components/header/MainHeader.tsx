@@ -466,10 +466,10 @@ const Header: React.FC<HeaderProps> = () => {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky} px-[100px] bg-cream`}
     >
       <div
-        className={`w-full justify-center items-center bg-lightBgColor h-auto md:h-20 lg:h-22 px-4 pt-2 pb-3 md:pb-20 lg:pb-22 ${
+        className={`w-full justify-center items-center  h-auto md:h-[80px] lg:h-22 px-4 pt-2 pb-3 md:pb-20 lg:pb-22 ${
           styles.stickyHeader
         } ${isSearchFocused ? styles.searchFocused : ""}`}
       >
@@ -496,16 +496,18 @@ const Header: React.FC<HeaderProps> = () => {
               style={{ minWidth: "175px", maxWidth: "180px" }}
             >
               <Image
-                src="/images/Logo-2.webp"
+                src="/images/home/header/hubeco-logo.png"
                 className="h-8 md:h-9 lg:h-10 xl:h-12 w-auto object-contain"
                 alt="Hubeco Logo"
-                width={200}
-                height={50}
+                width={242}
+                height={55}
                 onError={(e) => {
                   e.currentTarget.src = "/images/product-placeholder.webp";
                 }}
                 loading="lazy"
               />
+
+
             </Link>
 
             {/* Desktop Navigation Links - Visible on tablet and large screens */}
@@ -525,7 +527,7 @@ const Header: React.FC<HeaderProps> = () => {
                   }}
                   data-product-segments-button
                 >
-                  <span
+                  {/* <span
                     className={`font-medium relative text-sm md:text-sm lg:text-base md:ml-[25px] lg:ml-[2px] ${
                       isProductSegmentsOpen ? "text-[#B90647]" : "text-gray-800"
                     }`}
@@ -534,8 +536,8 @@ const Header: React.FC<HeaderProps> = () => {
                     {isProductSegmentsOpen && (
                       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                     )}
-                  </span>
-                  <svg
+                  </span> */}
+                  {/* <svg
                     className={`w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 text-gray-600 transition-transform duration-200 ${
                       isProductSegmentsOpen ? "rotate-180" : ""
                     }`}
@@ -549,9 +551,9 @@ const Header: React.FC<HeaderProps> = () => {
                       strokeWidth={2}
                       d="M19 9l-7 7-7-7"
                     />
-                  </svg>
+                  </svg> */}
                 </div>
-                <div
+                {/* <div
                   onMouseEnter={handleProductSegmentsMouseEnter}
                   onMouseLeave={handleProductSegmentsMouseLeave}
                 >
@@ -562,26 +564,101 @@ const Header: React.FC<HeaderProps> = () => {
                       setIsProductSegmentsClicked(false);
                     }}
                   />
-                </div>
+                </div> */}
               </div>
-              <Link
-                href="/green-financing"
-                className={`flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative pr-1 md:pr-2 lg:pr-5 ${
-                  pathname === "/green-financing"
-                    ? "text-[#B90647]"
-                    : "text-gray-800"
-                }`}
-                style={{ marginLeft: "20px" }}
-              >
-                <span className="font-medium text-sm md:text-sm lg:text-base relative">
-                  Green Financing
-                  {pathname === "/green-financing" && (
-                    // Underline is absolutely positioned in 'span', so it won't extend to the right padding
-                    <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-[#B90647]"></span>
-                  )}
-                </span>
-                {/* You can add icons or other elements here */}
-              </Link>
+
+                 {/* Center - Search Bar with Hamburger Menu - Visible on tablet and large screens */}
+          <div className="hidden md:flex lg:flex items-center space-x-2 md:space-x-2 lg:space-x-4 max-w-xl">
+            <div className="relative md:flex lg:flex">
+              {/* {!isSearchFocused ? (
+                <div ref={searchRef} className="relative">
+                  <button
+                    className={`w-10 h-10 md:w-10 md:h-10 lg:w-12 lg:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors md:mr-1 ${token? "lg:mr-0" : "lg:mr-4"}   md:ml-0 lg:ml-2`}
+                    onClick={handleSearchFocus}
+                  >
+                    <IoSearchOutline className="text-gray-600" size={18} />
+                  </button>
+                </div>
+              ) : ( */}
+                <div className="flex items-center space-x-2 md:space-x-2 lg:space-x-4 w-full md:w-[150px] lg:w-[300px] bg-cream">
+                  {/* <div className="hidden md:hidden lg:flex">
+                    <VscMenu
+                      className="text-black cursor-pointer font-light text-gray-800"
+                      size={24}
+                      onClick={toggleMenu}
+                    />
+                  </div> */}
+                  <div className="relative flex-1 bg-red-200">
+                    <SearchBar
+                      isExpanded={true}
+                      onFocus={handleSearchFocus}
+                      onBlur={handleSearchBlur}
+                      className="w-full bg-red-100"
+                      value={searchValue}
+                      onChange={(value) => setSearchValue(value)}
+                      placeholder={
+                        rotatingPlaceholders[currentPlaceholderIndex] ||
+                        "Search for Products..."
+                      }
+                    />
+                  </div>
+                  {/* <button
+                    className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
+                    onClick={handleSearchClose}
+                  >
+                    <IoClose className="text-gray-600" size={18} />
+                  </button> */}
+                </div>
+            </div>
+          </div>
+         {/* Products */}
+<Link
+  href="/products"
+  className={`mx-4 font-medium cursor-pointer transition-colors relative hidden lg:block ${
+    pathname === "/products"
+      ? "text-[#B90647]"
+      : "text-gray-800 hover:text-secondary"
+  }`}
+>
+  Products
+  {pathname === "/products" && (
+    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+  )}
+</Link>
+
+{/* Green Financing */}
+<Link
+  href="/green-financing"
+  className={`mx-4 flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative hidden lg:flex ${
+    pathname === "/green-financing"
+      ? "text-[#B90647]"
+      : "text-gray-800"
+  }`}
+>
+  <span className="font-medium text-base relative">
+    Green Financing
+    {pathname === "/green-financing" && (
+      <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-[#B90647]"></span>
+    )}
+  </span>
+</Link>
+
+{/* About */}
+<Link
+  href="/about"
+  className={`mx-4 font-medium cursor-pointer transition-colors relative hidden lg:block ${
+    pathname === "/about"
+      ? "text-[#B90647]"
+      : "text-gray-800 hover:text-secondary"
+  }`}
+>
+  About
+  {pathname === "/about" && (
+    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+  )}
+</Link>
+
+
             </div>
 
             {/* Mobile Navigation Links */}
@@ -635,7 +712,7 @@ const Header: React.FC<HeaderProps> = () => {
                   : "space-x-6 md:space-x-8 lg:space-x-8"
               }`}
             >
-              <Link
+              {/* <Link
                 href="/brands"
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/brands"
@@ -647,8 +724,8 @@ const Header: React.FC<HeaderProps> = () => {
                 {pathname === "/brands" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
-              </Link>
-              <Link
+              </Link> */}
+              {/* <Link
                 href="/blogs"
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/blogs"
@@ -660,34 +737,10 @@ const Header: React.FC<HeaderProps> = () => {
                 {pathname === "/blogs" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
-              </Link>
-              <Link
-                href="/products"
-                className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
-                  pathname === "/products"
-                    ? "text-[#B90647]"
-                    : "text-gray-800 hover:text-secondary"
-                }`}
-              >
-                Products
-                {pathname === "/products" && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
-                )}
-              </Link>
-              <Link
-                href="/about"
-                className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
-                  pathname === "/about"
-                    ? "text-[#B90647]"
-                    : "text-gray-800 hover:text-secondary"
-                }`}
-              >
-                About Us
-                {pathname === "/about" && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
-                )}
-              </Link>
-              <Link
+              </Link> */}
+             
+           
+              {/* <Link
                 href="/contact"
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/contact"
@@ -699,7 +752,7 @@ const Header: React.FC<HeaderProps> = () => {
                 {pathname === "/contact" && (
                   <div className="absolute bottom-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
-              </Link>
+              </Link> */}
             </div>
           )}
 
@@ -751,56 +804,12 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
           </div> */}
 
-          {/* Center - Search Bar with Hamburger Menu - Visible on tablet and large screens */}
-          <div className="hidden md:flex lg:flex items-center space-x-2 md:space-x-2 lg:space-x-4 max-w-2xl">
-            <div className="relative md:flex lg:flex">
-              {!isSearchFocused ? (
-                <div ref={searchRef} className="relative">
-                  <button
-                    className={`w-10 h-10 md:w-10 md:h-10 lg:w-12 lg:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors md:mr-1 ${token? "lg:mr-0" : "lg:mr-4"}   md:ml-0 lg:ml-2`}
-                    onClick={handleSearchFocus}
-                  >
-                    <IoSearchOutline className="text-gray-600" size={18} />
-                  </button>
-                </div>
-              ) : (
-                <div className="flex items-center space-x-2 md:space-x-2 lg:space-x-4 w-full md:w-[350px] lg:w-[500px]">
-                  <div className="hidden md:hidden lg:flex">
-                    <VscMenu
-                      className="text-black cursor-pointer font-light text-gray-800"
-                      size={24}
-                      onClick={toggleMenu}
-                    />
-                  </div>
-                  <div className="relative flex-1">
-                    <SearchBar
-                      isExpanded={true}
-                      onFocus={handleSearchFocus}
-                      onBlur={handleSearchBlur}
-                      className="w-full"
-                      value={searchValue}
-                      onChange={(value) => setSearchValue(value)}
-                      placeholder={
-                        rotatingPlaceholders[currentPlaceholderIndex] ||
-                        "Search for Products..."
-                      }
-                    />
-                  </div>
-                  <button
-                    className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
-                    onClick={handleSearchClose}
-                  >
-                    <IoClose className="text-gray-600" size={18} />
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
+       
 
           {/* Right side - User actions */}
           <div className="flex items-center md:space-x-2 lg:space-x-4">
             {/* Profile Icon - Visible on all screen sizes */}
-            <div
+            {token ? <><div
               ref={iconRef}
               onClick={() => {
                 if (isUserPopoverOpen) {
@@ -844,11 +853,29 @@ const Header: React.FC<HeaderProps> = () => {
                 </div>
               ) : null}
             </div>
+            </>
+             :
+             <div className="flex justify-center items-center">
+             <CustomButton
+             title="Submit Enquiry"
+              className="text-[16px] bg-secondaryLight px-4 lg:px-2 h-12 mr-4 hidden lg:flex text-white "
+              customStyles={{ marginRight:'30px'}}
+              hoverBgColor=""
+              onPress={() => router.push('/contact')}
+            />
+            <CustomButton
+            title="Login / SignUp"
+              className="text-[16px] bg-white text-secondaryLight border-2 border-secondaryLight px-4 lg:px-2  h-12 mr-4 hidden lg:flex  font-medium"
+              customStyles={{ marginRight:'30px'}}
+              hoverBgColor=""
+              onPress={() => router.push('/login')}
+            />
+              </div>}
 
             {/* Vendor Button/Icon - Different for mobile vs tablet vs desktop */}
-            {!token && (
+            {/* {!token && (
               <>
-                {/* Desktop - Full button */}
+              
                 <CustomButton
                   title={`${
                     showVendorLogin ? "Vendor Login" : "Vendor Connect"
@@ -860,7 +887,7 @@ const Header: React.FC<HeaderProps> = () => {
                   onPress={() => onClickVendor()}
                 />
 
-                {/* Tablet - Icon only (like mobile) */}
+               
                 <Link
                   href="/plans"
                   className="hidden md:flex lg:hidden p-1"
@@ -879,7 +906,6 @@ const Header: React.FC<HeaderProps> = () => {
                   />
                 </Link>
 
-                {/* Mobile - Icon only */}
                 <Link
                   href="/plans"
                   className="md:hidden"
@@ -898,7 +924,7 @@ const Header: React.FC<HeaderProps> = () => {
                   />
                 </Link>
               </>
-            )}
+            )} */}
 
             {token && <div className="relative w-10 md:w-12 lg:w-18"></div>}
 

@@ -224,3 +224,51 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
   font-family: "Inter", "Roboto", "Segoe UI", sans-serif !important;
   font-weight: 500;
 }
+
+.marquee-swiper .swiper-wrapper {
+  width: max-content !important;   /* prevent stretching */
+  display: flex !important;
+  animation: marqueeMove 200s linear infinite;
+  will-change: transform;
+}
+
+.marquee-slide {
+  width: auto !important;
+}
+
+@keyframes marqueeMove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);  /* move full width of logos */
+  }
+}
+.vertical-marquee {
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+}
+
+.vertical-track {
+  display: flex;
+  flex-direction: column;
+  animation: verticalScroll 4s linear infinite;
+}
+
+.vertical-item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@keyframes verticalScroll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-150px); /* 3 items x 50px each */
+  }
+}
+

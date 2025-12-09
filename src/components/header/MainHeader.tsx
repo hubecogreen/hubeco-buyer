@@ -466,7 +466,7 @@ const Header: React.FC<HeaderProps> = () => {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky} px-[100px] bg-cream`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky} px-[100px] bg-cream h-[80px]`}
     >
       <div
         className={`w-full justify-center items-center  h-auto md:h-[80px] lg:h-22 px-4 pt-2 pb-3 md:pb-20 lg:pb-22 ${

@@ -52,38 +52,31 @@ const ImageSlider = () => {
             </h1>
           </div>
 
-        {/* RIGHT SIDE — Vertical swiper text */}
-<div className="flex flex-col justify-center h-full md:translate-y-[180px] gap-2">
-  <p className="text-lg">Certified Products from</p>
+          {/* RIGHT SIDE — Vertical swiper text */}
+          <div className="flex flex-col justify-center h-full md:translate-y-[180px] gap-2">
+            <p className="text-lg">Certified Products from</p>
 
-  <div className="h-[50px] overflow-hidden">
-    <Swiper
-      direction="vertical"
-      modules={[Autoplay]}
-      slidesPerView={1}
-      loop={true}
-      allowTouchMove={false}
-      speed={1500}
-      autoplay={{
-        delay: 0,
-        disableOnInteraction: false,
-      }}
-      className="w-full"
-    >
-      {greenProLabels.map((item, idx) => (
-        <SwiperSlide key={idx}>
-          <p className="text-4xl font-semibold">{item}</p>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  </div>
-</div>
+            <div className="h-[50px] overflow-hidden">
+              <div className="vertical-marquee">
+                <div className="vertical-track">
+                  {[...greenProLabels, ...greenProLabels].map((item, i) => (
+                    <div key={i} className="vertical-item">
+                      <p className="text-4xl font-semibold">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-          
+            </div>
+          </div>
+
+
         </div>
+<hr className="border-white/40 w-full my-8" />
+
 
         {/* Middle Row (Paragraph + Buttons) */}
-        <div className="flex gap-[312px] items-center pt-[41px] pb-[56px]">
+        <div className="flex gap-[312px] items-center  pb-[50px]">
           <div>
             <p className="text-[20px] leading-[20px] opacity-85 mt-2">
               Empowering India’s Construction industry with <br />
@@ -91,7 +84,7 @@ const ImageSlider = () => {
             </p>
           </div>
 
-          <div className="flex space-x-4 mt-8">
+          <div className="flex space-x-4 ">
             <button className="bg-primary hover:bg-white hover:text-primary text-white px-[40px] py-[20px] rounded-md">
               Shop Now
             </button>
@@ -102,29 +95,27 @@ const ImageSlider = () => {
         </div>
 
         {/* Bottom scrolling logos */}
-        <div className="w-full flex flex-row items-center text-center">
-          <p className="text-xs opacity-80 whitespace-nowrap px-2">Trusted by:</p>
+       <div className="w-full flex flex-row items-center justify-center bg-white/10 backdrop-blur-md rounded-md py-2 px-4">
+
+          <p className="opacity-80 whitespace-nowrap px-3 -mt-[16px]">Trusted by:</p>
 
           <Swiper
-  modules={[Autoplay]}
-  slidesPerView="auto"
-  loop={true}
-  speed={5000}               // slower/smoother → increase if needed
-  freeMode={true}            // enables free scrolling
-  autoplay={{
-    delay: 0,                // continuous (no stop)
-    disableOnInteraction: false,
-  }}
-  className="ml-4 opacity-85 w-full"
->
-  {Array.from({ length: 20 }).map((_, index) =>
-    logos.map((logo, i) => (
-      <SwiperSlide key={`${index}-${i}`} style={{ width: "auto" }}>
-        <Image src={logo} alt={`logo-${i}`} width={80} height={24} />
-      </SwiperSlide>
-    ))
-  )}
-</Swiper>
+            slidesPerView="auto"
+            loop={false}               // important
+            allowTouchMove={false}     // prevent dragging reset
+            autoplay={false}
+            speed={5000}
+            className="ml-4 opacity-85 w-full marquee-swiper"
+          >
+            {[...logos, ...logos, ...logos].map((dup) =>        // duplicate items manually ×2
+              logos.map((logo, i) => (
+                <SwiperSlide key={`${dup}-${i}`} className="marquee-slide">
+                  <Image src={logo} alt={`logo-${i}`} width={80} height={24} className="mx-3" />
+                </SwiperSlide>
+              ))
+            )}
+          </Swiper>
+
 
         </div>
 

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Image from "next/image";
 
 import { getCookie } from "cookies-next";
 import * as Webservices from "../../../network/WebServices";
@@ -87,10 +88,12 @@ const ContactSection: React.FC = () => {
       <div className="max-w-[1200px] w-full flex flex-col md:flex-row h-[963.63px]">
         {/* LEFT IMAGE */}
         <div className="w-[550px] h-[963.63px] flex-shrink-0">
-          <img
+          <Image
             src="/images/contacts/image.png"
             alt="contact"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-l-lg"
+            width={100}
+            height={100}
           />
         </div>
 
@@ -102,7 +105,7 @@ const ContactSection: React.FC = () => {
             flex flex-col gap-[22px]
             text-white
             px-[50px] py-[50px]
-            bg-gradient-to-br from-[#109989] to-[#084A42]
+            bg-gradient-to-br from-[#109989] to-[#084A42] rounded-r-lg
           "
         >
           {/* Heading */}
@@ -132,10 +135,10 @@ const ContactSection: React.FC = () => {
                 render={({ field }) => (
                   <input
                     {...field}
-                    placeholder="Jane Smith"
+                    placeholder="Enter Name"
                     className="
                       w-[572px] h-[63px] px-[19px] py-[15px]
-                      bg-transparent text-black placeholder:text-white/40
+                      bg-transparent  placeholder:text-white/40
                       text-[22.1px] font-medium rounded-[10px]
                       border border-transparent border-b-white
                       hover:border-white focus:border-white focus:outline-none
@@ -156,10 +159,10 @@ const ContactSection: React.FC = () => {
                 render={({ field }) => (
                   <input
                     {...field}
-                    placeholder="jane@framer.com"
+                    placeholder="Enter Email"
                     className="
                       w-[572px] h-[63px] px-[19px] py-[15px]
-                      bg-transparent text-black placeholder:text-white/40
+                      bg-transparent  placeholder:text-white/40
                       text-[22.1px] font-medium rounded-[10px]
                       border border-transparent border-b-white
                       hover:border-white focus:border-white focus:outline-none
@@ -182,10 +185,10 @@ const ContactSection: React.FC = () => {
                 render={({ field }) => (
                   <input
                     {...field}
-                    placeholder="9876543210"
+                    placeholder="Enter Phone Number"
                     className="
                       w-[572px] h-[63px] px-[19px] py-[15px]
-                      bg-transparent text-black placeholder:text-white/40
+                      bg-transparent  placeholder:text-white/40
                       text-[22.1px] font-medium rounded-[10px]
                       border border-transparent border-b-white
                       hover:border-white focus:border-white focus:outline-none
@@ -208,10 +211,10 @@ const ContactSection: React.FC = () => {
                 render={({ field }) => (
                   <textarea
                     {...field}
-                    placeholder="Your message..."
+                    placeholder="Write Your Messsage Here ... "
                     className="
                       w-[572px] h-[189px] p-[18px]
-                      bg-transparent text-black placeholder:text-white/40
+                      bg-transparent  placeholder:text-white/40
                       text-[22.1px] font-medium rounded-[10px]
                       border border-transparent border-b-white
                       hover:border-white focus:border-white focus:outline-none
@@ -228,14 +231,14 @@ const ContactSection: React.FC = () => {
               <button
                 onClick={handleSubmit(onSubmit)}
                 className="
-                  group w-[572px] h-[63px] rounded-[10px] mt-[20px]
+                  group w-[572px] h-[63px] rounded-[10px] mt-[20px] p-[30px]
                   bg-[linear-gradient(129deg,#F0FDFA_-23%,#109989_24%)]
                   text-white text-[25px] font-normal
                   relative overflow-hidden transition-all duration-600
                   hover:shadow-[0px_6px_14px_rgba(0,0,0,0.25)]
                 "
               >
-                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:left-[60px] transition-all">
+                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:left-[60px] transition-all ">
                   {loading ? "Sending..." : "Submit"}
                 </span>
 
@@ -247,7 +250,7 @@ const ContactSection: React.FC = () => {
                     transition-all
                   "
                 >
-                  →
+                  <Image src="/images/home/howitwork/white-arrao-icon.png" alt="arrow" width={24} height={24} />
                 </span>
               </button>
             </>

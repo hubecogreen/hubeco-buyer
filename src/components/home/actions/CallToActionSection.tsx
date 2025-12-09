@@ -1,8 +1,12 @@
 "use client";
 
+import CustomButton from "@/components/customButton/CustomButton";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const CallToActionSection: React.FC = () => {
+
+   const router=useRouter();
     return (
         <section
             className="
@@ -57,7 +61,7 @@ const CallToActionSection: React.FC = () => {
 
                 {/* Buttons */}
                 <div className="flex gap-4 mt-6">
-                    <button
+                    <CustomButton
                         className="
                             bg-[#109989]
                             text-white 
@@ -68,11 +72,15 @@ const CallToActionSection: React.FC = () => {
                             rounded-[5px]
                             tracking-wide
                         "
-                    >
-                        Submit RFQ
-                    </button>
+                        onPress={
+                            ()=>router.push('/products')
+                        }
+                        title="Submit RFQ"
+                    />
+                      
+                   
 
-                    <button
+                    <a
                         className="
                             bg-[#109989]
                             text-white 
@@ -82,10 +90,13 @@ const CallToActionSection: React.FC = () => {
                             py-3 
                             rounded-[5px]
                             tracking-wide
+                            cursor-pointer
                         "
+                        href="https://wa.me/${whatsappNumber}"
                     >
+                        
                         Talk to an Expert
-                    </button>
+                    </a>
                 </div>
             </div>
         </section>

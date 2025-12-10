@@ -37,8 +37,8 @@ const buyerContent = useMemo(
       <Image src="/images/home/howitwork/search-icon.png" alt="search-icon" height={52} width={52}/>
       <h6 className="font-medium  text-[22px] text-black">Browse Products</h6>
       <p className="text-[18px]  leading-6  text-lightGraytext">
-        Filter products using <br/>
-        material type, specifications, or browse <br/>
+        Filter products using 
+        material type, specifications, or browse 
         organized product categories.
       </p>
     </div>
@@ -50,7 +50,7 @@ const buyerContent = useMemo(
       <Image src="/images/home/howitwork/correct-icon.png" alt="correct-icon" height={52} width={52}/>
       <h6 className="font-medium  text-[22px] text-black">Request Quotations</h6>
       <p className="text-[18px]  leading-6  text-lightGraytext">
-        Select products and request competitive <br/> quotes from verified suppliers.
+        Select products and request competitive quotes from verified suppliers.
       </p>
     </div>
   </div>
@@ -61,7 +61,7 @@ const buyerContent = useMemo(
       <Image src="/images/home/howitwork/cart-icon.png" alt="cart-icon" height={52} width={52}/>
       <h6 className="font-medium  text-[22px] text-black">Procure & Track Impact</h6>
       <p className="text-[18px]  leading-6  text-lightGraytext">
-        Approve orders and monitor CO₂ emissions <br/> using sustainable materials.
+        Approve orders and monitor CO₂ emissions  using sustainable materials.
       </p>
     </div>
   </div>
@@ -72,7 +72,7 @@ const buyerContent = useMemo(
       <Image src="/images/home/howitwork/recycle-icon.png" alt="recycle-icon" height={52} width={52}/>
       <h6 className="font-medium  text-[22px] text-black">Build Sustainably</h6>
       <p className="text-[18px]  leading-6  text-lightGraytext">
-        Build eco-friendly structures using our <br/> curated green materials.
+        Build eco-friendly structures using our  curated green materials.
       </p>
     </div>
   </div>
@@ -104,8 +104,8 @@ const vendorContent = useMemo(
           </h6>
           <p className="text-[18px] leading-6 text-lightGraytext">
 
-            Sign up quickly with our simple <br/>
-             registration process to become a  <br/>
+            Sign up quickly with our simple
+             registration process to become a 
              vendor on our platform.
           
           </p>
@@ -125,9 +125,9 @@ const vendorContent = useMemo(
             Upload Products
           </h6>
           <p className="text-[18px] leading-6 text-lightGraytext">
-            Easily list your products with<br/>
-             detailed specifications,<br/>
-             certifications, sustainability<br/>
+            Easily list your products with
+             detailed specifications,
+             certifications, sustainability
              data, images and prices
           </p>
         </div>
@@ -146,8 +146,8 @@ const vendorContent = useMemo(
             Start Selling
           </h6>
           <p className="text-[18px] leading-6 text-lightGraytext">
-            Reach a broad audience and <br/>
-            receive quotation requests <br/>
+            Reach a broad audience and 
+            receive quotation requests 
             from active buyers.
           </p>
         </div>
@@ -167,8 +167,8 @@ const vendorContent = useMemo(
           </h6>
           <p className="text-[18px] leading-6 text-lightGraytext">
 
-            Track your sales performance and <br/>
-             revenue analytics from your <br/>
+            Track your sales performance and
+             revenue analytics from your 
               comprehensive vendor dashboard
           </p>
         </div>

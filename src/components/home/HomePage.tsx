@@ -55,9 +55,9 @@ const HomePage = () => {
       <div className="partners-section mx-auto">
         <PartnersSection />
       </div>
-      {/* <div className="blogs-section mx-auto">
+      <div className="blogs-section mx-auto">
         <BlogsSection />
-      </div> */}
+      </div>
       <div className="contact-section mx-auto pt-10">
         <ContactSection />
       </div>

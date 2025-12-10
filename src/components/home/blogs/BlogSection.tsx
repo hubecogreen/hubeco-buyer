@@ -1,19 +1,18 @@
 "use client";
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+// ✅ Correct Swiper v11 import
+import { Navigation } from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import CustomButton from "@/components/customButton/CustomButton";
-import { GoArrowRight } from "react-icons/go";
+
 import BlogCard from "@/components/blogCard/BlogCard";
 import * as Webservices from "../../../network/WebServices";
 import * as getEndpoint from "../../../network/EndPoints";
-import { getCookie } from 'cookies-next'
+import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
-
-const baseAPI = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 interface Blog {
   _id: string;
@@ -25,16 +24,7 @@ interface Blog {
   thumbnail: string;
   status: string;
   isActive: boolean;
-  author: {
-    email: string;
-    firstName: string;
-    lastName: string;
-    userId: string;
-    userType: string;
-    sessionId: string;
-    thumbnail: string | null;
-    phoneNumber: string;
-  };
+  author: any;
   createdAt: string;
   updatedAt: string;
   slug: string;
@@ -42,132 +32,101 @@ interface Blog {
 
 const BlogsSection = () => {
   const [blogs, setBlogData] = useState<Blog[]>([]);
-  const colors = ["#009886", "#009886", "#009886"]; // Define your colors here
-  const [bgColor, setBgColor] = useState(colors[0]);
-  const [slidesToShow, setSlidesToShow] = useState(3)
-  const router = useRouter()
+  const router = useRouter();
 
-  // Memoize API data fetching
-  const getData = useCallback((page = 1) => {
-    const token = getCookie('token') as string  
-    const url = `${getEndpoint.default.BLOGS}?limit=9&page=${page}`;
+  // Swiper button refs
+  const prevRef = useRef<HTMLButtonElement | null>(null);
+  const nextRef = useRef<HTMLButtonElement | null>(null);
+
+  const getData = useCallback(() => {
+    const token = getCookie("token") as string;
+    const url = `${getEndpoint.default.BLOGS}?limit=9&page=1`;
+
     Webservices.callGetApi(url, token)
-      .then(
-        (response: {
-          data: { data: Blog[]; nextCursor: string | null; totalCount: number; metadata: { totalCount: number; currentPage: number } };
-        }) => {
-          if (response.data && Array.isArray(response.data.data)) {
-            setBlogData(response.data.data);
-            if(response.data.data.length != 0 && response.data.data.length == 2) {
-              setSlidesToShow(2)
-            } else if(response.data.data.length != 0 && response.data.data.length == 1) {
-              setSlidesToShow(1)
-            } else if(response.data.data.length != 0 && response.data.data.length > 2) {
-              setSlidesToShow(3)
-            } else {
-              setSlidesToShow(1)
-            }
-          } else {
-            // consoleerror("Unexpected response format: ", response);
-          }
+      .then((response: any) => {
+        if (response.data?.data) {
+          setBlogData(response.data.data);
         }
-      )
-      .catch((err) => {
-        // consoleerror("API call failed: ", err);
-      });
+      })
+      .catch(() => {});
   }, []);
 
-  // Memoize navigation handler
-  const handleSeeAllBlogs = useCallback(() => {
-    router.push('/blogs');
-  }, [router]);
-
-  // Memoize swiper content
-  const swiperContent = useMemo(() => (
-    <Swiper
-      spaceBetween={50}
-      slidesPerView={1}
-      breakpoints={{
-        640: {
-          slidesPerView: slidesToShow,
-        },
-      }}
-      pagination={{ clickable: true }}
-      autoplay={{ delay: 3000 }}
-      loop={true}
-      className="h-auto flex justify-center md:h-auto md:w-10/12 md:mx-auto max-w-[95%]"
-    >
-      {blogs.map((src, index) => (
-        <SwiperSlide
-          key={`${src._id || index}`}
-          className="md:w-full w-full h-full"
-        >
-          <div className="h-full">
-            <BlogCard
-              key={`${src._id || index}`}
-              //@ts-ignore
-              product={src}
-              index={index} // Pass index for priority loading
-              imageStyle={{
-                filter: "grayscale(100%)",
-                transition: "filter 0.8s ease-in-out",
-              }}
-              imageHoverStyle={{
-                filter: "grayscale(0%)",
-              }}
-            />
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  ), [blogs, slidesToShow]);
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      setBgColor((prevColor) => {
-        const currentIndex = colors.indexOf(prevColor);
-        const nextIndex = (currentIndex + 1) % colors.length;
-        return colors[nextIndex];
-      });
-    }, 3000);
     getData();
-    return () => clearInterval(interval); // Cleanup the interval on component unmount
   }, [getData]);
 
   return (
     <>
-      {blogs && blogs.length > 0 ? (
-        <section
-          className="relative w-full items-center justify-center pt-4 md:pt-[50px] mobile-sm:mt-4 transition-bg ease-in-out duration-1000 bg-[url('/images/home/wavesBglight.webp')] bg-contain bg-no-repeat bg-center"
-          style={{ backgroundColor: bgColor }}
-        >
-          <div className="pb-10">
-            <div className="items-center justify-center px-8 text-center z-20 md:pt-20 pt-4">
-              <h2 className="text-4xl font-bold mb-4 text-white mt-30">
-                Blogs & News
-              </h2>
+      {blogs.length > 0 && (
+        <section className="relative w-full  flex flex-col items-center bg-cream">
+          <div className="flex justify-between m-[100px] ">
+            
+            {/* LEFT TEXT */}
+            <div className="w-[450px]">
+              <h2 className="text-[44px] text-black font-semibold">Blogs</h2>
+              <p className="text-black text-[33px] mt-2 leading-[28px]">
+                Inspiring insights for a smarter,{" "}
+                <span className="text-primary">greener</span> future
+              </p>
+            </div>
+
+            {/* SLIDER */}
+            <div className="relative w-[750px]">
+
+              {/* LEFT ARROW */}
+              <button
+                ref={prevRef}
+                className="absolute left-0 top-1/2 -translate-y-1/2 
+                -translate-x-1/2 z-20 w-10 h-10 bg-white rounded-full shadow-md 
+                flex items-center justify-center"
+              >
+                ←
+              </button>
+
+              {/* SWIPER */}
+              {/* SWIPER */}
+<Swiper
+  modules={[Navigation]}
+  slidesPerView={2}
+  spaceBetween={20}
+  onBeforeInit={(swiper) => {
+    swiper.params.navigation.prevEl = prevRef.current;
+    swiper.params.navigation.nextEl = nextRef.current;
+  }}
+  navigation={{
+    prevEl: prevRef.current,
+    nextEl: nextRef.current,
+  }}
+  onSwiper={(swiper) => {
+    // ensure refs are assigned AFTER Swiper is ready
+    setTimeout(() => {
+      swiper.navigation.init();
+      swiper.navigation.update();
+    });
+  }}
+  className="w-full"
+>
+
+                {blogs.map((product, index) => (
+                  <SwiperSlide key={index} className="!w-[350px] !h-[470x] !mr-[30px]">
+                    <BlogCard product={product} index={index} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+
+              {/* RIGHT ARROW */}
+              <button
+                ref={nextRef}
+                className="absolute right-0 top-1/2 -translate-y-1/2 
+                translate-x-1/2 z-20 w-10 h-10 bg-white rounded-full shadow-md 
+                flex items-center justify-center"
+              >
+                →
+              </button>
             </div>
           </div>
-        
-          {swiperContent}
-        
-          <div className="flex flex-row justify-evenly items-center mx-auto max-w-[90%]">
-            {/* Uncomment below if you want to use the grid layout instead */}
-            {/* {blogs.map((product, index) => (
-              <BlogCard key={index} product={product} />
-            ))} */}
-          </div>
-        
-          <div className="flex justify-center items-center md:py-10 py-4">
-            <CustomButton
-              title="See all Blogs and News"
-              className="px-3 py-3 mx-auto h-12 md:h-12 font-semibold bg-secondary hover:bg-primary2 text-sm w-72 text-white border border-white"
-              onPress={handleSeeAllBlogs}
-              rightIcon={<GoArrowRight />}
-            />
-          </div>
         </section>
-      ) : <></>}
+      )}
     </>
   );
 };

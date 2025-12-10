@@ -53,8 +53,8 @@ const CategoryList = () => {
       (result?.status === 400
         ? "Categories Not Found"
         : result?.status === 404
-        ? "Invalid Request"
-        : "Something went wrong");
+          ? "Invalid Request"
+          : "Something went wrong");
 
     toast.error(msg);
   };
@@ -117,27 +117,27 @@ const CategoryList = () => {
       key={index}
       href={`/products/${category?.parentCategorySlug}/${category?.seoSlug}?scid=${category?._id}`}
     >
-     <div className="group border rounded-md flex flex-col items-start justify-start cursor-pointer hover:bg-primary transform transition-transform duration-300 hover:scale-105 w-[282px] h-[350px] pt-[16px] px-[16px]">
-  <Image
-    src={
-      category?.image
-        ? normalizePath(`${assetURL}/${category.image}`)
-        : FALLBACK_IMAGE
-    }
-    alt={`Slide ${index}`}
-    width={250}
-    height={250}
-    onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
-    loading="lazy"
-    className="rounded-[5px] object-cover bg-black h-[250px] w-[250px]"
-  />
+      <div className="group border rounded-md flex flex-col items-start justify-start cursor-pointer hover:bg-primary transform transition-transform duration-300 hover:scale-105 w-[282px] h-[350px] pt-[16px] px-[16px]">
+        <Image
+          src={
+            category?.image
+              ? normalizePath(`${assetURL}/${category.image}`)
+              : FALLBACK_IMAGE
+          }
+          alt={`Slide ${index}`}
+          width={250}
+          height={250}
+          onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
+          loading="lazy"
+          className="rounded-[5px] object-cover bg-black h-[250px] w-[250px]"
+        />
 
-  <p
-    className={`${styles.cattitle} text-[19px] font-medium text-primary mt-[20px] mx-[32px] pb-[20px] group-hover:text-white`}
-  >
-    {category?.name}
-  </p>
-</div>
+        <p
+          className={`${styles.cattitle} text-[19px] font-medium text-primary mt-[20px] mx-[32px] pb-[20px] group-hover:text-white`}
+        >
+          {category?.name}
+        </p>
+      </div>
 
     </Link>
   );
@@ -146,14 +146,27 @@ const CategoryList = () => {
   // REUSABLE SECTION
   // -----------------------------
   const CategorySection = ({ title, data }: any) => (
-    <div className={`px-4  ${title=="Building Systems" ? "md:px-[100px] md:pb-[100px] md:pt-[43px]" : "md:p-[100px]"}  bg-cream`}>
+    <div className={`px-4  ${title == "Building Systems" ? "md:px-[100px] md:pb-[100px] md:pt-[43px]" : "md:p-[100px]"}  bg-cream`}>
       <div className="block md:flex md:justify-between items-center">
         <h2 className="text-primary text-2xl md:text-[43px]">{title}</h2>
 
         <CustomButton
           title="Shop Now"
-          className="ml-3 bg-primary hover:bg-white hover:text-primary h-12 md:w-48 w-30 md:text-md text-sm text-white"
-          rightIcon={<GoArrowRight />}
+          className="
+  
+    bg-[#109989]
+    rounded-[5px]
+    !px-[20px]
+    !py-[15px]
+    flex tem-center justify-center
+    gap-[21.69px]
+    text-white
+    text-[18px]
+    leading-[21.6px]
+    tracking-[0.36px]
+    capitalize
+  "
+          rightIcon={<GoArrowRight className="w-[24px] h-[24px]" />}
           onPress={() => router.push("/products")}
         />
       </div>

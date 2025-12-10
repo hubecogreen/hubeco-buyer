@@ -1,6 +1,12 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import styles from "./Header.module.css";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { IoIosClose } from "react-icons/io";
 import { GoArrowRight } from "react-icons/go";
 import {
   CiLocationOn,
@@ -40,7 +46,7 @@ import Image from "next/image";
 import useClient from "../hooks/useClient";
 
 const vendorURL = process.env.NEXT_PUBLIC_VENDOR_URL;
-interface HeaderProps {}
+interface HeaderProps { }
 
 const Header: React.FC<HeaderProps> = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -81,6 +87,7 @@ const Header: React.FC<HeaderProps> = () => {
   const [tempState, setTempState] = useState<any>(getCookie("culs"));
   const [tempPincode, setTempPincode] = useState<any>(getCookie("culp"));
   const [showVendorLogin, setShowVendorLogin] = useState<any>(false);
+  const [showLoginPopup, setShowLoginPopup] = useState<any>(false);
   const [reloadH, setReloadH] = useState<any>(0);
   const isClient = useClient();
 
@@ -159,33 +166,33 @@ const Header: React.FC<HeaderProps> = () => {
         const placeholders: string[] = [];
 
         console.log(result.data, "categories data");
-        
+
         // Collect category names (main categories, subcategories, and child categories)
         result.data.forEach((category: any) => {
           // Add main category name
           if (category.name && category.name !== "N/A") {
-            const truncatedName = category.name.length > 20 
-              ? category.name.substring(0, 20) + '...' 
+            const truncatedName = category.name.length > 20
+              ? category.name.substring(0, 20) + '...'
               : category.name;
             placeholders.push(`Search for ${truncatedName}...`);
           }
-          
+
           // Add subcategory names
           if (category.subCategories && category.subCategories.length > 0) {
             category.subCategories.forEach((subCat: any) => {
               if (subCat.name && subCat.name !== "N/A") {
-                const truncatedName = subCat.name.length > 20 
-                  ? subCat.name.substring(0, 20) + '...' 
+                const truncatedName = subCat.name.length > 20
+                  ? subCat.name.substring(0, 20) + '...'
                   : subCat.name;
                 placeholders.push(`Search for ${truncatedName}...`);
               }
-              
+
               // Add child category names
               if (subCat.childCategories && subCat.childCategories.length > 0) {
                 subCat.childCategories.forEach((childCat: any) => {
                   if (childCat.name && childCat.name !== "N/A") {
-                    const truncatedName = childCat.name.length > 20 
-                      ? childCat.name.substring(0, 20) + '...' 
+                    const truncatedName = childCat.name.length > 20
+                      ? childCat.name.substring(0, 20) + '...'
                       : childCat.name;
                     placeholders.push(`Search for ${truncatedName}...`);
                   }
@@ -464,70 +471,68 @@ const Header: React.FC<HeaderProps> = () => {
   if (!isClient) return <></>;
 
   return (
-    <header
-      ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky} px-[100px] bg-cream h-[80px]`}
-    >
-      <div
-        className={`w-full justify-center items-center  h-auto md:h-[80px] lg:h-22 px-4 pt-2 pb-3 md:pb-20 lg:pb-22 ${
-          styles.stickyHeader
-        } ${isSearchFocused ? styles.searchFocused : ""}`}
+    <>
+      <header
+        ref={headerRef}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky} px-[100px] bg-cream h-[80px]`}
       >
-        <div className="flex justify-between items-center py-2 md:py-3 lg:py-4 min-w-0">
-          {/* Left side - Fixed elements (never affected) */}
-          <div
-            className={`flex items-center min-w-0 ${
-              token
+        <div
+          className={`w-full justify-center items-center  h-auto md:h-[80px] lg:h-22 px-4 pt-2 pb-3 md:pb-20 lg:pb-22 ${styles.stickyHeader
+            } ${isSearchFocused ? styles.searchFocused : ""}`}
+        >
+          <div className="flex justify-between items-center py-2 md:py-3 lg:py-4 min-w-0">
+            {/* Left side - Fixed elements (never affected) */}
+            <div
+              className={`flex items-center min-w-0 ${token
                 ? "space-x-3 md:space-x-4 lg:space-x-8"
                 : "space-x-2 md:space-x-3 lg:space-x-6"
-            }`}
-          >
-            <div className="flex items-center md:hidden flex-shrink-0">
-              <VscMenu
-                className="text-black cursor-pointer font-light text-gray-800"
-                size={26}
-                onClick={toggleMenu}
-              />
-            </div>
-            {/* Mobile Logo */}
-            <Link
-              href="/"
-              className={`${styles.logo} w-48 sm:w-64 h-8 md:h-9 lg:h-10 xl:h-12 hover:cursor-pointer flex-shrink-0 min-w-0 lg:pb-2`}
-              style={{ minWidth: "175px", maxWidth: "180px" }}
+                }`}
             >
-              <Image
-                src="/images/home/header/hubeco-logo.png"
-                className="h-8 md:h-9 lg:h-10 xl:h-12 w-auto object-contain"
-                alt="Hubeco Logo"
-                width={242}
-                height={55}
-                onError={(e) => {
-                  e.currentTarget.src = "/images/product-placeholder.webp";
-                }}
-                loading="lazy"
-              />
-
-
-            </Link>
-
-            {/* Desktop Navigation Links - Visible on tablet and large screens */}
-            <div
-              className={`hidden md:flex items-center space-x-3 md:space-x-4 lg:space-x-8 flex-shrink-0 ${
-                isSearchFocused ? "lg:flex md:hidden" : ""
-              }`}
-            >
-              <div className="relative">
-                <div
-                  className="flex items-center space-x-1 cursor-pointer hover:text-secondary md:pl-1 lg:pl-0 transition-colors relative z-20 lg:pl-2"
-                  onMouseEnter={handleProductSegmentsMouseEnter}
-                  onMouseLeave={handleProductSegmentsMouseLeave}
-                  onClick={() => {
-                    setIsProductSegmentsClicked(true);
-                    setIsProductSegmentsOpen(!isProductSegmentsOpen);
+              <div className="flex items-center md:hidden flex-shrink-0">
+                <VscMenu
+                  className="text-black cursor-pointer font-light text-gray-800"
+                  size={26}
+                  onClick={toggleMenu}
+                />
+              </div>
+              {/* Mobile Logo */}
+              <Link
+                href="/"
+                className={`${styles.logo} w-48 sm:w-64 h-8 md:h-9 lg:h-10 xl:h-12 hover:cursor-pointer flex-shrink-0 min-w-0 lg:pb-2`}
+                style={{ minWidth: "175px", maxWidth: "180px" }}
+              >
+                <Image
+                  src="/images/home/header/hubeco-logo.png"
+                  className="h-8 md:h-9 lg:h-10 xl:h-12 w-auto object-contain"
+                  alt="Hubeco Logo"
+                  width={242}
+                  height={55}
+                  onError={(e) => {
+                    e.currentTarget.src = "/images/product-placeholder.webp";
                   }}
-                  data-product-segments-button
-                >
-                  {/* <span
+                  loading="lazy"
+                />
+
+
+              </Link>
+
+              {/* Desktop Navigation Links - Visible on tablet and large screens */}
+              <div
+                className={`hidden md:flex items-center space-x-3 md:space-x-4 lg:space-x-8 flex-shrink-0 ${isSearchFocused ? "lg:flex md:hidden" : ""
+                  }`}
+              >
+                <div className="relative">
+                  <div
+                    className="flex items-center space-x-1 cursor-pointer hover:text-secondary md:pl-1 lg:pl-0 transition-colors relative z-20 lg:pl-2"
+                    onMouseEnter={handleProductSegmentsMouseEnter}
+                    onMouseLeave={handleProductSegmentsMouseLeave}
+                    onClick={() => {
+                      setIsProductSegmentsClicked(true);
+                      setIsProductSegmentsOpen(!isProductSegmentsOpen);
+                    }}
+                    data-product-segments-button
+                  >
+                    {/* <span
                     className={`font-medium relative text-sm md:text-sm lg:text-base md:ml-[25px] lg:ml-[2px] ${
                       isProductSegmentsOpen ? "text-[#B90647]" : "text-gray-800"
                     }`}
@@ -537,7 +542,7 @@ const Header: React.FC<HeaderProps> = () => {
                       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                     )}
                   </span> */}
-                  {/* <svg
+                    {/* <svg
                     className={`w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 text-gray-600 transition-transform duration-200 ${
                       isProductSegmentsOpen ? "rotate-180" : ""
                     }`}
@@ -552,8 +557,8 @@ const Header: React.FC<HeaderProps> = () => {
                       d="M19 9l-7 7-7-7"
                     />
                   </svg> */}
-                </div>
-                {/* <div
+                  </div>
+                  {/* <div
                   onMouseEnter={handleProductSegmentsMouseEnter}
                   onMouseLeave={handleProductSegmentsMouseLeave}
                 >
@@ -565,12 +570,12 @@ const Header: React.FC<HeaderProps> = () => {
                     }}
                   />
                 </div> */}
-              </div>
+                </div>
 
-                 {/* Center - Search Bar with Hamburger Menu - Visible on tablet and large screens */}
-          <div className="hidden md:flex lg:flex items-center space-x-2 md:space-x-2 lg:space-x-4 max-w-xl">
-            <div className="relative md:flex lg:flex">
-              {/* {!isSearchFocused ? (
+                {/* Center - Search Bar with Hamburger Menu - Visible on tablet and large screens */}
+                <div className="hidden md:flex lg:flex items-center space-x-2 md:space-x-2 lg:space-x-4 max-w-xl">
+                  <div className="relative md:flex lg:flex">
+                    {/* {!isSearchFocused ? (
                 <div ref={searchRef} className="relative">
                   <button
                     className={`w-10 h-10 md:w-10 md:h-10 lg:w-12 lg:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors md:mr-1 ${token? "lg:mr-0" : "lg:mr-4"}   md:ml-0 lg:ml-2`}
@@ -580,89 +585,86 @@ const Header: React.FC<HeaderProps> = () => {
                   </button>
                 </div>
               ) : ( */}
-                <div className="flex items-center space-x-2 md:space-x-2 lg:space-x-4 w-full md:w-[150px] lg:w-[300px] bg-cream">
-                  {/* <div className="hidden md:hidden lg:flex">
+                    <div className="flex items-center space-x-2 md:space-x-2 lg:space-x-4 w-full md:w-[150px] lg:w-[300px] bg-cream">
+                      {/* <div className="hidden md:hidden lg:flex">
                     <VscMenu
                       className="text-black cursor-pointer font-light text-gray-800"
                       size={24}
                       onClick={toggleMenu}
                     />
                   </div> */}
-                  <div className="relative flex-1 bg-red-200">
-                    <SearchBar
-                      isExpanded={true}
-                      onFocus={handleSearchFocus}
-                      onBlur={handleSearchBlur}
-                      className="w-full bg-red-100"
-                      value={searchValue}
-                      onChange={(value) => setSearchValue(value)}
-                      placeholder={
-                        rotatingPlaceholders[currentPlaceholderIndex] ||
-                        "Search for Products..."
-                      }
-                    />
-                  </div>
-                  {/* <button
+                      <div className="relative flex-1 bg-red-200">
+                        <SearchBar
+                          isExpanded={true}
+                          onFocus={handleSearchFocus}
+                          onBlur={handleSearchBlur}
+                          className="w-full bg-red-100"
+                          value={searchValue}
+                          onChange={(value) => setSearchValue(value)}
+                          placeholder={
+                            rotatingPlaceholders[currentPlaceholderIndex] ||
+                            "Search for Products..."
+                          }
+                        />
+                      </div>
+                      {/* <button
                     className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
                     onClick={handleSearchClose}
                   >
                     <IoClose className="text-gray-600" size={18} />
                   </button> */}
+                    </div>
+                  </div>
                 </div>
-            </div>
-          </div>
-         {/* Products */}
-<Link
-  href="/products"
-  className={`mx-4 font-medium cursor-pointer transition-colors relative hidden lg:block ${
-    pathname === "/products"
-      ? "text-[#B90647]"
-      : "text-gray-800 hover:text-secondary"
-  }`}
->
-  Products
-  {pathname === "/products" && (
-    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
-  )}
-</Link>
+                {/* Products */}
+                <Link
+                  href="/products"
+                  className={`mx-4 font-medium cursor-pointer transition-colors relative hidden lg:block ${pathname === "/products"
+                    ? "text-[#B90647]"
+                    : "text-gray-800 hover:text-secondary"
+                    }`}
+                >
+                  Products
+                  {pathname === "/products" && (
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                  )}
+                </Link>
 
-{/* Green Financing */}
-<Link
-  href="/green-financing"
-  className={`mx-4 flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative hidden lg:flex ${
-    pathname === "/green-financing"
-      ? "text-[#B90647]"
-      : "text-gray-800"
-  }`}
->
-  <span className="font-medium text-base relative">
-    Green Financing
-    {pathname === "/green-financing" && (
-      <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-[#B90647]"></span>
-    )}
-  </span>
-</Link>
+                {/* Green Financing */}
+                <Link
+                  href="/green-financing"
+                  className={`mx-4 flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative hidden lg:flex ${pathname === "/green-financing"
+                    ? "text-[#B90647]"
+                    : "text-gray-800"
+                    }`}
+                >
+                  <span className="font-medium text-base relative">
+                    Green Financing
+                    {pathname === "/green-financing" && (
+                      <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-[#B90647]"></span>
+                    )}
+                  </span>
+                </Link>
 
-{/* About */}
-<Link
-  href="/about"
-  className={`mx-4 font-medium cursor-pointer transition-colors relative hidden lg:block ${
-    pathname === "/about"
-      ? "text-[#B90647]"
-      : "text-gray-800 hover:text-secondary"
-  }`}
->
-  About
-  {pathname === "/about" && (
-    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
-  )}
-</Link>
+                {/* About */}
+                <Link
+                  href="/about"
+                  className={`mx-4 font-medium cursor-pointer transition-colors relative hidden lg:block ${pathname === "/about"
+                    ? "text-[#B90647]"
+                    : "text-gray-800 hover:text-secondary"
+                    }`}
+                >
+                  About
+                  {pathname === "/about" && (
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
+                  )}
+                </Link>
 
 
-            </div>
+              </div>
 
-            {/* Mobile Navigation Links */}
-            {/* <div className="md:hidden flex items-center space-x-3">
+              {/* Mobile Navigation Links */}
+              {/* <div className="md:hidden flex items-center space-x-3">
               <div className="relative">
                 <div
                   className="flex items-center space-x-1 cursor-pointer text-gray-800 relative z-20"
@@ -701,18 +703,17 @@ const Header: React.FC<HeaderProps> = () => {
                 />
               </div>
             </div> */}
-          </div>
+            </div>
 
-          {/* Desktop Additional Navigation Links - Visible on tablet and large screens, but hide some items on tablet */}
-          {!isSearchFocused && (
-            <div
-              className={`hidden md:flex items-center ${
-                token
+            {/* Desktop Additional Navigation Links - Visible on tablet and large screens, but hide some items on tablet */}
+            {!isSearchFocused && (
+              <div
+                className={`hidden md:flex items-center ${token
                   ? "space-x-8 md:space-x-10 lg:space-x-14"
                   : "space-x-6 md:space-x-8 lg:space-x-8"
-              }`}
-            >
-              {/* <Link
+                  }`}
+              >
+                {/* <Link
                 href="/brands"
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/brands"
@@ -725,7 +726,7 @@ const Header: React.FC<HeaderProps> = () => {
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link> */}
-              {/* <Link
+                {/* <Link
                 href="/blogs"
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/blogs"
@@ -738,9 +739,9 @@ const Header: React.FC<HeaderProps> = () => {
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link> */}
-             
-           
-              {/* <Link
+
+
+                {/* <Link
                 href="/contact"
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/contact"
@@ -753,13 +754,13 @@ const Header: React.FC<HeaderProps> = () => {
                   <div className="absolute bottom-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link> */}
-            </div>
-          )}
+              </div>
+            )}
 
-          {/* Mobile Additional Navigation Links - Removed, moved to hamburger menu */}
+            {/* Mobile Additional Navigation Links - Removed, moved to hamburger menu */}
 
-          {/* Center - Search Bar with Hamburger Menu */}
-          {/* <div className="hidden md:flex items-center space-x-2 md:space-x-4 max-w-2xl">
+            {/* Center - Search Bar with Hamburger Menu */}
+            {/* <div className="hidden md:flex items-center space-x-2 md:space-x-4 max-w-2xl">
             <div className="relative">
               {!isSearchFocused ? (
                 <div
@@ -804,76 +805,76 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
           </div> */}
 
-       
 
-          {/* Right side - User actions */}
-          <div className="flex items-center md:space-x-2 lg:space-x-4">
-            {/* Profile Icon - Visible on all screen sizes */}
-            {token ? <><div
-              ref={iconRef}
-              onClick={() => {
-                if (isUserPopoverOpen) {
-                  setUserPopoverOpen(false);
-                  setIsUserPopoverClicked(false);
-                } else {
-                  setUserPopoverOpen(true);
-                  setIsUserPopoverClicked(true);
-                }
-              }}
-              className="relative"
-            >
-              <PiUserCircleThin
-                className="text-black hover:cursor-pointer"
-                size={30}
-              />
-            </div>
 
-            <div ref={popoverRef} onMouseLeave={() => closeUserPopover()}>
-              <UserPopover
-                isOpen={isUserPopoverOpen}
-                userInfos={userInfo}
-                onClose={() => closeUserPopover()}
-              />
-            </div>
+            {/* Right side - User actions */}
+            <div className="flex items-center md:space-x-2 lg:space-x-4">
+              {/* Profile Icon - Visible on all screen sizes */}
+              {token ? <><div
+                ref={iconRef}
+                onClick={() => {
+                  if (isUserPopoverOpen) {
+                    setUserPopoverOpen(false);
+                    setIsUserPopoverClicked(false);
+                  } else {
+                    setUserPopoverOpen(true);
+                    setIsUserPopoverClicked(true);
+                  }
+                }}
+                className="relative"
+              >
+                <PiUserCircleThin
+                  className="text-black hover:cursor-pointer"
+                  size={30}
+                />
+              </div>
 
-            {/* Cart Icon - Visible on all screen sizes */}
-            <div className="relative pr-2 md:pr-2 lg:pr-4">
-              <CiShoppingCart
-                className="text-black hover:cursor-pointer"
-                size={30}
-                onClick={onClickCart}
-              />
-              {Number(cartCountV) > 0 &&
-              (cartCountV !== "0" ||
-                cartCount !== null ||
-                cartCount !== undefined) &&
-              token ? (
-                <div className="absolute top-[-8px] right-[2px] md:top-[-8px] md:right-[2px] lg:top-[-12px] lg:right-[2px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[16px] md:h-[16px] lg:w-[20px] lg:h-[20px] flex items-center justify-center text-[8px] md:text-[8px] lg:text-[10px] font-bold">
-                  {cartCountV ? cartCountV : cartCount ? cartCount : ""}
+                <div ref={popoverRef} onMouseLeave={() => closeUserPopover()}>
+                  <UserPopover
+                    isOpen={isUserPopoverOpen}
+                    userInfos={userInfo}
+                    onClose={() => closeUserPopover()}
+                  />
                 </div>
-              ) : null}
-            </div>
-            </>
-             :
-             <div className="flex justify-center items-center">
-             <CustomButton
-             title="Submit Enquiry"
-              className="text-[16px] bg-secondaryLight px-4 lg:px-2 h-12 mr-4 hidden lg:flex text-white "
-              customStyles={{ marginRight:'30px'}}
-              hoverBgColor=""
-              onPress={() => router.push('/contact')}
-            />
-            <CustomButton
-            title="Login / SignUp"
-              className="text-[16px] bg-white text-secondaryLight border-2 border-secondaryLight px-4 lg:px-2  h-12 mr-4 hidden lg:flex  font-medium"
-              customStyles={{ marginRight:'30px'}}
-              hoverBgColor=""
-              onPress={() => router.push('/login')}
-            />
-              </div>}
 
-            {/* Vendor Button/Icon - Different for mobile vs tablet vs desktop */}
-            {/* {!token && (
+                {/* Cart Icon - Visible on all screen sizes */}
+                <div className="relative pr-2 md:pr-2 lg:pr-4">
+                  <CiShoppingCart
+                    className="text-black hover:cursor-pointer"
+                    size={30}
+                    onClick={onClickCart}
+                  />
+                  {Number(cartCountV) > 0 &&
+                    (cartCountV !== "0" ||
+                      cartCount !== null ||
+                      cartCount !== undefined) &&
+                    token ? (
+                    <div className="absolute top-[-8px] right-[2px] md:top-[-8px] md:right-[2px] lg:top-[-12px] lg:right-[2px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[16px] md:h-[16px] lg:w-[20px] lg:h-[20px] flex items-center justify-center text-[8px] md:text-[8px] lg:text-[10px] font-bold">
+                      {cartCountV ? cartCountV : cartCount ? cartCount : ""}
+                    </div>
+                  ) : null}
+                </div>
+              </>
+                :
+                <div className="flex justify-center items-center">
+                  <CustomButton
+                    title="Submit Enquiry"
+                    className="text-[16px] bg-secondaryLight px-4 lg:px-2 h-12 mr-4 hidden lg:flex text-white "
+                    customStyles={{ marginRight: '30px' }}
+                    hoverBgColor=""
+                    onPress={() => router.push('/contact')}
+                  />
+                  <CustomButton
+                    title="Login / SignUp"
+                    className="text-[16px] bg-white text-secondaryLight border-2 border-secondaryLight px-4 lg:px-2  h-12 mr-4 hidden lg:flex  font-medium"
+                    customStyles={{ marginRight: '30px' }}
+                    hoverBgColor=""
+                    onPress={() => setShowLoginPopup(true)}
+                  />
+                </div>}
+
+              {/* Vendor Button/Icon - Different for mobile vs tablet vs desktop */}
+              {/* {!token && (
               <>
               
                 <CustomButton
@@ -926,48 +927,114 @@ const Header: React.FC<HeaderProps> = () => {
               </>
             )} */}
 
-            {token && <div className="relative w-10 md:w-12 lg:w-18"></div>}
+              {token && <div className="relative w-10 md:w-12 lg:w-18"></div>}
 
-            {/* Tablet Hamburger Menu - Show after vendor image */}
-            <div className="hidden md:flex lg:hidden" style={{marginRight:'18px'}}>
-              <VscMenu
-                className="text-black cursor-pointer font-light text-gray-800"
-                size={22}
-                onClick={toggleMenu}
+              {/* Tablet Hamburger Menu - Show after vendor image */}
+              <div className="hidden md:flex lg:hidden" style={{ marginRight: '18px' }}>
+                <VscMenu
+                  className="text-black cursor-pointer font-light text-gray-800"
+                  size={22}
+                  onClick={toggleMenu}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Second Line - Mobile Only: Search Bar */}
+          <div className="md:hidden flex items-center justify-between py-2">
+            {/* Search Bar */}
+            <div className="flex-1 mx-3">
+              <SearchBar
+                isExpanded={true}
+                onFocus={handleSearchFocus}
+                onBlur={handleSearchBlur}
+                className="w-full"
+                value={searchValue}
+                onChange={(value) => setSearchValue(value)}
+                placeholder={
+                  rotatingPlaceholders[currentPlaceholderIndex] ||
+                  "Search for Products..."
+                }
               />
             </div>
           </div>
         </div>
 
-        {/* Second Line - Mobile Only: Search Bar */}
-        <div className="md:hidden flex items-center justify-between py-2">
-          {/* Search Bar */}
-          <div className="flex-1 mx-3">
-            <SearchBar
-              isExpanded={true}
-              onFocus={handleSearchFocus}
-              onBlur={handleSearchBlur}
-              className="w-full"
-              value={searchValue}
-              onChange={(value) => setSearchValue(value)}
-              placeholder={
-                rotatingPlaceholders[currentPlaceholderIndex] ||
-                "Search for Products..."
-              }
-            />
+        <PincodePopup isOpen={isPopupOpen} onClose={togglePopup} />
+        <SidebarMenu isOpen={isMenuOpen} onClose={toggleMenu} />
+        {isMenuOpen && (
+          <div
+            className="fixed top-0 left-0 w-full duration-1000 h-full bg-black opacity-50 z-60"
+            onClick={toggleMenu}
+          />
+        )}
+      </header>
+      <Dialog open={showLoginPopup} onOpenChange={setShowLoginPopup}>
+        <DialogContent
+          className="
+      max-w-md h-fit
+    "
+        >
+         
+<div className="flex flex-col items-center justify-center p-6">
+          {/* Logo */}
+          <Image
+            src="/images/home/header/hubeco-logo.png"
+            alt="Hubeco Logo"
+            width={180}
+            height={40}
+            className="mb-1"
+          />
+
+          <p className="text-gray-500 text-sm mb-6">
+            Sustainable Construction Materials Marketplace
+          </p>
+
+          {/* Buyer + Vendor buttons */}
+          <div className="flex gap-6">
+            {/* BUYER BUTTON */}
+            <button
+              onClick={() => {setShowLoginPopup(false); router.push('/login');}}
+              className="
+          w-[158.35px] h-[96.55px]
+          bg-white 
+          border border-[#109989]
+          rounded-[6.84px]
+          shadow-[0px_1.14px_2.28px_rgba(0,0,0,0.05)]
+          flex flex-row items-center justify-center
+          p-[30px] 
+          gap-[11px]
+          hover:bg-[#0dac8815]
+        "
+            >
+              <Image src="/images/signup/buyer.png" width={20.35} height={36.55} alt="1" />
+              <span className="text-[#109989] font-medium">Buyer</span>
+            </button>
+
+            {/* VENDOR BUTTON */}
+            <button
+              onClick={() => {setShowLoginPopup(false); router.push('/plans');}}
+              className="
+          w-[178.16px] h-[96.55px]
+          bg-white
+          border border-[#BB0444]
+          rounded-[6.84px]
+          shadow-[0px_1.14px_2.28px_rgba(0,0,0,0.05)]
+          p-[30px] 
+          flex flex-row items-center justify-center
+          gap-[9px]
+          hover:bg-[#b9064715]
+        "
+            >
+              <Image src="/images/signup/vendor.png" width={20.35} height={36.55} alt="vendor" />
+              <span className="text-[#BB0444] font-medium">Vendor</span>
+            </button>
           </div>
         </div>
-      </div>
+        </DialogContent>
+      </Dialog>
 
-      <PincodePopup isOpen={isPopupOpen} onClose={togglePopup} />
-      <SidebarMenu isOpen={isMenuOpen} onClose={toggleMenu} />
-      {isMenuOpen && (
-        <div
-          className="fixed top-0 left-0 w-full duration-1000 h-full bg-black opacity-50 z-60"
-          onClick={toggleMenu}
-        />
-      )}
-    </header>
+    </>
   );
 };
 

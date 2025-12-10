@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import { motion } from "framer-motion";
 
 const logos = [
   "/images/home/hero/banka-bio-logo.png",
@@ -44,9 +45,25 @@ const ImageSlider = () => {
             <h1 className="text-3xl lg:text-6xl md:text-[60px] leading-[60px]">
               Digitizing <br /> Procurement for <br />
               Smarter,{" "}
-              <span className="bg-primary px-2 rounded text-white">
-                Sustainable
-              </span>{" "}
+              <span className="bg-primary px-2 rounded text-white inline-flex">
+                {"Sustainable".split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: 0.35,
+                      delay: i * 0.04,
+                      ease: [0.25, 0.1, 0.25, 1], // smooth cubic ease
+                    }}
+                    className="inline-block will-change-transform"
+                    style={{ display: "inline-block" }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
+              {" "}
               <br />
               Construction
             </h1>
@@ -72,7 +89,7 @@ const ImageSlider = () => {
 
 
         </div>
-<hr className="border-white/40 w-full my-8" />
+        <hr className="border-white/40 w-full my-8" />
 
 
         {/* Middle Row (Paragraph + Buttons) */}
@@ -84,18 +101,37 @@ const ImageSlider = () => {
             </p>
           </div>
 
-          <div className="flex space-x-4 ">
-            <button className="bg-primary hover:bg-white hover:text-primary text-white px-[40px] py-[20px] rounded-md">
+          <div className="flex space-x-4">
+            <motion.button
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.5,   // shorter delay
+                ease: "easeOut",
+              }}
+              className="bg-primary hover:bg-white hover:text-primary text-white px-[40px] py-[20px] rounded-md"
+            >
               Shop Now
-            </button>
-            <button className="bg-primary hover:bg-white hover:text-primary text-white px-[40px] py-[20px]  rounded-md">
+            </motion.button>
+
+            <motion.button
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.5,   // SAME delay → both come together
+                ease: "easeOut",
+              }}
+              className="bg-primary hover:bg-white hover:text-primary text-white px-[40px] py-[20px] rounded-md"
+            >
               Sell With Us
-            </button>
+            </motion.button>
           </div>
         </div>
 
         {/* Bottom scrolling logos */}
-       <div className="w-full flex flex-row items-center justify-center bg-white/10 backdrop-blur-md rounded-md py-2 px-4">
+        <div className="w-full flex flex-row items-center justify-center bg-white/10 backdrop-blur-md rounded-md py-2 px-4">
 
           <p className="opacity-80 whitespace-nowrap px-3 -mt-[16px]">Trusted by:</p>
 

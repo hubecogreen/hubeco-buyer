@@ -66,9 +66,9 @@ const CallToActionSection: React.FC = () => {
                             bg-[#109989]
                             text-white 
                             text-[20px]
-                            font-medium 
-                            px-8 
-                            py-3 
+                            font-medium  
+                            !px-8 
+                            !py-3 
                             rounded-[5px]
                             tracking-wide
                         "

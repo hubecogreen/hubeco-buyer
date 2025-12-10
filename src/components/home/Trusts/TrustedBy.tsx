@@ -102,7 +102,7 @@ export default function TrustedBy() {
               h-[217px]
               rounded-[24px]
               p-[30px]
-              bg-[linear-gradient(120.89deg,#DFF3F1_0%,#109989_24.32%)]
+              bg-[linear-gradient(120.89deg,#B0E0DA_0%,#109989_24.32%)]
               backdrop-blur-[1.38px]
               flex
               flex-col

@@ -73,7 +73,7 @@ const Footer = () => {
 
         {/* FOOTER CONTENT (Background Section) */}
         <div className="w-full bg-cover bg-center bg-no-repeat mr-[0px]"
-          style={{ backgroundImage: "url('/images/home/footer-bg-2.webp')" }}>
+          >
 
           {/* GREEN DIVIDER */}
           <div className="w-full flex justify-start ml-[460px] pt-10">

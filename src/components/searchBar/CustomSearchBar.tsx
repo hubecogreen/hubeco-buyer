@@ -70,22 +70,26 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
   const [clickedResult, setClickedResult] = useState(false);
 
   // Rotate placeholders with animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Start animation
-      setIsAnimating(true);
-      
-      // After animation completes, change the placeholder
-      setTimeout(() => {
-        setCurrentPlaceholderIndex((prev) => 
-          (prev + 1) % rotatingPlaceholders.length
-        );
-        setIsAnimating(false);
-      }, 1000); // Match the CSS animation duration
-    }, 2000); // Change every 2 seconds
+useEffect(() => {
+  const interval = setInterval(() => {
 
-    return () => clearInterval(interval);
-  }, [rotatingPlaceholders.length]);
+    // 1️⃣ Change category first
+    setCurrentPlaceholderIndex((prev) =>
+      (prev + 1) % rotatingPlaceholders.length
+    );
+
+    // 2️⃣ Immediately start roll animation for NEW text
+    setIsAnimating(true);
+
+    // Stop animation after it completes
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 1000); // match CSS duration
+
+  }, 2000); // change every 2 seconds
+
+  return () => clearInterval(interval);
+}, [rotatingPlaceholders.length]);
 
   // Trigger initial animation after mount
   useEffect(() => {

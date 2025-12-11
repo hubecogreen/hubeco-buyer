@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const logos = [
   "/images/home/hero/banka-bio-logo.png",
@@ -18,6 +19,9 @@ const greenProLabels = ["GreenPro", "EDP", "GRIHA"];
 
 
 const ImageSlider = () => {
+  const router=useRouter();
+
+
   return (
     <section className="relative w-full h-screen overflow-hidden">
       {/* Full-screen video */}
@@ -33,10 +37,10 @@ const ImageSlider = () => {
       </video>
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/10 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-black/10 z-10" />
 
       {/* Content Layer */}
-      <div className="relative z-20 w-full h-full flex flex-col justify-center px-6 md:px-12 lg:px-32 text-white">
+      <div className="relative z-20 w-full h-full flex flex-col justify-center px-6 md:px-12 lg:px-32 text-white translate-y-[-100px]">
 
         {/* Title + Right Section */}
         <div className="flex flex-col md:flex-row items-start md:items-center gap-[179px] w-full">
@@ -111,6 +115,7 @@ const ImageSlider = () => {
                 ease: "easeOut",
               }}
               className="bg-primary hover:bg-white hover:text-primary text-white px-[40px] py-[20px] rounded-md"
+              onClick={()=>router.push("/products")}
             >
               Shop Now
             </motion.button>
@@ -124,6 +129,7 @@ const ImageSlider = () => {
                 ease: "easeOut",
               }}
               className="bg-primary hover:bg-white hover:text-primary text-white px-[40px] py-[20px] rounded-md"
+               onClick={()=>router.push("/plans")}
             >
               Sell With Us
             </motion.button>
@@ -132,8 +138,8 @@ const ImageSlider = () => {
 
         {/* Bottom scrolling logos */}
         <div className="w-full flex flex-row items-center justify-center bg-white/10 backdrop-blur-md rounded-md py-2 px-4">
-
-          <p className="opacity-80 whitespace-nowrap px-3 -mt-[16px]">Trusted by:</p>
+          
+          <p className="opacity-80 whitespace-nowrap px-3 ">Trusted by:</p>
 
           <Swiper
             slidesPerView="auto"
@@ -145,8 +151,8 @@ const ImageSlider = () => {
           >
             {[...logos, ...logos, ...logos].map((dup) =>        // duplicate items manually ×2
               logos.map((logo, i) => (
-                <SwiperSlide key={`${dup}-${i}`} className="marquee-slide">
-                  <Image src={logo} alt={`logo-${i}`} width={80} height={24} className="mx-3" />
+                <SwiperSlide key={`${dup}-${i}`} className="marquee-slide ">
+                  <Image src={logo} alt={`logo-${i}`} width={80} height={24} className="mx-3 mt-2" />
                 </SwiperSlide>
               ))
             )}

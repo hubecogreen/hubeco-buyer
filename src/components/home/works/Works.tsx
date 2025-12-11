@@ -32,7 +32,7 @@ const buyerContent = useMemo(
  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pt-5 ">
 
   {/* BOX 1 */}
-  <div className="flex items-start  p-10 rounded-xl border-2 border-primary hover:shadow-md transition h-[330px] w-[290px]">
+  <div className="flex items-start  px-5 pt-10 pb-5 rounded-xl border-2 border-primary hover:shadow-md transition h-[330px] w-[290px]">
     <div className="flex flex-col gap-5">
       <Image src="/images/home/howitwork/search-icon.png" alt="search-icon" height={52} width={52}/>
       <h6 className="font-medium  text-[22px] text-black">Browse Products</h6>
@@ -45,7 +45,7 @@ const buyerContent = useMemo(
   </div>
 
   {/* BOX 2 */}
-  <div className="flex items-start p-10 rounded-xl border-2 border-primary hover:shadow-md transition h-[330px] w-[290px]">
+  <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-primary hover:shadow-md transition h-[330px] w-[290px]">
     <div className="flex flex-col gap-5">
       <Image src="/images/home/howitwork/correct-icon.png" alt="correct-icon" height={52} width={52}/>
       <h6 className="font-medium  text-[22px] text-black">Request Quotations</h6>
@@ -56,7 +56,7 @@ const buyerContent = useMemo(
   </div>
 
   {/* BOX 3 */}
-  <div className="flex items-start  p-10 rounded-xl border-2 border-primary hover:shadow-md transition h-[330px] w-[290px]">
+  <div className="flex items-start  px-5 pt-10 pb-5 rounded-xl border-2 border-primary hover:shadow-md transition h-[330px] w-[290px]">
     <div className="flex flex-col gap-5">
       <Image src="/images/home/howitwork/cart-icon.png" alt="cart-icon" height={52} width={52}/>
       <h6 className="font-medium  text-[22px] text-black">Procure & Track Impact</h6>
@@ -67,7 +67,7 @@ const buyerContent = useMemo(
   </div>
 
   {/* BOX 4 */}
-  <div className="flex items-start p-10 rounded-xl border-2 border-primary hover:shadow-md transition h-[330px] w-[290px]">
+  <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-primary hover:shadow-md transition h-[330px] w-[290px]">
     <div className="flex flex-col gap-5">
       <Image src="/images/home/howitwork/recycle-icon.png" alt="recycle-icon" height={52} width={52}/>
       <h6 className="font-medium  text-[22px] text-black">Build Sustainably</h6>
@@ -91,7 +91,7 @@ const vendorContent = useMemo(
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pt-5">
 
       {/* BOX 1 */}
-      <div className="flex items-start p-10 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
+      <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
         <div className="flex flex-col gap-5">
           <Image
             src="/images/home/howitwork/search-icon.png"
@@ -113,7 +113,7 @@ const vendorContent = useMemo(
       </div>
 
       {/* BOX 2 */}
-      <div className="flex items-start p-10 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
+      <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
         <div className="flex flex-col gap-5">
           <Image
             src="/images/home/howitwork/search-icon.png"
@@ -134,7 +134,7 @@ const vendorContent = useMemo(
       </div>
 
       {/* BOX 3 */}
-      <div className="flex items-start p-10 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
+      <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
         <div className="flex flex-col gap-5">
           <Image
             src="/images/home/howitwork/search-icon.png"
@@ -154,7 +154,7 @@ const vendorContent = useMemo(
       </div>
 
 
-       <div className="flex items-start p-10 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
+       <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
         <div className="flex flex-col gap-5">
           <Image
             src="/images/home/howitwork/search-icon.png"

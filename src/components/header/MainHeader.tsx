@@ -148,7 +148,7 @@ const Header: React.FC<HeaderProps> = () => {
 
     const timeout = setTimeout(() => {
       setIsProductSegmentsOpen(false);
-    }, 300); // 300ms delay before closing
+    }, 200); // 300ms delay before closing
     setHoverTimeout(timeout);
   };
 
@@ -996,7 +996,7 @@ const Header: React.FC<HeaderProps> = () => {
             <button
               onClick={() => {setShowLoginPopup(false); router.push('/login');}}
               className="
-          w-[158.35px] h-[96.55px]
+          group w-[158.35px] h-[96.55px]
           bg-white 
           border border-[#109989]
           rounded-[6.84px]
@@ -1004,31 +1004,45 @@ const Header: React.FC<HeaderProps> = () => {
           flex flex-row items-center justify-center
           p-[30px] 
           gap-[11px]
-          hover:bg-[#0dac8815]
+          hover:bg-primary
         "
             >
-              <Image src="/images/signup/buyer.png" width={20.35} height={36.55} alt="1" />
-              <span className="text-[#109989] font-medium">Buyer</span>
+              <Image src="/images/signup/buyer.png" width={25.35} height={26.55} alt="1" className="transition duration-100 group-hover:invert group-hover:brightness-0 group-hover:brightness-500" />
+              <span className="text-primary font-medium group-hover:text-white text-[24px]">Buyer</span>
             </button>
 
             {/* VENDOR BUTTON */}
-            <button
-              onClick={() => {setShowLoginPopup(false); router.push('/plans');}}
-              className="
-          w-[178.16px] h-[96.55px]
-          bg-white
-          border border-[#BB0444]
-          rounded-[6.84px]
-          shadow-[0px_1.14px_2.28px_rgba(0,0,0,0.05)]
-          p-[30px] 
-          flex flex-row items-center justify-center
-          gap-[9px]
-          hover:bg-[#b9064715]
-        "
-            >
-              <Image src="/images/signup/vendor.png" width={20.35} height={36.55} alt="vendor" />
-              <span className="text-[#BB0444] font-medium">Vendor</span>
-            </button>
+          <button
+  onClick={() => {
+    setShowLoginPopup(false);
+    router.push("/plans");
+  }}
+  className="
+    group
+    w-[178.16px] h-[96.55px]
+    bg-white
+    border border-[#BB0444]
+    rounded-[6.84px]
+    shadow-[0px_1.14px_2.28px_rgba(0,0,0,0.05)]
+    p-[30px]
+    flex flex-row items-center justify-center
+    gap-[9px]
+    hover:bg-secondary
+  "
+>
+  <Image
+    src="/images/signup/vendor.png"
+    width={25.35}
+    height={26.55}
+    alt="vendor"
+    className="transition duration-100 group-hover:invert group-hover:brightness-0 group-hover:brightness-500"
+  />
+
+  <span className="text-secondary font-medium transition duration-200 group-hover:text-white text-[24px]">
+    Vendor
+  </span>
+</button>
+
           </div>
         </div>
         </DialogContent>

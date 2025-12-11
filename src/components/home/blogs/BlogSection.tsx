@@ -1,8 +1,7 @@
 "use client";
+
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// ✅ Correct Swiper v11 import
 import { Navigation } from "swiper/modules";
 
 import "swiper/css";
@@ -12,7 +11,6 @@ import BlogCard from "@/components/blogCard/BlogCard";
 import * as Webservices from "../../../network/WebServices";
 import * as getEndpoint from "../../../network/EndPoints";
 import { getCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
 
 interface Blog {
   _id: string;
@@ -31,10 +29,9 @@ interface Blog {
 }
 
 const BlogsSection = () => {
-  const [blogs, setBlogData] = useState<Blog[]>([]);
-  const router = useRouter();
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [navReady, setNavReady] = useState(false);
 
-  // Swiper button refs
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
@@ -44,9 +41,7 @@ const BlogsSection = () => {
 
     Webservices.callGetApi(url, token)
       .then((response: any) => {
-        if (response.data?.data) {
-          setBlogData(response.data.data);
-        }
+        if (response.data?.data) setBlogs(response.data.data);
       })
       .catch(() => {});
   }, []);
@@ -55,16 +50,22 @@ const BlogsSection = () => {
     getData();
   }, [getData]);
 
+  // Wait until both refs exist before rendering Swiper
+  useEffect(() => {
+    if (prevRef.current && nextRef.current) {
+      setNavReady(true);
+    }
+  }, [prevRef.current, nextRef.current]);
+
   return (
     <>
       {blogs.length > 0 && (
-        <section className="relative w-full  flex flex-col items-center bg-cream">
-          <div className="flex justify-between m-[100px] ">
-            
+        <section className="relative p-[100px] flex flex-col bg-cream">
+          <div className="flex justify-between">
             {/* LEFT TEXT */}
             <div className="w-[450px]">
-              <h2 className="text-[44px] text-black font-semibold">Blogs</h2>
-              <p className="text-black text-[33px] mt-2 leading-[28px]">
+              <h2 className="text-[44px] text-black">Blogs</h2>
+              <p className="text-black text-[33px] mt-2 leading-[43px]">
                 Inspiring insights for a smarter,{" "}
                 <span className="text-primary">greener</span> future
               </p>
@@ -74,55 +75,81 @@ const BlogsSection = () => {
             <div className="relative w-[750px]">
 
               {/* LEFT ARROW */}
-              <button
-                ref={prevRef}
-                className="absolute left-0 top-1/2 -translate-y-1/2 
-                -translate-x-1/2 z-20 w-10 h-10 bg-white rounded-full shadow-md 
-                flex items-center justify-center"
-              >
-                ←
-              </button>
-
-              {/* SWIPER */}
-              {/* SWIPER */}
-<Swiper
-  modules={[Navigation]}
-  slidesPerView={2}
-  spaceBetween={20}
-  onBeforeInit={(swiper) => {
-    swiper.params.navigation.prevEl = prevRef.current;
-    swiper.params.navigation.nextEl = nextRef.current;
-  }}
-  navigation={{
-    prevEl: prevRef.current,
-    nextEl: nextRef.current,
-  }}
-  onSwiper={(swiper) => {
-    // ensure refs are assigned AFTER Swiper is ready
-    setTimeout(() => {
-      swiper.navigation.init();
-      swiper.navigation.update();
-    });
-  }}
-  className="w-full"
+         <button
+  ref={prevRef}
+  className="
+    absolute left-[-30px] top-[300px] -translate-y-1/2 z-20
+    w-[70px] h-[70px] rounded-full bg-white 
+    flex items-center justify-center
+  "
 >
+  <div
+    className="
+      w-[48px] h-[48px] rounded-full 
+      border border-gray-500 border-dashed
+      flex items-center justify-center
+    "
+  >
+    <span className="text-gray-700 text-xl">←</span>
+  </div>
+</button>
 
-                {blogs.map((product, index) => (
-                  <SwiperSlide key={index} className="!w-[350px] !h-[470x] !mr-[30px]">
-                    <BlogCard product={product} index={index} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+
+
+
+
+              {/* SWIPER — render only when refs are ready */}
+              {navReady && (
+                <Swiper
+                  modules={[Navigation]}
+                  slidesPerView={2}
+                  spaceBetween={20}
+                  navigation={{
+                    prevEl: prevRef.current,
+                    nextEl: nextRef.current,
+                  }}
+                  onSwiper={(swiper) => {
+                    setTimeout(() => {
+                      swiper.navigation.init();
+                      swiper.navigation.update();
+                    });
+                  }}
+                  className="w-full"
+                >
+                  {blogs.map((product, index) => (
+                    <SwiperSlide
+                      key={index}
+                      className="!w-[350px]  !mr-[15px] !ml-[15px]"
+                    >
+                      <BlogCard product={product} index={index} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
 
               {/* RIGHT ARROW */}
-              <button
-                ref={nextRef}
-                className="absolute right-0 top-1/2 -translate-y-1/2 
-                translate-x-1/2 z-20 w-10 h-10 bg-white rounded-full shadow-md 
-                flex items-center justify-center"
-              >
-                →
-              </button>
+           
+
+                      <button
+    ref={nextRef}
+  className="
+    absolute right-[-30px] top-[300px] -translate-y-1/2 z-20
+    w-[70px] h-[70px] rounded-full bg-white 
+    flex items-center justify-center
+  "
+>
+  <div
+    className="
+      w-[48px] h-[48px] rounded-full 
+      border border-gray-500 border-dashed
+      flex items-center justify-center
+    "
+  >
+    <span className="text-gray-700 text-xl"> →</span>
+  </div>
+</button>
+              
+
             </div>
           </div>
         </section>

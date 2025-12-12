@@ -5,7 +5,6 @@ import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
-
 import { getCookie } from "cookies-next";
 import * as Webservices from "../../../network/WebServices";
 import * as getEndpoint from "../../../network/EndPoints";
@@ -22,7 +21,7 @@ const schema = yup.object({
 
 const ContactSection: React.FC = () => {
   const token = getCookie("token");
-
+  
   const {
     control,
     handleSubmit,
@@ -52,16 +51,12 @@ const ContactSection: React.FC = () => {
       message: data.message,
     };
 
-    
-
     Webservices.callPostApi(getEndpoint.default.CONTACTUS, payload, token)
       .then((res) => {
         if (res.status === 201) {
           setIsSubmitted(true);
           reset();
-        } else {
-          alert("Failed to send message");
-        }
+        } else alert("Failed to send message");
         setLoading(false);
       })
       .catch(() => {
@@ -69,66 +64,58 @@ const ContactSection: React.FC = () => {
         setLoading(false);
       });
   };
-  // Reopen form after success
-    useEffect(() => {
-      if (isSubmitted) {
-        const timer = setTimeout(() => {
-          setIsSubmitted(false); // reopen form automatically
-        }, 4000);
 
-        return () => clearTimeout(timer);
-      }
-    }, [isSubmitted]);
+  useEffect(() => {
+    if (isSubmitted) {
+      const timer = setTimeout(() => setIsSubmitted(false), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [isSubmitted]);
 
   return (
     <section
       className="w-full flex justify-center py-10 font-[Poppins]"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
-      <div className="max-w-[1200px] w-full flex flex-col md:flex-row h-[963.63px]">
+      <div className="max-w-[1200px] w-full flex flex-col md:flex-row">
+
         {/* LEFT IMAGE */}
-        <div className="w-[550px] h-[963.63px] flex-shrink-0">
+        <div className="w-full md:w-[550px] h-[400px] md:h-[963.63px] flex-shrink-0">
           <Image
             src="/images/contacts/image.png"
             alt="contact"
-            className="w-full h-full object-cover rounded-l-lg"
+            className="w-full h-full object-cover rounded-t-lg md:rounded-l-lg md:rounded-tr-none"
             width={100}
             height={100}
           />
         </div>
 
-        {/* RIGHT FORM SECTION */}
+        {/* RIGHT FORM */}
         <div
           className="
             w-full md:w-[650px]
-            h-[963.63px]
             flex flex-col gap-[22px]
             text-white
-            px-[50px] py-[50px]
-            bg-gradient-to-br from-[#109989] to-[#084A42] rounded-r-lg
+            px-6 py-10 md:px-[50px] md:py-[50px]
+            bg-gradient-to-br from-[#109989] to-[#084A42] 
+            rounded-b-lg md:rounded-r-lg md:rounded-bl-none
           "
         >
           {/* Heading */}
-          <h2
-            className="
-              w-[550px]
-              text-white
-              font-semibold
-              text-[36px]
-              leading-[1em]
-            "
-          >
+          <h2 className="text-[28px] md:text-[36px] font-semibold leading-tight">
             Let’s Build Sustainably Together
           </h2>
 
-          <p className="w-[550px] text-white text-[25px] leading-[1em] font-normal">
+          <p className="text-[18px] md:text-[25px] leading-tight">
             Reach out for certified materials, partnerships and RFQ’s
           </p>
 
           {!isSubmitted ? (
             <>
               {/* NAME */}
-              <label className="text-[19px] font-medium mt-[10px]">Name</label>
+              <label className="text-[16px] md:text-[19px] font-medium mt-2">
+                Name
+              </label>
               <Controller
                 control={control}
                 name="name"
@@ -137,9 +124,10 @@ const ContactSection: React.FC = () => {
                     {...field}
                     placeholder="Enter Name"
                     className="
-                      w-[572px] h-[63px] px-[19px] py-[15px]
+                      w-full md:w-[572px] h-[55px] md:h-[63px]
+                      px-[15px] md:px-[19px]
                       bg-transparent  placeholder:text-white/40
-                      text-[22.1px] font-medium rounded-[10px]
+                      text-[18px] md:text-[22px] font-medium rounded-[10px]
                       border border-transparent border-b-white
                       hover:border-white focus:border-white focus:outline-none
                       transition-all
@@ -152,7 +140,9 @@ const ContactSection: React.FC = () => {
               )}
 
               {/* EMAIL */}
-              <label className="text-[19px] font-medium mt-[10px]">Email</label>
+              <label className="text-[16px] md:text-[19px] font-medium mt-2">
+                Email
+              </label>
               <Controller
                 control={control}
                 name="email"
@@ -161,9 +151,10 @@ const ContactSection: React.FC = () => {
                     {...field}
                     placeholder="Enter Email"
                     className="
-                      w-[572px] h-[63px] px-[19px] py-[15px]
+                      w-full md:w-[572px] h-[55px] md:h-[63px]
+                      px-[15px] md:px-[19px]
                       bg-transparent  placeholder:text-white/40
-                      text-[22.1px] font-medium rounded-[10px]
+                      text-[18px] md:text-[22px] font-medium rounded-[10px]
                       border border-transparent border-b-white
                       hover:border-white focus:border-white focus:outline-none
                       transition-all
@@ -176,7 +167,7 @@ const ContactSection: React.FC = () => {
               )}
 
               {/* PHONE */}
-              <label className="text-[19px] font-medium mt-[10px]">
+              <label className="text-[16px] md:text-[19px] font-medium mt-2">
                 Phone No
               </label>
               <Controller
@@ -187,9 +178,10 @@ const ContactSection: React.FC = () => {
                     {...field}
                     placeholder="Enter Phone Number"
                     className="
-                      w-[572px] h-[63px] px-[19px] py-[15px]
+                      w-full md:w-[572px] h-[55px] md:h-[63px]
+                      px-[15px] md:px-[19px]
                       bg-transparent  placeholder:text-white/40
-                      text-[22.1px] font-medium rounded-[10px]
+                      text-[18px] md:text-[22px] font-medium rounded-[10px]
                       border border-transparent border-b-white
                       hover:border-white focus:border-white focus:outline-none
                       transition-all
@@ -202,7 +194,7 @@ const ContactSection: React.FC = () => {
               )}
 
               {/* MESSAGE */}
-              <label className="text-[19px] font-medium mt-[10px]">
+              <label className="text-[16px] md:text-[19px] font-medium mt-2">
                 Message
               </label>
               <Controller
@@ -211,14 +203,16 @@ const ContactSection: React.FC = () => {
                 render={({ field }) => (
                   <textarea
                     {...field}
-                    placeholder="Write Your Messsage Here ... "
+                    placeholder="Write Your Message Here..."
                     className="
-                      w-[572px] h-[189px] p-[18px]
-                      bg-transparent  placeholder:text-white/40
-                      text-[22.1px] font-medium rounded-[10px]
+                      w-full md:w-[572px] h-[150px] md:h-[189px]
+                      p-[15px] md:p-[18px]
+                      bg-transparent placeholder:text-white/40
+                      text-[18px] md:text-[22px] font-medium rounded-[10px]
                       border border-transparent border-b-white
                       hover:border-white focus:border-white focus:outline-none
-                      transition-all resize-none
+                      transition-all
+                      resize-none
                     "
                   />
                 )}
@@ -231,31 +225,40 @@ const ContactSection: React.FC = () => {
               <button
                 onClick={handleSubmit(onSubmit)}
                 className="
-                  group w-[572px] h-[63px] rounded-[10px] mt-[20px] p-[30px]
+                  group w-full md:w-[572px] h-[55px] md:h-[63px] rounded-[10px] mt-[20px] p-[20px]
                   bg-[linear-gradient(129deg,#F0FDFA_-23%,#109989_24%)]
-                  text-white text-[25px] font-normal
+                  text-white text-[20px] md:text-[25px] font-normal
                   relative overflow-hidden transition-all duration-600
                   hover:shadow-[0px_6px_14px_rgba(0,0,0,0.25)]
                 "
               >
-                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:left-[60px] transition-all ">
+                <span className="absolute left-1/2 top-1/2 
+                  -translate-x-1/2 -translate-y-1/2 
+                  group-hover:left-[40px] md:group-hover:left-[60px]
+                  transition-all"
+                >
                   {loading ? "Sending..." : "Submit"}
                 </span>
 
                 <span
                   className="
-                    absolute right-[20px] top-1/2 -translate-y-1/2
+                    absolute right-[15px] md:right-[20px] top-1/2 -translate-y-1/2
                     opacity-0 group-hover:opacity-100
                     translate-x-3 group-hover:translate-x-0
                     transition-all
                   "
                 >
-                  <Image src="/images/home/howitwork/white-arrao-icon.png" alt="arrow" width={24} height={24} />
+                  <Image
+                    src="/images/home/howitwork/white-arrao-icon.png"
+                    alt="arrow"
+                    width={24}
+                    height={24}
+                  />
                 </span>
               </button>
             </>
           ) : (
-            <h3 className="text-white text-3xl mt-10">
+            <h3 className="text-white text-2xl md:text-3xl mt-10">
               Thank you! Message sent.
             </h3>
           )}
@@ -264,9 +267,5 @@ const ContactSection: React.FC = () => {
     </section>
   );
 };
-
-
-
-
 
 export default ContactSection;

@@ -488,13 +488,7 @@ const Header: React.FC<HeaderProps> = () => {
                 : "space-x-2 md:space-x-3 lg:space-x-6"
                 }`}
             >
-              <div className="flex items-center md:hidden flex-shrink-0">
-                <VscMenu
-                  className="text-black cursor-pointer font-light text-gray-800"
-                  size={26}
-                  onClick={toggleMenu}
-                />
-              </div>
+             
               {/* Mobile Logo */}
               <Link
                 href="/"
@@ -503,7 +497,7 @@ const Header: React.FC<HeaderProps> = () => {
               >
                 <Image
                   src="/images/home/header/hubeco-logo.png"
-                  className="h-8 md:h-9 lg:h-10 xl:h-12 w-auto object-contain"
+                  className="h-[55px] w-[242px] md:h-9 lg:h-10 xl:h-12 w-auto object-contain"
                   alt="Hubeco Logo"
                   width={242}
                   height={55}
@@ -516,6 +510,7 @@ const Header: React.FC<HeaderProps> = () => {
 
               </Link>
 
+              
               {/* Desktop Navigation Links - Visible on tablet and large screens */}
               <div
                 className={`hidden md:flex items-center space-x-3 md:space-x-4 lg:space-x-8 flex-shrink-0 ${isSearchFocused ? "lg:flex md:hidden" : ""
@@ -856,18 +851,18 @@ const Header: React.FC<HeaderProps> = () => {
                 </div>
               </>
                 :
-                <div className="flex justify-center items-center">
+                <div className="flex justify-between items-center">
                   <CustomButton
                     title="Submit Enquiry"
-                    className="text-[16px] bg-secondaryLight px-4 lg:px-2 h-12 mr-4 hidden lg:flex text-white "
-                    customStyles={{ marginRight: '30px' }}
+                    className="text-[16px] bg-secondaryLight px-4 lg:px-2 h-12 mr-[15px] hidden lg:flex text-white "
+                  
                     hoverBgColor=""
                     onPress={() => router.push('/contact')}
                   />
                   <CustomButton
                     title="Login / SignUp"
-                    className="text-[16px] bg-white text-secondaryLight border-2 border-secondaryLight px-4 lg:px-2  h-12 mr-4 hidden lg:flex  font-medium"
-                    customStyles={{ marginRight: '30px' }}
+                    className="text-[16px] bg-white text-secondaryLight border-2 border-secondaryLight px-4 lg:px-2  h-12 ml-[15px] hidden lg:flex  font-medium"
+                 
                     hoverBgColor=""
                     onPress={() => setShowLoginPopup(true)}
                   />
@@ -969,14 +964,35 @@ const Header: React.FC<HeaderProps> = () => {
           />
         )}
       </header>
-      <Dialog open={showLoginPopup} onOpenChange={setShowLoginPopup}>
-        <DialogContent
-          className="
-      max-w-md h-fit
-    "
-        >
-         
-<div className="flex flex-col items-center justify-center p-6">
+ <LoginPopup
+  open={showLoginPopup}
+  onOpenChange={setShowLoginPopup}
+  router={router}
+/>
+
+
+    </>
+  );
+};
+
+
+
+// ----------------------------
+// Login Popup Component
+// ----------------------------
+const LoginPopup = ({
+  open,
+  onOpenChange,
+  router,
+}: {
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
+  router: any;
+}) => {
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-md h-fit">
+        <div className="flex flex-col items-center justify-center p-6">
           {/* Logo */}
           <Image
             src="/images/home/header/hubeco-logo.png"
@@ -992,64 +1008,67 @@ const Header: React.FC<HeaderProps> = () => {
 
           {/* Buyer + Vendor buttons */}
           <div className="flex gap-6">
+
             {/* BUYER BUTTON */}
             <button
-              onClick={() => {setShowLoginPopup(false); router.push('/login');}}
+              onClick={() => {
+                onOpenChange(false);
+                router.push("/login");
+              }}
               className="
-          group w-[158.35px] h-[96.55px]
-          bg-white 
-          border border-[#109989]
-          rounded-[6.84px]
-          shadow-[0px_1.14px_2.28px_rgba(0,0,0,0.05)]
-          flex flex-row items-center justify-center
-          p-[30px] 
-          gap-[11px]
-          hover:bg-primary
-        "
+                group w-[158px] h-[96px]
+                bg-white border border-[#109989]
+                rounded-[7px] shadow-sm
+                flex items-center justify-center gap-[11px]
+                hover:bg-primary
+              "
             >
-              <Image src="/images/signup/buyer.png" width={25.35} height={26.55} alt="1" className="transition duration-100 group-hover:invert group-hover:brightness-0 group-hover:brightness-500" />
-              <span className="text-primary font-medium group-hover:text-white text-[24px]">Buyer</span>
+              <Image
+                src="/images/signup/buyer.png"
+                width={25}
+                height={26}
+                alt="buyer"
+                className="transition group-hover:invert"
+              />
+              <span className="text-primary font-medium group-hover:text-white text-[24px]">
+                Buyer
+              </span>
             </button>
 
             {/* VENDOR BUTTON */}
-          <button
-  onClick={() => {
-    setShowLoginPopup(false);
-    router.push("/plans");
-  }}
-  className="
-    group
-    w-[178.16px] h-[96.55px]
-    bg-white
-    border border-[#BB0444]
-    rounded-[6.84px]
-    shadow-[0px_1.14px_2.28px_rgba(0,0,0,0.05)]
-    p-[30px]
-    flex flex-row items-center justify-center
-    gap-[9px]
-    hover:bg-secondary
-  "
->
-  <Image
-    src="/images/signup/vendor.png"
-    width={25.35}
-    height={26.55}
-    alt="vendor"
-    className="transition duration-100 group-hover:invert group-hover:brightness-0 group-hover:brightness-500"
-  />
-
-  <span className="text-secondary font-medium transition duration-200 group-hover:text-white text-[24px]">
-    Vendor
-  </span>
-</button>
-
+            <button
+              onClick={() => {
+                onOpenChange(false);
+                router.push("/plans");
+              }}
+              className="
+                group w-[178px] h-[96px]
+                bg-white border border-[#BB0444]
+                rounded-[7px] shadow-sm
+                flex items-center justify-center gap-[9px]
+                hover:bg-secondary
+              "
+            >
+              <Image
+                src="/images/signup/vendor.png"
+                width={25}
+                height={26}
+                alt="vendor"
+                className="transition group-hover:invert"
+              />
+              <span className="text-secondary font-medium group-hover:text-white text-[24px]">
+                Vendor
+              </span>
+            </button>
           </div>
         </div>
-        </DialogContent>
-      </Dialog>
-
-    </>
+      </DialogContent>
+    </Dialog>
   );
 };
 
+
 export default Header;
+
+
+

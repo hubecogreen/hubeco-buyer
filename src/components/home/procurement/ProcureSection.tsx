@@ -36,20 +36,22 @@ const ProcureSection: React.FC = () => {
 
     return (
         <section className="w-full flex justify-center py-20 bg-white">
-            <div className="max-w-[1250px] w-full flex flex-col gap-[12px]">
+            <div className="max-w-[1250px] w-full flex flex-col gap-[12px] px-4 md:px-0">
 
                 {/* Heading */}
-                <h2 className="text-[43px] leading-[43px] text-[#3D3528]">
+                <h2 className="text-[32px] md:text-[43px] leading-[38px] md:leading-[43px] text-[#3D3528]">
                     Why Procure from Us?
                 </h2>
 
                 <div className="flex flex-col md:flex-row w-full gap-[31px] items-start">
 
-                    {/* LEFT IMAGE (Exact Figma Properties) */}
+                    {/* LEFT IMAGE */}
                     <div
                         className="
-                            w-[592px]
-                            h-[802px]
+                            w-full
+                            md:w-[592px]
+                            h-auto
+                            md:h-[802px]
                             rounded-[12px]
                             overflow-hidden
                             shrink-0
@@ -62,9 +64,14 @@ const ProcureSection: React.FC = () => {
                         />
                     </div>
 
-                    {/* RIGHT 4 CARDS GRID */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-[10px]">
-
+                    {/* RIGHT CARDS GRID */}
+                    <div className="
+                        grid 
+                        grid-cols-1 
+                        md:grid-cols-2 
+                        gap-[15px] 
+                        w-full
+                    ">
                         {services.map((service) => (
                             <div
                                 key={service.id}
@@ -72,9 +79,11 @@ const ProcureSection: React.FC = () => {
                                     bg-white
                                     border border-[#109989]
                                     rounded-[20px]
-                                    w-[300px]
-                                    h-[391.75px]
-                                    p-[40px]
+                                    w-full
+                                    md:w-[300px]
+                                    h-auto
+                                    md:h-[391.75px]
+                                    p-[30px] md:p-[40px]
                                     flex flex-col
                                     gap-[20px]
                                 "
@@ -87,17 +96,16 @@ const ProcureSection: React.FC = () => {
                                 />
 
                                 {/* TITLE */}
-                                <h3 className="text-[22px] font-medium text-[#000] leading-[1.1]">
+                                <h3 className="text-[20px] md:text-[22px] font-medium text-[#000] leading-[1.2]">
                                     {service.title}
                                 </h3>
 
                                 {/* DESCRIPTION */}
-                                <p className="text-[15px] text-[#6C757D] leading-[1.5]">
+                                <p className="text-[14px] md:text-[15px] text-[#6C757D] leading-[1.5]">
                                     {service.description}
                                 </p>
                             </div>
                         ))}
-
                     </div>
                 </div>
             </div>

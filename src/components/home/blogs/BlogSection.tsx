@@ -35,9 +35,9 @@ const BlogsSection = () => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
-  const getData = useCallback(() => {
+  const getData = useCallback((page = 1) => {
     const token = getCookie("token") as string;
-    const url = `${getEndpoint.default.BLOGS}?limit=9&page=1`;
+    const url = `${getEndpoint.default.BLOGS}?limit=9&${page}`;
 
     Webservices.callGetApi(url, token)
       .then((response: any) => {
@@ -50,59 +50,65 @@ const BlogsSection = () => {
     getData();
   }, [getData]);
 
-  // Wait until both refs exist before rendering Swiper
   useEffect(() => {
-    if (prevRef.current && nextRef.current) {
-      setNavReady(true);
-    }
+    if (prevRef.current && nextRef.current) setNavReady(true);
   }, [prevRef.current, nextRef.current]);
 
   return (
     <>
-      {blogs.length > 0 && (
-        <section className="relative p-[100px] flex flex-col bg-cream">
-          <div className="flex justify-between">
+      {blogs?.length > 0 && (
+        <section className="relative px-4 md:p-[100px] py-16 bg-cream">
+
+          <div className="flex flex-col md:flex-row justify-between gap-10">
+
             {/* LEFT TEXT */}
-            <div className="w-[450px]">
-              <h2 className="text-[44px] text-black">Blogs</h2>
-              <p className="text-black text-[33px] mt-2 leading-[43px]">
+            <div className="w-full md:w-[450px]">
+              <h2 className="text-[32px] md:text-[44px] text-black">
+                Blogs
+              </h2>
+              <p className="text-black text-[22px] md:text-[33px] mt-2 leading-[32px] md:leading-[43px]">
                 Inspiring insights for a smarter,{" "}
                 <span className="text-primary">greener</span> future
               </p>
             </div>
 
             {/* SLIDER */}
-            <div className="relative w-[750px]">
+            <div className="relative w-full md:w-[750px]">
 
               {/* LEFT ARROW */}
-         <button
-  ref={prevRef}
-  className="
-    absolute left-[-30px] top-[300px] -translate-y-1/2 z-20
-    w-[70px] h-[70px] rounded-full bg-white 
-    flex items-center justify-center
-  "
->
-  <div
-    className="
-      w-[48px] h-[48px] rounded-full 
-      border border-gray-500 border-dashed
-      flex items-center justify-center
-    "
-  >
-    <span className="text-gray-700 text-xl">←</span>
-  </div>
-</button>
+              <button
+                ref={prevRef}
+                className="
+                  absolute 
+                  left-[-10px] md:left-[-30px] 
+                  top-[50%] md:top-[300px] 
+                  -translate-y-1/2 
+                  z-20
+                  w-[45px] h-[45px] md:w-[70px] md:h-[70px]
+                  rounded-full bg-white shadow
+                  flex items-center justify-center
+                "
+              >
+                <div
+                  className="
+                    w-[30px] h-[30px] md:w-[48px] md:h-[48px]
+                    rounded-full 
+                    border border-gray-500 border-dashed
+                    flex items-center justify-center
+                  "
+                >
+                  <span className="text-gray-700 text-lg md:text-xl">←</span>
+                </div>
+              </button>
 
-
-
-
-
-              {/* SWIPER — render only when refs are ready */}
+              {/* SWIPER */}
               {navReady && (
                 <Swiper
                   modules={[Navigation]}
-                  slidesPerView={2}
+                  slidesPerView={1}
+                  breakpoints={{
+                    768: { slidesPerView: 2 },
+                  }}
                   spaceBetween={20}
                   navigation={{
                     prevEl: prevRef.current,
@@ -117,10 +123,7 @@ const BlogsSection = () => {
                   className="w-full"
                 >
                   {blogs.map((product, index) => (
-                    <SwiperSlide
-                      key={index}
-                      className="!w-[350px]  !mr-[15px] !ml-[15px]"
-                    >
+                    <SwiperSlide key={index} className="!w-auto">
                       <BlogCard product={product} index={index} />
                     </SwiperSlide>
                   ))}
@@ -128,27 +131,30 @@ const BlogsSection = () => {
               )}
 
               {/* RIGHT ARROW */}
-           
-
-                      <button
-    ref={nextRef}
-  className="
-    absolute right-[-30px] top-[300px] -translate-y-1/2 z-20
-    w-[70px] h-[70px] rounded-full bg-white 
-    flex items-center justify-center
-  "
->
-  <div
-    className="
-      w-[48px] h-[48px] rounded-full 
-      border border-gray-500 border-dashed
-      flex items-center justify-center
-    "
-  >
-    <span className="text-gray-700 text-xl"> →</span>
-  </div>
-</button>
-              
+              <button
+                ref={nextRef}
+                className="
+                  absolute 
+                  right-[-10px] md:right-[-30px] 
+                  top-[50%] md:top-[300px] 
+                  -translate-y-1/2 
+                  z-20
+                  w-[45px] h-[45px] md:w-[70px] md:h-[70px]
+                  rounded-full bg-white shadow
+                  flex items-center justify-center
+                "
+              >
+                <div
+                  className="
+                    w-[30px] h-[30px] md:w-[48px] md:h-[48px]
+                    rounded-full 
+                    border border-gray-500 border-dashed
+                    flex items-center justify-center
+                  "
+                >
+                  <span className="text-gray-700 text-lg md:text-xl">→</span>
+                </div>
+              </button>
 
             </div>
           </div>

@@ -94,7 +94,7 @@ const vendorContent = useMemo(
       <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
         <div className="flex flex-col gap-5">
           <Image
-            src="/images/home/howitwork/search-icon.png"
+            src="/images/home/howitwork/user-icon.png"
             alt="registration"
             height={52}
             width={52}
@@ -116,7 +116,7 @@ const vendorContent = useMemo(
       <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
         <div className="flex flex-col gap-5">
           <Image
-            src="/images/home/howitwork/search-icon.png"
+            src="/images/home/howitwork/cloud-icon.png"
             alt="upload-products"
             height={52}
             width={52}
@@ -137,7 +137,7 @@ const vendorContent = useMemo(
       <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
         <div className="flex flex-col gap-5">
           <Image
-            src="/images/home/howitwork/search-icon.png"
+            src="/images/home/howitwork/shop-icon.png"
             alt="start-selling"
             height={52}
             width={52}
@@ -157,10 +157,10 @@ const vendorContent = useMemo(
        <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px]">
         <div className="flex flex-col gap-5">
           <Image
-            src="/images/home/howitwork/search-icon.png"
+            src="/images/home/howitwork/graph-icon.png"
             alt="start-selling"
-            height={52}
-            width={52}
+            height={42}
+            width={42}
           />
           <h6 className="font-medium text-[22px] text-black">
             Monitor Sales & Revenue
@@ -208,7 +208,7 @@ const vendorContent = useMemo(
              providing eco-friendly construction <br/>
              materials for both B2B and B2C markets.
           </p>
-          <div className="relative flex md:block items-center justify-start mb-5 md:mb-0 z-20 mt-10">
+          <div className="relative  md:block items-center justify-start mb-5 md:mb-0 z-20 mt-10">
           <CustomButton
   onPress={handleBuyerClick}
   className={`

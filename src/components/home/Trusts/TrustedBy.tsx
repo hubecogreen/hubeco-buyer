@@ -64,71 +64,81 @@ export default function TrustedBy() {
   }, [visible]);
 
   return (
-    <section
-      ref={sectionRef}
-      className="
-        mx-auto
-        w-[1440px]
-        h-[514px]
-        pt-[99px]
-        pr-[100px]
-        pb-[100px]
-        pl-[100px]
-        flex
-        flex-col
-        items-center
-      "
-    >
-      <h2 className="text-center text-[43px] font-semibold text-[#3d3528] mb-[54px]">
-        Trusted by 50+ Brands
-      </h2>
+  <section
+  ref={sectionRef}
+  className="
+    mx-auto
+    w-full
+    max-w-[1440px]
+    p-[40px]
+    md:p-[80px]
+    lg:p-[100px]
+    block
+    md:flex
+    md:flex-col
+    md:items-center
+  "
+>
+  <h2 className="text-center text-[28px] md:text-[43px] font-semibold text-[#3d3528] mb-10 md:mb-[54px]">
+    Trusted by 50+ Brands
+  </h2>
 
+  <div
+    className="
+      grid 
+      grid-cols-2
+      gap-4
+      sm:gap-6
+      md:flex
+      md:justify-between
+      md:items-center
+      w-full
+      md:w-[1220px]
+      max-w-[1220px]
+      md:h-[217px]
+    "
+  >
+    {cards.map((card, index) => (
       <div
+        key={index}
         className="
+          w-full
+          h-[160px]
+          sm:h-[180px]
+          md:w-[293.75px]
+          md:h-[217px]
+          rounded-[20px]
+          p-[20px]
+          sm:p-[25px]
+          md:p-[30px]
+          bg-[linear-gradient(120.89deg,#B0E0DA_0%,#109989_24.32%)]
+          backdrop-blur-[1.38px]
           flex
-          justify-between
+          flex-col
           items-center
-          w-[1220px]
-          max-w-[1220px]
-          h-[217px]
-          gap-[15px]
+          justify-center
         "
       >
-        {cards.map((card, index) => (
-          <div
-            key={index}
-            className="
-              w-[293.75px]
-              h-[217px]
-              rounded-[24px]
-              p-[30px]
-              bg-[linear-gradient(120.89deg,#B0E0DA_0%,#109989_24.32%)]
-              backdrop-blur-[1.38px]
-              flex
-              flex-col
-              items-center
-              justify-center
-            "
-          >
-            <Image
-              src={card.img}
-              alt={card.title}
-              width={90}
-              height={90}
-              className="mb-3"
-            />
+        <Image
+          src={card.img}
+          alt={card.title}
+          width={70}
+          height={70}
+          className="mb-2 md:mb-3"
+        />
 
-            <p className="text-[34px] font-semibold text-white">
-              {counts[index]}
-              {card.suffix}
-            </p>
+        <p className="text-[22px] sm:text-[26px] md:text-[34px] font-semibold text-white">
+          {counts[index]}
+          {card.suffix}
+        </p>
 
-            <p className="text-[18px] font-medium text-white -mt-1 text-center">
-              {card.title}
-            </p>
-          </div>
-        ))}
+        <p className="text-[12px] sm:text-[14px] md:text-[18px] font-medium text-white text-center -mt-1">
+          {card.title}
+        </p>
       </div>
-    </section>
+    ))}
+  </div>
+</section>
+
   );
 }

@@ -79,7 +79,7 @@ export default function TrustedBy() {
     md:items-center
   "
 >
-  <h2 className="text-center text-[28px] md:text-[43px] font-semibold text-[#3d3528] mb-10 md:mb-[54px]">
+  <h2 className="text-center text-[28px] md:text-[43px]  text-[#3d3528] mb-10 md:mb-[54px]">
     Trusted by 50+ Brands
   </h2>
 

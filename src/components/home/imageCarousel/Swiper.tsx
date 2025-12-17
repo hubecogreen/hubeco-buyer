@@ -43,10 +43,10 @@ const ImageSlider = () => {
       <div className="relative z-20 w-full h-full flex flex-col justify-center px-6 md:px-12 lg:px-32 text-white translate-y-[-100px]">
 
         {/* Title + Right Section */}
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-[179px] w-full">
+        <div className="flex flex-col md:flex-row items-start md:items-center md:gap-[179px] gap-[20px] w-full">
           {/* LEFT TITLE */}
           <div className="max-w-3xl space-y-4 pt-[209px]">
-            <h1 className="text-3xl lg:text-6xl md:text-[60px] leading-[60px]">
+            <h1 className="text-3xl lg:text-6xl md:text-[60px] md:leading-[60px]">
               Digitizing <br /> Procurement for <br />
               Smarter,{" "}
               <span className="bg-primary px-2 rounded text-white inline-flex">
@@ -93,48 +93,52 @@ const ImageSlider = () => {
 
 
         </div>
-        <hr className="border-white/40 w-full my-8" />
+        <hr className="border-white/40 w-full md:my-8 my-4" />
 
 
         {/* Middle Row (Paragraph + Buttons) */}
-        <div className="flex gap-[312px] items-center  pb-[50px]">
-          <div>
-            <p className="text-[20px] leading-[20px] opacity-85 mt-2">
-              Empowering India’s Construction industry with <br />
-              Sustainable Materials and Digital Efficiency
-            </p>
-          </div>
+        <div className="md:flex block gap-[312px] items-center  pb-[50px]">
+  
+  {/* Text */}
+  <div className="md:w-auto w-full">
+    <p className="text-[20px] leading-[26px] opacity-85 mt-2">
+      Empowering India’s Construction industry with <br className="hidden md:block" />
+      Sustainable Materials and Digital Efficiency
+    </p>
+  </div>
 
-          <div className="flex space-x-4">
-            <motion.button
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                delay: 0.5,   // shorter delay
-                ease: "easeOut",
-              }}
-              className="bg-primary hover:bg-white hover:text-primary text-white px-[40px] py-[20px] rounded-md"
-              onClick={()=>router.push("/products")}
-            >
-              Shop Now
-            </motion.button>
+  {/* Buttons */}
+  <div className=" gap-3 mt-4 md:mt-0 flex  md:space-x-4 md:gap-0  ">
+    
+    <motion.button
+      initial={{ opacity: 0, y: 25 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+      className="bg-primary hover:bg-white hover:text-primary text-white 
+                 w-full md:w-auto 
+                 px-[20px] py-[12px] md:px-[40px] md:py-[20px] 
+                 rounded-md"
+      onClick={() => router.push("/products")}
+    >
+      Shop Now
+    </motion.button>
 
-            <motion.button
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                delay: 0.5,   // SAME delay → both come together
-                ease: "easeOut",
-              }}
-              className="bg-primary hover:bg-white hover:text-primary text-white px-[40px] py-[20px] rounded-md"
-               onClick={()=>router.push("/plans")}
-            >
-              Sell With Us
-            </motion.button>
-          </div>
-        </div>
+    <motion.button
+      initial={{ opacity: 0, y: 25 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+      className="bg-primary hover:bg-white hover:text-primary text-white 
+                 w-full md:w-auto 
+                 px-[20px] py-[12px] md:px-[40px] md:py-[20px] 
+                 rounded-md"
+      onClick={() => router.push("/plans")}
+    >
+      Sell With Us
+    </motion.button>
+
+  </div>
+</div>
+
 
         {/* Bottom scrolling logos */}
         <div className="w-full flex flex-row items-center justify-center bg-white/10 backdrop-blur-md rounded-md py-2 px-4">

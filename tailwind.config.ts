@@ -58,6 +58,7 @@ const config = {
         foreground: "hsl(var(--foreground))",
         red:'#F70000',
         cream:"#FFFEF8",
+        brown:"#3d3529",
         // primary: {
         //   DEFAULT: "hsl(var(--primary))",
         //   foreground: "hsl(var(--primary-foreground))",

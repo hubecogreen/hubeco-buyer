@@ -52,7 +52,7 @@ const ProcureSection: React.FC = () => {
                 </h2>
 
                 {/* CONTENT ROW */}
-                <div className="flex flex-col md:flex-row gap-[20px] sm:gap-[25px] md:gap-[31px] items-start">
+                <div className="flex flex-col md:flex-row gap-[20px] sm:gap-[25px] md:gap-[31px] md:items-stretch">
 
                     {/* LEFT IMAGE */}
                     <div

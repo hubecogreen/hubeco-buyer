@@ -474,10 +474,10 @@ const Header: React.FC<HeaderProps> = () => {
     <>
       <header
         ref={headerRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky} px-[100px] bg-cream h-[80px]`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky} md:px-[100px] bg-cream md:h-[80px]`}
       >
         <div
-          className={`w-full justify-center items-center  h-auto md:h-[80px] lg:h-22 px-4 pt-2 pb-3 md:pb-20 lg:pb-22 ${styles.stickyHeader
+          className={`hidden md:block w-full justify-center items-center  h-auto md:h-[80px] lg:h-22 px-4 pt-2 pb-3 md:pb-20 lg:pb-22 ${styles.stickyHeader
             } ${isSearchFocused ? styles.searchFocused : ""}`}
         >
           <div className="flex justify-between items-center py-2 md:py-3 lg:py-4 min-w-0">
@@ -955,6 +955,67 @@ const Header: React.FC<HeaderProps> = () => {
           </div>
         </div>
 
+
+        {/* MOBILE HEADER */}
+<div className="md:hidden w-full px-4 py-3 bg-cream" >
+
+{/* Row 1: Menu | Logo | Login */}
+<div className="flex items-center justify-between">
+
+  {/* Menu */}
+  <VscMenu
+    className="text-black cursor-pointer"
+    size={24}
+    onClick={toggleMenu}
+  />
+
+  {/* Logo */}
+  <Link href="/" className="flex justify-center flex-1">
+    <Image
+      src="/images/home/header/hubeco-logo.png"
+      alt="Hubeco Logo"
+      width={160}
+      height={40}
+      className="object-contain"
+    />
+  </Link>
+
+  {/* Login / Profile */}
+  {token ? (
+    <PiUserCircleThin
+      className="text-black cursor-pointer"
+      size={28}
+      onClick={() => setUserPopoverOpen(!isUserPopoverOpen)}
+    />
+  ) : (
+    <CustomButton
+    title="Login / SignUp"
+    className="text-[12px] bg-white text-secondaryLight border-2 border-secondaryLight px-4 lg:px-2  md:h-12 h-10   lg:flex  font-medium"
+ 
+    hoverBgColor=""
+    onPress={() => setShowLoginPopup(true)}
+  />
+  )}
+</div>
+
+{/* Row 2: Full-width Search */}
+<div className="mt-3">
+  <SearchBar
+    isExpanded={true}
+    onFocus={handleSearchFocus}
+    onBlur={handleSearchBlur}
+    className="w-full"
+    value={searchValue}
+    onChange={(value) => setSearchValue(value)}
+    placeholder={
+      rotatingPlaceholders[currentPlaceholderIndex] ||
+      "Search for Products..."
+    }
+  />
+</div>
+</div>
+
+
         <PincodePopup isOpen={isPopupOpen} onClose={togglePopup} />
         <SidebarMenu isOpen={isMenuOpen} onClose={toggleMenu} />
         {isMenuOpen && (
@@ -991,8 +1052,18 @@ const LoginPopup = ({
 }) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md h-fit">
-        <div className="flex flex-col items-center justify-center p-6">
+      <DialogContent
+        className="
+          md:max-w-md
+          max-w-[95vw]
+          rounded-lg
+          h-fit
+          p-4
+          md:p-0
+        "
+      >
+        <div className="flex flex-col items-center justify-center gap-3 md:p-6 p-4">
+
           {/* Logo */}
           <Image
             src="/images/home/header/hubeco-logo.png"
@@ -1002,21 +1073,23 @@ const LoginPopup = ({
             className="mb-1"
           />
 
-          <p className="text-gray-500 text-sm mb-6">
+          <p className="text-gray-500 text-sm text-center mb-4">
             Sustainable Construction Materials Marketplace
           </p>
 
           {/* Buyer + Vendor buttons */}
-          <div className="flex gap-6">
+          <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
 
-            {/* BUYER BUTTON */}
+            {/* BUYER */}
             <button
               onClick={() => {
                 onOpenChange(false);
                 router.push("/login");
               }}
               className="
-                group w-[158px] h-[96px]
+                group
+                w-full md:w-[158px]
+                h-[72px] md:h-[96px]
                 bg-white border border-[#109989]
                 rounded-[7px] shadow-sm
                 flex items-center justify-center gap-[11px]
@@ -1030,19 +1103,21 @@ const LoginPopup = ({
                 alt="buyer"
                 className="transition group-hover:invert"
               />
-              <span className="text-primary font-medium group-hover:text-white text-[24px]">
+              <span className="text-primary font-medium group-hover:text-white text-[18px] md:text-[24px]">
                 Buyer
               </span>
             </button>
 
-            {/* VENDOR BUTTON */}
+            {/* VENDOR */}
             <button
               onClick={() => {
                 onOpenChange(false);
                 router.push("/plans");
               }}
               className="
-                group w-[178px] h-[96px]
+                group
+                w-full md:w-[178px]
+                h-[72px] md:h-[96px]
                 bg-white border border-[#BB0444]
                 rounded-[7px] shadow-sm
                 flex items-center justify-center gap-[9px]
@@ -1056,10 +1131,11 @@ const LoginPopup = ({
                 alt="vendor"
                 className="transition group-hover:invert"
               />
-              <span className="text-secondary font-medium group-hover:text-white text-[24px]">
+              <span className="text-secondary font-medium group-hover:text-white text-[18px] md:text-[24px]">
                 Vendor
               </span>
             </button>
+
           </div>
         </div>
       </DialogContent>

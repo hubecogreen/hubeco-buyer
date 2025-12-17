@@ -30,13 +30,13 @@ const FilterHTML = ({
       {catCount > 0 ? (
         <>
           <div className="mt-2 mb-4 border-b border-borderGray">
-            <h3 className="text-sm text-black font-semibold mb-4">
+            <h3 className="text-sm text-brown  font-semibold mb-4">
               CATEGORIES
             </h3>
 
             <div className="relative flex flex-row items-center">
               {/* Search Icon */}
-              <span className="absolute inset-y-0 left-3 flex items-center text-fontGray h-[40px] ">
+              <span className="absolute inset-y-0 left-3 flex items-center text-brown  h-[40px] ">
                 <Search size={16} color="#4d4d4d" className="text-fontGray" />
               </span>
               <Input
@@ -90,7 +90,7 @@ const FilterHTML = ({
                         className={`flex items-center justify-between w-full text-left text-md ${
                           selectedParentid.includes(category?._id)
                             ? "text-secondary"
-                            : "text-black "
+                            : "text-brown "
                         }`}
                         // onClick={() => {
                         //   setOpenCategory(
@@ -103,7 +103,7 @@ const FilterHTML = ({
                           className={`text-[14px] text-black font-normal ${
                             selectedParentid.includes(category?._id)
                               ? "text-secondary"
-                              : "text-black "
+                              : "text-brown "
                           }`}
                         >
                           {category.name}

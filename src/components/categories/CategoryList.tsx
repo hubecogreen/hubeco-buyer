@@ -1,8 +1,8 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { IoIosSearch } from "react-icons/io";
 import { GoArrowRight } from "react-icons/go";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
@@ -37,8 +37,6 @@ const CategoryList = () => {
     (state: any) => state.masterData.buildingSystemCategories
   );
 
-  const [searchTerm, setSearchTerm] = useState("");
-
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -53,8 +51,8 @@ const CategoryList = () => {
       (result?.status === 400
         ? "Categories Not Found"
         : result?.status === 404
-          ? "Invalid Request"
-          : "Something went wrong");
+        ? "Invalid Request"
+        : "Something went wrong");
 
     toast.error(msg);
   };
@@ -76,117 +74,132 @@ const CategoryList = () => {
 
       const data = result.data;
 
-      // -------------------------------------
-      // 1) NORMAL CATEGORIES (first category)
-      // -------------------------------------
+      // 1️⃣ Default Categories
       const defaultCategory = data?.[0];
 
-      const subCategoriesWithParent =
+      const formattedCategories =
         defaultCategory?.subCategories?.map((sub: any) => ({
           ...sub,
           parentCategoryName: defaultCategory.name,
           parentCategorySlug: defaultCategory.seoSlug,
         })) || [];
 
-      dispatch(saveCategories(subCategoriesWithParent));
+      dispatch(saveCategories(formattedCategories));
 
-      // -------------------------------------
-      // 2) BUILDING SYSTEM CATEGORIES
-      // -------------------------------------
+      // 2️⃣ Building System Categories
       const buildingSystemParent = data.find((c: any) => {
         const name = c?.name?.toLowerCase();
         return name === "building systems" || name === "building system";
       });
 
-      const buildingSystemsFormatted =
+      const formattedBuildingSystems =
         buildingSystemParent?.subCategories?.map((sub: any) => ({
           ...sub,
           parentCategoryName: buildingSystemParent?.name,
           parentCategorySlug: buildingSystemParent?.seoSlug,
         })) || [];
 
-      dispatch(saveBuildingSystemCategories(buildingSystemsFormatted));
+      dispatch(saveBuildingSystemCategories(formattedBuildingSystems));
       dispatch(saveCatTime(new Date()));
     } catch (error) {
       handleApiError(error);
     }
   };
 
+  // -----------------------------
+  // CATEGORY CARD
+  // -----------------------------
   const CategoryCard = ({ category, index }: any) => (
     <Link
-      key={index}
       href={`/products/${category?.parentCategorySlug}/${category?.seoSlug}?scid=${category?._id}`}
     >
-      <div className="group border rounded-md flex flex-col items-start justify-start cursor-pointer hover:bg-primary transform transition-transform duration-300 hover:scale-105 w-[282px] h-[350px] pt-[16px] px-[16px]">
+      <div className="group border rounded-md flex flex-col cursor-pointer hover:bg-primary transition-transform duration-300 hover:scale-105 w-[260px] h-[340px] p-4">
         <Image
           src={
             category?.image
               ? normalizePath(`${assetURL}/${category.image}`)
               : FALLBACK_IMAGE
           }
-          alt={`Slide ${index}`}
+          alt={category?.name}
           width={250}
           height={250}
-          onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
           loading="lazy"
-          className="rounded-[5px] object-cover bg-black h-[250px] w-[250px]"
+          onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
+          className="rounded-md object-cover h-[250px] w-full"
         />
 
         <p
-          className={`${styles.cattitle} text-[19px] font-medium text-primary mt-[20px] mx-[32px] pb-[20px] group-hover:text-white`}
+          className={`${styles.cattitle} text-[18px] font-medium text-primary mt-4 text-center group-hover:text-white`}
         >
           {category?.name}
         </p>
       </div>
-
     </Link>
   );
 
   // -----------------------------
-  // REUSABLE SECTION
+  // CATEGORY SECTION
   // -----------------------------
   const CategorySection = ({ title, data }: any) => (
-    <div className={`px-4  ${title == "Building Systems" ? "md:px-[100px] md:pb-[100px] md:pt-[43px]" : "md:p-[100px]"}  bg-cream`}>
-      <div className="block md:flex md:justify-between items-center">
-        <h2 className="text-primary text-2xl md:text-[43px]">{title}</h2>
+    <div
+      className={`px-4 bg-cream ${
+        title === "Building Systems"
+          ? "md:px-[100px] md:pb-[100px] md:pt-[43px] p-[20px]"
+          : "md:p-[100px] p-[20px]"
+      }`}
+    >
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:justify-between  gap-4">
+        <h2 className="text-xl md:text-[43px] md:text-start text-center text-brown ">{title}</h2>
 
         <CustomButton
           title="Shop Now"
-          className="
-  
-    bg-[#109989]
-    rounded-[5px]
-    !px-[20px]
-    !py-[15px]
-    flex tem-center justify-center
-    gap-[21.69px]
-    text-white
-    text-[18px]
-    leading-[21.6px]
-    tracking-[0.36px]
-    capitalize
-  "
-          rightIcon={<GoArrowRight className="w-[24px] h-[24px]" />}
+          className=" md:flex hidden 
+            bg-[#109989]
+            rounded-[5px]
+            px-[14px] py-[10px]
+            md:!px-[20px] md:!py-[15px]
+            gap-[12px]
+            text-white
+            text-[14px]
+            md:text-[18px]
+            capitalize
+            w-fit
+          "
+          rightIcon={
+            <GoArrowRight className="w-[18px] h-[18px] md:w-[24px] md:h-[24px]" />
+          }
           onPress={() => router.push("/products")}
         />
       </div>
 
-      <hr className="border-t-[1px] border-primary mx-auto mt-[21px] mb-[36px]" />
+      <hr className="border-t border-primary mx-auto mt-5 mb-6 md:mb-9" />
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+      {/* Mobile Scroll / Desktop Grid */}
+      <div
+        className="
+          flex gap-4 overflow-x-auto pb-4
+          snap-x snap-mandatory
+          scrollbar-hide
+          md:grid md:grid-cols-4 md:gap-8 md:overflow-visible
+        "
+      >
         {data?.map((cat: any, idx: number) => (
-          <CategoryCard category={cat} index={idx} key={idx} />
+          <div key={idx} className="snap-start shrink-0 md:shrink">
+            <CategoryCard category={cat} index={idx} />
+          </div>
         ))}
       </div>
 
+      {/* Empty State */}
       {data?.length === 0 && (
         <>
           <LottieWrapper
             animationData={animationData}
             loop
-            className="flex mx-auto justify-center items-center w-[400px] h-[400px]"
+            className="flex mx-auto justify-center items-center w-[300px] h-[300px] md:w-[400px] md:h-[400px]"
           />
-          <p className="text-center text-fontGray mt-4 text-lg font-bold">
+          <p className="text-center text-fontGray mt-4 text-base md:text-lg font-bold">
             No Categories Found.
           </p>
         </>
@@ -197,7 +210,10 @@ const CategoryList = () => {
   return (
     <>
       <CategorySection title="Building Materials" data={categories} />
-      <CategorySection title="Building Systems" data={buildingSystemCategories} />
+      <CategorySection
+        title="Building Systems"
+        data={buildingSystemCategories}
+      />
     </>
   );
 };

@@ -163,7 +163,7 @@ const WorksSection = () => {
 
       <div className="md:w-1/2 md:pt-14 pt-8 pr-2 md:pr-10 max-[768px]:w-full max-[768px]:pr-0 max-[768px]:pt-6">
         <div className="">
-            <h2 className="text-center md:text-left text-2xl pt-5 md:text-[43px] font-normal text-black mt-30 pb-[20px] max-[768px]:text-center max-[768px]:text-[20px] max-[768px]:pt-0 max-[768px]:pb-3">
+            <h2 className="text-center md:text-left text-[28px] pt-5 md:text-[43px] font-normal text-brown mt-30 pb-[20px] max-[768px]:text-center  max-[768px]:pt-0 max-[768px]:pb-3">
             How it Works
             </h2>
           <p className="md:text-[18px] text-md pt-5 text-lightGraytext leading-[30px] w-[390px] h-[120px] mb-[45px] max-[768px]:w-full max-[768px]:h-auto max-[768px]:text-[12px] max-[768px]:leading-[1.5] max-[768px]:pt-0 max-[768px]:mb-4">
@@ -194,8 +194,8 @@ const WorksSection = () => {
               title="Buyer"
               rightIcon={
                 showBuyer 
-                  ? <Image src="/images/home/howitwork/white-arrao-icon.png" alt="white arrow" width={30} height={30} className="max-[768px]:w-5 max-[768px]:h-5"/>
-                  : <Image src="/images/home/howitwork/green-arrow-icon.png" alt="green arrow" width={30} height={30} className="max-[768px]:w-5 max-[768px]:h-5"/>
+                  ? <Image src="/images/home/howitwork/white-arrao-icon.png" alt="white arrow" width={30} height={30} className="max-[768px]:w-5 max-[768px]:h-5 md:block hidden"/>
+                  : <Image src="/images/home/howitwork/green-arrow-icon.png" alt="green arrow" width={30} height={30} className="max-[768px]:w-5 max-[768px]:h-5 md:block hidden"/>
               }
             />
 
@@ -209,7 +209,7 @@ const WorksSection = () => {
                   ? "border-secondary text-white bg-secondary shadow-[0px_6px_20px_rgba(169,36,73,0.45)]" 
                   : "border-secondary text-secondary bg-white shadow-[0px_4px_12px_rgba(169,36,73,0.25)] hover:shadow-[0px_4px_16px_rgba(169,36,73,0.35)]"
                 }
-                font-bold text-[30px]
+                font-bold text-[34px]
                 max-[768px]:text-[16px] max-[768px]:flex-1 max-[768px]:justify-center max-[768px]:gap-2 max-[768px]:py-3
               `}
               customStyles={{ 
@@ -219,8 +219,8 @@ const WorksSection = () => {
               title="Vendor"
               rightIcon={
                 !showBuyer 
-                  ? <Image src="/images/home/howitwork/white-arrao-icon.png" alt="white arrow" width={30} height={30} className="max-[768px]:w-5 max-[768px]:h-5"/>
-                  : <Image src="/images/home/howitwork/red-arrow-icon.png" alt="red arrow" width={30} height={30} className="max-[768px]:w-5 max-[768px]:h-5"/>
+                  ? <Image src="/images/home/howitwork/white-arrao-icon.png" alt="white arrow" width={30} height={30} className="max-[768px]:w-5 max-[768px]:h-5 md:block hidden"/>
+                  : <Image src="/images/home/howitwork/red-arrow-icon.png" alt="red arrow" width={30} height={30} className="max-[768px]:w-5 max-[768px]:h-5 md:block hidden"/>
               }
             />
           </div>

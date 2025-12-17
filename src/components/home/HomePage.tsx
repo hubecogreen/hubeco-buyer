@@ -17,13 +17,14 @@ const HomePage = () => {
   return (
     <div className="bg-white">
       {/* Optimize for Speed Index - Load everything immediately but efficiently */}
-      <div className="banner-section mx-auto h-64 md:h-full max-w-full">
+      <div className="banner-section mx-auto md:h-full max-w-full">
         <ImageSlider />
       </div>
 
-      <div className="category-section">
+      <div className="category-section mx-auto">
         <CategoryList />
-      
+        </div>
+
       {/* <div className="featured-section mx-auto md:pb-10 md:m-w-full">
         <FeaturedProducts />
       </div> */}
@@ -36,7 +37,6 @@ const HomePage = () => {
       </div>
       <div className="trusted-section mx-auto bg-cream">
         <TrustedBy />
-      </div>
       </div>
          <div className="works-section mx-auto bg-cream">
         <WorksSection />

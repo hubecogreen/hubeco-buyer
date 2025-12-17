@@ -23,10 +23,7 @@ const HomePage = () => {
 
       <div className="category-section">
         <CategoryList />
-      </div>
-         <div className="works-section mx-auto bg-cream">
-        <WorksSection />
-      </div>
+      
       {/* <div className="featured-section mx-auto md:pb-10 md:m-w-full">
         <FeaturedProducts />
       </div> */}
@@ -37,20 +34,23 @@ const HomePage = () => {
       <div className="green-financing-section mx-auto">
         <GreenFinancing />
       </div>
-      <div className="trusted-section mx-auto">
+      <div className="trusted-section mx-auto bg-cream">
         <TrustedBy />
       </div>
-
-   
+      </div>
+         <div className="works-section mx-auto bg-cream">
+        <WorksSection />
+      </div>
 
       {/* <div className="projects-section mx-auto relative flex items-center justify-center pt-[30px] bg-[url('/images/home/bg5.webp')] bg-top bg-no-repeat bg-cover">
         <ProjectsSection />
       </div> */}
-      <div className="procure-section mx-auto pt-10">
-        <ProcureSection />
-      </div>
-      <div className="calltoaction-section mx-auto pt-10">
+      
+      <div className="calltoaction-section mx-auto pt-10 bg-cream">
         <CallToActionSection />
+      </div>
+      <div className="procure-section mx-auto pt-10 bg-cream">
+        <ProcureSection />
       </div>
       <div className="partners-section mx-auto">
         <PartnersSection />
@@ -58,7 +58,7 @@ const HomePage = () => {
       <div className="blogs-section mx-auto">
         <BlogsSection />
       </div>
-      <div className="contact-section mx-auto pt-10">
+      <div className="contact-section mx-auto pt-[100px] pb-[100px] bg-cream">
         <ContactSection />
       </div>
     </div>

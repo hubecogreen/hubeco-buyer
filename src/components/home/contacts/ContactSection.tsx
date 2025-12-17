@@ -21,7 +21,7 @@ const schema = yup.object({
 
 const ContactSection: React.FC = () => {
   const token = getCookie("token");
-  
+
   const {
     control,
     handleSubmit,
@@ -80,7 +80,7 @@ const ContactSection: React.FC = () => {
       <div className="max-w-[1200px] w-full flex flex-col md:flex-row">
 
         {/* LEFT IMAGE */}
-        <div className="w-full md:w-[550px] h-[400px] md:h-[963.63px] flex-shrink-0">
+        <div className="hidden md:block md:flex-1 relative">
           <Image
             src="/images/contacts/image.png"
             alt="contact"
@@ -93,13 +93,19 @@ const ContactSection: React.FC = () => {
         {/* RIGHT FORM */}
         <div
           className="
-            w-full md:w-[650px]
-            flex flex-col gap-[22px]
-            text-white
-            px-6 py-10 md:px-[50px] md:py-[50px]
-            bg-gradient-to-br from-[#109989] to-[#084A42] 
-            rounded-b-lg md:rounded-r-lg md:rounded-bl-none
-          "
+    w-full
+    flex flex-col
+    gap-[12px]
+    p-[20px]
+
+    md:flex-1
+    md:gap-[22px]
+    md:px-[50px] md:py-[50px]
+
+    text-white
+    bg-gradient-to-br from-[#109989] to-[#084A42]
+    rounded-lg md:rounded-r-lg md:rounded-l-none
+  "
         >
           {/* Heading */}
           <h2 className="text-[28px] md:text-[36px] font-semibold leading-tight">
@@ -202,19 +208,20 @@ const ContactSection: React.FC = () => {
                 name="message"
                 render={({ field }) => (
                   <textarea
-                    {...field}
-                    placeholder="Write Your Message Here..."
-                    className="
-                      w-full md:w-[572px] h-[150px] md:h-[189px]
-                      p-[15px] md:p-[18px]
-                      bg-transparent placeholder:text-white/40
-                      text-[18px] md:text-[22px] font-medium rounded-[10px]
-                      border border-transparent border-b-white
-                      hover:border-white focus:border-white focus:outline-none
-                      transition-all
-                      resize-none
-                    "
-                  />
+  {...field}
+  placeholder="Write Your Message Here..."
+  className="
+    w-full md:w-[572px]
+    h-[55px] md:h-[63px]
+    px-[15px] md:px-[19px]
+    bg-transparent placeholder:text-white/40
+    text-[18px] md:text-[22px] font-medium rounded-[10px]
+    border border-transparent border-b-white
+    hover:border-white focus:border-white focus:outline-none
+    transition-all
+    resize-none
+  "
+/>
                 )}
               />
               {errors.message && (

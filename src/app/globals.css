@@ -271,4 +271,11 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
     transform: translateY(-150px); /* 3 items x 50px each */
   }
 }
+html {
+  scrollbar-gutter: stable;
+}
+body {
+  overflow-y: scroll;
+}
+
 

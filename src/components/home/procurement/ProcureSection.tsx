@@ -9,53 +9,64 @@ const ProcureSection: React.FC = () => {
             title: "100% Sustainable, Certified Materials",
             icon: "/images/procurement/icon1.png",
             description:
-                "We list materials certified by GreenPro, GRIHA, and EPD ensuring every purchase meets India’s leading green building standards.",
+                "We list only GreenPro, GRIHA, and EPD certified materials",
         },
         {
             id: 2,
             title: "Transparent Sourcing & Pricing",
             icon: "/images/procurement/icon2.png",
             description:
-                "View verified suppliers, specifications, and prices in one place. Make smarter, transparent and value-driven procurement decisions.",
+                "View verified suppliers, specs and prices for smarter procurement",
         },
         {
             id: 3,
             title: "Streamlined RFQ to Payment",
             icon: "/images/procurement/icon3.png",
             description:
-                "Raise RFQs, negotiate, confirm orders and update payment status seamlessly all within your Hubeco dashboard.",
+                "Manage RFQs, orders and payments seamlessly from your dashboard.",
         },
         {
             id: 4,
             title: "Expert Support for Green Projects",
             icon: "/images/procurement/icon4.png",
             description:
-                "Our team helps you select materials aligned with GRIHA, IGBC, and LEED requirements for your next sustainable project.",
+                "We help you choose materials aligned with GRIHA, IGBC and LEED.",
         },
     ];
 
     return (
-        <section className="w-full flex justify-center py-20 bg-white">
-            <div className="max-w-[1250px] w-full flex flex-col gap-[12px] px-4 md:px-0">
+        <section className="w-full flex justify-center pt-[60px] sm:pt-[80px] md:pt-[100px] pb-[60px] sm:pb-[80px] md:pb-[100px]">
+            <div className="max-w-[1250px] w-full px-4 md:px-0">
 
-                {/* Heading */}
-                <h2 className="text-[32px] md:text-[43px] leading-[38px] md:leading-[43px] text-[#3D3528]">
+                {/* HEADING */}
+                <h2
+                    className="
+          text-[28px] xs:text-[32px] sm:text-[36px] md:text-[43px]
+          leading-[34px] xs:leading-[38px] sm:leading-[40px] md:leading-[43px]
+          text-[#3D3528]
+          text-center
+          mb-[20px] sm:mb-[23px]
+        "
+                >
                     Why Procure from Us?
                 </h2>
 
-                <div className="flex flex-col md:flex-row w-full gap-[31px] items-start">
+                {/* CONTENT ROW */}
+                <div className="flex flex-col md:flex-row gap-[20px] sm:gap-[25px] md:gap-[31px] items-start">
 
                     {/* LEFT IMAGE */}
                     <div
                         className="
-                            w-full
-                            md:w-[592px]
-                            h-auto
-                            md:h-[802px]
-                            rounded-[12px]
-                            overflow-hidden
-                            shrink-0
-                        "
+            w-full
+            md:w-[592px]
+            h-[280px]
+            xs:h-[320px]
+            sm:h-[400px]
+            md:h-[598px]
+            rounded-[12px]
+            overflow-hidden
+            shrink-0
+          "
                     >
                         <img
                             src="/images/procurement/img1.png"
@@ -64,49 +75,41 @@ const ProcureSection: React.FC = () => {
                         />
                     </div>
 
-                    {/* RIGHT CARDS GRID */}
-                    <div className="
-                        grid 
-                        grid-cols-1 
-                        md:grid-cols-2 
-                        gap-[15px] 
-                        w-full
-                    ">
+                    {/* RIGHT CARDS */}
+                    <div className="grid grid-cols-2 gap-[10px] xs:gap-[12px] sm:gap-[15px] w-full">
                         {services.map((service) => (
                             <div
                                 key={service.id}
                                 className="
-                                    bg-white
-                                    border border-[#109989]
-                                    rounded-[20px]
-                                    w-full
-                                    md:w-[300px]
-                                    h-auto
-                                    md:h-[391.75px]
-                                    p-[30px] md:p-[40px]
-                                    flex flex-col
-                                    gap-[20px]
-                                "
+                bg-cream
+                border border-[#109989]
+                rounded-[12px]
+                sm:rounded-[16px]
+                md:rounded-[20px]
+                md:w-[300px]
+                md:h-[286px]
+                p-[16px]
+                xs:p-[20px]
+                sm:p-[28px]
+                md:p-[40px]
+                flex flex-col gap-[12px] sm:gap-[16px] md:gap-[20px]
+              "
                             >
-                                {/* ICON */}
                                 <img
                                     src={service.icon}
                                     alt={service.title}
-                                    className="w-[48px] h-[48px] object-contain"
+                                    className="w-[32px] h-[32px] xs:w-[36px] xs:h-[36px] sm:w-[42px] sm:h-[42px] md:w-[48px] md:h-[48px]"
                                 />
-
-                                {/* TITLE */}
-                                <h3 className="text-[20px] md:text-[22px] font-medium text-[#000] leading-[1.2]">
+                                {/* <h3 className="text-[20px] md:text-[22px] font-medium">
                                     {service.title}
-                                </h3>
-
-                                {/* DESCRIPTION */}
-                                <p className="text-[14px] md:text-[15px] text-[#6C757D] leading-[1.5]">
+                                </h3> */}
+                                <p className="text-[11px] xs:text-[12px] sm:text-[14px] md:text-[22px] text-[#000000] leading-[16px] xs:leading-[17px] sm:leading-[20px] md:leading-[28px]">
                                     {service.description}
                                 </p>
                             </div>
                         ))}
                     </div>
+
                 </div>
             </div>
         </section>

@@ -23,7 +23,7 @@ const ImageSlider = () => {
 
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <section className="relative w-full h-[561px] overflow-hidden">
       {/* Full-screen video */}
       <video
         autoPlay

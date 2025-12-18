@@ -8,6 +8,7 @@ export default function GreenFinancing() {
         {/* CENTER HEADING */}
         <h2 className="
         w-full
+        text-brown
         max-w-[354px]
         text-[32px]
         xs:text-[36px]
@@ -39,24 +40,22 @@ export default function GreenFinancing() {
           </div>
 
           {/* Right Section */}
-          <div className="w-full md:w-[582px] relative flex flex-col justify-between min-h-auto md:min-h-[506px]">
+          <div className="w-full md:w-[582px] relative flex flex-col justify-center min-h-auto md:min-h-[506px]">
 
             {/* Text */}
             <div className="flex flex-col gap-[16px] sm:gap-[20px] md:gap-[20px]">
               <p className="text-[16px] xs:text-[18px] sm:text-[20px] md:text-[24px] leading-[22px] xs:leading-[26px] sm:leading-[28px] md:leading-[30px] text-black">
-                Access tailored financing solutions designed specifically for eco-friendly construction. Our green financing program empowers you to invest in certified sustainable materials while maintaining cost efficiency and project stability.
+                Access tailored financing solutions designed specifically for eco-friendly construction. Our green financing program empowers you to invest in certified sustainable materials while maintaining cost efficiency and project <br/>stability.
               </p>
-              <p className="text-[16px] xs:text-[18px] sm:text-[20px] md:text-[24px] leading-[22px] xs:leading-[26px] sm:leading-[28px] md:leading-[30px] text-black">
-                Partnered With Environment-Focused Financial Institutions
-              </p>
+              
               <p className="text-[16px] xs:text-[18px] sm:text-[20px] md:text-[24px] leading-[22px] xs:leading-[26px] sm:leading-[28px] md:leading-[30px] text-black">
                 Work with leading financial partners committed to environmental responsibility. Together we enable smoother, smarter and more sustainable project financing
               </p>
             </div>
 
             {/* CTA */}
-            <div className="mt-6 sm:mt-8 md:mt-[26px] w-full md:w-[328px] h-[52px] sm:h-[56px] md:h-[60px]">
-              <button className="bg-[#109989] w-full h-full rounded-md flex items-center justify-center gap-3 sm:gap-4 text-white text-[16px] sm:text-[17px] md:text-[18px] font-medium">
+            <div className="mt-6 sm:mt-8 md:mt-[34px] w-full md:w-[328px] h-[52px] sm:h-[56px] md:h-[60px] flex justify-center md:justify-start">
+              <button className="bg-[#109989] md:w-full h-full rounded-md flex items-center justify-center gap-3 sm:gap-4 text-white text-[16px] sm:text-[17px] md:text-[18px] font-medium px-[20px] py-[10px]">
                 Ready To Build Greener
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

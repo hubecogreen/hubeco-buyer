@@ -30,13 +30,13 @@ const FilterHTML = ({
       {catCount > 0 ? (
         <>
           <div className="mt-2 mb-4 border-b border-borderGray">
-            <h3 className="text-sm text-brown  font-semibold mb-4">
+            <h3 className="text-sm text-white  font-semibold mb-4">
               CATEGORIES
             </h3>
 
             <div className="relative flex flex-row items-center">
               {/* Search Icon */}
-              <span className="absolute inset-y-0 left-3 flex items-center text-brown  h-[40px] ">
+              <span className="absolute inset-y-0 left-3 flex items-center text-white  h-[40px] ">
                 <Search size={16} color="#4d4d4d" className="text-fontGray" />
               </span>
               <Input
@@ -76,7 +76,7 @@ const FilterHTML = ({
                     >
                       <Checkbox
                         id={category?._id}
-                        className="mr-3"
+                        className="mr-3 border-white"
                         checked={selectedParentid.includes(category?._id)}
                         onClick={() => {
                           onSelectParentCat(category?._id);
@@ -102,8 +102,8 @@ const FilterHTML = ({
                           onClick={() => onSelectParentCat(category._id)}
                           className={`text-[14px] text-black font-normal ${
                             selectedParentid.includes(category?._id)
-                              ? "text-secondary"
-                              : "text-brown "
+                              ? "text-white"
+                              : "text-white "
                           }`}
                         >
                           {category.name}
@@ -118,9 +118,9 @@ const FilterHTML = ({
                           }}
                         >
                           {openCategory === category.name ? (
-                            <ChevronUp size={16} className="" />
+                            <ChevronUp size={16} className="text-white" />
                           ) : (
-                            <ChevronDown size={16} className="" />
+                            <ChevronDown size={16} className="text-white" />
                           )}
                         </div>
                       </button>
@@ -136,7 +136,7 @@ const FilterHTML = ({
                               >
                                 <Checkbox
                                   id={childCat?._id}
-                                  className="mr-3"
+                                  className="mr-3 text-white border-white"
                                   checked={selectedCats.includes(childCat?._id)}
                                   onClick={() => onSelectCat(childCat?._id)}
                                 />
@@ -144,8 +144,8 @@ const FilterHTML = ({
                                   key={childCat.name}
                                   className={`text-[14px]  font-normal py-[5px] ${
                                     selectedCats.includes(childCat?._id)
-                                      ? "text-secondary"
-                                      : "text-black"
+                                      ? "text-white"
+                                      : "text-white"
                                   } `}
                                   onClick={() => onSelectCat(childCat?._id)}
                                 >
@@ -174,7 +174,7 @@ const FilterHTML = ({
                 ) : (
                   <div className="flex items-center flex-row mt-3 mb-4">
                     <button
-                      className="text-sm text-secondary "
+                      className="text-sm text-white "
                       onClick={handleShowMoreCats}
                     >
                       Show More

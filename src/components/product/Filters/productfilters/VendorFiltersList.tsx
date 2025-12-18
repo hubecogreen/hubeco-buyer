@@ -247,11 +247,11 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                         <div className="w-full flex justify-between items-center">
                           <div className="flex items-center flex-row mt-3 mb-4">
                             <MdKeyboardDoubleArrowLeft
-                              color={"#A92449"}
+                              color={"white"}
                               size={18}
                             />
                             <button
-                              className="text-sm text-secondary "
+                              className="text-sm text-white "
                               onClick={handleShowLessVendors}
                             >
                               Show Less
@@ -259,13 +259,13 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                           </div>
                           <div className="flex items-center flex-row mt-3 mb-4">
                             <button
-                              className="text-sm text-secondary "
+                              className="text-sm text-white "
                               onClick={handleShowMoreVendors}
                             >
                               Show More
                             </button>
                             <MdKeyboardDoubleArrowRight
-                              color={"#A92449"}
+                              color={"white"}
                               size={18}
                             />
                           </div>
@@ -274,13 +274,13 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                     ) : (
                       <div className="flex items-center flex-row mt-3 mb-4">
                         <button
-                          className="text-sm text-secondary "
+                          className="text-sm text-white "
                           onClick={handleShowMoreVendors}
                         >
                           Show More
                         </button>
                         <MdKeyboardDoubleArrowRight
-                          color={"#A92449"}
+                          color={"white"}
                           size={18}
                         />
                       </div>
@@ -288,9 +288,9 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                   </>
                 ) : (
                   <div className="flex items-center flex-row mt-3 mb-4">
-                    <MdKeyboardDoubleArrowLeft color={"#A92449"} size={18} />
+                    <MdKeyboardDoubleArrowLeft color={"white"} size={18} />
                     <button
-                      className="text-sm text-secondary "
+                      className="text-sm text-white "
                       onClick={handleShowLessVendors}
                     >
                       Show Less

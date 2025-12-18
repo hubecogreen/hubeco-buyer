@@ -341,7 +341,7 @@ useEffect(() => {
         link1={{ name: "Home", href: "/" }}
         link2={{ name: h1Tag, href: "/products" }}
       />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 px-4 md:px-24 md:pt-16 pt-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 px-4 md:px-24 md:pt-16 pt-6 bg-cream">
       {/* Desktop Filter Sidebar */}
       <div className="hidden lg:block col-span-3">
         <FiltersSidebar

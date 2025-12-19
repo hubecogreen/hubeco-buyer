@@ -93,7 +93,7 @@ const BlogsSection = () => {
 
           {/* RIGHT ARROW */}
           <button
-            className="swiper-button-next-custom absolute right-[-30px] top-1/2 
+            className="swiper-button-next-custom absolute md:right-[-30px] right-[-10px]  top-1/2 
                        -translate-y-1/2 z-20 md:w-[70px] md:h-[70px] w-[60px] h-[60px]
                        rounded-full bg-white shadow flex items-center justify-center"
           >

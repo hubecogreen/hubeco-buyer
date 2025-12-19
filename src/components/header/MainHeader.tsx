@@ -474,33 +474,33 @@ const Header: React.FC<HeaderProps> = () => {
     <>
       <header
         ref={headerRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky} md:px-[100px] bg-cream md:h-[80px]`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky} md:px-[100px] bg-cream md:h-[79px] flex items-center justify-center`}
       >
         <div
-          className={`hidden md:block w-full justify-center items-center  h-auto md:h-[80px] lg:h-22 px-4 pt-2 pb-3 md:pb-20 lg:pb-22 ${styles.stickyHeader
+          className={`hidden md:block  justify-center items-center    ${styles.stickyHeader
             } ${isSearchFocused ? styles.searchFocused : ""}`}
         >
-          <div className="flex justify-between items-center py-2 md:py-3 lg:py-4 min-w-0">
+          <div className="flex justify-between items-center ">
             {/* Left side - Fixed elements (never affected) */}
             <div
               className={`flex items-center min-w-0 ${token
-                ? "space-x-3 md:space-x-4 lg:space-x-8"
-                : "space-x-2 md:space-x-3 lg:space-x-6"
+                ? "space-x-3 "
+                : "space-x-2"
                 }`}
             >
              
               {/* Mobile Logo */}
               <Link
                 href="/"
-                className={`${styles.logo} w-48 sm:w-64 h-8 md:h-9 lg:h-10 xl:h-12 hover:cursor-pointer flex-shrink-0 min-w-0 lg:pb-2`}
-                style={{ minWidth: "175px", maxWidth: "180px" }}
+                className={`${styles.logo}  hover:cursor-pointer flex-shrink-0 min-w-0 lg:pb-2`}
+               
               >
                 <Image
                   src="/images/home/header/hubeco-logo.png"
-                  className="h-[55px] w-[242px] md:h-9 lg:h-10 xl:h-12 w-auto object-contain"
+                  className="!h-[72px] !w-[255px] object-contain"
                   alt="Hubeco Logo"
-                  width={242}
-                  height={55}
+                  width={255}
+                  height={72}
                   onError={(e) => {
                     e.currentTarget.src = "/images/product-placeholder.webp";
                   }}
@@ -593,7 +593,7 @@ const Header: React.FC<HeaderProps> = () => {
                           isExpanded={true}
                           onFocus={handleSearchFocus}
                           onBlur={handleSearchBlur}
-                          className="w-full bg-red-100"
+                          className="w-[288px] bg-red-100"
                           value={searchValue}
                           onChange={(value) => setSearchValue(value)}
                           placeholder={
@@ -854,14 +854,14 @@ const Header: React.FC<HeaderProps> = () => {
                 <div className="flex justify-between items-center">
                   <CustomButton
                     title="Submit Enquiry"
-                    className="text-[16px] bg-secondaryLight px-4 lg:px-2 h-12 mr-[15px] hidden lg:flex text-white "
+                    className="text-[16px] bg-secondaryLight py-[12px] px-[13px]  h-12 m-[10px] hidden lg:flex text-white w-[145px] "
                   
                     hoverBgColor=""
                     onPress={() => router.push('/contact')}
                   />
                   <CustomButton
                     title="Login / SignUp"
-                    className="text-[16px] bg-white text-secondaryLight border-2 border-secondaryLight px-4 lg:px-2  h-12 ml-[15px] hidden lg:flex  font-medium"
+                    className="text-[16px] bg-white text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
                  
                     hoverBgColor=""
                     onPress={() => setShowLoginPopup(true)}
@@ -957,7 +957,7 @@ const Header: React.FC<HeaderProps> = () => {
 
 
         {/* MOBILE HEADER */}
-<div className="md:hidden w-full px-4 py-3 bg-cream" >
+<div className="md:hidden w-full mx-[10px] p-2 bg-cream border-[1px] border-gray-200 shadow-sm h-[122px]" >
 
 {/* Row 1: Menu | Logo | Login */}
 <div className="flex items-center justify-between">
@@ -974,8 +974,8 @@ const Header: React.FC<HeaderProps> = () => {
     <Image
       src="/images/home/header/hubeco-logo.png"
       alt="Hubeco Logo"
-      width={160}
-      height={40}
+      width={188}
+      height={43}
       className="object-contain"
     />
   </Link>
@@ -990,7 +990,7 @@ const Header: React.FC<HeaderProps> = () => {
   ) : (
     <CustomButton
     title="Login / SignUp"
-    className="text-[12px] bg-white text-secondaryLight border-2 border-secondaryLight px-4 lg:px-2  md:h-12 h-10   lg:flex  font-medium"
+    className="text-[12px] bg-white text-secondaryLight border-[1px] border-secondaryLight px-4 lg:px-2  md:h-12 h-10   lg:flex  font-medium"
  
     hoverBgColor=""
     onPress={() => setShowLoginPopup(true)}

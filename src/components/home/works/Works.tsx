@@ -5,21 +5,22 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-// Mock components for demo
 interface CustomButtonProps {
   onPress: () => void;
   className: string;
-  customStyles: React.CSSProperties;
+  customStyles?: React.CSSProperties;
   title: string;
   rightIcon: React.ReactNode;
 }
 
-const CustomButton = ({ onPress, className, customStyles, title, rightIcon }: CustomButtonProps) => (
-  <button 
-    onClick={onPress} 
-    className={className}
-    style={customStyles}
-  >
+const CustomButton = ({
+  onPress,
+  className,
+  customStyles,
+  title,
+  rightIcon,
+}: CustomButtonProps) => (
+  <button onClick={onPress} className={className} style={customStyles}>
     <span>{title}</span>
     {rightIcon}
   </button>
@@ -30,70 +31,66 @@ interface ImageProps {
   alt: string;
   width: number;
   height: number;
-  className: string;
+  className?: string;
   [key: string]: any;
 }
 
 const Image = ({ src, alt, width, height, className, ...props }: ImageProps) => (
-  <img src={src} alt={alt} width={width} height={height} className={className} {...props} />
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    className={className}
+    {...props}
+  />
 );
 
 const WorksSection = () => {
   const [showBuyer, setShowBuyer] = useState(true);
 
-  const handleBuyerClick = useCallback(() => {
-    setShowBuyer(true);
-  }, []);
-
-  const handleVendorClick = useCallback(() => {
-    setShowBuyer(false);
-  }, []);
+  const handleBuyerClick = useCallback(() => setShowBuyer(true), []);
+  const handleVendorClick = useCallback(() => setShowBuyer(false), []);
 
   const buyerContent = useMemo(
     () => (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pt-5 max-[768px]:grid-cols-2 max-[768px]:gap-3 max-[768px]:pt-5">
-        {/* BOX 1 */}
-        <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-primary hover:shadow-md transition h-[215px] w-[300px] max-[768px]:w-full max-[768px]:h-[180px] max-[768px]:px-3 max-[768px]:pt-5 max-[768px]:pb-3">
-          <div className="flex flex-col gap-5 max-[768px]:gap-3">
-            <Image src="/images/home/howitwork/search-icon.png" alt="search-icon" height={48} width={48} className="w-[48px] h-[48px]"/>
-            {/* <h6 className="font-medium text-[22px] text-black max-[768px]:text-[14px] max-[768px]:leading-tight">Browse Products</h6> */}
-            <p className="text-[18px] leading-6 text-lightGraytext max-[768px]:text-[11px] max-[768px]:leading-[1.3]">
-                  Filter products by material, specs or category            </p>
+      <div className="grid grid-cols-2 md:grid-cols-2 gap-3 pt-5">
+        {[
+          {
+            img: "/images/home/howitwork/search-icon.png",
+            text: "Filter products by material, specs or category",
+          },
+          {
+            img: "/images/home/howitwork/correct-icon.png",
+            text: "Select products and request quotes from verified suppliers.",
+          },
+          {
+            img: "/images/home/howitwork/cart-icon.png",
+            text: "Approve orders and track CO₂ savings",
+          },
+          {
+            img: "/images/home/howitwork/recycle-icon.png",
+            text: "Build with curated green materials",
+          },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-2 border-primary h-[180px] w-full md:px-5 md:pt-10 md:pb-5 md:h-[215px] md:w-[300px]"
+          >
+            <div className="flex flex-col gap-3 md:gap-5">
+              <Image
+                src={item.img}
+                alt="icon"
+                width={48}
+                height={48}
+                className="w-8 h-8 md:w-12 md:h-12"
+              />
+              <p className="text-[11px] leading-snug md:text-[18px] md:leading-6 text-lightGraytext">
+                {item.text}
+              </p>
+            </div>
           </div>
-        </div>
-
-        {/* BOX 2 */}
-        <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-primary hover:shadow-md transition  h-[215px] w-[300px] max-[768px]:w-full max-[768px]:h-[180px] max-[768px]:px-3 max-[768px]:pt-5 max-[768px]:pb-3">
-          <div className="flex flex-col gap-5 max-[768px]:gap-3">
-            <Image src="/images/home/howitwork/correct-icon.png" alt="correct-icon" height={48} width={48} className="w-[48px] h-[48px]"/>
-            {/* <h6 className="font-medium text-[22px] text-black max-[768px]:text-[14px] max-[768px]:leading-tight">Request Quotations</h6> */}
-            <p className="text-[18px] leading-6 text-lightGraytext max-[768px]:text-[11px] max-[768px]:leading-[1.3]">
-              Select products and request competitive quotes from verified suppliers.
-            </p>
-          </div>
-        </div>
-
-        {/* BOX 3 */}
-        <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-primary hover:shadow-md transition  h-[215px] w-[300px] max-[768px]:w-full max-[768px]:h-[180px] max-[768px]:px-3 max-[768px]:pt-5 max-[768px]:pb-3">
-          <div className="flex flex-col gap-5 max-[768px]:gap-3">
-            <Image src="/images/home/howitwork/cart-icon.png" alt="cart-icon" height={48} width={48} className="w-[48px] h-[48px]"/>
-            {/* <h6 className="font-medium text-[22px] text-black max-[768px]:text-[14px] max-[768px]:leading-tight">Procure & Track Impact</h6> */}
-            <p className="text-[18px] leading-6 text-lightGraytext max-[768px]:text-[11px] max-[768px]:leading-[1.3]">
-              Approve orders and monitor CO₂ emissions using sustainable materials.
-            </p>
-          </div>
-        </div>
-
-        {/* BOX 4 */}
-        <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-primary hover:shadow-md transition  h-[215px] w-[300px] max-[768px]:w-full max-[768px]:h-[180px] max-[768px]:px-3 max-[768px]:pt-5 max-[768px]:pb-3">
-          <div className="flex flex-col gap-5 max-[768px]:gap-3">
-            <Image src="/images/home/howitwork/recycle-icon.png" alt="recycle-icon" height={48} width={48} className="w-[48px] h-[48px]"/>
-            {/* <h6 className="font-medium text-[22px] text-black max-[768px]:text-[14px] max-[768px]:leading-tight">Build Sustainably</h6> */}
-            <p className="text-[18px] leading-6 text-lightGraytext max-[768px]:text-[11px] max-[768px]:leading-[1.3]">
-              Build eco-friendly structures using our curated green materials.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     ),
     []
@@ -101,133 +98,132 @@ const WorksSection = () => {
 
   const vendorContent = useMemo(
     () => (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pt-5 max-[768px]:grid-cols-2 max-[768px]:gap-3 max-[768px]:pt-5">
-        {/* BOX 1 */}
-        <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px] max-[768px]:w-full max-[768px]:h-[180px] max-[768px]:px-3 max-[768px]:pt-5 max-[768px]:pb-3">
-          <div className="flex flex-col gap-5 max-[768px]:gap-3">
-            <Image src="/images/home/howitwork/user-icon.png" alt="registration" height={52} width={52} className="max-[768px]:w-8 max-[768px]:h-8"/>
-            {/* <h6 className="font-medium text-[22px] text-black max-[768px]:text-[14px] max-[768px]:leading-tight">Registration</h6> */}
-            <p className="text-[18px] leading-6 text-lightGraytext max-[768px]:text-[11px] max-[768px]:leading-[1.3]">
-              Sign up quickly with our simple registration process to become a vendor on our platform.
-            </p>
+      <div className="grid grid-cols-2 md:grid-cols-2 gap-3 pt-5">
+        {[
+          {
+            img: "/images/home/howitwork/user-icon.png",
+            text: "Sign up easily to become a vendor.",
+          },
+          {
+            img: "/images/home/howitwork/cloud-icon.png",
+            text: "List products with specs, certifications and prices.",
+          },
+          {
+            img: "/images/home/howitwork/shop-icon.png",
+            text: "Reach buyers and receive RFQ’s.",
+          },
+          {
+            img: "/images/home/howitwork/graph-icon.png",
+            text: "Track sales and revenue in your vendor dashboard.",
+          },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-2 border-secondary h-[180px] w-full md:px-5 md:pt-10 md:pb-5 md:h-[215px] md:w-[300px]"
+          >
+            <div className="flex flex-col gap-3 md:gap-5">
+              <Image
+                src={item.img}
+                alt="icon"
+                width={48}
+                height={48}
+                className="w-8 h-8 md:w-12 md:h-12"
+              />
+              <p className="text-[11px] leading-snug md:text-[18px] md:leading-6 text-lightGraytext">
+                {item.text}
+              </p>
+            </div>
           </div>
-        </div>
-
-        {/* BOX 2 */}
-        <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px] max-[768px]:w-full max-[768px]:h-[180px] max-[768px]:px-3 max-[768px]:pt-5 max-[768px]:pb-3">
-          <div className="flex flex-col gap-5 max-[768px]:gap-3">
-            <Image src="/images/home/howitwork/cloud-icon.png" alt="upload-products" height={52} width={52} className="max-[768px]:w-8 max-[768px]:h-8"/>
-            {/* <h6 className="font-medium text-[22px] text-black max-[768px]:text-[14px] max-[768px]:leading-tight">Upload Products</h6> */}
-            <p className="text-[18px] leading-6 text-lightGraytext max-[768px]:text-[11px] max-[768px]:leading-[1.3]">
-              Easily list your products with detailed specifications, certifications, sustainability data, images and prices
-            </p>
-          </div>
-        </div>
-
-        {/* BOX 3 */}
-        <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px] max-[768px]:w-full max-[768px]:h-[180px] max-[768px]:px-3 max-[768px]:pt-5 max-[768px]:pb-3">
-          <div className="flex flex-col gap-5 max-[768px]:gap-3">
-            <Image src="/images/home/howitwork/shop-icon.png" alt="start-selling" height={52} width={52} className="max-[768px]:w-8 max-[768px]:h-8"/>
-            {/* <h6 className="font-medium text-[22px] text-black max-[768px]:text-[14px] max-[768px]:leading-tight">Start Selling</h6> */}
-            <p className="text-[18px] leading-6 text-lightGraytext max-[768px]:text-[11px] max-[768px]:leading-[1.3]">
-              Reach a broad audience and receive quotation requests from active buyers.
-            </p>
-          </div>
-        </div>
-
-        {/* BOX 4 */}
-        <div className="flex items-start px-5 pt-10 pb-5 rounded-xl border-2 border-secondary hover:shadow-md transition h-[330px] w-[290px] max-[768px]:w-full max-[768px]:h-[180px] max-[768px]:px-3 max-[768px]:pt-5 max-[768px]:pb-3">
-          <div className="flex flex-col gap-5 max-[768px]:gap-3">
-            <Image src="/images/home/howitwork/graph-icon.png" alt="monitor-sales" height={42} width={42} className="max-[768px]:w-8 max-[768px]:h-8"/>
-            {/* <h6 className="font-medium text-[22px] text-black max-[768px]:text-[14px] max-[768px]:leading-tight">Monitor Sales & Revenue</h6> */}
-            <p className="text-[18px] leading-6 text-lightGraytext max-[768px]:text-[11px] max-[768px]:leading-[1.3]">
-              Track your sales performance and revenue analytics from your comprehensive vendor dashboard
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     ),
     []
   );
 
   return (
-    <section className="relative md:flex block max-w-7xl mx-auto items-start h-fit justify-center bg-cream max-[768px]:block max-[768px]:px-4">
+    <section className="relative block px-4 bg-cream max-w-7xl mx-auto md:flex md:px-0">
       <Image
         src="/images/home/latest/Vector.webp"
         alt="Center Vector"
-        width={900}
+        width={700}
         height={300}
-        className="absolute left-0 bottom-0 pointer-events-none opacity-80 max-[768px]:hidden"
+        className="hidden md:block absolute left-0 bottom-0 opacity-80 pointer-events-none"
       />
 
-      <div className="md:w-1/2 md:pt-14 pt-8 pr-2 md:pr-10 max-[768px]:w-full max-[768px]:pr-0 max-[768px]:pt-6">
-        <div className="">
-            <h2 className="text-center md:text-left text-[28px] pt-5 md:text-[43px] font-normal text-brown mt-30 pb-[20px] max-[768px]:text-center  max-[768px]:pt-0 max-[768px]:pb-3">
-            How it Works
-            </h2>
-          <p className="md:text-[18px] text-md  text-lightGraytext leading-[30px] w-[390px] h-[120px] mb-[45px] max-[768px]:w-full max-[768px]:h-auto max-[768px]:text-[12px] max-[768px]:leading-[1.5] max-[768px]:pt-0 max-[768px]:mb-4">
-            We are passionate about driving the <br className="md:block hidden"/>
-            transition towards sustainable living by <br className="md:block hidden"/>
-            providing eco-friendly construction <br className="md:block hidden"/>
-            materials for both B2B and B2C markets.
-          </p>
+      <div className="w-full pt-6 md:w-1/2 md:pt-14 md:pr-10">
+        <h2 className="text-center text-[28px] text-brown pb-3 md:text-left md:text-[43px] md:pb-5">
+          How it Works
+        </h2>
 
-          <div className="relative md:block items-center justify-start mb-5 md:mb-0 z-20 mt-10 max-[768px]:mt-4 max-[768px]:flex max-[768px]:gap-3">
-            <CustomButton
-              onPress={handleBuyerClick}
-              className={`
-                flex items-center justify-between 
-                max-w-xs rounded-2xl border 
-                transition-all mb-[25px]
-                ${showBuyer 
-                  ? "border-primary text-white bg-primary shadow-[0px_6px_20px_rgba(67,151,135,0.45)]" 
-                  : "border-primary text-primary bg-white shadow-[0px_4px_12px_rgba(67,151,135,0.25)] hover:shadow-[0px_4px_16px_rgba(67,151,135,0.35)]"
-                }
-                font-bold text-[30px]
-                max-[768px]:text-[16px] max-[768px]:mb-0 max-[768px]:flex-1 max-[768px]:justify-center !px-[32px] !py-[22px] w-[306px]
-              `}
-              // customStyles={{ 
-              //   padding: typeof window !== 'undefined' && window.innerWidth < 768 ? "12px 16px" : "22px 62px", 
-              //   width: typeof window !== 'undefined' && window.innerWidth < 768 ? "auto" : "384px" 
-              // }}
-              title="Buyer"
-              rightIcon={
-                showBuyer 
-                  ? <Image src="/images/home/howitwork/white-arrao-icon.png" alt="white arrow" width={30} height={30} className="max-[768px]:w-5 max-[768px]:h-5 md:block hidden"/>
-                  : <Image src="/images/home/howitwork/green-arrow-icon.png" alt="green arrow" width={30} height={30} className="max-[768px]:w-5 max-[768px]:h-5 md:block hidden"/>
-              }
-            />
+        <p className="text-[12px] leading-relaxed text-lightGraytext mb-4 md:text-[18px] md:leading-[30px] md:w-[390px] md:mb-10">
+          We are passionate about driving the transition towards sustainable
+          living by providing eco-friendly construction materials for both B2B
+          and B2C markets.
+        </p>
 
-            <CustomButton
-              onPress={handleVendorClick}
-              className={`
-                flex items-center justify-between 
-                max-w-xs rounded-2xl border 
-                transition-all
-                ${!showBuyer 
-                  ? "border-secondary text-white bg-secondary shadow-[0px_6px_20px_rgba(169,36,73,0.45)]" 
-                  : "border-secondary text-secondary bg-white shadow-[0px_4px_12px_rgba(169,36,73,0.25)] hover:shadow-[0px_4px_16px_rgba(169,36,73,0.35)]"
-                }
-                font-bold text-[34px]
-                max-[768px]:text-[16px] max-[768px]:flex-1 max-[768px]:justify-center max-[768px]:gap-2 max-[768px]:py-3 !px-[32px] !py-[22px] w-[306px]
-              `}
-              // customStyles={{ 
-              //   padding: typeof window !== 'undefined' && window.innerWidth < 768 ? "12px 16px" : "22px 62px", 
-              //   width: typeof window !== 'undefined' && window.innerWidth < 768 ? "auto" : "384px" 
-              // }}
-              title="Vendor"
-              rightIcon={
-                !showBuyer 
-                  ? <Image src="/images/home/howitwork/white-arrao-icon.png" alt="white arrow" width={30} height={30} className="max-[768px]:w-5 max-[768px]:h-5 md:block hidden"/>
-                  : <Image src="/images/home/howitwork/red-arrow-icon.png" alt="red arrow" width={30} height={30} className="max-[768px]:w-5 max-[768px]:h-5 md:block hidden"/>
-              }
-            />
-          </div>
+        <div className="flex gap-3 mt-4 md:block md:mt-10">
+          <CustomButton
+            onPress={handleBuyerClick}
+            className={`flex items-center justify-center gap-2 rounded-2xl border font-bold w-full py-3 text-[16px] md:w-[306px] md:py-[22px] h-[60px] md:text-[30px] md:justify-between mb-0 md:mb-6 ${
+              showBuyer
+                ? "bg-primary text-white border-primary"
+                : "bg-white text-primary border-primary"
+            }`}
+            title="Buyer"
+            rightIcon={
+              showBuyer ? (
+                <Image
+                  src="/images/home/howitwork/white-arrao-icon.png"
+                  alt="arrow"
+                  width={30}
+                  height={30}
+                  className="hidden md:block"
+                />
+              ) : (
+                <Image
+                  src="/images/home/howitwork/green-arrow-icon.png"
+                  alt="arrow"
+                  width={30}
+                  height={30}
+                  className="hidden md:block"
+                />
+              )
+            }
+          />
+
+          <CustomButton
+            onPress={handleVendorClick}
+            className={`flex items-center justify-center gap-2 rounded-2xl border font-bold w-full py-3 text-[16px] md:w-[306px] md:py-[22px] h-[60px] md:text-[30px] md:justify-between ${
+              !showBuyer
+                ? "bg-secondary text-white border-secondary"
+                : "bg-white text-secondary border-secondary"
+            }`}
+            title="Vendor"
+            rightIcon={
+              !showBuyer ? (
+                <Image
+                  src="/images/home/howitwork/white-arrao-icon.png"
+                  alt="arrow"
+                  width={30}
+                  height={30}
+                  className="hidden md:block"
+                />
+              ) : (
+                <Image
+                  src="/images/home/howitwork/red-arrow-icon.png"
+                  alt="arrow"
+                  width={30}
+                  height={30}
+                  className="hidden md:block"
+                />
+              )
+            }
+          />
         </div>
       </div>
 
-      <div className="md:w-1/2 md:pl-10 md:pt-14 pt-8 max-[768px]:w-full max-[768px]:pl-0 max-[768px]:pt-4">
-        <div className="w-full">{showBuyer ? buyerContent : vendorContent}</div>
+      <div className="w-full pt-4 md:w-1/2 md:pt-14 md:pl-10">
+        {showBuyer ? buyerContent : vendorContent}
       </div>
     </section>
   );

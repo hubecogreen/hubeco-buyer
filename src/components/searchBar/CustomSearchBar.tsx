@@ -451,7 +451,7 @@ useEffect(() => {
           </div>
         )}
          <span className="absolute inset-y-0 right-3 top-[6px] flex items-center text-fontGray bg-primary w-[34px] h-[34px] rounded-md justify-center  ">
-        <Search size={16} color="#ffffff" className="text-secondary" />
+        <Search size={18} color="#ffffff"  />
       </span>
       </div>
 

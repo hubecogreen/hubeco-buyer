@@ -33,7 +33,7 @@ const config = {
         black: "#000000",
         white: "#ffffff",
         gray: "#8C8C8C",
-        primary: "#439787",
+        primary: "#109989",
         secondary: "#A92449",
         secondaryLight:"#BB0444",
         hoverBg: "#2F318D",

@@ -474,7 +474,7 @@ const Header: React.FC<HeaderProps> = () => {
     <>
       <header
         ref={headerRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky} md:px-[100px] bg-cream md:h-[79px] flex items-center justify-center`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky} md:px-[100px] bg-cream md:h-[79px] flex items-center justify-center shadow-md`}
       >
         <div
           className={`hidden md:block  justify-center items-center    ${styles.stickyHeader
@@ -956,8 +956,66 @@ const Header: React.FC<HeaderProps> = () => {
         </div>
 
 
+
+
+        {/* ================= TABLET HEADER ONLY ================= */}
+<div className="hidden sm:flex md:hidden w-full items-center gap-3 px-4 h-[72px] bg-cream border-b">
+
+{/* Menu */}
+<VscMenu
+  className="text-black cursor-pointer"
+  size={22}
+  onClick={toggleMenu}
+/>
+
+{/* Logo */}
+<Link href="/" className="flex-shrink-0">
+  <Image
+    src="/images/home/header/hubeco-logo.png"
+    alt="Hubeco Logo"
+    width={140}
+    height={40}
+    className="object-contain"
+  />
+</Link>
+
+{/* Search */}
+<div className="flex-1">
+  <SearchBar
+    isExpanded={true}
+    onFocus={handleSearchFocus}
+    onBlur={handleSearchBlur}
+    value={searchValue}
+    onChange={(value) => setSearchValue(value)}
+    placeholder={
+      rotatingPlaceholders[currentPlaceholderIndex] ||
+      "Search for Products..."
+    }
+  />
+</div>
+
+{/* Submit Enquiry */}
+<CustomButton
+  title="Submit Enquiry"
+  className="bg-secondaryLight text-white h-10 px-4 text-sm"
+  onPress={() => router.push("/contact")}
+/>
+
+{/* Login / Signup */}
+{!token && (
+  <CustomButton
+    title="Login / SignUp"
+    className="bg-white border border-secondaryLight text-secondaryLight h-10 px-4 text-sm"
+    onPress={() => setShowLoginPopup(true)}
+  />
+)}
+
+</div>
+
+
+
         {/* MOBILE HEADER */}
-<div className="md:hidden w-full mx-[10px] p-2 bg-cream border-[1px] border-gray-200 shadow-sm h-[122px]" >
+<div className="md:hidden sm:hidden w-full mx-[10px] p-2 bg-cream border-[1px] border-gray-200 shadow-sm h-[122px]" >
 
 {/* Row 1: Menu | Logo | Login */}
 <div className="flex items-center justify-between">

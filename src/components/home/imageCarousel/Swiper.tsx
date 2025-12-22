@@ -23,7 +23,7 @@ const ImageSlider = () => {
 
 
   return (
-    <section className="relative w-full md:h-[561px] h-[536px] overflow-hidden flex items-center justify-center ">
+    <section className="relative w-full md:h-[561px] h-[536px]  ">
       {/* Full-screen video */}
       <video
         autoPlay
@@ -40,7 +40,7 @@ const ImageSlider = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-black/0 z-10" />
 
       {/* Content Layer */}
-      <div className="relative z-20 w-full h-full flex flex-col justify-center px-[20px] md:px-[120px]  text-white md:translate-y-[-100px] translate-y-[-40px] md:max-w-[1440px] ">
+      <div className="relative z-20 w-full h-full flex flex-col justify-center px-[20px] md:px-[120px]  text-white md:translate-y-[-100px] translate-y-[-40px] md:max-w-[1440px] mx-auto ">
 
         {/* Title + Right Section */}
         <div className="flex flex-col md:flex-row items-start md:items-center  md:gap-[80px] gap-[20px] w-full">
@@ -117,7 +117,7 @@ const ImageSlider = () => {
       transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
       className="bg-primary hover:bg-white hover:text-primary text-white 
                  w-full md:w-auto 
-                 px-[40px] py-[20px] text-[18px] font-medium
+                 md:px-[40px] md:py-[20px] py-[10px] px-[20px] text-[18px] font-medium
                  rounded-md"
       onClick={() => router.push("/products")}
     >
@@ -130,7 +130,7 @@ const ImageSlider = () => {
       transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
       className="bg-primary hover:bg-white hover:text-primary text-white 
                  w-full md:w-auto 
-                 px-[40px] py-[20px]  text-[18px] font-medium
+                 md:px-[40px] md:py-[20px] py-[10px] px-[20px] text-[18px] font-medium
                  rounded-md"
       onClick={() => router.push("/plans")}
     >

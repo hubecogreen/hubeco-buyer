@@ -81,7 +81,7 @@ const CallToActionSection: React.FC = () => {
                         max-[490px]:px-4">
   <CustomButton
    className="
-      bg-[#109989]
+      bg-primary
       text-white 
       text-[20px]
       font-medium  
@@ -106,7 +106,7 @@ const CallToActionSection: React.FC = () => {
 
                <a
    className="
-      bg-[#109989]
+      bg-primary
       text-white 
       text-[20px]
       font-medium 
@@ -116,8 +116,8 @@ const CallToActionSection: React.FC = () => {
       tracking-wide
       cursor-pointer
       md:text-[20px]
-      md:px-8
-      md:py-3
+      md:px-[40px]
+      md:py-[20px]
       max-[490px]:text-[16px]
       max-[490px]:px-4
       max-[490px]:h-[59px]

@@ -76,7 +76,7 @@ const WorksSection = () => {
         ].map((item, i) => (
           <div
             key={i}
-            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-primary h-[140px] w-full md:px-5 md:pt-10 md:pb-5 md:h-[215px] md:w-[300px]"
+            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-primary h-[140px] w-[170px] md:px-5 md:pt-10 md:pb-5 md:h-[215px] md:w-[300px]"
           >
             <div className="flex flex-col gap-3 md:gap-5">
               <Image
@@ -86,7 +86,7 @@ const WorksSection = () => {
                 height={32}
                 className="w-[30px] h-auto md:w-[52px] md:h-auto"
               />
-              <p className="text-[16px] md:text-[24px] md:leading-6 text-brown">
+              <p className="text-[13px] md:text-[24px]  md:leading-6 text-brown">
                 {item.text}
               </p>
             </div>
@@ -130,7 +130,7 @@ const WorksSection = () => {
                 height={32}
                 className="w-[30px] h-auto md:w-[52px] md:h-auto"
               />
-              <p className="text-[16px]  md:text-[24px] md:leading-6 text-brown">
+              <p className="text-[13px]  md:text-[24px] md:leading-6 text-brown">
                 {item.text}
               </p>
             </div>

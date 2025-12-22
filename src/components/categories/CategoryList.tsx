@@ -264,71 +264,48 @@ const CategoryList = () => {
   // -----------------------------
   const CategorySection = ({ title, data }: any) => (
     <div
-      className={`px-4 bg-cream   ${
+      className={`px-4 bg-cream md:max-w-[1440px] mx-auto ${
         title === "Building Systems"
-          ? "md:px-[100px]  p-[20px] md:py-[0px]"
-          : "md:px-[100px] py-[100px]"
+          ? "md:px-[100px] p-[20px] md:py-[0px]"
+          : "md:px-[100px] py-[20px]"
       }`}
     >
-      <div className="md:max-w-[1440px] ">
+      {/* 👇 CENTERED when width > 1440px */}
+      <div className="">
+        
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:justify-between  gap-4 ">
-          <h2 className="text-xl md:text-[43px] md:text-start text-center text-brown ">
+        <div className="flex flex-col md:flex-row md:justify-between gap-4">
+          <h2 className="text-xl md:text-[43px] md:text-start text-center text-brown">
             {title}
           </h2>
-
+  
           <CustomButton
             title="View All"
-            className=" md:flex hidden 
-            bg-[#109989]
-            rounded-[5px]
-            px-[14px] py-[10px]
-            md:!px-[20px] md:!py-[10px]
-            gap-[12px]
-            text-white
-            text-[14px]
-            md:text-[18px]
-            capitalize
-            w-fit
-          "
-            rightIcon={
-              <GoArrowRight className="w-[18px] h-[18px] md:w-[24px] md:h-[24px]" />
-            }
+            className="md:flex hidden bg-[#109989] rounded-[5px]
+            px-[14px] py-[10px] md:!px-[20px] md:!py-[10px]
+            gap-[12px] text-white text-[14px] md:text-[18px]"
+            rightIcon={<GoArrowRight className="w-[18px] h-[18px] md:w-[24px] md:h-[24px]" />}
             onPress={() => router.push("/products")}
           />
         </div>
-
+  
         <hr className="border-t border-primary mx-auto mt-[21px] mb-[10px] md:mb-9" />
-
-        {/* Mobile Scroll / Desktop Grid */}
-        {/* MOBILE – row-wise carousel */}
+  
+        {/* Mobile */}
         {chunkIntoRows(data || []).map((row, idx) => (
           <MobileRowCarousel key={idx} items={row} />
         ))}
-
-        {/* DESKTOP – unchanged grid */}
+  
+        {/* Desktop */}
         <div className="hidden md:grid md:grid-cols-4 md:gap-8">
           {data?.map((cat: any, idx: number) => (
             <CategoryCard key={idx} category={cat} />
           ))}
         </div>
-
-        {/* Empty State */}
-        {data?.length === 0 && (
-          <>
-            <LottieWrapper
-              animationData={animationData}
-              loop
-              className="flex mx-auto justify-center items-center w-[300px] h-[300px] md:w-[400px] md:h-[400px]"
-            />
-            <p className="text-center text-fontGray mt-4 text-base md:text-lg font-bold">
-              No Categories Found.
-            </p>
-          </>
-        )}
       </div>
     </div>
   );
+  
 
   return (
     <>

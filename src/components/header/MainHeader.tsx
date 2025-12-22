@@ -474,10 +474,10 @@ const Header: React.FC<HeaderProps> = () => {
     <>
       <header
         ref={headerRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky} md:px-[100px] bg-cream md:h-[79px] flex items-center justify-center shadow-md `}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky}  bg-cream md:h-[79px]  shadow-md  flex items-center justify-center  `}
       >
         <div
-          className={`hidden md:block  justify-center items-center md:max-w-[1440px]    ${styles.stickyHeader
+          className={`hidden md:block md:max-w-[1440px] mx-auto  md:px-[100px]     ${styles.stickyHeader
             } ${isSearchFocused ? styles.searchFocused : ""}`}
         >
           <div className="flex justify-between items-center ">

@@ -69,10 +69,9 @@ export default function TrustedBy() {
   className="
     mx-auto
     w-full
-    max-w-[1440px]
+    md:max-w-[1440px]
     p-[40px]
-    md:p-[80px]
-    lg:p-[100px]
+    md:p-[100px]
     block
     md:flex
     md:flex-col

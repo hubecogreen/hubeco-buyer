@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function GreenFinancing() {
   return (
-    <section className="w-full bg-[#FFFEF8] flex justify-center">
-      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-[100px] md:h-[795px] flex flex-col items-center justify-center py-8 md:py-0">
+    <section className="w-full bg-[#FFFEF8] ">
+      <div className="w-full md:max-w-[1440px] mx-auto px-4 md:p-[100px]  flex flex-col items-center justify-start py-8 ">
 
         {/* CENTER HEADING */}
         <h2 className="
@@ -17,7 +17,6 @@ export default function GreenFinancing() {
         xs:leading-[40px]
         sm:leading-[43px]
         font-normal
-        text-[#3D3528]
         text-center
         mb-[24px]
         sm:mb-[32px]

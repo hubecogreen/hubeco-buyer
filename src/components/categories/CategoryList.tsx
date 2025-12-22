@@ -267,7 +267,7 @@ const CategoryList = () => {
       className={`px-4 bg-cream md:max-w-[1440px] mx-auto ${
         title === "Building Systems"
           ? "md:px-[100px] p-[20px] md:py-[0px]"
-          : "md:px-[100px] py-[20px]"
+          : "md:px-[100px] py-[20px] md:py-[80px]"
       }`}
     >
       {/* 👇 CENTERED when width > 1440px */}

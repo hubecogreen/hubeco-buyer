@@ -76,7 +76,7 @@ const WorksSection = () => {
         ].map((item, i) => (
           <div
             key={i}
-            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-primary h-[140px] w-[170px] md:px-5 md:pt-10 md:pb-5 md:h-[215px] md:w-[300px]"
+            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-primary h-[140px] w-full md:px-5 md:pt-10 md:pb-5 md:h-[215px] md:w-[300px]"
           >
             <div className="flex flex-col gap-3 md:gap-5">
               <Image

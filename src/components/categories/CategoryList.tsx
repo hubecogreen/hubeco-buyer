@@ -57,6 +57,108 @@ const CategoryList = () => {
     toast.error(msg);
   };
 
+  const chunkIntoRows = (arr: any[], size = 4) => {
+    const rows = [];
+    for (let i = 0; i < arr.length; i += size) {
+      rows.push(arr.slice(i, i + size));
+    }
+    return rows;
+  };
+  const MobileRowCarousel = ({ items }: { items: any[] }) => {
+    const rowRef = React.useRef<HTMLDivElement | null>(null);
+    const [showLeft, setShowLeft] = useState(false);
+    const [showRight, setShowRight] = useState(items.length === 4);
+
+    const CARD_WIDTH = 110; // REQUIRED
+    const SCROLL_BY = CARD_WIDTH;
+
+    const onScroll = () => {
+      if (!rowRef.current) return;
+      const { scrollLeft, scrollWidth, clientWidth } = rowRef.current;
+
+      setShowLeft(scrollLeft > 2);
+      setShowRight(scrollLeft + clientWidth < scrollWidth - 2);
+    };
+
+    const scroll = (dir: "left" | "right") => {
+      if (!rowRef.current) return;
+      rowRef.current.scrollBy({
+        left: dir === "left" ? -SCROLL_BY : SCROLL_BY,
+        behavior: "smooth",
+      });
+    };
+
+    return (
+      <div className="relative md:hidden ">
+        {/* LEFT ARROW */}
+        {showLeft && (
+          <button
+            onClick={() => scroll("left")}
+            className="
+    absolute left-[-8px] top-1/2 -translate-y-1/2 z-20
+    w-[40px] h-[40px]
+    rounded-full
+    bg-black/20
+    flex items-center justify-center
+    
+  "
+          >
+            <Image
+              src="https://framerusercontent.com/images/6tTbkXggWgQCAJ4DO2QEdXXmgM.svg"
+              alt="prev"
+              width={40}
+              height={40}
+            />
+          </button>
+        )}
+
+        {/* RIGHT ARROW */}
+        {showRight && (
+          <button
+            onClick={() => scroll("right")}
+            className="
+    absolute right-[-8px] top-1/2 -translate-y-1/2 z-20
+    w-[40px] h-[40px]
+    rounded-full
+    bg-black/20
+    flex items-center justify-center
+    
+  "
+          >
+            <Image
+              src="https://framerusercontent.com/images/11KSGbIZoRSg4pjdnUoif6MKHI.svg"
+              alt="next"
+              width={40}
+              height={40}
+            />
+          </button>
+        )}
+
+        {/* ROW */}
+        <div
+          ref={rowRef}
+          onScroll={onScroll}
+          className="
+          flex gap-[6px]
+          overflow-x-auto
+          scrollbar-hide
+        "
+          style={{
+    width: "350px",
+    height: "142px",
+    overflow:'hidden'
+  }}
+        >
+          {items.map((cat: any) => (
+            <div key={cat._id} className="shrink-0">
+              <CategoryCard category={cat} />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   // -----------------------------
   // FETCH CATEGORY DATA
   // -----------------------------
@@ -113,26 +215,46 @@ const CategoryList = () => {
     <Link
       href={`/products/${category?.parentCategorySlug}/${category?.seoSlug}?scid=${category?._id}`}
     >
-      <div className="group border rounded-md flex flex-col cursor-pointer hover:bg-primary transition-transform duration-300 hover:scale-105 w-[260px] h-[340px] p-4">
-        <Image
-          src={
-            category?.image
-              ? normalizePath(`${assetURL}/${category.image}`)
-              : FALLBACK_IMAGE
-          }
-          alt={category?.name}
-          width={250}
-          height={250}
-          loading="lazy"
-          onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
-          className="rounded-md object-cover h-[250px] w-full"
-        />
+      <div className="px-[5px] pb-4">
+        <div
+          className="
+    group border rounded-md
+    cursor-pointer
+    flex flex-col items-center
 
-        <p
-          className={`${styles.cattitle} text-[18px] font-medium text-primary mt-4 text-center group-hover:text-white`}
+    w-[95px] h-[124px]
+    md:w-[260px] md:h-[340px]
+    p-[4px] md:p-4
+
+    md:hover:bg-primary
+    md:hover:scale-105
+    md:transition-transform md:duration-300
+  "
         >
-          {category?.name}
-        </p>
+          <Image
+            src={
+              category?.image
+                ? normalizePath(`${assetURL}/${category.image}`)
+                : FALLBACK_IMAGE
+            }
+            alt={category?.name}
+            width={250}
+            height={250}
+            loading="lazy"
+            onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
+            className="
+  rounded-md object-cover
+  w-[84px] h-[84px]
+  md:w-full md:h-[250px]
+"
+          />
+
+          <p
+            className={`${styles.cattitle} text-[8px] md:text-[18px] font-medium  text-primary group-hover:text-white mt-4 text-center `}
+          >
+            {category?.name}
+          </p>
+        </div>
       </div>
     </Link>
   );
@@ -142,20 +264,22 @@ const CategoryList = () => {
   // -----------------------------
   const CategorySection = ({ title, data }: any) => (
     <div
-      className={`px-4 bg-cream flex justify-center ${
+      className={`px-4 bg-cream   ${
         title === "Building Systems"
-          ? "md:px-[100px] md:pb-[100px] md:pt-[43px] p-[20px]"
-          : "md:p-[100px] p-[20px]"
+          ? "md:px-[100px]  p-[20px] md:py-[0px]"
+          : "md:px-[100px] py-[100px]"
       }`}
     >
       <div className="md:max-w-[1440px] ">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:justify-between  gap-4 ">
-        <h2 className="text-xl md:text-[43px] md:text-start text-center text-brown ">{title}</h2>
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:justify-between  gap-4 ">
+          <h2 className="text-xl md:text-[43px] md:text-start text-center text-brown ">
+            {title}
+          </h2>
 
-        <CustomButton
-          title="View All"
-          className=" md:flex hidden 
+          <CustomButton
+            title="View All"
+            className=" md:flex hidden 
             bg-[#109989]
             rounded-[5px]
             px-[14px] py-[10px]
@@ -167,44 +291,41 @@ const CategoryList = () => {
             capitalize
             w-fit
           "
-          rightIcon={
-            <GoArrowRight className="w-[18px] h-[18px] md:w-[24px] md:h-[24px]" />
-          }
-          onPress={() => router.push("/products")}
-        />
-      </div>
-
-      <hr className="border-t border-primary mx-auto mt-5 mb-6 md:mb-9" />
-
-      {/* Mobile Scroll / Desktop Grid */}
-      <div
-        className="
-          flex gap-4 overflow-x-auto pb-4
-          snap-x snap-mandatory
-          scrollbar-hide
-          md:grid md:grid-cols-4 md:gap-8 md:overflow-visible
-        "
-      >
-        {data?.map((cat: any, idx: number) => (
-          <div key={idx} className="snap-start shrink-0 md:shrink">
-            <CategoryCard category={cat} index={idx} />
-          </div>
-        ))}
-      </div>
-
-      {/* Empty State */}
-      {data?.length === 0 && (
-        <>
-          <LottieWrapper
-            animationData={animationData}
-            loop
-            className="flex mx-auto justify-center items-center w-[300px] h-[300px] md:w-[400px] md:h-[400px]"
+            rightIcon={
+              <GoArrowRight className="w-[18px] h-[18px] md:w-[24px] md:h-[24px]" />
+            }
+            onPress={() => router.push("/products")}
           />
-          <p className="text-center text-fontGray mt-4 text-base md:text-lg font-bold">
-            No Categories Found.
-          </p>
-        </>
-      )}
+        </div>
+
+        <hr className="border-t border-primary mx-auto mt-[21px] mb-[10px] md:mb-9" />
+
+        {/* Mobile Scroll / Desktop Grid */}
+        {/* MOBILE – row-wise carousel */}
+        {chunkIntoRows(data || []).map((row, idx) => (
+          <MobileRowCarousel key={idx} items={row} />
+        ))}
+
+        {/* DESKTOP – unchanged grid */}
+        <div className="hidden md:grid md:grid-cols-4 md:gap-8">
+          {data?.map((cat: any, idx: number) => (
+            <CategoryCard key={idx} category={cat} />
+          ))}
+        </div>
+
+        {/* Empty State */}
+        {data?.length === 0 && (
+          <>
+            <LottieWrapper
+              animationData={animationData}
+              loop
+              className="flex mx-auto justify-center items-center w-[300px] h-[300px] md:w-[400px] md:h-[400px]"
+            />
+            <p className="text-center text-fontGray mt-4 text-base md:text-lg font-bold">
+              No Categories Found.
+            </p>
+          </>
+        )}
       </div>
     </div>
   );

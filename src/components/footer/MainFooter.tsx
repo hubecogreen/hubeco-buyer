@@ -41,15 +41,15 @@ const Footer = () => {
           <div className="w-full max-w-[1200px]">
             {/* Mobile */}
             <div className="md:hidden flex flex-col gap-2 px-4">
-              <p className="text-[12px] text-black font-light leading-tight">
+              <p className="text-[12px] text-black font-light leading-tight pb-[40px]">
                 Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt Ltd. All Rights Reserved
               </p>
 
-              <div className="flex flex-wrap gap-2 text-[12px] text-black">
+              <div className="flex flex-wrap gap-2 text-[12px] text-black pb-[40px]">
                 <Link href="/privacy-policy">Privacy Policy</Link> |
                 <Link href="/terms-of-use">Terms of Use</Link> |
                 <Link href="/vendor-terms-sale">Terms of Sale</Link> |
-                <Link href="/returns-refunds-cancellations">Returns & Refunds</Link> |
+                <Link href="/returns-refunds-cancellations">Returns Refunds and Cancellations</Link> |
                 <Link href="/shipping-delivery">Shipping Policy</Link>
               </div>
             </div>
@@ -60,7 +60,7 @@ const Footer = () => {
                 Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt Ltd. All Rights Reserved
               </p>
 
-              <div className="flex gap-1 text-[12px] text-black whitespace-nowrap">
+              <div className="flex gap-1 text-[12px] text-black whitespace-nowrap ">
                 <Link href="/privacy-policy">Privacy Policy</Link> |
                 <Link href="/terms-of-use">Terms of Use</Link> |
                 <Link href="/vendor-terms-sale">Terms of Sale</Link> |
@@ -76,13 +76,13 @@ const Footer = () => {
         >
 
           {/* GREEN DIVIDER */}
-          <div className="w-full flex justify-start md:ml-[460px] pt-6 md:pt-10 mb-4 mt-2 px-4 md:px-0">
+          <div className="w-full flex justify-start md:ml-[460px] pt-6 md:pt-10 mb-4 md:mt-[131px] px-4 md:px-0">
             <div className="w-full md:w-[768px] h-[1px] bg-[#069A66]" />
           </div>
 
 
           {/* FOUR COLUMNS */}
-          <div className="w-full flex flex-col md:flex-row justify-start max-w-[1200px] mx-auto gap-6 md:gap-[60px] pb-10 px-4 md:px-0 md:ml-[460px]">
+          <div className="w-full flex flex-col md:flex-row justify-start max-w-[1200px] mx-auto gap-6 md:gap-[60px] md:pb-[148px] px-4 md:px-0 md:ml-[460px]">
 
             {/* Column 1 - Products */}
             <div className="w-full md:w-[112px]">
@@ -176,9 +176,9 @@ const Footer = () => {
         </div>
 
         {/* BOTTOM LOGO */}
-        <div className="w-full flex mt-5 pb-10 px-4 md:px-0">
-          <div className="max-w-[1200px] md:ml-[10px] w-full flex justify-center md:justify-start">
-            <div className="w-full max-w-[500px] md:max-w-[717px] h-[120px] md:h-[161px] relative">
+        <div className="w-full flex mt-5 pb-[30px] px-4 md:px-0">
+          <div className="max-w-[1200px] md:ml-[10px] w-full flex justify-start md:justify-start">
+            <div className="w-full max-w-[279.38px] md:max-w-[717px] h-[63px] md:h-[161px] relative">
               <Image
                 src="/images/logo3.png"
                 alt="Hubeco Logo"

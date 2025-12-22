@@ -11,6 +11,8 @@ import BlogCard from "@/components/blogCard/BlogCard";
 import * as Webservices from "../../../network/WebServices";
 import * as getEndpoint from "../../../network/EndPoints";
 import { getCookie } from "cookies-next";
+import Image from "next/image";
+
 
 interface Blog {
   _id: string;
@@ -43,15 +45,15 @@ const BlogsSection = () => {
   if (blogs.length === 0) return null;
 
   return (
-    <section className="relative px-4 md:p-[100px] py-16 bg-cream">
+    <section className="relative px-5 md:p-[100px] py-8 bg-cream">
       <div className="flex flex-col md:flex-row justify-between gap-10">
 
         {/* LEFT CONTENT */}
         <div className="w-full md:w-[450px]">
-          <h2 className="text-[32px] md:text-[44px] text-black">
+          <h2 className="text-center md:text-left text-[32px] md:text-[44px] text-black mb-[8px]">
             Blogs
           </h2>
-          <p className="text-black text-[22px] md:text-[33px] mt-2">
+          <p className="text-black text-[22px] md:text-[33px] mt-2 text-center md:text-left ">
             Inspiring insights for a smarter{" "}
             <span className="text-primary">greener</span> future
           </p>
@@ -62,11 +64,16 @@ const BlogsSection = () => {
 
           {/* LEFT ARROW */}
           <button
-            className="swiper-button-prev-custom absolute left-[-30px] top-1/2 
+            className="swiper-button-prev-custom absolute md:left-[-30px] left-[-10px] top-1/2 
                        -translate-y-1/2 z-20 md:w-[70px] md:h-[70px] w-[60px] h-[60px]
                        rounded-full bg-white shadow flex items-center justify-center"
           >
-            ←
+            <Image
+              src="/images/blogs/left.png"
+              alt="Previous"
+              width={90}
+              height={90}
+            />
           </button>
 
           <Swiper
@@ -97,7 +104,12 @@ const BlogsSection = () => {
                        -translate-y-1/2 z-20 md:w-[70px] md:h-[70px] w-[60px] h-[60px]
                        rounded-full bg-white shadow flex items-center justify-center"
           >
-            →
+            <Image
+              src="/images/blogs/right.png"
+              alt="Previous"
+              width={90}
+              height={90}
+            />
           </button>
         </div>
       </div>

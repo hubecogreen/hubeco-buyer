@@ -74,7 +74,7 @@ const ContactSection: React.FC = () => {
 
   return (
     <section
-      className="w-full flex justify-center py-10 font-[Poppins]"
+      className="w-full flex justify-center py-10 p-[8px] font-[Poppins]"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       <div className="max-w-[1200px] w-full flex flex-col md:flex-row">
@@ -97,7 +97,8 @@ const ContactSection: React.FC = () => {
     flex flex-col
     gap-[12px]
     p-[20px]
-
+    text-center
+    md:text-start
     md:flex-1
     md:gap-[22px]
     md:px-[50px] md:py-[50px]
@@ -112,14 +113,14 @@ const ContactSection: React.FC = () => {
             Let’s Build Sustainably Together
           </h2>
 
-          <p className="text-[18px] md:text-[25px] leading-tight">
-            Reach out for certified materials, partnerships and RFQ’s
+          <p className="text-[15px] md:text-[25px] leading-tight">
+            Reach out for certified materials,<br className ="md:hidden"/> partnerships and RFQ’s
           </p>
 
           {!isSubmitted ? (
             <>
               {/* NAME */}
-              <label className="text-[16px] md:text-[19px] font-medium mt-2">
+              <label className="hidden md:block text-[16px] md:text-[19px] font-medium mt-2">
                 Name
               </label>
               <Controller
@@ -146,7 +147,7 @@ const ContactSection: React.FC = () => {
               )}
 
               {/* EMAIL */}
-              <label className="text-[16px] md:text-[19px] font-medium mt-2">
+              <label className="hidden md:block text-[16px] md:text-[19px] font-medium mt-2">
                 Email
               </label>
               <Controller
@@ -173,7 +174,7 @@ const ContactSection: React.FC = () => {
               )}
 
               {/* PHONE */}
-              <label className="text-[16px] md:text-[19px] font-medium mt-2">
+              <label className="hidden md:block text-[16px] md:text-[19px] font-medium mt-2">
                 Phone No
               </label>
               <Controller
@@ -200,7 +201,7 @@ const ContactSection: React.FC = () => {
               )}
 
               {/* MESSAGE */}
-              <label className="text-[16px] md:text-[19px] font-medium mt-2">
+              <label className="hidden md:block text-[16px] md:text-[19px] font-medium mt-2">
                 Message
               </label>
               <Controller
@@ -232,7 +233,8 @@ const ContactSection: React.FC = () => {
               <button
                 onClick={handleSubmit(onSubmit)}
                 className="
-                  group w-full md:w-[572px] h-[55px] md:h-[63px] rounded-[10px] mt-[20px] p-[20px]
+                  group w-[200px] md:w-[572px] h-[60px] md:h-[63px] rounded-[10px] mt-[20px] p-[20px]
+                  mx-auto md:mx-0
                   bg-[linear-gradient(129deg,#F0FDFA_-23%,#109989_24%)]
                   text-white text-[20px] md:text-[25px] font-normal
                   relative overflow-hidden transition-all duration-600

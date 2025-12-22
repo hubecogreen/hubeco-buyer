@@ -1,4 +1,5 @@
 "use client";
+import { autoBatchEnhancer } from "@reduxjs/toolkit";
 import React, { useState, useCallback, useMemo } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -54,7 +55,7 @@ const WorksSection = () => {
 
   const buyerContent = useMemo(
     () => (
-      <div className="grid grid-cols-2 md:grid-cols-2 gap-3 pt-5">
+      <div className="grid grid-cols-2 md:grid-cols-2 gap-[10px] pt-5">
         {[
           {
             img: "/images/home/howitwork/search-icon.png",
@@ -75,17 +76,17 @@ const WorksSection = () => {
         ].map((item, i) => (
           <div
             key={i}
-            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-2 border-primary h-[180px] w-full md:px-5 md:pt-10 md:pb-5 md:h-[215px] md:w-[300px]"
+            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-primary h-[140px] w-full md:px-5 md:pt-10 md:pb-5 md:h-[215px] md:w-[300px]"
           >
             <div className="flex flex-col gap-3 md:gap-5">
               <Image
                 src={item.img}
                 alt="icon"
-                width={48}
-                height={48}
-                className="w-8 h-8 md:w-12 md:h-12"
+               width={52}
+                height={32}
+                className="w-[30px] h-auto md:w-[52px] md:h-auto"
               />
-              <p className="text-[11px] leading-snug md:text-[18px] md:leading-6 text-lightGraytext">
+              <p className="text-[16px] md:text-[24px] md:leading-6 text-brown">
                 {item.text}
               </p>
             </div>
@@ -119,17 +120,17 @@ const WorksSection = () => {
         ].map((item, i) => (
           <div
             key={i}
-            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-2 border-secondary h-[180px] w-full md:px-5 md:pt-10 md:pb-5 md:h-[215px] md:w-[300px]"
+            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-secondary h-[140px] w-full md:px-5 md:pt-10 md:pb-5 md:h-[215px] md:w-[300px]"
           >
             <div className="flex flex-col gap-3 md:gap-5">
               <Image
                 src={item.img}
                 alt="icon"
-                width={48}
-                height={48}
-                className="w-8 h-8 md:w-12 md:h-12"
+                width={52}
+                height={32}
+                className="w-[30px] h-auto md:w-[52px] md:h-auto"
               />
-              <p className="text-[11px] leading-snug md:text-[18px] md:leading-6 text-lightGraytext">
+              <p className="text-[16px]  md:text-[24px] md:leading-6 text-brown">
                 {item.text}
               </p>
             </div>
@@ -141,91 +142,97 @@ const WorksSection = () => {
   );
 
   return (
-    <section className="relative block px-4 bg-cream max-w-7xl mx-auto md:flex md:px-0">
-      <Image
-        src="/images/home/latest/Vector.webp"
-        alt="Center Vector"
-        width={700}
-        height={300}
-        className="hidden md:block absolute left-0 bottom-0 opacity-80 pointer-events-none"
+ <section className="relative block bg-cream mx-auto md:flex md:p-[100px] p-[20px] md:max-w-[1440px] ">
+  {/* Background Image - Positioned to match reference */}
+  <Image
+    src="/images/home/latest/Vector.webp"
+    alt="Center Vector"
+    width={700}
+    height={300}
+    className="hidden md:block absolute left-[600px] top-[365px] -translate-x-3/4 -translate-y-1/2 opacity-80 pointer-events-none z-0"
+  />
+
+  {/* Left Div */}
+  <div className="flex md:flex-row flex-col justify-start md:gap-[162px]">
+  <div className="relative z-10  ">
+    <h2 className="text-center text-[28px] text-brown pb-3 md:text-left md:text-[43px] md:pb-5">
+      How it Works
+    </h2>
+
+    <p className="text-[12px] leading-relaxed text-lightGraytext mb-4 md:text-[18px] md:leading-[30px] md:w-[390px] md:mb-10">
+      We are passionate about driving the transition towards sustainable
+      living by providing eco-friendly construction materials for both B2B
+      and B2C customers.
+    </p>
+
+    <div className="flex gap-3 mt-4 md:block md:mt-10 ">
+      <CustomButton
+        onPress={handleBuyerClick}
+        className={`flex items-center shadow-md shadow-primary justify-center md:w-[380px] md:h-[80px] gap-2 rounded-2xl border font-bold w-full py-3 text-[16px]  md:p-[22px] h-[60px] md:text-[30px] md:justify-between mb-0 md:mb-6 ${
+          showBuyer
+            ? "bg-primary text-white border-primary"
+            : "bg-transparent text-primary border-primary"
+        }`}
+        title="Buyer"
+        rightIcon={
+          showBuyer ? (
+            <Image
+              src="/images/home/howitwork/white-arrao-icon.png"
+              alt="arrow"
+              width={25}
+              height={25}
+              className="hidden md:block"
+            />
+          ) : (
+            <Image
+              src="/images/home/howitwork/green-arrow-icon.png"
+              alt="arrow"
+              width={25}
+              height={25}
+              className="hidden md:block"
+            />
+          )
+        }
       />
 
-      <div className="w-full pt-6 md:w-1/2 md:pt-14 md:pr-10">
-        <h2 className="text-center text-[28px] text-brown pb-3 md:text-left md:text-[43px] md:pb-5">
-          How it Works
-        </h2>
+      <CustomButton
+        onPress={handleVendorClick}
+        className={`flex items-center justify-center shadow-md shadow-secondary md:w-[380px] md:h-[80px] gap-2 rounded-2xl border font-bold w-full py-3 text-[16px]  md:p-[22px] h-[60px] md:text-[30px] md:justify-between ${
+          !showBuyer
+            ? "bg-secondary text-white border-secondary"
+            : "bg-transparent text-secondary border-secondary"
+        }`}
+        title="Vendor"
+        rightIcon={
+          !showBuyer ? (
+            <Image
+              src="/images/home/howitwork/white-arrao-icon.png"
+              alt="arrow"
+              width={25}
+              height={25}
+              className="hidden md:block"
+            />
+          ) : (
+            <Image
+              src="/images/home/howitwork/red-arrow-icon.png"
+              alt="arrow"
+              width={25}
+              height={25}
+              className="hidden md:block"
+            />
+          )
+        }
+      />
+    </div>
+  </div>
 
-        <p className="text-[12px] leading-relaxed text-lightGraytext mb-4 md:text-[18px] md:leading-[30px] md:w-[390px] md:mb-10">
-          We are passionate about driving the transition towards sustainable
-          living by providing eco-friendly construction materials for both B2B
-          and B2C markets.
-        </p>
+  {/* Right Div */}
+  <div className="relative z-10  ">
+    {showBuyer ? buyerContent : vendorContent}
+  </div>
 
-        <div className="flex gap-3 mt-4 md:block md:mt-10">
-          <CustomButton
-            onPress={handleBuyerClick}
-            className={`flex items-center justify-center gap-2 rounded-2xl border font-bold w-full py-3 text-[16px] md:w-[306px] md:py-[22px] h-[60px] md:text-[30px] md:justify-between mb-0 md:mb-6 ${
-              showBuyer
-                ? "bg-primary text-white border-primary"
-                : "bg-white text-primary border-primary"
-            }`}
-            title="Buyer"
-            rightIcon={
-              showBuyer ? (
-                <Image
-                  src="/images/home/howitwork/white-arrao-icon.png"
-                  alt="arrow"
-                  width={30}
-                  height={30}
-                  className="hidden md:block"
-                />
-              ) : (
-                <Image
-                  src="/images/home/howitwork/green-arrow-icon.png"
-                  alt="arrow"
-                  width={30}
-                  height={30}
-                  className="hidden md:block"
-                />
-              )
-            }
-          />
-
-          <CustomButton
-            onPress={handleVendorClick}
-            className={`flex items-center justify-center gap-2 rounded-2xl border font-bold w-full py-3 text-[16px] md:w-[306px] md:py-[22px] h-[60px] md:text-[30px] md:justify-between ${
-              !showBuyer
-                ? "bg-secondary text-white border-secondary"
-                : "bg-white text-secondary border-secondary"
-            }`}
-            title="Vendor"
-            rightIcon={
-              !showBuyer ? (
-                <Image
-                  src="/images/home/howitwork/white-arrao-icon.png"
-                  alt="arrow"
-                  width={30}
-                  height={30}
-                  className="hidden md:block"
-                />
-              ) : (
-                <Image
-                  src="/images/home/howitwork/red-arrow-icon.png"
-                  alt="arrow"
-                  width={30}
-                  height={30}
-                  className="hidden md:block"
-                />
-              )
-            }
-          />
-        </div>
-      </div>
-
-      <div className="w-full pt-4 md:w-1/2 md:pt-14 md:pl-10">
-        {showBuyer ? buyerContent : vendorContent}
-      </div>
-    </section>
+  </div>
+</section>
   );
 };
 

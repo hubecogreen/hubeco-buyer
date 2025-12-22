@@ -58,7 +58,7 @@ const HomePage = () => {
       <div className="blogs-section mx-auto">
         <BlogsSection />
       </div>
-      <div className="contact-section mx-auto pt-[100px] pb-[100px] bg-cream">
+      <div className="contact-section mx-auto   bg-cream">
         <ContactSection />
       </div>
     </div>

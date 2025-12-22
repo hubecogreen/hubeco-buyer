@@ -1159,7 +1159,7 @@ const LoginPopup = ({
                 width={25}
                 height={26}
                 alt="buyer"
-                className="transition group-hover:invert"
+                className="transition group-hover:invert group-hover:brightness-0"
               />
               <span className="text-primary font-medium group-hover:text-white text-[18px] md:text-[24px]">
                 Buyer
@@ -1170,7 +1170,7 @@ const LoginPopup = ({
             <button
               onClick={() => {
                 onOpenChange(false);
-                router.push("/plans");
+                window.location.href = "https://vendor.hubeco.market/login";
               }}
               className="
                 group
@@ -1187,7 +1187,7 @@ const LoginPopup = ({
                 width={25}
                 height={26}
                 alt="vendor"
-                className="transition group-hover:invert"
+                className="transition group-hover:invert group-hover:brightness-0"
               />
               <span className="text-secondary font-medium group-hover:text-white text-[18px] md:text-[24px]">
                 Vendor

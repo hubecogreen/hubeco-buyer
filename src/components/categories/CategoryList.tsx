@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { GoArrowRight } from "react-icons/go";
@@ -31,6 +31,7 @@ const CategoryList = () => {
 
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
 
+  // Redux State
   const categories = useSelector((state: any) => state.masterData.categories);
   const buildingSystemCategories = useSelector(
     (state: any) => state.masterData.buildingSystemCategories
@@ -40,6 +41,9 @@ const CategoryList = () => {
     fetchCategories();
   }, []);
 
+  // -----------------------------
+  // API ERROR HANDLER
+  // -----------------------------
   const handleApiError = (err: any) => {
     const result = err?.response;
     const msg =
@@ -53,6 +57,9 @@ const CategoryList = () => {
     toast.error(msg);
   };
 
+  // -----------------------------
+  // FETCH CATEGORY DATA
+  // -----------------------------
   const fetchCategories = async () => {
     try {
       const result: any = await callApi(
@@ -67,6 +74,7 @@ const CategoryList = () => {
 
       const data = result.data;
 
+      // 1️⃣ Default Categories
       const defaultCategory = data?.[0];
 
       const formattedCategories =
@@ -78,6 +86,7 @@ const CategoryList = () => {
 
       dispatch(saveCategories(formattedCategories));
 
+      // 2️⃣ Building System Categories
       const buildingSystemParent = data.find((c: any) => {
         const name = c?.name?.toLowerCase();
         return name === "building systems" || name === "building system";
@@ -100,19 +109,11 @@ const CategoryList = () => {
   // -----------------------------
   // CATEGORY CARD
   // -----------------------------
-  const CategoryCard = ({ category }: any) => (
+  const CategoryCard = ({ category, index }: any) => (
     <Link
       href={`/products/${category?.parentCategorySlug}/${category?.seoSlug}?scid=${category?._id}`}
     >
-      <div
-        className="
-          group border rounded-md flex flex-col cursor-pointer
-          hover:bg-primary transition-transform duration-300 hover:scale-105
-        
-          h-[160px] md:h-[340px]
-          p-2 md:p-4
-        "
-      >
+      <div className="group border rounded-md flex flex-col cursor-pointer hover:bg-primary transition-transform duration-300 hover:scale-105 w-[260px] h-[340px] p-4">
         <Image
           src={
             category?.image
@@ -124,18 +125,11 @@ const CategoryList = () => {
           height={250}
           loading="lazy"
           onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
-          className="
-            rounded-md object-cover 
-             md:h-[250px] md:w-[250px] w-[84px] h-[84px]
-          "
+          className="rounded-md object-cover h-[250px] w-full"
         />
 
         <p
-          className={`${styles.cattitle}
-            text-[12px] md:text-[18px]
-            font-medium text-primary mt-2 md:mt-4
-            text-center group-hover:text-white
-          `}
+          className={`${styles.cattitle} text-[18px] font-medium text-primary mt-4 text-center group-hover:text-white`}
         >
           {category?.name}
         </p>
@@ -148,34 +142,53 @@ const CategoryList = () => {
   // -----------------------------
   const CategorySection = ({ title, data }: any) => (
     <div
-      className={`px-4 bg-cream ${
+      className={`px-4 bg-cream flex justify-center ${
         title === "Building Systems"
           ? "md:px-[100px] md:pb-[100px] md:pt-[43px] p-[20px]"
           : "md:p-[100px] p-[20px]"
       }`}
     >
+      <div className="md:max-w-[1440px] ">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:justify-between gap-4">
-        <h2 className="text-[27px] md:text-[43px] text-center md:text-start text-brown">
-          {title}
-        </h2>
+      <div className="flex flex-col md:flex-row md:justify-between  gap-4 ">
+        <h2 className="text-xl md:text-[43px] md:text-start text-center text-brown ">{title}</h2>
 
         <CustomButton
           title="View All"
-          className="hidden md:flex bg-[#109989] rounded-[5px]
-            px-[20px] py-[10px] gap-[12px]
-            text-white text-[18px] capitalize w-fit"
-          rightIcon={<GoArrowRight className="w-[24px] h-[24px]" />}
+          className=" md:flex hidden 
+            bg-[#109989]
+            rounded-[5px]
+            px-[14px] py-[10px]
+            md:!px-[20px] md:!py-[10px]
+            gap-[12px]
+            text-white
+            text-[14px]
+            md:text-[18px]
+            capitalize
+            w-fit
+          "
+          rightIcon={
+            <GoArrowRight className="w-[18px] h-[18px] md:w-[24px] md:h-[24px]" />
+          }
           onPress={() => router.push("/products")}
         />
       </div>
 
       <hr className="border-t border-primary mx-auto mt-5 mb-6 md:mb-9" />
 
-      {/* GRID – SAME FOR MOBILE & DESKTOP */}
-      <div className="grid grid-cols-4 gap-3 md:gap-8">
+      {/* Mobile Scroll / Desktop Grid */}
+      <div
+        className="
+          flex gap-4 overflow-x-auto pb-4
+          snap-x snap-mandatory
+          scrollbar-hide
+          md:grid md:grid-cols-4 md:gap-8 md:overflow-visible
+        "
+      >
         {data?.map((cat: any, idx: number) => (
-          <CategoryCard key={idx} category={cat} />
+          <div key={idx} className="snap-start shrink-0 md:shrink">
+            <CategoryCard category={cat} index={idx} />
+          </div>
         ))}
       </div>
 
@@ -185,14 +198,14 @@ const CategoryList = () => {
           <LottieWrapper
             animationData={animationData}
             loop
-            className="flex mx-auto justify-center items-center
-              w-[300px] h-[300px] md:w-[400px] md:h-[400px]"
+            className="flex mx-auto justify-center items-center w-[300px] h-[300px] md:w-[400px] md:h-[400px]"
           />
           <p className="text-center text-fontGray mt-4 text-base md:text-lg font-bold">
             No Categories Found.
           </p>
         </>
       )}
+      </div>
     </div>
   );
 

@@ -8,7 +8,7 @@ export default function ReadyToBuildCTA() {
   const [isProjectFormOpen, setIsProjectFormOpen] = useState(false);
 
   return (
-    <div className="w-full px-[10px] py-[14px]">
+    <div className="w-full px-[10px] py-[5px]">
       <div className="relative w-full max-w-[1440px] mx-auto h-[320px] overflow-hidden rounded-[64px]">
         {/* Background Image */}
         <div className="absolute inset-0">
@@ -34,7 +34,7 @@ export default function ReadyToBuildCTA() {
 
           <button
             onClick={() => setIsProjectFormOpen(true)}
-            className="inline-flex items-center gap-3 bg-[#B90647] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-[16px] sm:text-lg font-semibold hover:bg-[#B90647] transition-all duration-300"
+            className="inline-flex items-center gap-3 bg-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-[16px] sm:text-lg font-semibold hover:bg-primary transition-all duration-300"
           >
             Apply for Green Project Financing
             <GoArrowRight className="text-xl" />

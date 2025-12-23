@@ -384,13 +384,13 @@ useEffect(() => {
           </h1>
           <div className="flex justify-end items-center">
             <div className="h-[40px] md:flex w-full md:w-56 mt-4 md:mt-0 mobile-sm:hidden">
-              <SearchInput
+              {/* <SearchInput
                 customStyles="!top-[0px]"
                 placeholder="Search Product"
                 onChange={handleInputChange}
-              />
+              /> */}
             </div>
-            <div className="h-[40px] md:flex w-full md:w-fit mt-4 md:mt-0 mobile-sm:hidden ml-3">
+            {/* <div className="h-[40px] md:flex w-full md:w-fit mt-4 md:mt-0 mobile-sm:hidden ml-3">
               <Select value={sortBy} onValueChange={handleSelectSortBy}>
                 <SelectTrigger className="select-trigger h-[43px]">
                   <SelectValue placeholder="Sort By" />
@@ -415,7 +415,7 @@ useEffect(() => {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-            </div>
+            </div> */}
           </div>
         </div>
 

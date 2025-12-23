@@ -200,7 +200,7 @@ export default function SimilarProducts({ childIds,currentId }: SimilarProductsP
     <>
      {productsData && productsData.length>0 &&
        (
-    <div className="bg-white  block w-full md:px-20 md:py-12 py-8 px-4 ">
+    <div className="bg-cream  block w-full md:px-20 md:py-12 py-8 px-4 ">
       
             <p className="md:text-[30px] text-black font-bold text-md mb-4">
               Similar Products{" "}

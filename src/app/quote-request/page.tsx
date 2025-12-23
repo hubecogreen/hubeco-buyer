@@ -174,7 +174,7 @@ const QuoteRequest = () => {
   }
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="  bg-cream min-h-screen">
       <head>
         <title>Hubeco | Quote Requests</title>
       </head>

@@ -369,9 +369,9 @@ const QuoteDetails = ({ id }: any) => {
         }}
       />
 
-      <div className="max-w-[1440px] mx-auto px-[40px] mt-0">
+      <div className="max-w-[1440px] mx-auto px-[40px] mt-0 bg-cream">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 bg-white border-b border-[#E5E7EB] shadow-[0px_1px_2px_0px_#0000000D] px-4 md:px-[40px] py-4 md:py-[20px] w-full max-w-[1440px] mx-auto rounded-none">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center  mb-8  border-b border-[#E5E7EB] shadow-[0px_1px_2px_0px_#0000000D] px-4 md:px-[40px] py-4 md:py-[20px] w-full max-w-[1440px] mx-auto rounded-none">
           {/* Left side — Quote ID and Status inline */}
           <div className="flex flex-wrap items-center gap-2 md:gap-3">
             <h1 className="text-lg md:text-[22px] font-bold text-[#2F2B3D] leading-[26px] md:leading-[28px] tracking-[0.2px] break-words">

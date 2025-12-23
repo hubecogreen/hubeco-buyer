@@ -19,7 +19,7 @@ const ProductPreview = (params:any) => {
 if(loading) return <CircularProgress />
 
   return (
-    <div>
+    <div className ="bg-cream ">
       {(productName.length==0 && slug.length!==0) && <ProductDetails slug={slug} />}
     </div>
   );

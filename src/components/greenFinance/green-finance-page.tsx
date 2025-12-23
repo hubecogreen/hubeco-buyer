@@ -11,7 +11,7 @@ export default function GreenFinancingSection() {
 
   return (
     <>
-      <div className="relative w-full h-[500px] overflow-hidden rounded-[48px] mx-auto max-w-[1440px] top-8">
+      <div className="relative w-full h-[500px] overflow-hidden rounded-[48px] mx-auto max-w-[1440px] top-8 ">
         {/* Background Image */}
         <div className="absolute inset-0 m-4">
           <Image
@@ -50,7 +50,7 @@ export default function GreenFinancingSection() {
 
               <button
                 onClick={() => setIsProjectFormOpen(true)}
-                className="flex items-center gap-2 bg-[#B90647] text-white px-6 py-3 rounded-md text-base font-semibold hover:bg-[#B90647] transition"
+                className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-md text-base font-semibold hover:bg-primary transition"
               >
                 Apply for Green Project Financing
                 <GoArrowRight className="text-lg" />

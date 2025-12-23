@@ -1022,7 +1022,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
   // console.log(getMeta("metaDescription", totalProduct),"getMeta");
   return (
-    <div className="bg-white ">
+    <div className=" ">
       <BannerSection
         link1={{ name: "Home", href: "/" }}
         link2={{
@@ -1221,8 +1221,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
                 <div
                   className={`flex items-start ${isLongVariant
-                      ? "justify-between" // long name → wishlist extreme right (desktop & mobile)
-                      : "justify-between md:justify-start gap-3" // short name → desktop: two 50% blocks
+                    ? "justify-between" // long name → wishlist extreme right (desktop & mobile)
+                    : "justify-between md:justify-start gap-3" // short name → desktop: two 50% blocks
                     }`}
                 >
                   <div className={`w-auto ${!isLongVariant ? "md:w-1/2" : "md:w-auto"}`}>
@@ -1382,7 +1382,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
                 {/* MATERIAL + QUANTITY SECTION (GREY BOX WRAPPER) */}
                 <div
-                  className={`bg-white rounded-xl  ${totalProduct?.purchaseType !== "QUOTE"
+                  className={` rounded-xl  ${totalProduct?.purchaseType !== "QUOTE"
                     ? "py-[10px] mt-3 md:px-[0px] px-[0px]"
                     : "md:py-[24px] p-[10px] mt-2"
                     }`}
@@ -1651,37 +1651,31 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         Delivery:
 
                       </p>
-                      <div className="flex h-8 items-center justify-between w-fit  mt-2 md:mt-0">
+                      <div className="relative w-[250px] md:w-[250px]">
                         <Input
                           placeholder="Enter Pincode"
                           onChange={(e: any) => {
-                            if (e?.target?.value.length == 6) {
-                              setPincode(e?.target?.value);
+                            if (e.target.value.length === 6) {
+                              setPincode(e.target.value);
                               setShowMssg(false);
                             } else {
-                              setPincode(e?.target?.value);
+                              setPincode(e.target.value);
                             }
                           }}
-                          className="border border-borderGray text-[16px] text-black rounded-none h-10 md:h-10 md:w-[250px] w-[250px] md:text-md text-xs py-2 md:py-0"
-                        // customStyles={{
-                        //   border: "1px solid #BCBCBC",
-                        //   color: "#333",
-                        // }}
-                        // leftIcon={<CiLocationOn size={20} />}
-
-                        // extraClassnames="w-fit h-8 text-xs rounded-sm"
+                          className="border border-borderGray text-[16px] text-black h-10 pr-16 rounded-none"
                         />
+
                         <Button
-                          title={"Apply"}
                           variant="link"
-                          disabled={pincode.length == 6 ? false : true}
-                          className={`text-secondary relative right-[70px] ${pincode.length == 6 ? "opacity-100" : "opacity-50"
-                            } `}
+                          disabled={pincode.length !== 6}
                           onClick={() => CheckDelivery(pincode)}
+                          className={`absolute right-3 top-1/2 -translate-y-1/2 text-secondary 
+      ${pincode.length === 6 ? "opacity-100" : "opacity-50"}`}
                         >
                           Check
                         </Button>
                       </div>
+
                       {pincode &&
                         pincode.length > 0 &&
                         pincode.length == 6 &&
@@ -2217,39 +2211,39 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
             </div>
           </div>
 
-          <div className="bg-[#F4F4F4] md:flex block w-full md:mx-auto  md:max-w-[87.5%] md:py-6 md:justify-center md:items-center py-8 px-4 rounded-lg">
+          <div className="bg-tailgreen md:flex block w-full md:mx-auto  md:max-w-[87.5%] md:py-6 md:justify-center md:items-center py-8 px-4 rounded-lg">
             <Tabs defaultValue="account" className="w-full">
-              <div className="lg:sticky   bg-[#F4F4F4] top-[128px] overflow-x-scroll no-scrollbar">
+              <div className="   top-[128px] overflow-x-scroll no-scrollbar">
                 <TabsList className="border-b border-borderGray h-[45px] md:max-w-fit rounded-none md:mx-auto md:flex md:justify-center md:items-center pb-0 mb-6 overflow-x-scroll no-scrollbar">
                   <TabsTrigger
                     value="account"
-                    className="px-4 text-md bg-transparent text-[#333333] border-b-2 border-transparent rounded-none data-[state=active]:border-secondary data-[state=active]:text-secondary data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                    className="px-4 text-md bg-transparent text-cream border-b-2 border-transparent rounded-none data-[state=active]:border-white data-[state=active]:text-lg data-[state=active]:text-white  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                   >
                     Overview
                   </TabsTrigger>
                   <TabsTrigger
                     value="specifications"
-                    className="px-4 text-md bg-transparent text-[#333333] border-b-2 border-transparent rounded-none data-[state=active]:border-secondary data-[state=active]:text-secondary data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                    className="px-4 text-md bg-transparent text-cream border-b-2 border-transparent rounded-none data-[state=active]:border-white data-[state=active]:text-lg data-[state=active]:text-white  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                   >
                     Specifications
                   </TabsTrigger>
                   <TabsTrigger
                     value="sustainability"
-                    className="px-4 text-md bg-transparent text-[#333333] border-b-2 border-transparent rounded-none data-[state=active]:border-secondary data-[state=active]:text-secondary data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                    className="px-4 text-md bg-transparent text-cream border-b-2 border-transparent rounded-none data-[state=active]:border-white data-[state=active]:text-lg data-[state=active]:text-white  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                   >
                     Sustainability
                   </TabsTrigger>
                   {attachments && attachments?.length !== 0 && (
                     <TabsTrigger
                       value="attachments"
-                      className="px-4 text-md bg-transparent text-[#333333] border-b-2 border-transparent rounded-none data-[state=active]:border-secondary data-[state=active]:text-secondary data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                    className="px-4 text-md bg-transparent text-cream border-b-2 border-transparent rounded-none data-[state=active]:border-white data-[state=active]:text-lg data-[state=active]:text-white  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                     >
                       Attachments
                     </TabsTrigger>
                   )}
                 </TabsList>
               </div>
-              <TabsContent value="account" className="md:px-[50px]  px-[10px]">
+              <TabsContent value="account" className="md:px-[50px]  px-[10px] text-cream">
                 {/* {specificationData.map((specification:any)=>(
               <div
                 className="text-sm"
@@ -2266,7 +2260,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               </TabsContent>
               <TabsContent
                 value="specifications"
-                className="md:px-[50px] px-[10px]"
+                className="md:px-[50px] px-[10px] text-cream"
               >
                 {specificationData &&
                   specificationData?.map((specification: any) => {
@@ -2299,7 +2293,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               </TabsContent> */}
               <TabsContent
                 value="sustainability"
-                className="md:px-[50px] px-[10px]"
+                className="md:px-[50px] px-[10px] text-cream"
               >
                 {sustainability &&
                   sustainability?.map((sustainability: any) => (
@@ -2318,7 +2312,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               {attachments && attachments?.length !== 0 && (
                 <TabsContent
                   value="attachments"
-                  className="md:px-[50px] px-[10px] w-full"
+                  className="md:px-[50px] px-[10px] w-full text-white"
                 >
                   {attachments && attachments?.length === 0 ? (
                     <>
@@ -2380,7 +2374,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                 }}
                                 loading="lazy"
                               />
-                              <p className="text-black text-lg md:ml-8 ml-1 font-medium">
+                              <p className="text-cream text-lg md:ml-8 ml-1 font-medium">
                                 {attachment?.key}
                               </p>
                             </div>

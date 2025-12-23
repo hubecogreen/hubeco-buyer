@@ -95,7 +95,7 @@ const CategoryList = () => {
           <button
             onClick={() => scroll("left")}
             className="
-    absolute left-[-8px] top-1/2 -translate-y-1/2 z-20
+    absolute left-[10px] top-1/2 -translate-y-1/2 z-20
     w-[40px] h-[40px]
     rounded-full
     bg-black/20
@@ -117,7 +117,7 @@ const CategoryList = () => {
           <button
             onClick={() => scroll("right")}
             className="
-    absolute right-[-8px] top-1/2 -translate-y-1/2 z-20
+    absolute right-[10px] top-1/2 -translate-y-1/2 z-20
     w-[40px] h-[40px]
     rounded-full
     bg-black/20
@@ -144,7 +144,7 @@ const CategoryList = () => {
           scrollbar-hide
         "
           style={{
-    width: "350px",
+    width: '100%',
     height: "142px",
     overflow:'hidden'
   }}
@@ -215,15 +215,15 @@ const CategoryList = () => {
     <Link
       href={`/products/${category?.parentCategorySlug}/${category?.seoSlug}?scid=${category?._id}`}
     >
-      <div className="px-[5px] pb-4">
+      <div className="px-[5px] pb-4 ">
         <div
           className="
-    group border rounded-md
+    group border border-darkcream rounded-md
     cursor-pointer
     flex flex-col items-center
 
     w-[95px] h-[124px]
-    md:w-[260px] md:h-[340px]
+    md:w-[282px] md:h-[369px]
     p-[4px] md:p-4
 
     md:hover:bg-primary
@@ -245,7 +245,7 @@ const CategoryList = () => {
             className="
   rounded-md object-cover
   w-[84px] h-[84px]
-  md:w-full md:h-[250px]
+  md:w-[250px] md:h-[250px]
 "
           />
 
@@ -297,7 +297,7 @@ const CategoryList = () => {
         ))}
   
         {/* Desktop */}
-        <div className="hidden md:grid md:grid-cols-4 md:gap-8">
+        <div className="hidden md:grid md:grid-cols-4 md:gap-4 md:px-[20px]">
           {data?.map((cat: any, idx: number) => (
             <CategoryCard key={idx} category={cat} />
           ))}

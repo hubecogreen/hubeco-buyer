@@ -309,7 +309,7 @@ useEffect(() => {
   };
 
   return (
-    <div className="w-full bg-[#40c4B5] p-4 opacity-90 cursor-pointer text-white ">
+    <div className="w-full bg-tailgreen p-4 opacity-90 cursor-pointer text-white ">
       <div className="flex items-center justify-between mb-4 border-b border-borderGray pb-2">
         <h2 className="text-xl font-medium  ">Filters</h2>
         {Object.entries(selectedFilters).some(([key, filter]) => {

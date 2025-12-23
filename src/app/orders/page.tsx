@@ -185,7 +185,7 @@ const Orders = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-cream min-h-screen">
       <head>
         <title>Home | Orders</title>
         {/* <meta name="description" content='' />
@@ -193,7 +193,7 @@ const Orders = () => {
         {/* <meta name="author" content={productsData?.author.firstName} /> */}
         {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
       </head>
-      <div className="banner-section h-102">
+      <div className="banner-section h-102 ">
       <div className="md:px-20 px-5 py-5 relative h-[200px] flex items-center justify-start text-white bg-cover bg-center bg-[url('/images/about/aboutBanner1.webp')]">
 
           <Link

@@ -244,7 +244,7 @@ const RecentViewCard = ({
 
   return (
     <div
-      className={`bg-white group border border-borderGray rounded-sm overflow-hidden shadow-sm hover:bg-[#E8E8E8] hover:shadow-lg transition-shadow duration-300 cursor-pointer`}
+      className={`bg-cream group border border-borderGray rounded-sm overflow-hidden shadow-sm hover:border-primary hover:shadow-lg transition-shadow duration-300 cursor-pointer`}
     >
       <div className="relative">
         <Image
@@ -293,7 +293,7 @@ const RecentViewCard = ({
               {isClicked ? (
                 <>
                   <IoBookmark
-                    color="#A92449" // Change stroke color on click
+                    color="#109989" // Change stroke color on click
                     className="group-hover:text-white cursor-pointer z-50"
                     size={25}
                     onClick={() => deleteWishlist(product?._id)}
@@ -303,7 +303,7 @@ const RecentViewCard = ({
               ) : (
                 <>
                   <CiBookmark
-                    color="#A92449" // Change stroke color on click
+                    color="#109989" // Change stroke color on click
                     className="group-hover:text-white cursor-pointer z-50"
                     size={25}
                     onClick={() => addToWishlist(product?._id)}

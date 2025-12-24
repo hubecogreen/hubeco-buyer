@@ -474,10 +474,10 @@ const Header: React.FC<HeaderProps> = () => {
     <>
       <header
         ref={headerRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky}  bg-cream md:h-[79px]  shadow-md  flex items-center justify-center  `}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${styles.sticky}  bg-cream lg:h-[79px]  shadow-md  flex items-center justify-center  `}
       >
         <div
-          className={`hidden md:block md:max-w-[1440px] mx-auto  md:px-[100px]     ${styles.stickyHeader
+          className={`hidden md:hidden lg:block lg:max-w-[1440px] mx-auto  lg:px-[100px]     ${styles.stickyHeader
             } ${isSearchFocused ? styles.searchFocused : ""}`}
         >
           <div className="flex justify-between items-center ">
@@ -513,12 +513,12 @@ const Header: React.FC<HeaderProps> = () => {
               
               {/* Desktop Navigation Links - Visible on tablet and large screens */}
               <div
-                className={`hidden md:flex items-center space-x-3 md:space-x-4 lg:space-x-8 flex-shrink-0 ${isSearchFocused ? "lg:flex md:hidden" : ""
+                className={`hidden lg:flex items-center space-x-3 lg:space-x-4  flex-shrink-0 ${isSearchFocused ? "lg:flex md:hidden" : ""
                   }`}
               >
                 <div className="relative">
                   <div
-                    className="flex items-center space-x-1 cursor-pointer hover:text-secondary md:pl-1 lg:pl-0 transition-colors relative z-20 lg:pl-2"
+                    className="flex items-center space-x-1 cursor-pointer hover:text-secondary md:pl-1 l transition-colors relative z-20 lg:pl-2"
                     onMouseEnter={handleProductSegmentsMouseEnter}
                     onMouseLeave={handleProductSegmentsMouseLeave}
                     onClick={() => {
@@ -801,11 +801,222 @@ const Header: React.FC<HeaderProps> = () => {
           </div> */}
 
 
-
+  
             {/* Right side - User actions */}
-            <div className="flex items-center md:space-x-2 lg:space-x-4">
+            <div className="flex items-center md:space-x-2 lg:space-x-4 justify-end ">
               {/* Profile Icon - Visible on all screen sizes */}
-              {token ? <><div
+              {token ? <div className="flex ml-[150px]">
+                <div
+                ref={iconRef}
+                onClick={() => {
+                  if (isUserPopoverOpen) {
+                    setUserPopoverOpen(false);
+                    setIsUserPopoverClicked(false);
+                  } else {
+                    setUserPopoverOpen(true);
+                    setIsUserPopoverClicked(true);
+                  }
+                }}
+                className="relative"
+              >
+                <PiUserCircleThin
+                  className="text-black hover:cursor-pointer "
+                  size={30}
+                />
+              </div>
+
+                <div ref={popoverRef} onMouseLeave={() => closeUserPopover()}>
+                  <UserPopover
+                    isOpen={isUserPopoverOpen}
+                    userInfos={userInfo}
+                    onClose={() => closeUserPopover()}
+                  />
+                </div>
+
+                {/* Cart Icon - Visible on all screen sizes */}
+                <div className="relative pr-2 md:pr-2 lg:pr-4 lg:mx-4">
+                  <CiShoppingCart
+                    className="text-black hover:cursor-pointer " 
+                    size={30}
+                    onClick={onClickCart}
+                  />
+                  {Number(cartCountV) > 0 &&
+                    (cartCountV !== "0" ||
+                      cartCount !== null ||
+                      cartCount !== undefined) &&
+                    token ? (
+                    <div className="absolute top-[-8px] right-[2px] md:top-[-8px] md:right-[2px] lg:top-[-12px] lg:right-[2px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[16px] md:h-[16px] lg:w-[20px] lg:h-[20px] flex items-center justify-center text-[8px] md:text-[8px] lg:text-[10px] font-bold">
+                      {cartCountV ? cartCountV : cartCount ? cartCount : ""}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+                :
+                <div className="flex justify-between items-center">
+                  <CustomButton
+                    title="Submit Enquiry"
+                    className="text-[16px] bg-secondaryLight py-[12px] px-[13px]  h-12 m-[10px] hidden lg:flex text-white w-[145px] "
+                  
+                    hoverBgColor=""
+                    onPress={() => router.push('/contact')}
+                  />
+                  <CustomButton
+                    title="Login / SignUp"
+                    className="text-[16px] bg-white text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
+                 
+                    hoverBgColor=""
+                    onPress={() => setShowLoginPopup(true)}
+                  />
+                </div>}
+
+              {/* Vendor Button/Icon - Different for mobile vs tablet vs desktop */}
+              {/* {!token && (
+              <>
+              
+                <CustomButton
+                  title={`${
+                    showVendorLogin ? "Vendor Login" : "Vendor Connect"
+                  }`}
+                  className="text-base bg-secondary px-4 lg:px-2 hover:bg-primary h-12 mr-4 hidden lg:flex text-white font-medium"
+                  customStyles={{ marginRight:'30px'}}
+                  rightIcon={<GoArrowRight />}
+                  hoverBgColor=""
+                  onPress={() => onClickVendor()}
+                />
+
+               
+                <Link
+                  href="/plans"
+                  className="hidden md:flex lg:hidden p-1"
+                  onClick={() => onClickVendor()}
+                >
+                  <Image
+                    alt="vendor"
+                    className="w-5 h-5 md:w-6 md:h-6"
+                    src="/images/home/vendor.webp"
+                    width={20}
+                    height={20}
+                    onError={(e) => {
+                      e.currentTarget.src = "/images/product-placeholder.webp";
+                    }}
+                    loading="lazy"
+                  />
+                </Link>
+
+                <Link
+                  href="/plans"
+                  className="md:hidden"
+                  onClick={() => onClickVendor()}
+                >
+                  <Image
+                    alt="vendor"
+                    className="w-7 h-7"
+                    src="/images/home/vendor.webp"
+                    width={20}
+                    height={20}
+                    onError={(e) => {
+                      e.currentTarget.src = "/images/product-placeholder.webp";
+                    }}
+                    loading="lazy"
+                  />
+                </Link>
+              </>
+            )} */}
+
+              {token && <div className="relative w-10 md:w-12 lg:w-18"></div>}
+
+              {/* Tablet Hamburger Menu - Show after vendor image */}
+              <div className="hidden md:flex lg:hidden" style={{ marginRight: '18px' }}>
+                <VscMenu
+                  className="text-black cursor-pointer font-light text-gray-800"
+                  size={22}
+                  onClick={toggleMenu}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Second Line - Mobile Only: Search Bar */}
+          <div className="md:hidden flex items-center justify-between py-2">
+            {/* Search Bar */}
+            <div className="flex-1 mx-3">
+              <SearchBar
+                isExpanded={true}
+                onFocus={handleSearchFocus}
+                onBlur={handleSearchBlur}
+                className="w-full"
+                value={searchValue}
+                onChange={(value) => setSearchValue(value)}
+                placeholder={
+                  rotatingPlaceholders[currentPlaceholderIndex] ||
+                  "Search for Products..."
+                }
+              />
+            </div>
+          </div>
+        </div>
+
+
+
+
+        {/* ================= TABLET HEADER ONLY ================= */}
+<div className="hidden md:flex lg:hidden  w-full items-center gap-3 px-4 h-[72px] bg-cream border-b">
+
+{/* Menu */}
+<VscMenu
+  className="text-black cursor-pointer"
+  size={22}
+  onClick={toggleMenu}
+/>
+
+{/* Logo */}
+<Link href="/" className="flex-shrink-0">
+  <Image
+    src="/images/home/header/hubeco-logo.png"
+    alt="Hubeco Logo"
+    width={140}
+    height={40}
+    className="object-contain"
+  />
+</Link>
+
+{/* Search */}
+<div className="flex-1">
+  <SearchBar
+    isExpanded={true}
+    onFocus={handleSearchFocus}
+    onBlur={handleSearchBlur}
+    value={searchValue}
+    onChange={(value) => setSearchValue(value)}
+    placeholder={
+      rotatingPlaceholders[currentPlaceholderIndex] ||
+      "Search for Products..."
+    }
+  />
+</div>
+
+{/* Submit Enquiry */}
+{!token && (
+  <>
+<CustomButton
+  title="Submit Enquiry"
+  className="bg-secondaryLight text-white h-10 px-4 text-sm"
+  onPress={() => router.push("/contact")}
+/>
+
+
+  <CustomButton
+    title="Login / SignUp"
+    className="bg-white border border-secondaryLight text-secondaryLight h-10 px-4 text-sm"
+    onPress={() => setShowLoginPopup(true)}
+  />
+  </>
+)}
+
+<div className="flex items-center md:space-x-2 lg:space-x-4 ">
+              {/* Profile Icon - Visible on all screen sizes */}
+              {token ? <>
+              <div
                 ref={iconRef}
                 onClick={() => {
                   if (isUserPopoverOpen) {
@@ -922,93 +1133,9 @@ const Header: React.FC<HeaderProps> = () => {
               </>
             )} */}
 
-              {token && <div className="relative w-10 md:w-12 lg:w-18"></div>}
-
-              {/* Tablet Hamburger Menu - Show after vendor image */}
-              <div className="hidden md:flex lg:hidden" style={{ marginRight: '18px' }}>
-                <VscMenu
-                  className="text-black cursor-pointer font-light text-gray-800"
-                  size={22}
-                  onClick={toggleMenu}
-                />
-              </div>
+            
+              
             </div>
-          </div>
-
-          {/* Second Line - Mobile Only: Search Bar */}
-          <div className="md:hidden flex items-center justify-between py-2">
-            {/* Search Bar */}
-            <div className="flex-1 mx-3">
-              <SearchBar
-                isExpanded={true}
-                onFocus={handleSearchFocus}
-                onBlur={handleSearchBlur}
-                className="w-full"
-                value={searchValue}
-                onChange={(value) => setSearchValue(value)}
-                placeholder={
-                  rotatingPlaceholders[currentPlaceholderIndex] ||
-                  "Search for Products..."
-                }
-              />
-            </div>
-          </div>
-        </div>
-
-
-
-
-        {/* ================= TABLET HEADER ONLY ================= */}
-<div className="hidden sm:flex md:hidden w-full items-center gap-3 px-4 h-[72px] bg-cream border-b">
-
-{/* Menu */}
-<VscMenu
-  className="text-black cursor-pointer"
-  size={22}
-  onClick={toggleMenu}
-/>
-
-{/* Logo */}
-<Link href="/" className="flex-shrink-0">
-  <Image
-    src="/images/home/header/hubeco-logo.png"
-    alt="Hubeco Logo"
-    width={140}
-    height={40}
-    className="object-contain"
-  />
-</Link>
-
-{/* Search */}
-<div className="flex-1">
-  <SearchBar
-    isExpanded={true}
-    onFocus={handleSearchFocus}
-    onBlur={handleSearchBlur}
-    value={searchValue}
-    onChange={(value) => setSearchValue(value)}
-    placeholder={
-      rotatingPlaceholders[currentPlaceholderIndex] ||
-      "Search for Products..."
-    }
-  />
-</div>
-
-{/* Submit Enquiry */}
-<CustomButton
-  title="Submit Enquiry"
-  className="bg-secondaryLight text-white h-10 px-4 text-sm"
-  onPress={() => router.push("/contact")}
-/>
-
-{/* Login / Signup */}
-{!token && (
-  <CustomButton
-    title="Login / SignUp"
-    className="bg-white border border-secondaryLight text-secondaryLight h-10 px-4 text-sm"
-    onPress={() => setShowLoginPopup(true)}
-  />
-)}
 
 </div>
 
@@ -1040,11 +1167,129 @@ const Header: React.FC<HeaderProps> = () => {
 
   {/* Login / Profile */}
   {token ? (
-    <PiUserCircleThin
-      className="text-black cursor-pointer"
-      size={28}
-      onClick={() => setUserPopoverOpen(!isUserPopoverOpen)}
-    />
+    <div className="flex items-center md:space-x-2 lg:space-x-4">
+    {/* Profile Icon - Visible on all screen sizes */}
+    {token ? <><div
+      ref={iconRef}
+      onClick={() => {
+        if (isUserPopoverOpen) {
+          setUserPopoverOpen(false);
+          setIsUserPopoverClicked(false);
+        } else {
+          setUserPopoverOpen(true);
+          setIsUserPopoverClicked(true);
+        }
+      }}
+      className="relative"
+    >
+      <PiUserCircleThin
+        className="text-black hover:cursor-pointer"
+        size={30}
+      />
+    </div>
+
+      <div ref={popoverRef} onMouseLeave={() => closeUserPopover()}>
+        <UserPopover
+          isOpen={isUserPopoverOpen}
+          userInfos={userInfo}
+          onClose={() => closeUserPopover()}
+        />
+      </div>
+
+      {/* Cart Icon - Visible on all screen sizes */}
+      <div className="relative pr-2 md:pr-2 lg:pr-4">
+        <CiShoppingCart
+          className="text-black hover:cursor-pointer"
+          size={30}
+          onClick={onClickCart}
+        />
+        {Number(cartCountV) > 0 &&
+          (cartCountV !== "0" ||
+            cartCount !== null ||
+            cartCount !== undefined) &&
+          token ? (
+          <div className="absolute top-[-8px] right-[2px] md:top-[-8px] md:right-[2px] lg:top-[-12px] lg:right-[2px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[16px] md:h-[16px] lg:w-[20px] lg:h-[20px] flex items-center justify-center text-[8px] md:text-[8px] lg:text-[10px] font-bold">
+            {cartCountV ? cartCountV : cartCount ? cartCount : ""}
+          </div>
+        ) : null}
+      </div>
+    </>
+      :
+      <div className="flex justify-between items-center">
+        <CustomButton
+          title="Submit Enquiry"
+          className="text-[16px] bg-secondaryLight py-[12px] px-[13px]  h-12 m-[10px] hidden lg:flex text-white w-[145px] "
+        
+          hoverBgColor=""
+          onPress={() => router.push('/contact')}
+        />
+        <CustomButton
+          title="Login / SignUp"
+          className="text-[16px] bg-white text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
+       
+          hoverBgColor=""
+          onPress={() => setShowLoginPopup(true)}
+        />
+      </div>}
+
+    {/* Vendor Button/Icon - Different for mobile vs tablet vs desktop */}
+    {/* {!token && (
+    <>
+    
+      <CustomButton
+        title={`${
+          showVendorLogin ? "Vendor Login" : "Vendor Connect"
+        }`}
+        className="text-base bg-secondary px-4 lg:px-2 hover:bg-primary h-12 mr-4 hidden lg:flex text-white font-medium"
+        customStyles={{ marginRight:'30px'}}
+        rightIcon={<GoArrowRight />}
+        hoverBgColor=""
+        onPress={() => onClickVendor()}
+      />
+
+     
+      <Link
+        href="/plans"
+        className="hidden md:flex lg:hidden p-1"
+        onClick={() => onClickVendor()}
+      >
+        <Image
+          alt="vendor"
+          className="w-5 h-5 md:w-6 md:h-6"
+          src="/images/home/vendor.webp"
+          width={20}
+          height={20}
+          onError={(e) => {
+            e.currentTarget.src = "/images/product-placeholder.webp";
+          }}
+          loading="lazy"
+        />
+      </Link>
+
+      <Link
+        href="/plans"
+        className="md:hidden"
+        onClick={() => onClickVendor()}
+      >
+        <Image
+          alt="vendor"
+          className="w-7 h-7"
+          src="/images/home/vendor.webp"
+          width={20}
+          height={20}
+          onError={(e) => {
+            e.currentTarget.src = "/images/product-placeholder.webp";
+          }}
+          loading="lazy"
+        />
+      </Link>
+    </>
+  )} */}
+
+  
+    
+  </div>
+
   ) : (
     <CustomButton
     title="Login / SignUp"

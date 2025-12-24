@@ -17,7 +17,7 @@ const HomePage = () => {
   return (
     <div className="bg-cream">
       {/* Optimize for Speed Index - Load everything immediately but efficiently */}
-      <div className="banner-section mx-auto md:h-full max-w-full">
+      <div className="banner-section mx-auto md:h-full ">
         <ImageSlider />
       </div>
 

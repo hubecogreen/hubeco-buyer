@@ -101,7 +101,7 @@ const WishList = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-cream min-h-screen">
       <head>
         <title>Wishlist | Hubeco</title>
         {/* <meta name="description" content='' />

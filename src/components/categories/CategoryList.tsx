@@ -89,7 +89,7 @@ const CategoryList = () => {
     };
 
     return (
-      <div className="relative md:hidden ">
+      <div className="relative lg:hidden md:relative ">
         {/* LEFT ARROW */}
         {showLeft && (
           <button
@@ -145,7 +145,7 @@ const CategoryList = () => {
         "
           style={{
     width: '100%',
-    height: "142px",
+    // height: "142px",
     overflow:'hidden'
   }}
         >
@@ -223,12 +223,13 @@ const CategoryList = () => {
     flex flex-col items-center
 
     w-[95px] h-[124px]
-    md:w-[282px] md:h-[369px]
-    p-[4px] md:p-4
+    lg:w-[282px] lg:h-[369px]
+    md:w-[195px] md:h-[255px]
+    p-[4px] lg:p-4
 
-    md:hover:bg-primary
-    md:hover:scale-105
-    md:transition-transform md:duration-300
+    lg:hover:bg-primary
+    lg:hover:scale-105
+    lg:transition-transform lg:duration-300
   "
         >
           <Image
@@ -245,12 +246,13 @@ const CategoryList = () => {
             className="
   rounded-md object-cover
   w-[84px] h-[84px]
-  md:w-[250px] md:h-[250px]
+  md:w-[173px] md:h-[173px]
+  lg:w-[250px] lg:h-[250px]
 "
           />
 
           <p
-            className={`${styles.cattitle} text-[8px] md:text-[18px] font-medium  text-primary group-hover:text-white mt-4 text-center `}
+            className={`${styles.cattitle} text-[8px] lg:text-[18px] font-medium  text-primary group-hover:text-white mt-4 text-center `}
           >
             {category?.name}
           </p>
@@ -264,32 +266,32 @@ const CategoryList = () => {
   // -----------------------------
   const CategorySection = ({ title, data }: any) => (
     <div
-      className={`px-4 bg-cream md:max-w-[1440px] mx-auto ${
+      className={`px-4 bg-cream lg:max-w-[1440px] mx-auto ${
         title === "Building Systems"
-          ? "md:px-[100px] p-[20px] md:py-[0px]"
-          : "md:px-[100px] py-[20px] md:py-[80px]"
+          ? "lg:px-[100px] p-[20px] lg:py-[0px]"
+          : "lg:px-[100px] py-[20px] lg:py-[80px]"
       }`}
     >
       {/* 👇 CENTERED when width > 1440px */}
       <div className="">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:justify-between gap-4">
-          <h2 className="text-xl md:text-[43px] md:text-start text-center text-brown">
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-4">
+          <h2 className="text-xl lg:text-[43px] lg:text-start text-center text-brown">
             {title}
           </h2>
   
           <CustomButton
             title="View All"
-            className="md:flex hidden bg-[#109989] rounded-[5px]
-            px-[14px] py-[10px] md:!px-[20px] md:!py-[10px]
-            gap-[12px] text-white text-[14px] md:text-[18px]"
-            rightIcon={<GoArrowRight className="w-[18px] h-[18px] md:w-[24px] md:h-[24px]" />}
+            className="lg:flex hidden bg-[#109989] rounded-[5px]
+            px-[14px] py-[10px] lg:!px-[20px] lg:!py-[10px]
+            gap-[12px] text-white text-[14px] lg:text-[18px]"
+            rightIcon={<GoArrowRight className="w-[18px] h-[18px] lg:w-[24px] lg:h-[24px]" />}
             onPress={() => router.push("/products")}
           />
         </div>
   
-        <hr className="border-t border-primary mx-auto mt-[21px] mb-[10px] md:mb-9" />
+        <hr className="border-t border-primary mx-auto mt-[21px] mb-[10px] lg:mb-9" />
   
         {/* Mobile */}
         {chunkIntoRows(data || []).map((row, idx) => (
@@ -297,7 +299,7 @@ const CategoryList = () => {
         ))}
   
         {/* Desktop */}
-        <div className="hidden md:grid md:grid-cols-4 md:gap-4 md:px-[20px]">
+        <div className="hidden lg:grid lg:grid-cols-4 lg:gap-4 lg:px-[20px]">
           {data?.map((cat: any, idx: number) => (
             <CategoryCard key={idx} category={cat} />
           ))}

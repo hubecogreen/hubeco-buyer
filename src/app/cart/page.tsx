@@ -313,7 +313,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-cream min-h-screen">
       <head>
         <title>My Cart | Hubeco</title>
         {/* <meta name="description" content='' />

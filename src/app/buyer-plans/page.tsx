@@ -92,7 +92,7 @@ export default function Page() {
       });
   };
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       <Head>
         <title>Buyer Plans | Hubeco Buyer</title>
       </Head>

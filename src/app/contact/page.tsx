@@ -261,7 +261,7 @@ export default function Page() {
       });
   };
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       <Head>
         <title>Contact Us | Hubeco Buyer</title>
       </Head>

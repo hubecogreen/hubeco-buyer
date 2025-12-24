@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
 function Page({ params }: { params: { id: string } }) {
   return (
-    <div className="bg-white pt-5">
+    <div className="bg-cream pt-5">
       <div className="category-section mx-auto pb-10">
         <BlogsDetails id={params.id} />
       </div>

@@ -116,7 +116,7 @@ export default function Page() {
           </Link>
         </div>
 
-        <div className="bg-white w-full">
+        <div className="bg-cream w-full">
           <div
             className="flex flex-col lg:flex-row items-start justify-between py-12 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full bg-[url('/images/home/contactbg.webp')] bg-contain bg-no-repeat bg-left-10% relative max-w-full"
           >

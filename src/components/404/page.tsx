@@ -9,8 +9,8 @@ const Lottie = dynamic(() => import('lottie-react'), {
 
 const Custom404: React.FC = () => {
   return (
-    <div className="bg-white">
-      <div className="flex items-center flex-col text-center bg-white">
+    <div className="bg-cream">
+      <div className="flex items-center flex-col text-center bg-cream">
         <Lottie
           animationData={animationData}
           loop={true}

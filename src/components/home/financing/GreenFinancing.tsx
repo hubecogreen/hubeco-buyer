@@ -43,11 +43,11 @@ export default function GreenFinancing() {
 
             {/* Text */}
             <div className="flex flex-col gap-[16px] sm:gap-[20px] md:gap-[20px]">
-              <p className="text-[16px] xs:text-[18px] sm:text-[20px] md:text-[24px] leading-[22px] xs:leading-[26px] sm:leading-[28px] md:leading-[30px] text-black">
+              <p className="text-[16px] xs:text-[18px] sm:text-[20px] md:text-[24px] leading-[22px] xs:leading-[26px] sm:leading-[28px] md:leading-[30px] text-brown">
                 Access tailored financing solutions designed specifically for eco-friendly construction. Our green financing program empowers you to invest in certified sustainable materials while maintaining cost efficiency and project <br/>stability.
               </p>
               
-              <p className="text-[16px] xs:text-[18px] sm:text-[20px] md:text-[24px] leading-[22px] xs:leading-[26px] sm:leading-[28px] md:leading-[30px] text-black">
+              <p className="text-[16px] xs:text-[18px] sm:text-[20px] md:text-[24px] leading-[22px] xs:leading-[26px] sm:leading-[28px] md:leading-[30px] text-brown">
                 Work with leading financial partners committed to environmental responsibility. Together we enable smoother, smarter and more sustainable project financing
               </p>
             </div>

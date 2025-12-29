@@ -598,7 +598,7 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
       </div>
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             First Name <span className="text-red">*</span>
           </label>
           <Controller
@@ -623,7 +623,7 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
           />
         </div>
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Last Name <span className="text-red">*</span>
           </label>
           <Controller
@@ -650,7 +650,7 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
       </div>
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Email Address <span className="text-red">*</span>
           </label>
           <Controller
@@ -675,7 +675,7 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
           />
         </div>
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Phone Number<span className="text-red">*</span>
           </label>
           <Controller
@@ -779,7 +779,7 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
       <div className="flex flex-col sm:flex-row justify-start mt-4">
         <CustomButton
           title={"Back"}
-          className={`ml-3 hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-black ${
+          className={`ml-3 hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-brown ${
             disableBack ? "opacity-50" : "opacity-100"
           } `}
           customStyles={{ backgroundColor: "#E0E0E0" }}

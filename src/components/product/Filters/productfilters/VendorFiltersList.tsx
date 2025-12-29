@@ -305,7 +305,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
         ) : (
           <>
             <div className="w-full justify-start items-center ">
-              <p className="text-black text-sm font-medium py-2">
+              <p className="text-brown text-sm font-medium py-2">
                 No vendors found.Try adjusting your search.
               </p>
             </div>

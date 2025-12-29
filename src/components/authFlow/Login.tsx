@@ -227,7 +227,7 @@ setIsLoading(false)
          <div className="h-full flex items-center justify-center py-20 md:py-10 px-[10px] md:px-0">
           {/* <div className=" flex items-center justify-center py-10 md:py-15 w-11/12  px-4 md:max-w-lg   bg-white"> */}
            <div className="text-center py-10 md:py-15 max-w-full md:max-w-lg  text-white bg-white">
-             <h1 className="text-center text-[22px] md:text-3xl  font-bold mb-4 text-black">
+             <h1 className="text-center text-[22px] md:text-3xl  font-bold mb-4 text-brown">
                Welcome to{" "}
                <span className="text-primary text-[22px] md:text-2xl lg:text-3xl font-bold">
                hubeco.market
@@ -235,7 +235,7 @@ setIsLoading(false)
                👋🏻
              </h1>
              <div className="flex items-center justify-center">
-               <p className="mb-2 md:mb-2 lg:mb-4 text-xs md:text-[13px] text-black w-10/12 text-center">
+               <p className="mb-2 md:mb-2 lg:mb-4 text-xs md:text-[13px] text-brown w-10/12 text-center">
                Log in to access your account, track orders, and explore our selection of sustainable building materials.
                </p>
              </div>
@@ -243,7 +243,7 @@ setIsLoading(false)
               <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                 <div>
                 <div className="p-4 inline-block max-w-full h-[120px] md:w-10/12 w-[98%]">
-                  <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                  <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                     Phone Number<span className="text-red font-light pl-1">*</span>
                   </label>
                   <Controller
@@ -263,7 +263,7 @@ setIsLoading(false)
                           borderRadius: "5px",
                           // width: "400px",
                         }}
-                        rightIcon={<AiFillEdit onClick={onPress}  className="text-black w-4 h-4 " />}
+                        rightIcon={<AiFillEdit onClick={onPress}  className="text-brown w-4 h-4 " />}
                         iconClassnames="right-3"
                         extraClassnames="custom-input  md:w-[400px] w-[100%]"
                         errorMessage={errors.mobile?.message}
@@ -274,7 +274,7 @@ setIsLoading(false)
                   />
                 </div>
                 <div className="p-4 inline-block max-w-full h-[120px] md:w-10/12 w-[98%]">
-                  <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                  <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                     Password<span className="text-red font-light pl-1">*</span>
                   </label>
                   <Controller
@@ -288,7 +288,7 @@ setIsLoading(false)
                         onChange={onChange}
                         type="password"
                         value={value}
-                        // rightIcon={<GoEye className={errors.password?.message ? 'text-red ':'text-black'} />}
+                        // rightIcon={<GoEye className={errors.password?.message ? 'text-red ':'text-brown'} />}
                         customStyles={{
                           border: "1px solid #E0E0E0",
                           borderRadius: "5px",
@@ -326,7 +326,7 @@ setIsLoading(false)
               </div>
               <div className="flex items-center justify-center">
                   {!showForgotPassword && ( // Display "Forgot Password" link only when login form is visible
-                    <p className="text-sm md:text-base text-black w-10/12 text-center">
+                    <p className="text-sm md:text-base text-brown w-10/12 text-center">
                     <button
                       onClick={resetPass}
                       className="text-[#B90647]"
@@ -348,7 +348,7 @@ setIsLoading(false)
      
       <DialogContent  className="sm:max-w-md">
       <DialogClose onClick={() => setIsOpen(false)} className="absolute top-4 right-4">
-      <IoIosClose className="w-6 h-6  z-10 bg-white  text-black" />
+      <IoIosClose className="w-6 h-6  z-10 bg-white  text-brown" />
 
 
       </DialogClose>

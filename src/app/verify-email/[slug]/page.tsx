@@ -146,7 +146,7 @@ const VerifyEmail = (param: any) => {
                     <h1 className="text-center font-bold text-big">
                       Verify your email
                     </h1>
-                    <p className="text-center text-md text-black my-4">
+                    <p className="text-center text-md text-brown my-4">
                       To proceed, please ensure that you have verified your
                       registered email address.
                     </p>
@@ -182,7 +182,7 @@ const VerifyEmail = (param: any) => {
                   className="w-[200px] h-[200px]"
                 />
 
-                <p className="text-center  text-black font-semibold text-lg my-6">
+                <p className="text-center  text-brown font-semibold text-lg my-6">
                   Your email has been verified successfully
                 </p>
                 <CustomButton

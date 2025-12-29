@@ -61,7 +61,7 @@ const Checkout = () => {
                 </h1>
               </div>
             </div>
-            <p className="text-xs md:text-sm mt-2 font-semibold text-black">
+            <p className="text-xs md:text-sm mt-2 font-semibold text-brown">
               Order ID: #H00917725
             </p>
             <p className="mt-4 text-gray-700 text-xs md:text-base px-4 md:px-0">
@@ -117,7 +117,7 @@ const Checkout = () => {
         </div>
         {/* Right Column: Order Summary */}
         <div className="p-6 bg-[#F4F4F4] h-fit">
-          <h2 className="text-lg font-semibold mb-4 text-black">Order Summary</h2>
+          <h2 className="text-lg font-semibold mb-4 text-brown">Order Summary</h2>
           <div className="w-full">
             {products.map((product, index) => (
               <div className="flex w-full py-3" key={index}>
@@ -132,7 +132,7 @@ const Checkout = () => {
                   }}
                   loading="lazy"
                 />
-                <div className="w-full text-black">
+                <div className="w-full text-brown">
                   <p className="font-semibold">{product.title}</p>
                   <div className="flex justify-between">
                     <p className="text-gray-500">Quantity : 100 piece</p>
@@ -143,7 +143,7 @@ const Checkout = () => {
             ))}
           </div>
 
-          <div className="py-7 px-2 text-black">
+          <div className="py-7 px-2 text-brown">
             <div className="flex justify-between mb-2">
               <p>Coupon</p>
               <p>₹400.00</p>

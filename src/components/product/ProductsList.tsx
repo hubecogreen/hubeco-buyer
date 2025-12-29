@@ -379,7 +379,7 @@ useEffect(() => {
       {/* Main Content */}
       <div className="col-span-12 lg:col-span-9">
         <div className="block md:flex md:justify-between mb-8 px-4 items-center">
-          <h1 className="text-black font-bold text-2xl md:text-3xl mt-[20px] md:mt-0">
+          <h1 className="text-brown font-bold text-2xl md:text-3xl mt-[20px] md:mt-0">
             {h1Tag}
           </h1>
           <div className="flex justify-end items-center">

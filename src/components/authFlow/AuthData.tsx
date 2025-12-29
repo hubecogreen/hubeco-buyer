@@ -239,7 +239,7 @@ const handleApiError = async (err: any) => {
         <div className="flex items-center justify-center py-20 md:py-20">
           <div className=" flex items-center justify-center py-10 md:py-15 w-11/12  px-4 md:max-w-lg md:h-[360px]  bg-white">
           <div>
-            <h1 className="text-center text-[22px] md:text-3xl  font-bold mb-4 text-black">
+            <h1 className="text-center text-[22px] md:text-3xl  font-bold mb-4 text-brown">
               Welcome to{" "}
               <span className="text-primary text-[22px] md:text-2xl lg:text-3xl font-bold">
               hubeco.market
@@ -247,7 +247,7 @@ const handleApiError = async (err: any) => {
               👋🏻
             </h1>
             <div className="flex items-center justify-center">
-              <p className="mb-2 md:mb-2 lg:mb-4 text-xs md:text-[13px] text-black w-10/12 text-center">
+              <p className="mb-2 md:mb-2 lg:mb-4 text-xs md:text-[13px] text-brown w-10/12 text-center">
               Log in to access your account, track orders, and explore our selection of sustainable building materials.
               </p>
             </div>
@@ -261,7 +261,7 @@ const handleApiError = async (err: any) => {
               <div className="flex justify-center items-center">
                 <div className='text-center w-full'>
                 <div className="p-4 md:inline-block max-w-full h-[120px] ">
-                  <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                  <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                     Phone Number<span className="text-red font-light pl-1">*</span>
                   </label>
                   <Controller

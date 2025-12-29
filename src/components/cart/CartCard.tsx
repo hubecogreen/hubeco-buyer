@@ -76,7 +76,7 @@ const CartCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
         </div>
         <div className={styles.viewButton}>
-          <p className="text-black font-normal text-sm text-center">View</p>
+          <p className="text-brown font-normal text-sm text-center">View</p>
         </div>
       </div>
     </div>

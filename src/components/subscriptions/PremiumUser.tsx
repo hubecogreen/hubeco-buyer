@@ -331,8 +331,8 @@ export default function Page() {
       </div>
       <div className="flex flex-col lg:flex-row items-start justify-between py-12 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full bg-cover bg-no-repeat bg-left-10% relative max-w-full">
         <div className="overflow-auto p-2 lg:p-4 w-full lg:w-6/12">
-          <h1 className="text-4xl font-bold mb-4 text-black">Buyer Plans</h1>
-          <p className="text-lg font-thin text-justify text-black leading-custom-1.7">
+          <h1 className="text-4xl font-bold mb-4 text-brown">Buyer Plans</h1>
+          <p className="text-lg font-thin text-justify text-brown leading-custom-1.7">
             At Hubeco, we offer a variety of subscription plans designed to
             support buyers at every stage of their purchasing journey. Whether
             you&#39;re a small business looking for cost-effective resources or
@@ -358,14 +358,14 @@ export default function Page() {
                     </h3>
                     {/* <div className="flex rounded-full  justify-between items-center bg-white  shadow-lg" style={{marginTop:'-2px'}}>
                                 <div onClick={()=>{setTerm('Monthly'),setCookie('term','Monthly')}} className={`${term==='Monthly' ? 'bg-primary border border-primary rounded-full' : ''}`}>
-                                    <p className={` ${term==='Monthly' ? 'text-white' : 'text-black'} text-xs font-normal  px-4 py-1 `}>Monthly</p>
+                                    <p className={` ${term==='Monthly' ? 'text-white' : 'text-brown'} text-xs font-normal  px-4 py-1 `}>Monthly</p>
                                 </div>
                                 <div onClick={()=>{setTerm('Yearly'),setCookie('term','Yearly')}} className={`${term==='Yearly' ? 'bg-primary border border-primary rounded-full' : ''}`}>
-                                    <p className={` ${term==='Yearly' ? 'text-white' : 'text-black'} text-xs font-normal  px-4 py-1`}>Yearly</p>
+                                    <p className={` ${term==='Yearly' ? 'text-white' : 'text-brown'} text-xs font-normal  px-4 py-1`}>Yearly</p>
                                 </div>
                             </div> */}
                   </div>
-                  <p className="text-sm font-normal text-black text-left mt-5 h-[30px]">
+                  <p className="text-sm font-normal text-brown text-left mt-5 h-[30px]">
                     {prePlanData.description}
                   </p>
                 </div>

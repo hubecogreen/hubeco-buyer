@@ -177,11 +177,11 @@ const SetPassword:React.FC<Setprops> = ({token}) => {
       >
         <div className=" h-full flex items-center justify-center py-20 md:py-10 px-[10px] md:px-0">
           <div className="text-center py-10 md:py-15 max-w-full md:max-w-lg  text-white bg-white">
-            <h1 className="text-[24px] md:text-3xl  font-bold mb-4 text-black">
+            <h1 className="text-[24px] md:text-3xl  font-bold mb-4 text-brown">
               Set Password 🔒
             </h1>
             <div className="flex items-center justify-center">
-              <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-base text-black w-10/12 text-center">
+              <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-base text-brown w-10/12 text-center">
                 Please set your password to continue
               </p>
             </div>
@@ -195,7 +195,7 @@ const SetPassword:React.FC<Setprops> = ({token}) => {
               
               <div className="">
                 <div className="p-4 inline-block max-w-full h-[120px] md:w-10/12 w-[98%]">
-                  <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                  <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                     Password<span className="text-red">*</span>
                   </label>
                   <Controller
@@ -224,7 +224,7 @@ const SetPassword:React.FC<Setprops> = ({token}) => {
                   />
                 </div>
                 <div className="p-4 inline-block max-w-full h-[120px] md:w-10/12  w-[98%]">
-                  <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                  <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                     Confirm Password<span className="text-red">*</span>
                   </label>
                   <Controller
@@ -253,15 +253,15 @@ const SetPassword:React.FC<Setprops> = ({token}) => {
                 </div>
                 <div className="px-4 inline-block max-w-full text-left md:w-10/12  w-[98%]">
                   <div>
-                  <h1 className="text-xs pb-3 text-black">Password Requirements :</h1>
+                  <h1 className="text-xs pb-3 text-brown">Password Requirements :</h1>
                   <ul className="list-disc pl-5">
-                  <li className="pb-3 text-xs text-black">
+                  <li className="pb-3 text-xs text-brown">
                       Minimum 8 characters long - the more, the better
                     </li>
-                    <li className="pb-3 text-xs text-black">
+                    <li className="pb-3 text-xs text-brown">
                       At least one lowercase and uppercase character
                     </li>
-                    <li className="pb-3 text-xs text-black">
+                    <li className="pb-3 text-xs text-brown">
                       At least one number or symbol
                     </li>
                   </ul>

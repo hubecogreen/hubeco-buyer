@@ -64,7 +64,7 @@ const PaymentSuccessful = () => {
           <h4  className='font-bold text-2xl text-primary'>
             Registration Complete
           </h4>
-          <p  className='text-black text-md mt-4'>
+          <p  className='text-brown text-md mt-4'>
           Thank you for registering. Your account has been successfully created.
           </p>
         </div>

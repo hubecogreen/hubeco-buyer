@@ -280,11 +280,11 @@ export default function OrdersPage({ params }: any) {
           {/* Order Id Section Start */}
           <div className="block w-full md:flex justify-between items-center ">
             <div className="md:w-[60%] w-full flex justify-between items-center ">
-              <p className="text-black font-bold text-2xl">
+              <p className="text-brown font-bold text-2xl">
                 Order No. {orderData?.mainOrderId}
               </p>
               {/* <p className="text-secondary font-bold text-md pr-2">
-              <span className="text-black font-medium text-md mr-2">Payment Mode :</span> PayU */}
+              <span className="text-brown font-medium text-md mr-2">Payment Mode :</span> PayU */}
               {/* {orderData?.orders[0]?.payment==='Pay U payment gateway'?'PayU':orderData?.orders[0]?.payment} */}
               {/* </p> */}
             </div>
@@ -296,7 +296,7 @@ export default function OrdersPage({ params }: any) {
               Return Order
             </Button> */}
               <p className="text-secondary font-bold text-md pr-2">
-                <span className="text-black font-medium text-md mr-2">
+                <span className="text-brown font-medium text-md mr-2">
                   Payment Mode :
                 </span>{" "}
                 PayU
@@ -403,7 +403,7 @@ export default function OrdersPage({ params }: any) {
                                 <Button variant={'outline'} className="ml-3 !py-0 w-fit !h-[35px] !px-2 border-secondary text-secondary rounded-none bg:white hover:bg-white" ><MdOutlineFileDownload color="#9B314A" /> Download Invoice</Button>
                               )} */}
                                 </div>
-                                <p className="text-xl text-black font-semibold w-full">
+                                <p className="text-xl text-brown font-semibold w-full">
                                   {/* {order?.order?.item?.productName} */}
                                   {order?.item?.productName}
                                 </p>
@@ -439,8 +439,8 @@ export default function OrdersPage({ params }: any) {
                                 <></>
                               ) : (
                                 <>
-                                  <p className="text-xl text-black font-semibold pt-7">
-                                    <span className="text-black text-xl font-normal font-mono">
+                                  <p className="text-xl text-brown font-semibold pt-7">
+                                    <span className="text-brown text-xl font-normal font-mono">
                                       {" "}
                                       ₹
                                     </span>{" "}
@@ -563,7 +563,7 @@ export default function OrdersPage({ params }: any) {
                                   </span>
                                 )}
                               </p>
-                              <p className="text-xl text-black font-semibold w-full flex md:justify-start justify-center items-center ">
+                              <p className="text-xl text-brown font-semibold w-full flex md:justify-start justify-center items-center ">
                                 {/* {order?.order?.item?.productName} */}
                                 {order?.item?.productName}
                               </p>
@@ -600,8 +600,8 @@ export default function OrdersPage({ params }: any) {
                               <></>
                             ) : (
                               <>
-                                <p className="text-xl text-black font-semibold  flex md:justify-start justify-center pt-7">
-                                  <span className="text-black text-xl font-normal font-mono">
+                                <p className="text-xl text-brown font-semibold  flex md:justify-start justify-center pt-7">
+                                  <span className="text-brown text-xl font-normal font-mono">
                                     {" "}
                                     ₹
                                   </span>{" "}
@@ -656,12 +656,12 @@ export default function OrdersPage({ params }: any) {
                         : "md:w-[50%] w-full"
                     }`}
                   >
-                    <p className="text-md text-black font-semibold mb-2">
+                    <p className="text-md text-brown font-semibold mb-2">
                       Delivery To
                     </p>
                     <div className="flex flex-col justify-start items-start">
-                      <p className="text-[14px] text-black font-normal mb-2 ruby">
-                        <span className="text-[14px] text-black font-semibold">
+                      <p className="text-[14px] text-brown font-normal mb-2 ruby">
+                        <span className="text-[14px] text-brown font-semibold">
                           <ViewMore text={orderData?.name} length={35} />
                         </span>
                         {/* ,{" "} */}
@@ -677,8 +677,8 @@ export default function OrdersPage({ params }: any) {
                     </div>
 
                     <div className="flex flex-col justify-start items-start">
-                      <p className="text-[14px] text-black font-regular mb-2">
-                        <span className="text-[14px] text-black font-semibold">
+                      <p className="text-[14px] text-brown font-regular mb-2">
+                        <span className="text-[14px] text-brown font-semibold">
                           {" "}
                           Billing Address :
                         </span>{" "}
@@ -698,7 +698,7 @@ export default function OrdersPage({ params }: any) {
                       </p>
                     </div>
                     <p
-                      className="text-[14px] text-black font-regular flex justify-start items-center mt-2 w-full cursor-pointer"
+                      className="text-[14px] text-brown font-regular flex justify-start items-center mt-2 w-full cursor-pointer"
                       onClick={() =>
                         router.push(`tel:${orderData?.phoneNumber}`)
                       }
@@ -708,7 +708,7 @@ export default function OrdersPage({ params }: any) {
                     </p>
                     {orderData?.alternateNumber !== orderData?.phoneNumber && (
                       <p
-                        className="text-[14px] text-black font-regular flex justify-start items-center mt-2 w-full cursor-pointer"
+                        className="text-[14px] text-brown font-regular flex justify-start items-center mt-2 w-full cursor-pointer"
                         onClick={() =>
                           router.push(`tel:${orderData?.alternateNumber}`)
                         }
@@ -758,15 +758,15 @@ export default function OrdersPage({ params }: any) {
                             : "md:w-[40%] w-full"
                         }`}
                       >
-                        <p className="text-md text-black font-semibold  mb-2">
+                        <p className="text-md text-brown font-semibold  mb-2">
                           Total Order Summary
                         </p>
                         <div className="flex justify-between items-center">
-                          <p className="text-md text-black font-regular">
+                          <p className="text-md text-brown font-regular">
                             SubTotal
                           </p>
-                          <p className="text-md text-black font-regular">
-                            <span className="text-black text-lg font-mono font-normal">
+                          <p className="text-md text-brown font-regular">
+                            <span className="text-brown text-lg font-mono font-normal">
                               {" "}
                               ₹
                             </span>{" "}
@@ -779,11 +779,11 @@ export default function OrdersPage({ params }: any) {
                           </p>
                         </div>
                         <div className="flex justify-between items-center mt-2">
-                          <p className="text-md text-black font-regular">
+                          <p className="text-md text-brown font-regular">
                             Tax Amount
                           </p>
-                          <p className="text-md text-black font-normal ruby">
-                            <span className="text-black text-lg font-mono font-normal">
+                          <p className="text-md text-brown font-normal ruby">
+                            <span className="text-brown text-lg font-mono font-normal">
                               {" "}
                               ₹
                             </span>{" "}
@@ -793,11 +793,11 @@ export default function OrdersPage({ params }: any) {
                           </p>
                         </div>
                         <div className="flex justify-between items-center mt-2">
-                          <p className="text-md text-black font-regular">
+                          <p className="text-md text-brown font-regular">
                             Delivery Charges
                           </p>
-                          <p className="text-md text-black font-normal ruby">
-                            <span className="text-black text-lg font-normal font-mono">
+                          <p className="text-md text-brown font-normal ruby">
+                            <span className="text-brown text-lg font-normal font-mono">
                               {" "}
                               ₹
                             </span>{" "}
@@ -807,7 +807,7 @@ export default function OrdersPage({ params }: any) {
                           </p>
                         </div>
                         <div className="flex justify-between items-center mt-2">
-                          <p className="text-md text-black font-regular">
+                          <p className="text-md text-brown font-regular">
                             Total
                           </p>
                           <p className="text-md text-secondary font-semibold ">
@@ -831,15 +831,15 @@ export default function OrdersPage({ params }: any) {
                             : "md:w-[40%] w-full"
                         }`}
                       >
-                        <p className="text-md text-black font-semibold  mb-2">
+                        <p className="text-md text-brown font-semibold  mb-2">
                           Total Order Summary
                         </p>
                         <div className="flex justify-between items-center">
-                          <p className="text-md text-black font-regular">
+                          <p className="text-md text-brown font-regular">
                             SubTotal
                           </p>
-                          <p className="text-md text-black font-regular">
-                            <span className="text-black text-lg font-normal font-mono">
+                          <p className="text-md text-brown font-regular">
+                            <span className="text-brown text-lg font-normal font-mono">
                               {" "}
                               ₹
                             </span>{" "}
@@ -850,11 +850,11 @@ export default function OrdersPage({ params }: any) {
                           </p>
                         </div>
                         <div className="flex justify-between items-center mt-2">
-                          <p className="text-md text-black font-regular">
+                          <p className="text-md text-brown font-regular">
                             Tax Amount
                           </p>
-                          <p className="text-md text-black font-normal ruby">
-                            <span className="text-black text-lg font-normal font-monospace">
+                          <p className="text-md text-brown font-normal ruby">
+                            <span className="text-brown text-lg font-normal font-monospace">
                               {" "}
                               ₹
                             </span>{" "}
@@ -864,11 +864,11 @@ export default function OrdersPage({ params }: any) {
                           </p>
                         </div>
                         <div className="flex justify-between items-center mt-2">
-                          <p className="text-md text-black font-regular">
+                          <p className="text-md text-brown font-regular">
                             Delivery Charges
                           </p>
-                          <p className="text-md text-black font-normal ruby">
-                            <span className="text-black text-lg font-mono font-normal">
+                          <p className="text-md text-brown font-normal ruby">
+                            <span className="text-brown text-lg font-mono font-normal">
                               {" "}
                               ₹
                             </span>{" "}
@@ -879,7 +879,7 @@ export default function OrdersPage({ params }: any) {
                         </div>
                         <div>
                           <div className="flex justify-between items-center mt-2">
-                            <p className="text-md text-black font-regular">
+                            <p className="text-md text-brown font-regular">
                               Total
                             </p>
                             <p className="text-md text-secondary font-semibold ">
@@ -893,10 +893,10 @@ export default function OrdersPage({ params }: any) {
                             </p>
                           </div>
                           {orderData?.cartId?.cost?.roundedValue !== 0 && (
-                            <p className="text-black w-full text-start text-xs font-regular">
+                            <p className="text-brown w-full text-start text-xs font-regular">
                               {" "}
                               Amount rounded off to{" "}
-                              <span className="text-black text-xs font-mono font-normal mr-0">
+                              <span className="text-brown text-xs font-mono font-normal mr-0">
                                 ₹
                               </span>
                               <span>
@@ -909,12 +909,12 @@ export default function OrdersPage({ params }: any) {
                     </>
                   )}
                   {/* <div className={`${selectedOrder?.isRFQOrder===true ?'hidden': 'w-[40%]'}`}>
-                  <p className="text-md text-black font-semibold  mb-2">
+                  <p className="text-md text-brown font-semibold  mb-2">
                     Total Order Summary
                   </p>
                   <div className="flex justify-between items-center">
-                    <p className="text-md text-black font-regular">SubTotal</p>
-                    <p className="text-md text-black font-regular">
+                    <p className="text-md text-brown font-regular">SubTotal</p>
+                    <p className="text-md text-brown font-regular">
                       
                         {" "}
                         ₹
@@ -923,7 +923,7 @@ export default function OrdersPage({ params }: any) {
                     </p>
                   </div>
                   <div className="flex justify-between items-center mt-2">
-                    <p className="text-md text-black font-regular">
+                    <p className="text-md text-brown font-regular">
                       Delivery Charges
                     </p>
                    
@@ -934,7 +934,7 @@ export default function OrdersPage({ params }: any) {
                     </p>
                   </div>
                   <div className="flex justify-between items-center mt-2">
-                    <p className="text-md text-black font-regular">Total</p>
+                    <p className="text-md text-brown font-regular">Total</p>
                     <p className="text-md text-secondary font-semibold ">
                       
                         {" "}
@@ -949,10 +949,10 @@ export default function OrdersPage({ params }: any) {
                 {/* Order Instructions Start */}
                 {orderData?.cartId?.orderInstructions && (
                   <div className="w-full my-4 p-3">
-                    <p className="text-md text-black font-semibold">
+                    <p className="text-md text-brown font-semibold">
                       Order Instructions
                     </p>
-                    <p className="text-md text-black font-regular">
+                    <p className="text-md text-brown font-regular">
                       {orderData?.cartId?.orderInstructions}
                     </p>
                   </div>
@@ -963,7 +963,7 @@ export default function OrdersPage({ params }: any) {
                 {/* Contact Support Policy Section Start */}
                 <div className="flex justify-between">
                   <div className="w-fit flex justify-center items-center bg-secondaryBg my-4 ml-3 p-3 rounded">
-                    <p className="flex justify-start items-center text-md text-black">
+                    <p className="flex justify-start items-center text-md text-brown">
                       Have an issue with this order?{" "}
                       <span
                         className="ml-2 text-secondary font-medium cursor-pointer"
@@ -991,7 +991,7 @@ export default function OrdersPage({ params }: any) {
                 <div className="w-full my-4 p-3 bg-[#F4F4F4] py-8 px-4 rounded ">
                   <p className="text-md text-[#EDA740] font-semibold">
                     Refund Processed
-                    <span className="ml-2 text-black font-medium cursor-pointer">
+                    <span className="ml-2 text-brown font-medium cursor-pointer">
                       (Refund ID :{" "}
                       {selectedOrder?.refundDetails?.mihpayid
                         ? `${selectedOrder?.refundDetails?.mihpayid}`
@@ -1001,7 +1001,7 @@ export default function OrdersPage({ params }: any) {
                       )
                     </span>
                   </p>
-                  <p className="text-sm text-black font-regular mt-4">
+                  <p className="text-sm text-brown font-regular mt-4">
                     Your refund is being processed. It should reflect in your
                     bank account within 4-7 business days (excluding bank
                     holidays)
@@ -1013,7 +1013,7 @@ export default function OrdersPage({ params }: any) {
             </div>
             <div className=" lg:w-[38%] w-full">
               <div className="w-full    p-3  border border-borderGray shadow-md">
-                <p className="text-lg text-black font-semibold pl-3 mb-3">
+                <p className="text-lg text-brown font-semibold pl-3 mb-3">
                   Shipping Activity
                 </p>
                 <OrderTimeline

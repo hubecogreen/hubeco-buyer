@@ -182,7 +182,7 @@ const B2BMain:React.FC<B2BProps> = ({mobileParam}) =>  {
       </Head>
      {/* <Header /> */} 
       <div className="md:px-10 pb-10 md:w-[90%] w-[98%] md:m-20 m-2">
-      <div className="category-section pb-10 text-center text-black bg-white shadow-[8px_4px_8px_8px_rgba(149,157,165,0.2)]">
+      <div className="category-section pb-10 text-center text-brown bg-white shadow-[8px_4px_8px_8px_rgba(149,157,165,0.2)]">
 
           <div className="container mx-auto py-10 w-full mobile-sm:px-5">
             <div className="text-center">

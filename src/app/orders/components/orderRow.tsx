@@ -42,7 +42,7 @@ export default function OrderRow({ order, reloadPage }: OrderProps) {
         <div className="w-full md:w-[50%] flex flex-col md:flex-row justify-between items-center">
           <div className={`${order?.orderType == "RFQ" ? "w-[60%]" : "w-full"} mb-4 md:mb-0`}>
             <p className="font-medium text-primary text-sm flex items-center justify-start">
-              <span className="text-black text-sm font-medium mr-2">ORDER:</span>
+              <span className="text-brown text-sm font-medium mr-2">ORDER:</span>
               {order?.mainOrderId}
               <span
                 onClick={onClickView}
@@ -59,7 +59,7 @@ export default function OrderRow({ order, reloadPage }: OrderProps) {
           {order?.orderType == "RFQ" && (
             <div className="w-full md:w-[40%] flex justify-start items-center">
               <p className="font-medium text-primary text-sm flex items-center">
-                <span className="text-black text-sm font-medium mr-2">ORDER TYPE:</span>
+                <span className="text-brown text-sm font-medium mr-2">ORDER TYPE:</span>
                 <span className="text-sm text-secondary rounded ml-2">{order?.orderType}</span>
               </p>
             </div>
@@ -69,12 +69,12 @@ export default function OrderRow({ order, reloadPage }: OrderProps) {
 
         {/* Price Section Start */}
         <div className="w-full md:w-[45%] flex flex-col md:flex-row justify-between lg:items-center">
-          <p className="text-sm text-black font-medium mb-2 md:mb-0">
+          <p className="text-sm text-brown font-medium mb-2 md:mb-0">
             <span className="text-sm font-regular mr-2">Payment Mode:</span>
             {order?.orders[0]?.payment === "Pay U payment gateway" ? "PayU" : order?.orders[0]?.payment}
           </p>
-          <p className="text-lg text-black font-semibold">
-            <span className="text-sm font-medium mr-2">Total Amount:</span>  <span className="text-black text-lg font-normal font-monospace mr-1">
+          <p className="text-lg text-brown font-semibold">
+            <span className="text-sm font-medium mr-2">Total Amount:</span>  <span className="text-brown text-lg font-normal font-monospace mr-1">
 
                         {" "}
                         ₹

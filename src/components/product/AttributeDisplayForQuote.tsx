@@ -133,7 +133,7 @@ const AttributeDisplayForQuote = ({
                       className={`text-sm ${
                         selectedAttributes[attributeName] === value
                           ? "text-secondary bg-gray-200 hover:bg-gray-200 hover:text-secondary focus:bg-gray-200 focus:text-secondary"
-                          : "text-black"
+                          : "text-brown"
                       }`}
                     >
                       {value}

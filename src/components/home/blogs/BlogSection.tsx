@@ -50,10 +50,10 @@ const BlogsSection = () => {
 
         {/* LEFT CONTENT */}
         <div className="w-full md:w-[450px]">
-          <h2 className="text-center md:text-left text-[32px] md:text-[44px] text-black mb-[8px]">
+          <h2 className="text-center md:text-left text-[32px] md:text-[44px] text-brown mb-[8px]">
             Blogs
           </h2>
-          <p className="text-black text-[22px] md:text-[33px] mt-2 text-center md:text-left ">
+          <p className="text-brown text-[22px] md:text-[33px] mt-2 text-center md:text-left ">
             Inspiring insights for a smarter{" "}
             <span className="text-primary">greener</span> future
           </p>

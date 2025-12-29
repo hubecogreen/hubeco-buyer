@@ -41,11 +41,11 @@ const Footer = () => {
           <div className="w-full max-w-[1200px]">
             {/* Mobile */}
             <div className="md:hidden flex flex-col gap-2 px-4">
-              <p className="text-[12px] text-black font-light leading-tight pb-[40px]">
+              <p className="text-[12px] text-brown font-light leading-tight pb-[40px]">
                 Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt Ltd. All Rights Reserved
               </p>
 
-              <div className="flex flex-wrap gap-2 text-[12px] text-black pb-[40px]">
+              <div className="flex flex-wrap gap-2 text-[12px] text-brown pb-[40px]">
                 <Link href="/privacy-policy">Privacy Policy</Link> |
                 <Link href="/terms-of-use">Terms of Use</Link> |
                 <Link href="/vendor-terms-sale">Terms of Sale</Link> |
@@ -56,11 +56,11 @@ const Footer = () => {
 
             {/* Desktop */}
             <div className="hidden md:flex justify-between items-center whitespace-nowrap">
-              <p className="text-[12px] text-black font-light">
+              <p className="text-[12px] text-brown font-light">
                 Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt Ltd. All Rights Reserved
               </p>
 
-              <div className="flex gap-1 text-[12px] text-black whitespace-nowrap ">
+              <div className="flex gap-1 text-[12px] text-brown whitespace-nowrap ">
                 <Link href="/privacy-policy">Privacy Policy</Link> |
                 <Link href="/terms-of-use">Terms of Use</Link> |
                 <Link href="/vendor-terms-sale">Terms of Sale</Link> |
@@ -124,9 +124,9 @@ const Footer = () => {
             <div className="w-full md:w-[230px]">
               <h4 className="text-[14px] text-[#069A66] mb-2 font-semibold">Contact Us</h4>
 
-              <div className="flex items-start gap-2 text-black text-[13px] md:text-xs">
+              <div className="flex items-start gap-2 text-brown text-[13px] md:text-xs">
                 <p
-                  className="text-black mb-2 text-[13px] md:text-[14px] leading-[18px] md:leading-[20px]"
+                  className="text-brown mb-2 text-[13px] md:text-[14px] leading-[18px] md:leading-[20px]"
                 >
                   Awfis Co-Working Space <br />
                   NSL Icon, Road No. 12 <br />
@@ -135,11 +135,11 @@ const Footer = () => {
                 </p>
               </div>
 
-              <p className="text-[13px] md:text-[14px] flex items-center gap-2 text-black mb-2">
+              <p className="text-[13px] md:text-[14px] flex items-center gap-2 text-brown mb-2">
                 <FiPhone size={14} /> Phone: +91 9985544055
               </p>
 
-              <p className="text-[13px] md:text-[14px] flex items-center gap-2 text-black mb-3 md:mb-1">
+              <p className="text-[13px] md:text-[14px] flex items-center gap-2 text-brown mb-3 md:mb-1">
                 <BsEnvelope size={14} />Email: info@hubeco.market
               </p>
 

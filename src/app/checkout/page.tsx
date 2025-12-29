@@ -819,14 +819,14 @@ const Checkout = () => {
           <div className="border border-borderGray rounded p-4  flex items-center justify-between">
             <div className=" flex items-center justify-center">
               <IoLocationOutline className="text-secondary mr-2" size={28} />
-              <p className="font-semibold text-sm text-black ">
+              <p className="font-semibold text-sm text-brown ">
                 {actualAddress &&
                 actualAddress?.contactPersonName &&
                 actualAddress?.contactPersonName.includes("|")
                   ? actualAddress?.contactPersonName.replace("|", " ")
                   : userInfos?.firstName + " " + userInfos?.lastName}
                 ,
-                <span className="text-sm font-regular text-black">
+                <span className="text-sm font-regular text-brown">
                   {/* {deliveryAddress?.address +
                     ", " +
                     deliveryAddress?.city +
@@ -897,7 +897,7 @@ const Checkout = () => {
                       ))
                     ) : (
                       <>
-                        <p className="text-[14px] text-black">
+                        <p className="text-[14px] text-brown">
                           No addresses available.
                           <span
                             className="text-[14px] text-secondary hover:underline"
@@ -913,7 +913,7 @@ const Checkout = () => {
                 </div>
                 <DialogFooter>
                   <Button
-                    className="text-black bg-secondaryBg hover:bg-secondaryBg w-fit mr-4"
+                    className="text-brown bg-secondaryBg hover:bg-secondaryBg w-fit mr-4"
                     type="button"
                     onClick={() => {
                       setChangePopup(false);
@@ -989,7 +989,7 @@ const Checkout = () => {
                   <div className="mb-8">
                     <div className="flex flex-col sm:flex-row gap-3 my-5">
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                           First Name <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1014,7 +1014,7 @@ const Checkout = () => {
                         />
                       </div>
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                           Last Name
                         </label>
                         <Controller
@@ -1041,7 +1041,7 @@ const Checkout = () => {
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3 my-5">
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                           Address Line 1 <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1066,7 +1066,7 @@ const Checkout = () => {
                         />
                       </div>
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                           Land Mark
                         </label>
                         <Controller
@@ -1093,7 +1093,7 @@ const Checkout = () => {
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3 my-5">
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                           Pin code <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1122,7 +1122,7 @@ const Checkout = () => {
                         />
                       </div>
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                           Country<span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1166,7 +1166,7 @@ const Checkout = () => {
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3 my-5">
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                           State <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1210,7 +1210,7 @@ const Checkout = () => {
                         </div>
                       </div>
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                           City <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1256,7 +1256,7 @@ const Checkout = () => {
 
                     <div className="flex flex-col sm:flex-row gap-3 my-5">
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                           Phone Number <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1281,7 +1281,7 @@ const Checkout = () => {
                         />
                       </div>
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                           Email <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1423,7 +1423,7 @@ const Checkout = () => {
                     />{" "}
                     Billing Address
                   </p>
-                  <p className="text-md text-black font-regular">
+                  <p className="text-md text-brown font-regular">
                     {billinAddress && billinAddress.length > 0
                       ? billinAddress?.replace(/\|/g, ",  ")
                       : billinAddress}
@@ -1576,8 +1576,8 @@ const Checkout = () => {
                         <p className="text-gray-500">
                           Quantity : {product?.quantity}
                         </p>
-                        <p className="text-black font-semibold text-md flex item-center justify-start">
-                        <span className="text-black text-lg font-normal font-mono mr-1.5">
+                        <p className="text-brown font-semibold text-md flex item-center justify-start">
+                        <span className="text-brown text-lg font-normal font-mono mr-1.5">
 
                             {" "}
                             ₹
@@ -1627,8 +1627,8 @@ const Checkout = () => {
                     <p className="text-md text-fontGray font-regular">
                       Subtotal
                     </p>
-                    <p className="text-black font-semibold text-md flex item-center justify-start">
-                    <span className="text-black text-lg font-normal font-mono mr-1.5">
+                    <p className="text-brown font-semibold text-md flex item-center justify-start">
+                    <span className="text-brown text-lg font-normal font-mono mr-1.5">
 
                         {" "}
                         ₹
@@ -1642,8 +1642,8 @@ const Checkout = () => {
                 {/* {cost?.deliveryCharges && ( */}
                 <div className="flex justify-between mb-2">
                   <p>Delivery Charges</p>
-                  <p className="text-black font-semibold text-md flex item-center justify-start">
-                  <span className="text-black text-lg font-normal font-mono mr-[5px]">
+                  <p className="text-brown font-semibold text-md flex item-center justify-start">
+                  <span className="text-brown text-lg font-normal font-mono mr-[5px]">
 
                       {" "}
                       ₹
@@ -1655,8 +1655,8 @@ const Checkout = () => {
                 {cost?.taxes && (
                   <div className="flex justify-between mb-2">
                     <p>Taxes</p>
-                    <p className="text-black font-semibold text-md flex item-center justify-start">
-                    <span className="text-black text-lg font-normal font-mono mr-[5px]">
+                    <p className="text-brown font-semibold text-md flex item-center justify-start">
+                    <span className="text-brown text-lg font-normal font-mono mr-[5px]">
                         {" "}
                         ₹
                       </span>{" "}
@@ -1667,8 +1667,8 @@ const Checkout = () => {
                 {cost?.totalCost && (
                   <div className="flex justify-between font-semibold text-lg mt-4">
                     <p>Total</p>
-                    <p className="text-black font-semibold text-md flex item-center justify-start">
-                    <span className="text-black text-base font-normal font-mono mr-[5px]">
+                    <p className="text-brown font-semibold text-md flex item-center justify-start">
+                    <span className="text-brown text-base font-normal font-mono mr-[5px]">
 
                         {" "}
                         ₹
@@ -1678,10 +1678,10 @@ const Checkout = () => {
                   </div>
                 )}
                 {cost?.roundedValue !== 0 && (
-                  <p className="text-black w-full text-start  text-xs font-regular">
+                  <p className="text-brown w-full text-start  text-xs font-regular">
                     {" "}
                     Amount rounded off to{" "}
-                    <span className="text-black text-xs font-normal font-mono mr-0">
+                    <span className="text-brown text-xs font-normal font-mono mr-0">
 
                       ₹
                     </span>

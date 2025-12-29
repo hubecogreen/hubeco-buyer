@@ -276,7 +276,7 @@ const RenderButton = ({ orderId, order, justify = "center" }: any) => {
                         />
                       </div>
 
-                      <p className="text-center text-lg text-black mt-4">
+                      <p className="text-center text-lg text-brown mt-4">
                         Are you sure you want to cancel the order?
                       </p>
 

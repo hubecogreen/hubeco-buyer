@@ -935,7 +935,7 @@ reset1()
       </div>
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             First Name <span className="text-red">*</span>
           </label>
           <Controller
@@ -959,7 +959,7 @@ reset1()
           />
         </div>
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Last Name
           </label>
           <Controller
@@ -987,7 +987,7 @@ reset1()
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
         <div className="flex  justify-between items-center">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Email Address <span className="text-red">*</span>
 
           </label>
@@ -1042,7 +1042,7 @@ reset1()
         </div>
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
         <div className="flex  justify-between items-center">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Phone Number <span className="text-red">*</span>
           </label>
           <p onClick={onClickEdit} className={`${editMobile ? 'text-gray' : 'text-secondary'} text-md cursor-pointer font-semibold mr-1`}>{editMobile ? 'Cancel' :'Edit'}</p>
@@ -1127,12 +1127,12 @@ reset1()
         <DialogHeader className="flex sm:justify-center justify-center items-center ">
           <DialogTitle className="text-center text-2xl mb-4">Verify OTP</DialogTitle>
           <div className="flex items-center justify-center w-max">
-              <p className="my-2 md:my-2 lg:my-2 text-sm md:text-sm text-black  text-center">
+              <p className="my-2 md:my-2 lg:my-2 text-sm md:text-sm text-brown  text-center">
                 Enter the code we sent to the{' '}{changeType === "email" ? 'Email' : 'Mobile'} 
               </p>
             </div>
             <div className="flex items-center justify-center">
-              <p className=" flex text-sm md:text-sm text-black  text-center font-bold">
+              <p className=" flex text-sm md:text-sm text-brown  text-center font-bold">
                 {changeType === "email" ? formattedEmail : formattedNumber}
               </p>
             </div>
@@ -1161,7 +1161,7 @@ reset1()
                     ref={(el: any) => (inputRefs.current[index] = el)} // Set ref to each input field
                     value={value}
                     onChange={(e) => handleInputChange(onChange, e.target.value, index, field)}
-                    className="otpfield text-black text-center border border-slate-400 rounded-lg p-3 w-[70px] h-[55px]"
+                    className="otpfield text-brown text-center border border-slate-400 rounded-lg p-3 w-[70px] h-[55px]"
                   />
                 )}
               />

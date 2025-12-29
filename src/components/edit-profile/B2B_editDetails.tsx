@@ -655,7 +655,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
     >
          <div className="flex flex-wrap w-full">
         <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Company Name <span className="text-red">*</span>
           </label>
           <Controller
@@ -680,7 +680,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
           />
         </div>
         <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Business Type <span className="text-red">*</span>
           </label>
           <Controller
@@ -757,7 +757,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
         </div>
         {others ? (
           <div className={"md:w-3/6 w-full p-5 "}>
-            <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+            <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
               Other Business Type<span className="text-red">*</span>
             </label>
             {/* <Controller
@@ -809,7 +809,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
         {/* </div> */}
         {/* <div style={{ display: "flex" }}> */}
         <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             GST <span className="text-red">*</span>
           </label>
           <div className="flex juistify-between items-start">
@@ -878,7 +878,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
             ) : (
               <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
                 <p
-                  className="truncate text-black text-[14px] w-[300px] mr-[10px]"
+                  className="truncate text-brown text-[14px] w-[300px] mr-[10px]"
 
                 >
                   {gstExtractPathUrl.split("/").pop()}
@@ -917,7 +917,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
           </div>
         </div>
         <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             TAN 
           </label>
           <div className="flex juistify-between items-start">
@@ -984,7 +984,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
             ) : (
               <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
                 <p
-                  className="truncate text-black text-[14px] w-[300px] mr-[10px]"
+                  className="truncate text-brown text-[14px] w-[300px] mr-[10px]"
 
                 >
                   {tanExtractPathUrl.split("/").pop()}
@@ -1026,7 +1026,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
         </div>
         <div className="flex flex-wrap w-full">
         <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             PAN <span className="text-red">*</span>
           </label>
           <div className="flex juistify-between items-start">
@@ -1094,7 +1094,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
             ) : (
               <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
                 <p
-                  className="truncate text-black text-[14px] w-[300px] mr-[10px]"
+                  className="truncate text-brown text-[14px] w-[300px] mr-[10px]"
 
                 >
                   {panExtractPathUrl.split("/").pop()}
@@ -1136,7 +1136,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
           </div>
         </div>
         <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Company Address <span className="text-red">*</span>
           </label>
           <Controller

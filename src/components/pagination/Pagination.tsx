@@ -56,8 +56,8 @@ const Pagination: React.FC<paginationProps> = ({
         <button
           key={1}
           onClick={() => handleClick(1)}
-          className={`flex items-center justify-center px-3 py-1 rounded bg-graylight text-black h-8 w-8 text-base ${
-            currentPage === 1 ? "bg-pink text-white" : "bg-lightGray text-black"
+          className={`flex items-center justify-center px-3 py-1 rounded bg-graylight text-brown h-8 w-8 text-base ${
+            currentPage === 1 ? "bg-pink text-white" : "bg-lightGray text-brown"
           }`}
         >
           1
@@ -74,8 +74,8 @@ const Pagination: React.FC<paginationProps> = ({
         <button
           key={i}
           onClick={() => handleClick(i)}
-          className={`flex items-center justify-center px-3 py-1 rounded bg-graylight text-black h-8 w-8 text-base ${
-            currentPage === i ? "bg-pink text-white" : "bg-lightGray text-black"
+          className={`flex items-center justify-center px-3 py-1 rounded bg-graylight text-brown h-8 w-8 text-base ${
+            currentPage === i ? "bg-pink text-white" : "bg-lightGray text-brown"
           }`}
         >
           {i}
@@ -92,10 +92,10 @@ const Pagination: React.FC<paginationProps> = ({
         <button
           key={totalPages}
           onClick={() => handleClick(totalPages)}
-          className={`flex items-center justify-center px-3 py-1 rounded bg-graylight text-black h-8 w-8 text-base ${
+          className={`flex items-center justify-center px-3 py-1 rounded bg-graylight text-brown h-8 w-8 text-base ${
             currentPage === totalPages
               ? "bg-pink text-white"
-              : "bg-lightGray text-black"
+              : "bg-lightGray text-brown"
           }`}
         >
           {totalPages}
@@ -110,14 +110,14 @@ const Pagination: React.FC<paginationProps> = ({
     <div className="flex items-center justify-center space-x-2 mt-4">
       <button
         onClick={handleFirstPage}
-        className="flex items-center justify-center px-1 py-1 rounded bg-lightGray text-black  h-8 w-8 "
+        className="flex items-center justify-center px-1 py-1 rounded bg-lightGray text-brown  h-8 w-8 "
         disabled={currentPage === 1}
       >
         <MdKeyboardDoubleArrowLeft size={18} />
       </button>
       <button
         onClick={() => handleClick(currentPage - 1)}
-        className="flex items-center justify-center px-1 py-1 rounded bg-lightGray text-black  h-8 w-8 "
+        className="flex items-center justify-center px-1 py-1 rounded bg-lightGray text-brown  h-8 w-8 "
         disabled={currentPage === 1}
       >
         <MdKeyboardArrowLeft size={18} />
@@ -125,14 +125,14 @@ const Pagination: React.FC<paginationProps> = ({
       {renderPageNumbers()}
       <button
         onClick={() => handleClick(currentPage + 1)}
-        className="flex items-center justify-center px-1 py-1 rounded bg-lightGray text-black  h-8 w-8 "
+        className="flex items-center justify-center px-1 py-1 rounded bg-lightGray text-brown  h-8 w-8 "
         disabled={currentPage === totalPages}
       >
         <MdKeyboardArrowRight size={18} />
       </button>
       <button
         onClick={handleLastPage}
-        className="flex items-center justify-center px-1 py-1 rounded bg-lightGray text-black h-8 w-8 "
+        className="flex items-center justify-center px-1 py-1 rounded bg-lightGray text-brown h-8 w-8 "
         disabled={currentPage === totalPages}
       >
         <MdKeyboardDoubleArrowRight size={18} />

@@ -525,7 +525,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                 replace={true}
                                 onClick={handleClick}
                               >
-                                <a className="block text-black text-sm my-1 px-2 py-1">
+                                <a className="block text-brown text-sm my-1 px-2 py-1">
                                   {subItem?.name}
                                 </a>
                               </a> */}
@@ -536,7 +536,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                   subItem?.seoSlug || "child-category"
                                 }?ccid=${subItem?._id}`}
                                 replace={true}
-                                className="block text-black text-sm my-1 px-2 py-1"
+                                className="block text-brown text-sm my-1 px-2 py-1"
                                 onClick={handleClick}
                               >
                                 {subItem?.name}
@@ -612,7 +612,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                             //   href={`/products?ccid=${item?._id}`}
                             //   onClick={handleClick}
                             // >
-                            //   <a className="block text-black text-sm my-1">
+                            //   <a className="block text-brown text-sm my-1">
                             //     <ViewMore text={item?.name} length={30} />
                             //   </a>
                             // </a>
@@ -623,7 +623,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                               }/${item?.seoSlug || "child-category"}?ccid=${
                                 item?._id
                               }`}
-                              className="block text-black text-sm my-1"
+                              className="block text-brown text-sm my-1"
                               onClick={handleClick}
                             >
                               <ViewMore text={item?.name} length={30} />

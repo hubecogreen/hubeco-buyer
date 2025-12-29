@@ -252,7 +252,7 @@ export default function Page() {
           <div className="px-4 md:px-30 md:mt-20 pb-10 w-full md:w-11/12 mx-auto">
             
             <div
-  className="category-section pb-10 text-center text-black bg-white shadow-[rgba(149,157,165,0.2)_8px_4px_8px_8px]"
+  className="category-section pb-10 text-center text-brown bg-white shadow-[rgba(149,157,165,0.2)_8px_4px_8px_8px]"
 >
 
               <div className="container mx-auto py-10">

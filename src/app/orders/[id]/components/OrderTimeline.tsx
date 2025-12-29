@@ -355,7 +355,7 @@ const OrderTimeline: React.FC<TimelineProps> = ({
               <div className="ml-3 pb-3">
                 <p
                   className={`font-medium  ${
-                    isCompleted ? color : "text-black opacity-50"
+                    isCompleted ? color : "text-brown opacity-50"
                   }`}
                 >
                   {label}
@@ -379,7 +379,7 @@ const OrderTimeline: React.FC<TimelineProps> = ({
                   <p className="text-sm text-gray-500 capitalize bg-[#f7f7f7] p-3 rounded h-full mt-1">
                     {/* {status.timestamp ? dayjs(status.timestamp).format("dddd, MMM D, hh:mm A") : ""} */}
 
-                    <span className="text-sm font-medium text-black">
+                    <span className="text-sm font-medium text-brown">
                       Reason :{" "}
                     </span>
                     <ViewMore
@@ -392,7 +392,7 @@ const OrderTimeline: React.FC<TimelineProps> = ({
                 {status.previousStatus == "cancellation_requested" &&
                   status.currentStatus == "confirmed" && (
                     <p className="text-sm text-gray-500 capitalize bg-[#f7f7f7] p-3 rounded h-full mt-1">
-                      <span className="text-sm font-medium text-black">
+                      <span className="text-sm font-medium text-brown">
                         Reason :{" "}
                       </span>
                       <ViewMore

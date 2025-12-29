@@ -45,11 +45,11 @@ const Thankyou = () => {
               <div className="flex justify-center mb-4">
               <LottieWrapper animationData={animationData} loop={true} style={{ width: 400, height: 400 }} />;
               </div>
-              <h1 className="text-4xl md:text-3xl font-bold mb-4 text-black">
+              <h1 className="text-4xl md:text-3xl font-bold mb-4 text-brown">
                 Thank you !
               </h1>
               <div className="flex items-center justify-center">
-                <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-base text-black w-10/12 text-center">
+                <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-base text-brown w-10/12 text-center">
                   Your enquiry has been submitted successfully
                 </p>
               </div>

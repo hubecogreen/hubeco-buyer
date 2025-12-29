@@ -173,7 +173,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ id }) => {
         <div className="py-8 md:pt-10 md:pb-2">
           <div className="block md:flex md:justify-between mb-2 md:mb-4">
             <div className="block md:flex">
-              <h1 className="text-black  text-2xl md:text-2xl font-bold">
+              <h1 className="text-brown  text-2xl md:text-2xl font-bold">
                 {projectData?.title}
               </h1>
             </div>

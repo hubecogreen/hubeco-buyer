@@ -152,7 +152,7 @@ const CustomTicketPopup: React.FC<CustomPopupProps> = ({
       <div className="fixed inset-0 flex items-center justify-center z-50">
         <div className="bg-white md:w-[500px] p-6 rounded shadow-lg border border-borderGray relative">
           <div className="flex justify-center items-center">
-            <p className="text-center text-lg text-black font-medium mt-4">Raise a Ticket</p>
+            <p className="text-center text-lg text-brown font-medium mt-4">Raise a Ticket</p>
               <PiTicketFill className="mt-3 ml-2 text-2xl text-primary" />
           </div>
           <form onSubmit={handleSubmit(handleFormSubmit)}>

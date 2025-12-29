@@ -58,7 +58,7 @@ const QuotePayment:React.FC<QuotePaymentProps> = ({id}) => {
       },
       {
         statuses: ["pending"],
-        textColor: "text-black",
+        textColor: "text-brown",
         bgColor: "text-[#fdba74]",
       },
       {
@@ -83,7 +83,7 @@ const QuotePayment:React.FC<QuotePaymentProps> = ({id}) => {
       },
       {
         statuses: ["partial_payment_made"],
-        textColor: "text-black",
+        textColor: "text-brown",
         bgColor: "text-[#fdba74]",
       },
       {
@@ -98,7 +98,7 @@ const QuotePayment:React.FC<QuotePaymentProps> = ({id}) => {
       },
     ];
 
-    const defaultStyles = { textColor: "text-black", bgColor: "bg-gray-300" };
+    const defaultStyles = { textColor: "text-brown", bgColor: "bg-gray-300" };
 
     // Find the matching style based on the status
     const style = statusStyles.find((item) =>

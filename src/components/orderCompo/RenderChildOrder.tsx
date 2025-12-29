@@ -80,14 +80,14 @@ const RenderChildOrder = (order: any, orderLength: any) => {
   const renderInfo = (data: any) => {
     if (data?.status === "payment_success" && data.shippingInDays) {
       return (
-        <p className="text-sm text-black my-2 text-center w-full capitalize">
+        <p className="text-sm text-brown my-2 text-center w-full capitalize">
           Expected Shipping by {calculateShippingDate(data?.shippingInDays)}
         </p>
       );
     }
     if (data?.status === "shipped" && data?.shippingInfo) {
       return (
-        <p className="text-sm text-black my-2 text-center w-full capitalize">
+        <p className="text-sm text-brown my-2 text-center w-full capitalize">
           {data?.shippingInfo} on {dayjs(data?.updatedAt).format("DD MMM YYYY")}
         </p>
       );
@@ -135,7 +135,7 @@ const RenderChildOrder = (order: any, orderLength: any) => {
           >
             {order?.order?.orderId}
           </p>
-          <p className="text-base text-black font-semibold w-full">
+          <p className="text-base text-brown font-semibold w-full">
             {order?.order?.item?.productName}
           </p>
         </div>
@@ -144,7 +144,7 @@ const RenderChildOrder = (order: any, orderLength: any) => {
       {/* Price Section */}
       <div className="flex flex-col w-full sm:w-[30%] justify-center items-start sm:items-center mt-4 sm:mt-0">
         {!order?.order?.isRFQOrder && (
-          <p className="text-xl text-black font-semibold">
+          <p className="text-xl text-brown font-semibold">
             ₹ {order?.order?.item?.totalPrice.toLocaleString("en-IN")} /-
           </p>
         )}

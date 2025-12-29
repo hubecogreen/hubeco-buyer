@@ -751,7 +751,7 @@ const B2BDetails: React.FC<CompanyDetailsFormProps> = ({
       <div className="flex flex-wrap">
         {/* <div style={{ display: "flex" }}> */}
         <div className={"md:w-3/6 md:p-5 mobile-sm:px-0 mobile-sm:w-full mobile-sm:my-2 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Company Name <span className="text-red">*</span>
           </label>
           <Controller
@@ -776,7 +776,7 @@ const B2BDetails: React.FC<CompanyDetailsFormProps> = ({
           />
         </div>
         <div className={"md:w-3/6 md:p-5 mobile-sm:px-0 mobile-sm:w-full mobile-sm:my-2 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Business Type <span className="text-red">*</span>
           </label>
           <Controller
@@ -859,7 +859,7 @@ const B2BDetails: React.FC<CompanyDetailsFormProps> = ({
         </div>
         {others ? (
           <div className={"md:w-3/6 md:p-5 mobile-sm:px-0 mobile-sm:w-full mobile-sm:my-2 "}>
-            <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+            <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
               Other Business Type<span className="text-red">*</span>
             </label>
 
@@ -885,7 +885,7 @@ const B2BDetails: React.FC<CompanyDetailsFormProps> = ({
         {/* </div> */}
         {/* <div style={{ display: "flex" }}> */}
         <div className={"md:w-3/6 md:p-5 mobile-sm:px-0 mobile-sm:w-full mobile-sm:my-2 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             GST <span className="text-red">*</span>
           </label>
           <div className="flex juistify-between items-start">
@@ -951,7 +951,7 @@ const B2BDetails: React.FC<CompanyDetailsFormProps> = ({
               ""
             ) : (
               <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
-                <p className="truncate text-black text-[14px] w-[300px] mr-2">
+                <p className="truncate text-brown text-[14px] w-[300px] mr-2">
 
                   {gstExtractPathUrl.split("/").pop()}
                 </p>
@@ -979,7 +979,7 @@ const B2BDetails: React.FC<CompanyDetailsFormProps> = ({
           </div>
         </div>
         <div className={"md:w-3/6 md:p-5 mobile-sm:px-0 mobile-sm:w-full mobile-sm:my-2 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             TAN
           </label>
           <div className="flex juistify-between items-start">
@@ -1043,7 +1043,7 @@ const B2BDetails: React.FC<CompanyDetailsFormProps> = ({
               ""
             ) : (
               <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
-                  <p className="truncate text-black text-[14px] w-[300px] mr-2">
+                  <p className="truncate text-brown text-[14px] w-[300px] mr-2">
                   {tanExtractPathUrl.split("/").pop()}
                 </p>
                 <IoEyeOutline
@@ -1072,7 +1072,7 @@ const B2BDetails: React.FC<CompanyDetailsFormProps> = ({
         {/* </div> */}
         {/* <div style={{ display: "flex" }}> */}
         <div className={"md:w-3/6 md:p-5 mobile-sm:px-0 mobile-sm:w-full mobile-sm:my-2 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             PAN <span className="text-red">*</span>
           </label>
           <div className="flex juistify-between items-start">
@@ -1137,7 +1137,7 @@ const B2BDetails: React.FC<CompanyDetailsFormProps> = ({
               ""
             ) : (
               <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
-                <p className="truncate text-black text-[14px] w-[300px] mr-2">
+                <p className="truncate text-brown text-[14px] w-[300px] mr-2">
                   {panExtractPathUrl.split("/").pop()}
                 </p>
                 <IoEyeOutline
@@ -1164,7 +1164,7 @@ const B2BDetails: React.FC<CompanyDetailsFormProps> = ({
           </div>
         </div>
         <div className={"md:w-3/6 md:p-5 mobile-sm:px-0 mobile-sm:w-full mobile-sm:my-2 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Company Address <span className="text-red">*</span>
           </label>
           <Controller
@@ -1195,7 +1195,7 @@ const B2BDetails: React.FC<CompanyDetailsFormProps> = ({
 
         <CustomButton
           title={"Back"}
-          className={`md:ml-3 mobile-sm:ml-0 hover:bg-primary  h-12 md:h-12 !md:w-32 mobile-sm:!w-32  w-30 md:text-md text-sm text-black `}
+          className={`md:ml-3 mobile-sm:ml-0 hover:bg-primary  h-12 md:h-12 !md:w-32 mobile-sm:!w-32  w-30 md:text-md text-sm text-brown `}
           customStyles={{ backgroundColor: "#E0E0E0" }}
           onPress={prevStep}
         />

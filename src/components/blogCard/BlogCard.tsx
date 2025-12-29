@@ -29,7 +29,7 @@ const BlogCard = ({ product }: any) => {
           {new Date(product.createdAt).toDateString()}
         </span>
 
-        <h3 className="mt-2 text-[18px] md:text-[24px] font-medium text-black line-clamp-2">
+        <h3 className="mt-2 text-[18px] md:text-[24px] font-medium text-brown line-clamp-2">
           {product.title}
         </h3>
       </div>

@@ -183,7 +183,7 @@
 //             Delivery and Shipping Policy
 //           </a>
 //         </div>
-//         <div className={`flex justify-center items-center   text-sm  text-black  leading-8 `}>
+//         <div className={`flex justify-center items-center   text-sm  text-brown  leading-8 `}>
 //         <Worker
 //           workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}
 //         >
@@ -236,7 +236,7 @@ export default function Page() {
         </div>
 
         <div
-          className={`w-full flex justify-center items-center mx-auto max-w-[100%]  text-sm  text-black  leading-8 `}
+          className={`w-full flex justify-center items-center mx-auto max-w-[100%]  text-sm  text-brown  leading-8 `}
         >
           <div className="p-10 leading-loose text-justify">
             <p

@@ -395,7 +395,7 @@ export default function CartRow({
               onClick={() => onClickImage()}
             />
             <div className="w-full">
-              <p className="font-medium text-black w-full">
+              <p className="font-medium text-brown w-full">
                 {/* {product?.product?.variantName} */}
                 {(product?.productInfo?.productName).length > 30
                   ? (product?.productInfo?.productName).slice(0, 30) + "..."
@@ -407,7 +407,7 @@ export default function CartRow({
                     return (
                       <p
                         key={index}
-                        className="text-black text-medium text-sm uppercase"
+                        className="text-brown text-medium text-sm uppercase"
                       >
                         {/* {attribute?.value} */}
                         {attribute?.value.length > 30
@@ -533,13 +533,13 @@ export default function CartRow({
         <td className="py-4 px-4 w-[20%]">
           {/* {product?.product?.currentPrice} */}
           <div className="flex justify-start items-center">
-            <p className="md:text-xl text-md text-black text-normal ">
-            <span className="text-black text-xl font-normal font-mono">
+            <p className="md:text-xl text-md text-brown text-normal ">
+            <span className="text-brown text-xl font-normal font-mono">
 
                 {" "}
                 ₹
               </span>{" "}
-              <span className="md:text-xl text-md text-black font-semibold text-normal ">
+              <span className="md:text-xl text-md text-brown font-semibold text-normal ">
                 {formatCurrencyInIndianStyle(
                   product?.costBeforeGST
                 )}
@@ -661,7 +661,7 @@ export default function CartRow({
             <AlertDialogFooter className="flex sm:justify-center justify-center w-full items-center">
               <AlertDialogCancel
                 onClick={() => setOpen(false)}
-                className=" h-[35px] md:h-[45px] md:w-24  text-black  w-16"
+                className=" h-[35px] md:h-[45px] md:w-24  text-brown  w-16"
               >
                 No
               </AlertDialogCancel>

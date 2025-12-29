@@ -211,13 +211,13 @@ const VerifyNumber: React.FC<VerifyNumProps> = ({ mobileNumber, onPress, resetPa
       <div className="bg-cover bg-center bg-[url('/images/auth/auth.webp')] h-5/6">
         <div className="bg-opacity-90 h-full flex items-center justify-center py-20 md:py-20">
           <div className="text-center md:p-10 md:pt-10 py-10 md:py-15 max-w-md md:max-w-lg text-white bg-white">
-            <h1 className="text-[24px] md:text-3xl font-bold mb-4 text-black">
+            <h1 className="text-[24px] md:text-3xl font-bold mb-4 text-brown">
               Verify your Number
             </h1>
-            <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-sm text-black w-full text-center">
+            <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-sm text-brown w-full text-center">
               Enter the code we sent to the number
             </p>
-            <p className="text-sm md:text-sm text-black w-full text-center font-bold">
+            <p className="text-sm md:text-sm text-brown w-full text-center font-bold">
               {formattedNumber}
             </p>
             <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
@@ -234,7 +234,7 @@ const VerifyNumber: React.FC<VerifyNumProps> = ({ mobileNumber, onPress, resetPa
                             ref={(el:any) => (inputRefs.current[index] = el)} // Set ref to each input field
                             value={value}
                             onChange={(e) => handleInputChange(onChange, e.target.value, index)}
-                            className="text-black text-center border border-slate-400 rounded-lg p-3 w-[70px] h-[55px]"
+                            className="text-brown text-center border border-slate-400 rounded-lg p-3 w-[70px] h-[55px]"
 
                           />
                         )}
@@ -273,7 +273,7 @@ const VerifyNumber: React.FC<VerifyNumProps> = ({ mobileNumber, onPress, resetPa
                   </div>
                 </div>
                 <div className="flex justify-center items-center mt-3">
-                  <p className="text-center text-sm text-black">If you haven't received any OTP?</p>
+                  <p className="text-center text-sm text-brown">If you haven't received any OTP?</p>
                   <p className="text-center text-sm text-secondary" onClick={resendOTP}>
                     <Link href="#" className="text-secondary ml-1 text-md cursor-pointer">Resend</Link>
                   </p>

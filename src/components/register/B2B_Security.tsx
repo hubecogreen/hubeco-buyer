@@ -179,7 +179,7 @@ const B2BSecurity: React.FC<SecurityFormProps> = ({
     <form autoComplete="off" onSubmit={handleSubmit(handleSecuritySubmit)}>
       <div style={{ display: "flex" }}>
         <div className={"w-3/6 p-5"}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Password <span className="text-red">*</span>
           </label>
           <Controller
@@ -204,7 +204,7 @@ const B2BSecurity: React.FC<SecurityFormProps> = ({
           />
         </div>
         <div className={"w-3/6 p-5"}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Confirm Password <span className="text-red">*</span>
           </label>
           <Controller
@@ -246,7 +246,7 @@ const B2BSecurity: React.FC<SecurityFormProps> = ({
       <div className="flex flex-col sm:flex-row justify-start mt-4">
         <CustomButton
           title={"Back"}
-          className="ml-3 hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-black "
+          className="ml-3 hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-brown "
           customStyles={{ backgroundColor: "#E0E0E0" }}
           onPress={prevStep}
         />

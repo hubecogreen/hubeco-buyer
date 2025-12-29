@@ -171,7 +171,7 @@ const PortfolioCard = () => {
       </head>
       <div className="max-w-full px-0">
         <div className="block md:flex md:justify-between mb-6 md:mb-6">
-          <h2 className="text-black font-bold text-2xl md:text-3xl">
+          <h2 className="text-brown font-bold text-2xl md:text-3xl">
             Projects
           </h2>
           <div className="h-12 block flex md:w-96 ">

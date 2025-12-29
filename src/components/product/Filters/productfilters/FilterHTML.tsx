@@ -100,7 +100,7 @@ const FilterHTML = ({
                       >
                         <span
                           onClick={() => onSelectParentCat(category._id)}
-                          className={`text-[14px] text-black font-normal ${
+                          className={`text-[14px] text-brown font-normal ${
                             selectedParentid.includes(category?._id)
                               ? "text-white"
                               : "text-white "

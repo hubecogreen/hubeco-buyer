@@ -137,11 +137,11 @@ setLoading(true)
 
         <div className="bg-opacity-90 h-full flex items-center justify-center py-20 md:py-20">
           <div className="text-center py-10 md:py-15 max-w-md md:max-w-lg  text-white bg-white">
-            <h1 className="text-4xl md:text-3xl  font-bold mb-4 text-black">
+            <h1 className="text-4xl md:text-3xl  font-bold mb-4 text-brown">
               Forgot Password 🔒
             </h1>
             <div className="flex items-center justify-center">
-              <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-base text-black w-10/12 text-center">
+              <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-base text-brown w-10/12 text-center">
               Enter your email address below. We will send a password reset link to your email.
               </p>
             </div>
@@ -154,7 +154,7 @@ setLoading(true)
             >
               <div className="">
                 <div className="p-4 inline-block max-w-full ">
-                  <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                  <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                     Email ID
                   </label>
                   <Controller

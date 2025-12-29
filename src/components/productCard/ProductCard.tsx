@@ -438,7 +438,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index = 0 }) => {
           className={styles.viewButton}
           onClick={() => router.push(`/${product.slug}`)}
         >
-          <p className="text-black font-normal text-sm text-center">View</p>
+          <p className="text-brown font-normal text-sm text-center">View</p>
         </div>
       </div>
     </div>

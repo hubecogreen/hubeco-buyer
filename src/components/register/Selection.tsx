@@ -54,7 +54,7 @@ const CustomerTypeSelection: React.FC<CustomerTypeSelectionProps> = ({ onSelect 
             />
             </div>
             <h1
-              className={` text-xl md:text-4xl group-hover:text-white font-bold mb-4 text-black`}
+              className={` text-xl md:text-4xl group-hover:text-white font-bold mb-4 text-brown`}
             >
               B2C
             </h1>
@@ -94,7 +94,7 @@ const CustomerTypeSelection: React.FC<CustomerTypeSelectionProps> = ({ onSelect 
             />
             </div>
             <h1
-              className={` text-xl md:text-4xl group-hover:text-white font-bold mb-4 text-black`}
+              className={` text-xl md:text-4xl group-hover:text-white font-bold mb-4 text-brown`}
             >
               B2B
             </h1>

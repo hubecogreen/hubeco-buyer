@@ -297,10 +297,10 @@ export default function Page() {
           <div className="md:flex flex-col lg:flex-row items-start justify-start space-y-4 lg:space-x-4 lg:space-y-0 bg-cover bg-no-repeat bg-center bg-[url('/images/home/contactbg.webp')]">
             <div className="md:w-11/12 mx-auto md:flex">
               <div className="md:w-1/2 w-full md:overflow-auto p-4">
-                <h1 className="md:text-3xl text-2xl  text-center md:text-left font-bold md:mb-4 text-black">
+                <h1 className="md:text-3xl text-2xl  text-center md:text-left font-bold md:mb-4 text-brown">
                   Customer Support
                 </h1>
-                <p className="max-w-2xl mb-4 py-4 text-justify text-black md:text-lg text-md">
+                <p className="max-w-2xl mb-4 py-4 text-justify text-brown md:text-lg text-md">
                   For any inquiries or support related to your purchases,
                   account, or our services, feel free to reach out to us:
                 </p>
@@ -313,7 +313,7 @@ export default function Page() {
                       <h6 className="font-regular text-sm md:text-base text-secondary">
                         Phone
                       </h6>
-                      <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-black">
+                      <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-brown">
                         +91 9985544055
                       </p>
                     </div>
@@ -329,7 +329,7 @@ export default function Page() {
                       </h6>
                       <Link
                         href="mailto:info@hubeco.market"
-                        className="font-medium text-xs md:text-sm text-black no-underline overflow-hidden text-ellipsis whitespace-nowrap"
+                        className="font-medium text-xs md:text-sm text-brown no-underline overflow-hidden text-ellipsis whitespace-nowrap"
                       >
                         info@hubeco.market
                       </Link>
@@ -346,7 +346,7 @@ export default function Page() {
                       <h6 className="font-regular text-sm md:text-base text-secondary">
                         Live Chat
                       </h6>
-                      <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-black">
+                      <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-brown">
                         9 AM to 6 PM <br /> (Monday to Friday)
                       </p>
                     </div>
@@ -360,7 +360,7 @@ export default function Page() {
                       <h6 className="font-regular text-sm md:text-base text-secondary">
                         Address
                       </h6>
-                      <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis text-black">
+                      <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis text-brown">
                         Hubeco Green Ventures Pvt Ltd<br></br>
                         Awfis Space Solutions Ltd, NSL Icon<br></br>
                         3rd Floor, Road No. 12, Anand Banjara Colony<br></br>
@@ -380,7 +380,7 @@ export default function Page() {
                     <div className="flex justify-center">
                       <div className="inline-block max-w-full w-11/12 md:w-full p-6 bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                         <div className="md:p-4 py-4">
-                          <label className="block text-gray-700 mb-2 text-black text-base font-medium">
+                          <label className="block text-gray-700 mb-2 text-brown text-base font-medium">
                             Name <span className="text-red">*</span>
                           </label>
                           <Controller
@@ -404,7 +404,7 @@ export default function Page() {
                           />
                         </div>
                         <div className="md:p-4 py-4">
-                          <label className="block text-gray-700 mb-2 text-black text-base font-medium">
+                          <label className="block text-gray-700 mb-2 text-brown text-base font-medium">
                             Email <span className="text-red">*</span>
                           </label>
                           <Controller
@@ -428,7 +428,7 @@ export default function Page() {
                           />
                         </div>
                         <div className="md:p-4 py-4">
-                          <label className="block text-gray-700 mb-2 text-black text-base font-medium">
+                          <label className="block text-gray-700 mb-2 text-brown text-base font-medium">
                             Phone Number <span className="text-red">*</span>
                           </label>
                           <Controller
@@ -454,7 +454,7 @@ export default function Page() {
                           />
                         </div>
                         <div className="md:p-4 py-4">
-                          <label className="block text-gray-700 mb-2 text-black text-base font-medium">
+                          <label className="block text-gray-700 mb-2 text-brown text-base font-medium">
                             Your Message <span className="text-red">*</span>
                           </label>
                           <Controller
@@ -514,11 +514,11 @@ export default function Page() {
                             className="w-[300px] h-[300px]"
                           />
                         </div>
-                        <h1 className="text-4xl md:text-3xl font-bold mb-4 text-black">
+                        <h1 className="text-4xl md:text-3xl font-bold mb-4 text-brown">
                           Thank you !
                         </h1>
                         <div className="flex items-center justify-center">
-                          <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-base text-black w-10/12 text-center">
+                          <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-base text-brown w-10/12 text-center">
                             Your enquiry has been submitted successfully
                           </p>
                         </div>
@@ -581,10 +581,10 @@ export default function Page() {
           </div>
 
           <div className="text-center p-4 ">
-            <h1 className="md:text-4xl text-2xl font-bold mb-6 text-black">
+            <h1 className="md:text-4xl text-2xl font-bold mb-6 text-brown">
               Connect With Us
             </h1>
-            <p className="mb-4 md:text-big text-md md:text-center text-justify font-normal text-black">
+            <p className="mb-4 md:text-big text-md md:text-center text-justify font-normal text-brown">
               Stay connected and follow us on social media for the latest
               updates, news, and promotions:
             </p>
@@ -613,7 +613,7 @@ export default function Page() {
                         {/* {item.title} */}
                         Facebook
                       </h6>
-                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-black">
+                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-brown">
                  
                         Hubeco.Market
                       </p> */}
@@ -640,7 +640,7 @@ export default function Page() {
                         {/* {item.title} */}
                         Youtube
                       </h6>
-                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-black">
+                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-brown">
                        
                         hubeco.market
                       </p> */}
@@ -666,7 +666,7 @@ export default function Page() {
                         {/* {item.title} */}
                         Instagram
                       </h6>
-                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-black">
+                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-brown">
                       
                         hubeco.market
                       </p> */}
@@ -692,7 +692,7 @@ export default function Page() {
                         {/* {item.title} */}
                         LinkedIn
                       </h6>
-                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-black">
+                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-brown">
                  
                         hubeco.market
                       </p> */}
@@ -707,7 +707,7 @@ export default function Page() {
         <div className="bg-secondaryBg w-full">
           <div className="flex items-center justify-center md:py-8 py-4">
             <div className="text-center">
-              <h1 className="md:text-3xl text-2xl font-bold mt-4 text-black">
+              <h1 className="md:text-3xl text-2xl font-bold mt-4 text-brown">
                 Frequently Asked Questions
               </h1>
             </div>
@@ -743,7 +743,7 @@ export default function Page() {
                         <h2>
                           <AccordionButton className="flex justify-between text-left">
                             <div className="items-center">
-                              <span className="text-left font-bold  flex-1 text-black text-base">
+                              <span className="text-left font-bold  flex-1 text-brown text-base">
                                 {item.title}
                               </span>
                             </div>

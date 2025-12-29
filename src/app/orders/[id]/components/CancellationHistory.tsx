@@ -135,7 +135,7 @@ const CancellationHistory: React.FC<TimelineProps> = ({
               <div className="ml-3 pb-3">
                 <p
                   className={`font-medium  ${
-                    isCompleted ? color : "text-black opacity-50"
+                    isCompleted ? color : "text-brown opacity-50"
                   }`}
                 >
                   {label}

@@ -151,7 +151,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 <CompanyCardSkeleton />
               </div>
             )}
-            <h2 className="text-black font-bold text-2xl md:text-3xl">
+            <h2 className="text-brown font-bold text-2xl md:text-3xl">
               {userValues?.companyName}
             </h2>
           </div>
@@ -185,7 +185,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 <FiltersSidebar />
               </div> */}
               <div className="col-span-12 lg:col-span-12">
-                <h2 className="text-black font-bold text-2xl md:text-3xl pb-3">
+                <h2 className="text-brown font-bold text-2xl md:text-3xl pb-3">
                   Sustainable Products
                 </h2>
                 <ProductGrid id={id} searchTerm={searchTerm} />

@@ -264,7 +264,7 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
             />
           </div>
 
-          <p className="text-center text-lg text-black mt-4">
+          <p className="text-center text-lg text-brown mt-4">
             Are you sure you want to return the order?
           </p>
           <div></div>

@@ -177,9 +177,9 @@ const CustomInput: React.FC<CustomInputProps> = ({
       {type === 'password' ? (
         <span
           onClick={handleTogglePassword}
-          className={`absolute right-3 ${errorMessage ?'top-1/3':'top-1/2'} transform -translate-y-1/2 cursor-pointer text-black`}
+          className={`absolute right-3 ${errorMessage ?'top-1/3':'top-1/2'} transform -translate-y-1/2 cursor-pointer text-brown`}
         >
-          {showPassword ? <FaEyeSlash  className={'text-black w-4 h-4'} /> : <FaEye className={'text-black w-4 h-4 text-black'} />}
+          {showPassword ? <FaEyeSlash  className={'text-brown w-4 h-4'} /> : <FaEye className={'text-brown w-4 h-4 text-brown'} />}
         </span>
       ):(
         <></>

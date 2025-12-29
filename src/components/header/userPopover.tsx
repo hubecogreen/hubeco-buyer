@@ -196,7 +196,7 @@ const isClient = useClient()
                 onPress={() => router.push("/login")}
               />
               <div className="flex mx-auto w-11/12 justify-between mt-4 items-center">
-                <p className="text-black text-semibold text-sm">New Customer?</p>
+                <p className="text-brown text-semibold text-sm">New Customer?</p>
                 <Link href='/login' className="text-secondary hover:cursor-pointer text-bold text-sm">Sign Up</Link>
               </div>
             </div>

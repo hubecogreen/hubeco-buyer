@@ -443,22 +443,22 @@ export default function Page() {
           style={{backgroundImage: "url('/images/about/aboutWavesBg2.webp')"}}
         >
           <div className="w-full">
-            <div className="flex w-full justify-between bg-[#2DD4BF] rounded mobile-sm:mb-20 mobile-sm:flex-wrap sm:flex-nowrap h-[500px] md:h-[450px]">
+            <div className="flex w-full border border-primary justify-between bg-cream rounded mobile-sm:mb-20 mobile-sm:flex-wrap sm:flex-nowrap h-[500px] md:h-[450px]">
               <div className="w-full p-2 md:h-[450px] h-fit-content md:w-8/12 flex flex-col items-start">
                 <div className="w-full lg:w-2/3 pl-4 md:pl-8">
                   <h1 className="text-3xl md:text-5xl font-medium text-left px-2 md:px-4 text-brown py-[5%] leading-tight">
                     Together, let&#39;s build a greener tomorrow with{" "}
-                    <span className="text-white font-medium text-3xl md:text-5xl">
+                    <span className="text-brown-medium text-3xl md:text-5xl">
                       hubeco.market
                     </span>
                   </h1>
                 </div>
                 <div className="w-full md:w-2/3 flex flex-col md:flex-row items-start md:items-center pl-4 md:pl-8 mt-5 md:mb-0 mb-4 md:mt-24">
                   <div className="md:mr-4">
-                    <h1 className="text-xl font-bold text-left px-2 md:pr-4 text-white">
+                    <h1 className="text-xl font-bold text-left px-2 md:pr-4 text-brown">
                       SaiPadma Potluri
                     </h1>
-                    <p className="text-left mb-2 px-2 md:pr-4 text-white text-sm">
+                    <p className="text-left mb-2 px-2 md:pr-4 text-brown text-sm">
                       Founder & CEO
                     </p>
                     <div className="ml-4 md:ml-2 mt-4 md:mt-0 flex-shrink-0">

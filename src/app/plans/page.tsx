@@ -134,10 +134,10 @@ export default function Page() {
         <div className="bg-white w-full">
           <div className="flex flex-col lg:flex-row items-start justify-between md:py-12 mobile-sm:py-4 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full bg-[url('/images/home/contactbg.webp')] bg-contain bg-left-[10%] bg-no-repeat relative max-w-full">
             <div className="overflow-auto p-2 lg:p-4 w-full lg:w-4/12">
-              <h1 className="text-4xl font-bold mb-4 text-black">
+              <h1 className="text-4xl font-bold mb-4 text-brown">
                 Vendor Plans
               </h1>
-              <p className="text-lg font-thin text-justify text-black leading-7">
+              <p className="text-lg font-thin text-justify text-brown leading-7">
                 At hubeco, we offer a range of subscription plans tailored to
                 meet the needs of vendors at every stage of their business
                 journey. Whether you&#39;re a small supplier just starting out
@@ -215,7 +215,7 @@ export default function Page() {
                                 <h3 className="text-2xl font-bold">
                                   {freePlanData?.name}
                                 </h3>
-                                <p className="text-sm font-normal text-black mt-5 h-10">
+                                <p className="text-sm font-normal text-brown mt-5 h-10">
                                   {freePlanData?.description}
                                 </p>
 
@@ -231,7 +231,7 @@ export default function Page() {
                                     }
                                   />
                                 </div>
-                                <h4 className="text-lg text-black font-bold mt-3 mb-1">
+                                <h4 className="text-lg text-brown font-bold mt-3 mb-1">
                                   Free
                                 </h4>
                                 <div className="mt-10">
@@ -285,7 +285,7 @@ export default function Page() {
                           {prePlanData && prePlanData?.features ? (
                             <div className="w-full lg:w-5/12 relative md:border-r md:border-gray-100">
                               <div className="pr-4 border-gray-200 text-inherit">
-                                <h3 className="text-2xl text-black font-bold">
+                                <h3 className="text-2xl text-brown font-bold">
                                   {prePlanData.name}
                                 </h3>
                                 <p className="text-sm font-normal mb-2 mt-[20px] h-[40px]">
@@ -308,8 +308,8 @@ export default function Page() {
 
                                 <div className="flex justify-start items-center mt-5">
                                   {prePlanData.monthlyDiscount == 0 ? (
-                                    <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
-                                      <span className="text-lg text-black mr-1 font-mono font-normal">
+                                    <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
+                                      <span className="text-lg text-brown mr-1 font-mono font-normal">
                                         ₹
                                       </span>
                                       &nbsp;
@@ -321,14 +321,14 @@ export default function Page() {
                                   ) : (
                                     <>
                                       {" "}
-                                      <p className="text-sm font-normal line-through  text-black">
-                                        <span className="text-sm text-black mr-1 font-normal font-mono">
+                                      <p className="text-sm font-normal line-through  text-brown">
+                                        <span className="text-sm text-brown mr-1 font-normal font-mono">
                                           {" "}
                                           ₹
                                         </span>
                                         &nbsp;{prePlanData.monthlyPrice}
                                       </p>
-                                      <h4 className="text-lg font-bold ml-2 text-black">
+                                      <h4 className="text-lg font-bold ml-2 text-brown">
                                         ₹&nbsp;
                                         {prePlanData.monthlyPrice -
                                           prePlanData.monthlyDiscount}
@@ -387,7 +387,7 @@ export default function Page() {
                                 <h3 className="text-2xl font-bold">
                                   {freePlanData.name}
                                 </h3>
-                                <p className="text-sm font-normal text-black mt-[20px]">
+                                <p className="text-sm font-normal text-brown mt-[20px]">
                                   {freePlanData.description}
                                 </p>
 
@@ -404,7 +404,7 @@ export default function Page() {
                                     }
                                   />
                                 </div>
-                                <h4 className="text-lg text-black font-bold mt-3 mb-1">
+                                <h4 className="text-lg text-brown font-bold mt-3 mb-1">
                                   Free
                                 </h4>
                                 <div className="mt-10">
@@ -455,7 +455,7 @@ export default function Page() {
                             <div className="w-full lg:w-5/12 relative">
                               <div className="border-r border-[#E5E7EB] pr-4 text-inherit">
 
-                                <h3 className="text-2xl text-black font-bold">
+                                <h3 className="text-2xl text-brown font-bold">
                                   {prePlanData.name}
                                 </h3>
                                 <p className="text-sm font-normal mb-2 mt-5">
@@ -476,8 +476,8 @@ export default function Page() {
                                 </div>
                                 <div className="flex justify-start items-center mt-5">
                                   {prePlanData.monthlyDiscount == 0 ? (
-                                    <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
-                                      <span className="text-lg text-black mr-1 font-normal font-mono">
+                                    <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
+                                      <span className="text-lg text-brown mr-1 font-normal font-mono">
                                         ₹
                                       </span>
                                       &nbsp;
@@ -489,14 +489,14 @@ export default function Page() {
                                   ) : (
                                     <>
                                       {" "}
-                                      <p className="text-sm font-normal line-through  text-black">
-                                        <span className="text-sm text-black mr-1 font-normal font-mono">
+                                      <p className="text-sm font-normal line-through  text-brown">
+                                        <span className="text-sm text-brown mr-1 font-normal font-mono">
                                           ₹
                                         </span>
                                         &nbsp;{prePlanData.yearlyPrice}
                                       </p>
-                                      <h4 className="text-lg font-bold ml-2 text-black">
-                                        <span className="text-lg text-black mr-1 font-normal font-mono">
+                                      <h4 className="text-lg font-bold ml-2 text-brown">
+                                        <span className="text-lg text-brown mr-1 font-normal font-mono">
                                           ₹
                                         </span>
                                         &nbsp;

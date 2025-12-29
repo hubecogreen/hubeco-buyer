@@ -697,7 +697,7 @@ setAddresses(result.data)
             <div>
           
              
-            <p className="text-black text-md w-full flex leading-6  break-words  break-all">
+            <p className="text-brown text-md w-full flex leading-6  break-words  break-all">
              {address?.address.includes("|") ? address.address.replace(/\|/g, ', '):address.address},{' '}{address.city},{' '} {address.state}, {' '}{address.country},{' '} {address.postCode}
           
              </p>
@@ -795,7 +795,7 @@ setAddresses(result.data)
          {/* <div style={{ display: "flex" }}> */}
          <div className="flex flex-wrap md:flex-nowrap w-full">
              <div className="md:w-3/6 w-full p-5">
-               <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+               <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                  Address Line 1 <span className="text-red">*</span>
                </label>
                <Controller
@@ -820,7 +820,7 @@ setAddresses(result.data)
              </div>
      
              <div className="md:w-3/6 w-full p-5">
-               <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+               <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                  Land Mark
                </label>
                <Controller
@@ -847,7 +847,7 @@ setAddresses(result.data)
             {/* Pincode and Country */}
             <div className="flex flex-wrap md:flex-nowrap w-full">
              <div className="md:w-3/6 w-full p-5">
-               <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+               <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                  Pincode <span className="text-red">*</span>
                </label>
                <Controller
@@ -879,7 +879,7 @@ setAddresses(result.data)
              </div>
      
              <div className="md:w-3/6 w-full p-5">
-               <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+               <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                  Country <span className="text-red">*</span>
                </label>
      
@@ -921,7 +921,7 @@ setAddresses(result.data)
            <div className="flex flex-wrap md:flex-nowrap w-full">
            <div className="md:w-3/6 w-full p-5">
                
-               <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+               <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                  State <span className="text-red">*</span>
                </label>
                <Controller
@@ -958,7 +958,7 @@ setAddresses(result.data)
              </div>
              <div className="md:w-3/6 w-full p-5">
               
-               <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+               <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
                  City <span className="text-red">*</span>
                </label>
                 <Controller

@@ -43,8 +43,8 @@ const ImageSlider = () => {
               }}
               loading="lazy"
             />
-            <div className="absolute inset-0 flex flex-col items-start justify-center text-black bg-opacity-50 px-3 md:px-16">
-              <h2 className="text-xs md:text-4xl font-normal md:mb-4 text-black md:tracking-wide">
+            <div className="absolute inset-0 flex flex-col items-start justify-center text-brown bg-opacity-50 px-3 md:px-16">
+              <h2 className="text-xs md:text-4xl font-normal md:mb-4 text-brown md:tracking-wide">
                 Welcome to hubeco.market-
                 <br />
                 Your Source for
@@ -55,7 +55,7 @@ const ImageSlider = () => {
                   Building Materials
                 </span>
               </h2>
-              <p className="text-xs md:text-sm mb-0 md:mb-6 text-black md:w-2/6 font-thin">
+              <p className="text-xs md:text-sm mb-0 md:mb-6 text-brown md:w-2/6 font-thin">
                 At hubeco.market, we make it easy for you to find and purchase
                 eco-friendly building materials for your projects. Whether
                 you’re a professional builder, an architect, or a homeowner, our

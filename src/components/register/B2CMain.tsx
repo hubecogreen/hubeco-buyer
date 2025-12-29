@@ -79,7 +79,7 @@ const B2CMain: React.FC<B2CProps> = ({ mobileParam }) => {
         </Head>
         {/* <Header /> */}
         <div className="px-4 md:px-10 pb-10 w-full md:w-[90%] mx-5 md:mx-20">
-        <div className="category-section pb-10 text-center text-black bg-white shadow-2xl">
+        <div className="category-section pb-10 text-center text-brown bg-white shadow-2xl">
             <div className="container mx-auto py-10 md:mt-20 ">
               <div className="text-center">
                 <h1 className="text-2xl md:text-4xl font-bold mb-5">

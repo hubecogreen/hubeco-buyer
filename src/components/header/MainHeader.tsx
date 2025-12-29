@@ -583,7 +583,7 @@ const Header: React.FC<HeaderProps> = () => {
                     <div className="flex items-center space-x-2 md:space-x-2 lg:space-x-4 w-full md:w-[150px] lg:w-[300px] bg-cream">
                       {/* <div className="hidden md:hidden lg:flex">
                     <VscMenu
-                      className="text-black cursor-pointer font-light text-gray-800"
+                      className="text-brown cursor-pointer font-light text-gray-800"
                       size={24}
                       onClick={toggleMenu}
                     />
@@ -774,7 +774,7 @@ const Header: React.FC<HeaderProps> = () => {
                 <div className="flex items-center space-x-2 md:space-x-4 w-full">
                   <div className="w-8 md:w-12 md:px-4 flex items-center">
                     <VscMenu
-                      className="text-black hover:cursor-pointer font-light"
+                      className="text-brown hover:cursor-pointer font-light"
                       size={24}
                       onClick={toggleMenu}
                     />
@@ -820,7 +820,7 @@ const Header: React.FC<HeaderProps> = () => {
                 className="relative"
               >
                 <PiUserCircleThin
-                  className="text-black hover:cursor-pointer "
+                  className="text-brown hover:cursor-pointer "
                   size={30}
                 />
               </div>
@@ -836,7 +836,7 @@ const Header: React.FC<HeaderProps> = () => {
                 {/* Cart Icon - Visible on all screen sizes */}
                 <div className="relative pr-2 md:pr-2 lg:pr-4 lg:mx-4">
                   <CiShoppingCart
-                    className="text-black hover:cursor-pointer " 
+                    className="text-brown hover:cursor-pointer " 
                     size={30}
                     onClick={onClickCart}
                   />
@@ -928,7 +928,7 @@ const Header: React.FC<HeaderProps> = () => {
               {/* Tablet Hamburger Menu - Show after vendor image */}
               <div className="hidden md:flex lg:hidden" style={{ marginRight: '18px' }}>
                 <VscMenu
-                  className="text-black cursor-pointer font-light text-gray-800"
+                  className="text-brown cursor-pointer font-light text-gray-800"
                   size={22}
                   onClick={toggleMenu}
                 />
@@ -964,7 +964,7 @@ const Header: React.FC<HeaderProps> = () => {
 
 {/* Menu */}
 <VscMenu
-  className="text-black cursor-pointer"
+  className="text-brown cursor-pointer"
   size={22}
   onClick={toggleMenu}
 />
@@ -1030,7 +1030,7 @@ const Header: React.FC<HeaderProps> = () => {
                 className="relative"
               >
                 <PiUserCircleThin
-                  className="text-black hover:cursor-pointer"
+                  className="text-brown hover:cursor-pointer"
                   size={30}
                 />
               </div>
@@ -1046,7 +1046,7 @@ const Header: React.FC<HeaderProps> = () => {
                 {/* Cart Icon - Visible on all screen sizes */}
                 <div className="relative pr-2 md:pr-2 lg:pr-4">
                   <CiShoppingCart
-                    className="text-black hover:cursor-pointer"
+                    className="text-brown hover:cursor-pointer"
                     size={30}
                     onClick={onClickCart}
                   />
@@ -1149,7 +1149,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   {/* Menu */}
   <VscMenu
-    className="text-black cursor-pointer"
+    className="text-brown cursor-pointer"
     size={24}
     onClick={toggleMenu}
   />
@@ -1183,7 +1183,7 @@ const Header: React.FC<HeaderProps> = () => {
       className="relative"
     >
       <PiUserCircleThin
-        className="text-black hover:cursor-pointer"
+        className="text-brown hover:cursor-pointer"
         size={30}
       />
     </div>
@@ -1199,7 +1199,7 @@ const Header: React.FC<HeaderProps> = () => {
       {/* Cart Icon - Visible on all screen sizes */}
       <div className="relative pr-2 md:pr-2 lg:pr-4">
         <CiShoppingCart
-          className="text-black hover:cursor-pointer"
+          className="text-brown hover:cursor-pointer"
           size={30}
           onClick={onClickCart}
         />

@@ -404,7 +404,7 @@ export default function Page() {
                     >
                       <p
                         className={` ${
-                          term === "Monthly" ? "text-white" : "text-black"
+                          term === "Monthly" ? "text-white" : "text-brown"
                         } text-xs font-normal  px-6 py-3 `}
                       >
                         Monthly
@@ -422,7 +422,7 @@ export default function Page() {
                     >
                       <p
                         className={` ${
-                          term === "Yearly" ? "text-white" : "text-black"
+                          term === "Yearly" ? "text-white" : "text-brown"
                         } text-xs font-normal  px-6 py-3`}
                       >
                         Yearly
@@ -437,10 +437,10 @@ export default function Page() {
                       {term === "Monthly" ? (
                         <>
                           {prePlanData?.monthlyDiscount == 0 ? (
-                            <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
+                            <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
                       {" "}
                               <span
-                                className="text-lg text-black mr-1"
+                                className="text-lg text-brown mr-1"
                                 style={{
                                   fontWeight: "400",
                                   fontFamily: "monospace",
@@ -458,9 +458,9 @@ export default function Page() {
                           ) : (
                             <>
                               {" "}
-                              <p className="text-sm font-normal line-through  text-black">
+                              <p className="text-sm font-normal line-through  text-brown">
                                 <span
-                                  className="text-sm text-black mr-1"
+                                  className="text-sm text-brown mr-1"
                                   style={{
                                     fontWeight: "400",
                                     fontFamily: "monospace",
@@ -471,7 +471,7 @@ export default function Page() {
                                 </span>
                                 &nbsp;{prePlanData.monthlyPrice}
                               </p>
-                              <h4 className="text-lg font-bold ml-2 text-black">
+                              <h4 className="text-lg font-bold ml-2 text-brown">
                   ₹&nbsp;
                                 {prePlanData.monthlyPrice -
                                   prePlanData.monthlyDiscount}
@@ -486,10 +486,10 @@ export default function Page() {
                           )}
                         </>
                       ) : prePlanData?.yearlyDiscount == 0 ? (
-                        <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
+                        <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
            {" "}
                           <span
-                            className="text-lg text-black mr-1"
+                            className="text-lg text-brown mr-1"
                             style={{
                               fontWeight: "400",
                               fontFamily: "monospace",
@@ -507,9 +507,9 @@ export default function Page() {
                       ) : (
                         <>
                           {" "}
-                          <p className="text-sm font-normal line-through  text-black">
+                          <p className="text-sm font-normal line-through  text-brown">
                             <span
-                              className="text-sm text-black mr-1"
+                              className="text-sm text-brown mr-1"
                               style={{
                                 fontWeight: "400",
                                 fontFamily: "monospace",
@@ -520,7 +520,7 @@ export default function Page() {
                             </span>
                             &nbsp;{prePlanData?.yearlyPrice}
                           </p>
-                          <h4 className="text-lg font-bold ml-2 text-black">
+                          <h4 className="text-lg font-bold ml-2 text-brown">
                    ₹&nbsp;
                             {prePlanData?.yearlyPrice -
                               prePlanData?.yearlyDiscount}
@@ -564,9 +564,9 @@ export default function Page() {
         }}
       >
         <div className="overflow-auto p-2 lg:p-4 w-full lg:w-4/12">
-          <h1 className="text-4xl font-bold mb-4 text-black">Buyer Plans</h1>
+          <h1 className="text-4xl font-bold mb-4 text-brown">Buyer Plans</h1>
           <p
-            className="text-lg font-thin text-justify text-black"
+            className="text-lg font-thin text-justify text-brown"
             style={{ lineHeight: "1.7" }}
           >
             At Hubeco, we offer a variety of subscription plans designed to
@@ -655,14 +655,14 @@ export default function Page() {
                             {freePlanData.name}
                           </h3>
                           <p
-                            className="text-sm font-normal text-black"
+                            className="text-sm font-normal text-brown"
                             style={{ marginTop: "20px", height: "40px" }}
                           >
                             {/* Ideal for small businesses and new vendors. */}
                             {freePlanData.description}
                           </p>
                        
-                          <h4 className="text-lg text-black font-bold mt-3 mb-1">
+                          <h4 className="text-lg text-brown font-bold mt-3 mb-1">
                             Free
                           </h4>
                           <div className="mt-10">
@@ -734,7 +734,7 @@ export default function Page() {
                           className=" pr-4"
                           style={{ borderColor: "#E5E7EB", color: "initial" }}
                         >
-                          <h3 className="text-2xl text-black font-bold">
+                          <h3 className="text-2xl text-brown font-bold">
                             {prePlanData.name}
                           </h3>
                           <p
@@ -746,9 +746,9 @@ export default function Page() {
 
                           <div className="flex justify-start items-center mt-5">
                             {prePlanData.monthlyDiscount == 0 ? (
-                              <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
+                              <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
                                 <span
-                                  className="text-lg text-black mr-1"
+                                  className="text-lg text-brown mr-1"
                                   style={{
                                     fontWeight: "400",
                                     fontFamily: "monospace",
@@ -766,9 +766,9 @@ export default function Page() {
                             ) : (
                               <>
                                 {" "}
-                                <p className="text-sm font-normal line-through  text-black">
+                                <p className="text-sm font-normal line-through  text-brown">
                                   <span
-                                    className="text-sm text-black mr-1"
+                                    className="text-sm text-brown mr-1"
                                     style={{
                                       fontWeight: "400",
                                       fontFamily: "monospace",
@@ -779,7 +779,7 @@ export default function Page() {
                                   </span>
                                   &nbsp;{prePlanData.monthlyPrice}
                                 </p>
-                                <h4 className="text-lg font-bold ml-2 text-black">
+                                <h4 className="text-lg font-bold ml-2 text-brown">
                                   ₹&nbsp;
                                   {prePlanData.monthlyPrice -
                                     prePlanData.monthlyDiscount}
@@ -849,7 +849,7 @@ export default function Page() {
                             {freePlanData.name}
                           </h3>
                           <p
-                            className="text-sm font-normal text-black"
+                            className="text-sm font-normal text-brown"
                             style={{ marginTop: "20px", height: "40px" }}
                           >
                             {freePlanData.description}
@@ -870,7 +870,7 @@ export default function Page() {
                       }}                               
                       />
                   </div> */}
-                          <h4 className="text-lg text-black font-bold mt-3 mb-1">
+                          <h4 className="text-lg text-brown font-bold mt-3 mb-1">
                             Free
                           </h4>
                           <div className="mt-10">
@@ -941,7 +941,7 @@ export default function Page() {
                           className="border-r border-gray-100 pr-4"
                           style={{ borderColor: "#E5E7EB", color: "initial" }}
                         >
-                          <h3 className="text-2xl text-black font-bold">
+                          <h3 className="text-2xl text-brown font-bold">
                             {prePlanData.name}
                           </h3>
                           <p
@@ -954,9 +954,9 @@ export default function Page() {
                           <div className="flex justify-start items-center mt-5">
                             {prePlanData.yearlyDiscount == 0 ? (
                               <>
-                                <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
+                                <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
                                   <span
-                                    className="text-lg text-black mr-1"
+                                    className="text-lg text-brown mr-1"
                                     style={{
                                       fontWeight: "400",
                                       fontFamily: "monospace",
@@ -974,9 +974,9 @@ export default function Page() {
                               </>
                             ) : (
                               <>
-                                <p className="text-sm font-normal line-through  text-black">
+                                <p className="text-sm font-normal line-through  text-brown">
                                   <span
-                                    className="text-sm text-black mr-1"
+                                    className="text-sm text-brown mr-1"
                                     style={{
                                       fontWeight: "400",
                                       fontFamily: "monospace",
@@ -987,9 +987,9 @@ export default function Page() {
                                   </span>
                                   &nbsp;{prePlanData.yearlyPrice}
                                 </p>
-                                <h4 className="text-lg font-bold ml-2 text-black">
+                                <h4 className="text-lg font-bold ml-2 text-brown">
                                   <span
-                                    className="text-lg text-black mr-1"
+                                    className="text-lg text-brown mr-1"
                                     style={{
                                       fontWeight: "400",
                                       fontFamily: "monospace",

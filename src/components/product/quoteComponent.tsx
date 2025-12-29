@@ -66,7 +66,7 @@ export default function quoteComponent() {
             onClick={() => setIsOpen(false)}
             className="absolute top-4 right-4"
           >
-            <IoIosClose className="w-6 h-6 text-black" />
+            <IoIosClose className="w-6 h-6 text-brown" />
           </DialogClose>
 
           <DialogHeader>
@@ -270,7 +270,7 @@ export default function quoteComponent() {
             onClick={() => setIsOpen(false)}
             className="absolute top-4 right-4"
           >
-            <IoIosClose className="w-6 h-6  z-10 bg-white  text-black" />
+            <IoIosClose className="w-6 h-6  z-10 bg-white  text-brown" />
           </DialogClose>
 
           <DialogHeader>

@@ -325,10 +325,10 @@ export default function Page() {
         </div>
         <div className="bg-secondaryBg w-full">
           <div className="py-12 px-4 lg:px-24 mx-auto max-w-[100%] pb-0">
-            <h1 className="text-4xl font-bold mb-4 mt-4 text-black">
+            <h1 className="text-4xl font-bold mb-4 mt-4 text-brown">
               Frequently Asked Questions{" "}
             </h1>
-            <p className="max-w mx-0 text-xl text-black font-medium">
+            <p className="max-w mx-0 text-xl text-brown font-medium">
               Thank you for choosing hubeco your partner in sustainable building
               materials. We look forward to assisting you!
             </p>
@@ -336,7 +336,7 @@ export default function Page() {
           <div
             // className="flex flex-col lg:flex-row items-start justify-start py-12 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto max-w-[90%]"
             // style={{ height: "700px" }}
-            className="py-12 px-4 lg:px-24 mx-auto max-w-[100%] text-black"
+            className="py-12 px-4 lg:px-24 mx-auto max-w-[100%] text-brown"
           >
             <div className=" pb-2">
               <h4 className="text-2xl font-bold">General Questions</h4>

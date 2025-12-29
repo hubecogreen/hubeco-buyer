@@ -1226,7 +1226,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     }`}
                 >
                   <div className={`w-auto ${!isLongVariant ? "md:w-1/2" : "md:w-auto"}`}>
-                    <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-black text-normal pr-[10px] sr-only">
+                    <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-brown text-normal pr-[10px] sr-only">
                       {productData?.meta?.metaTitle}
                     </h1>
 
@@ -2211,39 +2211,39 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
             </div>
           </div>
 
-          <div className="bg-tailgreen md:flex block w-full md:mx-auto  md:max-w-[87.5%] md:py-6 md:justify-center md:items-center py-8 px-4 rounded-lg">
+          <div className="bg-cream border border-primary md:flex block w-full md:mx-auto  md:max-w-[87.5%] md:py-6 md:justify-center md:items-center py-8 px-4 rounded-lg">
             <Tabs defaultValue="account" className="w-full">
               <div className="   top-[128px] overflow-x-scroll no-scrollbar">
-                <TabsList className="border-b border-borderGray h-[45px] md:max-w-fit rounded-none md:mx-auto md:flex md:justify-center md:items-center pb-0 mb-6 overflow-x-scroll no-scrollbar">
+                <TabsList className="border-b border-primary h-[45px] w-full rounded-none flex justify-start items-center  pb-0 mb-6 overflow-x-scroll no-scrollbar">
                   <TabsTrigger
                     value="account"
-                    className="px-4 text-md bg-transparent text-cream border-b-2 border-transparent rounded-none data-[state=active]:border-white data-[state=active]:text-lg data-[state=active]:text-white  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                    className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                   >
                     Overview
                   </TabsTrigger>
                   <TabsTrigger
                     value="specifications"
-                    className="px-4 text-md bg-transparent text-cream border-b-2 border-transparent rounded-none data-[state=active]:border-white data-[state=active]:text-lg data-[state=active]:text-white  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                    className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary  data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                   >
                     Specifications
                   </TabsTrigger>
                   <TabsTrigger
                     value="sustainability"
-                    className="px-4 text-md bg-transparent text-cream border-b-2 border-transparent rounded-none data-[state=active]:border-white data-[state=active]:text-lg data-[state=active]:text-white  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                    className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary  data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                   >
                     Sustainability
                   </TabsTrigger>
                   {attachments && attachments?.length !== 0 && (
                     <TabsTrigger
                       value="attachments"
-                    className="px-4 text-md bg-transparent text-cream border-b-2 border-transparent rounded-none data-[state=active]:border-white data-[state=active]:text-lg data-[state=active]:text-white  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                    className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                     >
                       Attachments
                     </TabsTrigger>
                   )}
                 </TabsList>
               </div>
-              <TabsContent value="account" className="md:px-[50px]  px-[10px] text-cream">
+              <TabsContent value="account" className="md:pl-4 md:pr-0 px-[10px] text-brown">
                 {/* {specificationData.map((specification:any)=>(
               <div
                 className="text-sm"
@@ -2252,7 +2252,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               ></div>
             ))} */}
                 <div
-                  className="text-sm w-full max-w-full text-justify"
+                  className="text-sm w-full max-w-full text-justify-start"
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(productData?.description),
                   }}
@@ -2260,7 +2260,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               </TabsContent>
               <TabsContent
                 value="specifications"
-                className="md:px-[50px] px-[10px] text-cream"
+                className="md:pl-4 md:pr-0 px-[10px] text-brown"
               >
                 {specificationData &&
                   specificationData?.map((specification: any) => {
@@ -2293,7 +2293,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               </TabsContent> */}
               <TabsContent
                 value="sustainability"
-                className="md:px-[50px] px-[10px] text-cream"
+                className="md:pl-4 md:pr-0 px-[10px] text-brown"
               >
                 {sustainability &&
                   sustainability?.map((sustainability: any) => (
@@ -2312,7 +2312,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               {attachments && attachments?.length !== 0 && (
                 <TabsContent
                   value="attachments"
-                  className="md:px-[50px] px-[10px] w-full text-white"
+                  className="md:px-0 px-[10px] w-full text-brown"
                 >
                   {attachments && attachments?.length === 0 ? (
                     <>
@@ -2374,7 +2374,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                 }}
                                 loading="lazy"
                               />
-                              <p className="text-cream text-lg md:ml-8 ml-1 font-medium">
+                              <p className="text-brown text-lg md:ml-8 ml-1 font-medium">
                                 {attachment?.key}
                               </p>
                             </div>

@@ -178,7 +178,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
       {/* <div style={{ display: "flex" }}> */}
       <div className="flex flex-wrap md:flex-nowrap w-full">
         <div className={"md:w-3/6 w-full p-5"}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Current Password <span className="text-red">*</span>
           </label>
           <Controller
@@ -206,7 +206,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
       {/* <div style={{ display: "flex" }}> */}
       <div className="flex flex-wrap md:flex-nowrap w-full">
         <div className={"md:w-3/6 w-full p-5"}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             New Password <span className="text-red">*</span>
           </label>
           <Controller
@@ -231,7 +231,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
           />
         </div>
         <div className={"md:w-3/6 w-full p-5"}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Confirm Password <span className="text-red">*</span>
           </label>
           <Controller

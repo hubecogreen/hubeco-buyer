@@ -322,7 +322,7 @@ export default function QuoteCompo({
         }}
       >
         <DialogContent
-          className={`max-w-lg h-full pb-12 ${addOpen && "hidden"}`}
+          className={`max-w-lg h-full pb-12 bg-cream ${addOpen && "hidden"}`}
         >
           <DialogHeader>
             <DialogTitle className="text-xl font-bold">
@@ -443,7 +443,7 @@ export default function QuoteCompo({
               <label className="relative inline-block w-full">
                 <input
                   type="date"
-                  className="border w-full rounded px-3 py-2 focus:outline-none picker"
+                  className="border w-full rounded px-3 py-2 bg-cream focus:outline-none picker"
                   placeholder="Select Date"
                   onChange={(e) => setQuoteDueDate(e.target.value)}
                   min={new Date().toISOString().split("T")[0]}
@@ -463,7 +463,7 @@ export default function QuoteCompo({
               </label>
               <textarea
                 placeholder="Submission Instructions"
-                className="border w-full rounded px-3 py-2 focus:outline-none"
+                className="border bg-cream w-full rounded px-3 py-2 focus:outline-none"
                 onChange={(e) => {
                   if (e.target.value.length < 3) {
                     setSubmissionInstructionError(
@@ -484,7 +484,7 @@ export default function QuoteCompo({
               <label className="block font-semibold text-sm mb-1">Notes</label>
               <textarea
                 placeholder="Type here"
-                className="border w-full rounded px-3 py-2 focus:outline-none"
+                className="border bg-cream w-full rounded px-3 py-2 focus:outline-none"
                 onChange={(e) => {
                   // if (e.target.value.length > 250) {
                   //   setNotesError("Notes should be less than 250 characters");
@@ -504,12 +504,12 @@ export default function QuoteCompo({
           <DialogFooter className="flex justify-between fixed bottom-0 w-full px-5 py-5">
             <Button
               onClick={() => handleClose()}
-              className="bg-gray-200 text-[#B90647] px-4 py-2 border border-[#B90647] w-full w-1/2"
+              className="bg-gray-200 text-brown px-4 py-2 border border-primary w-full w-1/2"
             >
               Cancel
             </Button>
             <Button
-              className="bg-[#B90647] text-white px-4 py-2 w-full w-1/2"
+              className="bg-primary text-white px-4 py-2 w-full w-1/2"
               onClick={async () => {
                 await handleQuoteSubmit();
               }}

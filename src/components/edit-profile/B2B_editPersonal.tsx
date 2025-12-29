@@ -1105,7 +1105,7 @@ reset1()
          title={"Save "}
          onPress={handleSubmit(handleProfileSubmit)}
          loading={isLoading1}
-         className="ml-3 bg-secondary hover:bg-primary  h-12 md:h-12 md:w-32  w-30 md:text-md text-sm text-white "
+         className="ml-3 bg-primary hover:bg-primary  h-12 md:h-12 md:w-32  w-30 md:text-md text-sm text-white "
         />
        
           

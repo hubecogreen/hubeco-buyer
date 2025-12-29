@@ -489,7 +489,7 @@ export default function CartRow({
                           max={maxQty}
                           value={quantity}
                           onChange={(e) => handleChange(e)}
-                          className="w-24 pl-0 text-center custom-input"
+                          className="w-24 pl-0 text-center custom-input bg-cream"
                           onKeyDown={(e) => {
                             if (
                               e.key === "e" ||

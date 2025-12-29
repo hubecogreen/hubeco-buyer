@@ -257,7 +257,7 @@ export default function OrdersPage({ params }: any) {
   if (!isClient) return <></>;
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-cream min-h-screen">
       <head>
         <title>Order Details : {orderData?.mainOrderId}</title>
         {/* <meta name="description" content={blogData?.metaDescriptions} />
@@ -308,7 +308,7 @@ export default function OrdersPage({ params }: any) {
           {/* Order Details Grid Start */}
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 mt-3 lg:flex lg:flex-row lg:justify-between lg:items-start">
             <div className=" lg:w-[60%] w-full">
-              <div className="w-full shadow-md    border border-borderGray   ">
+              <div className="w-full shadow-md    border border-borderGray  ">
                 {orderData &&
                   orderData?.orders &&
                   orderData?.orders.length > 0 &&
@@ -332,7 +332,7 @@ export default function OrdersPage({ params }: any) {
                               "border-b border-borderGray"
                             } ${
                               selectedOrder?._id === order?._id
-                                ? "bg-secondaryBg"
+                                ? "bg-cream"
                                 : ""
                             } p-4 w-full flex justify-start items-center  `}
                             onClick={() => {
@@ -496,7 +496,7 @@ export default function OrdersPage({ params }: any) {
                             "border-b border-borderGray"
                           } ${
                             selectedOrder?._id === order?._id
-                              ? "bg-secondaryBg"
+                              ? "bg-cream border border-primary"
                               : ""
                           } p-4 w-full md:flex block justify-start items-center  `}
                           onClick={() => {
@@ -584,9 +584,9 @@ export default function OrdersPage({ params }: any) {
                                       )
                                     }
                                     variant={"outline"}
-                                    className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-secondary text-secondary rounded-none bg:white hover:bg-white hover:text-secondary "
+                                    className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-primary text-primary rounded-none bg:white  hover:text-primary "
                                   >
-                                    <MdOutlineFileDownload color="#9B314A" />{" "}
+                                    <MdOutlineFileDownload color="#109989" />{" "}
                                     Download Invoice
                                   </Button>
                                 </div>
@@ -731,16 +731,16 @@ export default function OrdersPage({ params }: any) {
                             )
                           }
                           variant={"outline"}
-                          className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-secondary text-secondary rounded-none bg:white hover:bg-white hover:text-secondary"
+                          className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-primary text-primary rounded-none bg:white hover:bg-white hover:text-primary"
                         >
                           {buyer?.buyerInfo?.buyerType === "B2C" ? (
                             <>
-                              <MdOutlineFileDownload color="#9B314A" />
+                              <MdOutlineFileDownload color="#109989" />
                               Download Order
                             </>
                           ) : (
                             <>
-                              <MdOutlineFileDownload color="#9B314A" />
+                              <MdOutlineFileDownload color="#109989" />
                               Download Purchase Order
                             </>
                           )}
@@ -962,7 +962,7 @@ export default function OrdersPage({ params }: any) {
 
                 {/* Contact Support Policy Section Start */}
                 <div className="flex justify-between">
-                  <div className="w-fit flex justify-center items-center bg-secondaryBg my-4 ml-3 p-3 rounded">
+                  <div className="w-fit flex justify-center items-center bg-cream border border-primary my-4 ml-3 p-3 rounded">
                     <p className="flex justify-start items-center text-md text-brown">
                       Have an issue with this order?{" "}
                       <span

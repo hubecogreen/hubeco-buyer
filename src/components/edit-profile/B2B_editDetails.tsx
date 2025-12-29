@@ -1168,7 +1168,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
       <div className="block p-5">
         <CustomButton
           title={"Save"}
-          className="ml-3 bg-secondary hover:bg-primary h-12 md:h-12 md:w-32 w-30 md:text-md text-sm text-white"
+          className="ml-3 bg-primary hover:bg-primary h-12 md:h-12 md:w-32 w-30 md:text-md text-sm text-white"
           customStyles={{}}
           //onPress={onSubmit}
           type="submit"

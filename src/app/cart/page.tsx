@@ -374,7 +374,7 @@ const Cart = () => {
             <CustomButton
               title={"Clear Cart"}
               className={
-                "lg:px-2 bg-secondary hover:bg-secondary md:w-32 w-32 md:p-md p-0.5 h-8 md:h-12 justify-around items-center font-semibold text-tiny md:text-sm text-white pl-5"
+                "lg:px-2 bg-primary hover:bg-primary md:w-32 w-32 md:p-md p-0.5 h-8 md:h-12 justify-around items-center font-semibold text-tiny md:text-sm text-white pl-5"
               }
               hoverBgColor="#439787" // Hover background color
               hoverColor="#ffffff" // Hover text color
@@ -429,11 +429,11 @@ const Cart = () => {
             {cartData && cartData.length > 0 ? (
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2">
-                  <div className="bg-white shadow rounded-lg p-4 sm:py-6 sm:px-4 max-w-2/3">
+                  <div className="bg-cream shadow rounded-lg p-4 sm:py-6 sm:px-4 max-w-2/3">
                     <div className="sm:block">
                       <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                          <thead className="bg-[#F4F4F4]">
+                          <thead className="bg-cream border border-primary">
                             <tr className="border-b">
                               <th className="py-4 pl-2 pr-4 max-w-[45%]">
                                 Product
@@ -485,9 +485,9 @@ const Cart = () => {
                 </div>
 
                 <div>
-                  <div className="bg-white shadow rounded-lg p-6">
+                  <div className="bg-cream shadow rounded-lg p-6">
                     <div
-                      className="flex justify-between bg-[#F4F4F4] items-center py-3 px-4 cursor-pointer"
+                      className="flex justify-between bg-cream border border-primary items-center py-3 px-4 cursor-pointer"
                       onClick={() => setOpenShipping(!openShipping)}
                     >
                       <h2 className="flex justify-between items-center font-semibold text-lg">
@@ -653,7 +653,7 @@ const Cart = () => {
                           </div>
                         </div>
                         <div>
-                          <div className="flex justify-between items-center font-semibold text-lg mt-0 py-3 px-4 bg-secondaryBg ">
+                          <div className="flex justify-between items-center font-semibold text-lg mt-0 py-3 px-4 bg-cream border border-primary">
                             <p>Total</p>
                             <p className="text-brown font-semibold text-md">
                               {summaryLoading ? (
@@ -707,6 +707,7 @@ const Cart = () => {
                           borderRadius: "5px",
                           border: "1px solid #ccc",
                           color: "black",
+                          backgroundColor: "#FFFEF8"
                         }}
                         onChange={(e: any) => {
                           setCookie("CheckoutReason", e);
@@ -746,7 +747,7 @@ const Cart = () => {
                         onClick={handleOnClickCheckout}
                         className={`${
                           enableCheckout ? "opacity-100" : "opacity-50"
-                        } my-3 bg-secondary hover:bg-primary   h-12 md:h-12 md:w-full w-full md:text-md text-sm text-white`}
+                        } my-3 bg-primary hover:bg-primary   h-12 md:h-12 md:w-full w-full md:text-md text-sm text-white`}
                       >
                         Checkout
                       </Button>

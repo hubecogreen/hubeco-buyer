@@ -289,7 +289,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
       <div className="flex flex-col sm:flex-row justify-start mt-4">
         <CustomButton
           title={"Save Changes"}
-          className="ml-3 bg-secondary hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-white "
+          className="ml-3 bg-primary hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-white "
           customStyles={{}}
           //onPress={onSubmit}
           type='submit'

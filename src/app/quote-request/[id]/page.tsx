@@ -418,13 +418,13 @@ const QuoteDetails = ({ id }: any) => {
                 {/* Product Details Card */}
                 <div className="w-full lg:w-auto">
                   <div
-                    className="bg-white border border-[#E5E7EB] rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A] p-5 flex flex-col gap-3 w-full sm:w-[526px] min-h-[424.56px]"
+                    className="bg-cream border border-[#E5E7EB] rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A] p-5 flex flex-col gap-3 w-full sm:w-[526px] min-h-[424.56px]"
                   >
 
                     {initialState.products.map((product: any) => (
                       <div key={product._id} className="flex flex-col gap-3">
                         {/* Product Image */}
-                        <div className="overflow-hidden border border-[#009886]/30 rounded-[10px] w-full h-[219px]">
+                        <div className="overflow-hidden border border-primary rounded-[10px] w-full h-[219px]">
                           <Image
                             src={
                               product.variantId.thumbnail
@@ -565,7 +565,7 @@ const QuoteDetails = ({ id }: any) => {
                 {/* Middle Section: Cost Breakdown */}
                 <div className="flex flex-col gap-5 flex-shrink-0 w-full sm:w-[350px]">
                   <div
-                    className="bg-white rounded-[8px] border border-[#E5E7EB] shadow-[0px_2px_4px_0px_#0000001A] p-[15px] w-full sm:w-[350px] min-h-[424.56px]"
+                    className="bg-cream rounded-[8px] border border-[#E5E7EB] shadow-[0px_2px_4px_0px_#0000001A] p-[15px] w-full sm:w-[350px] min-h-[424.56px]"
                   >
                     {/* --- Cost Breakdown header + Approve/Reject section --- */}
                     <div className="flex items-center justify-between mb-3">

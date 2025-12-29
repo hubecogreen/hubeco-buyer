@@ -764,7 +764,7 @@ setAddresses(result.data)
         <div>
           <button
             onClick={toggleForm}
-            className="block ml-0 bg-secondary rounded-md text-white p-3 hover:bg-primary"
+            className="block ml-0 bg-primary rounded-md text-white p-3 hover:bg-primary"
           >
             Add New Address
           </button>

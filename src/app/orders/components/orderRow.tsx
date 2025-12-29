@@ -36,8 +36,8 @@ export default function OrderRow({ order, reloadPage }: OrderProps) {
   }
 
   return (
-    <div className="border border-borderGray w-full mb-2 rounded bg-white">
-      <div className="w-full flex flex-wrap md:flex-nowrap justify-start items-center mb-4 bg-secondaryBg p-3 rounded">
+    <div className="border border-primary w-full mb-2 rounded bg-cream">
+      <div className="w-full flex flex-wrap md:flex-nowrap justify-start items-center mb-4 bg-cream border  p-3 rounded">
         {/* Product Section Start */}
         <div className="w-full md:w-[50%] flex flex-col md:flex-row justify-between items-center">
           <div className={`${order?.orderType == "RFQ" ? "w-[60%]" : "w-full"} mb-4 md:mb-0`}>

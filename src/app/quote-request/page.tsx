@@ -244,7 +244,7 @@ const QuoteRequest = () => {
                 {data.length > 0 ? (
                   data.map((quote, index) => (
                     <div key={index} className="mb-6 bg-gray-100 rounded-md">
-                      <div className="flex justify-between items-center mb-4 bg-secondaryBg  p-5">
+                      <div className="flex justify-between items-center mb-4 bg-cream border border-primary  p-5">
                         <div className="flex flex-col">
                           <div className="flex">
                             {" "}

@@ -136,12 +136,12 @@ const Tickets: React.FC = () => {
         link1={{ name: "Home", href: "/" }}
         link2={{ name: "Tickets", href: "#" }}
       />
-      <div className="min-h-screen bg-white p-4">
+      <div className="min-h-screen bg-cream p-4">
         <div className="max-w-full mx-auto md:mx-10 mt-10">
           {/* <h1 className="text-xl font-bold text-center mb-4">Tickets</h1> */}
           <h1 className="text-2xl font-bold mb-4">Tickets</h1>
           {/* Tickets Table */}
-          <div className="bg-gray-50 shadow-md rounded-md overflow-hidden">
+          <div className="bg-gray-50 shadow-md rounded-md ">
             {loading ? (
               <tr>
                 <td colSpan={6} className="text-center py-4">
@@ -152,7 +152,7 @@ const Tickets: React.FC = () => {
               <div className="sm:block">
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
-                    <thead className="bg-secondaryBg">
+                    <thead className="bg-cream border border-primary">
                       <tr>
                         <th className="py-6 px-4 text-sm font-semibold">
                           Date

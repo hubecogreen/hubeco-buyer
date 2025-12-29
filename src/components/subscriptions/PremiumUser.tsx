@@ -236,8 +236,8 @@ export default function Page() {
 
   return (
     <div>
-      <div className="bg-white w-full md:px-24 ">
-        <div className="overflow-auto p-2 lg:p-4 w-full bg-[#f8f8f8] shadow-md my-5 rounded-md ">
+      <div className="bg-cream w-full md:px-24 ">
+        <div className="overflow-auto p-2 lg:p-4 w-full bg-cream shadow-md my-5 rounded-md ">
           <div className="flex flex-col gap-4 ">
             <div className="p-2 md:flex gap-6 justify-between">
               <div className="flex flex-col gap-6 md:w-[60%]">

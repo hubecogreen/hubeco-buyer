@@ -203,7 +203,7 @@ const Header: React.FC<HeaderProps> = () => {
         });
 
         // Remove duplicates and limit to first 8 placeholders
-        const uniquePlaceholders = [...new Set(placeholders)].slice(0, 8);
+        const uniquePlaceholders = Array.from(new Set(placeholders)).slice(0, 8);
         setRotatingPlaceholders(uniquePlaceholders);
       }
     } catch (error) {
@@ -356,27 +356,8 @@ const Header: React.FC<HeaderProps> = () => {
     }
   }, []);
 
-  // Close popover when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        iconRef.current &&
-        !iconRef.current.contains(event.target as Node) &&
-        popoverRef.current &&
-        !popoverRef.current.contains(event.target as Node)
-      ) {
-        closeUserPopover();
-      }
-    };
-
-    if (isUserPopoverOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isUserPopoverOpen]);
+  // REMOVED: The conflicting click-outside handler that was closing popover before menu items could be clicked
+  // The UserPopover component has its own click-outside handler that works correctly
 
   const handleWishlistApiError = async (err: any) => {
     const result = err?.response;
@@ -825,7 +806,7 @@ const Header: React.FC<HeaderProps> = () => {
                 />
               </div>
 
-                <div ref={popoverRef} onMouseLeave={() => closeUserPopover()}>
+                <div ref={popoverRef}>
                   <UserPopover
                     isOpen={isUserPopoverOpen}
                     userInfos={userInfo}
@@ -1035,7 +1016,7 @@ const Header: React.FC<HeaderProps> = () => {
                 />
               </div>
 
-                <div ref={popoverRef} onMouseLeave={() => closeUserPopover()}>
+                <div ref={popoverRef}>
                   <UserPopover
                     isOpen={isUserPopoverOpen}
                     userInfos={userInfo}
@@ -1188,7 +1169,7 @@ const Header: React.FC<HeaderProps> = () => {
       />
     </div>
 
-      <div ref={popoverRef} onMouseLeave={() => closeUserPopover()}>
+      <div ref={popoverRef}>
         <UserPopover
           isOpen={isUserPopoverOpen}
           userInfos={userInfo}
@@ -1448,6 +1429,3 @@ const LoginPopup = ({
 
 
 export default Header;
-
-
-

@@ -100,7 +100,7 @@ export default function Page() {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       {/* <Head>
         <title>Plans | Hubeco Buyer</title>
       </Head> */}
@@ -131,8 +131,8 @@ export default function Page() {
           </Link>
         </div>
 
-        <div className="bg-white w-full">
-          <div className="flex flex-col lg:flex-row items-start justify-between md:py-12 mobile-sm:py-4 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full bg-[url('/images/home/contactbg.webp')] bg-contain bg-left-[10%] bg-no-repeat relative max-w-full">
+        <div className="bg-cream w-full">
+          <div className="bg-cream flex flex-col lg:flex-row items-start justify-between md:py-12 mobile-sm:py-4 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full bg-[url('/images/home/contactbg.webp')] bg-contain bg-left-[10%] bg-no-repeat relative max-w-full">
             <div className="overflow-auto p-2 lg:p-4 w-full lg:w-4/12">
               <h1 className="text-4xl font-bold mb-4 text-brown">
                 Vendor Plans
@@ -222,7 +222,7 @@ export default function Page() {
                                 <div className="my-5">
                                   <CustomButton
                                     title={"Choose Freemium plan"}
-                                    className="bg-secondary hover:bg-primary h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-white"
+                                    className="bg-primary hover:bg-secondary h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-white"
                                     rightIcon={<GoArrowRight />}
                                     onPress={() =>
                                       window.open(
@@ -295,7 +295,7 @@ export default function Page() {
                                 <div className="mt-5">
                                   <CustomButton
                                     title={"Choose Premium plan"}
-                                    className=" bg-secondary hover:bg-secondary  h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-white  md:mt-4 mobile-sm:mt-12 "
+                                    className=" bg-primary hover:bg-secondary  h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-white  md:mt-4 mobile-sm:mt-12 "
                                     rightIcon={<GoArrowRight />}
                                     // onPress={()=>window.open('https://hubeco-vendor-uat.vercel.app/register?plan=19f5088c-9811-45df-b66c-ac504147116f&term=monthly')}
                                     onPress={() =>
@@ -593,7 +593,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="bg-white w-full py-4 md:flex items-center justify-center p-4 md:p-6">
+        <div className="bg-cream w-full py-4 md:flex items-center justify-center p-4 md:p-6">
           <div
             className="w-full md:w-11/12 md:flex items-center justify-center"
             style={{

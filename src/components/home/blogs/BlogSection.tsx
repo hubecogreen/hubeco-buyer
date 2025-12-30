@@ -2,7 +2,7 @@
 
 import React, { useEffect, useCallback, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -77,13 +77,25 @@ const BlogsSection = () => {
           </button>
 
           <Swiper
-            key={blogs.length}
-            modules={[Navigation]}
+            modules={[Navigation, Autoplay]}
             spaceBetween={24}
             slidesPerView={1}
             slidesPerGroup={1}
+            loop={true}
+            speed={800}
+            watchSlidesProgress
+            observer={true}
+            observeParents={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false, // 👈 key
+              pauseOnMouseEnter: false,
+            }}
             breakpoints={{
-              768: { slidesPerView: 2 },
+              768: {
+                slidesPerView: 2,
+                autoplay: false, // desktop no autoplay
+              },
             }}
             navigation={{
               prevEl: ".swiper-button-prev-custom",
@@ -102,7 +114,8 @@ const BlogsSection = () => {
           <button
             className="swiper-button-next-custom absolute lg:right-[-30px] right-[-10px]  top-1/2 
                        -translate-y-1/2 z-20 lg:w-[70px] lg:h-[70px] w-[60px] h-[60px]
-                       rounded-full bg-white shadow flex items-center justify-center"
+                       rounded-full bg-white shadow flex items-center justify-center
+                       "
           >
             <Image
               src="/images/blogs/right.png"

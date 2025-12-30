@@ -282,7 +282,7 @@ export default function ChatBox({
 
   return (
     <div
-      className={`bg-white w-full max-w-${width} rounded-lg shadow-lg flex flex-col h-full relative`}
+      className={`bg-cream w-full max-w-${width} rounded-lg shadow-lg flex flex-col h-full relative`}
 
     >
       <div className="bg-[#B90647] text-white rounded-t-lg px-5 py-3 flex justify-between items-start sticky top-0 shadow-sm">
@@ -428,7 +428,7 @@ export default function ChatBox({
             onChange={(e) => setText(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && handleSend(text)}
             placeholder="Type your message here..."
-            className="border rounded-full px-4 py-2 focus:outline-none focus:border-[#009886]
+            className="bg-cream border rounded-full px-4 py-2 focus:outline-none focus:border-[#009886]
                  w-[80%] sm:w-full transition-all duration-200"
           />
           <button

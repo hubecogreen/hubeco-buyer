@@ -70,7 +70,7 @@ export default function TrustedBy() {
     mx-auto
     w-full
     lg:max-w-[1440px]
-    p-[40px]
+    p-[20px]
     lg:p-[100px]
     block
     lg:flex

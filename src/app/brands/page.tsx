@@ -10,7 +10,7 @@ type Props = {};
 
 function page({}: Props) {
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       {/* <Meta title="Brands" subtitle="Brands" description="" /> */}
       <head>
         <title>Brands | Hubeco Buyer</title>

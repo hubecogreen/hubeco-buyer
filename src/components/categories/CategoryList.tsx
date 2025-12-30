@@ -51,8 +51,8 @@ const CategoryList = () => {
       (result?.status === 400
         ? "Categories Not Found"
         : result?.status === 404
-        ? "Invalid Request"
-        : "Something went wrong");
+          ? "Invalid Request"
+          : "Something went wrong");
 
     toast.error(msg);
   };
@@ -71,6 +71,28 @@ const CategoryList = () => {
 
     const CARD_WIDTH = 110; // REQUIRED
     const SCROLL_BY = CARD_WIDTH;
+    
+    // useEffect(() => {
+    //   if (!rowRef.current) return;
+
+    //   const container = rowRef.current;
+
+    //   const interval = setInterval(() => {
+    //     if (!container) return;
+
+    //     const { scrollLeft, scrollWidth, clientWidth } = container;
+
+    //     // reached end → go back to start
+    //     if (scrollLeft + clientWidth >= scrollWidth - 5) {
+    //       container.scrollTo({ left: 0, behavior: "smooth" });
+    //     } else {
+    //       container.scrollBy({ left: SCROLL_BY, behavior: "smooth" });
+    //     }
+    //   }, 2500); // 2.5s
+
+    //   return () => clearInterval(interval);
+    // }, []);
+
 
     const onScroll = () => {
       if (!rowRef.current) return;
@@ -144,10 +166,10 @@ const CategoryList = () => {
           scrollbar-hide
         "
           style={{
-    width: '100%',
-    // height: "142px",
-    overflow:'hidden'
-  }}
+            width: '100%',
+            // height: "142px",
+            overflow: 'hidden'
+          }}
         >
           {items.map((cat: any) => (
             <div key={cat._id} className="shrink-0">
@@ -266,21 +288,20 @@ const CategoryList = () => {
   // -----------------------------
   const CategorySection = ({ title, data }: any) => (
     <div
-      className={`px-4 bg-cream lg:max-w-[1440px] mx-auto ${
-        title === "Building Systems"
+      className={`px-4 bg-cream lg:max-w-[1440px] mx-auto ${title === "Building Systems"
           ? "lg:px-[100px] p-[20px] lg:py-[0px]"
           : "lg:px-[100px] py-[20px] lg:py-[80px]"
-      }`}
+        }`}
     >
       {/* 👇 CENTERED when width > 1440px */}
       <div className="">
-        
+
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:justify-between gap-4">
           <h2 className="text-xl lg:text-[43px] lg:text-start text-center text-brown">
             {title}
           </h2>
-  
+
           <CustomButton
             title="View All"
             className="lg:flex hidden bg-[#109989] rounded-[5px]
@@ -290,14 +311,14 @@ const CategoryList = () => {
             onPress={() => router.push("/products")}
           />
         </div>
-  
+
         <hr className="border-t border-primary mx-auto mt-[21px] mb-[10px] lg:mb-9" />
-  
+
         {/* Mobile */}
         {chunkIntoRows(data || []).map((row, idx) => (
           <MobileRowCarousel key={idx} items={row} />
         ))}
-  
+
         {/* Desktop */}
         <div className="hidden lg:grid lg:grid-cols-4 lg:gap-4 lg:px-[20px]">
           {data?.map((cat: any, idx: number) => (
@@ -307,7 +328,7 @@ const CategoryList = () => {
       </div>
     </div>
   );
-  
+
 
   return (
     <>

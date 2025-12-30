@@ -37,7 +37,7 @@ const MainLayout = ({
               <div className="mt-[79px] bg-cream">
                 <PrivateRoute>{children}</PrivateRoute>
               </div>
-              <Footer />
+              <Footer  />
             </ChakraProvider>
           </MeDetails>
         </RootProvider>

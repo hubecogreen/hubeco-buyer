@@ -161,11 +161,11 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
       </h2>
 
       <div
-        className="bg-white border border-[#E5E7EB] rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A]  overflow-y-auto scrollbar w-full"
+        className="bg-cream border border-primary rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A]  overflow-y-auto scrollbar w-full"
         style={{ opacity: 1 }}
       >
         <table className="w-full border-collapse text-sm table-auto">
-          <thead className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
+          <thead className="bg-cream border-b border-primary">
             <tr>
               <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">Payment ID</th>
               <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">Payment For</th>
@@ -228,9 +228,9 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
                           "buyer/sample-invoice.pdf"
                         )
                       }
-                      className="bg-[#B90647] text-white text-sm font-semibold px-4 py-2 rounded-[6px] hover:bg-[#9B314A] flex items-center gap-1"
+                      className="bg-primary text-white text-sm font-semibold px-4 py-2 rounded-[6px]  flex items-center gap-1"
                     >
-                      <MdOutlineFileDownload size={18} />
+                      <MdOutlineFileDownload size={18} color="#ffffffff" />
                       Payment Receipt
                     </button>
                   ) : (

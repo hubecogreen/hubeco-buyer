@@ -173,11 +173,11 @@ export default function SentQuotation({
       </h2>
 
       <div
-        className="bg-white border border-[#E5E7EB] rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A] overflow-y-auto scrollbar w-full "
+        className="bg-cream border border-primary rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A] overflow-y-auto scrollbar w-full "
         style={{ opacity: 1 }}
       >
         <table className="w-full border-collapse text-sm table-auto">
-          <thead className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
+          <thead className="bg-cream border-b border-primary">
             <tr>
               <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">
                 Quotation ID
@@ -229,7 +229,7 @@ export default function SentQuotation({
                             `Hubeco_${initialState?.quoteId}`
                           )
                         }
-                        className="bg-[#B90647] text-white text-sm font-semibold px-4 py-2 rounded-[6px] hover:bg-[#9B314A]"
+                        className="bg-primary text-white text-sm font-semibold px-4 py-2 rounded-[6px] hover:bg-primary"
                       >
                         Download Quote
                       </Button>
@@ -237,7 +237,7 @@ export default function SentQuotation({
                       <Button
                         asChild
                         variant="outline"
-                        className="border border-[#B90647] text-[#B90647] text-sm font-semibold px-4 py-2 rounded-[6px] hover:bg-[#FFF1F4]"
+                        className="border border-primary text-primary hover:text-primary hover:bg-transparent text-sm font-semibold px-4 py-2 rounded-[6px]"
                       >
                         <Link
                           href={`/quote-request/${initialState._id}/view-quote?id=${quote.quotationId}`}

@@ -222,10 +222,10 @@ const QuoteRequest = () => {
                   placeholder="Search Quote by ID"
                   value={searchTerm}
                   onChange={handleInputChange}
-                  className="pl-2 w-full h-full rounded-sm"
+                  className="pl-2 w-full h-full rounded-sm bg-cream border border-primary"
                   // className="border border-gray-300 rounded-md py-2 px-3 w-[50%] focus:outline-none focus:border-blue-500"
                 />
-                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none bg-secondary p-3">
+                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none bg-primary p-3">
                   <IoIosSearch
                     className="h-5 w-5 text-white rounded-r"
                     aria-hidden="true"
@@ -243,8 +243,8 @@ const QuoteRequest = () => {
                 {" "}
                 {data.length > 0 ? (
                   data.map((quote, index) => (
-                    <div key={index} className="mb-6 bg-gray-100 rounded-md">
-                      <div className="flex justify-between items-center mb-4 bg-cream border border-primary  p-5">
+                    <div key={index} className="mb-6 bg-cream border border-primary rounded-md">
+                      <div className="flex justify-between items-center p-5 border-b border-primary">
                         <div className="flex flex-col">
                           <div className="flex">
                             {" "}
@@ -286,7 +286,7 @@ const QuoteRequest = () => {
                           <div className="flex gap-3 pt-3">
                             <Link
                               href={`/quote-request/${quote._id}`}
-                              className="text-[#B90647] font-bold"
+                              className="text-primary font-bold"
                             >
                               View Quote Detail
                             </Link>
@@ -296,7 +296,7 @@ const QuoteRequest = () => {
                       {quote?.products?.map((item: any, idx: number) => (
                         <div
                           key={idx}
-                          className="flex items-start justify-between py-4 border-b border-gray-300"
+                          className="flex items-start justify-between py-4 px-5 border-b border-primary last:border-b-0"
                         >
                           <div className="flex">
                             <Image
@@ -364,7 +364,7 @@ const QuoteRequest = () => {
       </div>
 
       {totalPages > 1 && (
-        <div className="flex justify-center mb-4 items-center border-t border-t-transparent mt-8">
+        <div className="flex justify-center items-center border-t border-t-transparent pt-8 pb-4 bg-cream">
           <Pagination
             totalItems={totalPages}
             itemsPerPage={limit}

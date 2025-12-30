@@ -89,7 +89,7 @@ const CategoryList = () => {
     };
 
     return (
-      <div className="relative lg:hidden md:relative ">
+      <div className="relative lg:hidden  ">
         {/* LEFT ARROW */}
         {showLeft && (
           <button

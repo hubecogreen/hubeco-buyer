@@ -77,14 +77,14 @@ const ContactSection: React.FC = () => {
       className="w-full flex justify-center py-10 p-[8px] font-[Poppins]"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
-      <div className="max-w-[1200px] w-full flex flex-col md:flex-row">
+      <div className="max-w-[1200px] w-full flex flex-col lg:flex-row">
 
         {/* LEFT IMAGE */}
-        <div className="hidden md:block md:flex-1 relative">
+        <div className="hidden lg:block lg:flex-1 relative">
           <Image
             src="/images/contacts/image.png"
             alt="contact"
-            className="w-full h-full object-cover rounded-t-lg md:rounded-l-lg md:rounded-tr-none"
+            className="w-full h-full object-cover rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none"
             width={100}
             height={100}
           />
@@ -98,29 +98,29 @@ const ContactSection: React.FC = () => {
     gap-[12px]
     p-[20px]
     text-center
-    md:text-start
-    md:flex-1
-    md:gap-[22px]
-    md:px-[50px] md:py-[50px]
+    lg:text-start
+    lg:flex-1
+    lg:gap-[22px]
+    lg:px-[50px] lg:py-[50px]
 
     text-white
     bg-gradient-to-br from-[#109989] to-[#084A42]
-    rounded-lg md:rounded-r-lg md:rounded-l-none
+    rounded-lg lg:rounded-r-lg lg:rounded-l-none
   "
         >
           {/* Heading */}
-          <h2 className="text-[28px] md:text-[36px] font-semibold leading-tight">
+          <h2 className="text-[28px] lg:text-[36px] font-semibold leading-tight">
             Let’s Build Sustainably Together
           </h2>
 
-          <p className="text-[15px] md:text-[25px] leading-tight">
-            Reach out for certified materials,<br className ="md:hidden"/> partnerships and RFQ’s
+          <p className="text-[15px] lg:text-[25px] leading-tight">
+            Reach out for certified materials,<br className ="lg:hidden"/> partnerships and RFQ’s
           </p>
 
           {!isSubmitted ? (
             <>
               {/* NAME */}
-              <label className="hidden md:block text-[16px] md:text-[19px] font-medium mt-2">
+              <label className="hidden lg:block text-[16px] lg:text-[19px] font-medium mt-2">
                 Name
               </label>
               <Controller
@@ -131,10 +131,10 @@ const ContactSection: React.FC = () => {
                     {...field}
                     placeholder="Enter Name"
                     className="
-                      w-full md:w-[572px] h-[55px] md:h-[63px]
-                      px-[15px] md:px-[19px]
+                      w-full lg:w-[572px] h-[55px] lg:h-[63px]
+                      px-[15px] lg:px-[19px]
                       bg-transparent  placeholder:text-white/40
-                      text-[18px] md:text-[22px] font-medium rounded-[10px]
+                      text-[18px] lg:text-[22px] font-medium rounded-[10px]
                       border border-transparent border-b-white
                       hover:border-white focus:border-white focus:outline-none
                       transition-all
@@ -147,7 +147,7 @@ const ContactSection: React.FC = () => {
               )}
 
               {/* EMAIL */}
-              <label className="hidden md:block text-[16px] md:text-[19px] font-medium mt-2">
+              <label className="hidden lg:block text-[16px] lg:text-[19px] font-medium mt-2">
                 Email
               </label>
               <Controller
@@ -158,10 +158,10 @@ const ContactSection: React.FC = () => {
                     {...field}
                     placeholder="Enter Email"
                     className="
-                      w-full md:w-[572px] h-[55px] md:h-[63px]
-                      px-[15px] md:px-[19px]
+                      w-full lg:w-[572px] h-[55px] lg:h-[63px]
+                      px-[15px] lg:px-[19px]
                       bg-transparent  placeholder:text-white/40
-                      text-[18px] md:text-[22px] font-medium rounded-[10px]
+                      text-[18px] lg:text-[22px] font-medium rounded-[10px]
                       border border-transparent border-b-white
                       hover:border-white focus:border-white focus:outline-none
                       transition-all
@@ -174,7 +174,7 @@ const ContactSection: React.FC = () => {
               )}
 
               {/* PHONE */}
-              <label className="hidden md:block text-[16px] md:text-[19px] font-medium mt-2">
+              <label className="hidden lg:block text-[16px] lg:text-[19px] font-medium mt-2">
                 Phone No
               </label>
               <Controller
@@ -185,10 +185,10 @@ const ContactSection: React.FC = () => {
                     {...field}
                     placeholder="Enter Phone Number"
                     className="
-                      w-full md:w-[572px] h-[55px] md:h-[63px]
-                      px-[15px] md:px-[19px]
+                      w-full lg:w-[572px] h-[55px] lg:h-[63px]
+                      px-[15px] lg:px-[19px]
                       bg-transparent  placeholder:text-white/40
-                      text-[18px] md:text-[22px] font-medium rounded-[10px]
+                      text-[18px] lg:text-[22px] font-medium rounded-[10px]
                       border border-transparent border-b-white
                       hover:border-white focus:border-white focus:outline-none
                       transition-all
@@ -201,7 +201,7 @@ const ContactSection: React.FC = () => {
               )}
 
               {/* MESSAGE */}
-              <label className="hidden md:block text-[16px] md:text-[19px] font-medium mt-2">
+              <label className="hidden lg:block text-[16px] lg:text-[19px] font-medium mt-2">
                 Message
               </label>
               <Controller
@@ -212,11 +212,11 @@ const ContactSection: React.FC = () => {
   {...field}
   placeholder="Write Your Message Here..."
   className="
-    w-full md:w-[572px]
-    h-[55px] md:h-[63px]
-    px-[15px] md:px-[19px]
+    w-full lg:w-[572px]
+    h-[55px] lg:h-[63px]
+    px-[15px] lg:px-[19px]
     bg-transparent placeholder:text-white/40
-    text-[18px] md:text-[22px] font-medium rounded-[10px]
+    text-[18px] lg:text-[22px] font-medium rounded-[10px]
     border border-transparent border-b-white
     hover:border-white focus:border-white focus:outline-none
     transition-all
@@ -233,17 +233,17 @@ const ContactSection: React.FC = () => {
               <button
                 onClick={handleSubmit(onSubmit)}
                 className="
-                  group w-[200px] md:w-[572px] h-[60px] md:h-[63px] rounded-[10px] mt-[20px] p-[20px]
-                  mx-auto md:mx-0
+                  group w-[200px] lg:w-[572px] h-[60px] lg:h-[63px] rounded-[10px] mt-[20px] p-[20px]
+                  mx-auto lg:mx-0
                   bg-[linear-gradient(129deg,#F0FDFA_-23%,#109989_24%)]
-                  text-white text-[20px] md:text-[25px] font-normal
+                  text-white text-[20px] lg:text-[25px] font-normal
                   relative overflow-hidden transition-all duration-600
                   hover:shadow-[0px_6px_14px_rgba(0,0,0,0.25)]
                 "
               >
                 <span className="absolute left-1/2 top-1/2 
                   -translate-x-1/2 -translate-y-1/2 
-                  group-hover:left-[40px] md:group-hover:left-[60px]
+                  group-hover:left-[40px] lg:group-hover:left-[60px]
                   transition-all"
                 >
                   {loading ? "Sending..." : "Submit"}
@@ -251,7 +251,7 @@ const ContactSection: React.FC = () => {
 
                 <span
                   className="
-                    absolute right-[15px] md:right-[20px] top-1/2 -translate-y-1/2
+                    absolute right-[15px] lg:right-[20px] top-1/2 -translate-y-1/2
                     opacity-0 group-hover:opacity-100
                     translate-x-3 group-hover:translate-x-0
                     transition-all
@@ -267,7 +267,7 @@ const ContactSection: React.FC = () => {
               </button>
             </>
           ) : (
-            <h3 className="text-white text-2xl md:text-3xl mt-10">
+            <h3 className="text-white text-2xl lg:text-3xl mt-10">
               Thank you! Message sent.
             </h3>
           )}

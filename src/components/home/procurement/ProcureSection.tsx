@@ -35,14 +35,14 @@ const ProcureSection: React.FC = () => {
     ];
 
     return (
-        <section className="w-full flex justify-center pt-[60px] sm:pt-[80px] pb-[60px] sm:pb-[80px] md:p-[100px]">
-            <div className="max-w-[1250px] w-full px-4 md:px-0">
+        <section className="w-full flex justify-center pt-[60px] sm:pt-[80px] pb-[60px] sm:pb-[80px] lg:p-[100px]">
+            <div className="max-w-[1250px] w-full px-4 lg:px-0">
 
                 {/* HEADING */}
                 <h2
                     className="
-          text-[28px] xs:text-[32px] sm:text-[36px] md:text-[43px]
-          leading-[34px] xs:leading-[38px] sm:leading-[40px] md:leading-[43px]
+          text-[28px] xs:text-[32px] sm:text-[36px] lg:text-[43px]
+          leading-[34px] xs:leading-[38px] sm:leading-[40px] lg:leading-[43px]
           text-[#3D3528]
           text-center
           mb-[20px] sm:mb-[23px]
@@ -52,17 +52,17 @@ const ProcureSection: React.FC = () => {
                 </h2>
 
                 {/* CONTENT ROW */}
-                <div className="flex flex-col md:flex-row gap-[20px] sm:gap-[25px] md:gap-[31px] md:items-stretch">
+                <div className="flex flex-col lg:flex-row gap-[20px] sm:gap-[25px] lg:gap-[31px] lg:items-stretch">
 
                     {/* LEFT IMAGE */}
                     <div
                         className="
             w-full
-            md:w-[592px]
+            lg:w-[592px]
             h-[280px]
             xs:h-[320px]
             sm:h-[400px]
-            md:h-[598px]
+            lg:h-[598px]
             rounded-[12px]
             overflow-hidden
             shrink-0
@@ -85,25 +85,25 @@ const ProcureSection: React.FC = () => {
                 border border-[#109989]
                 rounded-[12px]
                 sm:rounded-[16px]
-                md:rounded-[20px]
-                md:w-[300px]
-                md:h-[286px]
+                lg:rounded-[20px]
+                lg:w-[300px]
+                lg:h-[286px]
                 p-[16px]
                 xs:p-[20px]
                 sm:p-[28px]
-                md:p-[40px]
-                flex flex-col gap-[12px] sm:gap-[16px] md:gap-[20px]
+                lg:p-[40px]
+                flex flex-col gap-[12px] sm:gap-[16px] lg:gap-[20px]
               "
                             >
                                 <img
                                     src={service.icon}
                                     alt={service.title}
-                                    className="w-[32px] h-[32px] xs:w-[36px] xs:h-[36px] sm:w-[42px] sm:h-[42px] md:w-[48px] md:h-[48px]"
+                                    className="w-[32px] h-[32px] xs:w-[36px] xs:h-[36px] sm:w-[42px] sm:h-[42px] lg:w-[48px] lg:h-[48px]"
                                 />
-                                {/* <h3 className="text-[20px] md:text-[22px] font-medium">
+                                {/* <h3 className="text-[20px] lg:text-[22px] font-medium">
                                     {service.title}
                                 </h3> */}
-                                <p className="text-[11px] xs:text-[12px] sm:text-[14px] md:text-[22px] text-[#000000] leading-[16px] xs:leading-[17px] sm:leading-[20px] md:leading-[28px]">
+                                <p className="text-[11px] xs:text-[12px] sm:text-[14px] lg:text-[22px] text-[#000000] leading-[16px] xs:leading-[17px] sm:leading-[20px] lg:leading-[28px]">
                                     {service.description}
                                 </p>
                             </div>

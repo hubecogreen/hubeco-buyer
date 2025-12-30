@@ -69,16 +69,16 @@ export default function TrustedBy() {
   className="
     mx-auto
     w-full
-    md:max-w-[1440px]
+    lg:max-w-[1440px]
     p-[40px]
-    md:p-[100px]
+    lg:p-[100px]
     block
-    md:flex
-    md:flex-col
-    md:items-center
+    lg:flex
+    lg:flex-col
+    lg:items-center
   "
 >
-  <h2 className="text-center text-[28px] md:text-[43px]  text-[#3d3528] mb-10 md:mb-[54px]">
+  <h2 className="text-center text-[28px] lg:text-[43px]  text-[#3d3528] mb-10 lg:mb-[54px]">
     Trusted by 50+ Brands
   </h2>
 
@@ -88,13 +88,13 @@ export default function TrustedBy() {
       grid-cols-2
       gap-4
       sm:gap-6
-      md:flex
-      md:justify-between
-      md:items-center
+      lg:flex
+      lg:justify-between
+      lg:items-center
       w-full
-      md:w-[1220px]
+      lg:w-[1220px]
       max-w-[1220px]
-      md:h-[217px]
+      lg:h-[217px]
     "
   >
     {cards.map((card, index) => (
@@ -104,12 +104,12 @@ export default function TrustedBy() {
           w-full
           h-[160px]
           sm:h-[180px]
-          md:w-[293.75px]
-          md:h-[217px]
+          lg:w-[293.75px]
+          lg:h-[217px]
           rounded-[20px]
           p-[20px]
           sm:p-[25px]
-          md:p-[30px]
+          lg:p-[30px]
           bg-[linear-gradient(120.89deg,#B0E0DA_0%,#109989_24.32%)]
           backdrop-blur-[1.38px]
           flex
@@ -123,15 +123,15 @@ export default function TrustedBy() {
           alt={card.title}
           width={70}
           height={70}
-          className="mb-2 md:mb-3"
+          className="mb-2 lg:mb-3"
         />
 
-        <p className="text-[22px] sm:text-[26px] md:text-[34px] font-semibold text-white">
+        <p className="text-[22px] sm:text-[26px] lg:text-[34px] font-semibold text-white">
           {counts[index]}
           {card.suffix}
         </p>
 
-        <p className="text-[12px] sm:text-[14px] md:text-[18px] font-medium text-white text-center -mt-1">
+        <p className="text-[12px] sm:text-[14px] lg:text-[18px] font-medium text-white text-center -mt-1">
           {card.title}
         </p>
       </div>

@@ -33,14 +33,14 @@ const Footer = () => {
 
         {/* TOP GREEN LINE */}
         <div className="w-full flex justify-center">
-          <div className="w-full md:w-[1200px] h-[1px] bg-[#069A66]" />
+          <div className="w-full lg:w-[1200px] h-[1px] bg-[#069A66]" />
         </div>
 
         {/* COPYRIGHT ROW */}
         <div className="w-full flex justify-center pt-2">
           <div className="w-full max-w-[1200px]">
             {/* Mobile */}
-            <div className="md:hidden flex flex-col gap-2 px-4">
+            <div className="lg:hidden flex flex-col gap-2 px-4">
               <p className="text-[12px] text-brown font-light leading-tight pb-[40px]">
                 Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt Ltd. All Rights Reserved
               </p>
@@ -55,7 +55,7 @@ const Footer = () => {
             </div>
 
             {/* Desktop */}
-            <div className="hidden md:flex justify-between items-center whitespace-nowrap">
+            <div className="hidden lg:flex justify-between items-center whitespace-nowrap">
               <p className="text-[12px] text-brown font-light">
                 Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt Ltd. All Rights Reserved
               </p>
@@ -76,18 +76,18 @@ const Footer = () => {
         >
 
           {/* GREEN DIVIDER */}
-          <div className="w-full flex justify-start md:ml-[460px] pt-6 md:pt-10 mb-4 md:mt-[131px] px-4 md:px-0">
-            <div className="w-full md:w-[768px] h-[1px] bg-[#069A66]" />
+          <div className="w-full flex justify-start lg:ml-[460px] pt-6 lg:pt-10 mb-4 lg:mt-[131px] px-4 lg:px-0">
+            <div className="w-full lg:w-[768px] h-[1px] bg-[#069A66]" />
           </div>
 
 
           {/* FOUR COLUMNS */}
-          <div className="w-full flex flex-col md:flex-row justify-start max-w-[1200px] mx-auto gap-6 md:gap-[60px] md:pb-[148px] px-4 md:px-0 md:ml-[460px]">
+          <div className="w-full flex flex-col lg:flex-row justify-start max-w-[1200px] mx-auto gap-6 lg:gap-[60px] lg:pb-[148px] px-4 lg:px-0 lg:ml-[460px]">
 
             {/* Column 1 - Products */}
-            <div className="w-full md:w-[112px]">
+            <div className="w-full lg:w-[112px]">
               <h4 className="text-[14px] text-[#069A66] mb-2 font-semibold">Products</h4>
-              <ul className="space-y-1 text-[13px] md:text-[14px]">
+              <ul className="space-y-1 text-[13px] lg:text-[14px]">
                 <li><Link className="text-[#023A27]" href="/products/bricks">Bricks</Link></li>
                 <li><Link className="text-[#023A27]" href="/products">Adhesives</Link></li>
                 <li><Link className="text-[#023A27]" href="/products">Paints</Link></li>
@@ -98,9 +98,9 @@ const Footer = () => {
             </div>
 
             {/* Column 2 - Quick Links */}
-            <div className="w-full md:w-[112px]">
+            <div className="w-full lg:w-[112px]">
               <h4 className="text-[14px] text-[#069A66] mb-2 font-semibold">Quick Links</h4>
-              <ul className="space-y-1 text-[13px] md:text-[14px]">
+              <ul className="space-y-1 text-[13px] lg:text-[14px]">
                 <li><Link className="text-[#023A27]" href="/about">About</Link></li>
                 <li><Link className="text-[#023A27]" href="/blogs">Blogs</Link></li>
                 <li><Link className="text-[#023A27] whitespace-nowrap" href="/blogs">Green Financing</Link></li>
@@ -110,9 +110,9 @@ const Footer = () => {
             </div>
 
             {/* Column 3 - Customer Support */}
-            <div className="w-full md:w-[150px]">
+            <div className="w-full lg:w-[150px]">
               <h4 className="text-[14px] text-[#069A66] mb-2 font-semibold">Support</h4>
-              <ul className="space-y-1 text-[13px] md:text-[14px]">
+              <ul className="space-y-1 text-[13px] lg:text-[14px]">
                 <li><Link className="text-[#023A27]" href="/contact">Contact Us</Link></li>
                 <li><Link className="text-[#023A27]" href="/cart">Help Center</Link></li>
                 <li><Link className="text-[#023A27]" href="/profile?tab=profile">Order Tracking</Link></li>
@@ -121,12 +121,12 @@ const Footer = () => {
             </div>
 
             {/* Column 4 - Contact Us */}
-            <div className="w-full md:w-[230px]">
+            <div className="w-full lg:w-[230px]">
               <h4 className="text-[14px] text-[#069A66] mb-2 font-semibold">Contact Us</h4>
 
-              <div className="flex items-start gap-2 text-brown text-[13px] md:text-xs">
+              <div className="flex items-start gap-2 text-brown text-[13px] lg:text-xs">
                 <p
-                  className="text-brown mb-2 text-[13px] md:text-[14px] leading-[18px] md:leading-[20px]"
+                  className="text-brown mb-2 text-[13px] lg:text-[14px] leading-[18px] lg:leading-[20px]"
                 >
                   Awfis Co-Working Space <br />
                   NSL Icon, Road No. 12 <br />
@@ -135,40 +135,40 @@ const Footer = () => {
                 </p>
               </div>
 
-              <p className="text-[13px] md:text-[14px] flex items-center gap-2 text-brown mb-2">
+              <p className="text-[13px] lg:text-[14px] flex items-center gap-2 text-brown mb-2">
                 <FiPhone size={14} /> Phone: +91 9985544055
               </p>
 
-              <p className="text-[13px] md:text-[14px] flex items-center gap-2 text-brown mb-3 md:mb-1">
+              <p className="text-[13px] lg:text-[14px] flex items-center gap-2 text-brown mb-3 lg:mb-1">
                 <BsEnvelope size={14} />Email: info@hubeco.market
               </p>
 
               {/* Social Icons */}
-              <ul className="flex mt-3 md:mt-1 mb-6 md:mb-8 gap-2">
+              <ul className="flex mt-3 lg:mt-1 mb-6 lg:mb-8 gap-2">
                 <li
-                  className="w-[32px] h-[32px] md:w-[26px] md:h-[26px] bg-[#169B88] rounded flex justify-center items-center cursor-pointer"
+                  className="w-[32px] h-[32px] lg:w-[26px] lg:h-[26px] bg-[#169B88] rounded flex justify-center items-center cursor-pointer"
                   onClick={() => window.open("https://www.instagram.com/hubeco.market/", "_blank")}
                 >
-                  <FaInstagram size={16} className="text-white md:w-[14px] md:h-[14px]" />
+                  <FaInstagram size={16} className="text-white lg:w-[14px] lg:h-[14px]" />
                 </li>
                 <li
-                  className="w-[32px] h-[32px] md:w-[26px] md:h-[26px] bg-[#169B88] rounded flex justify-center items-center cursor-pointer"
+                  className="w-[32px] h-[32px] lg:w-[26px] lg:h-[26px] bg-[#169B88] rounded flex justify-center items-center cursor-pointer"
                   onClick={() => window.open("https://www.facebook.com/people/HubecoMarket/61566048633254/", "_blank")}
                 >
-                  <FaFacebookF size={16} className="text-white md:w-[14px] md:h-[14px]" />
+                  <FaFacebookF size={16} className="text-white lg:w-[14px] lg:h-[14px]" />
                 </li>
                 <li
-                  className="w-[32px] h-[32px] md:w-[26px] md:h-[26px] bg-[#169B88] rounded flex justify-center items-center cursor-pointer"
+                  className="w-[32px] h-[32px] lg:w-[26px] lg:h-[26px] bg-[#169B88] rounded flex justify-center items-center cursor-pointer"
                   onClick={() => window.open("https://www.linkedin.com/company/hubeco-market/", "_blank")}
                 >
-                  <FaLinkedinIn size={16} className="text-white md:w-[14px] md:h-[14px]" />
+                  <FaLinkedinIn size={16} className="text-white lg:w-[14px] lg:h-[14px]" />
                 </li>
 
                 <li
-                  className="w-[32px] h-[32px] md:w-[26px] md:h-[26px] bg-[#169B88] rounded flex justify-center items-center cursor-pointer"
+                  className="w-[32px] h-[32px] lg:w-[26px] lg:h-[26px] bg-[#169B88] rounded flex justify-center items-center cursor-pointer"
                   onClick={() => window.open("https://www.youtube.com/@hubeco.marketplace", "_blank")}
                 >
-                  <FaYoutube size={16} className="text-white md:w-[14px] md:h-[14px]" />
+                  <FaYoutube size={16} className="text-white lg:w-[14px] lg:h-[14px]" />
                 </li>
               </ul>
             </div>
@@ -176,9 +176,9 @@ const Footer = () => {
         </div>
 
         {/* BOTTOM LOGO */}
-        <div className="w-full flex mt-5 pb-[30px] px-4 md:px-0">
-          <div className="max-w-[1200px] md:ml-[10px] w-full flex justify-start md:justify-start">
-            <div className="w-full max-w-[279.38px] md:max-w-[717px] h-[63px] md:h-[161px] relative">
+        <div className="w-full flex mt-5 pb-[30px] px-4 lg:px-0">
+          <div className="max-w-[1200px] lg:ml-[10px] w-full flex justify-start lg:justify-start">
+            <div className="w-full max-w-[279.38px] lg:max-w-[717px] h-[63px] lg:h-[161px] relative">
               <Image
                 src="/images/logo3.png"
                 alt="Hubeco Logo"

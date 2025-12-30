@@ -248,36 +248,21 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
 
           return (
             <li key={category?._id}>
-              <div
-                className={`flex justify-between items-center cursor-pointer text-sm mb-1 ${
-                  openMenus[category._id] ? styles.parentItemActive : ""
-                }`}
-              >
-                <span
-                  onClick={() => {
-                    setSeoCategorySlug(category.seoSlug || "");
-                    console.log("Main category selected:", category?.seoSlug);
-                  }}
-                >
-                  {category?.name}
-                </span>
-                {(hasSubCategories || hasChildCategories) &&
-                  (openMenus[category._id] ? (
-                    <FaAngleUp
-                      onClick={() => {
-                        toggleMenu(category._id);
-                        setSeoCategorySlug(category.seoSlug || "");
-                      }}
-                    />
-                  ) : (
-                    <FaAngleDown
-                      onClick={() => {
-                        toggleMenu(category._id);
-                        setSeoCategorySlug(category.seoSlug || "");
-                      }}
-                    />
-                  ))}
-              </div>
+            <div
+  className={`flex justify-between items-center cursor-pointer text-sm mb-1 ${
+    openMenus[category._id] ? styles.parentItemActive : ""
+  }`}
+  onClick={() => {
+    toggleMenu(category._id);
+    setSeoCategorySlug(category.seoSlug || "");
+  }}
+>
+  <span>{category?.name}</span>
+
+  {(hasSubCategories || hasChildCategories) &&
+    (openMenus[category._id] ? <FaAngleUp /> : <FaAngleDown />)}
+</div>
+
               {(hasSubCategories || hasChildCategories) && (
                 <ul
                   className={`${styles.submenu} ${

@@ -46,26 +46,26 @@ const BlogsSection = () => {
 
   return (
     <section className="relative px-5  py-8 bg-cream">
-      <div className="flex flex-col md:flex-row justify-between gap-10  md:max-w-[1440px] md:p-[100px] mx-auto">
+      <div className="flex flex-col lg:flex-row justify-between gap-10  lg:max-w-[1440px] lg:p-[100px] mx-auto">
 
         {/* LEFT CONTENT */}
-        <div className="w-full md:w-[450px]">
-          <h2 className="text-center md:text-left text-[32px] md:text-[44px] text-brown mb-[8px]">
+        <div className="w-full lg:w-[450px]">
+          <h2 className="text-center lg:text-left text-[32px] lg:text-[44px] text-brown mb-[8px]">
             Blogs
           </h2>
-          <p className="text-brown text-[22px] md:text-[33px] mt-2 text-center md:text-left ">
+          <p className="text-brown text-[22px] lg:text-[33px] mt-2 text-center lg:text-left ">
             Inspiring insights for a smarter{" "}
             <span className="text-primary">greener</span> future
           </p>
         </div>
 
         {/* SLIDER */}
-        <div className="relative w-full md:w-[750px]">
+        <div className="relative w-full lg:w-[750px]">
 
           {/* LEFT ARROW */}
           <button
-            className="swiper-button-prev-custom absolute md:left-[-30px] left-[-10px] top-1/2 
-                       -translate-y-1/2 z-20 md:w-[70px] md:h-[70px] w-[60px] h-[60px]
+            className="swiper-button-prev-custom absolute lg:left-[-30px] left-[-10px] top-1/2 
+                       -translate-y-1/2 z-20 lg:w-[70px] lg:h-[70px] w-[60px] h-[60px]
                        rounded-full bg-white shadow flex items-center justify-center"
           >
             <Image
@@ -100,8 +100,8 @@ const BlogsSection = () => {
 
           {/* RIGHT ARROW */}
           <button
-            className="swiper-button-next-custom absolute md:right-[-30px] right-[-10px]  top-1/2 
-                       -translate-y-1/2 z-20 md:w-[70px] md:h-[70px] w-[60px] h-[60px]
+            className="swiper-button-next-custom absolute lg:right-[-30px] right-[-10px]  top-1/2 
+                       -translate-y-1/2 z-20 lg:w-[70px] lg:h-[70px] w-[60px] h-[60px]
                        rounded-full bg-white shadow flex items-center justify-center"
           >
             <Image

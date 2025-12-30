@@ -815,7 +815,7 @@ export default function Page() {
                                       style={{
                                         height: "16px",
                                         width: "20px",
-                                        color: "#B90647",
+                                        color: "#109899",
                                       }}
                                     />
                                   </div>

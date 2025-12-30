@@ -222,7 +222,7 @@ export default function Page() {
                                 <div className="my-5">
                                   <CustomButton
                                     title={"Choose Freemium plan"}
-                                    className="bg-primary hover:bg-secondary h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-white"
+                                    className="bg-secondary hover:bg-primary h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-white"
                                     rightIcon={<GoArrowRight />}
                                     onPress={() =>
                                       window.open(
@@ -295,7 +295,7 @@ export default function Page() {
                                 <div className="mt-5">
                                   <CustomButton
                                     title={"Choose Premium plan"}
-                                    className=" bg-primary hover:bg-secondary  h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-white  md:mt-4 mobile-sm:mt-12 "
+                                    className=" bg-secondary hover:bg-primary  h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-white  md:mt-4 mobile-sm:mt-12 "
                                     rightIcon={<GoArrowRight />}
                                     // onPress={()=>window.open('https://hubeco-vendor-uat.vercel.app/register?plan=19f5088c-9811-45df-b66c-ac504147116f&term=monthly')}
                                     onPress={() =>
@@ -464,7 +464,7 @@ export default function Page() {
                                 <div className="mt-5">
                                   <CustomButton
                                     title={"Choose Premium plan"}
-                                    className=" bg-secondary hover:bg-secondary  h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-white  md:mt-4 mobile-sm:mt-12 "
+                                    className=" bg-secondary hover:bg-primary  h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-white  md:mt-4 mobile-sm:mt-12 "
                                     rightIcon={<GoArrowRight />}
                                     // onPress={()=>window.open('https://hubeco-vendor-uat.vercel.app/register?plan=19f5088c-9811-45df-b66c-ac504147116f&term=yearly')}
                                     onPress={() =>

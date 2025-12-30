@@ -309,9 +309,9 @@ export default function Page() {
                       handleDownload(`${assetURL}/${subData?.invoiceLink}`)
                     }
                     variant={"outline"}
-                    className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-secondary text-secondary rounded-none bg:white hover:bg-white hover:text-secondary "
+                    className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-primary text-white rounded-none bg-primary hover:bg-white hover:text-secondary "
                   >
-                    <MdOutlineFileDownload color="#9B314A" /> Download Invoice
+                    <MdOutlineFileDownload className="text-white hover:text-red-600" /> Download Invoice
                   </Button>
                 )}
               </div>
@@ -374,7 +374,7 @@ export default function Page() {
                     {premium.map((product: any, index: any) => (
                       <div key={index} className="flex  mb-5 items-center">
                         <div>
-                          <GoCheckCircleFill className="w-[20px] h-[16px] text-[#B90647]" />
+                          <GoCheckCircleFill className="w-[20px] h-[16px] text-[#109899]" />
                         </div>
 
                         <div className="ml-2">

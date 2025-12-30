@@ -81,7 +81,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, handleSectionClick ,se
                 className={
                   isOrdersExpanded
                     ? "text-[#B90647] font-semibold"
-                    : "text-[#31466B] hover:text-[#00A18A] font-medium"
+                    : "text-[#31466B] hover:text-[#31466B]font-medium"
                 }
               >
                 My Orders
@@ -101,7 +101,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, handleSectionClick ,se
                       className={`${
                         currentStaus === item?.label?.toLowerCase()
                           ? "text-[#B90647]"
-                          : "text-[#31466B]"
+                          : "text-primary"
                       } hover:text-[#00A18A]`}
                       onClick={() => {onClickStatus(item)}}
                     >

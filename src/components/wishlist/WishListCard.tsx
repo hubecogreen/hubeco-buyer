@@ -308,7 +308,7 @@ const WishListCard: React.FC<ProductCardProps> = ({
           {product?.productId.purchaseType === "QUOTE" ? (
             <CustomButton
               title={loadingQuoteButton ? "Loading..." : "Request Quote"}
-              className={`${styles.addToCart} bg-secondary hover:bg-secondary  w-36 p-2 h-12 md:h-10 justify-around items-center font-semibold text-xs md:text-xs text-white`}
+              className={`${styles.addToCart} bg-primary hover:bg-secondary  w-36 p-2 h-12 md:h-10 justify-around items-center font-semibold text-xs md:text-xs text-white`}
               onPress={() => OnClickQuote(product?.slug)}
               loading={loadingQuoteButton}
             />
@@ -317,7 +317,7 @@ const WishListCard: React.FC<ProductCardProps> = ({
               title={
                 product?.status === "PUBLISHED" ? "Add to Cart" : "Out of Stock"
               }
-              className={`${styles.addToCart} bg-secondary ${
+              className={`${styles.addToCart} bg-primary ${
                 product?.status === "PUBLISHED" ? "hover:bg-primary" : ""
               } w-36 p-2 h-12 md:h-10 justify-around items-center font-semibold text-xs md:text-xs text-white`}
               hoverBgColor="#439787"

@@ -220,7 +220,7 @@ const Orders = () => {
           {/* Wishlist Section */}
           <section className="flex-1">
             <div className="flex justify-between items-center mb-4">
-              <h1 className="text-3xl font-bold text-gray-800  pl-2">
+              <h1 className="text-3xl font-bold text-brown-700  pl-2">
                 Orders {totalItems > 0 ? `(${totalItems})` : ""}
               </h1>
               {/* <div className="relative w-full max-w-md h-[43px] border !border-gray rounded"> */}

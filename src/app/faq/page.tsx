@@ -323,7 +323,7 @@ export default function Page() {
             Frequently Asked Questions
           </Link>
         </div>
-        <div className="bg-secondaryBg w-full">
+        <div className="bg-cream w-full">
           <div className="py-12 px-4 lg:px-24 mx-auto max-w-[100%] pb-0">
             <h1 className="text-4xl font-bold mb-4 mt-4 text-brown">
               Frequently Asked Questions{" "}

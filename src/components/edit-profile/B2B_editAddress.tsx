@@ -706,7 +706,7 @@ setAddresses(result.data)
               <div className={`" flex justify-start w-2/3 h-[22px] " ${address.id} ${addId}`}>
                <button
                  onClick={() => onEditAddress(address)}
-                 className={`hover:underline font-bold text-[#B90647] ${addId === address.id ? "opacity-50" : ""}`}
+                 className={`hover:underline font-bold text-primary ${addId === address.id ? "opacity-50" : ""}`}
 
                  disabled={addId==address.id}
                >
@@ -718,7 +718,7 @@ setAddresses(result.data)
             
             
              <button
-               className={`hover:underline ml-2 font-bold text-[#B90647] ${addId === address.id ? "opacity-50" : ""}`}
+               className={`hover:underline ml-2 font-bold text-primary ${addId === address.id ? "opacity-50" : ""}`}
 
                onClick={() => {setIsOpen(true),setDeleteId(address.id)}}
                disabled={addId==address.id}
@@ -750,7 +750,7 @@ setAddresses(result.data)
 
     {
                 address.isDefault?(
-                <h2 className="text-xs font-normal flex   justify-center mt-1 text-secondary w-16 text-center py-0 h-[20px] border border-secondary border-solid rounded ">Default</h2>
+                <h2 className="text-xs font-normal flex   justify-center mt-1 text-primary w-16 text-center py-0 h-[20px] border border-primary border-solid rounded ">Default</h2>
                 ):<></>
               }
              </div>

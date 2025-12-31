@@ -132,7 +132,7 @@ export default function Page() {
         </div>
 
         <div className="bg-cream w-full">
-          <div className="bg-cream flex flex-col lg:flex-row items-start justify-between md:py-12 mobile-sm:py-4 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full bg-[url('/images/home/contactbg.webp')] bg-contain bg-left-[10%] bg-no-repeat relative max-w-full">
+          <div className="bg-cream flex flex-col lg:flex-row items-start justify-between md:py-12 mobile-sm:py-4 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full bg-[url('/images/home/contactbg-1.png')]  bg-contain bg-left-[10%] bg-no-repeat relative max-w-full">
             <div className="overflow-auto p-2 lg:p-4 w-full lg:w-4/12">
               <h1 className="text-4xl font-bold mb-4 text-brown">
                 Vendor Plans

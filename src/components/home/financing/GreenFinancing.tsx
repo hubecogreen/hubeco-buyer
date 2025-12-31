@@ -10,9 +10,8 @@ export default function GreenFinancing() {
         w-full
         text-brown
         max-w-[354px]
-        text-[32px]
-        xs:text-[36px]
-        sm:text-[43.2px]
+        text-[28px]
+        lg:text-[43px]
         leading-[36px]
         xs:leading-[40px]
         sm:leading-[43px]

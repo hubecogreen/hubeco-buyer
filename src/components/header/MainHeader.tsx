@@ -477,7 +477,7 @@ const Header: React.FC<HeaderProps> = () => {
                
               >
                 <Image
-                  src="/images/home/header/hubeco-logo.png"
+                  src="/images/logo3.png"
                   className="!h-[72px] !w-[255px] object-contain"
                   alt="Hubeco Logo"
                   width={255}

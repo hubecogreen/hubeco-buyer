@@ -79,6 +79,8 @@ const WorksSection = () => {
             className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-primary h-[140px] w-full lg:px-5 lg:pt-10 lg:pb-5 lg:h-[215px] lg:w-[300px]"
           >
             <div className="flex flex-col gap-3 lg:gap-5">
+              <div className="h-[32px] lg:h-[52px] flex items-center">
+
               <Image
                 src={item.img}
                 alt="icon"
@@ -86,6 +88,7 @@ const WorksSection = () => {
                 height={32}
                 className="w-[30px] h-auto lg:w-[52px] lg:h-auto"
               />
+              </div>
               <p className="text-[13px] lg:text-[24px]  lg:leading-6 text-brown">
                 {item.text}
               </p>
@@ -123,6 +126,8 @@ const WorksSection = () => {
             className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-secondary h-[140px] w-full lg:px-5 lg:pt-10 lg:pb-5 lg:h-[215px] lg:w-[300px]"
           >
             <div className="flex flex-col gap-3 lg:gap-5">
+                            <div className="h-[32px] lg:h-[52px] flex items-center">
+
               <Image
                 src={item.img}
                 alt="icon"
@@ -130,6 +135,7 @@ const WorksSection = () => {
                 height={32}
                 className="w-[30px] h-auto lg:w-[52px] lg:h-auto"
               />
+              </div>
               <p className="text-[13px]  lg:text-[24px] lg:leading-6 text-brown">
                 {item.text}
               </p>

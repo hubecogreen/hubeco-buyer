@@ -28,7 +28,7 @@ const Footer = () => {
   if (!rehydrated) return null;
 
   return (
-    <footer className="w-full bg-cream flex justify-center overflow-x-hidden">
+    <footer className="w-full bg-cream flex justify-center overflow-x-hidden pt-[49px]">
       <div className="w-full max-w-[1250px] flex flex-col">
 
         {/* TOP GREEN LINE */}
@@ -82,11 +82,11 @@ const Footer = () => {
 
 
           {/* FOUR COLUMNS */}
-          <div className="w-full flex flex-col lg:flex-row justify-start max-w-[1200px] mx-auto gap-6 lg:gap-[60px] lg:pb-[148px] px-4 lg:px-0 lg:ml-[460px]">
+          <div className="w-full flex flex-col lg:flex-row justify-start max-w-[1200px] mx-auto gap-6 lg:gap-[60px]  px-4 lg:px-0 lg:ml-[460px]">
 
             {/* Column 1 - Products */}
             <div className="w-full lg:w-[112px]">
-              <h4 className="text-[14px] text-[#069A66] mb-2 font-semibold">Products</h4>
+              <h4 className="text-[14px] text-primary mb-2 ">Products</h4>
               <ul className="space-y-1 text-[13px] lg:text-[14px]">
                 <li><Link className="text-[#023A27]" href="/products/bricks">Bricks</Link></li>
                 <li><Link className="text-[#023A27]" href="/products">Adhesives</Link></li>
@@ -99,30 +99,31 @@ const Footer = () => {
 
             {/* Column 2 - Quick Links */}
             <div className="w-full lg:w-[112px]">
-              <h4 className="text-[14px] text-[#069A66] mb-2 font-semibold">Quick Links</h4>
+              <h4 className="text-[14px] text-primary mb-2 ">Quick Links</h4>
               <ul className="space-y-1 text-[13px] lg:text-[14px]">
                 <li><Link className="text-[#023A27]" href="/about">About</Link></li>
                 <li><Link className="text-[#023A27]" href="/blogs">Blogs</Link></li>
-                <li><Link className="text-[#023A27] whitespace-nowrap" href="/blogs">Green Financing</Link></li>
+                <li><Link className="text-[#023A27] whitespace-nowrap" href="/green-financing">Green Financing</Link></li>
                 <li><Link className="text-[#023A27] whitespace-nowrap" href="/plans">Vendor Connect</Link></li>
                 <li><Link className="text-[#023A27]" href="/brands">Brands</Link></li>
+                <li><Link className="text-[#023A27]" href="/faq">Faq's</Link></li>
               </ul>
             </div>
 
             {/* Column 3 - Customer Support */}
             <div className="w-full lg:w-[150px]">
-              <h4 className="text-[14px] text-[#069A66] mb-2 font-semibold">Support</h4>
-              <ul className="space-y-1 text-[13px] lg:text-[14px]">
-                <li><Link className="text-[#023A27]" href="/contact">Contact Us</Link></li>
+              <h4 className="text-[14px] text-primary mb-2 ">Customer Support</h4>
+              <ul className="space-y-1 text-[13px] lg:text-[14px]">                
                 <li><Link className="text-[#023A27]" href="/cart">Help Center</Link></li>
-                <li><Link className="text-[#023A27]" href="/profile?tab=profile">Order Tracking</Link></li>
+                <li><Link className="text-[#023A27]" href="/orders">Orders</Link></li>
                 <li><Link className="text-[#023A27]" href="/orders">Returns</Link></li>
+                <li><Link className="text-[#023A27]" href="/contact">Contact Us</Link></li>
               </ul>
             </div>
 
             {/* Column 4 - Contact Us */}
             <div className="w-full lg:w-[230px]">
-              <h4 className="text-[14px] text-[#069A66] mb-2 font-semibold">Contact Us</h4>
+              <h4 className="text-[14px] text-primary mb-2">Contact Us</h4>
 
               <div className="flex items-start gap-2 text-brown text-[13px] lg:text-xs">
                 <p
@@ -176,7 +177,7 @@ const Footer = () => {
         </div>
 
         {/* BOTTOM LOGO */}
-        <div className="w-full flex mt-5 pb-[30px] px-4 lg:px-0">
+        <div className="w-full flex mt-[90px] lg:pb-[58px] pb-[30px] px-4 lg:px-0 lg:mt-[148px] md:mt-[132px]">
           <div className="max-w-[1200px] lg:ml-[10px] w-full flex justify-start lg:justify-start">
             <div className="w-full max-w-[279.38px] lg:max-w-[717px] h-[63px] lg:h-[161px] relative">
               <Image

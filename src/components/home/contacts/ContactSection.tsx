@@ -74,7 +74,7 @@ const ContactSection: React.FC = () => {
 
   return (
     <section
-      className="w-full flex justify-center py-10 p-[8px] font-[Poppins]"
+      className="w-full flex justify-center pt-10 p-[8px] font-[Poppins]"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       <div className="max-w-[1200px] w-full flex flex-col lg:flex-row">

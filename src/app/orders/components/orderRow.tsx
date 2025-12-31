@@ -60,7 +60,7 @@ export default function OrderRow({ order, reloadPage }: OrderProps) {
             <div className="w-full md:w-[40%] flex justify-start items-center">
               <p className="font-medium text-primary text-sm flex items-center">
                 <span className="text-brown text-sm font-medium mr-2">ORDER TYPE:</span>
-                <span className="text-sm text-secondary rounded ml-2">{order?.orderType}</span>
+                <span className="text-sm text-primary rounded ml-2">{order?.orderType}</span>
               </p>
             </div>
           )}

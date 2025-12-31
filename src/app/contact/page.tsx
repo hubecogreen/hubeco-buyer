@@ -294,9 +294,9 @@ export default function Page() {
           </Link>
         </div>
         <div className="bg-cream  md:py-20">
-          <div className="md:flex flex-col lg:flex-row items-start justify-start space-y-4 lg:space-x-4 lg:space-y-0 bg-cover bg-no-repeat bg-center bg-[url('/images/home/contactbg.webp')]">
+          <div className="md:flex flex-col lg:flex-row items-start justify-start space-y-4 lg:space-x-4 lg:space-y-0 bg-cover bg-no-repeat bg-center bg-[url('/images/home/contactbg-1.png')]">
             <div className="md:w-11/12 mx-auto md:flex">
-              <div className="bg-cream md:w-1/2 w-full md:overflow-auto p-4">
+              <div className=" md:w-1/2 w-full md:overflow-auto p-4">
                 <h1 className="md:text-3xl text-2xl  text-center md:text-left font-bold md:mb-4 text-brown">
                   Customer Support
                 </h1>

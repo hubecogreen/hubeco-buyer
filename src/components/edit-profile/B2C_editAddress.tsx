@@ -666,7 +666,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                     <div className="flex justify-start w-2/3 h-[22px]">
                     <button
                       onClick={() => onEditAddress(address)}
-                      className="hover:underline font-bold text-[#B90647]"
+                      className="hover:underline font-bold text-primary"
                     >
 
                         Edit
@@ -678,7 +678,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                           <span className="text-pink-600 ml-2">|</span>
 
                           <button
-                            className="hover:underline ml-2 font-bold text-[#B90647]"
+                            className="hover:underline ml-2 font-bold text-primary"
                             onClick={() => {
                               setIsOpen(true);
                               setDeleteId(address.id);
@@ -724,7 +724,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                     </div>
 
                     {address.isDefault ? (
-                      <h2 className="text-xs font-normal flex   justify-center mt-1 text-secondary w-16 text-center py-0 h-[20px] border border-secondary border-solid rounded ">
+                      <h2 className="text-xs font-normal flex   justify-center mt-1 text-primary w-16 text-center py-0 h-[20px] border border-primary border-solid rounded ">
                         Default
                       </h2>
                     ) : (

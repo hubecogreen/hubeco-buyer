@@ -72,26 +72,26 @@ const CategoryList = () => {
     const CARD_WIDTH = 110; // REQUIRED
     const SCROLL_BY = CARD_WIDTH;
     
-    // useEffect(() => {
-    //   if (!rowRef.current) return;
+    useEffect(() => {
+      if (!rowRef.current) return;
 
-    //   const container = rowRef.current;
+      const container = rowRef.current;
 
-    //   const interval = setInterval(() => {
-    //     if (!container) return;
+      const interval = setInterval(() => {
+        if (!container) return;
 
-    //     const { scrollLeft, scrollWidth, clientWidth } = container;
+        const { scrollLeft, scrollWidth, clientWidth } = container;
 
-    //     // reached end → go back to start
-    //     if (scrollLeft + clientWidth >= scrollWidth - 5) {
-    //       container.scrollTo({ left: 0, behavior: "smooth" });
-    //     } else {
-    //       container.scrollBy({ left: SCROLL_BY, behavior: "smooth" });
-    //     }
-    //   }, 2500); // 2.5s
+        // reached end → go back to start
+        if (scrollLeft + clientWidth >= scrollWidth - 5) {
+          container.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          container.scrollBy({ left: SCROLL_BY, behavior: "smooth" });
+        }
+      }, 2500); // 2.5s
 
-    //   return () => clearInterval(interval);
-    // }, []);
+      return () => clearInterval(interval);
+    }, []);
 
 
     const onScroll = () => {
@@ -305,7 +305,8 @@ const CategoryList = () => {
           <CustomButton
             title="View All"
             className="lg:flex hidden bg-[#109989] rounded-[5px]
-            px-[14px] py-[10px] lg:!px-[20px] lg:!py-[10px]
+            px-[14px] py-[10px] lg:!px-[25px] lg:!py-[10px] h-[53px]
+
             gap-[12px] text-white text-[14px] lg:text-[18px]"
             rightIcon={<GoArrowRight className="w-[18px] h-[18px] lg:w-[24px] lg:h-[24px]" />}
             onPress={() => router.push("/products")}

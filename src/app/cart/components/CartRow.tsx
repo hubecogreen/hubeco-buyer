@@ -568,9 +568,9 @@ export default function CartRow({
           <Button
             type="button"
             onClick={() => setOpen(true)}
-            className="bg-secondary/10 text-lg hover:bg-secondary/10  relative z-[29] text-secondary"
+            className="bg-primary text-lg hover:bg-secondary  relative z-[29] text-secondary"
           >
-            <GoTrash className="text-secondary" />
+            <GoTrash className="text-white" />
           </Button>
           {(quoteCond || (enable===true) ) && isQuoteAvailable && (
             <div className="flex flex-row items-center justify-start w-full mt-2">

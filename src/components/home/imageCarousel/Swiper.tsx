@@ -75,22 +75,23 @@ const ImageSlider = () => {
           </div>
 
           {/* RIGHT SIDE — Vertical swiper text */}
-          <div className="flex flex-col justify-center h-full lg:translate-y-[190px] gap-2">
-            <p className="text-[20px] font-regular">Certified Products from</p>
+          {/* RIGHT SIDE — Vertical swiper text */}
+<div className="flex flex-col justify-center h-full lg:translate-y-[190px] gap-2 pointer-events-none">
+  <p className="text-[20px] font-regular">Certified Products from</p>
 
-            <div className="h-[50px] overflow-hidden">
-              <div className="vertical-marquee">
-                <div className="vertical-track">
-                  {[...greenProLabels, ...greenProLabels].map((item, i) => (
-                    <div key={i} className="vertical-item">
-                      <p className="text-3xl">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-            </div>
+  <div className="h-[50px] overflow-hidden">
+    <div className="vertical-marquee">
+      <div className="vertical-track">
+        {[...greenProLabels, ...greenProLabels].map((item, i) => (
+          <div key={i} className="vertical-item">
+            <p className="text-3xl">{item}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
         </div>
@@ -117,7 +118,7 @@ const ImageSlider = () => {
       transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
       className="bg-primary hover:bg-white hover:text-primary text-white 
                  w-full lg:w-auto 
-                 lg:px-[40px] lg:py-[20px] py-[10px] px-[20px] text-[18px] font-medium
+                 lg:px-[40px] lg:py-[18px] py-[10px] px-[20px] text-[18px] font-medium
                  rounded-md"
       onClick={() => router.push("/products")}
     >
@@ -130,7 +131,7 @@ const ImageSlider = () => {
       transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
       className="bg-primary hover:bg-white hover:text-primary text-white 
                  w-full lg:w-auto 
-                 lg:px-[40px] lg:py-[20px] py-[10px] px-[20px] text-[18px] font-medium
+                 lg:px-[40px] lg:py-[18px] py-[10px] px-[20px] text-[18px] font-medium
                  rounded-md"
       onClick={() => router.push("/plans")}
     >

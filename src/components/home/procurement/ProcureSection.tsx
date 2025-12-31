@@ -98,7 +98,7 @@ const ProcureSection: React.FC = () => {
                                 <img
                                     src={service.icon}
                                     alt={service.title}
-                                    className="w-[32px] h-[32px] xs:w-[36px] xs:h-[36px] sm:w-[42px] sm:h-[42px] lg:w-[48px] lg:h-[48px]"
+                                    className="w-[32px] h-[32px] xs:w-[36px] xs:h-[36px] sm:w-[42px] sm:h-[42px] lg:w-[65px] lg:h-[65px]"
                                 />
                                 {/* <h3 className="text-[20px] lg:text-[22px] font-medium">
                                     {service.title}

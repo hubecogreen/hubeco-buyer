@@ -40,7 +40,7 @@ const ImageSlider = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-black/0 z-10" />
 
       {/* Content Layer */}
-      <div className="relative z-20 w-full h-full flex flex-col justify-center px-[20px] lg:px-[120px]  text-white lg:translate-y-[-100px] translate-y-[-40px] lg:max-w-[1440px] mx-auto  ">
+      <div className="relative z-20 w-full h-full flex flex-col justify-center px-[20px] lg:px-[120px]  text-cream lg:translate-y-[-100px] translate-y-[-40px] lg:max-w-[1440px] mx-auto  ">
 
         {/* Title + Right Section */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center  lg:gap-[80px] gap-[20px] w-full">
@@ -49,7 +49,7 @@ const ImageSlider = () => {
             <h1 className="text-[27px] lg:text-[60px] lg:leading-[60px] leading-[30px] font-medium">
               Digitizing <br className="hidden lg:block" /> Procurement for <br className="lg:block md:hidden block " />
               Smarter,{" "} <br className="md:block lg:hidden hidden " />
-              <span className="bg-primary px-2  py-1 rounded text-white inline-flex">
+              <span className="bg-primary px-2  py-1 rounded text-cream inline-flex">
                 {"Sustainable".split("").map((char, i) => (
                   <motion.span
                     key={i}
@@ -116,7 +116,7 @@ const ImageSlider = () => {
       initial={{ opacity: 0, y: 25 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
-      className="bg-primary hover:bg-white hover:text-primary text-white 
+      className="bg-primary hover:bg-cream hover:text-primary text-cream 
                  w-full lg:w-auto 
                  lg:px-[40px] lg:py-[18px] py-[10px] px-[20px] text-[18px] font-medium
                  rounded-md"
@@ -129,7 +129,7 @@ const ImageSlider = () => {
       initial={{ opacity: 0, y: 25 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
-      className="bg-primary hover:bg-white hover:text-primary text-white 
+      className="bg-primary hover:bg-cream hover:text-primary text-cream 
                  w-full lg:w-auto 
                  lg:px-[40px] lg:py-[18px] py-[10px] px-[20px] text-[18px] font-medium
                  rounded-md"

@@ -210,7 +210,7 @@ const VerifyNumber: React.FC<VerifyNumProps> = ({ mobileNumber, onPress, resetPa
     <div className="relative mt-30">
       <div className="bg-cover bg-center bg-[url('/images/auth/auth.webp')] h-5/6">
         <div className="bg-opacity-90 h-full flex items-center justify-center py-20 md:py-20">
-          <div className="text-center md:p-10 md:pt-10 py-10 md:py-15 max-w-md md:max-w-lg text-white bg-white">
+          <div className="text-center md:p-10 md:pt-10 py-10 md:py-15 max-w-md md:max-w-lg text-white bg-cream">
             <h1 className="text-[24px] md:text-3xl font-bold mb-4 text-brown">
               Verify your Number
             </h1>
@@ -234,7 +234,7 @@ const VerifyNumber: React.FC<VerifyNumProps> = ({ mobileNumber, onPress, resetPa
                             ref={(el:any) => (inputRefs.current[index] = el)} // Set ref to each input field
                             value={value}
                             onChange={(e) => handleInputChange(onChange, e.target.value, index)}
-                            className="text-brown text-center border border-slate-400 rounded-lg p-3 w-[70px] h-[55px]"
+                            className="text-brown text-center border border-slate-400 rounded-lg p-3 w-[70px] h-[55px] bg-cream"
 
                           />
                         )}
@@ -266,7 +266,7 @@ const VerifyNumber: React.FC<VerifyNumProps> = ({ mobileNumber, onPress, resetPa
                         border: "1px solid #FFFFFF",
                         color: "white",
                         minWidth: "300px",
-                        backgroundColor: "#B90647",
+                        backgroundColor: "#109899",
                       }}
                       loading={isLoading}
                     />

@@ -23,14 +23,14 @@ const ProcureSection: React.FC = () => {
             title: "Streamlined RFQ to Payment",
             icon: "/images/procurement/icon3.png",
             description:
-                "Manage RFQs, orders and payments seamlessly from your dashboard.",
+                "Manage RFQs, orders and payments seamlessly from your dashboard",
         },
         {
             id: 4,
             title: "Expert Support for Green Projects",
             icon: "/images/procurement/icon4.png",
             description:
-                "We help you choose materials aligned with GRIHA, IGBC and LEED.",
+                "We help you choose materials aligned with GRIHA, IGBC and LEED",
         },
     ];
 

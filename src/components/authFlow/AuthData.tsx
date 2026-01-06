@@ -232,12 +232,12 @@ const handleApiError = async (err: any) => {
 
  
   return (
-    <div className="relative mt-30">
+    <div className="relative mt-30 bg-cream">
       <div
         className="bg-cover bg-center bg-[url('/images/auth/auth.webp')] h-5/6"
       >
         <div className="flex items-center justify-center py-20 md:py-20">
-          <div className=" flex items-center justify-center py-10 md:py-15 w-11/12  px-4 md:max-w-lg md:h-[360px]  bg-white">
+          <div className=" flex items-center justify-center py-10 md:py-15 w-11/12  px-4 md:max-w-lg md:h-[360px]  bg-cream">
           <div>
             <h1 className="text-center text-[22px] md:text-3xl  font-bold mb-4 text-brown">
               Welcome to{" "}
@@ -276,7 +276,7 @@ const handleApiError = async (err: any) => {
                         onChange={onChange}
                         value={value}
                         customStyles={{
-                          // backgroundColor: "#F3F3F3",
+                          backgroundColor: "#FFFEF8",
                           border: "1px solid #E0E0E0",
                           borderRadius: "5px",
                           // width: "400px",
@@ -300,7 +300,7 @@ const handleApiError = async (err: any) => {
                         border: "1px solid #FFFFFF",
                         color: "white",
                         // minWidth: "400px",
-                        backgroundColor: "#B90647",
+                        backgroundColor: "#109889",
                       }}
                       //   hoverBgColor="#A92449"
                       //   hoverColor="black"

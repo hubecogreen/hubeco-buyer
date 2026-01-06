@@ -63,7 +63,7 @@ const WorksSection = () => {
           },
           {
             img: "/images/home/howitwork/correct-icon.png",
-            text: "Select products and request quotes from verified suppliers.",
+            text: "Select products and request quotes from verified suppliers",
           },
           {
             img: "/images/home/howitwork/cart-icon.png",

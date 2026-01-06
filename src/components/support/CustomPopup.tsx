@@ -150,7 +150,7 @@ const CustomTicketPopup: React.FC<CustomPopupProps> = ({
 
       {/* Popup Content */}
       <div className="fixed inset-0 flex items-center justify-center z-50">
-        <div className="bg-white md:w-[500px] p-6 rounded shadow-lg border border-borderGray relative">
+        <div className="bg-cream md:w-[500px] p-6 rounded shadow-lg border border-borderGray relative">
           <div className="flex justify-center items-center">
             <p className="text-center text-lg text-brown font-medium mt-4">Raise a Ticket</p>
               <PiTicketFill className="mt-3 ml-2 text-2xl text-primary" />
@@ -165,7 +165,7 @@ const CustomTicketPopup: React.FC<CustomPopupProps> = ({
                 control={control}
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger className="w-full border border-gray-300 rounded">
+                    <SelectTrigger className="w-full  rounded">
                       <SelectValue placeholder="Select Type" />
                     </SelectTrigger>
                     <SelectContent>
@@ -193,7 +193,7 @@ const CustomTicketPopup: React.FC<CustomPopupProps> = ({
                     {...field}
                     id="description"
                     placeholder="Provide a brief description of the issue"
-                    className="w-full p-2 border border-gray-300 rounded resize-none focus:outline-none"
+                    className="w-full p-2 border border-primary rounded resize-none focus:outline-none bg-cream"
                     rows={4}
                   />
                 )}
@@ -211,7 +211,7 @@ const CustomTicketPopup: React.FC<CustomPopupProps> = ({
                 control={control}
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger className="w-full border border-gray-300 rounded">
+                    <SelectTrigger className="w-full  rounded">
                       <SelectValue placeholder="Select Order" />
                     </SelectTrigger>
                     <SelectContent>
@@ -229,7 +229,7 @@ const CustomTicketPopup: React.FC<CustomPopupProps> = ({
             <div className="flex justify-end items-center mt-8">
               <Button
                 type="button"
-                className="py-2 px-4 bg-secondaryBg text-gray-700 rounded hover:bg-secondaryBg ml-6"
+                className="py-2 px-4 bg-cream border border-primary text-primary hover:text-cream rounded  ml-6"
                 onClick={handleCloseReturn}
               >
                 Cancel
@@ -237,11 +237,11 @@ const CustomTicketPopup: React.FC<CustomPopupProps> = ({
               <CustomButton
                 title={"Submit"}
                 customStyles={{
-                  border: "1px solid #FFFFFF",
+                  
                   color: "#FFFFFF",
                   minWidth: "200px",
                 }}
-                className="py-2 px-4 bg-secondary text-white rounded hover:bg-secondary ml-4"
+                className="py-2 px-4 bg-primary text-white rounded  ml-4"
                 onPress={handleSubmit(handleFormSubmit)}
                 loading={submitLoading}
               />

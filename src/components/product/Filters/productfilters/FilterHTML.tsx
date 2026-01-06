@@ -43,7 +43,7 @@ const FilterHTML = ({
                 placeholder="Search"
                 value={categorySearch || ""}
                 onChange={(e: any) => handleCategorySearch(e)}
-                className="pl-[35px] bg-white md:text-md text-sm w-full h-[40px] shadow-md text-fontGray mr-[1px] mb-4 rounded-[5px]"
+                className="pl-[35px] bg-cream md:text-md text-sm w-full h-[40px] shadow-md text-fontGray mr-[1px] mb-4 rounded-[5px]"
               />
 
             </div>

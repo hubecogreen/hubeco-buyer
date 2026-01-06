@@ -672,6 +672,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   borderRadius: "5px",
                   border: "1px solid #ccc",
                   color: "black",
+                  backgroundColor: "#FFFEF8",
                 }}
                 extraClassnames="custom-input"
                 errorMessage={errors.companyName?.message}
@@ -729,10 +730,10 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                     : ""
                 }
               >
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full bg-[#FFFEF8] ">
                   <SelectValue placeholder="Select Business Type" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-[#FFFEF8]">
                   <SelectGroup>
                     <SelectItem>Select Business Type</SelectItem>
                     {Array.isArray(businessTypes) &&
@@ -797,6 +798,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                 borderRadius: "5px",
                 border: "1px solid #ccc",
                 color: "black",
+                backgroundColor: "#FFFEF8",
               }}
               extraClassnames="custom-input"
               errorMessage={otherbusinessTypeErr}
@@ -830,6 +832,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                     borderRadius: "5px",
                     border: "1px solid #ccc",
                     color: "black",
+                    backgroundColor: "#FFFEF8",
                   }}
                   extraClassnames="custom-input "
                   errorMessage={errors.gst?.message}
@@ -850,7 +853,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   type="button"
                   color="primary"
                   disabled={!!gstExtractPathUrl}
-                  className="text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
+                  className="bg-creamtext-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
                 >
 
                 <FiUpload />
@@ -876,7 +879,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
             {gstExtractPathUrl.length === 0 ? (
               ""
             ) : (
-              <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
+              <div className="flex items-center justify-between p-2 bg-cream border border-primary rounded">
                 <p
                   className="truncate text-brown text-[14px] w-[300px] mr-[10px]"
 
@@ -936,6 +939,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                     borderRadius: "5px",
                     border: "1px solid #ccc",
                     color: "black",
+                    backgroundColor: "#FFFEF8",
                   }}
                   extraClassnames="custom-input"
                   errorMessage={errors.tan?.message}
@@ -956,7 +960,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   type="button"
                   color="primary"
                   disabled={!!tanExtractPathUrl}
-                  className="text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
+                  className="bg-cream text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
                 >
 
                 <FiUpload />
@@ -982,7 +986,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
             {tanExtractPathUrl.length === 0 ? (
               ""
             ) : (
-              <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
+              <div className="flex items-center justify-between p-2 bg-cream rounded">
                 <p
                   className="truncate text-brown text-[14px] w-[300px] mr-[10px]"
 
@@ -1045,6 +1049,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                     borderRadius: "5px",
                     border: "1px solid #ccc",
                     color: "black",
+                    backgroundColor: "#FFFEF8", 
                   }}
                   extraClassnames="custom-input"
                   errorMessage={errors.pan?.message}
@@ -1066,7 +1071,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   type="button"
                   color="primary"
                   disabled={!!panExtractPathUrl}
-                  className="text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
+                  className="bg-cream text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
                 >
 
                 <FiUpload />
@@ -1092,7 +1097,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
             {panExtractPathUrl.length === 0 ? (
               ""
             ) : (
-              <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
+              <div className="flex items-center justify-between p-2 bg-cream border border-primary rounded">
                 <p
                   className="truncate text-brown text-[14px] w-[300px] mr-[10px]"
 
@@ -1153,6 +1158,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   borderRadius: "5px",
                   border: "1px solid #ccc",
                   color: "black",
+                  backgroundColor: "#FFFEF8",
                 }}
                 extraClassnames="custom-input"
                 errorMessage={errors.companyAddress?.message}

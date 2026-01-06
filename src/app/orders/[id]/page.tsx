@@ -308,7 +308,7 @@ export default function OrdersPage({ params }: any) {
           {/* Order Details Grid Start */}
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 mt-3 lg:flex lg:flex-row lg:justify-between lg:items-start">
             <div className=" lg:w-[60%] w-full">
-              <div className="w-full shadow-md    border border-borderGray  ">
+              <div className="w-full shadow-md    border border-primary  ">
                 {orderData &&
                   orderData?.orders &&
                   orderData?.orders.length > 0 &&
@@ -496,7 +496,7 @@ export default function OrdersPage({ params }: any) {
                             "border-b border-borderGray"
                           } ${
                             selectedOrder?._id === order?._id
-                              ? "bg-cream border border-primary"
+                              ? "bg-cream  "
                               : ""
                           } p-4 w-full md:flex block justify-start items-center  `}
                           onClick={() => {
@@ -584,9 +584,9 @@ export default function OrdersPage({ params }: any) {
                                       )
                                     }
                                     variant={"outline"}
-                                    className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-primary text-primary rounded-none bg:white  hover:text-primary "
+                                    className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-primary text-cream rounded-[6px] bg-primary  hover:text-cream hover:bg-primary"
                                   >
-                                    <MdOutlineFileDownload color="#109989" />{" "}
+                                    <MdOutlineFileDownload color="#FFFEF8" />{" "}
                                     Download Invoice
                                   </Button>
                                 </div>
@@ -731,7 +731,7 @@ export default function OrdersPage({ params }: any) {
                             )
                           }
                           variant={"outline"}
-                          className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-primary text-primary rounded-none bg:white hover:bg-white hover:text-primary"
+                          className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-primary text-cream rounded-none bg-primary hover:bg-primary hover:text-cream rounded-[6px]"
                         >
                           {buyer?.buyerInfo?.buyerType === "B2C" ? (
                             <>
@@ -740,7 +740,7 @@ export default function OrdersPage({ params }: any) {
                             </>
                           ) : (
                             <>
-                              <MdOutlineFileDownload color="#109989" />
+                              <MdOutlineFileDownload color="#FFFEF8" />
                               Download Purchase Order
                             </>
                           )}
@@ -1012,7 +1012,7 @@ export default function OrdersPage({ params }: any) {
               {/* Refund Intitae  Section End */}
             </div>
             <div className=" lg:w-[38%] w-full">
-              <div className="w-full    p-3  border border-borderGray shadow-md">
+              <div className="w-full    p-3  border border-primary shadow-md">
                 <p className="text-lg text-brown font-semibold pl-3 mb-3">
                   Shipping Activity
                 </p>

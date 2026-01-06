@@ -467,7 +467,7 @@ const ProductCard = ({
               variant={"outline"}
               // onClick={() => router.push(`/${product.slug}?qt=open`)}
               onClick={() => OnClickQuote(product?.slug)}
-              className="z-10 w-[50%] bg-white text-primary  py-2 px-4 rounded  border-primary hover:text-primary transition duration-300 flex items-center justify-center gap-2"
+              className="z-10 w-[50%] bg-cream text-primary  py-2 px-4 rounded  border-primary hover:text-primary transition duration-300 flex items-center justify-center gap-2"
             >
               {/* {product.action}{" "}
             {product.action === "Add to Cart" && <ArrowRight size={16} />} */}
@@ -502,7 +502,7 @@ const ProductCard = ({
                 variant={"outline"}
                 // onClick={() => router.push(`/${product.slug}?qt=open`)}
                 onClick={() => OnClickQuote(product?.slug)}
-                className="z-10 w-[50%] bg-white  hover:text-primary  text-primary border-primary py-2 px-4 rounded  transition duration-300 flex items-center justify-center gap-2"
+                className="z-10 w-[50%] bg-cream  hover:text-primary  text-primary border-primary py-2 px-4 rounded  transition duration-300 flex items-center justify-center gap-2"
               >
                 {/* {product.action}{" "}
             {product.action === "Add to Cart" && <ArrowRight size={16} />} */}

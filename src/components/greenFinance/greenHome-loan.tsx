@@ -27,7 +27,7 @@ export default function GreenHomeLoanSection() {
           {/* Right Content */}
           <div className="space-y-6">
             <h3 className="text-3xl sm:text-3xl font-extrabold text-brown leading-tight tracking-tight leading-10">
-              Apply for Green Home Loan Turning <br/>Eco-Conscious Homes into Reality
+              Apply for Green Home Loan turning <br/>Eco-Conscious Homes into reality
               with Smarter, Greener Loans
             </h3>
 

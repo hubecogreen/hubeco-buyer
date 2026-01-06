@@ -136,7 +136,7 @@ const Tickets: React.FC = () => {
         link1={{ name: "Home", href: "/" }}
         link2={{ name: "Tickets", href: "#" }}
       />
-      <div className="min-h-screen bg-cream p-4">
+      <div className="min-h-screen bg-cream  p-4">
         <div className="max-w-full mx-auto md:mx-10 mt-10">
           {/* <h1 className="text-xl font-bold text-center mb-4">Tickets</h1> */}
           <h1 className="text-2xl font-bold mb-4">Tickets</h1>
@@ -149,10 +149,10 @@ const Tickets: React.FC = () => {
                 </td>
               </tr>
             ) : tableData.length > 0 ? (
-              <div className="sm:block">
+              <div className="sm:block border border-primary">
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
-                    <thead className="bg-cream border border-primary">
+                    <thead className="bg-cream border border-b-primary">
                       <tr>
                         <th className="py-6 px-4 text-sm font-semibold">
                           Date
@@ -216,16 +216,16 @@ const Tickets: React.FC = () => {
                               <div
                                 className={`border w-fit px-2 rounded-lg ${
                                   ticket.status === "OPEN"
-                                    ? "bg-[#EEFFFD] text-[#009886] border-[#EEFFFD]"
+                                    ? "bg-[#EEFFFD] text-[#009886] border-[#009886]"
                                     : ticket.status.includes("PENDING")
-                                    ? "bg-[#FF9F4329] text-[#FF9F43] border-[#FF9F4329]"
+                                    ? "bg-[#FFFDD0] text-brown border-brown"
                                     : ticket.status === "ESCALATED"
-                                    ? "bg-[#FFE9EA] text-[#FF4C51] border-[#FFE9EA]"
+                                    ? "bg-[#FFE9EA] text-[#FF4C51] border-[#FF4C51]"
                                     : ticket.status === "IN_PROGRESS"
-                                    ? "bg-[#00BAD129] text-[#00BAD1] border-[#00BAD129]"
+                                    ? "bg-[#FFFDD0] text-brown border-brown"
                                     : ticket.status === "CLOSED" ||
                                       ticket.status === "RESOLVED"
-                                    ? "bg-[#28C76F29] text-[#28C76F] border-[#28C76F29]"
+                                    ? "bg-[#2DD4BF] text-cream border-cream"
                                     : //   ? "bg-[#00BAD129] text-[#00BAD1] border-[#00BAD129]"
                                       "bg-gray-500" // Default color if no match
                                 }`}

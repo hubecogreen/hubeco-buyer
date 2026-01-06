@@ -808,7 +808,7 @@ const Checkout = () => {
     return <></>
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-cream min-h-screen">
       <Head>
         <title>Checkout</title>
       </Head>

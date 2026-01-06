@@ -206,7 +206,7 @@ const WishListCard: React.FC<ProductCardProps> = ({
 
   return (
     <div
-      className={`${styles.productCard} flex flex-col md:flex-row mx-auto my-2 md:my-4 hover-card w-full md:w-1/2 lg:w-full`}
+      className={`${styles.productCard} flex flex-col md:flex-row mx-auto my-2 md:my-4 hover:border-primary w-full md:w-1/2 lg:w-full`}
     >
       <div className="product-card-body w-full">
         <Image

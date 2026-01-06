@@ -144,7 +144,7 @@ export default function Page() {
           </div>
         </div>
 
-        <div className=" w-full bg-cream">
+        <div className=" w-full ">
           <div
             className={`${styles.secondSection} flex flex-col lg:flex-row items-center justify-between md:py-12 py-6 px-2 lg:px-4 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto max-w-[90%]`}
           >
@@ -379,7 +379,7 @@ export default function Page() {
                 vendors of green building materials on a global scale. We
                 envision a world where sustainable construction practices are
                 the norm, where buildings are energy-efficient, environmentally
-                friendly, and contribute positively to the well-being of people
+                friendly and contribute positively to the well-being of people
                 and the planet.
               </p>
             </div>
@@ -397,7 +397,7 @@ export default function Page() {
                   Join Us on Our Journey
                 </h1>
                 <p className="mb-6 md:mb-8 lg:mb-10 text-sm md:text-base lg:text-lg">
-                  Whether you are a builder, architect, or homeowner, I invite
+                  Whether you are a builder, architect or homeowner, I invite
                   you to join us on our journey towards a more sustainable
                   future. Explore our marketplace, connect with our community,
                   and discover the difference that ecofriendly materials can

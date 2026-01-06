@@ -1241,7 +1241,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       <div
                         className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group
      
-        ${isClicked ? "bg-secondary" : "bg-white"}`}
+        ${isClicked ? "bg-secondary" : "bg-cream"}`}
                       >
                         {isClicked ? (
                           <CiBookmark
@@ -1399,11 +1399,11 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           <TooltipProvider>
                             <Tooltip open={showQtyTip}>
                               <TooltipTrigger asChild>
-                                <div className="flex items-center justify-between border border-borderGray w-full bg-white rounded-lg">
+                                <div className="flex items-center justify-between border border-primary w-full bg-white rounded-lg">
                                   <Button
                                     type="button"
                                     onClick={handleDecrement}
-                                    className="pl-4 pr-0 py-2 bg-transparent text-lg hover:bg-transparent text-secondary"
+                                    className="pl-4 pr-0 py-2 bg-cream text-lg hover:bg-cream text-secondary"
                                     disabled={quantity <= minQty}
                                   >
                                     -
@@ -1413,13 +1413,13 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                     type="number"
                                     value={quantity}
                                     onChange={(e) => handleChange(e)}
-                                    className="w-24 pl-0 text-center custom-input"
+                                    className="bg-cream w-24 pl-0 text-center custom-input"
                                   />
 
                                   <Button
                                     type="button"
                                     onClick={handleIncrement}
-                                    className="pr-4 pl-0 py-2 text-lg bg-transparent hover:bg-transparent text-secondary"
+                                    className="pr-4 pl-0 py-2 text-lg bg-cream hover:bg-cream text-secondary"
                                     disabled={quantity >= maxQty}
                                   >
                                     +
@@ -1662,7 +1662,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               setPincode(e.target.value);
                             }
                           }}
-                          className="border border-borderGray text-[16px] text-black h-10 pr-16 rounded-none"
+                          className="border border-primary bg-cream text-[16px] text-black h-10 pr-16 rounded-none"
                         />
 
                         <Button
@@ -2214,7 +2214,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
           <div className="bg-cream border border-primary md:flex block w-full md:mx-auto  md:max-w-[87.5%] md:py-6 md:justify-center md:items-center py-8 px-4 rounded-lg">
             <Tabs defaultValue="account" className="w-full">
               <div className="   top-[128px] overflow-x-scroll no-scrollbar">
-                <TabsList className="border-b border-primary h-[45px] w-full rounded-none flex justify-start items-center  pb-0 mb-6 overflow-x-scroll no-scrollbar">
+                <TabsList className="border-b border-transparent h-[45px] w-full rounded-none flex justify-start items-center  pb-0 mb-6 overflow-x-scroll no-scrollbar">
                   <TabsTrigger
                     value="account"
                     className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"

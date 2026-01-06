@@ -464,7 +464,7 @@ useEffect(() => {
       {isDropdownOpen && (
         <div
           ref={dropdownRef}
-          className="absolute top-14 z-50 w-full bg-white shadow-lg rounded-lg max-h-96 overflow-y-auto"
+          className="absolute top-14 z-50 w-full bg-cream shadow-lg rounded-lg max-h-96 overflow-y-auto"
         >
           {noSearch ? (
             <>
@@ -476,7 +476,7 @@ useEffect(() => {
                     className="w-[200px] h-[200px]"
                   />
 
-                  <p className="font-semibold text-sm text-center mb-4">
+                  <p className="font-semibold text-sm text-center mb-4 ">
                     Oops, looks like there's nothing here. Try adjusting your
                     search again!
                   </p>

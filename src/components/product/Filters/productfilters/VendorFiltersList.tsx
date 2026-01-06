@@ -194,7 +194,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
               placeholder="Search"
               value={vendorSearch || ""}
               onChange={(e: any) => handleVendorSearch(e)}
-              className="pl-[35px] bg-white md:text-md text-sm h-[40px] shadow-md text-fontGray mr-[1px] mb-4 rounded-[5px] w-full"
+              className="pl-[35px] bg-cream md:text-md text-sm h-[40px] shadow-md text-fontGray mr-[1px] mb-4 rounded-[5px] w-full"
             />
 
           </div>
@@ -251,7 +251,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                               size={18}
                             />
                             <button
-                              className="text-sm text-white "
+                              className="text-sm text-cream "
                               onClick={handleShowLessVendors}
                             >
                               Show Less
@@ -259,7 +259,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                           </div>
                           <div className="flex items-center flex-row mt-3 mb-4">
                             <button
-                              className="text-sm text-white "
+                              className="text-sm text-cream "
                               onClick={handleShowMoreVendors}
                             >
                               Show More
@@ -274,7 +274,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                     ) : (
                       <div className="flex items-center flex-row mt-3 mb-4">
                         <button
-                          className="text-sm text-white "
+                          className="text-sm text-cream "
                           onClick={handleShowMoreVendors}
                         >
                           Show More
@@ -290,7 +290,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                   <div className="flex items-center flex-row mt-3 mb-4">
                     <MdKeyboardDoubleArrowLeft color={"white"} size={18} />
                     <button
-                      className="text-sm text-white "
+                      className="text-sm text-cream "
                       onClick={handleShowLessVendors}
                     >
                       Show Less

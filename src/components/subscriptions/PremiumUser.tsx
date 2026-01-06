@@ -309,7 +309,7 @@ export default function Page() {
                       handleDownload(`${assetURL}/${subData?.invoiceLink}`)
                     }
                     variant={"outline"}
-                    className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-primary text-white rounded-none bg-primary hover:bg-white hover:text-secondary "
+                    className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-primary text-white rounded-[6px] bg-primary hover:bg-white hover:text-secondary "
                   >
                     <MdOutlineFileDownload className="text-white hover:text-red-600" /> Download Invoice
                   </Button>

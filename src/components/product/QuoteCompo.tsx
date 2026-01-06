@@ -504,7 +504,7 @@ export default function QuoteCompo({
           <DialogFooter className="flex justify-between fixed bottom-0 w-full px-5 py-5">
             <Button
               onClick={() => handleClose()}
-              className="bg-gray-200 text-brown px-4 py-2 border border-primary w-full w-1/2"
+              className="bg-gray-200 text-brown px-4 py-2 border border-primary w-full w-1/2 hover:text-cream"
             >
               Cancel
             </Button>

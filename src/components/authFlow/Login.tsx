@@ -226,7 +226,7 @@ setIsLoading(false)
         <div className="bg-cover bg-center bg-[url('/images/auth/auth.webp')] h-5/6">
          <div className="h-full flex items-center justify-center py-20 md:py-10 px-[10px] md:px-0">
           {/* <div className=" flex items-center justify-center py-10 md:py-15 w-11/12  px-4 md:max-w-lg   bg-white"> */}
-           <div className="text-center py-10 md:py-15 max-w-full md:max-w-lg  text-white bg-white">
+           <div className="text-center py-10 md:py-15 max-w-full md:max-w-lg  text-white bg-cream">
              <h1 className="text-center text-[22px] md:text-3xl  font-bold mb-4 text-brown">
                Welcome to{" "}
                <span className="text-primary text-[22px] md:text-2xl lg:text-3xl font-bold">
@@ -261,6 +261,7 @@ setIsLoading(false)
                         customStyles={{
                           border: "1px solid #E0E0E0",
                           borderRadius: "5px",
+                          backgroundColor: "#FFFEF8",
                           // width: "400px",
                         }}
                         rightIcon={<AiFillEdit onClick={onPress}  className="text-brown w-4 h-4 " />}
@@ -292,6 +293,7 @@ setIsLoading(false)
                         customStyles={{
                           border: "1px solid #E0E0E0",
                           borderRadius: "5px",
+                          backgroundColor: "#FFFEF8",
                           // width: "400px",
                         }}
                         errorStyle={{}}
@@ -312,7 +314,7 @@ setIsLoading(false)
                         border: "1px solid #FFFFFF",
                         color: "white",
                         // minWidth: "400px",
-                        backgroundColor: "#B90647",
+                        backgroundColor: "#109899",
                       }}
                       loading={isLoading}
                       type="submit"

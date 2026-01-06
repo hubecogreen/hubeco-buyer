@@ -411,7 +411,7 @@ export default function Page({ params }: any) {
         <title>Order Support</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <div className="category-section py-7 mx-auto pb-10 lg:px-24 md:px-12 px-2">
+      <div className="bg-cream category-section py-7 mx-auto pb-10 lg:px-24 md:px-12 px-2">
         <div className="flex justify-between">
           <h1 className="text-3xl font-bold py-5 mx-8 text-center md:text-left">
             Chat with us now
@@ -439,9 +439,9 @@ export default function Page({ params }: any) {
             />
             {/* <RefundNotification /> */}
           </div>
-          <div className="flex flex-col gap-1 md:mt-3 border border-borderGray">
+          <div className="flex flex-col gap-1 md:mt-3 border border-primary">
             <div className="w-full shadow-md border border-borderGray">
-              <div className="md:flex  block justify-between bg-secondaryBg">
+              <div className="md:flex  block justify-between bg-cream">
                 <div className="md:flex block md:justify-start justify-center items-center md:w-[80%] w-full">
                   <div
                     className="min-w-[160px] md:flex block md:justify-start justify-center ml-[6rem] md:ml-0 items-center"

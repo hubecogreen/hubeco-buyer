@@ -951,6 +951,7 @@ reset1()
                   borderRadius: "5px",
                   border: "1px solid #ccc",
                   color: "black",
+                  backgroundColor: '#FFFEF8'
                 }}
                 errorMessage={errors.firstName?.message}
               />
@@ -976,6 +977,7 @@ reset1()
                   borderRadius: "5px",
                   border: "1px solid #ccc",
                   color: "black",
+                  backgroundColor: '#FFFEF8'
                 }}
                 errorMessage={errors.lastName?.message}
               />

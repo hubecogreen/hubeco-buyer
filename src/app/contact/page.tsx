@@ -392,7 +392,7 @@ export default function Page() {
                                 onChange={onChange}
                                 value={value}
                                 customStyles={{
-                                  backgroundColor: "#F3F3F3",
+                                  // backgroundColor: "#F3F3F3",
                                   borderRadius: "5px",
                                   // width: "500px",
                                 }}
@@ -416,7 +416,7 @@ export default function Page() {
                                 onChange={onChange}
                                 value={value}
                                 customStyles={{
-                                  backgroundColor: "#F3F3F3",
+                                  // backgroundColor: "#F3F3F3",
                                   borderRadius: "5px",
                                   // width: "500px",
                                 }}
@@ -441,7 +441,6 @@ export default function Page() {
                                 onChange={onChange}
                                 value={value}
                                 customStyles={{
-                                  backgroundColor: "#F3F3F3",
                                   borderRadius: "5px",
                                   // width: "500px",
                                 }}
@@ -466,7 +465,6 @@ export default function Page() {
                                 onChange={onChange}
                                 value={value}
                                 customStyles={{
-                                  backgroundColor: "#F3F3F3",
                                   borderRadius: "5px",
                                   width: "100%",
                                   height: "100px",

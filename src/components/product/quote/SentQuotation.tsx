@@ -237,7 +237,7 @@ export default function SentQuotation({
                       <Button
                         asChild
                         variant="outline"
-                        className="border border-primary text-primary hover:text-primary hover:bg-transparent text-sm font-semibold px-4 py-2 rounded-[6px]"
+                        className="border bg-cream border-primary text-primary hover:text-primary hover:bg-transparent text-sm font-semibold px-4 py-2 rounded-[6px]"
                       >
                         <Link
                           href={`/quote-request/${initialState._id}/view-quote?id=${quote.quotationId}`}

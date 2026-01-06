@@ -358,7 +358,7 @@ useEffect(() => {
         <Sheet>
           <SheetTrigger asChild>
             <button
-              className="bg-primary text-white p-3 rounded-full shadow-lg flex items-center space-x-2 hover:bg-primary/90 transition-colors"
+              className="bg-primary text-cream p-3 rounded-full shadow-lg flex items-center space-x-2 hover:bg-primary/90 transition-colors"
               aria-label="Open Filters"
             >
               <Filter className="w-6 h-6" />

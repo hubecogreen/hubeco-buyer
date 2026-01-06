@@ -429,11 +429,11 @@ const Cart = () => {
             {cartData && cartData.length > 0 ? (
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2">
-                  <div className="bg-cream shadow rounded-lg p-4 sm:py-6 sm:px-4 max-w-2/3">
+                  <div className="bg-cream shadow rounded-lg p-4 sm:py-6 sm:px-4 max-w-2/3 border border-primary">
                     <div className="sm:block">
                       <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                          <thead className="bg-cream border border-primary">
+                          <thead className="bg-cream ">
                             <tr className="border-b">
                               <th className="py-4 pl-2 pr-4 max-w-[45%]">
                                 Product
@@ -485,7 +485,7 @@ const Cart = () => {
                 </div>
 
                 <div>
-                  <div className="bg-cream shadow rounded-lg p-6">
+                  <div className="bg-cream border border-primary shadow rounded-lg p-6">
                     <div
                       className="flex justify-between bg-cream border border-primary items-center py-3 px-4 cursor-pointer"
                       onClick={() => setOpenShipping(!openShipping)}
@@ -705,7 +705,7 @@ const Cart = () => {
                         isTextArea={true}
                         customStyles={{
                           borderRadius: "5px",
-                          border: "1px solid #ccc",
+                      
                           color: "black",
                           backgroundColor: "#FFFEF8"
                         }}

@@ -494,7 +494,7 @@ const Header: React.FC<HeaderProps> = () => {
               
               {/* Desktop Navigation Links - Visible on tablet and large screens */}
               <div
-                className={`hidden lg:flex items-center space-x-3 lg:space-x-4  flex-shrink-0 ${isSearchFocused ? "lg:flex md:hidden" : ""
+                className={`hidden lg:flex items-center flex-shrink-0 ${isSearchFocused ? "lg:flex md:hidden" : ""
                   }`}
               >
                 <div className="relative">
@@ -595,7 +595,7 @@ const Header: React.FC<HeaderProps> = () => {
                 {/* Products */}
                 <Link
                   href="/products"
-                  className={`mx-4 font-medium cursor-pointer transition-colors relative hidden lg:block ${pathname === "/products"
+                  className={`ml-[29px] font-medium cursor-pointer transition-colors relative hidden lg:block ${pathname === "/products"
                     ? "text-[#B90647]"
                     : "text-gray-800 hover:text-secondary"
                     }`}
@@ -609,7 +609,7 @@ const Header: React.FC<HeaderProps> = () => {
                 {/* Green Financing */}
                 <Link
                   href="/green-financing"
-                  className={`mx-4 flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative hidden lg:flex ${pathname === "/green-financing"
+                  className={`ml-[20px] flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative hidden lg:flex ${pathname === "/green-financing"
                     ? "text-[#B90647]"
                     : "text-gray-800"
                     }`}
@@ -625,7 +625,7 @@ const Header: React.FC<HeaderProps> = () => {
                 {/* About */}
                 <Link
                   href="/about"
-                  className={`mx-4 font-medium cursor-pointer transition-colors relative hidden lg:block ${pathname === "/about"
+                  className={`ml-[20px] font-medium cursor-pointer transition-colors relative hidden lg:block ${pathname === "/about"
                     ? "text-[#B90647]"
                     : "text-gray-800 hover:text-secondary"
                     }`}
@@ -843,7 +843,7 @@ const Header: React.FC<HeaderProps> = () => {
                   />
                   <CustomButton
                     title="Login / SignUp"
-                    className="text-[16px] bg-white text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
+                    className="text-[16px] bg-cream text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
                  
                     hoverBgColor=""
                     onPress={() => setShowLoginPopup(true)}
@@ -1344,6 +1344,7 @@ const LoginPopup = ({
           h-fit
           p-4
           md:p-0
+          bg-cream
         "
       >
         <div className="flex flex-col items-center justify-center gap-3 md:p-6 p-4">
@@ -1374,7 +1375,7 @@ const LoginPopup = ({
                 group
                 w-full md:w-[158px]
                 h-[72px] md:h-[96px]
-                bg-white border border-[#109989]
+                bg-cream border border-[#109989]
                 rounded-[7px] shadow-sm
                 flex items-center justify-center gap-[11px]
                 hover:bg-primary
@@ -1402,7 +1403,7 @@ const LoginPopup = ({
                 group
                 w-full md:w-[178px]
                 h-[72px] md:h-[96px]
-                bg-white border border-[#BB0444]
+                bg-cream border border-[#BB0444]
                 rounded-[7px] shadow-sm
                 flex items-center justify-center gap-[9px]
                 hover:bg-secondary

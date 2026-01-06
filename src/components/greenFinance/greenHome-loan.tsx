@@ -34,14 +34,14 @@ export default function GreenHomeLoanSection() {
             <p className="text-[18px] text-brown leading-relaxed font-normal">
               Buying a home is one of the most important decisions you will
               make. At Hubeco, we make it easier to choose a home that’s
-              healthier, energy-efficient, and future ready with financing that
+              healthier, energy-efficient and future ready with financing that
               rewards your commitment to sustainability.
             </p>
 
             <div className="pt-4">
               <button
                 onClick={() => setIsHomeLoanFormOpen(true)}
-                className="inline-flex items-center gap-3 border-2 border-primary text-primary px-7 py-3 rounded-lg text-[18px] font-semibold hover:bg-primary hover:text-white transition-all duration-300"
+                className="inline-flex items-center gap-3 border-2 border-primary bg-primary text-cream px-7 py-3 rounded-lg text-[18px] font-semibold transition-all duration-300"
               >
                 Apply for Green Home Loan
                 <GoArrowRight className="text-xl" />

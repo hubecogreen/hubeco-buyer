@@ -193,7 +193,7 @@ const PartnersSection: React.FC = () => {
           {partners.map((p) => (
             <div
               key={p.id}
-              className="bg-[#FFFEF8] rounded-[7px] w-[406px] h-[392px] p-[30px] border border-[#E4F1EE] border-l-[3px] border-l-[#0BA392]"
+              className="bg-[#FFFEF8] rounded-[7px] w-[406px]  p-[30px] border border-[#E4F1EE] border-l-[3px] border-l-[#0BA392] flex flex-col"
             >
               <div className="flex justify-center mb-6">
                 <img
@@ -207,7 +207,7 @@ const PartnersSection: React.FC = () => {
                 {p.name}
               </h3>
 
-              <p className="text-[14px] text-center opacity-70 mb-5">
+              <p className="text-[14px] text-center opacity-70 mb-5 ">
                 {p.role}
               </p>
 

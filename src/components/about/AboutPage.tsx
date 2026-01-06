@@ -445,7 +445,7 @@ export default function Page() {
           <div className="w-full">
             <div className="flex w-full border border-primary justify-between bg-cream rounded mobile-sm:mb-20 mobile-sm:flex-wrap sm:flex-nowrap h-[500px] md:h-[450px]">
               <div className="w-full p-2 md:h-[450px] h-fit-content md:w-8/12 flex flex-col items-start">
-                <div className="w-full lg:w-2/3 pl-4 md:pl-8">
+                <div className="w-full md:w-full lg:w-full pl-4 md:pl-8">
                   <h1 className="text-3xl md:text-5xl font-medium text-left px-2 md:px-4 text-brown py-[5%] leading-tight">
                     Together, let&#39;s build a greener tomorrow with{" "}
                     <span className="text-brown-medium text-3xl md:text-5xl">

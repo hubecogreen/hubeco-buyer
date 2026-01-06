@@ -32,7 +32,7 @@ const CallToActionSection: React.FC = () => {
          </div>
 
          {/* Content */}
-         <div className="relative max-w-[900px] w-full px-5 
+         <div className="relative max-w-[900px] w-full px-[12px] 
                      flex flex-col items-center text-center gap-6
                      md:gap-6">
 
@@ -78,23 +78,22 @@ const CallToActionSection: React.FC = () => {
             <div className="flex gap-4 mt-6
                         max-[490px]:gap-[10px]
                         max-[490px]:w-full
-                        max-[490px]:px-4">
+                       ">
   <CustomButton
    className="
       bg-primary
       text-white 
       text-[20px]
       font-medium  
-      !px-8 
-      !py-3 
+      !px-[41px]
+      !py-[20px]
       rounded-[5px]
       tracking-wide
       md:text-[20px]
-      md:!px-8
-      md:!py-3
+      md:!px-[65px]
+      md:!py-[20px]
       max-[490px]:text-[16px]
-      max-[490px]:!px-4
-      max-[490px]:!py-2
+    
       max-[490px]:!h-[59px]
       max-[490px]:w-full
       max-[490px]:whitespace-nowrap
@@ -110,8 +109,8 @@ const CallToActionSection: React.FC = () => {
       text-white 
       text-[20px]
       font-medium 
-      px-8 
-      py-3 
+      px-[19px] 
+      py-[20px] 
       rounded-[5px]
       tracking-wide
       cursor-pointer

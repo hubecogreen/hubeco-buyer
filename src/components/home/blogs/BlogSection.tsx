@@ -66,7 +66,7 @@ const BlogsSection = () => {
           <button
             className="swiper-button-prev-custom absolute lg:left-[-30px] left-[-10px] top-1/2 
                        -translate-y-1/2 z-20 lg:w-[70px] lg:h-[70px] w-[60px] h-[60px]
-                       rounded-full bg-white shadow flex items-center justify-center"
+                       rounded-full bg-cream shadow flex items-center justify-center"
           >
             <Image
               src="/images/blogs/left.png"
@@ -94,7 +94,6 @@ const BlogsSection = () => {
             breakpoints={{
               768: {
                 slidesPerView: 2,
-                autoplay: false, // desktop no autoplay
               },
             }}
             navigation={{
@@ -114,7 +113,7 @@ const BlogsSection = () => {
           <button
             className="swiper-button-next-custom absolute lg:right-[-30px] right-[-10px]  top-1/2 
                        -translate-y-1/2 z-20 lg:w-[70px] lg:h-[70px] w-[60px] h-[60px]
-                       rounded-full bg-white shadow flex items-center justify-center
+                       rounded-full bg-cream shadow flex items-center justify-center
                        "
           >
             <Image

@@ -9,7 +9,7 @@ const ProcureSection: React.FC = () => {
             title: "100% Sustainable, Certified Materials",
             icon: "/images/procurement/icon1.png",
             description:
-                "We list only GreenPro, GRIHA, and EPD certified materials",
+                "We list only GreenPro, GRIHA and EPD certified materials",
         },
         {
             id: 2,

@@ -174,7 +174,7 @@ const WorksSection = () => {
     <div className="flex gap-3 mt-4 lg:block lg:mt-10 ">
       <CustomButton
         onPress={handleBuyerClick}
-        className={`flex items-center shadow-md shadow-primary justify-center lg:w-[380px] lg:h-[80px] gap-2 rounded-md border font-bold w-full py-3 text-[16px]  lg:p-[22px] h-[60px] lg:text-[30px] lg:justify-between mb-0 lg:mb-6 ${
+        className={`flex items-center shadow-primary justify-center lg:w-[380px] lg:h-[80px] gap-2 rounded-md border font-bold w-full py-3 text-[16px]  lg:p-[22px] h-[60px] lg:text-[30px] lg:justify-between mb-0 lg:mb-6 ${
           showBuyer
             ? "bg-primary text-white border-primary"
             : "bg-transparent text-primary border-primary"
@@ -203,7 +203,7 @@ const WorksSection = () => {
 
       <CustomButton
         onPress={handleVendorClick}
-        className={`flex items-center justify-center shadow-md shadow-secondary lg:w-[380px] lg:h-[80px] gap-2 rounded-md border font-bold w-full py-3 text-[16px]  lg:p-[22px] h-[60px] lg:text-[30px] lg:justify-between ${
+        className={`flex items-center justify-center shadow-secondary lg:w-[380px] lg:h-[80px] gap-2 rounded-md border font-bold w-full py-3 text-[16px]  lg:p-[22px] h-[60px] lg:text-[30px] lg:justify-between ${
           !showBuyer
             ? "bg-secondary text-white border-secondary"
             : "bg-transparent text-secondary border-secondary"

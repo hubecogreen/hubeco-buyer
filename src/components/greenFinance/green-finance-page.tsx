@@ -18,10 +18,10 @@ export default function GreenFinancingSection() {
             src="/images/greenFinance/greenFinanceBanner.webp"
             alt="Modern sustainable home interior"
             fill
-            className="object-fit rounded-[48px]"
+            className="object-fit rounded-[40px]"
             priority
           />
-          <div className="absolute inset-0 bg-black/50 rounded-[48px]" />
+          <div className="absolute inset-0 bg-black/50 rounded-[40px]" />
         </div>
 
         {/* Content */}
@@ -42,7 +42,7 @@ export default function GreenFinancingSection() {
             <div className="flex flex-wrap gap-4 sm:gap-6">
               <button
                 onClick={() => setIsHomeLoanFormOpen(true)}
-                className="flex items-center gap-2 bg-transparent border border-white text-white px-6 py-3 rounded-md text-base font-semibold hover:text-gray-900 transition"
+                className="flex items-center gap-2 bg-cream border border-white text-primary px-6 py-3 rounded-md text-base font-semibold hover:text-gray-900 transition"
               >
                 Apply for Green Home Loan
                 <GoArrowRight className="text-lg" />
@@ -50,7 +50,7 @@ export default function GreenFinancingSection() {
 
               <button
                 onClick={() => setIsProjectFormOpen(true)}
-                className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-md text-base font-semibold hover:bg-primary transition"
+                className="flex items-center gap-2 bg-primary text-cream px-6 py-3 rounded-md text-base font-semibold hover:bg-primary transition"
               >
                 Apply for Green Project Financing
                 <GoArrowRight className="text-lg" />

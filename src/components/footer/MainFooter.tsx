@@ -140,7 +140,7 @@ const Footer = () => {
                 <FiPhone size={14} /> Phone: +91 9985544055
               </p>
 
-              <p className="text-[13px] lg:text-[14px] flex items-center gap-2 text-brown mb-3 lg:mb-1">
+              <p className="text-[13px] lg:text-[14px] flex items-center gap-2 text-brown mb-3 lg:mb-2">
                 <BsEnvelope size={14} />Email: info@hubeco.market
               </p>
 

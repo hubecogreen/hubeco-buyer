@@ -145,98 +145,73 @@ export default function Page() {
         </div>
 
         <div className=" w-full ">
-          <div
-            className={`${styles.secondSection} flex flex-col lg:flex-row items-center justify-between md:py-12 py-6 px-2 lg:px-4 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto max-w-[90%]`}
+        <div
+        className={`${styles.secondSection} flex flex-col md:flex-row items-center justify-between
+        md:py-12 py-6 px-2 lg:px-4 mx-auto max-w-[90%] gap-6 mb-12`}
+      >
+        {/* TEXT COLUMN */}
+        <div className="md:w-1/2 overflow-visible lg:overflow-auto p-2 lg:p-4">
+          <h1 className="text-2xl font-bold mb-4 text-brown">What We Do</h1>
+          <p className="text-md text-brown mb-6">
+            We provide a comprehensive marketplace that connects you with a wide
+            range of eco-friendly building materials.
+          </p>
+
+          <Accordion
+            allowMultiple={false}
+            defaultIndex={selectedIndex ?? [0]}
+            onChange={handleAccordionChange}
           >
-            <div className="overflow-auto p-2 lg:p-4">
-              <h1 className="text-2xl font-bold mb-4 text-brown">What We Do</h1>
-              <p className="max-w-2xl text-md font-thin text-brown text-justify">
-                We provide a comprehensive marketplace that connects you with a
-                wide range of eco-friendly building materials. Our carefully
-                curated selection includes products that are :
-              </p>
+            {accordionItems.map((item, index) => (
+              <AccordionItem key={index} className="border-b border-primary py-4">
+                {({ isExpanded }) => (
+                  <>
+                    <AccordionButton className="flex justify-between">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src={item.imgSrc}
+                          alt={item.alt}
+                          width={32}
+                          height={32}
+                          className={
+                            selectedIndex === index ||
+                            (selectedIndex === undefined && index === 0)
+                              ? ""
+                              : "grayscale"
+                          }
+                        />
+                        <span className="font-semibold text-brown">
+                          {item.title}
+                        </span>
+                      </div>
+                      {isExpanded ? (
+                        <PiMinusCircleBold className="text-primary" />
+                      ) : (
+                        <TbCirclePlus className="text-primary" />
+                      )}
+                    </AccordionButton>
 
-              <Accordion
-                className="w-full mt-10"
-                allowMultiple={false}
-                defaultIndex={selectedIndex ?? [0]}
-                onChange={handleAccordionChange}
-              >
-                {accordionItems.map((item, index) => (
-                  <AccordionItem
-                  key={index}
-                  className="border-b border-[#B90647] py-[17px]"
-                >
-                
-                    {({ isExpanded }) => (
-                      <>
-                        <h2>
-                          <AccordionButton className="flex justify-between">
-                            <div className=" flex items-center">
-                              <Image
-                                src={item.imgSrc}
-                                alt={item.alt}
-                                className={`${
-                                  selectedIndex === index ||
-                                  (selectedIndex === undefined && index === 0)
-                                    ? "filter-none"
-                                    : "grayscale"
-                                }`}
-                                width={32}
-                                height={32}
-                                onError={e => {
-                                  e.currentTarget.src = 'images/product-placeholder.webp'
-                                }}
-                                loading="lazy"
-                              />
-                              <span
-                                className={`text-left text-brown flex-1 font-semibold ml-2.5`}
-                              >
-                                {item.title}
-                              </span>
-                            </div>
-                            <div className="flex items-center">
-                              {isExpanded ? (
-                                <PiMinusCircleBold
-                                  className="text-[#B90647] text-lg"
-                                />
-                              ) : (
-                                <TbCirclePlus
-                                  className="text-[#B90647] text-lg"
-                                />
-                              )}
-                            </div>
-                          </AccordionButton>
-                        </h2>
-                        <AccordionPanel
-                          className="text-left text-sm text-brown text-medium mt-2 pl-10"
-                          pb={4}
-                        >
-                          {item.description}
-                        </AccordionPanel>
-                      </>
-                    )}
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
+                    <AccordionPanel className="pl-10 text-sm text-brown">
+                      {item.description}
+                    </AccordionPanel>
+                  </>
+                )}
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
 
-            <div
-              className=" lg:flex justify-center items-center p-2 lg:p-4"
-            >
-              <Image
-                src="images/about/aboutBanner2.webp"
-                alt="banner1"
-                className="w-full rounded-md md:w-full max-w-lg mx-auto"
-                height={512}
-                width={512}
-                onError={e => {
-                  e.currentTarget.src = 'images/product-placeholder.webp'
-                }}
-                loading="lazy"
-              />
-            </div>
-          </div>
+        {/* IMAGE COLUMN (VISIBLE ON TABLET + DESKTOP) */}
+        <div className="flex md:flex md:w-1/2 justify-center items-center p-2 lg:p-4">
+          <Image
+            src="images/about/aboutBanner2.webp"
+            alt="What we do"
+            width={512}
+            height={512}
+            className="rounded-md max-w-lg w-full"
+          />
+        </div>
+      </div>
 
           <div className="flex items-center justify-center md:pb-8 pb-4">
             <div className="text-center">
@@ -445,7 +420,7 @@ export default function Page() {
           <div className="w-full">
             <div className="flex w-full border border-primary justify-between bg-cream rounded mobile-sm:mb-20 mobile-sm:flex-wrap sm:flex-nowrap h-[500px] md:h-[450px]">
               <div className="w-full p-2 md:h-[450px] h-fit-content md:w-8/12 flex flex-col items-start">
-                <div className="w-full md:w-full lg:w-full pl-4 md:pl-8">
+                <div className="w-full md:w-full lg:w-full pl-4 md:pl-4">
                   <h1 className="text-3xl md:text-5xl font-medium text-left px-2 md:px-4 text-brown py-[5%] leading-tight">
                     Together, let&#39;s build a greener tomorrow with{" "}
                     <span className="text-brown-medium text-3xl md:text-5xl">

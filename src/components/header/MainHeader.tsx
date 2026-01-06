@@ -682,13 +682,13 @@ const Header: React.FC<HeaderProps> = () => {
             </div>
 
             {/* Desktop Additional Navigation Links - Visible on tablet and large screens, but hide some items on tablet */}
-            {!isSearchFocused && (
+            {/* {!isSearchFocused && (
               <div
                 className={`hidden md:flex items-center ${token
                   ? "space-x-8 md:space-x-10 lg:space-x-14"
                   : "space-x-6 md:space-x-8 lg:space-x-8"
                   }`}
-              >
+              > */}
                 {/* <Link
                 href="/brands"
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
@@ -730,8 +730,8 @@ const Header: React.FC<HeaderProps> = () => {
                   <div className="absolute bottom-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link> */}
-              </div>
-            )}
+              {/* </div>
+            )} */}
 
             {/* Mobile Additional Navigation Links - Removed, moved to hamburger menu */}
 
@@ -786,7 +786,7 @@ const Header: React.FC<HeaderProps> = () => {
             {/* Right side - User actions */}
             <div className="flex items-center md:space-x-2 lg:space-x-4 justify-end ">
               {/* Profile Icon - Visible on all screen sizes */}
-              {token ? <div className="flex ml-[150px]">
+              {token ? <div className="flex ">
                 <div
                 ref={iconRef}
                 onClick={() => {
@@ -798,12 +798,13 @@ const Header: React.FC<HeaderProps> = () => {
                     setIsUserPopoverClicked(true);
                   }
                 }}
-                className="relative"
+                className="relative flex justify-between items-center gap-[10px] cursor-pointer"
               >
                 <PiUserCircleThin
                   className="text-brown hover:cursor-pointer "
                   size={30}
                 />
+                <span className="text-primary">Profile</span>
               </div>
 
                 <div ref={popoverRef}>
@@ -815,7 +816,7 @@ const Header: React.FC<HeaderProps> = () => {
                 </div>
 
                 {/* Cart Icon - Visible on all screen sizes */}
-                <div className="relative pr-2 md:pr-2 lg:pr-4 lg:mx-4">
+                <div className="relative flex justify-between items-center pr-2 md:pr-2 lg:pr-4 lg:mx-4 gap-[10px] cursor-pointer">
                   <CiShoppingCart
                     className="text-brown hover:cursor-pointer " 
                     size={30}
@@ -830,6 +831,7 @@ const Header: React.FC<HeaderProps> = () => {
                       {cartCountV ? cartCountV : cartCount ? cartCount : ""}
                     </div>
                   ) : null}
+                  <span className="text-primary">View Cart</span>
                 </div>
               </div>
                 :

@@ -798,10 +798,10 @@ const Header: React.FC<HeaderProps> = () => {
                     setIsUserPopoverClicked(true);
                   }
                 }}
-                className="relative flex justify-between items-center gap-[10px] cursor-pointer"
+                className="relative flex justify-between items-center gap-[5px] cursor-pointer"
               >
                 <PiUserCircleThin
-                  className="text-brown hover:cursor-pointer "
+                  className="text-brown hover:cursor-pointer"
                   size={30}
                 />
                 <span className="text-primary">Profile</span>
@@ -816,7 +816,8 @@ const Header: React.FC<HeaderProps> = () => {
                 </div>
 
                 {/* Cart Icon - Visible on all screen sizes */}
-                <div className="relative flex justify-between items-center pr-2 md:pr-2 lg:pr-4 lg:mx-4 gap-[10px] cursor-pointer">
+                <div className=" flex justify-between items-center pr-2 md:pr-2 lg:pr-4 lg:mx-4 gap-[5px] cursor-pointer">
+                  <div className="relative">
                   <CiShoppingCart
                     className="text-brown hover:cursor-pointer " 
                     size={30}
@@ -827,12 +828,14 @@ const Header: React.FC<HeaderProps> = () => {
                       cartCount !== null ||
                       cartCount !== undefined) &&
                     token ? (
-                    <div className="absolute top-[-8px] right-[2px] md:top-[-8px] md:right-[2px] lg:top-[-12px] lg:right-[2px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[16px] md:h-[16px] lg:w-[20px] lg:h-[20px] flex items-center justify-center text-[8px] md:text-[8px] lg:text-[10px] font-bold">
+                    <div className="absolute top-[-8px] right-[2px] md:top-[-8px] md:right-[2px] lg:top-[-12px] lg:right-[-7px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[16px] md:h-[16px] lg:w-[20px] lg:h-[20px] flex items-center justify-center text-[8px] md:text-[8px] lg:text-[10px] font-bold">
                       {cartCountV ? cartCountV : cartCount ? cartCount : ""}
                     </div>
                   ) : null}
-                  <span className="text-primary">View Cart</span>
+                  </div>
+                   <span className="text-primary">View Cart</span>
                 </div>
+               
               </div>
                 :
                 <div className="flex justify-between items-center">

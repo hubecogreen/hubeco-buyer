@@ -193,7 +193,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
                 }}
                 errorMessage={errors.currentPassword?.message}
@@ -221,7 +221,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
                 }}
                 errorMessage={errors.newPassword?.message}
@@ -246,7 +246,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
                 }}
                 errorMessage={errors.confirmNewPassword?.message}

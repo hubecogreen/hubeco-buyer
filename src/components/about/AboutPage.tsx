@@ -25,27 +25,27 @@ type ExpandedIndex = number | null | undefined;
 export default function Page() {
   const accordionItems = [
     {
-      imgSrc: "images/about/aboutEnv.webp",
+      imgSrc: "images/about/road.png",
       alt: "sustain",
       title: "Environmentally Responsible",
       description: "Sourced from sustainable practices and recycled content.",
     },
     {
-      imgSrc: "images/about/aboutEnergy.webp",
+      imgSrc: "images/about/renewable-energy.png",
       alt: "energy",
       title: "Energy Efficient",
       description:
         "Designed to reduce energy consumption and enhance building performance.",
     },
     {
-      imgSrc: "images/about/aboutHeart.webp",
+      imgSrc: "images/about/healthy-heart.png",
       alt: "healthy",
       title: "Healthy",
       description:
         " Low in VOCs and free from harmful chemicals, promoting better indoor air quality.",
     },
     {
-      imgSrc: "images/about/aboutDurable.webp",
+      imgSrc: "images/about/kettlebell.png",
       alt: "durable",
       title: "Durable",
       description:

@@ -718,7 +718,7 @@ setAddresses(result.data)
             
             
              <button
-               className={`hover:underline ml-2 font-bold text-primary ${addId === address.id ? "opacity-50" : ""}`}
+               className={`hover:underline ml-2 font-bold text-secondary ${addId === address.id ? "opacity-50" : ""}`}
 
                onClick={() => {setIsOpen(true),setDeleteId(address.id)}}
                disabled={addId==address.id}
@@ -775,7 +775,7 @@ setAddresses(result.data)
       {isFormVisible && (
         <>
            <div className='w-full flex justify-start items-center'>
-           <Button  className="bg-secondary hover:bg-primary h-[45px] md:h-[45px] md:w-48  w-48 px-2 md:text-md text-sm text-white flex items-center justify-center"  onClick={()=>getCurrentLocation()} >
+           <Button  className="bg-primary hover:bg-secondary h-[45px] md:h-[45px] md:w-48  w-48 px-2 md:text-md text-sm text-white flex items-center justify-center"  onClick={()=>getCurrentLocation()} >
             {loading?
             <CircularProgress color="#ffffff" size={15} />
             :
@@ -810,7 +810,7 @@ setAddresses(result.data)
                      isTextArea={false}
                      customStyles={{
                        borderRadius: "5px",
-                       border: "1px solid #ccc",
+                       
                        color: "black",
                      }}
                      errorMessage={errors.address?.message}
@@ -834,7 +834,7 @@ setAddresses(result.data)
                      isTextArea={false}
                      customStyles={{
                        borderRadius: "5px",
-                       border: "1px solid #ccc",
+                       
                        color: "black",
                      }}
                      errorMessage={errors.landmark?.message}
@@ -868,7 +868,7 @@ setAddresses(result.data)
                      
                      customStyles={{
                        borderRadius: "5px",
-                       border: "1px solid #ccc",
+                       
                        color: "black",
                      }}
                   

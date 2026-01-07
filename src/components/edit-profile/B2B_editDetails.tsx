@@ -670,7 +670,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
                   backgroundColor: "#FFFEF8",
                 }}
@@ -796,7 +796,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
               isTextArea={false}
               customStyles={{
                 borderRadius: "5px",
-                border: "1px solid #ccc",
+                
                 color: "black",
                 backgroundColor: "#FFFEF8",
               }}
@@ -830,7 +830,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   textInputStyle={{ textTransform: "uppercase" }}
                   customStyles={{
                     borderRadius: "5px",
-                    border: "1px solid #ccc",
+                    
                     color: "black",
                     backgroundColor: "#FFFEF8",
                   }}
@@ -853,7 +853,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   type="button"
                   color="primary"
                   disabled={!!gstExtractPathUrl}
-                  className="bg-creamtext-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
+                  className="bg-cream text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
                 >
 
                 <FiUpload />
@@ -937,7 +937,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   isTextArea={false}
                   customStyles={{
                     borderRadius: "5px",
-                    border: "1px solid #ccc",
+                    
                     color: "black",
                     backgroundColor: "#FFFEF8",
                   }}
@@ -1047,7 +1047,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   textInputStyle={{ textTransform: "uppercase" }}
                   customStyles={{
                     borderRadius: "5px",
-                    border: "1px solid #ccc",
+                    
                     color: "black",
                     backgroundColor: "#FFFEF8", 
                   }}
@@ -1156,7 +1156,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
                   backgroundColor: "#FFFEF8",
                 }}

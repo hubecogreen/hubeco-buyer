@@ -949,7 +949,7 @@ reset1()
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
                   backgroundColor: '#FFFEF8'
                 }}
@@ -975,7 +975,7 @@ reset1()
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
                   backgroundColor: '#FFFEF8'
                 }}
@@ -993,7 +993,7 @@ reset1()
             Email Address <span className="text-red">*</span>
 
           </label>
-          <p onClick={onClickEditEmail} className={`${editEmail ? 'text-gray' : 'text-secondary'} text-md cursor-pointer font-semibold mr-1`}>{editEmail ? 'Cancel' :'Edit'}</p>
+          <p onClick={onClickEditEmail} className={`${editEmail ? 'text-primary' : 'text-primary'} text-md cursor-pointer font-semibold mr-1`}>{editEmail ? 'Cancel' :'Edit'}</p>
           </div>
           <div className="flex justify-between items-start">
           {editEmail ?
@@ -1009,7 +1009,6 @@ reset1()
                 disabled={editEmail ? false:true}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
                   color: "black",
                 }}
                 errorMessage={errors.email?.message}
@@ -1035,7 +1034,7 @@ reset1()
 }
 
   {editEmail?
-  <Button variant={'outline'} onClick={()=>sendOTP('fromEmail')} type="button"  title="Verify" color="secondary" className="text-secondary hover:text-secondary hover:bg-white  border-secondary ml-2">Verify</Button>
+  <Button variant={'outline'} onClick={()=>sendOTP('fromEmail')} type="button"  title="Verify" color="secondary" className="text-cream bg-primary hover:text-secondary hover:bg-white  hover:border-secondary ml-2">Verify</Button>
 
 :<></>}</div>
 <div className="text-left mt-3">
@@ -1047,7 +1046,7 @@ reset1()
           <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
             Phone Number <span className="text-red">*</span>
           </label>
-          <p onClick={onClickEdit} className={`${editMobile ? 'text-gray' : 'text-secondary'} text-md cursor-pointer font-semibold mr-1`}>{editMobile ? 'Cancel' :'Edit'}</p>
+          <p onClick={onClickEdit} className={`${editMobile ? 'text-primary' : 'text-primary'} text-md cursor-pointer font-semibold mr-1`}>{editMobile ? 'Cancel' :'Edit'}</p>
           </div>
           <div className="flex justify-between items-start">
 {editMobile ?
@@ -1064,7 +1063,7 @@ reset1()
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
                 }}
                 errorMessage={errors.mobile?.message}
@@ -1092,7 +1091,7 @@ reset1()
 }
 
         {editMobile?
-        <Button variant={'outline'} onClick={()=>sendOTP('fromMobile')} type="button"  title="Verify" color="secondary" className="text-secondary hover:text-secondary hover:bg-white  border-secondary ml-2">Verify</Button>
+        <Button variant={'outline'} onClick={()=>sendOTP('fromMobile')} type="button"  title="Verify" color="secondary" className="text-cream bg-primary hover:text-secondary hover:bg-white  hover:border-secondary ml-2">Verify</Button>
   
     :<></>}
 

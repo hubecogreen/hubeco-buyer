@@ -120,7 +120,7 @@ const UserPopover: React.FC<UserPopoverProps> = ({
 
 
   return (
-    <div ref={popoverRef} className={`${styles.popover} ${token?'md:right-[50px] mobile-sm:right-[10px] ':'md:right-[150px] mobile-sm:right-[10px]'} `}>
+    <div ref={popoverRef} className={`${styles.popover} ${token?'md:right-[170px] mobile-sm:right-[10px] ':'md:right-[150px] mobile-sm:right-[10px]'} `}>
       <div className={styles.popoverContent}>
         {token ? (
           <>

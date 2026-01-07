@@ -122,15 +122,15 @@ export default function Page() {
   };
 
   const stepsB2B = [
-    { label: "Personal Information", img: "/images/register/personal.webp" },
-    { label: "Company Details", img: "/images/register/company.webp" },
-    { label: "Shipping Address", img: "/images/register/shipping.webp" },
-    { label: "Account Settings", img: "/images/register/account.webp" },
+    { label: "Personal Information", img: "/images/register/user.png" },
+    { label: "Company Details", img: "/images/register/add.png" },
+    { label: "Shipping Address", img: "/images/register/home.png" },
+    { label: "Account Settings", img: "/images/register/lock.png" },
   ];
   const stepsB2C = [
-    { label: "Personal Information", img: "/images/register/personal.webp" },
-    { label: "Shipping Address", img: "/images/register/shipping.webp" },
-    { label: "Account Settings", img: "/images/register/account.webp" },
+    { label: "Personal Information", img: "/images/register/user.png" },
+    { label: "Shipping Address", img: "/images/register/home.png" },
+    { label: "Account Settings", img: "/images/register/lock.png" },
   ];
 
   //s// console.log('getvaluessss',getValues1())
@@ -277,7 +277,7 @@ export default function Page() {
                           <Image
                             src={step.img}
                             alt="Step"
-                            className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                            className="w-8 h-8 md:w-8 md:h-8 object-contain mt-2"
                             width={10}
                             height={10}
                             onError={e => {

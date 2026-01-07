@@ -21,11 +21,12 @@ const BlogCard = ({ product }: any) => {
         alt={product.title}
         width={350}
         height={256}
-        className="w-full h-[300px] md:h-[256px] object-cover rounded-2xl"
+        
+        className="w-full h-[300px] md:h-[256px] object-fill rounded-2xl"
       />
 
       <div className="mt-3">
-        <span className="text-gray-500 text-xs border px-2 py-1 rounded-full">
+        <span className="text-brown text-xs border px-2 py-1 rounded-full">
           {new Date(product.createdAt).toDateString()}
         </span>
 

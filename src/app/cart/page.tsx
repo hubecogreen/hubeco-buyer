@@ -435,15 +435,15 @@ const Cart = () => {
                         <table className="w-full text-left">
                           <thead className="bg-cream ">
                             <tr className="border-b">
-                              <th className="py-4 pl-2 pr-4 max-w-[45%]">
+                              <th className="text-brown py-4 pl-2 pr-4 max-w-[45%]">
                                 Product
                               </th>
-                              <th className="py-4 px-4 max-w-1/6">
+                              <th className="text-brown py-4 px-4 max-w-1/6">
                                 Unit Price
                               </th>
-                              <th className="py-4 px-4 max-w-1/6">Quantity</th>
-                              <th className="py-4 px-4 max-w-1/6">Total</th>
-                              <th className="py-4 max-w-1/6"></th>
+                              <th className="text-brown py-4 px-4 max-w-1/6">Quantity</th>
+                              <th className="text-brown py-4 px-4 max-w-1/6">Total</th>
+                              <th className="text-brown py-4 max-w-1/6"></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -490,7 +490,7 @@ const Cart = () => {
                       className="flex justify-between bg-cream border border-primary items-center py-3 px-4 cursor-pointer"
                       onClick={() => setOpenShipping(!openShipping)}
                     >
-                      <h2 className="flex justify-between items-center font-semibold text-lg">
+                      <h2 className="text-brown flex justify-between items-center font-semibold text-lg">
                         Calculate Shipping
                       </h2>
                       <div className="transition-all duration-300">
@@ -516,7 +516,7 @@ const Cart = () => {
                                 className="form-radio h-4 w-4 text-indigo-600 accent-[#B90647]"
                               />
 
-                              <p className="text-sm text-gray-700 ">
+                              <p className="text-sm text-brown ">
                                 {address?.address}, {address?.city},{" "}
                                 {address?.state}, {address?.country},{" "}
                                 {address?.postCode}
@@ -568,7 +568,7 @@ const Cart = () => {
                     ) : (
                       <>
                         <div className="p-4 border-t-2">
-                          <div className="flex justify-between items-center mb-4">
+                          <div className="text-brown flex justify-between items-center mb-4">
                             <p>Subtotal </p>
                             {Number(cost?.price - cost?.taxes) ? (
                               <p className="text-brown font-regular text-md">
@@ -588,7 +588,7 @@ const Cart = () => {
                             )}
                           </div>
                           {cost?.discount > 0 && (
-                            <div className="flex justify-between items-center mb-4">
+                            <div className="text-brown flex justify-between items-center mb-4">
                               <p>Discount</p>
                               <p className="text-[#009886] font-regular text-md">
                                 -{" "}
@@ -623,7 +623,7 @@ const Cart = () => {
                                   <span className="text-[#009886]">Free</span>
                                 )
                               ) : (
-                                <span className="text-gray-500">Not Available</span>
+                                <span className="text-brown">Not Available</span>
                               )}
                             </p>
                           </div>
@@ -696,7 +696,7 @@ const Cart = () => {
                     <div className="mt-6">
                       <label
                         htmlFor="remarks"
-                        className="block text-gray-700 text-sm font-medium mb-2"
+                        className="block text-brown text-sm font-medium mb-2"
                       >
                         Order Instructions
                       </label>
@@ -730,7 +730,7 @@ const Cart = () => {
 
                     {/* Checkout Button */}
                     <div className="mt-6">
-                      <p className="text-sm text-gray-500 mb-4 my-3">
+                      <p className="text-sm text-brown mb-4 my-3">
                         Price includes tax.
                         <span className="text-[#009886]">
                           {" "}

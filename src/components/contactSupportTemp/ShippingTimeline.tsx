@@ -39,13 +39,13 @@ const ShippingTimeline = () => {
             <div className="ml-4 flex-1">
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="font-medium text-gray-900">{activity.type}</h3>
-                  <p className="text-sm text-gray-500 mt-1">{activity.description}</p>
+                  <h3 className="font-medium text-brown">{activity.type}</h3>
+                  <p className="text-sm text-brown mt-1">{activity.description}</p>
                   {activity.additionalInfo && (
-                    <p className="text-sm text-gray-500 mt-1">{activity.additionalInfo}</p>
+                    <p className="text-sm text-brown mt-1">{activity.additionalInfo}</p>
                   )}
                 </div>
-                <span className="text-sm text-gray-500">{activity.date}</span>
+                <span className="text-sm text-brown">{activity.date}</span>
               </div>
             </div>
           </div>

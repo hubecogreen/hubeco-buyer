@@ -330,7 +330,7 @@ export default function Page() {
   return (
     <div>
       <div className="bg-cream w-full md:px-24 ">
-        <div className="overflow-auto p-2 lg:p-4 w-full bg-[#f8f8f8] shadow-md my-5 rounded-md ">
+        <div className="overflow-auto p-2 lg:p-4 w-full bg-cream border border-primary shadow-md my-5 rounded-md ">
           <div className="flex flex-col gap-4 ">
             <div className="p-2 md:flex gap-6 justify-between">
               <div className="flex flex-col gap-6 md:w-[60%]">
@@ -364,7 +364,7 @@ export default function Page() {
               {/* <Button
               variant="secondary"
               color="primary"
-              className="text-white"
+              className="text-cream"
               onClick={() => alert("Renew Subscription clicked!")}
             >
               Upgrade
@@ -374,7 +374,7 @@ export default function Page() {
                   <Button
                     variant="secondary"
                     color="primary"
-                    className="text-white text-center"
+                    className="text-cream text-center"
                   >
                     Upgrade
                   </Button>
@@ -389,7 +389,7 @@ export default function Page() {
                     </DialogDescription>
                   </DialogHeader>
                   <div
-                    className="flex rounded-full  justify-between mt-[5px] items-center bg-white border-broderGray border  shadow-lg"
+                    className="flex rounded-full  justify-between mt-[5px] items-center bg-cream border-broderGray border  shadow-lg"
                     style={{}}
                   >
                     <div
@@ -404,7 +404,7 @@ export default function Page() {
                     >
                       <p
                         className={` ${
-                          term === "Monthly" ? "text-white" : "text-brown"
+                          term === "Monthly" ? "text-cream" : "text-brown"
                         } text-xs font-normal  px-6 py-3 `}
                       >
                         Monthly
@@ -422,7 +422,7 @@ export default function Page() {
                     >
                       <p
                         className={` ${
-                          term === "Yearly" ? "text-white" : "text-brown"
+                          term === "Yearly" ? "text-cream" : "text-brown"
                         } text-xs font-normal  px-6 py-3`}
                       >
                         Yearly
@@ -451,7 +451,7 @@ export default function Page() {
                               </span>
                               &nbsp;
                               {prePlanData?.monthlyPrice}
-                              <p className="text-sm font-normal ml-2 text-gray">
+                              <p className="text-sm font-normal ml-2 text-brown">
                                 + {prePlanData?.gst}% GST
                               </p>
                             </h4>
@@ -476,10 +476,10 @@ export default function Page() {
                                 {prePlanData.monthlyPrice -
                                   prePlanData.monthlyDiscount}
                               </h4>
-                              <p className="text-sm font-normal ml-2 text-gray">
+                              <p className="text-sm font-normal ml-2 text-brown">
                                 / month
                               </p>
-                              <p className="text-sm font-normal ml-2 text-gray">
+                              <p className="text-sm font-normal ml-2 text-brown">
                                 + {prePlanData.gst}% GST
                               </p>
                             </>
@@ -500,7 +500,7 @@ export default function Page() {
                           </span>
                           &nbsp;
                           {prePlanData?.yearlyPrice}
-                          <p className="text-sm font-normal ml-2 text-gray">
+                          <p className="text-sm font-normal ml-2 text-brown">
                             + {prePlanData?.gst}% GST
                           </p>
                         </h4>
@@ -525,24 +525,24 @@ export default function Page() {
                             {prePlanData?.yearlyPrice -
                               prePlanData?.yearlyDiscount}
                           </h4>
-                          <p className="text-sm font-normal ml-2 text-gray">
+                          <p className="text-sm font-normal ml-2 text-brown">
                             / year
                           </p>
-                          <p className="text-sm font-normal ml-2 text-gray">
+                          <p className="text-sm font-normal ml-2 text-brown">
                             + {prePlanData?.gst}% GST
                           </p>
                         </>
                       )}
                     </div>
                     <Button
-                      className="mt-4 text-white"
+                      className="mt-4 text-cream"
                       onClick={buySubscription}
                     >
                       Upgrade Plan
                     </Button>
                   </div>
 
-                  <p className="mt-6 text-sm text-gray-500">
+                  <p className="mt-6 text-sm text-brown">
                     Need help choosing? Contact our support team.
                   </p>
                 </DialogContent>
@@ -555,7 +555,7 @@ export default function Page() {
       <div
         className="flex flex-col lg:flex-row items-start justify-between py-12 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full"
         style={{
-          backgroundImage: "url('/images/home/contactbg.webp')",
+          backgroundImage: "url('/images/home/contactbg-1.png')",
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "left 10%",
@@ -759,7 +759,7 @@ export default function Page() {
                                 </span>
                                 &nbsp;
                                 {prePlanData.monthlyPrice}
-                                <p className="text-sm font-normal ml-2 text-gray">
+                                <p className="text-sm font-normal ml-2 text-brown">
                                   + {prePlanData.gst}% GST
                                 </p>
                               </h4>
@@ -784,10 +784,10 @@ export default function Page() {
                                   {prePlanData.monthlyPrice -
                                     prePlanData.monthlyDiscount}
                                 </h4>
-                                <p className="text-sm font-normal ml-2 text-gray">
+                                <p className="text-sm font-normal ml-2 text-brown">
                                   / month
                                 </p>
-                                <p className="text-sm font-normal ml-2 text-gray">
+                                <p className="text-sm font-normal ml-2 text-brown">
                                   + {prePlanData.gst}% GST
                                 </p>
                               </>
@@ -862,7 +862,7 @@ export default function Page() {
                   >
                     <CustomButton
                       title={"Choose Freemium plan"}
-                      className="bg-secondary h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-white opacity-0"
+                      className="bg-secondary h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-cream opacity-0"
                       rightIcon={<GoArrowRight />}
                       onPress={()=>{
                         setCookie('selectedPlanId','67d7f49a-d601-4d83-ae81-ba1789eddac5'),
@@ -967,7 +967,7 @@ export default function Page() {
                                   </span>
                                   &nbsp;
                                   {prePlanData.yearlyPrice}
-                                  <p className="text-sm font-normal ml-2 text-gray">
+                                  <p className="text-sm font-normal ml-2 text-brown">
                                     + {prePlanData.gst}% GST
                                   </p>
                                 </h4>
@@ -1002,10 +1002,10 @@ export default function Page() {
                                   {prePlanData.yearlyPrice -
                                     prePlanData.yearlyDiscount}
                                 </h4>
-                                <p className="text-sm font-normal ml-2 text-gray">
+                                <p className="text-sm font-normal ml-2 text-brown">
                                   / year
                                 </p>
-                                <p className="text-sm font-normal ml-2 text-gray">
+                                <p className="text-sm font-normal ml-2 text-brown">
                                   + {prePlanData.gst}% GST
                                 </p>
                               </>

@@ -775,7 +775,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                 {/* <div style={{ display: "flex" }}> */}
                 <div className="flex flex-wrap md:flex-nowrap w-full">
                   <div className="md:w-3/6 w-full p-5">
-                    <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                    <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                       Address Line 1 <span className="text-red">*</span>
                     </label>
                     <Controller
@@ -802,7 +802,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                   </div>
 
                   <div className="md:w-3/6 w-full p-5">
-                    <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                    <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                       Land Mark
                     </label>
                     <Controller
@@ -831,7 +831,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                 {/* Pincode and Country */}
                 <div className="flex flex-wrap md:flex-nowrap w-full">
                   <div className="md:w-3/6 w-full p-5">
-                    <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                    <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                       Pincode <span className="text-red">*</span>
                     </label>
                     <Controller
@@ -861,7 +861,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                   </div>
 
                   <div className="md:w-3/6 w-full p-5">
-                    <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                    <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                       Country <span className="text-red">*</span>
                     </label>
 
@@ -878,7 +878,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                         >
                           <SelectTrigger className="w-full">
                             <SelectValue
-                              className="text-fontGray"
+                              className="text-brown"
                               placeholder="Select a Country"
                             />
                           </SelectTrigger>
@@ -911,7 +911,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                 {/* City and State */}
                 <div className="flex flex-wrap md:flex-nowrap w-full">
                   <div className="md:w-3/6 w-full p-5">
-                    <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                    <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                       State <span className="text-red">*</span>
                     </label>
                     <Controller
@@ -954,7 +954,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                     </div>
                   </div>
                   <div className="md:w-3/6 w-full p-5">
-                    <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                    <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                       City <span className="text-red">*</span>
                     </label>
                     <Controller

@@ -38,7 +38,7 @@ export default function Page() {
   // }
 
   return (
-    <div className="bg-white pt-1">
+    <div className="bg-cream pt-1">
       {/* <Head>
         <title>Register</title>
       </Head> */}

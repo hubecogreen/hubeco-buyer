@@ -154,7 +154,7 @@ const PriceRangeSlider = React.forwardRef<
             />
           </div>
           <div>
-            <p className="text-center text-fontGray text-sm">to</p>
+            <p className="text-center text-brown text-sm">to</p>
           </div>
           <div className="w-2/5">
             <Input

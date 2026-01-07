@@ -57,7 +57,7 @@ const CartCard: React.FC<ProductCardProps> = ({ product }) => {
             </h3>
           </div>
         </div>
-        <p className="text-fontGray md:text-xs text-xs text-left mt-2 mb-3 product-card-desc">
+        <p className="text-brown md:text-xs text-xs text-left mt-2 mb-3 product-card-desc">
           {product && product.description}
         </p>
         <div className={`${styles.priceSection} block flex justify-start justify-between items-center hover-card`}>

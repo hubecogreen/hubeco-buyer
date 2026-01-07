@@ -51,8 +51,8 @@ export default function OrderRow({ order, reloadPage }: OrderProps) {
                 View Order
               </span>
             </p>
-            <p className="text-sm text-fontGray flex justify-start items-center mt-2">
-              <IoCalendarOutline className="mr-2 text-fontGray" />
+            <p className="text-sm text-brown flex justify-start items-center mt-2">
+              <IoCalendarOutline className="mr-2 text-brown" />
               {dayjs(order?.updatedAt).format("DD MMMM YYYY")}
             </p>
           </div>

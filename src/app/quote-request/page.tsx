@@ -213,7 +213,7 @@ const QuoteRequest = () => {
           />
           <section className="flex-1">
             <div className="flex gap-3 items-start justify-between">
-              <h1 className="whitespace-nowrap text-3xl font-bold text-gray-800  border-b border-gray-300 pb-10">
+              <h1 className="whitespace-nowrap text-3xl font-bold text-brown  border-b border-gray-300 pb-10">
                 Quote Requests
               </h1>
               <div className="relative w-full max-w-md h-[43px] border !border-gray rounded-md">
@@ -263,7 +263,7 @@ const QuoteRequest = () => {
                             </button>
                           </div>
                           <div className="flex">
-                            <h2 className="font-normal text-lg text-gray-600">
+                            <h2 className="font-normal text-lg text-brown">
                               Quote Requested On :
                             </h2>
                             <span className="font-bold px-3">
@@ -271,7 +271,7 @@ const QuoteRequest = () => {
                             </span>
                           </div>
                           <div className="flex ">
-                            {/* <h2 className="font-normal text-lg text-gray-600">
+                            {/* <h2 className="font-normal text-lg text-brown">
                               Quote Created On :
                             </h2>
                             <span className="px-3 font-bold">
@@ -352,7 +352,7 @@ const QuoteRequest = () => {
                       className="flex mx-auto justify-center items-center w-[400px] h-[400px]"
                     />
 
-                    <p className="text-center text-fontGray mt-4 text-lg font-bold">
+                    <p className="text-center text-brown mt-4 text-lg font-bold">
                       No quote found.
                     </p>
                   </>

@@ -413,7 +413,7 @@ useEffect(() => {
         <div className="fixed inset-0 z-[9999] bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white rounded-lg p-6 flex flex-col items-center space-y-4">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#B90647]"></div>
-            <p className="text-gray-700 font-medium">Redirecting...</p>
+            <p className="text-brown font-medium">Redirecting...</p>
           </div>
         </div>
       )}
@@ -433,7 +433,7 @@ useEffect(() => {
             // Reset the flag after a short delay
             setTimeout(() => setClickedResult(false), 100);
           }}
-          className={`pl-3 bg-cream  border-[1px] border-[#E8E3C5] border-solid md:text-base text-xs lg:text-sm w-full h-[47px] shadow-lg text-fontGray rounded-[5px] mr-[1px] ${
+          className={`pl-3 bg-cream  border-[1px] border-[#E8E3C5] border-solid md:text-base text-xs lg:text-sm w-full h-[47px] shadow-lg text-brown rounded-[5px] mr-[1px] ${
             isExpanded ? 'w-full' : 'w-12 h-12 rounded-lg'
           }`}
         />
@@ -441,7 +441,7 @@ useEffect(() => {
         {/* Animated Placeholder */}
         {!searchQuery && (
           <div className="absolute inset-0 flex items-center pointer-events-none overflow-hidden">
-            <div className="pl-3 text-gray-400 text-sm">
+            <div className="pl-3 text-brown text-sm">
               <div 
                 className={`${isAnimating ? 'slide-up-continuous' : ''} transition-all duration-1000 ease-in-out`}
               >
@@ -450,7 +450,7 @@ useEffect(() => {
             </div>
           </div>
         )}
-         <span className="absolute inset-y-0 right-3 top-[6px] flex items-center text-fontGray bg-primary w-[34px] h-[34px] rounded-md justify-center  ">
+         <span className="absolute inset-y-0 right-3 top-[6px] flex items-center text-brown bg-primary w-[34px] h-[34px] rounded-md justify-center  ">
         <Search size={18} color="#ffffff"  />
       </span>
       </div>
@@ -544,7 +544,7 @@ useEffect(() => {
                             />
                           )}
                           <div>
-                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
+                            <p className=" ml-2 text-brown group-hover:text-secondary group-hover:font-medium text-normal text-sm">
                               {childCategory?.name}
                             </p>
                           </div>
@@ -614,7 +614,7 @@ useEffect(() => {
                             />
                           )}
                           <div>
-                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
+                            <p className=" ml-2 text-brown group-hover:text-secondary group-hover:font-medium text-normal text-sm">
                               {subCategory?.name}
                             </p>
                           </div>
@@ -693,12 +693,12 @@ useEffect(() => {
                             className="w-[30px] h-[30px] rounded"
                           />
                           <div>
-                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
+                            <p className=" ml-2 text-brown group-hover:text-secondary group-hover:font-medium text-normal text-sm">
                               {product?.productName == "N/A"
                                 ? product?.name
                                 : product?.productName}
                             </p>
-                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-[10px]">
+                            <p className=" ml-2 text-brown group-hover:text-secondary group-hover:font-medium text-normal text-[10px]">
                               SKU : {product?.variantSku}
                             </p>
                           </div>
@@ -756,7 +756,7 @@ useEffect(() => {
                             />
                           )}
                           <div>
-                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
+                            <p className=" ml-2 text-brown group-hover:text-secondary group-hover:font-medium text-normal text-sm">
                               {category?.name}
                             </p>
                           </div>
@@ -817,7 +817,7 @@ useEffect(() => {
                               />
                             )}
                           <div>
-                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
+                            <p className=" ml-2 text-brown group-hover:text-secondary group-hover:font-medium text-normal text-sm">
                               {vendor?.businessInfo?.companyName}
                             </p>
                           </div>

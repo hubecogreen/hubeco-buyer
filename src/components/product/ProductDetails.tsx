@@ -1246,14 +1246,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         {isClicked ? (
                           <CiBookmark
                             color="#ffffff"
-                            className="group-hover:text-white cursor-pointer z-50"
+                            className="group-hover:text-cream cursor-pointer z-50"
                             size={25}
                             onClick={() => deleteWishlist(productData?._id)}
                           />
                         ) : (
                           <CiBookmark
                             color="#A92449"
-                            className="group-hover:text-white cursor-pointer z-50"
+                            className="group-hover:text-cream cursor-pointer z-50"
                             size={25}
                             onClick={() => addToWishlist(productData?._id)}
                           />
@@ -1287,7 +1287,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   )}
 
                   {/* SKU */}
-                  <p className="text-[14px] text-black font-normal w-fit px-2 py-2">
+                  <p className="text-[14px] text-brown font-normal w-fit px-2 py-2">
                     SKU: {productData?.variantSku}
                   </p>
                 </div>
@@ -1301,17 +1301,17 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   ) : productData?.MRP && productData?.discountedPrice ? (
                     <div className="block justify-start items-center">
                       {productData?.MRP === productData?.discountedPrice ? (
-                        <p className="md:text-3xl text-2xl text-black font-semibold text-normal flex justify-start items-center ">
-                          <span className="md:text-3xl text-2xl text-black mr-1 font-normal font-mono">
+                        <p className="md:text-3xl text-2xl text-brown font-semibold text-normal flex justify-start items-center ">
+                          <span className="md:text-3xl text-2xl text-brown mr-1 font-normal font-mono">
                             ₹
                           </span>{" "}
                           {formatCurrencyInIndianStyle(
                             productData?.platformPrice
                           )}
-                          <span className="text-[18px] font-regular text-fontGray ml-2">
+                          <span className="text-[18px] font-regular text-brown ml-2">
                             /{productData?.unitOfMeasure}
                           </span>
-                          <span className="text-[18px] font-regular text-black ml-2">
+                          <span className="text-[18px] font-regular text-brown ml-2">
                             MRP
                           </span>
                         </p>
@@ -1346,9 +1346,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                 </p>
                               )}
                           </div>
-                          <p className="md:text-3xl text-2xl text-black text-normal mt-2 flex justify-start items-center">
+                          <p className="md:text-3xl text-2xl text-brown text-normal mt-2 flex justify-start items-center">
                             ₹{" "}
-                            <span className="md:text-3xl text-2xl text-black font-semibold text-normal flex justify-start items-center">
+                            <span className="md:text-3xl text-2xl text-brown font-semibold text-normal flex justify-start items-center">
                               {productData?.platformPrice
                                 ? formatCurrencyInIndianStyle(
                                   productData?.platformPrice
@@ -1358,7 +1358,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                   productData?.MRP,
                                   productData?.tax?.igst
                                 ).toFixed(2)}
-                              <span className="text-[18px] font-regular text-fontGray ml-2">
+                              <span className="text-[18px] font-regular text-brown ml-2">
                                 /{productData?.unitOfMeasure} MRP
                               </span>
                             </span>
@@ -1371,7 +1371,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   )}
                 </div>
                 {totalProduct?.purchaseType !== "QUOTE" && (
-                  <p className="text-[13px] text-black text-normal mt-2">
+                  <p className="text-[13px] text-brown text-normal mt-2">
                     Inclusive of all taxes
                   </p>
                 )}
@@ -1394,7 +1394,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       <div className="flex md:flex-row flex-col  w-full  md:gap-6 gap-2 pb-4">
                         {/* QUANTITY - LEFT SIDE (50%) */}
                         <div className="md:w-1/4 w-full">
-                          <p className="text-md text-fontGray mb-3">Quantity</p>
+                          <p className="text-md text-brown mb-3">Quantity</p>
 
                           <TooltipProvider>
                             <Tooltip open={showQtyTip}>
@@ -1413,7 +1413,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                     type="number"
                                     value={quantity}
                                     onChange={(e) => handleChange(e)}
-                                    className="bg-cream w-24 pl-0 text-center custom-input"
+                                    className="bg-cream w-24 pl-0 text-center text-brown custom-input"
                                   />
 
                                   <Button
@@ -1434,7 +1434,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               >
                                 <TooltipArrow className="fill-black" />
                                 {tooltipMsg && (
-                                  <p className="text-sm text-white font-medium py-2 px-2">
+                                  <p className="text-sm text-cream font-medium py-2 px-2">
                                     {tooltipMsg}
                                   </p>
                                 )}
@@ -1480,7 +1480,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             }
                           }}
                         >
-                          <p className="text-white text-md text-medium ml-3">Request for Quote</p>
+                          <p className="text-cream text-md text-medium ml-3">Request for Quote</p>
                         </Button>
                       )}
 
@@ -1503,7 +1503,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           ) : (
                             <>
                               <BsCartPlus color="#fff" size={18} />
-                              <p className="text-white text-md text-medium ml-3">Add to Cart</p>
+                              <p className="text-cream text-md text-medium ml-3">Add to Cart</p>
                             </>
                           )}
                         </Button>
@@ -1517,15 +1517,15 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
               {/* SELLER DETAILS */}
               <div className="">
-                <p className="text-md text-fontGray font-semibold  text-normal mt-3 mb-2">Seller Details</p>
+                <p className="text-md text-brown font-semibold  text-normal mt-3 mb-2">Seller Details</p>
 
                 <div className="md:flex flex flex-col md:flex-row justify-start md:items-center items-start gap-4">
                   <div className="flex justify-start items-center md:mr-2 md:max-w-[60%]">
                     <div>
-                      <p className="text-[15px] capitalize text-black">
+                      <p className="text-[15px] capitalize text-brown">
                         {vendorInfo?.companyName}
                       </p>
-                      <p className="text-[13px] font-normal text-fontGray">
+                      <p className="text-[13px] font-normal text-brown">
                         Vendor ID : {vendorInfo?.vendorCode}
                       </p>
                     </div>
@@ -1567,12 +1567,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         // PDF BUTTON
                         <Button
                           onClick={() => window.open(totalProduct?.certificateLink, "_blank")}
-                          className="text-white bg-primary hover:bg-secondary font-semibold h-[45px]
+                          className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
                    w-[90%] md:w-40 mx-auto md:mx-0
                    text-sm md:text-md flex items-center justify-center
                    md:relative md:right-[10px]"
                         >
-                          <p className="text-white font-semibold text-md">Certified</p>
+                          <p className="text-cream font-semibold text-md">Certified</p>
                         </Button>
                       ) : (
                         // IMAGE PREVIEW DIALOG
@@ -1580,12 +1580,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           <DialogTrigger asChild className="max-w-[90%]">
                             <Link
                               href="#"
-                              className="text-white bg-primary hover:bg-secondary font-semibold h-[45px]
+                              className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
                        w-[90%] md:w-40 mx-auto md:mx-0
                        text-sm md:text-md flex items-center justify-center
                        md:relative md:right-[10px]"
                             >
-                              <p className="text-white font-semibold text-md">Certified</p>
+                              <p className="text-cream font-semibold text-md">Certified</p>
                             </Link>
                           </DialogTrigger>
 
@@ -1629,7 +1629,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
                 {/* COUNTRY & DELIVERY */}
                 <div className="flex justify-start md:items-center items-start md:gap-8 gap-2 md:flex-row flex-col">
-                  <p className="text-md text-fontGray md:mt-4 mt-1">
+                  <p className="text-md text-brown md:mt-4 mt-1">
                     Country Of Origin :
                     <span className="text-secondary font-medium uppercase ml-1">
                       {totalProduct?.countryOfOrigin == "In"
@@ -1647,7 +1647,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     </p>
                   ) : (
                     <div className="flex md:flex-row flex-col justify-between md:items-center items-start md:mt-4 mt-2 md:gap-3 ">
-                      <p className="text-md text-fontGray flex items-center justify-start text-normal font-normal  ">
+                      <p className="text-md text-brown flex items-center justify-start text-normal font-normal  ">
                         Delivery:
 
                       </p>
@@ -1662,7 +1662,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               setPincode(e.target.value);
                             }
                           }}
-                          className="border border-primary bg-cream text-[16px] text-black h-10 pr-16 rounded-none"
+                          className="border border-primary bg-cream text-[16px] text-brown h-10 pr-16 rounded-none"
                         />
 
                         <Button
@@ -1707,7 +1707,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         size={26}
                       />{" "}
                       Expected Shipping By :{" "}
-                      <span className="text-black text-normal font-semibold ml-2">
+                      <span className="text-brown text-normal font-semibold ml-2">
                         {calculateShippingDate(
                           productData?.readyForShippingInDay
                         )}
@@ -1745,7 +1745,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
                               {totalProduct?.cancellationPolicy
                                 ?.cancellationPolicyDoc ? (
-                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[95px]">
+                                <p className="text-sm text-brown text-normal h-[45px] max-w-[95px]">
                                   {totalProduct?.cancellationPolicy?.cancellationPolicyDoc.endsWith(
                                     ".pdf"
                                   ) ? (
@@ -1755,7 +1755,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                       className="text-secondary text-sm font-normal"
                                     >
                                       Cancellation{" "}
-                                      <span className="text-black text-sm font-normal">
+                                      <span className="text-brown text-sm font-normal">
                                         Available.
                                       </span>
                                     </Link>
@@ -1770,7 +1770,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                           <Link href="#" className="mr-3">
                                             <p className="text-secondary text-sm font-normal">
                                               Cancellation{" "}
-                                              <span className="text-black text-sm font-normal cursor-default">
+                                              <span className="text-brown text-sm font-normal cursor-default">
                                                 Available
                                               </span>
                                             </p>
@@ -1833,14 +1833,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                   )}
                                 </p>
                               ) : (
-                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[95px]">
+                                <p className="text-sm text-brown text-normal h-[45px] max-w-[95px]">
                                   <div
                                     // target="_blank"
                                     // href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.cancellationPolicy?.cancellationPolicyDoc}`}
                                     className="text-secondary text-sm font-normal"
                                   >
                                     Cancellation{" "}
-                                    <span className="text-black text-sm font-normal">
+                                    <span className="text-brown text-sm font-normal">
                                       Available.
                                     </span>
                                   </div>
@@ -1871,7 +1871,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         Cancellation
                       </p> */}
                           <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
-                            <p className="text-sm text-fontGray text-normal h-[45px]  max-w-[140px] ">
+                            <p className="text-sm text-brown text-normal h-[45px]  max-w-[140px] ">
                               Cancellation <br></br> Not Available
                             </p>
                           </div>
@@ -1898,7 +1898,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             />
                             <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
                               {totalProduct?.returnPolicy?.returnPolicyDoc ? (
-                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
+                                <p className="text-sm text-brown text-normal h-[45px] max-w-[100px]">
                                   {/* {totalProduct?.returnPolicy?.durationInDays} days{" "}
                             <Link
                               target="_blank"
@@ -1914,7 +1914,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                     <Link
                                       target="_blank"
                                       href={`${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`}
-                                      className="text-black text-sm font-normal "
+                                      className="text-brown text-sm font-normal "
                                     >
                                       {totalProduct?.returnPolicy?.durationInDays}{" "}
                                       days{" "}
@@ -1932,7 +1932,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                         >
                                           {/* <Button variant="outline">View</Button> */}
                                           <Link href="#" className=" md:mr-3">
-                                            <p className="text-black text-sm font-normal cursor-default">
+                                            <p className="text-brown text-sm font-normal cursor-default">
                                               {
                                                 totalProduct?.returnPolicy
                                                   ?.durationInDays
@@ -1999,11 +1999,11 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                   )}
                                 </p>
                               ) : (
-                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
+                                <p className="text-sm text-brown text-normal h-[45px] max-w-[100px]">
                                   <div
                                     // target="_blank"
                                     // href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`}
-                                    className="text-black text-sm font-normal "
+                                    className="text-brown text-sm font-normal "
                                   >
                                     {totalProduct?.returnPolicy?.durationInDays}{" "}
                                     days{" "}
@@ -2035,7 +2035,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             src={"/images/ReturnS.svg"}
                           />
                           <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
-                            <p className="text-sm text-fontGray text-normal h-[45px]  max-w-[140px] ">
+                            <p className="text-sm text-brown text-normal h-[45px]  max-w-[140px] ">
                               Return<br></br> Not Available
                             </p>
                           </div>
@@ -2066,14 +2066,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             />
                             <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
                               {totalProduct?.refundPolicy?.refundPolicyDoc ? (
-                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
+                                <p className="text-sm text-brown text-normal h-[45px] max-w-[100px]">
                                   {totalProduct?.refundPolicy?.refundPolicyDoc.endsWith(
                                     ".pdf"
                                   ) ? (
                                     <Link
                                       target="_blank"
                                       href={`${assetURL}/${totalProduct?.refundPolicy?.refundPolicyDoc}`}
-                                      className="text-black text-sm font-normal cursor-default"
+                                      className="text-brown text-sm font-normal cursor-default"
                                     >
                                       {totalProduct?.refundPolicy?.durationInDays}{" "}
                                       days{" "}
@@ -2090,7 +2090,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                           className="max-w-[90%]"
                                         >
                                           <Link href="#" className=" md:mr-3">
-                                            <p className="text-black text-sm font-normal cursor-default">
+                                            <p className="text-brown text-sm font-normal cursor-default">
                                               {
                                                 totalProduct?.refundPolicy
                                                   ?.durationInDays
@@ -2156,11 +2156,11 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                   )}
                                 </p>
                               ) : (
-                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
+                                <p className="text-sm text-brown text-normal h-[45px] max-w-[100px]">
                                   <div
                                     //  target="_blank"
                                     //  href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.refundPolicy?.refundPolicyDoc}`}
-                                    className="text-black text-sm font-normal cursor-default"
+                                    className="text-brown text-sm font-normal cursor-default"
                                   >
                                     {totalProduct?.refundPolicy?.durationInDays}{" "}
                                     days{" "}
@@ -2193,7 +2193,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               src={"/images/RefundS.svg"}
                             />
                             <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
-                              <p className="text-sm text-fontGray text-normal h-[45px]  max-w-[140px] ">
+                              <p className="text-sm text-brown text-normal h-[45px]  max-w-[140px] ">
                                 Refund <br></br> Not Available
                               </p>
                             </div>
@@ -2306,7 +2306,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               {/* {attachments.length === 0 ?
           
           <TabsContent value="attachments" className="md:px-[50px] px-[10px] w-full">
-            <p className="text-black text-lg md:ml-8 ml-1 font-medium">No Attachments Found</p>
+            <p className="text-brown text-lg md:ml-8 ml-1 font-medium">No Attachments Found</p>
             </TabsContent>
           : */}
               {attachments && attachments?.length !== 0 && (
@@ -2322,7 +2322,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         className="flex mx-auto justify-center items-center md:w-[400px] md:h-[400px] w-[90%]"
                       />
 
-                      <p className="text-black text-lg md:ml-8 ml-1 font- w-full flex items-center justify-center">
+                      <p className="text-brown text-lg md:ml-8 ml-1 font- w-full flex items-center justify-center">
                         No Attachments Found
                       </p>
                     </>
@@ -2567,9 +2567,9 @@ export default ProductDetails;
 //           <FiFileText
 //             // color="#A92449"
 //             size={18}
-//             className="text-current text-secondary group-hover:text-white"
+//             className="text-current text-secondary group-hover:text-cream"
 //           />
-//           <p className="text-secondary text-md text-medium ml-3 group-hover:text-white">
+//           <p className="text-secondary text-md text-medium ml-3 group-hover:text-cream">
 //             Request Quote
 //           </p>
 //         </Button>
@@ -2615,9 +2615,9 @@ export default ProductDetails;
 //             <BsCartPlus
 //               color="#fff"
 //               size={18}
-//               className="text-current group-hover:text-white"
+//               className="text-current group-hover:text-cream"
 //             />
-//             <p className="text-white text-md text-medium ml-3 group-hover:text-white">
+//             <p className="text-cream text-md text-medium ml-3 group-hover:text-cream">
 //               Add to Cart
 //             </p>
 //           </>

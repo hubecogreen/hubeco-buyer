@@ -510,7 +510,7 @@ const Header: React.FC<HeaderProps> = () => {
                   >
                     {/* <span
                     className={`font-medium relative text-sm md:text-sm lg:text-base md:ml-[25px] lg:ml-[2px] ${
-                      isProductSegmentsOpen ? "text-[#B90647]" : "text-gray-800"
+                      isProductSegmentsOpen ? "text-[#B90647]" : "text-brown"
                     }`}
                   >
                     Product Segments
@@ -519,7 +519,7 @@ const Header: React.FC<HeaderProps> = () => {
                     )}
                   </span> */}
                     {/* <svg
-                    className={`w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 text-gray-600 transition-transform duration-200 ${
+                    className={`w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 text-brown transition-transform duration-200 ${
                       isProductSegmentsOpen ? "rotate-180" : ""
                     }`}
                     fill="none"
@@ -557,14 +557,14 @@ const Header: React.FC<HeaderProps> = () => {
                     className={`w-10 h-10 md:w-10 md:h-10 lg:w-12 lg:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors md:mr-1 ${token? "lg:mr-0" : "lg:mr-4"}   md:ml-0 lg:ml-2`}
                     onClick={handleSearchFocus}
                   >
-                    <IoSearchOutline className="text-gray-600" size={18} />
+                    <IoSearchOutline className="text-brown" size={18} />
                   </button>
                 </div>
               ) : ( */}
                     <div className="flex items-center space-x-2 md:space-x-2 lg:space-x-4 w-full md:w-[150px] lg:w-[300px] bg-cream">
                       {/* <div className="hidden md:hidden lg:flex">
                     <VscMenu
-                      className="text-brown cursor-pointer font-light text-gray-800"
+                      className="text-brown cursor-pointer font-light text-brown"
                       size={24}
                       onClick={toggleMenu}
                     />
@@ -587,7 +587,7 @@ const Header: React.FC<HeaderProps> = () => {
                     className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
                     onClick={handleSearchClose}
                   >
-                    <IoClose className="text-gray-600" size={18} />
+                    <IoClose className="text-brown" size={18} />
                   </button> */}
                     </div>
                   </div>
@@ -597,7 +597,7 @@ const Header: React.FC<HeaderProps> = () => {
                   href="/products"
                   className={`ml-[29px] font-medium cursor-pointer transition-colors relative hidden lg:block ${pathname === "/products"
                     ? "text-[#B90647]"
-                    : "text-gray-800 hover:text-secondary"
+                    : "text-brown hover:text-secondary"
                     }`}
                 >
                   Products
@@ -611,7 +611,7 @@ const Header: React.FC<HeaderProps> = () => {
                   href="/green-financing"
                   className={`ml-[20px] flex items-center space-x-1 cursor-pointer hover:text-secondary transition-colors relative hidden lg:flex ${pathname === "/green-financing"
                     ? "text-[#B90647]"
-                    : "text-gray-800"
+                    : "text-brown"
                     }`}
                 >
                   <span className="font-medium text-base relative">
@@ -627,7 +627,7 @@ const Header: React.FC<HeaderProps> = () => {
                   href="/about"
                   className={`ml-[20px] font-medium cursor-pointer transition-colors relative hidden lg:block ${pathname === "/about"
                     ? "text-[#B90647]"
-                    : "text-gray-800 hover:text-secondary"
+                    : "text-brown hover:text-secondary"
                     }`}
                 >
                   About
@@ -643,13 +643,13 @@ const Header: React.FC<HeaderProps> = () => {
               {/* <div className="md:hidden flex items-center space-x-3">
               <div className="relative">
                 <div
-                  className="flex items-center space-x-1 cursor-pointer text-gray-800 relative z-20"
+                  className="flex items-center space-x-1 cursor-pointer text-brown relative z-20"
                   onClick={toggleProductSegments}
                   data-product-segments-button
                 >
                   <span
                     className={`font-medium relative text-xs pl-4 ${
-                      isProductSegmentsOpen ? "text-[#B90647]" : "text-gray-800"
+                      isProductSegmentsOpen ? "text-[#B90647]" : "text-brown"
                     }`}
                   >
                     Product Segments
@@ -658,7 +658,7 @@ const Header: React.FC<HeaderProps> = () => {
                     )}
                   </span>
                   <svg
-                    className={`w-3 h-3 text-gray-600 transition-transform duration-200 ${
+                    className={`w-3 h-3 text-brown transition-transform duration-200 ${
                       isProductSegmentsOpen ? "rotate-180" : ""
                     }`}
                     fill="none"
@@ -694,7 +694,7 @@ const Header: React.FC<HeaderProps> = () => {
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/brands"
                     ? "text-[#B90647]"
-                    : "text-gray-800 hover:text-secondary"
+                    : "text-brown hover:text-secondary"
                 }`}
               >
                 Brands
@@ -707,7 +707,7 @@ const Header: React.FC<HeaderProps> = () => {
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/blogs"
                     ? "text-[#B90647]"
-                    : "text-gray-800 hover:text-secondary"
+                    : "text-brown hover:text-secondary"
                 }`}
               >
                 Blogs
@@ -722,7 +722,7 @@ const Header: React.FC<HeaderProps> = () => {
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/contact"
                     ? "text-[#B90647]"
-                    : "text-gray-800 hover:text-secondary"
+                    : "text-brown hover:text-secondary"
                 }`}
               >
                 Contact Us
@@ -748,7 +748,7 @@ const Header: React.FC<HeaderProps> = () => {
                     className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center hover:bg-gray-100 rounded-lg transition-colors"
                     onClick={handleSearchFocus}
                   >
-                    <IoSearchOutline className="text-gray-600" size={18} />
+                    <IoSearchOutline className="text-brown" size={18} />
                   </button>
                 </div>
               ) : (
@@ -914,7 +914,7 @@ const Header: React.FC<HeaderProps> = () => {
               {/* Tablet Hamburger Menu - Show after vendor image */}
               <div className="hidden md:flex lg:hidden" style={{ marginRight: '18px' }}>
                 <VscMenu
-                  className="text-brown cursor-pointer font-light text-gray-800"
+                  className="text-brown cursor-pointer font-light text-brown"
                   size={22}
                   onClick={toggleMenu}
                 />
@@ -986,14 +986,14 @@ const Header: React.FC<HeaderProps> = () => {
   <>
 <CustomButton
   title="Submit Enquiry"
-  className="bg-secondaryLight text-white h-10 px-4 text-sm"
+  className="bg-secondaryLight text-cream h-10 px-4 text-sm"
   onPress={() => router.push("/contact")}
 />
 
 
   <CustomButton
     title="Login / SignUp"
-    className="bg-white border border-secondaryLight text-secondaryLight h-10 px-4 text-sm"
+    className="bg-cream border border-secondaryLight text-secondaryLight h-10 px-4 text-sm"
     onPress={() => setShowLoginPopup(true)}
   />
   </>
@@ -1058,7 +1058,7 @@ const Header: React.FC<HeaderProps> = () => {
                   />
                   <CustomButton
                     title="Login / SignUp"
-                    className="text-[16px] bg-white text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
+                    className="text-[16px] bg-cream text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
                  
                     hoverBgColor=""
                     onPress={() => setShowLoginPopup(true)}
@@ -1211,7 +1211,7 @@ const Header: React.FC<HeaderProps> = () => {
         />
         <CustomButton
           title="Login / SignUp"
-          className="text-[16px] bg-white text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
+          className="text-[16px] bg-cream text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
        
           hoverBgColor=""
           onPress={() => setShowLoginPopup(true)}
@@ -1279,7 +1279,7 @@ const Header: React.FC<HeaderProps> = () => {
   ) : (
     <CustomButton
     title="Login / SignUp"
-    className="text-[12px] bg-white text-secondaryLight border-[1px] border-secondaryLight px-4 lg:px-2  md:h-12 h-10   lg:flex  font-medium"
+    className="text-[12px] bg-cream text-secondaryLight border-[1px] border-secondaryLight px-4 lg:px-2  md:h-12 h-10   lg:flex  font-medium"
  
     hoverBgColor=""
     onPress={() => setShowLoginPopup(true)}
@@ -1363,7 +1363,7 @@ const LoginPopup = ({
             className="mb-1"
           />
 
-          <p className="text-gray-500 text-sm text-center mb-4">
+          <p className="text-brown text-sm text-center mb-4">
             Sustainable Construction Materials Marketplace
           </p>
 

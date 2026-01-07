@@ -125,7 +125,7 @@ const EnterMobile:React.FC<MobileProps> = ({onPress}) => {
             >
               <div className="">
                 <div className="p-4 inline-block max-w-full ">
-                  <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                  <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                     Phone Number<span className="text-red font-light pl-1">*</span>
                   </label>
                   <Controller

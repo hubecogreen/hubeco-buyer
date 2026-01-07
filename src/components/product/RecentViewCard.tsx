@@ -352,7 +352,7 @@ const RecentViewCard = ({
             )}
           </div> */}
         </div>
-        {/* <p className="text-sm text-gray-600 mb-2">{product.description}</p> */}
+        {/* <p className="text-sm text-brown mb-2">{product.description}</p> */}
         {/* <div className="flex items-center justify-between space-x-3 mt-2 ">
           <Button
             disabled={loadingCartButton}

@@ -32,7 +32,7 @@ export default function Page() {
               <h1 className="text-4xl font-bold mb-5">
                 Welcome to <span className="text-teal-500">hubeco</span> 👋
               </h1>
-              <p className="text-base text-gray-500">
+              <p className="text-base text-brown">
                 Lorem ipsum is placeholder text commonly used in the graphic,
                 print, and <br />
                 publishing industries for previewing layouts and visual mockups

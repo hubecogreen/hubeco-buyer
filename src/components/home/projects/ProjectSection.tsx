@@ -193,7 +193,7 @@ const ProjectsSection = () => {
           <h2 className="text-2xl lg:text-4xl font-bold mb-4 text-brown mt-30">
             Green Projects
           </h2>
-          <p className="lg:text-big text-md w-full lg:max-w-5xl mx-auto text-fontGray lg:pt-5">
+          <p className="lg:text-big text-md w-full lg:max-w-5xl mx-auto text-brown lg:pt-5">
             Browse the green building projects where our eco-friendly materials
             are deployed
           </p>

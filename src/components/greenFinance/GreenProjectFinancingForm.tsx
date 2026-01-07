@@ -181,7 +181,7 @@ export default function GreenProjectFinancingForm({
           <div className="absolute inset-0 bg-opacity-30" />
           <button
             onClick={handleClose}
-            className="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors z-10"
+            className="absolute top-4 right-4 text-white hover:text-brown transition-colors z-10"
           >
             <IoClose size={24} />
           </button>

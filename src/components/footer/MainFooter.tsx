@@ -102,12 +102,12 @@ const Footer = () => {
             <div className="w-full md:w-full lg:w-[112px]">
               <h4 className="text-[14px] text-primary mb-2">Products</h4>
               <ul className="space-y-1 text-[13px] lg:text-[14px]">
-                <li><Link className="text-[#023A27]" href="/products/bricks">Bricks</Link></li>
-                <li><Link className="text-[#023A27]" href="/products">Adhesives</Link></li>
-                <li><Link className="text-[#023A27]" href="/products">Paints</Link></li>
-                <li><Link className="text-[#023A27]" href="/products">Tiles</Link></li>
-                <li><Link className="text-[#023A27]" href="/products">Bath Fittings</Link></li>
-                <li><Link className="text-[#023A27]" href="/products">Steel</Link></li>
+                <li><Link className="text-brown" href="/products/bricks">Bricks</Link></li>
+                <li><Link className="text-brown" href="/products">Adhesives</Link></li>
+                <li><Link className="text-brown" href="/products">Paints</Link></li>
+                <li><Link className="text-brown" href="/products">Tiles</Link></li>
+                <li><Link className="text-brown" href="/products">Bath Fittings</Link></li>
+                <li><Link className="text-brown" href="/products">Steel</Link></li>
               </ul>
             </div>
 
@@ -115,12 +115,12 @@ const Footer = () => {
             <div className="w-full md:w-full lg:w-[112px]">
               <h4 className="text-[14px] text-primary mb-2">Quick Links</h4>
               <ul className="space-y-1 text-[13px] lg:text-[14px]">
-                <li><Link className="text-[#023A27]" href="/about">About</Link></li>
-                <li><Link className="text-[#023A27]" href="/blogs">Blogs</Link></li>
-                <li><Link className="text-[#023A27]" href="/green-financing">Green Financing</Link></li>
-                <li><Link className="text-[#023A27]" href="/plans">Vendor Connect</Link></li>
-                <li><Link className="text-[#023A27]" href="/brands">Brands</Link></li>
-                <li><Link className="text-[#023A27]" href="/faq">Faq&apos;s</Link></li>
+                <li><Link className="text-brown" href="/about">About</Link></li>
+                <li><Link className="text-brown" href="/blogs">Blogs</Link></li>
+                <li><Link className="text-brown" href="/green-financing">Green Financing</Link></li>
+                <li><Link className="text-brown" href="/plans">Vendor Connect</Link></li>
+                <li><Link className="text-brown" href="/brands">Brands</Link></li>
+                <li><Link className="text-brown" href="/faq">Faq&apos;s</Link></li>
               </ul>
             </div>
 
@@ -128,10 +128,10 @@ const Footer = () => {
             <div className="w-full md:w-full lg:w-[150px]">
               <h4 className="text-[14px] text-primary mb-2">Customer Support</h4>
               <ul className="space-y-1 text-[13px] lg:text-[14px]">
-                <li><Link className="text-[#023A27]" href="/cart">Help Center</Link></li>
-                <li><Link className="text-[#023A27]" href="/orders">Orders</Link></li>
-                <li><Link className="text-[#023A27]" href="/orders">Returns</Link></li>
-                <li><Link className="text-[#023A27]" href="/contact">Contact Us</Link></li>
+                <li><Link className="text-brown" href="/cart">Help Center</Link></li>
+                <li><Link className="text-brown" href="/orders">Orders</Link></li>
+                <li><Link className="text-brown" href="/orders">Returns</Link></li>
+                <li><Link className="text-brown" href="/contact">Contact Us</Link></li>
               </ul>
             </div>
 

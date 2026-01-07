@@ -126,7 +126,7 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
 
         return (
           <div key={attributeName} className="w-full">
-            <p className="text-md text-fontGray text-normal mb-3 capitalize">
+            <p className="text-md text-brown text-normal mb-3 capitalize">
               {attributeName}
             </p>
             <Select
@@ -139,7 +139,7 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
                   className={`text-sm ${
                     selectedAttributes && selectedAttributes[attributeName]
                       ? "text-secondary"
-                      : "text-fontGray"
+                      : "text-brown"
                   }`}
                 />
               </SelectTrigger>
@@ -169,7 +169,7 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
                     </SelectItem>
                   ))
                 ) : (
-                  <p className="text-sm text-gray-400 pl-3">No results found</p>
+                  <p className="text-sm text-brown pl-3">No results found</p>
                 )}
               </SelectContent>
             </Select>

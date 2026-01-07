@@ -311,7 +311,7 @@ const OrderTimeline: React.FC<TimelineProps> = ({
           );
           const { label, color, hex } = statusInfo[statusKey] || {
             label: "Unknown Status",
-            color: "text-gray-500",
+            color: "text-brown",
           };
 
           const cancelData =
@@ -360,7 +360,7 @@ const OrderTimeline: React.FC<TimelineProps> = ({
                 >
                   {label}
                 </p>
-                <p className="text-sm text-gray-500 capitalize">
+                <p className="text-sm text-brown capitalize">
                   {/* {status.timestamp ? dayjs(status.timestamp).format("dddd, MMM D, hh:mm A") : ""} */}
 
                   {/* {status?.reason ? status?.reason : ""} {status?.reason && status?.timestamp && (<span className="lowercase">on</span>)} {status.timestamp ? dayjs(status.timestamp).format("dddd, MMM D, hh:mm A") : ""} */}
@@ -376,7 +376,7 @@ const OrderTimeline: React.FC<TimelineProps> = ({
                     : ""}
                 </p>
                 {statusKey == "cancellation_requested" && (
-                  <p className="text-sm text-gray-500 capitalize bg-[#f7f7f7] p-3 rounded h-full mt-1">
+                  <p className="text-sm text-brown capitalize bg-[#f7f7f7] p-3 rounded h-full mt-1">
                     {/* {status.timestamp ? dayjs(status.timestamp).format("dddd, MMM D, hh:mm A") : ""} */}
 
                     <span className="text-sm font-medium text-brown">
@@ -391,7 +391,7 @@ const OrderTimeline: React.FC<TimelineProps> = ({
                 )}
                 {status.previousStatus == "cancellation_requested" &&
                   status.currentStatus == "confirmed" && (
-                    <p className="text-sm text-gray-500 capitalize bg-[#f7f7f7] p-3 rounded h-full mt-1">
+                    <p className="text-sm text-brown capitalize bg-[#f7f7f7] p-3 rounded h-full mt-1">
                       <span className="text-sm font-medium text-brown">
                         Reason :{" "}
                       </span>

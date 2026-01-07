@@ -261,7 +261,7 @@ const handleApiError = async (err: any) => {
               <div className="flex justify-center items-center">
                 <div className='text-center w-full'>
                 <div className="p-4 md:inline-block max-w-full h-[120px] ">
-                  <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                  <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                     Phone Number<span className="text-red font-light pl-1">*</span>
                   </label>
                   <Controller

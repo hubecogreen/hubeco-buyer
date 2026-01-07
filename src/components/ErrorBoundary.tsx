@@ -49,9 +49,9 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
             <LottieWrapper animationData={animationData} loop={true} className='w-72 h-72 mx-auto' />
 
             <div className='flex flex-col gap-2 w-[90vw] sm:w-auto mb-6'>
-              {/* <h1 className='font-medium text-8xl text-gray-900'>404</h1> */}
+              {/* <h1 className='font-medium text-8xl text-brown'>404</h1> */}
               <h2 className='text-4xl text-[#A92449] font-semibold'>Something went wrong </h2>
-              <p className='text-gray-700'>We're sorry for the inconvenience.</p>
+              <p className='text-brown'>We're sorry for the inconvenience.</p>
             </div>
             <Link  href='/' className='text-primary text-[#439787]'>
               Back To Home

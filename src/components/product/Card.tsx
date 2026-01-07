@@ -442,7 +442,7 @@ const ProductCard = ({
               )}
           </div>
         </div>
-        {/* <p className="text-sm text-gray-600 mb-2">{product.description}</p> */}
+        {/* <p className="text-sm text-brown mb-2">{product.description}</p> */}
         <div className="flex items-center justify-between md:gap-6 gap-2 mt-2 ">
           {product?.purchaseType == "ONLINE" ? (
             <Button

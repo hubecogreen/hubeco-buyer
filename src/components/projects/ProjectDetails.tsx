@@ -497,7 +497,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ id }) => {
                         loop={true}
                         className="flex justify-center items-center mx-auto w-[200px] h-[200px]"
                       />
-                      <p className="text-center text-fontGray mt-4 text-lg font-bold ">
+                      <p className="text-center text-brown mt-4 text-lg font-bold ">
                         No Products Used.
                       </p>
                     </>
@@ -521,7 +521,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ id }) => {
                           className="flex justify-center items-center mx-auto w-[200px] h-[200px]"
                         />
 
-                        <p className="text-center text-fontGray mt-4 text-lg font-bold ">
+                        <p className="text-center text-brown mt-4 text-lg font-bold ">
                           No Description found.
                         </p>
                       </>

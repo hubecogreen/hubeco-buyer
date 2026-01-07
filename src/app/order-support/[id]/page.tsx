@@ -155,8 +155,8 @@
 //                             <p className="text-xl text-brown font-semibold w-full">
 //                               {order?.item?.productName}
 //                             </p>
-//                             <p className="text-sm text-fontGray font-regular flex justify-start items-center mt-2">
-//                               <IoCalendarOutline className="mr-2 text-fontGray" />
+//                             <p className="text-sm text-brown font-regular flex justify-start items-center mt-2">
+//                               <IoCalendarOutline className="mr-2 text-brown" />
 
 //                               {dayjs(order?.order?.createdAt).format(
 //                                 "DD MMMM YYYY"
@@ -175,7 +175,7 @@
 //                             </span>{" "}
 //                             {order?.item?.totalPrice} /-
 //                           </p>
-//                           <p className="text-sm text-fontGray font-regular flex justify-start items-center mt-2">
+//                           <p className="text-sm text-brown font-regular flex justify-start items-center mt-2">
 //                             Quantity : {order?.item?.quantity}
 //                           </p>
 //                           <div className="mt-2 w-full"></div>
@@ -495,8 +495,8 @@ export default function Page({ params }: any) {
                     <p className="text-xl text-brown font-semibold w-full flex md:justify-start justify-center">
                       {orderData?.item?.productName}
                     </p>
-                    <p className="text-sm text-fontGray font-regular flex md:justify-start justify-center items-center mt-2">
-                      <IoCalendarOutline className="mr-2 text-fontGray" />
+                    <p className="text-sm text-brown font-regular flex md:justify-start justify-center items-center mt-2">
+                      <IoCalendarOutline className="mr-2 text-brown" />
                       {dayjs(orderData?.order?.createdAt).format(
                         "DD MMMM YYYY"
                       )}
@@ -511,7 +511,7 @@ export default function Page({ params }: any) {
                     </span>{" "}
                     {formatCurrencyInIndianStyle(orderData?.item?.totalPrice)} /-
                   </p>
-                  <p className="text-sm text-fontGray font-regular flex md:justify-start justify-center items-center mt-2">
+                  <p className="text-sm text-brown font-regular flex md:justify-start justify-center items-center mt-2">
                     Quantity: {orderData?.item?.quantity}
                   </p>
                 </div>

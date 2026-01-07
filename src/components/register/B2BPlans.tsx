@@ -341,7 +341,7 @@ const B2BPlans: React.FC<FormProps> = ({
                     </h4>
                   </>
                 )}
-                <p className="text-sm font-normal ml-2 text-gray-500">/ month</p>
+                <p className="text-sm font-normal ml-2 text-brown">/ month</p>
               </div>
             </div>
 
@@ -362,9 +362,9 @@ const B2BPlans: React.FC<FormProps> = ({
 
                 {disableFreemium.map((product, index) => (
                   <div key={index} className="flex items-start mb-5">
-                    <GiCircle className="h-4 w-5 text-gray-300" />
+                    <GiCircle className="h-4 w-5 text-brown" />
                     <div className="ml-2">
-                      <p className="text-sm font-normal text-gray-300">
+                      <p className="text-sm font-normal text-brown">
                         {product.plan}
                       </p>
                     </div>
@@ -459,7 +459,7 @@ const B2BPlans: React.FC<FormProps> = ({
             </h4>
           </>
         )}
-        <p className="text-sm font-normal ml-2 text-gray-500">/ month</p>
+        <p className="text-sm font-normal ml-2 text-brown">/ month</p>
       </div>
     </div>
 

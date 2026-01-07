@@ -136,7 +136,7 @@ const WishList = () => {
           {/* Wishlist Section */}
           <section className="flex-1">
             {wishlistData.length > 0 && (
-              <h1 className="text-3xl font-bold text-gray-800 mb-4 pl-2">
+              <h1 className="text-3xl font-bold text-brown mb-4 pl-2">
                 Wishlist (
                 {wishlistData.length ? `${wishlistData?.length}` : null})
               </h1>

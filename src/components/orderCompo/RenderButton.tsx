@@ -311,7 +311,7 @@ const RenderButton = ({ orderId, order, justify = "center" }: any) => {
                       >
                         <Button
                           type="button"
-                          className="py-2 px-4 bg-secondaryBg text-gray-700 rounded hover:bg-secondaryBg ml-6"
+                          className="py-2 px-4 bg-secondaryBg text-brown rounded hover:bg-secondaryBg ml-6"
                           onClick={() => setOpenCancel(false)}
                         >
                           Cancel

@@ -210,7 +210,7 @@ const VerifyEmail = (param: any) => {
                     className="flex justify-center items-center mt-4"
                     color="primary"
                   >
-                    <span className="text-base text-fontGray font-normal">
+                    <span className="text-base text-brown font-normal">
                       To get new link please log in{" "}
                     </span>
                     <Link

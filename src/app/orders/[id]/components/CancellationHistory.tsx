@@ -105,7 +105,7 @@ const CancellationHistory: React.FC<TimelineProps> = ({
           );
           const { label, color, hex } = statusInfo[statusKey] || {
             label: "Unknown Status",
-            color: "text-gray-500",
+            color: "text-brown",
           };
 
           // console.log('vsbrn64j7n5u',status)
@@ -140,7 +140,7 @@ const CancellationHistory: React.FC<TimelineProps> = ({
                 >
                   {label}
                 </p>
-                <p className="text-sm text-gray-500 capitalize">
+                <p className="text-sm text-brown capitalize">
                   {/* {status.timestamp ? dayjs(status.timestamp).format("dddd, MMM D, hh:mm A") : ""} */}
                   {status?.reason ? status?.reason : ""}{" "}
                   {status?.reason && status?.timestamp && (

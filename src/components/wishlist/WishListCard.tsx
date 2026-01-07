@@ -299,7 +299,7 @@ const WishListCard: React.FC<ProductCardProps> = ({
             ) : null}
           </div>
         </div>
-        {/* <p className="text-fontGray text-xs text-left mt-3 mb-5 product-card-desc">
+        {/* <p className="text-brown text-xs text-left mt-3 mb-5 product-card-desc">
           {product && product?.description}
         </p> */}
         <div

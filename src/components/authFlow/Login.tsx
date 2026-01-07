@@ -243,7 +243,7 @@ setIsLoading(false)
               <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                 <div>
                 <div className="p-4 inline-block max-w-full h-[120px] md:w-10/12 w-[98%]">
-                  <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                  <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                     Phone Number<span className="text-red font-light pl-1">*</span>
                   </label>
                   <Controller
@@ -275,7 +275,7 @@ setIsLoading(false)
                   />
                 </div>
                 <div className="p-4 inline-block max-w-full h-[120px] md:w-10/12 w-[98%]">
-                  <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                  <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                     Password<span className="text-red font-light pl-1">*</span>
                   </label>
                   <Controller

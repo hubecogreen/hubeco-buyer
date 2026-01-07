@@ -226,7 +226,7 @@ const B2CSecurity: React.FC<SecurityFormProps> = ({
     <form autoComplete="off" onSubmit={handleSubmit(handleSecuritySubmit)}>
       <div className="flex">
         <div className={"w-3/6 p-5"}>
-          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Password <span className="text-red">*</span>
           </label>
           <Controller
@@ -251,7 +251,7 @@ const B2CSecurity: React.FC<SecurityFormProps> = ({
           />
         </div>
         <div className={"w-3/6 p-5"}>
-          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Confirm Password <span className="text-red">*</span>
           </label>
           <Controller

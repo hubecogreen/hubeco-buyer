@@ -338,7 +338,7 @@ export default function quoteComponent() {
             </div>
           ))}
 
-          <p className="text-md text-fontGray text-normal mb-1">
+          <p className="text-md text-brown text-normal mb-1">
             Thickness
           </p>
           <div className="flex md:space-x-2 flex-wrap ">

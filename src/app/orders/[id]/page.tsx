@@ -407,8 +407,8 @@ export default function OrdersPage({ params }: any) {
                                   {/* {order?.order?.item?.productName} */}
                                   {order?.item?.productName}
                                 </p>
-                                <p className="text-sm text-fontGray font-regular flex justify-start items-center mt-2">
-                                  <IoCalendarOutline className="mr-2 text-fontGray" />
+                                <p className="text-sm text-brown font-regular flex justify-start items-center mt-2">
+                                  <IoCalendarOutline className="mr-2 text-brown" />
 
                                   {dayjs(order?.order?.createdAt).format(
                                     "DD MMMM YYYY"
@@ -452,7 +452,7 @@ export default function OrdersPage({ params }: any) {
                                   </p>
                                 </>
                               )}
-                              <p className="text-sm text-fontGray font-regular flex justify-start items-center mt-3">
+                              <p className="text-sm text-brown font-regular flex justify-start items-center mt-3">
                                 Quantity : {order?.item?.quantity}
                               </p>
                               {order?.creditNoteInfo?.creditNoteLink && (
@@ -567,8 +567,8 @@ export default function OrdersPage({ params }: any) {
                                 {/* {order?.order?.item?.productName} */}
                                 {order?.item?.productName}
                               </p>
-                              <p className="text-sm text-fontGray font-regular flex md:justify-start justify-center items-center mt-2">
-                                <IoCalendarOutline className="mr-2 text-fontGray" />
+                              <p className="text-sm text-brown font-regular flex md:justify-start justify-center items-center mt-2">
+                                <IoCalendarOutline className="mr-2 text-brown" />
 
                                 {dayjs(order?.order?.createdAt).format(
                                   "DD MMMM YYYY"
@@ -613,7 +613,7 @@ export default function OrdersPage({ params }: any) {
                                 </p>
                               </>
                             )}
-                            <p className="text-sm text-fontGray font-regular flex md:justify-start justify-center items-center md:mt-3">
+                            <p className="text-sm text-brown font-regular flex md:justify-start justify-center items-center md:mt-3">
                               Quantity: {order?.item?.quantity}
                             </p>
                             {order?.creditNoteInfo?.creditNoteLink && (

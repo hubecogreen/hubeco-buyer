@@ -32,10 +32,10 @@ export default function Error({
             />
           </svg>
         </div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-2">
+        <h2 className="text-lg font-semibold text-brown mb-2">
           Something went wrong!
         </h2>
-        <p className="text-gray-600 mb-4">
+        <p className="text-brown mb-4">
           We're sorry, but something went wrong on our end. Please try again.
         </p>
         <button

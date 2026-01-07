@@ -230,7 +230,7 @@ const VendorsList = () => {
             className="mx-auto w-[400px] h-[400px]"
           />
 
-          <p className="text-center text-fontGray mt-4 text-lg font-bold ">
+          <p className="text-center text-brown mt-4 text-lg font-bold ">
             No Brands Found.
           </p>
         </>

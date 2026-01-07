@@ -248,7 +248,7 @@ const Tickets: React.FC = () => {
                   className="flex mx-auto justify-center items-center w-full h-[200px]"
                 />
 
-                <p className="text-center text-fontGray mt-4 text-lg font-bold ">
+                <p className="text-center text-brown mt-4 text-lg font-bold ">
                   No Tickets found.
                 </p>
               </div>

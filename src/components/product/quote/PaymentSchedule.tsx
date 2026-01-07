@@ -263,13 +263,13 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
             <div className="space-y-6">
               {/* Direct Bank Transfer Section */}
               <div className="space-y-4">
-                <p className="text-gray-700">
+                <p className="text-brown">
                   For directly remitting to Hubeco Bank Account – please use the following bank details:
                 </p>
 
                 <div className="space-y-1">
                   <p className="text-sm font-medium text-blue-600">Account name</p>
-                  <p className="font-semibold text-gray-900">
+                  <p className="font-semibold text-brown">
                     HUBECO GREEN VENTURES PRIVATE LIMITED
                   </p>
                 </div>
@@ -277,12 +277,12 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <p className="text-sm font-medium text-blue-600">Account no</p>
-                    <p className="font-semibold text-gray-900">99909705044055</p>
+                    <p className="font-semibold text-brown">99909705044055</p>
                   </div>
 
                   <div className="space-y-2">
                     <p className="text-sm font-medium text-blue-600">IFSC Code</p>
-                    <p className="font-semibold text-gray-900">HDFC0000317</p>
+                    <p className="font-semibold text-brown">HDFC0000317</p>
                   </div>
                 </div>
               </div>
@@ -291,13 +291,13 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
               <div className="relative flex items-center justify-center">
                 <div className="absolute w-full border-t border-gray-300" />
                 <div className="relative px-4 bg-white">
-                  <span className="text-sm text-gray-500 uppercase">or</span>
+                  <span className="text-sm text-brown uppercase">or</span>
                 </div>
               </div>
 
               {/* PayU Section */}
               <div className="space-y-4">
-                <p className="text-gray-700">
+                <p className="text-brown">
                   Please use PayU Payment Gateway for initiating{" "}
                   {selectedPayment.applicablePaymentMethod === "RTGS_NEFT"
                     ? "RTGS/NEFT Transfer"

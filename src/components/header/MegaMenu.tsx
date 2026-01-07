@@ -226,7 +226,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                         className="w-full bg-transparent border-none outline-none text-sm py-3 px-4 placeholder-gray-400"
                       />
                       <button className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                        <Search size={20} className="text-gray-400" />
+                        <Search size={20} className="text-brown" />
                       </button> */}
                       <p className="font-bold text-xl pb-5">Categories</p>
                     </div>
@@ -248,7 +248,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                          selectedCategory?._id === category._id ||
                          (index === 0 && !selectedCategory)
                            ? "bg-teal-600 text-white shadow-sm"
-                           : "bg-white hover:bg-gray-50 text-gray-700"
+                           : "bg-white hover:bg-gray-50 text-brown"
                        }
                        ${
                          category.subCategories &&
@@ -275,7 +275,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                 selectedCategory?._id === category._id ||
                                 (index === 0 && !selectedCategory)
                                   ? "text-white"
-                                  : "text-gray-400"
+                                  : "text-brown"
                               }`}
                             />
                           )}
@@ -300,7 +300,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                       {/* Header */}
                       <div className="px-8 py-6 border-b border-gray-100">
                         <h1 className="sr-only">Sustainable Products</h1>
-                        <h2 className="text-2xl font-semibold text-gray-800">
+                        <h2 className="text-2xl font-semibold text-brown">
                           {selectedCategory
                             ? selectedCategory.name
                             : mainCategories[0]?.name}
@@ -344,7 +344,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                     subCat.childCategories.length > 0 && (
                                       <ChevronRight
                                         size={16}
-                                        className="ml-2 text-gray-400"
+                                        className="ml-2 text-brown"
                                       />
                                     )}
                                 </span>
@@ -425,7 +425,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                                               ? child._id
                                                               : `empty-${colIndex}`
                                                           }
-                                                          className="py-3 px-4 text-gray-600 align-top"
+                                                          className="py-3 px-4 text-brown align-top"
                                                         >
                                                           {child ? (
                                                             <Link

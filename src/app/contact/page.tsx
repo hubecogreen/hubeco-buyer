@@ -380,7 +380,7 @@ export default function Page() {
                     <div className="flex justify-center">
                       <div className="inline-block max-w-full w-11/12 md:w-full p-6 bg-cream shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                         <div className="md:p-4 py-4">
-                          <label className="block text-gray-700 mb-2 text-brown text-base font-medium">
+                          <label className="block text-brown mb-2 text-brown text-base font-medium">
                             Name <span className="text-red">*</span>
                           </label>
                           <Controller
@@ -404,7 +404,7 @@ export default function Page() {
                           />
                         </div>
                         <div className="md:p-4 py-4">
-                          <label className="block text-gray-700 mb-2 text-brown text-base font-medium">
+                          <label className="block text-brown mb-2 text-brown text-base font-medium">
                             Email <span className="text-red">*</span>
                           </label>
                           <Controller
@@ -428,7 +428,7 @@ export default function Page() {
                           />
                         </div>
                         <div className="md:p-4 py-4">
-                          <label className="block text-gray-700 mb-2 text-brown text-base font-medium">
+                          <label className="block text-brown mb-2 text-brown text-base font-medium">
                             Phone Number <span className="text-red">*</span>
                           </label>
                           <Controller
@@ -453,7 +453,7 @@ export default function Page() {
                           />
                         </div>
                         <div className="md:p-4 py-4">
-                          <label className="block text-gray-700 mb-2 text-brown text-base font-medium">
+                          <label className="block text-brown mb-2 text-brown text-base font-medium">
                             Your Message <span className="text-red">*</span>
                           </label>
                           <Controller
@@ -755,7 +755,7 @@ export default function Page() {
                           </AccordionButton>
                         </h2>
                         <AccordionPanel
-                          className="text-justify text-medium mt-2 text-sm  text-fontGray"
+                          className="text-justify text-medium mt-2 text-sm  text-brown"
                           pb={4}
                         >
                           {item.description}

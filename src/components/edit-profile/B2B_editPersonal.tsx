@@ -935,7 +935,7 @@ reset1()
       </div>
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             First Name <span className="text-red">*</span>
           </label>
           <Controller
@@ -960,7 +960,7 @@ reset1()
           />
         </div>
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Last Name
           </label>
           <Controller
@@ -989,7 +989,7 @@ reset1()
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
         <div className="flex  justify-between items-center">
-          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Email Address <span className="text-red">*</span>
 
           </label>
@@ -1043,7 +1043,7 @@ reset1()
         </div>
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
         <div className="flex  justify-between items-center">
-          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Phone Number <span className="text-red">*</span>
           </label>
           <p onClick={onClickEdit} className={`${editMobile ? 'text-primary' : 'text-primary'} text-md cursor-pointer font-semibold mr-1`}>{editMobile ? 'Cancel' :'Edit'}</p>
@@ -1119,7 +1119,7 @@ reset1()
       </DialogTrigger>
       <DialogContent className="sm:max-w-max">
     {/*   <DialogClose className='absolute right-4 top-4'>
-            <button className="text-gray-600 hover:text-gray-800" type="button" onClick={onCLickClose}>
+            <button className="text-brown hover:text-brown" type="button" onClick={onCLickClose}>
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>

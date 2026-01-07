@@ -569,7 +569,7 @@ clearErrors();
       </div>
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             First Name <span className="text-red">*</span>
           </label>
           <Controller
@@ -593,7 +593,7 @@ clearErrors();
           />
         </div>
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Last Name <span className="text-red">*</span>
           </label>
           <Controller
@@ -620,7 +620,7 @@ clearErrors();
       </div>
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Email Address <span className="text-red">*</span>
           </label>
           <Controller
@@ -645,7 +645,7 @@ clearErrors();
           />
         </div>
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Phone Number<span className="text-red">*</span>
           </label>
           <Controller
@@ -691,7 +691,7 @@ clearErrors();
             />
             <label
               htmlFor="tandc"
-              className="ms-2 mt-2 md:text-base font-medium text-gray-900 dark:text-gray-300 mobile-sm:!text-md"
+              className="ms-2 mt-2 md:text-base font-medium text-brown dark:text-brown mobile-sm:!text-md"
             >
               I agree to the{" "}
               <Link
@@ -729,7 +729,7 @@ clearErrors();
             />
             <label
               htmlFor="privacyPolicy"
-              className="ms-2 mt-2 md:text-base font-medium text-gray-900 dark:text-gray-300 mobile-sm:!text-md"
+              className="ms-2 mt-2 md:text-base font-medium text-brown dark:text-brown mobile-sm:!text-md"
             >
               I agree to the{" "}
               <Link

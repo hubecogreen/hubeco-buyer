@@ -176,7 +176,7 @@ const B2BMain:React.FC<B2BProps> = ({mobileParam}) =>  {
   // }
   return (
     <B2CContextProvider>
-    <div className="bg-white">
+    <div className="bg-cream">
       <Head>
         <title>B2B</title>
       </Head>
@@ -189,7 +189,7 @@ const B2BMain:React.FC<B2BProps> = ({mobileParam}) =>  {
               <h1 className="text-[24px] md:text-4xl font-bold mb-5">
                 Welcome to <span className="text-teal-500">hubeco</span> 👋
               </h1>
-              <p className="text-base md:text-xl text-gray-500 mb-10">
+              <p className="text-base md:text-xl text-brown mb-10">
                 Let&#39;s set up your <span className="font-semibold">B2B</span> profile
               </p>
             </div>

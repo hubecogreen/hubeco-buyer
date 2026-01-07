@@ -292,7 +292,7 @@ export default function QuoteDetailsDialog() {
                           <Text className="text-browntext-sm font-medium mb-1">
                             {attribute.name}
                           </Text>
-                          <Text className="text-gray-900 font-semibold">
+                          <Text className="text-brown font-semibold">
                             {attribute.value}
                           </Text>
                         </div>
@@ -301,7 +301,7 @@ export default function QuoteDetailsDialog() {
                       <Text className="text-browntext-sm font-medium mb-1">
                         Quantity
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         {selectedView?.products[index]?.quantity}
                       </Text>
                     </div>
@@ -309,7 +309,7 @@ export default function QuoteDetailsDialog() {
                       <Text className="text-browntext-sm font-medium mb-1">
                         Unit Price
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         <span className="text-xl font-normal font-mono">₹</span>
                         {selectedView?.products[index]?.unitPrice}
                       </Text>
@@ -318,7 +318,7 @@ export default function QuoteDetailsDialog() {
                       <Text className="text-browntext-sm font-medium mb-1">
                         Delivery Date
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         {dayjs(
                           selectedView?.products[index]?.deliveryDate
                         ).format("DD-MM-YYYY")}
@@ -329,7 +329,7 @@ export default function QuoteDetailsDialog() {
                         <Text className="text-browntext-sm font-medium mb-1">
                           CGST
                         </Text>
-                        <Text className="text-gray-900 font-semibold">
+                        <Text className="text-brown font-semibold">
                           {selectedView?.products[index]?.cgst}%
                         </Text>
                       </div>
@@ -339,7 +339,7 @@ export default function QuoteDetailsDialog() {
                         <Text className="text-browntext-sm font-medium mb-1">
                           SGST
                         </Text>
-                        <Text className="text-gray-900 font-semibold">
+                        <Text className="text-brown font-semibold">
                           {selectedView?.products[index]?.sgst}%
                         </Text>
                       </div>
@@ -349,7 +349,7 @@ export default function QuoteDetailsDialog() {
                         <Text className="text-browntext-sm font-medium mb-1">
                           IGST
                         </Text>
-                        <Text className="text-gray-900 font-semibold">
+                        <Text className="text-brown font-semibold">
                           {selectedView?.products[index]?.igst}%
                         </Text>
                       </div>
@@ -358,7 +358,7 @@ export default function QuoteDetailsDialog() {
                       <Text className="text-browntext-sm font-medium mb-1">
                         Shipping Cost
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         <span className="text-xl font-normal font-mono">₹</span>
                         {selectedView?.products[index]?.shippingCost}
                       </Text>
@@ -367,7 +367,7 @@ export default function QuoteDetailsDialog() {
                       <Text className="text-browntext-sm font-medium mb-1">
                         Other Cost
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         <span className="text-xl font-normal font-mono">₹</span>
                         {selectedView?.products[index]?.otherCost}
                       </Text>
@@ -376,7 +376,7 @@ export default function QuoteDetailsDialog() {
                       <Text className="text-browntext-sm font-medium mb-1">
                         Taxable Amount
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         <span className="text-xl font-normal font-mono">₹</span>
                         {formatCurrencyInIndianStyle(
                           selectedView?.products[index]?.unitPrice *
@@ -392,7 +392,7 @@ export default function QuoteDetailsDialog() {
                           : "CGST + SGST"}
                         )
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         <span className="text-xl font-normal font-mono">₹</span>
                         {selectedView?.products[index]?.taxableAmount}
                       </Text>
@@ -401,7 +401,7 @@ export default function QuoteDetailsDialog() {
                       <Text className="text-browntext-sm font-medium mb-1">
                         Product Cost
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                       <span
                       className="text-xl "
                       style={{ fontWeight: "400", fontFamily: "monospace" }}
@@ -415,7 +415,7 @@ export default function QuoteDetailsDialog() {
                       <Text className="text-browntext-sm font-medium mb-1">
                         Total Amount
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         <span className="text-xl font-normal font-mono">₹</span>
                         {selectedView?.products[index]?.totalAmount}
                       </Text>
@@ -429,7 +429,7 @@ export default function QuoteDetailsDialog() {
                           Notes
                         </Text>
                         <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                          <Text className="text-gray-900 whitespace-pre-wrap break-words text-wrap">
+                          <Text className="text-brown whitespace-pre-wrap break-words text-wrap">
                             {selectedView?.products[index]?.notes}
                           </Text>
                         </div>
@@ -442,7 +442,7 @@ export default function QuoteDetailsDialog() {
                           Warranty
                         </Text>
                         <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                          <Text className="text-gray-900 whitespace-pre-wrap break-words text-wrap">
+                          <Text className="text-brown whitespace-pre-wrap break-words text-wrap">
                             {selectedView?.products[index]?.warranty}
                           </Text>
                         </div>
@@ -463,7 +463,7 @@ export default function QuoteDetailsDialog() {
           <div className=" rounded-lg gap-5 flex  p-6 py-2">
             {/* <div className="bg-cream p-4 rounded-lg w-full">
                 <p className="text-browntext-sm font-medium mb-1">Shipping/Delivery Cost </p>
-                <p className="text-gray-900 font-semibold"> <span
+                <p className="text-brown font-semibold"> <span
                       className="text-xl "
                       style={{ fontWeight: "400", fontFamily: "monospace" }}
                     >
@@ -473,7 +473,7 @@ export default function QuoteDetailsDialog() {
               </div>
               <div className="bg-cream p-4 rounded-lg w-full">
                 <p className="text-browntext-sm font-medium mb-1">Other Cost</p>
-                <p className="text-gray-900 font-semibold"> <span
+                <p className="text-brown font-semibold"> <span
                       className="text-xl "
                       style={{ fontWeight: "400", fontFamily: "monospace" }}
                     >
@@ -485,7 +485,7 @@ export default function QuoteDetailsDialog() {
               <p className="text-browntext-sm font-medium mb-1">
                 Grand Total
               </p>
-              <p className="text-gray-900 font-semibold">
+              <p className="text-brown font-semibold">
                 {" "}
                 <span className="text-xl font-normal font-mono">₹</span>
                 {selectedView?.grandTotal}
@@ -526,7 +526,7 @@ export default function QuoteDetailsDialog() {
                 Delivery Terms
               </h3>
               <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                <p className="text-gray-700 whitespace-pre-wrap break-words text-wrap">
+                <p className="text-brown whitespace-pre-wrap break-words text-wrap">
                   {selectedView?.deliveryTerms || "-"}
                 </p>
               </div>
@@ -537,7 +537,7 @@ export default function QuoteDetailsDialog() {
                 Payment Terms
               </h3>
               <div className=" max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                <p className="text-gray-700  whitespace-pre-wrap break-words text-wrap">
+                <p className="text-brown  whitespace-pre-wrap break-words text-wrap">
                   {selectedView?.paymentTerms || "-"}
                 </p>
               </div>
@@ -548,7 +548,7 @@ export default function QuoteDetailsDialog() {
                 Other Terms and Conditions
               </h3>
               <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                <p className="text-gray-700 whitespace-pre-wrap break-words text-wrap">
+                <p className="text-brown whitespace-pre-wrap break-words text-wrap">
                   {selectedView?.otherTerms || "-"}
                 </p>
               </div>

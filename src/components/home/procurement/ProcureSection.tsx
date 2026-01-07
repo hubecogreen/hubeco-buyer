@@ -103,7 +103,7 @@ const ProcureSection: React.FC = () => {
                                 {/* <h3 className="text-[20px] lg:text-[22px] font-medium">
                                     {service.title}
                                 </h3> */}
-                                <p className="text-[11px] xs:text-[12px] sm:text-[14px] lg:text-[22px] text-[#000000] leading-[16px] xs:leading-[17px] sm:leading-[20px] lg:leading-[28px]">
+                                <p className="text-[11px] xs:text-[12px] sm:text-[14px] lg:text-[22px] text-brown leading-[16px] xs:leading-[17px] sm:leading-[20px] lg:leading-[28px]">
                                     {service.description}
                                 </p>
                             </div>

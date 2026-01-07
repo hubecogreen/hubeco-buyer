@@ -226,7 +226,7 @@ const ResetPassword:React.FC<Resetprops> = ({token}) => {
           >
             <div className="">
               <div className="p-4 inline-block max-w-full ">
-                <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                   New Password <span className="text-red">*</span>
                 </label>
                 <Controller
@@ -255,7 +255,7 @@ const ResetPassword:React.FC<Resetprops> = ({token}) => {
                 />
               </div>
               <div className="p-4 inline-block max-w-full ">
-                <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                   Confirm Password <span className="text-red">*</span>
                 </label>
                 <Controller
@@ -346,7 +346,7 @@ const ResetPassword:React.FC<Resetprops> = ({token}) => {
           </h4>
           <div className='flex justify-center items-center flex-wrap gap-2 mt-5'>
             <p className='flex justify-center items-center mt-4' color='primary'>
-              <span className="text-base text-fontGray font-normal">Please go to login and request new one.</span>
+              <span className="text-base text-brown font-normal">Please go to login and request new one.</span>
               <Link href='/login' className='flex text-base ml-2 text-secondary items-center font-semibold gap-1.5  hover:underline '>
                 <span>Go to Login</span>
               </Link>

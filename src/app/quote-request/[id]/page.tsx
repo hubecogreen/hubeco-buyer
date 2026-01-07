@@ -460,14 +460,14 @@ const QuoteDetails = ({ id }: any) => {
                         {/* Info Grid */}
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-3 gap-x-4 text-sm text-[#2F2B3D]">
                           <div>
-                            <p className="text-gray-500 font-medium">Quote ID</p>
+                            <p className="text-brown font-medium">Quote ID</p>
                             <p className="font-semibold break-all">
                               {initialState.quoteId}
                             </p>
                           </div>
 
                           <div>
-                            <p className="text-gray-500 font-medium">
+                            <p className="text-brown font-medium">
                               Quote Requested by
                             </p>
                             <p className="font-semibold break-words">
@@ -477,7 +477,7 @@ const QuoteDetails = ({ id }: any) => {
                           </div>
 
                           <div>
-                            <p className="text-gray-500 font-medium">
+                            <p className="text-brown font-medium">
                               Quote Requested on
                             </p>
                             <p className="font-semibold">
@@ -488,7 +488,7 @@ const QuoteDetails = ({ id }: any) => {
                           </div>
 
                           <div>
-                            <p className="text-gray-500 font-medium">
+                            <p className="text-brown font-medium">
                               Quote Created on
                             </p>
                             <p className="font-semibold">
@@ -500,7 +500,7 @@ const QuoteDetails = ({ id }: any) => {
 
                           {/* Dynamic Unit Price fix */}
                           <div>
-                            <p className="text-gray-500 font-medium">
+                            <p className="text-brown font-medium">
                               Unit Price
                             </p>
                             <p className="font-semibold">
@@ -535,7 +535,7 @@ const QuoteDetails = ({ id }: any) => {
 
                           {/* Quantity */}
                           <div>
-                            <p className="text-gray-500 font-medium">Quantity</p>
+                            <p className="text-brown font-medium">Quantity</p>
                             <p className="font-semibold">
                               {(() => {
                                 const quote = initialState?.quotations?.[0];
@@ -937,7 +937,7 @@ export default QuoteDetails;
 //         <p className="text-sm font-medium text-blue-600">
 //           Account name
 //         </p>
-//         <p className="font-semibold text-gray-900 text-base">
+//         <p className="font-semibold text-brown text-base">
 //           HUBECO GREEN VENTURES PRIVATE LIMITED
 //         </p>
 //       </div>
@@ -948,7 +948,7 @@ export default QuoteDetails;
 //           <p className="text-sm font-medium text-blue-600">
 //             Account no
 //           </p>
-//           <p className="font-semibold text-gray-900 border-0 ">
+//           <p className="font-semibold text-brown border-0 ">
 //             99909705044055
 //           </p>
 //         </div>
@@ -957,7 +957,7 @@ export default QuoteDetails;
 //           <p className="text-sm font-medium text-blue-600 border-0">
 //             IFSC Code
 //           </p>
-//           <p className="font-semibold text-gray-900 border-0">
+//           <p className="font-semibold text-brown border-0">
 //             HDFC0000317
 //           </p>
 //         </div>

@@ -104,7 +104,7 @@ const PaymentSuccessful = () => {
           <h4 className="font-bold text-primary mb-4 md:text-3xl text-xl">
           {!isPendingScreen?"Thank you for your order!":"Thank you for you order!"}
           </h4>
-          <p className="text-gray-600 max-w-[480px] mx-auto">
+          <p className="text-brown max-w-[480px] mx-auto">
            { !isPendingScreen ?"We appreciate your purchase! Your order has been successfully placed and is now being processed.":"Thank you for your purchase! Your order has been successfully placed, and payment is being processed. You’ll receive an email update shortly."}
           </p>
         </div>

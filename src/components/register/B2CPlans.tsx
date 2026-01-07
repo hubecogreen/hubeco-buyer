@@ -500,13 +500,13 @@ const B2CPlans: React.FC<FormProps> = ({ prevStep }) => {
       <div className="flex flex-col sm:flex-row justify-between mt-10">
         <CustomButton
           title={"Back"}
-          className="ml-3 hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-brown "
-          customStyles={{ backgroundColor: "#E0E0E0" }}
+          className="ml-3 hover:bg-primary border border-primary h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-brown "
+          customStyles={{ backgroundColor: "#FFFEF8" }}
           onPress={prevStep}
         />
         <CustomButton
           title={"Continue"}
-          className="ml-3 bg-secondary hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-white "
+          className="ml-3 bg-primary hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-cream "
           customStyles={{}}
           onPress={selectedPlan == "free" ? buyFreePlan : buySubscription}
           type="submit"

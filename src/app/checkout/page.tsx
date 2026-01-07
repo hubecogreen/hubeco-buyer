@@ -879,7 +879,7 @@ const Checkout = () => {
                               className="h-4 w-4 text-indigo-600 accent-[#B90647]"
                             />
 
-                            <span className="text-sm text-gray-700">
+                            <span className="text-sm text-brown">
                               {address?.address.includes("?|")
                                 ? address?.address.split("?|")[1]
                                 : address?.address}
@@ -974,7 +974,7 @@ const Checkout = () => {
                 />
                 <label
                   htmlFor="email"
-                  className="ms-2 mt-2 text-base font-medium text-gray-900 dark:text-gray-300"
+                  className="ms-2 mt-2 text-base font-medium text-brown dark:text-brown"
                 >
                   Email me with news and offers
                 </label>
@@ -989,7 +989,7 @@ const Checkout = () => {
                   <div className="mb-8">
                     <div className="flex flex-col sm:flex-row gap-3 my-5">
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           First Name <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1014,7 +1014,7 @@ const Checkout = () => {
                         />
                       </div>
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           Last Name
                         </label>
                         <Controller
@@ -1041,7 +1041,7 @@ const Checkout = () => {
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3 my-5">
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           Address Line 1 <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1066,7 +1066,7 @@ const Checkout = () => {
                         />
                       </div>
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           Land Mark
                         </label>
                         <Controller
@@ -1093,7 +1093,7 @@ const Checkout = () => {
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3 my-5">
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           Pin code <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1122,7 +1122,7 @@ const Checkout = () => {
                         />
                       </div>
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           Country<span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1166,7 +1166,7 @@ const Checkout = () => {
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3 my-5">
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           State <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1210,7 +1210,7 @@ const Checkout = () => {
                         </div>
                       </div>
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           City <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1256,7 +1256,7 @@ const Checkout = () => {
 
                     <div className="flex flex-col sm:flex-row gap-3 my-5">
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           Phone Number <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1281,7 +1281,7 @@ const Checkout = () => {
                         />
                       </div>
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           Email <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -1317,7 +1317,7 @@ const Checkout = () => {
                       />
                       <label
                         htmlFor="email"
-                        className="ms-2 mt-2 text-base font-medium text-gray-900 dark:text-gray-300"
+                        className="ms-2 mt-2 text-base font-medium text-brown dark:text-brown"
                       >
                         Save this information for next time
                       </label>
@@ -1332,7 +1332,7 @@ const Checkout = () => {
                       />
                       <label
                         htmlFor="email"
-                        className="ms-2 mt-2 text-base font-medium text-gray-900 dark:text-gray-300"
+                        className="ms-2 mt-2 text-base font-medium text-brown dark:text-brown"
                       >
                         Text me with news and offers
                       </label>
@@ -1475,7 +1475,7 @@ const Checkout = () => {
                   loading="lazy"
                 />
               </div>
-              <p className="text-sm text-gray-500 mt-2 text-center pb-10 px-10">
+              <p className="text-sm text-brown mt-2 text-center pb-10 px-10">
                 After clicking "Pay now", you will be redirected to PayU to
                 complete your purchase securely.
               </p>
@@ -1573,7 +1573,7 @@ const Checkout = () => {
                         })()}
                       </p>
                       <div className="flex justify-between">
-                        <p className="text-gray-500">
+                        <p className="text-brown">
                           Quantity : {product?.quantity}
                         </p>
                         <p className="text-brown font-semibold text-md flex item-center justify-start">
@@ -1624,7 +1624,7 @@ const Checkout = () => {
               <div className="py-7">
                 {cost?.price && (
                   <div className="flex justify-between mb-2">
-                    <p className="text-md text-fontGray font-regular">
+                    <p className="text-md text-brown font-regular">
                       Subtotal
                     </p>
                     <p className="text-brown font-semibold text-md flex item-center justify-start">

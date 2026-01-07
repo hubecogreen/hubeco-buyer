@@ -117,15 +117,15 @@ const PartnersSection: React.FC = () => {
                     />
                   </div>
 
-                  <h3 className="text-[18px] font-semibold text-center mb-1">
+                  <h3 className="text-[18px] text-brown font-semibold text-center mb-1">
                     {p.name}
                   </h3>
 
-                  <p className="text-[13px] text-center opacity-70 mb-4">
+                  <p className="text-[13px] text-brown text-center opacity-70 mb-4">
                     {p.role}
                   </p>
 
-                  <p className="text-[13px] text-[#333] leading-relaxed">
+                  <p className="text-[13px] text-brown leading-relaxed">
                     {p.testimonial}
                   </p>
                 </div>
@@ -203,15 +203,15 @@ const PartnersSection: React.FC = () => {
                 />
               </div>
 
-              <h3 className="text-[20px] font-semibold text-center mb-1">
+              <h3 className="text-[20px] text-brown font-semibold text-center mb-1">
                 {p.name}
               </h3>
 
-              <p className="text-[14px] text-center opacity-70 mb-5 ">
+              <p className="text-[14px] text-brown text-center opacity-70 mb-5 ">
                 {p.role}
               </p>
 
-              <p className="text-[14px] text-[#333] leading-relaxed">
+              <p className="text-[14px] text-brown leading-relaxed">
                 {p.testimonial}
               </p>
             </div>

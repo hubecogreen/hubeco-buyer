@@ -58,7 +58,7 @@ export default function Page() {
         </div>
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-5">Welcome to <span className="text-teal-500">hubeco</span> 👋</h1>
-            <p className="text-base text-gray-500">We connect you with top-quality eco-friendly and certified building materials for sustainable construction.</p>
+            <p className="text-base text-brown">We connect you with top-quality eco-friendly and certified building materials for sustainable construction.</p>
           </div>
         </div>
         <div className="flex items-center justify-center pb-12 ">

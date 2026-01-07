@@ -15,7 +15,7 @@ const RefundNotification = () => {
 
         <p className="text-[#2E2E2EB8] text-xs sm:text-sm">
           Your refund is being processed. It should reflect{" "}
-          <span className="text-gray-800">
+          <span className="text-brown">
             in your bank account within 3-5 business days
           </span>{" "}
           (excluding bank holidays)

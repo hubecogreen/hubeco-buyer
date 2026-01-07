@@ -187,14 +187,14 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
             /> */}
           <div className="relative flex flex-row items-center">
             {/* Search Icon */}
-            <span className="absolute inset-y-0 left-3 flex items-center text-fontGray h-[40px] ">
-              <Search size={16} color="#4d4d4d" className="text-fontGray" />
+            <span className="absolute inset-y-0 left-3 flex items-center text-brown h-[40px] ">
+              <Search size={16} color="#4d4d4d" className="text-brown" />
             </span>
             <Input
               placeholder="Search"
               value={vendorSearch || ""}
               onChange={(e: any) => handleVendorSearch(e)}
-              className="pl-[35px] bg-cream md:text-md text-sm h-[40px] shadow-md text-fontGray mr-[1px] mb-4 rounded-[5px] w-full"
+              className="pl-[35px] bg-cream md:text-md text-sm h-[40px] shadow-md text-brown mr-[1px] mb-4 rounded-[5px] w-full"
             />
 
           </div>

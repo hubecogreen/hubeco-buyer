@@ -176,7 +176,7 @@ const SetPassword:React.FC<Setprops> = ({token}) => {
         className="bg-cover bg-center bg-[url('/images/auth/auth.webp')] h-5/6"
       >
         <div className=" h-full flex items-center justify-center py-20 md:py-10 px-[10px] md:px-0">
-          <div className="text-center py-10 md:py-15 max-w-full md:max-w-lg  text-white bg-white">
+          <div className="text-center py-10 md:py-15 max-w-full md:max-w-lg  text-cream bg-cream">
             <h1 className="text-[24px] md:text-3xl  font-bold mb-4 text-brown">
               Set Password 🔒
             </h1>
@@ -195,7 +195,7 @@ const SetPassword:React.FC<Setprops> = ({token}) => {
               
               <div className="">
                 <div className="p-4 inline-block max-w-full h-[120px] md:w-10/12 w-[98%]">
-                  <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                  <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                     Password<span className="text-red">*</span>
                   </label>
                   <Controller
@@ -211,7 +211,7 @@ const SetPassword:React.FC<Setprops> = ({token}) => {
                         value={value}
                         customStyles={{
                           // backgroundColor: "#F3F3F3",
-                          border: "1px solid #E0E0E0",
+                          
                           borderRadius: "5px",
                           // width: "400px",
                         }}
@@ -224,7 +224,7 @@ const SetPassword:React.FC<Setprops> = ({token}) => {
                   />
                 </div>
                 <div className="p-4 inline-block max-w-full h-[120px] md:w-10/12  w-[98%]">
-                  <label className="block text-gray-700 mb-2 text-brown text-base font-medium text-left">
+                  <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                     Confirm Password<span className="text-red">*</span>
                   </label>
                   <Controller
@@ -240,7 +240,7 @@ const SetPassword:React.FC<Setprops> = ({token}) => {
                         value={value}
                         customStyles={{
                           // backgroundColor: "#F3F3F3",
-                          border: "1px solid #E0E0E0",
+                          
                           borderRadius: "5px",
                           // width: "400px",
                         }}
@@ -272,12 +272,12 @@ const SetPassword:React.FC<Setprops> = ({token}) => {
                     <CustomButton
                       title={"Submit"}
                       type="submit"
-                      className="text-white font-bold h-12 w-[100%] md:min-w-[400px] text-sm md:text-md mt-2 md:mt-2"
+                      className="text-cream font-bold h-12 w-[100%] md:min-w-[400px] text-sm md:text-md mt-2 md:mt-2"
                       customStyles={{
                         border: "1px solid #FFFFFF",
                         color: "white",
                         // minWidth: "400px",
-                        backgroundColor: "#B90647",
+                        backgroundColor: "#109899",
                       }}
                       loading={isLoadingState}
                     />

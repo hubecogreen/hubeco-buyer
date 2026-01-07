@@ -37,13 +37,13 @@ const FilterHTML = ({
             <div className="relative flex flex-row items-center">
               {/* Search Icon */}
               <span className="absolute inset-y-0 left-3 flex items-center text-white  h-[40px] ">
-                <Search size={16} color="#4d4d4d" className="text-fontGray" />
+                <Search size={16} color="#4d4d4d" className="text-brown" />
               </span>
               <Input
                 placeholder="Search"
                 value={categorySearch || ""}
                 onChange={(e: any) => handleCategorySearch(e)}
-                className="pl-[35px] bg-cream md:text-md text-sm w-full h-[40px] shadow-md text-fontGray mr-[1px] mb-4 rounded-[5px]"
+                className="pl-[35px] bg-cream md:text-md text-sm w-full h-[40px] shadow-md text-brown mr-[1px] mb-4 rounded-[5px]"
               />
 
             </div>

@@ -267,7 +267,7 @@ export default function Page() {
                                         </div>
 
                                         <div className="ml-2">
-                                          <p className="text-sm font-normal text-gray-300">
+                                          <p className="text-sm font-normal text-brown">
                                             {product.plan}
                                           </p>
                                         </div>
@@ -433,10 +433,10 @@ export default function Page() {
                                         className="flex items-left mb-5"
                                       >
                                         <div>
-                                          <GiCircle className="h-4 w-5 text-gray-300" />
+                                          <GiCircle className="h-4 w-5 text-brown" />
                                         </div>
                                         <div className="ml-2">
-                                          <p className="text-sm font-normal text-gray-300">
+                                          <p className="text-sm font-normal text-brown">
                                             {product.plan}
                                           </p>
                                         </div>

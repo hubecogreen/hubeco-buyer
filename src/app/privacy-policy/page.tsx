@@ -152,20 +152,20 @@
 //         >
 //           <a
 //             href="/"
-//             className="text-white flex items-center "
+//             className="text-cream flex items-center "
 //             className={{
 //               textDecoration: "none",
 //               padding: "5px 10px",
 //               borderRadius: "5px",
 //             }}
 //           >
-//             <AiFillHome size={16} className="text-white mr-1.5" />
+//             <AiFillHome size={16} className="text-cream mr-1.5" />
 //             Home
 //           </a>
-//           <span className="text-white mx-2">/</span>
+//           <span className="text-cream mx-2">/</span>
 //           <a
 //             href="#"
-//             className="text-white"
+//             className="text-cream"
 //             className={{
 //               textDecoration: "none",
 //               padding: "5px 10px",
@@ -389,20 +389,20 @@
 //         >
 //           <a
 //             href="/"
-//             className="text-white flex items-center "
+//             className="text-cream flex items-center "
 //             className={{
 //               textDecoration: "none",
 //               padding: "5px 10px",
 //               borderRadius: "5px",
 //             }}
 //           >
-//             <AiFillHome size={16} className="text-white mr-1.5" />
+//             <AiFillHome size={16} className="text-cream mr-1.5" />
 //             Home
 //           </a>
-//           <span className="text-white mx-2">/</span>
+//           <span className="text-cream mx-2">/</span>
 //           <a
 //             href="#"
-//             className="text-white"
+//             className="text-cream"
 //             className={{
 //               textDecoration: "none",
 //               padding: "5px 10px",
@@ -452,14 +452,14 @@ import Link from "next/link";
 export default function Page() {
 
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       <head>
         <title>Privacy Policy | Hubeco</title>
       </head>
       {/* <Header /> */}
       <div className="banner-section h-[100%]">
       <div
-  className="md:px-20 px-10 relative bg-cover bg-center h-[200px] flex items-center justify-start text-white"
+  className="md:px-20 px-10 relative bg-cover bg-center h-[200px] flex items-center justify-start text-cream"
   style={{
     backgroundImage: 'url("images/about/aboutBanner1.webp")',
   }}
@@ -467,16 +467,16 @@ export default function Page() {
 
           <Link
             href="/"
-            className="text-white flex items-center no-underline px-2.5 py-1 rounded"
+            className="text-cream flex items-center no-underline px-2.5 py-1 rounded"
           >
-            <AiFillHome size={16} className="text-white mr-1.5" />
+            <AiFillHome size={16} className="text-cream mr-1.5" />
             Home
           </Link>
 
-          <span className="text-white mx-2">/</span>
+          <span className="text-cream mx-2">/</span>
           <Link
             href="#"
-            className="text-white no-underline px-[10px] py-[5px] rounded-[5px]"
+            className="text-cream no-underline px-[10px] py-[5px] rounded-[5px]"
           >
             Privacy Policy
           </Link>

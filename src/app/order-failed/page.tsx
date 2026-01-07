@@ -112,7 +112,7 @@ const PaymentFailed = () => {
           <h4  className='font-bold text-[#ED615B] mb-4 md:text-3xl text-xl'>
           Order Failed!
           </h4>
-          <p  className='text-gray-600'>
+          <p  className='text-brown'>
           We’re sorry, but your order could not be processed successfully.
           </p>
       

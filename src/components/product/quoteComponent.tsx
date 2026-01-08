@@ -70,7 +70,7 @@ export default function quoteComponent() {
           </DialogClose>
 
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold">
+            <DialogTitle className="text-brown text-xl font-bold">
               Request Quote
             </DialogTitle>
           </DialogHeader>

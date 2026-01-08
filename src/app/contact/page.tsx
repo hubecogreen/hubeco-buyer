@@ -589,7 +589,7 @@ export default function Page() {
 
             <div className="flex justify-center">
               <div className="inline-block max-w-full p-6 bg-cream border border-primary shadow-[0px_8px_24px_rgba(149,157,165,0.2)] dark:bg-gray-800 dark:border-gray-700">
-                <div className="grid grid-cols-1 xl:gap-28 lg:gap-18 sm:grid-cols-2 md:grid-cols-4 gap-y-8">
+                <div className="grid grid-cols-2 xl:gap-28 lg:gap-18 sm:grid-cols-2 md:grid-cols-4 gap-y-8">
                   {/* {valueItems.slice(0, 4).map((item, index) => ( */}
                   <div
                     // key={index}

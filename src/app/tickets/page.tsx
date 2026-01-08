@@ -139,12 +139,12 @@ const Tickets: React.FC = () => {
       <div className="min-h-screen bg-cream  p-4">
         <div className="max-w-full mx-auto md:mx-10 mt-10">
           {/* <h1 className="text-xl font-bold text-center mb-4">Tickets</h1> */}
-          <h1 className="text-2xl font-bold mb-4">Tickets</h1>
+          <h1 className="text-2xl font-bold mb-4 text-brown">Tickets</h1>
           {/* Tickets Table */}
           <div className="bg-gray-50 shadow-md rounded-md ">
             {loading ? (
               <tr>
-                <td colSpan={6} className="text-center py-4">
+                <td colSpan={6} className="text-center py-4 text-brown">
                   Loading...
                 </td>
               </tr>
@@ -154,19 +154,19 @@ const Tickets: React.FC = () => {
                   <table className="w-full text-left">
                     <thead className="bg-cream border border-b-primary">
                       <tr>
-                        <th className="py-6 px-4 text-sm font-semibold">
+                        <th className="text-brown py-6 px-4 text-sm font-semibold">
                           Date
                         </th>
-                        <th className="py-2 px-4 text-sm font-semibold">
+                        <th className="text-brown py-2 px-4 text-sm font-semibold">
                           Ticket ID
                         </th>
-                        <th className="py-2 px-4 text-sm font-semibold">
+                        <th className="text-brown py-2 px-4 text-sm font-semibold">
                           Description
                         </th>
-                        <th className="py-2 px-4 text-sm font-semibold">
+                        <th className="text-brown py-2 px-4 text-sm font-semibold">
                           Ticket Type
                         </th>
-                        <th className="py-2 px-4 text-sm font-semibold">
+                        <th className="text-brown py-2 px-4 text-sm font-semibold">
                           Status
                         </th>
                       </tr>
@@ -176,10 +176,10 @@ const Tickets: React.FC = () => {
                       <tbody>
                         {tableData.map((ticket) => (
                           <tr key={ticket.id} className="border-b">
-                            <td className="py-6 px-4 text-sm">
+                            <td className="text-brown py-6 px-4 text-sm">
                               {formatDateTime(ticket.createdAt)}
                             </td>
-                            <td className="py-2 px-4 text-sm">
+                            <td className="text-brown py-2 px-4 text-sm">
                               <div className="flex">
                                 {ticket.ticketId} -
                                 <h6
@@ -197,10 +197,10 @@ const Tickets: React.FC = () => {
                               <ViewMore
                                 text={ticket.description}
                                 length={65}
-                                className="md:w-full "
+                                className="md:w-full text-brown"
                               />
                             </td>
-                            <td className="py-2 px-4 text-sm">
+                            <td className="py-2 px-4 text-sm text-brown">
                               {ticket.ticketType === "QUALITY_INQUIRY"
                                 ? "Quality Inquiry"
                                 : ticket.ticketType === "ORDER_INQUIRY"

@@ -15,7 +15,7 @@ export default function GreenHomeLoanSection() {
           <div className="relative">
             <div className="relative h-96 w-full rounded-2xl overflow-hidden">
               <Image
-                src="/images/greenFinance/loan_section.webp"
+                src="/images/greenFinance/loan_section.jpg"
                 alt="Modern eco-conscious home with large windows"
                 fill
                 className="object-cover"

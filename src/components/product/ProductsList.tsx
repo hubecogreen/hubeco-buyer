@@ -364,7 +364,7 @@ useEffect(() => {
               <Filter className="w-6 h-6" />
             </button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[300px] sm:w-[400px] pt-10">
+          <SheetContent side="left" className="w-[300px] sm:w-[400px] pt-10 bg-cream">
             <FiltersSidebar
               onVendorSelectionChange={filterWithVendors}
               onChildCategorySelectionChange={filterWithChildCategories}

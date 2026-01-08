@@ -231,7 +231,7 @@ export default function Page() {
     }
   };
 
-  if(!isClient)
+  if (!isClient)
     return <></>
 
   return (
@@ -242,20 +242,20 @@ export default function Page() {
             <div className="p-2 md:flex gap-6 justify-between">
               <div className="flex flex-col gap-6 md:w-[60%]">
                 <div className="flex flex-col gap-1">
-                  <p color="text.primary" className="font-medium">
+                  <p color="text.primary" className="font-medium text-brown">
                     Your Current Plan is{" "}
                     <span className="text-primary">
                       {" "}
                       {subData?.plan?.name ?? "Freemium"}
                     </span>
                   </p>
-                  <p>{prePlanData.description}</p>
+                  <p className="text-brown">{prePlanData.description}</p>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <p color="text.primary" className="font-medium tracking-wide">
+                  <p color="text.primary" className="font-medium tracking-wide text-brown">
                     Active until {daysRemain.expiryDate}
                   </p>
-                  <p>
+                  <p className="text-brown">
                     We will send you a notification upon Subscription expiration
                   </p>
                 </div>
@@ -282,10 +282,10 @@ export default function Page() {
                   )}
                 <div className="flex flex-col gap-1 mt-4">
                   <div className="flex items-center justify-between">
-                    <p color="text.primary" className="font-medium">
+                    <p color="text.primary" className="text-brown font-medium">
                       Days
                     </p>
-                    <p color="text.primary" className="font-medium">
+                    <p color="text.primary" className="text-brown font-medium">
                       {daysRemain.daysPassed} of {daysRemain.totalDays} Days
                     </p>
                   </div>
@@ -298,7 +298,7 @@ export default function Page() {
                     value={Number(daysRemain.percentage)}
                     className=" h-[10px] rounded my-1"
                   />
-                  <p>
+                  <p className="text-brown">
                     {daysRemain.remainingDays} days remaining until your plan
                     requires update
                   </p>
@@ -308,10 +308,14 @@ export default function Page() {
                     onClick={() =>
                       handleDownload(`${assetURL}/${subData?.invoiceLink}`)
                     }
-                    variant={"outline"}
-                    className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-primary text-white rounded-[6px] bg-primary hover:bg-white hover:text-secondary "
+                    variant="outline"
+                    className="group mt-2 !py-0 w-fit !h-[35px] !px-2 border-primary rounded-[6px] 
+             bg-primary text-cream hover:bg-cream hover:border-secondary"
                   >
-                    <MdOutlineFileDownload className="text-white hover:text-red-600" /> Download Invoice
+                    <MdOutlineFileDownload className="mr-1 text-cream group-hover:text-secondary" />
+                    <span className="text-cream group-hover:text-secondary">
+                      Download Invoice
+                    </span>
                   </Button>
                 )}
               </div>
@@ -378,7 +382,7 @@ export default function Page() {
                         </div>
 
                         <div className="ml-2">
-                          <p className="text-sm font-normal">
+                          <p className="text-brown text-sm font-normal">
                             {product?.feature.title}
                           </p>
                         </div>

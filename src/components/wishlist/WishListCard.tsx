@@ -287,7 +287,7 @@ const WishListCard: React.FC<ProductCardProps> = ({
                     </AlertDialogCancel>
                     <CustomButton
                       title={"Yes"}
-                      className="ml-3 bg-secondary hover:bg-primary h-[35px] md:h-[45px] md:w-24  w-16 md:text-md text-sm text-white "
+                      className="ml-3 bg-secondary hover:bg-primary h-[35px] md:h-[45px] md:w-24  w-16 md:text-md text-sm text-cream "
                       customStyles={{}}
                       onPress={() => deleteWishlist(product?._id)}
                       type="submit"
@@ -308,7 +308,7 @@ const WishListCard: React.FC<ProductCardProps> = ({
           {product?.productId.purchaseType === "QUOTE" ? (
             <CustomButton
               title={loadingQuoteButton ? "Loading..." : "Request Quote"}
-              className={`${styles.addToCart} bg-primary hover:bg-secondary  w-36 p-2 h-12 md:h-10 justify-around items-center font-semibold text-xs md:text-xs text-white`}
+              className={`${styles.addToCart} bg-primary hover:bg-secondary  w-36 p-2 h-12 md:h-10 justify-around items-center font-semibold text-xs md:text-xs text-cream`}
               onPress={() => OnClickQuote(product?.slug)}
               loading={loadingQuoteButton}
             />
@@ -319,7 +319,7 @@ const WishListCard: React.FC<ProductCardProps> = ({
               }
               className={`${styles.addToCart} bg-primary ${
                 product?.status === "PUBLISHED" ? "hover:bg-primary" : ""
-              } w-36 p-2 h-12 md:h-10 justify-around items-center font-semibold text-xs md:text-xs text-white`}
+              } w-36 p-2 h-12 md:h-10 justify-around items-center font-semibold text-xs md:text-xs text-cream hover:text-cream`}
               hoverBgColor="#439787"
               hoverColor="#ffffff"
               rightIcon={<GoArrowRight />}

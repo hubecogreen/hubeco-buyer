@@ -208,7 +208,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                   vendor && (
                     <div
                       key={vendor?.id?.id}
-                      className="flex items-center bg-primary/10 text-primary px-3 py-1 rounded text-sm"
+                      className="flex items-center bg-cream text-brown px-3 py-1 rounded text-sm"
                     >
                       {vendor?.id?.businessInfo?.companyName}{" "}
                       {/* Display vendor name here */}

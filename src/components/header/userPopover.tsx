@@ -121,7 +121,7 @@ const UserPopover: React.FC<UserPopoverProps> = ({
 
   return (
     <div ref={popoverRef} className={`${styles.popover} ${token?'md:right-[170px] mobile-sm:right-[10px] ':'md:right-[150px] mobile-sm:right-[10px]'} `}>
-      <div className={styles.popoverContent}>
+      <div className={`${styles.popoverContent} bg-cream`}>
         {token ? (
           <>
           {buyerInfo?.firstName + buyerInfo?.lastName ?
@@ -141,7 +141,7 @@ const UserPopover: React.FC<UserPopoverProps> = ({
 
               
 
-              <div className="ml-3">
+              <div className="ml-3 ">
                 <p className={styles.userName}>{(userInfo?.firstName + userInfo?.lastName).length>20?(userInfo?.firstName + userInfo?.lastName).substring(0,20):userInfo?.firstName + userInfo?.lastName}</p>
                 <p className={styles.userEmail}>{userInfo?.email}</p>
               </div>
@@ -153,48 +153,48 @@ const UserPopover: React.FC<UserPopoverProps> = ({
                 className="flex items-center justify-start cursor-pointer" 
                 onClick={() => handleNavigation('/profile?tab=profile')}
               >
-                <FaRegUser color="#000" />
-                <span className="ml-2">My Profile</span>
+                <FaRegUser color="#3d3529" />
+                <span className="ml-2 text-brown">My Profile</span>
               </li>
               <li 
                 className="flex items-center justify-start cursor-pointer" 
                 onClick={() => handleNavigation('/orders')}
               >
-                <CgShoppingBag color="#000" />
-                <span className="ml-2">Orders</span>
+                <CgShoppingBag color="#3d3529" />
+                <span className="ml-2 text-brown">Orders</span>
               </li>
               <li 
                 className="flex items-center justify-start cursor-pointer" 
                 onClick={() => handleNavigation('/quote-request')}
               >
-                <FiFileText color="#000"/>
-                <span className="ml-2">Quote Requests</span>
+                <FiFileText color="#3d3529" />
+                <span className="ml-2 text-brown">Quote Requests</span>
               </li>
               <li 
                 className="flex items-center justify-start cursor-pointer" 
                 onClick={() => handleNavigation('/subscriptions')}
               >
-                <BsCardChecklist color="#000" />
-                <span className="ml-2">Subscriptions</span>
+                <BsCardChecklist color="#3d3529" />
+                <span className="ml-2 text-brown">Subscriptions</span>
               </li>
               <li 
                 className="flex items-center justify-start cursor-pointer" 
                 onClick={() => handleNavigation('/wishlist')}
               >
-                <TbCubePlus color="#000" />
-                <span className="ml-2">Wishlist</span>
+                <TbCubePlus color="#3d3529" />
+                <span className="ml-2 text-brown">Wishlist</span>
               </li>
               <li 
                 className="flex items-center justify-start cursor-pointer" 
                 onClick={() => handleNavigation('/tickets')}
               >
-                <GrTicket color="#000" />
-                <span className="ml-2">Tickets Raised</span>
+                <GrTicket color="#3d3529" />
+                <span className="ml-2 text-brown">Tickets Raised</span>
               </li>
               <li onClick={Logout} className="flex items-center justify-start cursor-pointer">
 
-                <AiOutlineLogout color="#000" />
-                <span className="ml-2">
+                <AiOutlineLogout color="#3d3529" />
+                <span className="ml-2 text-brown">
                   Logout
                 </span>
               </li>

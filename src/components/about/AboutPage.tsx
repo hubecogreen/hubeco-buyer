@@ -123,8 +123,8 @@ export default function Page() {
         </div>
 
         <div
-          className="bg-cream w-full flex items-center justify-center md:py-20 py-5 bg-cover bg-no-repeat bg-center relative"
-          style={{backgroundImage: "url('/images/about/aboutWavesBg.webp')"}}
+          className="z-100 bg-cream w-full flex items-center justify-center md:py-20 py-5 bg-cover bg-no-repeat bg-center relative lg:h-[500px]"
+          style={{backgroundImage: "url('/images/about/aboutWavesBg_1.png')"}}
         >
           <div className="text-center p-4 text-brown">
             <h1 className="text-4xl font-bold mb-4">ABOUT</h1>
@@ -133,7 +133,7 @@ export default function Page() {
             >
               I am delighted to introduce hubeco.market, our green sourcing
               platform for building and architectural products and services. Our
-              mission is to empower builders,architects and homeowners to make
+              mission is to empower builders architects and homeowners to make
               sustainable choices that positively impact our planet. We believe
               that every construction project, whether big or small, should
               prioritize eco-friendliness and energy efficiency without
@@ -293,7 +293,7 @@ export default function Page() {
               ))}
             </div>
           </div>
-          <div className="flex items-center justify-center pb-12">
+          <div className="flex items-center justify-center">
             <CustomButton
               title={"Shop Now"}
               className="md:ml-3 bg-primary hover:bg-primary h-12 md:h-12 md:w-48 w-32 md:text-md text-sm text-white"
@@ -306,7 +306,7 @@ export default function Page() {
 
         <div
           className="bg-cream w-full flex flex-col lg:flex-row items-start justify-center py-12 md:px-16 px-4 lg:px-20 space-y-8 lg:space-y-0 lg:space-x-4 bg-cover bg-no-repeat bg-center relative"
-          style={{backgroundImage: "url('/images/about/aboutWavesBg2.webp')"}}
+          style={{backgroundImage: "url('/images/about/aboutWavesBg_2.png')"}}
         >
           <div className="flex flex-col items-start lg:w-1/2">
             <Image
@@ -324,8 +324,8 @@ export default function Page() {
               <h1 className="text-2xl font-bold mb-4 text-brown">
                 Our Mission
               </h1>
-              <p className="text-md text-brown font-normal text-justify">
-                To empower builders, architects, and homeowners with access to a
+              <p className="text-md text-brown font-normal text-left md:text-justify">
+                To empower builders, architects and homeowners with access to a
                 comprehensive marketplace of high-quality green building
                 materials, fostering sustainable practices and environmental
                 stewardship in the construction industry.
@@ -348,7 +348,7 @@ export default function Page() {
               <h1 className="text-2xl font-bold mb-4 text-brown">
                 Our Vision
               </h1>
-              <p className="text-md text-brown font-normal text-justify">
+              <p className="text-md text-brown font-normal text-left  md:text-justify">
                 Our vision is to lead the transformation of the construction
                 industry towards a sustainable future by connecting buyers and
                 vendors of green building materials on a global scale. We
@@ -374,7 +374,7 @@ export default function Page() {
                 <p className="mb-6 md:mb-8 lg:mb-10 text-sm md:text-base lg:text-lg">
                   Whether you are a builder, architect or homeowner, I invite
                   you to join us on our journey towards a more sustainable
-                  future. Explore our marketplace, connect with our community,
+                  future. Explore our marketplace, connect with our community
                   and discover the difference that ecofriendly materials can
                   make.
                 </p>
@@ -415,20 +415,20 @@ export default function Page() {
 
         <div
           className="bg-cream w-full flex items-center justify-center p-6 md:p-20 bg-cover bg-no-repeat bg-center relative pb-20"
-          style={{backgroundImage: "url('/images/about/aboutWavesBg2.webp')"}}
+          style={{backgroundImage: "url('/images/about/aboutWavesBg_2.png')"}}
         >
           <div className="w-full">
-            <div className="flex w-full border border-primary justify-between bg-cream rounded mobile-sm:mb-20 mobile-sm:flex-wrap sm:flex-nowrap h-[500px] md:h-[450px]">
-              <div className="w-full p-2 md:h-[450px] h-fit-content md:w-8/12 flex flex-col items-start">
+            <div className="flex w-full border border-primary justify-between bg-cream rounded mobile-sm:mb-20 mobile-sm:flex-wrap sm:flex-nowrap h-[500px] md:h-[350px] lg:h-[450px]">
+              <div className="w-full p-2 md:h-[350px] lg:h-[450px] h-fit-content md:w-8/12 flex flex-col items-start">
                 <div className="w-full md:w-full lg:w-full pl-4 md:pl-4">
-                  <h1 className="text-3xl md:text-5xl font-medium text-left px-2 md:px-4 text-brown py-[5%] leading-tight">
+                  <h1 className="text-3xl md:text-3xl lg:text-5xl font-medium text-left px-2 md:px-0 lg:px-4 text-brown py-[5%] leading-tight">
                     Together, let&#39;s build a greener tomorrow with{" "}
-                    <span className="text-brown-medium text-3xl md:text-5xl">
+                    <span className="text-brown-medium text-3xl md:text-3xl lg:text-5xl">
                       hubeco.market
                     </span>
                   </h1>
                 </div>
-                <div className="w-full md:w-2/3 flex flex-col md:flex-row items-start md:items-center pl-4 md:pl-8 mt-5 md:mb-0 mb-4 md:mt-24">
+                <div className="w-full md:w-2/3 flex flex-col md:flex-row items-start md:items-center pl-4 md:pl-2 lg:pl-8 mt-5 md:mb-0 mb-4 md:mt-16 lg:mt-24">
                   <div className="md:mr-4">
                     <h1 className="text-xl font-bold text-left px-2 md:pr-4 text-brown">
                       SaiPadma Potluri
@@ -452,7 +452,7 @@ export default function Page() {
                   </div>
                 </div>
               </div>
-              <div className="w-full md:w-fit flex items-center justify-center md:h-[450px] h-fit-content">
+              <div className="w-full md:w-fit flex items-center justify-center md:h-[350px] lg:h-[450px] h-fit-content">
                 <Image
                   src="images/about/profile-pic.webp"
                   alt="banner1"

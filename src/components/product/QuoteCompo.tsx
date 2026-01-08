@@ -325,7 +325,7 @@ export default function QuoteCompo({
           className={`max-w-lg h-full pb-12 bg-cream ${addOpen && "hidden"}`}
         >
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold">
+            <DialogTitle className="text-brown text-xl font-bold">
               Request Quote
             </DialogTitle>
           </DialogHeader>

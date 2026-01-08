@@ -104,7 +104,7 @@ const ImageSlider = () => {
   {/* Text */}
   <div className="">
     <p className="text-[20px] lg:leading-[30px] leading-[20px]  lg:mt-2 font-regular  ">
-      Empowering India’s Construction industry with <br className="hidden lg:block" />
+      Empowering India’s Construction Industry with <br className="hidden lg:block" />
       Sustainable Materials and Digital Efficiency
     </p>
   </div>

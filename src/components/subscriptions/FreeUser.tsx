@@ -335,25 +335,25 @@ export default function Page() {
             <div className="p-2 md:flex gap-6 justify-between">
               <div className="flex flex-col gap-6 md:w-[60%]">
                 <div className="flex flex-col gap-1">
-                  <p color="text.primary" className="font-medium">
+                  <p color="text.primary" className="text-brown font-medium">
                     Your Current Plan is{" "}
                     <span className="text-primary">
                       {" "}
                       {subData?.plan?.name ?? "Freemium"}
                     </span>
                   </p>
-                  <p>Ideal for buyers exploring sustainable products.</p>
+                  <p className="text-brown">Ideal for buyers exploring sustainable products.</p>
                 </div>
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-1.5">
-                    <p color="text.primary" className="font-medium">
+                    <p color="text.primary" className="text-brown font-medium">
                       Rs. {prePlanData?.monthlyPrice}/- Per Month
                     </p>
                     <p className="py-[5px] px-[10px]  bg-[#049b8917] text-primary rounded text-[14px]">
-                      Popular
+                      {subData?.plan?.name ?? "Freemium"}
                     </p>
                   </div>
-                  <p>
+                  <p className="text-brown">
                     Ideal for dedicated buyers seeking a wide range of
                     sustainable products.
                   </p>
@@ -379,17 +379,17 @@ export default function Page() {
                     Upgrade
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="md:w-[40%] flex flex-col justify-center items-center p-6">
+                <DialogContent className="md:w-[40%] flex flex-col justify-center items-center p-6 bg-cream">
                   <DialogHeader>
-                    <DialogTitle className="text-center sm:text-center mb-3">
+                    <DialogTitle className="text-brown text-center sm:text-center mb-3">
                       Upgrade Plan
                     </DialogTitle>
-                    <DialogDescription className="text-center sm:text-center mb-4">
+                    <DialogDescription className="text-brown text-center sm:text-center mb-4">
                       Choose the best plan for you
                     </DialogDescription>
                   </DialogHeader>
                   <div
-                    className="flex rounded-full  justify-between mt-[5px] items-center bg-cream border-broderGray border  shadow-lg"
+                    className="flex rounded-full cursor-pointer justify-between mt-[5px] items-center bg-cream border-broderGray border  shadow-lg"
                     style={{}}
                   >
                     <div
@@ -398,7 +398,7 @@ export default function Page() {
                       }}
                       className={`${
                         term === "Monthly"
-                          ? "bg-primary border border-primary rounded-full"
+                          ? "bg-primary border border-primary rounded-full cursor-pointer"
                           : ""
                       }`}
                     >
@@ -416,7 +416,7 @@ export default function Page() {
                       }}
                       className={`${
                         term === "Yearly"
-                          ? "bg-primary border border-primary rounded-full"
+                          ? "bg-primary border border-primary rounded-full cursor-pointer"
                           : ""
                       }`}
                     >
@@ -431,7 +431,7 @@ export default function Page() {
                   </div>
 
                   <div className="px-4 rounded-lg text-center">
-                    <p className="font-semibold text-lg mt-3">Premium Plan</p>
+                    <p className="text-brown font-semibold text-lg mt-3">Premium Plan</p>
                
                     <div className="flex justify-start items-center mb-2 mt-4">
                       {term === "Monthly" ? (
@@ -648,10 +648,10 @@ export default function Page() {
                       {/* First Column */}
                       <div className="w-full lg:w-5/12 relative border-r border-gray-100">
                         <div
-                          className=" pr-4"
+                          className="pr-4"
                           style={{ borderColor: "#E5E7EB", color: "initial" }}
                         >
-                          <h3 className="text-2xl font-bold">
+                          <h3 className="text-brown text-2xl font-bold">
                             {freePlanData.name}
                           </h3>
                           <p
@@ -689,7 +689,7 @@ export default function Page() {
                                     />
                                   </div>
                                   <div className="ml-2">
-                                    <p className="text-sm font-normal">
+                                    <p className="text-sm font-normal text-brown">
                                       {product.feature.title}
                                       {product.feature.title ===
                                         "Product Listings" &&
@@ -715,7 +715,7 @@ export default function Page() {
                                   </div>
                                   <div className="ml-2">
                                     <p
-                                      className="text-sm font-normal"
+                                      className="text-sm font-normal text-brown"
                                       style={{ color: "#D3D4D9" }}
                                     >
                                       {product.plan}
@@ -738,7 +738,7 @@ export default function Page() {
                             {prePlanData.name}
                           </h3>
                           <p
-                            className="text-sm font-normal mb-2"
+                            className="text-brown text-sm font-normal mb-2"
                             style={{ marginTop: "20px", height: "40px" }}
                           >
                             {prePlanData.description}
@@ -820,7 +820,7 @@ export default function Page() {
                                     />
                                   </div>
                                   <div className="ml-2">
-                                    <p className="text-sm font-normal">
+                                    <p className="text-sm font-normal text-brown">
                                       {product?.feature.title}
                                       {product?.feature.title ===
                                         "Product Listings" &&
@@ -845,7 +845,7 @@ export default function Page() {
                           className="border-r border-gray-100 pr-4"
                           style={{ borderColor: "#E5E7EB", color: "initial" }}
                         >
-                          <h3 className="text-2xl font-bold">
+                          <h3 className="text-brown text-2xl font-bold">
                             {freePlanData.name}
                           </h3>
                           <p
@@ -897,7 +897,7 @@ export default function Page() {
                                     />
                                   </div>
                                   <div className="ml-2">
-                                    <p className="text-sm font-normal">
+                                    <p className="text-sm font-normal text-brown">
                                       {product.feature.title}
                                       {product.feature.title ===
                                         "Product Listings" &&
@@ -945,7 +945,7 @@ export default function Page() {
                             {prePlanData.name}
                           </h3>
                           <p
-                            className="text-sm font-normal mb-2"
+                            className="text-sm font-normal mb-2 text-brown"
                             style={{ marginTop: "20px", height: "40px" }}
                           >
                             {prePlanData.description}
@@ -1040,7 +1040,7 @@ export default function Page() {
                                     />
                                   </div>
                                   <div className="ml-2">
-                                    <p className="text-sm font-normal">
+                                    <p className="text-sm font-normal text-brown">
                                       {product.feature.title}
                                       {product.feature.title ===
                                         "Product Listings" &&

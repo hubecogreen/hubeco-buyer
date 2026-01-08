@@ -30,11 +30,11 @@ const EmptyCart = () => {
               loading="lazy"
             />
           </div>
-          <p className="font-bold text-center">Your cart is empty!</p>
+          <p className="text-brown font-bold text-center">Your cart is empty!</p>
           <div className="flex justify-center p-5">
             <CustomButton
               title={"Shop Now"}
-              className="ml-3 bg-secondary hover:bg-primary h-12 md:h-12 md:w-48 w-30 md:text-md text-sm text-white"
+              className="ml-3 bg-primary  h-12 md:h-12 md:w-48 w-30 md:text-md text-sm text-cream"
               customStyles={{}}
               onPress={() => { router.push('/products') }}
             />

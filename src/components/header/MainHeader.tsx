@@ -816,12 +816,13 @@ const Header: React.FC<HeaderProps> = () => {
                 </div>
 
                 {/* Cart Icon - Visible on all screen sizes */}
-                <div className=" flex justify-between items-center pr-2 md:pr-2 lg:pr-4 lg:mx-4 gap-[5px] cursor-pointer">
+                <div className=" flex justify-between items-center pr-2 md:pr-2 lg:pr-4 lg:mx-4 gap-[5px] cursor-pointer "
+                onClick={onClickCart}>
                   <div className="relative">
                   <CiShoppingCart
                     className="text-brown hover:cursor-pointer " 
                     size={30}
-                    onClick={onClickCart}
+                    
                   />
                   {Number(cartCountV) > 0 &&
                     (cartCountV !== "0" ||

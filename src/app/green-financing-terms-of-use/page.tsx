@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       <head>
         <title>Terms of Use | Hubeco</title>
       </head>

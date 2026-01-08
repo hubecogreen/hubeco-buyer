@@ -25,7 +25,7 @@ interface VendorFiltersListProps {
   vendors: Vendor[]; // Array of vendors to display
   onVendorSelectionChange: (selectedVendors: string[]) => void; // Function prop to handle selected vendors
   refresh: any;
-  filter:any
+  filter: any
 }
 const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
   vendors,
@@ -58,7 +58,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
 
   useEffect(() => {
     getVendors(1); // Initial fetch
-  }, [refresh,filter]);
+  }, [refresh, filter]);
 
   useEffect(() => {
     if (refresh) {
@@ -175,7 +175,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
 
   return (
     <>
-      <div className="mt-2 mb-4 border-b border-borderGray ">
+      <div className="mt-2 mb-4 border-b border-primary ">
         <>
           <h3 className="text-sm font-semibold mb-4">VENDORS</h3>
           {/* <input
@@ -194,7 +194,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
               placeholder="Search"
               value={vendorSearch || ""}
               onChange={(e: any) => handleVendorSearch(e)}
-              className="pl-[35px] bg-cream md:text-md text-sm h-[40px] shadow-md text-brown mr-[1px] mb-4 rounded-[5px] w-full"
+              className="pl-[35px] bg-cream border border-brown md:text-md text-sm h-[40px] shadow-md text-brown mr-[1px] mb-4 rounded-[5px] w-full"
             />
 
           </div>
@@ -208,7 +208,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                   vendor && (
                     <div
                       key={vendor?.id?.id}
-                      className="flex items-center bg-cream text-brown px-3 py-1 rounded text-sm"
+                      className="flex items-center bg-primary text-cream px-3 py-1 rounded text-sm"
                     >
                       {vendor?.id?.businessInfo?.companyName}{" "}
                       {/* Display vendor name here */}
@@ -226,7 +226,12 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                 <div key={vendor?.id} className="flex items-center py-[5px]">
                   <Checkbox
                     id={vendor?.id}
-                    className="mr-3"
+                    className="mr-3
+                     data-[state=unchecked]:bg-cream
+                     data-[state=unchecked]:border-brown 
+                     data-[state=checked]:bg-brown 
+                     data-[state=checked]:border-brown
+                     data-[state=checked]:text-cream"
                     checked={selectedVendors.includes(vendor?.id)}
                     onClick={() => {
                       onSelectVendor(vendor);

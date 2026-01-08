@@ -309,8 +309,8 @@ useEffect(() => {
   };
 
   return (
-    <div className="w-full bg-tailgreen p-4 opacity-90 cursor-pointer text-cream ">
-      <div className="flex items-center justify-between mb-4 border-b border-borderGray pb-2">
+    <div className="w-full border-[1.5px] border-primary rounded-[10px] p-4 opacity-90 cursor-pointer text-brown ">
+      <div className="flex items-center justify-between mb-4 border-b border-primary pb-2">
         <h2 className="text-xl font-medium  ">Filters</h2>
         {Object.entries(selectedFilters).some(([key, filter]) => {
           return (
@@ -335,7 +335,7 @@ useEffect(() => {
         />
 
         {/* PRICE RANGE FILTER */}
-        <div className="mt-2 mb-4 border-b border-borderGray">
+        <div className="mt-2 mb-4 border-b border-primary">
           <h3 className="text-sm font-semibold mb-8 flex items-center justify-between">
             PRICE RANGE
           </h3>

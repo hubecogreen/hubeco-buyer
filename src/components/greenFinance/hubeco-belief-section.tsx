@@ -39,7 +39,7 @@ export default function HubecoBeliefSection() {
             {/* Right Column: Image */}
             <div className="relative h-72 sm:h-80 w-full rounded-2xl overflow-hidden shadow-lg">
               <Image
-                src="/images/greenFinance/about-Hubeco.webp"
+                src="/images/greenFinance/about-Hubeco.jpg"
                 alt="Modern sustainable apartment buildings"
                 fill
                 className="object-cover"

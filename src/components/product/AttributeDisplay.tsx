@@ -133,7 +133,7 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
               onValueChange={(value) => onClickVariant(attributeName, value)}
               value={selectedAttributes && selectedAttributes[attributeName] || ""}
             >
-              <SelectTrigger className="border border-secondary px-4 py-2 rounded bg-white !text-secondary">
+              <SelectTrigger className="border border-primary px-4 py-2 rounded bg-cream !text-brown">
                 <SelectValue
                   placeholder={`Select ${attributeName}`}
                   className={`text-sm ${
@@ -151,7 +151,7 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
                     handleSearchChange(attributeName, e.target.value)
                   }
                   placeholder="Search..."
-                  className="mb-2 p-2 border max-w-[95%] mx-auto h-[35px] mt-2 border-borderGray rounded"
+                  className="bg-cream mb-2 p-2 border max-w-[95%] mx-auto h-[35px] mt-2 border-primary rounded"
                 />
 
                 {filteredValues.length > 0 ? (
@@ -161,7 +161,7 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
                       value={value}
                       className={`text-sm ${
                        selectedAttributes &&  selectedAttributes[attributeName] === value
-                          ? "text-secondary bg-gray-200 hover:bg-gray-200 hover:text-secondary focus:bg-gray-200 focus:text-secondary"
+                          ? "text-brown bg-gray-200 hover:bg-gray-200 hover:text-primary focus:bg-gray-200 focus:text-primary"
                           : "text-brown"
                       }`}
                     >

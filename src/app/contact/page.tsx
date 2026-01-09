@@ -361,7 +361,7 @@ export default function Page() {
                         Address
                       </h6>
                       <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis text-brown">
-                        Hubeco Green Ventures Pvt Ltd<br></br>
+                        Hubeco Green Ventures Pvt. Ltd<br></br>
                         Awfis Space Solutions Ltd, NSL Icon<br></br>
                         3rd Floor, Road No. 12, Anand Banjara Colony<br></br>
                         Banjara Hills, Hyderabad, Telangana - 500034<br></br>
@@ -588,8 +588,8 @@ export default function Page() {
             </p>
 
             <div className="flex justify-center">
-              <div className="inline-block max-w-full p-6 bg-cream border border-primary shadow-[0px_8px_24px_rgba(149,157,165,0.2)] dark:bg-gray-800 dark:border-gray-700">
-                <div className="grid grid-cols-2 xl:gap-28 lg:gap-18 sm:grid-cols-2 md:grid-cols-4 gap-y-8">
+              <div className="inline-block max-w-full md:p-6 p-0 bg-cream border border-primary shadow-[0px_8px_24px_rgba(149,157,165,0.2)] dark:bg-gray-800 dark:border-gray-700">
+                <div className="grid grid-cols-2 xl:gap-28 lg:gap-18 sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-2 gap-y-8">
                   {/* {valueItems.slice(0, 4).map((item, index) => ( */}
                   <div
                     // key={index}
@@ -606,7 +606,7 @@ export default function Page() {
                       size={60}
                       color="#ffffff"
                     />
-                    <div className="ml-4 text-left flex-1">
+                    <div className="md:ml-4 ml-2 text-left flex-1">
                       <h6 className="font-bold text-sm md:text-base mb-2 text-primary group-hover:text-secondary">
                         {/* {item.title} */}
                         Facebook
@@ -633,7 +633,7 @@ export default function Page() {
                       size={60}
                       color="#ffffff"
                     />
-                    <div className="ml-4 text-left flex-1">
+                    <div className="md:ml-4 ml-2 text-left flex-1">
                       <h6 className="font-bold text-sm md:text-base mb-2 text-primary group-hover:text-secondary">
                         {/* {item.title} */}
                         Youtube
@@ -659,7 +659,7 @@ export default function Page() {
                       size={60}
                       color="#ffffff"
                     />
-                    <div className="ml-4 text-left flex-1">
+                    <div className="md:ml-4 ml-2 text-left flex-1">
                       <h6 className="font-bold text-sm md:text-base mb-2 text-primary group-hover:text-secondary">
                         {/* {item.title} */}
                         Instagram
@@ -685,7 +685,7 @@ export default function Page() {
                       size={60}
                       color="#ffffff"
                     />
-                    <div className="ml-4 text-left flex-1">
+                    <div className="md:ml-4 ml-2 text-left flex-1">
                       <h6 className="font-bold text-sm md:text-base mb-2 text-primary group-hover:text-secondary">
                         {/* {item.title} */}
                         LinkedIn

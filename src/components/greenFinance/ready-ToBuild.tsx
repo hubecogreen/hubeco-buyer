@@ -36,7 +36,7 @@ export default function ReadyToBuildCTA() {
             onClick={() => setIsProjectFormOpen(true)}
             className="inline-flex items-center gap-3 bg-primary text-cream px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-[16px] sm:text-lg font-semibold hover:bg-primary transition-all duration-300"
           >
-            Apply for Green Project Financing
+            Apply for Project Finance
             <GoArrowRight className="text-xl" />
           </button>
         </div>

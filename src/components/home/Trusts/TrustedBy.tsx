@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 export default function TrustedBy() {
   const cards = [
     { value: 50, suffix: "+", title: "Brands", img: "/images/trusts/img1.png" },
-    { value: 9, suffix: " Tonnes", title: "of Co₂ Reduced", img: "/images/trusts/img2.png" },
+    { value: 9, suffix: " Tonnes", title: "of CO₂ Reduced", img: "/images/trusts/img2.png" },
     { value: 24, suffix: "Hrs", title: "Receive Quotes", img: "/images/trusts/img3.png" },
     { value: 99, suffix: "%", title: "On time delivery", img: "/images/trusts/img4.png" },
   ];

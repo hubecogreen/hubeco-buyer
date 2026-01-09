@@ -641,7 +641,7 @@ export default function Page() {
                 </div>
               </div>
             </div>
-            <div className="w-full md:w-4/12 flex justify-end">
+            <div className="w-full md:w-4/12 flex justify-end self-end">
               <Image
                 src="images/plans/help.webp"
                 alt="banner1"

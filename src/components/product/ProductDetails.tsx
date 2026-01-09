@@ -1537,7 +1537,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     {/* CERTIFICATE LOGO */}
                     {totalProduct?.certificate?.organization?.logo &&
                       totalProduct?.certificate?.organization?.authorityName !== "Others" && (
-                        <div className="w-fit z-10">
+                        <div className="w-fit z-10 relative">
                           <Image
                             src={
                               totalProduct?.certificate?.organization?.logo
@@ -1561,16 +1561,16 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       )}
 
                     {/* CERTIFIED BUTTON */}
-                    <div className="w-full md:w-auto">
+                    <div className="w-full md:w-auto relative ">
 
                       {totalProduct?.certificate?.certificateImg.endsWith(".pdf") ? (
                         // PDF BUTTON
                         <Button
                           onClick={() => window.open(totalProduct?.certificateLink, "_blank")}
                           className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
-                   w-[90%] md:w-40 mx-auto md:mx-0
+                   w-[90%] md:w-40 mx-0 md:mx-0
                    text-sm md:text-md flex items-center justify-center
-                   md:relative md:right-[10px]"
+                   relative right-[10px]"
                         >
                           <p className="text-cream font-semibold text-md">Certified</p>
                         </Button>

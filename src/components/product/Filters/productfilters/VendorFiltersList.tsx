@@ -175,7 +175,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
 
   return (
     <>
-      <div className="mt-2 mb-4 border-b border-primary ">
+      <div className="mt-2 mb-4  ">
         <>
           <h3 className="text-sm font-semibold mb-4">VENDORS</h3>
           {/* <input

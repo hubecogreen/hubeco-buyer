@@ -32,7 +32,7 @@ const EmptyProducts:React.FC<Props> = ({ searchterm}) => {
       <div className="container mx-auto px-4">
        
 
-        <div className=" mx-auto  bg-[#F4F4F4] p-4 md:mt-1 mb-5">
+        <div className=" mx-auto  bg-cream shadow-md p-4 md:mt-1 mb-5">
           <div className="flex justify-center p-10">
 
             <Image src="/images/wishlist/cartimage.webp" alt="Image" width={300} height={300}

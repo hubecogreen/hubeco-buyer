@@ -40,7 +40,7 @@ const Footer = () => {
             {/* Mobile */}
             <div className="lg:hidden flex flex-col gap-2 px-4 pb-10">
               <p className="text-[12px] text-brown font-light">
-                Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt Ltd.
+                Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt. Ltd.
                 All Rights Reserved
               </p>
 
@@ -58,7 +58,7 @@ const Footer = () => {
             {/* Desktop */}
             <div className="hidden lg:flex justify-between items-center">
               <p className="text-[12px] text-brown font-light">
-                Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt Ltd.
+                Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt. Ltd.
                 All Rights Reserved
               </p>
 
@@ -117,21 +117,28 @@ const Footer = () => {
               <ul className="space-y-1 text-[13px] lg:text-[14px]">
                 <li><Link className="text-brown" href="/about">About</Link></li>
                 <li><Link className="text-brown" href="/blogs">Blogs</Link></li>
-                <li><Link className="text-brown" href="/green-financing">Green Financing</Link></li>
-                <li><Link className="text-brown" href="/plans">Vendor Connect</Link></li>
+                <li><Link className="text-brown whitespace-nowrap" href="/green-financing">Green Financing</Link></li>
+                <li>
+                  <a
+                    href="https://vendor.hubeco.market/login"
+                    className="text-brown whitespace-nowrap"
+                  >
+                    Vendor Connect
+                  </a>
+                </li>
                 <li><Link className="text-brown" href="/brands">Brands</Link></li>
-                <li><Link className="text-brown" href="/faq">Faq&apos;s</Link></li>
+                
               </ul>
             </div>
 
             {/* Customer Support */}
             <div className="w-full md:w-full lg:w-[150px]">
               <h4 className="text-[14px] text-primary mb-2">Customer Support</h4>
-              <ul className="space-y-1 text-[13px] lg:text-[14px]">
-                <li><Link className="text-brown" href="/cart">Help Center</Link></li>
+              <ul className="space-y-1 text-[13px] lg:text-[14px]">                
                 <li><Link className="text-brown" href="/orders">Orders</Link></li>
                 <li><Link className="text-brown" href="/orders">Returns</Link></li>
                 <li><Link className="text-brown" href="/contact">Contact Us</Link></li>
+                <li><Link className="text-brown" href="/faq">FAQ&apos;s</Link></li>
               </ul>
             </div>
 

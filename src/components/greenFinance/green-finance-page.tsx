@@ -42,9 +42,9 @@ export default function GreenFinancingSection() {
             <div className="flex flex-wrap gap-4 sm:gap-6">
               <button
                 onClick={() => setIsHomeLoanFormOpen(true)}
-                className="flex items-center gap-2 bg-cream border border-white text-primary px-6 py-3 rounded-md text-base font-semibold hover:text-brown transition"
+                className="flex items-center justify-between gap-2 bg-cream border border-white text-primary px-6 py-3 rounded-md text-base font-semibold hover:text-brown transition w-[275px]"
               >
-                Apply for Green Home Loan
+                Apply for Home Loan
                 <GoArrowRight className="text-lg" />
               </button>
 
@@ -52,7 +52,7 @@ export default function GreenFinancingSection() {
                 onClick={() => setIsProjectFormOpen(true)}
                 className="flex items-center gap-2 bg-primary text-cream px-6 py-3 rounded-md text-base font-semibold hover:bg-primary transition"
               >
-                Apply for Green Project Financing
+                Apply for Project Finance
                 <GoArrowRight className="text-lg" />
               </button>
             </div>

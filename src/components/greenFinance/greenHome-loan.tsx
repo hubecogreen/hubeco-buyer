@@ -15,7 +15,7 @@ export default function GreenHomeLoanSection() {
           <div className="relative">
             <div className="relative h-96 w-full rounded-2xl overflow-hidden">
               <Image
-                src="/images/greenFinance/loan_section.jpg"
+                src="/images/greenFinance/loan_section2.png"
                 alt="Modern eco-conscious home with large windows"
                 fill
                 className="object-cover"
@@ -43,7 +43,7 @@ export default function GreenHomeLoanSection() {
                 onClick={() => setIsHomeLoanFormOpen(true)}
                 className="inline-flex items-center gap-3 border-2 border-primary bg-primary text-cream px-7 py-3 rounded-lg text-[18px] font-semibold transition-all duration-300"
               >
-                Apply for Green Home Loan
+                Apply for Home Loan
                 <GoArrowRight className="text-xl" />
               </button>
             </div>

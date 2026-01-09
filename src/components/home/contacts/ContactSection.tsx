@@ -213,7 +213,7 @@ const ContactSection: React.FC = () => {
   placeholder="Write Your Message Here..."
   className="
     w-full lg:w-[572px]
-    h-[55px] lg:h-[63px]
+    h-[55px] lg:h-[63px] py-[14px]
     px-[15px] lg:px-[19px]
     bg-transparent placeholder:text-white/40
     text-[18px] lg:text-[22px] font-medium rounded-[10px]

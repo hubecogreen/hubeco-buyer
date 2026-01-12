@@ -1,5 +1,7 @@
 "use client";
-
+import { useEffect, useState } from "react";
+import useApi from "@/components/Fetcher/useAPI";
+import * as getEndpoint from "../../network/EndPoints";
 import { GoArrowRight } from "react-icons/go";
 import CustomButton from "../customButton/CustomButton";
 import { BsEnvelope } from "react-icons/bs";
@@ -24,6 +26,49 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { rehydrated } = useAuth();
   if (!rehydrated) return null;
+  const { callApi } = useApi();
+  const [categoryIdMap, setCategoryIdMap] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await callApi(
+          getEndpoint.default.PRODUCTS_CATEGORIES,
+          "GET"
+        );
+
+        const map: Record<string, string> = {};
+
+        const data = (res as { data?: any[] })?.data;
+
+        if (Array.isArray(data)) {
+          data.forEach((parent: any) => {
+            if (Array.isArray(parent?.subCategories)) {
+              parent.subCategories.forEach((sub: any) => {
+                if (sub?.name && sub?._id) {
+                  map[sub.name.toLowerCase()] = sub._id;
+                }
+              });
+            }
+          });
+        }
+
+        setCategoryIdMap(map);
+      } catch (e) {
+        console.error("Category fetch failed", e);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+
+  const goToCategory = (name: string) => {
+    const scid = categoryIdMap[name.toLowerCase()];
+    if (!scid) return;
+
+    router.push(`/products?scid=${scid}`);
+  };
 
   return (
     <footer className="w-full bg-cream flex justify-center overflow-x-hidden pt-[49px]">
@@ -102,12 +147,30 @@ const Footer = () => {
             <div className="w-full md:w-full lg:w-[112px]">
               <h4 className="text-[14px] text-primary mb-2">Products</h4>
               <ul className="space-y-1 text-[13px] lg:text-[14px]">
-                <li><Link className="text-brown" href="/products/bricks">Bricks</Link></li>
-                <li><Link className="text-brown" href="/products">Adhesives</Link></li>
-                <li><Link className="text-brown" href="/products">Paints</Link></li>
-                <li><Link className="text-brown" href="/products">Tiles</Link></li>
-                <li><Link className="text-brown" href="/products">Bath Fittings</Link></li>
-                <li><Link className="text-brown" href="/products">Steel</Link></li>
+                <button onClick={() => goToCategory("Bricks")} className="text-brown">
+                  Bricks
+                </button><br />
+                {/* <button onClick={() => goToCategory("Adhesives")} className="text-brown">
+                  Adhesives
+                </button><br /> */}
+                <button onClick={() => goToCategory("Sand")} className="text-brown">
+                  Sand
+                </button><br />
+                <button onClick={() => goToCategory("Paints")} className="text-brown">
+                  Paints
+                </button><br />
+                <button onClick={() => goToCategory("Tiles")} className="text-brown">
+                  Tiles
+                </button><br/>
+                {/* <button onClick={() => goToCategory("Sanitary & Bath Fittings")} className="text-brown">
+                  Bath Fittings
+                </button><br/> */}
+                <button onClick={() => goToCategory("Pavers")} className="text-brown">
+                  Pavers
+                </button><br/>
+                <button onClick={() => goToCategory("Steel")} className="text-brown">
+                  Steel
+                </button>
               </ul>
             </div>
 
@@ -127,14 +190,14 @@ const Footer = () => {
                   </a>
                 </li>
                 <li><Link className="text-brown" href="/brands">Brands</Link></li>
-                
+
               </ul>
             </div>
 
             {/* Customer Support */}
             <div className="w-full md:w-full lg:w-[150px]">
               <h4 className="text-[14px] text-primary mb-2">Customer Support</h4>
-              <ul className="space-y-1 text-[13px] lg:text-[14px]">                
+              <ul className="space-y-1 text-[13px] lg:text-[14px]">
                 <li><Link className="text-brown" href="/orders">Orders</Link></li>
                 <li><Link className="text-brown" href="/orders">Returns</Link></li>
                 <li><Link className="text-brown" href="/contact">Contact Us</Link></li>

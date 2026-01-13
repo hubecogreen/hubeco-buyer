@@ -222,7 +222,7 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       <head>
         <title>Terms of Sale | Hubeco</title>
       </head>

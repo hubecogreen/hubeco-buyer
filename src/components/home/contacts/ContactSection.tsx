@@ -221,6 +221,7 @@ const ContactSection: React.FC = () => {
     hover:border-white focus:border-white focus:outline-none
     transition-all
     resize-none
+    overflow-hidden
   "
 />
                 )}

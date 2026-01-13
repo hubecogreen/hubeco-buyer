@@ -1346,6 +1346,7 @@ const LoginPopup = ({
         className="
           md:max-w-md
           max-w-[95vw]
+          max-h-[50vh]
           rounded-lg
           h-fit
           p-4

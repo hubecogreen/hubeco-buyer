@@ -326,7 +326,7 @@ useEffect(() => {
           </button>
         )}
       </div>
-      <div className="max-h-[1030px] overflow-y-scroll no-scrollbar">
+      <div className="max-h-[calc(100vh-140px)] lg:max-h-[1030px] overflow-y-auto no-scrollbar">
         {/* CATEGORIES FILTER */}
         <CategoryFiltersList
           onCategorySelectionChange={filterWithChildCategories}

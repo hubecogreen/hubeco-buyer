@@ -4,8 +4,11 @@ import CustomButton from "@/components/customButton/CustomButton";
 import { useRouter } from "next/navigation";
 import React from "react";
 
+
 const CallToActionSection: React.FC = () => {
    const router = useRouter();
+   const whatsappNumber = "919985544055";
+   const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
    return (
       <section
@@ -79,8 +82,8 @@ const CallToActionSection: React.FC = () => {
                         max-[490px]:gap-[10px]
                         max-[490px]:w-full
                        ">
-  <CustomButton
-   className="
+               <CustomButton
+                  className="
       bg-primary
       text-white 
       text-[20px]
@@ -99,12 +102,12 @@ const CallToActionSection: React.FC = () => {
       max-[490px]:whitespace-nowrap
       max-[390px]:text-[14px]
    "
-   onPress={() => router.push('/products')}
-   title="Submit RFQ"
-/>
+                  onPress={() => router.push('/products')}
+                  title="Submit RFQ"
+               />
 
                <a
-   className="
+                  className="
       bg-primary
       text-white 
       text-[20px]
@@ -131,10 +134,10 @@ const CallToActionSection: React.FC = () => {
       hover:opacity-90
       transition-opacity
    "
-   href="https://wa.me/${whatsappNumber}"
->
-   Talk to an Expert
-</a>
+                  href={whatsappLink}
+               >
+                  Talk to an Expert
+               </a>
             </div>
          </div>
       </section>

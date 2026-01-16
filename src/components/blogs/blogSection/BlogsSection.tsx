@@ -125,7 +125,7 @@ const BlogsSection = () => {
               "
             />
             <div className="
-                bg-pink 
+                bg-primary 
                 p-2 
                 h-full 
                 flex 

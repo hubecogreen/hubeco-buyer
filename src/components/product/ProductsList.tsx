@@ -73,6 +73,7 @@ const ProductsList: React.FC<Props> = ({
   const [priceRangeObj, setPriceRangeObj] = useState<any[]>([]);
   const [selectedAttributes, setSelectedAttributes] = useState<any[]>([]);
   const [sortBy, setSortBy] = useState<string>("");
+  const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false);
 
   const { refreshTokens } = useRefreshToken();
   const { callApi } = useApi();
@@ -82,13 +83,13 @@ const ProductsList: React.FC<Props> = ({
   useEffect(() => {
     const currentCcid = searchParams.get('ccid');
     const currentScid = searchParams.get('scid');
-    
+
     // If no category parameters are present, reset to default
     if (!currentCcid && !currentScid) {
       setH1Tag('Featured Sustainable Products');
       return;
     }
-    
+
     // If we have parameters, fetch the appropriate h1tag
     fetchH1Tag();
   }, [searchParams]);
@@ -182,23 +183,23 @@ const ProductsList: React.FC<Props> = ({
 
 
   // Debounced API call when filters or search term change
-useEffect(() => {
-  const timeout = setTimeout(() => {
-    getProducts(1);
-  }, 300); // waits 500ms after the last change before calling API
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      getProducts(1);
+    }, 300); // waits 500ms after the last change before calling API
 
-  // cleanup if filters change again before 500ms
-  return () => clearTimeout(timeout);
-}, [
-  vendorCode,
-  catId,
-  subCatId,
-  childCatId,
-  priceRangeObj,
-  selectedAttributes,
-  sortBy,
-  searchTerm,
-]);
+    // cleanup if filters change again before 500ms
+    return () => clearTimeout(timeout);
+  }, [
+    vendorCode,
+    catId,
+    subCatId,
+    childCatId,
+    priceRangeObj,
+    selectedAttributes,
+    sortBy,
+    searchTerm,
+  ]);
 
 
   const handleApiError = async (err: any) => {
@@ -309,26 +310,40 @@ useEffect(() => {
     );
   };
 
-  // Filter handlers
   const filterWithVendors = (vendors: string) => {
-    //@ts-ignore
-    setVendorCode(vendors);
+    const vendorsArray = Array.isArray(vendors) ? vendors : [vendors];
+    if (JSON.stringify(vendorsArray) !== JSON.stringify(vendorCode)) {
+      setVendorCode(vendorsArray);
+      setIsFilterSheetOpen(false);
+    }
   };
 
   const filterWithSubCategories = (subCategories: string) => {
-    setSubCatId(subCategories);
+    if (subCategories !== subCatId) {
+      setSubCatId(subCategories);
+      setIsFilterSheetOpen(false);
+    }
   };
 
   const filterWithChildCategories = (childCategories: string) => {
-    // console.log("params from fun", childCategories);
-    setChildCatId(childCategories);
+    if (childCategories !== childCatId) {
+      setChildCatId(childCategories);
+      setIsFilterSheetOpen(false);
+    }
   };
+
   const filterWithPrice = (data: any) => {
-    setPriceRangeObj(data);
+    if (JSON.stringify(data) !== JSON.stringify(priceRangeObj)) {
+      setPriceRangeObj(data);
+      setIsFilterSheetOpen(false);
+    }
   };
 
   const filterWithAttrs = (data: any) => {
-    setSelectedAttributes(data);
+    if (JSON.stringify(data) !== JSON.stringify(selectedAttributes)) {
+      setSelectedAttributes(data);
+      setIsFilterSheetOpen(false);
+    }
   };
 
   const handleSelectSortBy = (value: string) => {
@@ -342,55 +357,55 @@ useEffect(() => {
         link2={{ name: h1Tag, href: "/products" }}
       />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 px-4 md:px-24 md:pt-16 pt-6 bg-cream">
-      {/* Desktop Filter Sidebar */}
-      <div className="hidden lg:block col-span-3">
-        <FiltersSidebar
-          onVendorSelectionChange={filterWithVendors}
-          onChildCategorySelectionChange={filterWithChildCategories}
-          onSubCategorySelectionChange={filterWithSubCategories}
-          onPirceRangeChange={filterWithPrice}
-          onSelectAttributeChange={filterWithAttrs}
-        />
-      </div>
+        {/* Desktop Filter Sidebar */}
+        <div className="hidden lg:block col-span-3">
+          <FiltersSidebar
+            onVendorSelectionChange={filterWithVendors}
+            onChildCategorySelectionChange={filterWithChildCategories}
+            onSubCategorySelectionChange={filterWithSubCategories}
+            onPirceRangeChange={filterWithPrice}
+            onSelectAttributeChange={filterWithAttrs}
+          />
+        </div>
 
-      {/* Mobile/Tablet Filter Button and Sheet */}
-      <div className="lg:hidden fixed bottom-4 left-4 z-50">
-        <Sheet>
-          <SheetTrigger asChild>
-            <button
-              className="bg-primary text-cream p-3 rounded-full shadow-lg flex items-center space-x-2 hover:bg-primary/90 transition-colors"
-              aria-label="Open Filters"
-            >
-              <Filter className="w-6 h-6" />
-            </button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-[300px] sm:w-[400px] pt-10 bg-cream">
-            <FiltersSidebar
-              onVendorSelectionChange={filterWithVendors}
-              onChildCategorySelectionChange={filterWithChildCategories}
-              onSubCategorySelectionChange={filterWithSubCategories}
-              onPirceRangeChange={filterWithPrice}
-              onSelectAttributeChange={filterWithAttrs}
-            />
-          </SheetContent>
-        </Sheet>
-      </div>
+        {/* Mobile/Tablet Filter Button and Sheet */}
+        <div className="lg:hidden fixed bottom-4 left-4 z-50">
+          <Sheet open={isFilterSheetOpen} onOpenChange={setIsFilterSheetOpen}>
+            <SheetTrigger asChild>
+              <button
+                className="bg-primary text-cream p-3 rounded-full shadow-lg flex items-center space-x-2 hover:bg-primary/90 transition-colors"
+                aria-label="Open Filters"
+              >
+                <Filter className="w-6 h-6" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[300px] sm:w-[400px] pt-10 bg-cream">
+              <FiltersSidebar
+                onVendorSelectionChange={filterWithVendors}
+                onChildCategorySelectionChange={filterWithChildCategories}
+                onSubCategorySelectionChange={filterWithSubCategories}
+                onPirceRangeChange={filterWithPrice}
+                onSelectAttributeChange={filterWithAttrs}
+              />
+            </SheetContent>
+          </Sheet>
+        </div>
 
-      {/* Main Content */}
-      <div className="col-span-12 lg:col-span-9">
-        <div className="block md:flex md:justify-between mb-8 px-4 items-center">
-          <h1 className="text-brown font-bold text-2xl md:text-3xl mt-[20px] md:mt-0">
-            {h1Tag}
-          </h1>
-          <div className="flex justify-end items-center">
-            <div className="h-[40px] md:flex w-full md:w-56 mt-4 md:mt-0 mobile-sm:hidden">
-              {/* <SearchInput
+        {/* Main Content */}
+        <div className="col-span-12 lg:col-span-9">
+          <div className="block md:flex md:justify-between mb-8 px-4 items-center">
+            <h1 className="text-brown font-bold text-2xl md:text-3xl mt-[20px] md:mt-0">
+              {h1Tag}
+            </h1>
+            <div className="flex justify-end items-center">
+              <div className="h-[40px] md:flex w-full md:w-56 mt-4 md:mt-0 mobile-sm:hidden">
+                {/* <SearchInput
                 customStyles="!top-[0px]"
                 placeholder="Search Product"
                 onChange={handleInputChange}
               /> */}
-            </div>
-            {/* <div className="h-[40px] md:flex w-full md:w-fit mt-4 md:mt-0 mobile-sm:hidden ml-3">
+              </div>
+              {/* <div className="h-[40px] md:flex w-full md:w-fit mt-4 md:mt-0 mobile-sm:hidden ml-3">
               <Select value={sortBy} onValueChange={handleSelectSortBy}>
                 <SelectTrigger className="select-trigger h-[43px]">
                   <SelectValue placeholder="Sort By" />
@@ -416,29 +431,29 @@ useEffect(() => {
                 </SelectContent>
               </Select>
             </div> */}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4">
+            {gridLoading ? (
+              <ProductCardSkeleton />
+            ) : (
+              <>
+                {productsData.length > 0 ? (
+                  <ProductGrid
+                    productsData={productsData}
+                    totalPage={totalPage}
+                    handleChangePage={handleChange}
+                    page={page}
+                  />
+                ) : (
+                  <EmptyProducts searchterm={searchTerm} />
+                )}
+              </>
+            )}
           </div>
         </div>
-
-        <div className="grid grid-cols-1 gap-4">
-          {gridLoading ? (
-            <ProductCardSkeleton />
-          ) : (
-            <>
-              {productsData.length > 0 ? (
-                <ProductGrid
-                  productsData={productsData}
-                  totalPage={totalPage}
-                  handleChangePage={handleChange}
-                  page={page}
-                />
-              ) : (
-                <EmptyProducts searchterm={searchTerm} />
-              )}
-            </>
-          )}
-        </div>
       </div>
-    </div>
     </>
   );
 };

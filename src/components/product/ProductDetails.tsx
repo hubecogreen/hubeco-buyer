@@ -1399,7 +1399,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           <TooltipProvider>
                             <Tooltip open={showQtyTip}>
                               <TooltipTrigger asChild>
-                                <div className="flex items-center justify-between border border-primary w-full bg-white rounded-lg">
+                                <div className="flex items-center justify-between border border-primary w-full bg-cream rounded-lg">
                                   <Button
                                     type="button"
                                     onClick={handleDecrement}

@@ -95,16 +95,16 @@ export default function Page() {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   return (
-    <div className="bg-cream md:mb-0 mb-[200px]">
+    <div className="bg-cream md:mb-0 ">
       <head>
         <title>About | Hubeco Buyer</title>
       </head>
-      
+
       <div className="banner-section h-102">
-        <div className="relative bg-cover bg-center h-[200px] flex items-center justify-start text-white px-20" 
-             style={{backgroundImage: 'url("images/about/aboutBanner1.webp")'}}>
+        <div className="relative bg-cover bg-center h-[200px] flex items-center justify-start text-white px-20"
+          style={{ backgroundImage: 'url("images/about/aboutBanner1.webp")' }}>
           <Link
             href="/"
             className="text-white flex items-center no-underline px-2.5 py-1 rounded"
@@ -124,7 +124,7 @@ export default function Page() {
 
         <div
           className="z-100 bg-cream w-full flex items-center justify-center md:py-20 py-5 bg-cover bg-no-repeat bg-center relative lg:h-[500px]"
-          style={{backgroundImage: "url('/images/about/aboutWavesBg_1.png')"}}
+          style={{ backgroundImage: "url('/images/about/aboutWavesBg_1.png')" }}
         >
           <div className="text-center p-4 text-brown">
             <h1 className="text-4xl font-bold mb-4">ABOUT</h1>
@@ -145,73 +145,73 @@ export default function Page() {
         </div>
 
         <div className=" w-full ">
-        <div
-        className={`${styles.secondSection} flex flex-col md:flex-row items-center justify-between
+          <div
+            className={`${styles.secondSection} flex flex-col md:flex-row items-center justify-between
         md:py-12 py-6 px-2 lg:px-4 mx-auto max-w-[90%] gap-6 mb-12`}
-      >
-        {/* TEXT COLUMN */}
-        <div className="md:w-1/2 overflow-visible lg:overflow-auto p-2 lg:p-4">
-          <h1 className="text-2xl font-bold mb-4 text-brown">What We Do</h1>
-          <p className="text-md text-brown mb-6">
-            We provide a comprehensive marketplace that connects you with a wide
-            range of eco-friendly building materials.
-          </p>
-
-          <Accordion
-            allowMultiple={false}
-            defaultIndex={selectedIndex ?? [0]}
-            onChange={handleAccordionChange}
           >
-            {accordionItems.map((item, index) => (
-              <AccordionItem key={index} className="border-b border-primary py-4">
-                {({ isExpanded }) => (
-                  <>
-                    <AccordionButton className="flex justify-between">
-                      <div className="flex items-center gap-3">
-                        <Image
-                          src={item.imgSrc}
-                          alt={item.alt}
-                          width={32}
-                          height={32}
-                          className={
-                            selectedIndex === index ||
-                            (selectedIndex === undefined && index === 0)
-                              ? ""
-                              : "grayscale"
-                          }
-                        />
-                        <span className="font-semibold text-brown">
-                          {item.title}
-                        </span>
-                      </div>
-                      {isExpanded ? (
-                        <PiMinusCircleBold className="text-primary" />
-                      ) : (
-                        <TbCirclePlus className="text-primary" />
-                      )}
-                    </AccordionButton>
+            {/* TEXT COLUMN */}
+            <div className="md:w-1/2 overflow-visible lg:overflow-auto p-2 lg:p-4">
+              <h1 className="text-2xl font-bold mb-4 text-brown">What We Do</h1>
+              <p className="text-md text-brown mb-6">
+                We provide a comprehensive marketplace that connects you with a wide
+                range of eco-friendly building materials.
+              </p>
 
-                    <AccordionPanel className="pl-10 text-sm text-brown">
-                      {item.description}
-                    </AccordionPanel>
-                  </>
-                )}
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
+              <Accordion
+                allowMultiple={false}
+                defaultIndex={selectedIndex ?? [0]}
+                onChange={handleAccordionChange}
+              >
+                {accordionItems.map((item, index) => (
+                  <AccordionItem key={index} className="border-b border-primary py-4">
+                    {({ isExpanded }) => (
+                      <>
+                        <AccordionButton className="flex justify-between">
+                          <div className="flex items-center gap-3">
+                            <Image
+                              src={item.imgSrc}
+                              alt={item.alt}
+                              width={32}
+                              height={32}
+                              className={
+                                selectedIndex === index ||
+                                  (selectedIndex === undefined && index === 0)
+                                  ? ""
+                                  : "grayscale"
+                              }
+                            />
+                            <span className="font-semibold text-brown">
+                              {item.title}
+                            </span>
+                          </div>
+                          {isExpanded ? (
+                            <PiMinusCircleBold className="text-primary" />
+                          ) : (
+                            <TbCirclePlus className="text-primary" />
+                          )}
+                        </AccordionButton>
 
-        {/* IMAGE COLUMN (VISIBLE ON TABLET + DESKTOP) */}
-        <div className="flex md:flex md:w-1/2 justify-center items-center p-2 lg:p-4">
-          <Image
-            src="images/about/aboutBanner2.webp"
-            alt="What we do"
-            width={512}
-            height={512}
-            className="rounded-md max-w-lg w-full"
-          />
-        </div>
-      </div>
+                        <AccordionPanel className="pl-10 text-sm text-brown">
+                          {item.description}
+                        </AccordionPanel>
+                      </>
+                    )}
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+
+            {/* IMAGE COLUMN (VISIBLE ON TABLET + DESKTOP) */}
+            <div className="flex md:flex md:w-1/2 justify-center items-center p-2 lg:p-4">
+              <Image
+                src="images/about/aboutBanner2.webp"
+                alt="What we do"
+                width={512}
+                height={512}
+                className="rounded-md max-w-lg w-full"
+              />
+            </div>
+          </div>
 
           <div className="flex items-center justify-center md:pb-8 pb-4">
             <div className="text-center">
@@ -236,8 +236,8 @@ export default function Page() {
                         e.currentTarget.src = 'images/product-placeholder.webp'
                       }}
                       loading="lazy"
-                      // className="md:h-[25px] md:w-[30px] h-[25px] w-[25px] "
-                      // style={{ height: "25px", width: "30px" }}
+                    // className="md:h-[25px] md:w-[30px] h-[25px] w-[25px] "
+                    // style={{ height: "25px", width: "30px" }}
                     />
                   </div>
                   <div className="ml-4">
@@ -268,7 +268,7 @@ export default function Page() {
               {valueItems.slice(2).map((item, index) => (
                 <div key={index} className="flex p-4 items-start justify-start">
                   <div className="align-middle bg-primary hover:bg-primary mt-[5px]  md:ml-4 md:p-1.5 p-[7px] rounded-md  ">
-                  <Image
+                    <Image
                       src={item.imgSrc}
                       alt={item.alt}
                       height={25}
@@ -277,8 +277,8 @@ export default function Page() {
                         e.currentTarget.src = 'images/product-placeholder.webp'
                       }}
                       loading="lazy"
-                      // className="rotate-on-hover"
-                      // style={{ height: "25px", width: "40px" }}
+                    // className="rotate-on-hover"
+                    // style={{ height: "25px", width: "40px" }}
                     />
                   </div>
                   <div className="ml-4">
@@ -306,7 +306,7 @@ export default function Page() {
 
         <div
           className="bg-cream w-full flex flex-col lg:flex-row items-start justify-center py-12 md:px-16 px-4 lg:px-20 space-y-8 lg:space-y-0 lg:space-x-4 bg-cover bg-no-repeat bg-center relative"
-          style={{backgroundImage: "url('/images/about/aboutWavesBg_2.png')"}}
+          style={{ backgroundImage: "url('/images/about/aboutWavesBg_2.png')" }}
         >
           <div className="flex flex-col items-start lg:w-1/2">
             <Image
@@ -413,57 +413,80 @@ export default function Page() {
           </div>
         </div>
 
-        <div
-          className="bg-cream w-full flex items-center justify-center p-6 md:p-20 bg-cover bg-no-repeat bg-center relative pb-20"
-          style={{backgroundImage: "url('/images/about/aboutWavesBg_2.png')"}}
-        >
-          <div className="w-full">
-            <div className="flex w-full border border-primary justify-between bg-cream rounded mobile-sm:mb-20 mobile-sm:flex-wrap sm:flex-nowrap h-[500px] md:h-[350px] lg:h-[450px]">
-              <div className="w-full p-2 md:h-[350px] lg:h-[450px] h-fit-content md:w-8/12 flex flex-col items-start">
-                <div className="w-full md:w-full lg:w-full pl-4 md:pl-4">
-                  <h1 className="text-3xl md:text-3xl lg:text-5xl font-medium text-left px-2 md:px-0 lg:px-4 text-brown py-[5%] leading-tight">
-                    Together, let&#39;s build a greener tomorrow with{" "}
-                    <span className="text-brown-medium text-3xl md:text-3xl lg:text-5xl">
+        {/* PROFILE SECTION */}
+        <div className="bg-cream w-full flex items-center justify-center p-6 md:p-20 bg-cover bg-no-repeat bg-center relative pb-0 lg:pb-20">
+          <div className="w-full flex justify-center">
+            {/* Main Container: 1280px x 542px */}
+            <div className="relative flex flex-col md:flex-row w-full max-w-[1280px] min-h-[542px] w-[400px] h-[542px] border border-primary bg-cream rounded-xl overflow-hidden">
+
+              {/* TEXT COLUMN: Properties based on Figma Auto Layout */}
+              <div className="flex-1 flex flex-col items-start justify-start px-8 md:px-12 lg:px-16 lg:pt-[95px] pt-2">
+                {/* Text Container: Set to Fill width and Hug height */}
+                <div className="w-full h-auto flex flex-col items-start gap-0">
+                  <h1 className="text-[40px] md:text-[56px] lg:text-[60px] font-bold text-brown leading-[1.1] lg:mb-[52px] mb-[20px]">
+                    Together, let&#39;s build a {" "}
+                    <span className="text-primary">greener</span>{" "}
+                    tomorrow
+                    {/* <span className="text-brown-medium">
                       hubeco.market
-                    </span>
+                    </span> */}
                   </h1>
-                </div>
-                <div className="w-full md:w-2/3 flex flex-col md:flex-row items-start md:items-center pl-4 md:pl-2 lg:pl-8 mt-5 md:mb-0 mb-4 md:mt-16 lg:mt-24">
-                  <div className="md:mr-4">
-                    <h1 className="text-xl font-bold text-left px-2 md:pr-4 text-brown">
-                      SaiPadma Potluri
-                    </h1>
-                    <p className="text-left mb-2 px-2 md:pr-4 text-brown text-sm">
-                      Founder & CEO
-                    </p>
-                    <div className="ml-4 md:ml-2 mt-4 md:mt-0 flex-shrink-0">
-                      <div
-                        onClick={() =>
-                          window.open(
-                            "https://www.linkedin.com/in/saipadmap/",
-                            "_blank"
-                          )
-                        }
-                        className="p-1.5 rounded-md h-8 w-8 bg-primary hover:bg-primary flex items-center cursor-pointer justify-center"
-                      >
-                        <BiLogoLinkedin className="text-white" size={20} />
+
+                  <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mt-auto lg:pb-[95px]">
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-3">
+                        <h2 className="text-2xl font-bold text-brown">
+                          SaiPadma Potluri
+                        </h2>
+                        <Link
+                          href="https://www.linkedin.com/in/saipadmap/"
+                          target="_blank"
+                          className="p-1 rounded-md h-7 w-7 bg-primary hover:opacity-90 flex items-center justify-center transition-all"
+                        >
+                          <BiLogoLinkedin className="text-white" size={24} />
+                        </Link>
                       </div>
+                      <p className="text-brown text-lg">
+                        Founder & CEO
+                      </p>
                     </div>
+
+
                   </div>
                 </div>
               </div>
-              <div className="w-full md:w-fit flex items-center justify-center md:h-[350px] lg:h-[450px] h-fit-content">
+
+              {/* IMAGE COLUMN: Fixed 668px width */}
+              <div className="w-full md:w-[668px] h-[400px] md:h-[542px] relative">
                 <Image
-                  src="images/about/profile-pic.webp"
-                  alt="banner1"
-                  style={{ width: "100%", height: "100%" }}
-                  width={317.81}
-                  height={450}
-                  onError={e => {
-                    e.currentTarget.src = 'images/product-placeholder.webp'
+                  src="/images/about/blob-mobile.png"
+                  alt="SaiPadma Potluri - Founder & CEO"
+                  fill
+                  className="object-cover object-top md:hidden"
+                  loading="lazy"
+                />
+
+                <Image
+                  src="/images/about/blob-desktop.png"
+                  alt="SaiPadma Potluri - Founder & CEO"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className="hidden md:block object-cover rounded-r-xl"
+                  onError={(e) => {
+                    e.currentTarget.src = 'images/product-placeholder.webp';
                   }}
                   loading="lazy"
-                  className="md:w-auto md:max-w-full rounded-r"
+                />
+
+              </div>
+              <div className="hidden md:block absolute bottom-0 left-[-40px]">
+                <Image
+                  src="/images/about/leaf.png"
+                  alt="decorative leaf"
+                  width={300}
+                  height={500}
+
+                  priority
                 />
               </div>
             </div>

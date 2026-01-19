@@ -403,12 +403,11 @@ export default function Page() {
                           </AccordionButton>
                         </h2>
                         <AccordionPanel
-                          className="text-justify text-medium mt-2 !text-navy-900 pl-10"
+                          className="text-left text-medium mt-2 !text-navy-900 pl-10"
                           pb={4}
-                          dangerouslySetInnerHTML={{ __html: item.description }}
-                        />
-                        {/* {item.description}
-                        </AccordionPanel> */}
+                        >
+                        {item.description}
+                        </AccordionPanel>
                       </>
                     )}
                   </AccordionItem>
@@ -483,11 +482,11 @@ export default function Page() {
                           </AccordionButton>
                         </h2>
                         <AccordionPanel
-                          className="text-justify text-medium mt-2 !text-navy-900 pl-10"
+                          className="text-left text-medium mt-2 !text-navy-900 pl-10"
                           pb={4}
-                          dangerouslySetInnerHTML={{ __html: item.description }}
-                        />
-                        {/* {item.description} */}
+                        >
+                        {item.description}
+                        </AccordionPanel>
                       </>
                     )}
                   </AccordionItem>
@@ -563,10 +562,10 @@ export default function Page() {
                           </AccordionButton>
                         </h2>
                         <AccordionPanel
-                          className="text-justify text-medium mt-2 !text-navy-900 pl-10"
+                          className="text-left text-medium mt-2 !text-navy-900 pl-10"
                           pb={4}
-                          dangerouslySetInnerHTML={{ __html: item.description }}
-                        />
+                          
+                        >{item.description}</AccordionPanel>
                         {/* {item.description}
                         </AccordionPanel> */}
                       </>
@@ -643,12 +642,11 @@ export default function Page() {
                           </AccordionButton>
                         </h2>
                         <AccordionPanel
-                          className="text-justify text-medium mt-2 !text-navy-900 pl-10"
+                          className="text-left text-medium mt-2 !text-navy-900 pl-10"
                           pb={4}
-                          dangerouslySetInnerHTML={{ __html: item.description }}
-                        />
-                        {/* {item.description}
-                        </AccordionPanel> */}
+                        >
+                        {item.description}
+                        </AccordionPanel>
                       </>
                     )}
                   </AccordionItem>
@@ -725,12 +723,11 @@ export default function Page() {
                           </AccordionButton>
                         </h2>
                         <AccordionPanel
-                          className="text-justify text-medium mt-2 !text-navy-900 pl-10"
+                          className="text-left text-medium mt-2 !text-navy-900 pl-10"
                           pb={4}
-                          dangerouslySetInnerHTML={{ __html: item.description }}
-                        />
-                        {/* {item.description}
-                        </AccordionPanel> */}
+                        >
+                        {item.description}
+                        </AccordionPanel>
                       </>
                     )}
                   </AccordionItem>
@@ -804,12 +801,11 @@ export default function Page() {
                           </AccordionButton>
                         </h2>
                         <AccordionPanel
-                          className="text-justify text-medium mt-2 !text-navy-900 pl-10"
+                          className="text-left text-medium mt-2 !text-navy-900 pl-10"
                           pb={4}
-                          dangerouslySetInnerHTML={{ __html: item.description }}
-                        />
-                        {/* {item.description}
-                        </AccordionPanel> */}
+                        >
+                        {item.description}
+                        </AccordionPanel>
                       </>
                     )}
                   </AccordionItem>
@@ -885,7 +881,7 @@ export default function Page() {
                           </AccordionButton>
                         </h2>
                         <AccordionPanel
-                          className="text-justify text-medium mt-2 !text-navy-900 pl-10"
+                          className="text-left text-medium mt-2 !text-navy-900 pl-10"
                           pb={4}
                         >
                           {item.description}

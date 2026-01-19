@@ -153,7 +153,7 @@ export default function GreenHomeLoanForm({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden touch-none"
       style={{ touchAction: 'none' }}
     >
-      <div className="bg-cream rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[95vh] flex flex-col">
+      <div className="bg-cream rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[80vh] flex flex-col">
         {/* Header - Fixed */}
         <div
           className="relative px-6 py-8 text-white flex-shrink-0"

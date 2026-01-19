@@ -608,7 +608,7 @@ export default function CartRow({
               </Button>
                   </TooltipTrigger>
                   <TooltipContent className="bg-black">
-                    <p className="text-white text-sm font-regular">Request Quote</p>
+                    <p className="text-white text-sm font-regular">Request Pricing</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>

@@ -476,7 +476,7 @@ const ProductCard = ({
                   <CircularProgress color="#ffffff" size={6} />
                 </>
               ) : (
-                <> Request Quote</>
+                <> Request Pricing</>
               )}
             </Button>
           ) : product?.purchaseType == "MULTI" ? (
@@ -511,7 +511,7 @@ const ProductCard = ({
                     <CircularProgress color="#ffffff" size={6} />
                   </>
                 ) : (
-                  <> Request Quote</>
+                  <> Request Pricing</>
                 )}
               </Button>
             </>

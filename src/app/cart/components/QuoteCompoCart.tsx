@@ -206,7 +206,7 @@ export default function QuoteCompo({
         >
           <DialogHeader>
             <DialogTitle className="text-xl font-bold">
-              Request Quote
+              Request Pricing
             </DialogTitle>
           </DialogHeader>
           <div className="h-fit scrollbar overflow-y-auto mb-7 pr-2">

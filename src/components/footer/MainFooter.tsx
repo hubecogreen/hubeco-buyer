@@ -84,7 +84,7 @@ const Footer = () => {
           <div className="w-full max-w-[1200px]">
             {/* Mobile */}
             <div className="lg:hidden flex flex-col gap-2 px-4 pb-10">
-              <p className="text-[12px] text-brown font-light">
+              <p className="text-[12px] text-brown font-light mb-[40px]">
                 Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt. Ltd.
                 All Rights Reserved
               </p>
@@ -124,7 +124,7 @@ const Footer = () => {
         <div className="w-full bg-cover bg-center bg-no-repeat">
 
           {/* GREEN DIVIDER */}
-          <div className="w-full flex justify-start lg:ml-[460px] pt-6 lg:pt-10 mb-4 px-4 lg:px-0">
+          <div className="w-full flex justify-start lg:ml-[460px] pt-0 md:pt-6 lg:pt-[138px] mb-4 px-4 lg:px-0 md:px-8">
             <div className="w-full lg:w-[768px] h-[1px] bg-[#069A66]" />
           </div>
 
@@ -139,7 +139,8 @@ const Footer = () => {
               max-w-[1200px]
               mx-auto
               gap-6 md:gap-y-8 lg:gap-[60px]
-              px-4 lg:px-0
+              px-4 lg:px-0 
+              md:px-8
               lg:ml-[460px]
             "
           >

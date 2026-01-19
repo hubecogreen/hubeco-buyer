@@ -414,24 +414,30 @@ export default function Page() {
         </div>
 
         {/* PROFILE SECTION */}
-        <div className="bg-cream w-full flex items-center justify-center p-6 md:p-20 bg-cover bg-no-repeat bg-center relative pb-0 lg:pb-20">
+        <div className="bg-cream w-full flex items-center justify-center p-6 md:p-12 bg-cover bg-no-repeat bg-center relative pb-0 lg:pb-20">
           <div className="w-full flex justify-center">
             {/* Main Container: 1280px x 542px */}
-            <div className="relative flex flex-col md:flex-row w-full max-w-[1280px] min-h-[542px] w-[400px] h-[542px] border border-primary bg-cream rounded-xl overflow-hidden">
+            <div className="relative flex flex-col lg:flex-row w-full max-w-[400px] h-[542px] md:max-w-[770px] md:h-[952.5px] md:px-[6.95px] lg:pr-0 lg:max-w-[1280px] lg:h-auto border border-primary bg-cream rounded-xl overflow-hidden">
+
 
               {/* TEXT COLUMN: Properties based on Figma Auto Layout */}
-              <div className="flex-1 flex flex-col items-start justify-start px-8 md:px-12 lg:px-16 lg:pt-[95px] pt-2">
+              <div className="flex-1 flex flex-col items-start justify-start px-4 md:px-12 lg:px-16 lg:pt-[95px] pt-2">
                 {/* Text Container: Set to Fill width and Hug height */}
                 <div className="w-full h-auto flex flex-col items-start gap-0">
                   <h1 className="text-[40px] md:text-[56px] lg:text-[60px] font-bold text-brown leading-[1.1] lg:mb-[52px] mb-[20px]">
-                    Together, let&#39;s build a {" "}
-                    <span className="text-primary">greener</span>{" "}
+                    <span className="whitespace-nowrap">
+                      Together,&nbsp;let&apos;s
+                    </span>
+                    <br />
+                    <span className="whitespace-nowrap">
+                      build&nbsp;a&nbsp;<span className="text-primary">greener</span>
+                    </span>
+                    <br />
                     tomorrow
-                    {/* <span className="text-brown-medium">
+                  </h1>
+                  {/* <span className="text-brown-medium">
                       hubeco.market
                     </span> */}
-                  </h1>
-
                   <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mt-auto lg:pb-[95px]">
                     <div className="flex flex-col">
                       <div className="flex items-center gap-3">
@@ -441,7 +447,7 @@ export default function Page() {
                         <Link
                           href="https://www.linkedin.com/in/saipadmap/"
                           target="_blank"
-                          className="p-1 rounded-md h-7 w-7 bg-primary hover:opacity-90 flex items-center justify-center transition-all"
+                          className="hidden lg:flex p-1 rounded-md h-7 w-7 bg-primary hover:opacity-90 flex items-center justify-center transition-all"
                         >
                           <BiLogoLinkedin className="text-white" size={24} />
                         </Link>
@@ -449,20 +455,33 @@ export default function Page() {
                       <p className="text-brown text-lg">
                         Founder & CEO
                       </p>
+                      <Link
+                        href="https://www.linkedin.com/in/saipadmap/"
+                        target="_blank"
+                        className="lg:hidden mt-1 p-1 rounded-md h-7 w-7 bg-primary hover:opacity-90 flex items-center justify-center transition-all"
+                      >
+                        <BiLogoLinkedin className="text-white" size={24} />
+                      </Link>
                     </div>
-
-
                   </div>
                 </div>
               </div>
 
               {/* IMAGE COLUMN: Fixed 668px width */}
-              <div className="w-full md:w-[668px] h-[400px] md:h-[542px] relative">
+              <div className="relative w-full h-[400px] md:w-[756.11px] md:h-[678.58px] lg:w-[668px] lg:h-[542px]">
                 <Image
                   src="/images/about/blob-mobile.png"
                   alt="SaiPadma Potluri - Founder & CEO"
                   fill
                   className="object-cover object-top md:hidden"
+                  loading="lazy"
+                />
+                <Image
+                  src="/images/about/blob-tab.png"
+                  alt="SaiPadma Potluri - Founder & CEO"
+                  width={756}
+                  height={678}
+                  className="hidden md:block lg:hidden absolute bottom-0 left-[49%] -translate-x-1/2"
                   loading="lazy"
                 />
 
@@ -471,7 +490,7 @@ export default function Page() {
                   alt="SaiPadma Potluri - Founder & CEO"
                   fill
                   style={{ objectFit: "cover" }}
-                  className="hidden md:block object-cover rounded-r-xl"
+                  className="hidden lg:block object-cover rounded-r-xl"
                   onError={(e) => {
                     e.currentTarget.src = 'images/product-placeholder.webp';
                   }}
@@ -479,7 +498,7 @@ export default function Page() {
                 />
 
               </div>
-              <div className="hidden md:block absolute bottom-0 left-[-40px]">
+              <div className="hidden lg:block md:hidden absolute bottom-0 left-[-40px]">
                 <Image
                   src="/images/about/leaf.png"
                   alt="decorative leaf"

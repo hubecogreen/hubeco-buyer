@@ -1480,7 +1480,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             }
                           }}
                         >
-                          <p className="text-cream text-md text-medium ml-3">Request for Quote</p>
+                          <p className="text-cream text-md text-medium ml-3">Request for Pricing</p>
                         </Button>
                       )}
 

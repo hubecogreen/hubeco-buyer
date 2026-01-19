@@ -118,11 +118,11 @@ const ImageSlider = () => {
       transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
       className="bg-primary hover:bg-cream hover:text-primary text-cream 
                  w-full lg:w-auto 
-                 lg:px-[40px] lg:py-[18px] py-[10px] px-[20px] text-[18px] font-medium
-                 rounded-md"
+                 lg:px-[20px] lg:py-[18px] py-[10px] px-[20px] text-[18px] font-medium
+                 rounded-md whitespace-nowrap"
       onClick={() => router.push("/products")}
     >
-      Shop Now
+      Explore Materials
     </motion.button>
 
     <motion.button
@@ -131,11 +131,11 @@ const ImageSlider = () => {
       transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
       className="bg-primary hover:bg-cream hover:text-primary text-cream 
                  w-full lg:w-auto 
-                 lg:px-[40px] lg:py-[18px] py-[10px] px-[20px] text-[18px] font-medium
-                 rounded-md"
+                 lg:px-[20px] lg:py-[18px] py-[10px] px-[20px] text-[18px] font-medium
+                 rounded-md whitespace-nowrap"
       onClick={() => router.push("/plans")}
     >
-      Sell With Us
+      Partner with Us
     </motion.button>
 
   </div>

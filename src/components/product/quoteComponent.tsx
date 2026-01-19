@@ -71,7 +71,7 @@ export default function quoteComponent() {
 
           <DialogHeader>
             <DialogTitle className="text-brown text-xl font-bold">
-              Request Quote
+              Request Pricing
             </DialogTitle>
           </DialogHeader>
           <div className="max-h-[500px] overflow-y-auto pr-2">

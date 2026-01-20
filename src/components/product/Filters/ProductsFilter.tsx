@@ -319,9 +319,9 @@ useEffect(() => {
         }) && (
           <button
             onClick={handleClearAll}
-            className="flex items-center cursor-pointer text-sm font-medium text-cream bg-white/10 p-2 rounded h-[35px]"
+            className="flex items-center cursor-pointer text-sm font-medium text-primary border border-primary bg-cream p-2 rounded h-[35px]"
           >
-            <IoClose className="mr-2 text-cream" />
+            <IoClose className="mr-2 text-primary" />
             Clear All
           </button>
         )}

@@ -168,7 +168,7 @@ export default function GreenProjectFinancingForm({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden touch-none"
       style={{ touchAction: 'none' }}
     >
-      <div className="bg-cream rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[80vh] flex flex-col">
+      <div className="bg-cream rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[80vh] md:max-h-[95vh] flex flex-col">
         {/* Header - Fixed */}
         <div
           className="relative px-6 py-8 text-white flex-shrink-0"
@@ -324,9 +324,9 @@ export default function GreenProjectFinancingForm({
           {/* Logo */}
           <div className="flex justify-center mt-8">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center">
+              {/* <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-sm">H</span>
-              </div>
+              </div> */}
               <img
                 src="/images/Logo-2.webp"
                 alt="Hubeco Logo"

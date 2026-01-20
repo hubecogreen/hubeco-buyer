@@ -258,7 +258,8 @@ const Footer = () => {
               <Image
                 src="/images/logo3.png"
                 alt="Hubeco Logo"
-                fill
+                width={500}
+                height={112}
                 className="object-contain"
               />
             </div>

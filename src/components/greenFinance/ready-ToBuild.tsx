@@ -8,8 +8,8 @@ export default function ReadyToBuildCTA() {
   const [isProjectFormOpen, setIsProjectFormOpen] = useState(false);
 
   return (
-    <div className="w-full px-[10px] py-[5px]">
-      <div className="relative w-full max-w-[1440px] mx-auto h-[320px] overflow-hidden rounded-[40px]">
+    <div className="w-full lg:px-12 px-4 py-[5px]">
+<div className="relative w-full max-w-[1440px] mx-auto min-h-[320px] overflow-hidden rounded-[40px] flex items-center justify-center ">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image

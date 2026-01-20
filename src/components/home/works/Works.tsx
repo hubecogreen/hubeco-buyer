@@ -106,19 +106,19 @@ const WorksSection = () => {
         {[
           {
             img: "/images/home/howitwork/user-icon.png",
-            text: "Sign up easily to become a vendor.",
+            text: "Sign up easily to become a vendor",
           },
           {
             img: "/images/home/howitwork/cloud-icon.png",
-            text: "List products with specs, certifications and prices.",
+            text: "List products with specs, certifications and prices",
           },
           {
             img: "/images/home/howitwork/shop-icon.png",
-            text: "Reach buyers and receive RFQ’s.",
+            text: "Reach buyers and receive RFQ’s",
           },
           {
             img: "/images/home/howitwork/graph-icon.png",
-            text: "Track sales and revenue in your vendor dashboard.",
+            text: "Track sales and revenue in your vendor dashboard",
           },
         ].map((item, i) => (
           <div

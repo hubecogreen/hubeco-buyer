@@ -77,7 +77,7 @@ const ImageSlider = () => {
           {/* RIGHT SIDE — Vertical swiper text */}
           {/* RIGHT SIDE — Vertical swiper text */}
 <div className="flex flex-col justify-center h-full lg:translate-y-[190px] gap-2 pointer-events-none">
-  <p className="text-[20px] font-regular">Certified Products from</p>
+  <p className="text-[20px] font-regular">Certified Products aligned with</p>
 
   <div className="h-[50px] overflow-hidden">
     <div className="vertical-marquee">
@@ -118,7 +118,7 @@ const ImageSlider = () => {
       transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
       className="bg-primary hover:bg-cream hover:text-primary text-cream 
                  w-full lg:w-auto 
-                 lg:px-[20px] lg:py-[18px] py-[10px] px-[20px] text-[18px] font-medium
+                 lg:px-[20px] lg:py-[18px] py-[10px] px-[20px] text-[17px] font-medium
                  rounded-md whitespace-nowrap"
       onClick={() => router.push("/products")}
     >
@@ -131,9 +131,9 @@ const ImageSlider = () => {
       transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
       className="bg-primary hover:bg-cream hover:text-primary text-cream 
                  w-full lg:w-auto 
-                 lg:px-[20px] lg:py-[18px] py-[10px] px-[20px] text-[18px] font-medium
+                 lg:px-[20px] lg:py-[18px] py-[10px] px-[20px] text-[17px] font-medium
                  rounded-md whitespace-nowrap"
-      onClick={() => router.push("/plans")}
+      onClick={() => window.location.href = "https://vendor.hubeco.market/login"}
     >
       Partner with Us
     </motion.button>

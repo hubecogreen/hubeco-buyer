@@ -295,7 +295,7 @@ export default function Page() {
           </div>
           <div className="flex items-center justify-center">
             <CustomButton
-              title={"Shop Now"}
+              title={"Explore Materials"}
               className="md:ml-3 bg-primary hover:bg-primary h-12 md:h-12 md:w-48 w-32 md:text-md text-sm text-white"
               customStyles={{}}
               rightIcon={<GoArrowRight />}
@@ -382,7 +382,7 @@ export default function Page() {
                   <div className="flex flex-col md:flex-row gap-4">
                     <CustomButton
                       onPress={() => {
-                        router.push("/plans");
+                        window.location.href = "https://vendor.hubeco.market/login";
                       }}
                       title={"Vendor Connect"}
                       className="text-white bg-primary hover:bg-primary font-semibold h-12 w-full md:w-40 text-sm md:text-md"

@@ -306,7 +306,7 @@ export default function Page() {
 
         <div
           className="bg-cream w-full flex flex-col lg:flex-row items-start justify-center py-12 md:px-16 px-4 lg:px-20 space-y-8 lg:space-y-0 lg:space-x-4 bg-cover bg-no-repeat bg-center relative"
-          style={{ backgroundImage: "url('/images/about/aboutWavesBg_2.png')" }}
+          // style={{backgroundImage: "url('/images/about/aboutWavesBg_2.png')"}}
         >
           <div className="flex flex-col items-start lg:w-1/2">
             <Image

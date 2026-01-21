@@ -88,12 +88,12 @@ const CallToActionSection: React.FC = () => {
       text-white 
       text-[20px]
       font-medium  
-      !px-[41px]
+      !px-[19px]
       !py-[20px]
       rounded-[5px]
       tracking-wide
       md:text-[20px]
-      md:!px-[65px]
+      md:!px-[30px]
       md:!py-[20px]
       max-[490px]:text-[16px]
     
@@ -103,7 +103,7 @@ const CallToActionSection: React.FC = () => {
       max-[390px]:text-[14px]
    "
                   onPress={() => router.push('/products')}
-                  title="Submit RFQ"
+                  title="Request for Pricing"
                />
 
                <a

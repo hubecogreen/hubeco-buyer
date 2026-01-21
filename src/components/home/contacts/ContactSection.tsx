@@ -113,8 +113,8 @@ const ContactSection: React.FC = () => {
             Let’s Build Sustainably Together
           </h2>
 
-          <p className="text-[15px] lg:text-[20px] leading-tight">
-            Reach out for certified materials,<br className ="lg:hidden"/> partnerships and RFQ’s
+          <p className="text-[15px] lg:text-[20px] leading-tight whitespace-nowrap">
+            Reach out for certified materials,<br className ="lg:hidden"/>partnerships and request pricing
           </p>
 
           {!isSubmitted ? (

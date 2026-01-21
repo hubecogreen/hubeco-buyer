@@ -162,13 +162,13 @@ const Footer = () => {
                 </button><br />
                 <button onClick={() => goToCategory("Tiles")} className="text-brown">
                   Tiles
-                </button><br/>
+                </button><br />
                 {/* <button onClick={() => goToCategory("Sanitary & Bath Fittings")} className="text-brown">
                   Bath Fittings
                 </button><br/> */}
                 <button onClick={() => goToCategory("Pavers")} className="text-brown">
                   Pavers
-                </button><br/>
+                </button><br />
                 <button onClick={() => goToCategory("Steel")} className="text-brown">
                   Steel
                 </button>
@@ -254,13 +254,13 @@ const Footer = () => {
         {/* BOTTOM LOGO */}
         <div className="w-full flex mt-[90px] lg:pb-[58px] pb-[30px] px-4 lg:px-0">
           <div className="max-w-[1200px] w-full">
-            <div className="w-full max-w-[279px] lg:max-w-[717px] h-[63px] lg:h-[161px] md:h-[112px] md:w-[496px] relative">
+            <div className="relative lg:w-[717px] lg:h-[162px]  w-[279px] h-[63px] md:w-[497px] md:h-[112px]">
               <Image
                 src="/images/logo3.png"
                 alt="Hubeco Logo"
-                width={500}
-                height={112}
+                fill
                 className="object-contain"
+                priority
               />
             </div>
           </div>

@@ -124,7 +124,7 @@ export default function Page() {
 
         <div
           className="z-100 bg-cream w-full flex items-center justify-center md:py-20 py-5 bg-cover bg-no-repeat bg-center relative lg:h-[500px]"
-          style={{ backgroundImage: "url('/images/about/aboutWavesBg_1.png')" }}
+          style={{ backgroundImage: "url('/images/about/Subtract (2).png')" }}
         >
           <div className="text-center p-4 text-brown">
             <h1 className="text-4xl font-bold mb-4">ABOUT</h1>
@@ -296,7 +296,7 @@ export default function Page() {
           <div className="flex items-center justify-center">
             <CustomButton
               title={"Explore Materials"}
-              className="md:ml-3 bg-primary hover:bg-primary h-12 md:h-12 md:w-48 w-32 md:text-md text-sm text-white"
+              className="md:ml-3 bg-primary hover:bg-primary h-12 md:h-12 md:w-48 w-44 md:text-md text-sm text-white whitespace-nowrap"
               customStyles={{}}
               rightIcon={<GoArrowRight />}
               onPress={() => router.push("/products")}

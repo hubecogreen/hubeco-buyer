@@ -165,7 +165,7 @@ export default function GreenProjectFinancingForm({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden touch-none"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black bg-opacity-50 overflow-hidden touch-none"
       style={{ touchAction: 'none' }}
     >
       <div className="bg-cream rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[80vh] md:max-h-[95vh] flex flex-col">
@@ -192,7 +192,7 @@ export default function GreenProjectFinancingForm({
 
         {/* Form - Scrollable */}
         <div 
-          className="px-8 md:px-20 py-20 overflow-y-auto flex-1 overscroll-contain"
+          className="px-6 md:px-20 py-4 md:py-6 overflow-y-auto flex-1 overscroll-contain"
           style={{ 
             WebkitOverflowScrolling: 'touch',
             scrollbarWidth: 'none',
@@ -319,21 +319,18 @@ export default function GreenProjectFinancingForm({
             >
               {loading ? "Submitting..." : "Submit"}
             </button>
-          </form>
 
-          {/* Logo */}
-          <div className="flex justify-center mt-8">
-            <div className="flex items-center space-x-2">
-              {/* <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">H</span>
-              </div> */}
-              <img
-                src="/images/Logo-2.webp"
-                alt="Hubeco Logo"
-                className="h-14 w-auto"
-              />
+            {/* Logo */}
+            <div className="flex justify-center mt-6 mb-4 md:mt-8">
+              <div className="flex items-center space-x-2">
+                <img
+                  src="/images/Logo-2.webp"
+                  alt="Hubeco Logo"
+                  className="h-6 md:h-14 w-auto"
+                />
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

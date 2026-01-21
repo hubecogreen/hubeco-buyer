@@ -168,7 +168,7 @@ export default function GreenProjectFinancingForm({
       className="fixed inset-0 z-[60] flex items-center justify-center bg-black bg-opacity-50 overflow-hidden touch-none"
       style={{ touchAction: 'none' }}
     >
-      <div className="bg-cream rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[80vh] md:max-h-[95vh] flex flex-col">
+      <div className="bg-cream rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[85vh] md:max-h-[95vh] flex flex-col">
         {/* Header - Fixed */}
         <div
           className="relative px-6 py-3 md:py-8 lg:py-8 text-white flex-shrink-0"

@@ -171,21 +171,21 @@ export default function GreenProjectFinancingForm({
       <div className="bg-cream rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[80vh] md:max-h-[95vh] flex flex-col">
         {/* Header - Fixed */}
         <div
-          className="relative px-6 py-8 text-white flex-shrink-0"
+          className="relative px-6 py-3 md:py-8 lg:py-8 text-white flex-shrink-0"
           style={{
             backgroundImage: "url('/images/greenFinance/Form-BG.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
-          <div className="absolute inset-0 bg-opacity-30" />
+          <div className="absolute inset-0 bg-opacity-30 pointer-events-none" />
           <button
             onClick={handleClose}
-            className="absolute top-4 right-4 text-white hover:text-brown transition-colors z-10"
+            className="absolute top-4 right-4  text-white hover:text-brown transition-colors z-20"
           >
             <IoClose size={24} />
           </button>
-          <h2 className="text-2xl font-bold relative z-10 text-center pt-5 pb-5">
+          <h2 className="text-xl font-bold relative z-10 text-center pt-5 pb-5">
             Green Project Financing
           </h2>
         </div>
@@ -326,7 +326,7 @@ export default function GreenProjectFinancingForm({
                 <img
                   src="/images/Logo-2.webp"
                   alt="Hubeco Logo"
-                  className="h-6 md:h-14 w-auto"
+                  className="h-12 md:h-14 w-auto"
                 />
               </div>
             </div>

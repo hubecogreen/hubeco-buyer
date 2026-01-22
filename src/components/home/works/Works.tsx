@@ -161,7 +161,7 @@ const WorksSection = () => {
   {/* Left Div */}
   <div className="flex lg:flex-row flex-col justify-start lg:gap-[162px]">
   <div className="relative z-10  ">
-    <h2 className="text-center text-[28px] text-brown pb-3 lg:text-left lg:text-[43px] lg:pb-5">
+    <h2 className="text-center text-[43px] text-brown pb-3 lg:text-left lg:text-[43px] lg:pb-5">
       How it Works
     </h2>
 

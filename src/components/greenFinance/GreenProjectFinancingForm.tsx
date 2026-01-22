@@ -29,21 +29,25 @@ const schema = yup.object({
   gstin: yup
     .string()
     .transform((val) => (val ? val.toUpperCase() : ""))
-    .required("GST is required")
-    .matches(/^[0-9A-Za-z]*$/, "Special Characters are not allowed")
-    .test("valid-state-code", "Invalid state code in GST", (value) =>
-      value ? validGSTStateCodes.includes(value.substring(0, 2)) : false
-    )
+    .notRequired()
+    .matches(/^[0-9A-Za-z]*$/, {
+      message: "Special Characters are not allowed",
+      excludeEmptyString: true,
+    })
     .test(
-      "no-multiple-spaces",
-      "Double spaces are not allowed",
-      (value) => !/\s{2,}/.test(value || "")
+      "valid-state-code",
+      "Invalid state code in GST",
+      (value) =>
+        !value || validGSTStateCodes.includes(value.substring(0, 2))
     )
     .matches(
       /^[0-9]{2}[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}[1-9]{1}[zZ]{1}[0-9A-Z]{1}$/,
-      "GST format is invalid."
+      {
+        message: "GST format is invalid",
+        excludeEmptyString: true,
+      }
     )
-    .trim("GST cannot have empty space at the start or end"),
+    .trim(),
   agreedToTerms: yup
     .boolean()
     .oneOf([true], "You must agree to the terms and conditions"),
@@ -78,13 +82,13 @@ export default function GreenProjectFinancingForm({
     if (isOpen) {
       // Store the current scroll position
       const scrollY = window.scrollY;
-      
+
       // Prevent scrolling on body and html
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
-      
+
       // Also prevent scrolling on html element for better mobile support
       document.documentElement.style.overflow = 'hidden';
     } else {
@@ -95,7 +99,7 @@ export default function GreenProjectFinancingForm({
       document.body.style.top = '';
       document.body.style.width = '';
       document.documentElement.style.overflow = '';
-      
+
       // Restore scroll position
       if (scrollY) {
         window.scrollTo(0, parseInt(scrollY || '0') * -1);
@@ -110,7 +114,7 @@ export default function GreenProjectFinancingForm({
       document.body.style.top = '';
       document.body.style.width = '';
       document.documentElement.style.overflow = '';
-      
+
       if (scrollY) {
         window.scrollTo(0, parseInt(scrollY || '0') * -1);
       }
@@ -136,7 +140,7 @@ export default function GreenProjectFinancingForm({
           body: JSON.stringify({
             name: data.name,
             phoneNumber: `+91${data.phoneNumber}`,
-            gstNumber: data.gstin,
+             gstNumber: data.gstin ? data.gstin : "",
           }),
         }
       );
@@ -164,7 +168,7 @@ export default function GreenProjectFinancingForm({
   if (!isOpen) return null;
 
   return (
-    <div 
+    <div
       className="fixed inset-0 z-[60] flex items-center justify-center bg-black bg-opacity-50 overflow-hidden touch-none"
       style={{ touchAction: 'none' }}
     >
@@ -191,9 +195,9 @@ export default function GreenProjectFinancingForm({
         </div>
 
         {/* Form - Scrollable */}
-        <div 
+        <div
           className="px-6 md:px-20 py-4 md:py-6 overflow-y-auto flex-1 overscroll-contain"
-          style={{ 
+          style={{
             WebkitOverflowScrolling: 'touch',
             scrollbarWidth: 'none',
             msOverflowStyle: 'none'
@@ -255,14 +259,13 @@ export default function GreenProjectFinancingForm({
             {/* GSTIN */}
             <div>
               <label className="block text-brown font-medium mb-2">
-                GSTIN*
+                GSTIN
               </label>
               <input
                 type="text"
                 {...register("gstin")}
                 placeholder="Enter GSTIN"
                 className="w-full px-4 py-3 border bg-cream border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
-                required
                 onInput={(e) => {
                   e.currentTarget.value = e.currentTarget.value.toUpperCase();
                 }}
@@ -313,9 +316,8 @@ export default function GreenProjectFinancingForm({
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-primary text-cream py-4 rounded-lg font-semibold text-lg transition-all duration-200 ${
-                loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-              }`}
+              className={`w-full bg-primary text-cream py-4 rounded-lg font-semibold text-lg transition-all duration-200 ${loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                }`}
             >
               {loading ? "Submitting..." : "Submit"}
             </button>

@@ -133,7 +133,7 @@ const ImageSlider = () => {
                  w-full lg:w-auto 
                  lg:px-[20px] lg:py-[18px] py-[10px] px-[20px] text-[17px] font-medium
                  rounded-md whitespace-nowrap"
-      onClick={() => window.location.href = "https://vendor.hubeco.market/login"}
+      onClick={() => window.location.href = `${process.env.NEXT_PUBLIC_VENDOR_URL}/login`}
     >
       Partner with Us
     </motion.button>

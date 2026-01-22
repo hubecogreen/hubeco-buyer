@@ -1404,7 +1404,7 @@ const LoginPopup = ({
             <button
               onClick={() => {
                 onOpenChange(false);
-                window.location.href = "https://vendor.hubeco.market/login";
+                window.location.href = `${process.env.NEXT_PUBLIC_VENDOR_URL}/login`;
               }}
               className="
                 group

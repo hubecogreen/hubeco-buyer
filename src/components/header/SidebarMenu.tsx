@@ -108,7 +108,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
       },
       {
         title: "Vendor Connect",
-        link: "https://vendor.hubeco.market/login",
+        link: `${process.env.NEXT_PUBLIC_VENDOR_URL}/login`,
         mb: true,
         level: 1,
         submenu: [],

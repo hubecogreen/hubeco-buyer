@@ -382,7 +382,7 @@ export default function Page() {
                   <div className="flex flex-col md:flex-row gap-4">
                     <CustomButton
                       onPress={() => {
-                        window.location.href = "https://vendor.hubeco.market/login";
+                        window.location.href =`${process.env.NEXT_PUBLIC_VENDOR_URL}/login`;
                       }}
                       title={"Vendor Connect"}
                       className="text-white bg-primary hover:bg-primary font-semibold h-12 w-full md:w-40 text-sm md:text-md"

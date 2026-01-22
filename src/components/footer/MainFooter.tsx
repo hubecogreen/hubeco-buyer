@@ -184,7 +184,7 @@ const Footer = () => {
                 <li><Link className="text-brown whitespace-nowrap" href="/green-financing">Green Financing</Link></li>
                 <li>
                   <a
-                    href="https://vendor.hubeco.market/login"
+                    href={`${process.env.NEXT_PUBLIC_VENDOR_URL}/login`}
                     className="text-brown whitespace-nowrap"
                   >
                     Vendor Connect

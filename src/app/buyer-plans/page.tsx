@@ -92,7 +92,7 @@ export default function Page() {
       });
   };
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       <Head>
         <title>Buyer Plans | Hubeco Buyer</title>
       </Head>
@@ -116,16 +116,16 @@ export default function Page() {
           </Link>
         </div>
 
-        <div className="bg-white w-full">
+        <div className="bg-cream w-full">
           <div
             className="flex flex-col lg:flex-row items-start justify-between py-12 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full bg-[url('/images/home/contactbg.webp')] bg-contain bg-no-repeat bg-left-10% relative max-w-full"
           >
             <div className="overflow-auto p-2 lg:p-4 w-full lg:w-4/12">
-              <h1 className="text-4xl font-bold mb-4 text-black">
+              <h1 className="text-4xl font-bold mb-4 text-brown">
                 Buyer Plans
               </h1>
               <p
-                className="text-lg font-thin text-justify text-black leading-relaxed"
+                className="text-lg font-thin text-justify text-brown leading-relaxed"
               >
                 At Hubeco, we offer a variety of subscription plans designed to
                 support buyers at every stage of their purchasing journey.
@@ -191,7 +191,7 @@ export default function Page() {
                               <h3 className="text-2xl font-bold">
                                 {freePlanData.name}
                               </h3>
-                              <p className="text-sm font-normal text-black mt-5 h-10">
+                              <p className="text-sm font-normal text-brown mt-5 h-10">
                                 {freePlanData.description}
                               </p>
                               <div className="my-5">
@@ -205,7 +205,7 @@ export default function Page() {
                                   }}
                                 />
                               </div>
-                              <h4 className="text-lg text-black font-bold mt-3 mb-1">
+                              <h4 className="text-lg text-brown font-bold mt-3 mb-1">
                                 Free
                               </h4>
                               <div className="mt-10">
@@ -252,7 +252,7 @@ export default function Page() {
                           {/* Second Column */}
                           <div className="w-full lg:w-5/12 relative border-r border-gray-100">
                             <div className="pr-4 text-current">
-                              <h3 className="text-2xl text-black font-bold">
+                              <h3 className="text-2xl text-brown font-bold">
                                 {prePlanData.name}
                               </h3>
                               <p className="text-sm font-normal mb-2 mt-5 h-10">
@@ -272,7 +272,7 @@ export default function Page() {
                               </div>
                               <div className="flex justify-start items-center mt-5">
                                 {prePlanData.monthlyDiscount == 0 ? (
-                                  <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
+                                  <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
                                     ₹&nbsp;
                                     {prePlanData.monthlyPrice}
                                     <p className="text-sm font-normal ml-2 text-gray">
@@ -281,10 +281,10 @@ export default function Page() {
                                   </h4>
                                 ) : (
                                   <>
-                                    <p className="text-sm font-normal line-through text-black">
+                                    <p className="text-sm font-normal line-through text-brown">
                                       ₹&nbsp;{prePlanData.monthlyPrice}
                                     </p>
-                                    <h4 className="text-lg font-bold ml-2 text-black">
+                                    <h4 className="text-lg font-bold ml-2 text-brown">
                                       ₹&nbsp;
                                       {prePlanData.monthlyPrice -
                                         prePlanData.monthlyDiscount}

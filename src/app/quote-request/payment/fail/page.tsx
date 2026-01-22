@@ -141,53 +141,53 @@ const PaymentFailed = () => {
           <h4  className='font-bold text-red-600 mt-6 mb-2'>
             Payment Failed
           </h4>
-          {/* <p  className='text-gray-600 mb-3 max-w-md mx-auto'>
+          {/* <p  className='text-brown mb-3 max-w-md mx-auto'>
             Don't worry, your account has been created successfully. Please verify your email address using the link
             we've sent to your registered email. You can then use your email and password to log into your account.
           </p>
-          <p className='text-gray-700 mb-6 font-medium'>
+          <p className='text-brown mb-6 font-medium'>
             You can upgrade your plan in account details
           </p>
-          <p  className='text-gray-500 '>
+          <p  className='text-brown '>
             Unfortunately, your transaction could not be completed. Please try again.
           </p> */}
         </div>
 
         {/* Transaction Details */}
         {/* <div className='mb-4 bg-red-200 p-5 rounded-lg shadow-md'>
-          <h6  className='font-bold text-gray-700'>
+          <h6  className='font-bold text-brown'>
             Transaction Details
           </h6>
           <Divider className='my-4' />
           {data ? (
             <>
               <div className='flex justify-between'>
-                <p className='font-bold text-gray-600'>
+                <p className='font-bold text-brown'>
                   Transaction ID:
                 </p>
-                <p className='text-gray-800'>
+                <p className='text-brown'>
                   {data.transactionId}
                 </p>
               </div>
               <div className='flex justify-between mt-2'>
-                <p className='font-bold text-gray-600'>
+                <p className='font-bold text-brown'>
                   Date:
                 </p>
-                <p className='text-gray-800'>
+                <p className='text-brown'>
                   {data.txnTime.split('T')[0]}
                 </p>
               </div>
               {/* <div className='flex justify-between mt-2'>
-                <p className='font-bold text-gray-600'>
+                <p className='font-bold text-brown'>
                   Amount:
                 </p>
-                <p className='text-gray-800'>
+                <p className='text-brown'>
                   ₹{data.txnAmount}
                 </p>
               </div> 
             </>
           ) : (
-            <p className='text-gray-600'>
+            <p className='text-brown'>
               No transaction details available.
             </p>
           )}

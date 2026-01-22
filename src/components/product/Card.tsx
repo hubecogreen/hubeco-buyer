@@ -319,7 +319,7 @@ const ProductCard = ({
 
   return (
     <div
-      className={`bg-white group border border-borderGray rounded-sm overflow-hidden shadow-sm hover:bg-[#E8E8E8] hover:shadow-lg transition-shadow duration-300 cursor-pointer`}
+      className={`bg-cream group border border-borderGray rounded-sm overflow-hidden shadow-sm  hover:border-primary hover:shadow-lg transition-shadow duration-300 cursor-pointer`}
     >
       <div className="relative">
         <Image
@@ -330,6 +330,7 @@ const ProductCard = ({
           }
           alt={product?.productName}
           className="w-full h-[314px] object-contain px-4 pt-10"
+          
           height={400}
           width={400}
           onError={(e) => {
@@ -366,7 +367,7 @@ const ProductCard = ({
               {isClicked ? (
                 <>
                   <IoBookmark
-                    color="#A92449" // Change stroke color on click
+                    color="#109989" // Change stroke color on click
                     className="group-hover:text-white cursor-pointer z-50"
                     size={25}
                     onClick={() => deleteWishlist(product?.variantId)}
@@ -376,7 +377,7 @@ const ProductCard = ({
               ) : (
                 <>
                   <CiBookmark
-                    color="#A92449" // Change stroke color on click
+                    color="#109989" // Change stroke color on click
                     className="group-hover:text-white cursor-pointer z-50"
                     size={25}
                     onClick={() => addToWishlist(product?.variantId)}
@@ -392,7 +393,7 @@ const ProductCard = ({
         <div className="flex justify-between items-start mb-2 gap-2">
           <h3
             onClick={() => router.push(`/${product.slug}`)}
-            className="text-lg font-medium text-[#01B6A3] mb-1 h-14 flex items-start w-full text-left overflow-hidden"
+            className="text-lg font-medium text-brown mb-1 h-14 flex items-start w-full text-left overflow-hidden"
           >
             <span className="line-clamp-2">{product.productName}</span>
           </h3>
@@ -441,14 +442,14 @@ const ProductCard = ({
               )}
           </div>
         </div>
-        {/* <p className="text-sm text-gray-600 mb-2">{product.description}</p> */}
+        {/* <p className="text-sm text-brown mb-2">{product.description}</p> */}
         <div className="flex items-center justify-between md:gap-6 gap-2 mt-2 ">
           {product?.purchaseType == "ONLINE" ? (
             <Button
               disabled={loadingCartButton}
               onClick={() => addToCart(product?.variantId)}
               // onClick={() => router.push("/coming-soon")}
-              className="z-10 w-[50%] bg-secondary text-white py-2 px-4 rounded group-hover:bg-secondary hover:bg-primary transition duration-300 flex items-center justify-center gap-2"
+              className="z-10 w-[50%] bg-primary text-white py-2 px-4 rounded hover:bg-primary transition duration-300 flex items-center justify-center gap-2"
             >
               {/* {product.action}{" "}
              {product.action === "Add to Cart" && <ArrowRight size={16} />} */}
@@ -466,7 +467,7 @@ const ProductCard = ({
               variant={"outline"}
               // onClick={() => router.push(`/${product.slug}?qt=open`)}
               onClick={() => OnClickQuote(product?.slug)}
-              className="z-10 w-[50%] bg-secondary text-white hover:text-white py-2 px-4 rounded group-hover:bg-secondary hover:bg-primary transition duration-300 flex items-center justify-center gap-2 md:text-[12px]"
+              className="z-10 w-[50%] bg-cream text-primary  py-2 px-4 rounded  border-primary hover:text-primary transition duration-300 flex items-center justify-center gap-2"
             >
               {/* {product.action}{" "}
             {product.action === "Add to Cart" && <ArrowRight size={16} />} */}
@@ -475,7 +476,7 @@ const ProductCard = ({
                   <CircularProgress color="#ffffff" size={6} />
                 </>
               ) : (
-                <> Request Quote</>
+                <> Request Pricing</>
               )}
             </Button>
           ) : product?.purchaseType == "MULTI" ? (
@@ -484,7 +485,7 @@ const ProductCard = ({
                 disabled={loadingCartButton}
                 onClick={() => addToCart(product?.variantId)}
                 // onClick={() => router.push("/coming-soon")}
-                className="z-10 w-[50%] bg-secondary text-white py-2 px-4 rounded group-hover:bg-secondary hover:bg-primary transition duration-300 flex items-center justify-center gap-2"
+                className="z-10 w-[50%] bg-primary text-white py-2 px-4 rounded  hover:bg-primary transition duration-300 flex items-center justify-center gap-2"
               >
                 {/* {product.action}{" "}
              {product.action === "Add to Cart" && <ArrowRight size={16} />} */}
@@ -501,7 +502,7 @@ const ProductCard = ({
                 variant={"outline"}
                 // onClick={() => router.push(`/${product.slug}?qt=open`)}
                 onClick={() => OnClickQuote(product?.slug)}
-                className="z-10 w-[50%] hover:bg-white hover:text-secondary  text-secondary border-secondary py-2 px-4 rounded  transition duration-300 flex items-center justify-center gap-2"
+                className="z-10 w-[50%] bg-cream  hover:text-primary  text-primary border-primary py-2 px-4 rounded  transition duration-300 flex items-center justify-center gap-2"
               >
                 {/* {product.action}{" "}
             {product.action === "Add to Cart" && <ArrowRight size={16} />} */}
@@ -510,7 +511,7 @@ const ProductCard = ({
                     <CircularProgress color="#ffffff" size={6} />
                   </>
                 ) : (
-                  <> Request Quote</>
+                  <> Request Pricing</>
                 )}
               </Button>
             </>

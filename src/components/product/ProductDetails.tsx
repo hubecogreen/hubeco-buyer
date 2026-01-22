@@ -1022,7 +1022,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
   // console.log(getMeta("metaDescription", totalProduct),"getMeta");
   return (
-    <div className="bg-white ">
+    <div className=" ">
       <BannerSection
         link1={{ name: "Home", href: "/" }}
         link2={{
@@ -1221,12 +1221,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
                 <div
                   className={`flex items-start ${isLongVariant
-                      ? "justify-between" // long name → wishlist extreme right (desktop & mobile)
-                      : "justify-between md:justify-start gap-3" // short name → desktop: two 50% blocks
+                    ? "justify-between" // long name → wishlist extreme right (desktop & mobile)
+                    : "justify-between md:justify-start gap-3" // short name → desktop: two 50% blocks
                     }`}
                 >
                   <div className={`w-auto ${!isLongVariant ? "md:w-1/2" : "md:w-auto"}`}>
-                    <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-black text-normal pr-[10px] sr-only">
+                    <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-brown text-normal pr-[10px] sr-only">
                       {productData?.meta?.metaTitle}
                     </h1>
 
@@ -1241,19 +1241,19 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       <div
                         className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group
      
-        ${isClicked ? "bg-secondary" : "bg-white"}`}
+        ${isClicked ? "bg-secondary" : "bg-cream"}`}
                       >
                         {isClicked ? (
                           <CiBookmark
                             color="#ffffff"
-                            className="group-hover:text-white cursor-pointer z-50"
+                            className="group-hover:text-cream cursor-pointer z-50"
                             size={25}
                             onClick={() => deleteWishlist(productData?._id)}
                           />
                         ) : (
                           <CiBookmark
                             color="#A92449"
-                            className="group-hover:text-white cursor-pointer z-50"
+                            className="group-hover:text-cream cursor-pointer z-50"
                             size={25}
                             onClick={() => addToWishlist(productData?._id)}
                           />
@@ -1287,7 +1287,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   )}
 
                   {/* SKU */}
-                  <p className="text-[14px] text-black font-normal w-fit px-2 py-2">
+                  <p className="text-[14px] text-brown font-normal w-fit px-2 py-2">
                     SKU: {productData?.variantSku}
                   </p>
                 </div>
@@ -1301,17 +1301,17 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   ) : productData?.MRP && productData?.discountedPrice ? (
                     <div className="block justify-start items-center">
                       {productData?.MRP === productData?.discountedPrice ? (
-                        <p className="md:text-3xl text-2xl text-black font-semibold text-normal flex justify-start items-center ">
-                          <span className="md:text-3xl text-2xl text-black mr-1 font-normal font-mono">
+                        <p className="md:text-3xl text-2xl text-brown font-semibold text-normal flex justify-start items-center ">
+                          <span className="md:text-3xl text-2xl text-brown mr-1 font-normal font-mono">
                             ₹
                           </span>{" "}
                           {formatCurrencyInIndianStyle(
                             productData?.platformPrice
                           )}
-                          <span className="text-[18px] font-regular text-fontGray ml-2">
+                          <span className="text-[18px] font-regular text-brown ml-2">
                             /{productData?.unitOfMeasure}
                           </span>
-                          <span className="text-[18px] font-regular text-black ml-2">
+                          <span className="text-[18px] font-regular text-brown ml-2">
                             MRP
                           </span>
                         </p>
@@ -1346,9 +1346,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                 </p>
                               )}
                           </div>
-                          <p className="md:text-3xl text-2xl text-black text-normal mt-2 flex justify-start items-center">
+                          <p className="md:text-3xl text-2xl text-brown text-normal mt-2 flex justify-start items-center">
                             ₹{" "}
-                            <span className="md:text-3xl text-2xl text-black font-semibold text-normal flex justify-start items-center">
+                            <span className="md:text-3xl text-2xl text-brown font-semibold text-normal flex justify-start items-center">
                               {productData?.platformPrice
                                 ? formatCurrencyInIndianStyle(
                                   productData?.platformPrice
@@ -1358,7 +1358,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                   productData?.MRP,
                                   productData?.tax?.igst
                                 ).toFixed(2)}
-                              <span className="text-[18px] font-regular text-fontGray ml-2">
+                              <span className="text-[18px] font-regular text-brown ml-2">
                                 /{productData?.unitOfMeasure} MRP
                               </span>
                             </span>
@@ -1371,7 +1371,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   )}
                 </div>
                 {totalProduct?.purchaseType !== "QUOTE" && (
-                  <p className="text-[13px] text-black text-normal mt-2">
+                  <p className="text-[13px] text-brown text-normal mt-2">
                     Inclusive of all taxes
                   </p>
                 )}
@@ -1382,7 +1382,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
                 {/* MATERIAL + QUANTITY SECTION (GREY BOX WRAPPER) */}
                 <div
-                  className={`bg-white rounded-xl  ${totalProduct?.purchaseType !== "QUOTE"
+                  className={` rounded-xl  ${totalProduct?.purchaseType !== "QUOTE"
                     ? "py-[10px] mt-3 md:px-[0px] px-[0px]"
                     : "md:py-[24px] p-[10px] mt-2"
                     }`}
@@ -1394,16 +1394,16 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       <div className="flex md:flex-row flex-col  w-full  md:gap-6 gap-2 pb-4">
                         {/* QUANTITY - LEFT SIDE (50%) */}
                         <div className="md:w-1/4 w-full">
-                          <p className="text-md text-fontGray mb-3">Quantity</p>
+                          <p className="text-md text-brown mb-3">Quantity</p>
 
                           <TooltipProvider>
                             <Tooltip open={showQtyTip}>
                               <TooltipTrigger asChild>
-                                <div className="flex items-center justify-between border border-borderGray w-full bg-white rounded-lg">
+                                <div className="flex items-center justify-between border border-primary w-full bg-cream rounded-lg">
                                   <Button
                                     type="button"
                                     onClick={handleDecrement}
-                                    className="pl-4 pr-0 py-2 bg-transparent text-lg hover:bg-transparent text-secondary"
+                                    className="pl-4 pr-0 py-2 bg-cream text-lg hover:bg-cream text-secondary"
                                     disabled={quantity <= minQty}
                                   >
                                     -
@@ -1413,13 +1413,13 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                     type="number"
                                     value={quantity}
                                     onChange={(e) => handleChange(e)}
-                                    className="w-24 pl-0 text-center custom-input"
+                                    className="bg-cream w-24 pl-0 text-center text-brown custom-input"
                                   />
 
                                   <Button
                                     type="button"
                                     onClick={handleIncrement}
-                                    className="pr-4 pl-0 py-2 text-lg bg-transparent hover:bg-transparent text-secondary"
+                                    className="pr-4 pl-0 py-2 text-lg bg-cream hover:bg-cream text-secondary"
                                     disabled={quantity >= maxQty}
                                   >
                                     +
@@ -1434,7 +1434,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               >
                                 <TooltipArrow className="fill-black" />
                                 {tooltipMsg && (
-                                  <p className="text-sm text-white font-medium py-2 px-2">
+                                  <p className="text-sm text-cream font-medium py-2 px-2">
                                     {tooltipMsg}
                                   </p>
                                 )}
@@ -1480,7 +1480,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             }
                           }}
                         >
-                          <p className="text-white text-md text-medium ml-3">Request for Quote</p>
+                          <p className="text-cream text-md text-medium ml-3">Request for Pricing</p>
                         </Button>
                       )}
 
@@ -1503,7 +1503,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           ) : (
                             <>
                               <BsCartPlus color="#fff" size={18} />
-                              <p className="text-white text-md text-medium ml-3">Add to Cart</p>
+                              <p className="text-cream text-md text-medium ml-3">Add to Cart</p>
                             </>
                           )}
                         </Button>
@@ -1517,15 +1517,15 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
               {/* SELLER DETAILS */}
               <div className="">
-                <p className="text-md text-fontGray font-semibold  text-normal mt-3 mb-2">Seller Details</p>
+                <p className="text-md text-brown font-semibold  text-normal mt-3 mb-2">Seller Details</p>
 
                 <div className="md:flex flex flex-col md:flex-row justify-start md:items-center items-start gap-4">
                   <div className="flex justify-start items-center md:mr-2 md:max-w-[60%]">
                     <div>
-                      <p className="text-[15px] capitalize text-black">
+                      <p className="text-[15px] capitalize text-brown">
                         {vendorInfo?.companyName}
                       </p>
-                      <p className="text-[13px] font-normal text-fontGray">
+                      <p className="text-[13px] font-normal text-brown">
                         Vendor ID : {vendorInfo?.vendorCode}
                       </p>
                     </div>
@@ -1537,7 +1537,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     {/* CERTIFICATE LOGO */}
                     {totalProduct?.certificate?.organization?.logo &&
                       totalProduct?.certificate?.organization?.authorityName !== "Others" && (
-                        <div className="w-fit z-10">
+                        <div className="w-fit z-10 relative">
                           <Image
                             src={
                               totalProduct?.certificate?.organization?.logo
@@ -1561,18 +1561,18 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       )}
 
                     {/* CERTIFIED BUTTON */}
-                    <div className="w-full md:w-auto">
+                    <div className="w-full md:w-auto relative ">
 
                       {totalProduct?.certificate?.certificateImg.endsWith(".pdf") ? (
                         // PDF BUTTON
                         <Button
                           onClick={() => window.open(totalProduct?.certificateLink, "_blank")}
-                          className="text-white bg-primary hover:bg-secondary font-semibold h-[45px]
-                   w-[90%] md:w-40 mx-auto md:mx-0
+                          className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
+                   w-[90%] md:w-40 mx-0 md:mx-0
                    text-sm md:text-md flex items-center justify-center
-                   md:relative md:right-[10px]"
+                   relative right-[10px]"
                         >
-                          <p className="text-white font-semibold text-md">Certified</p>
+                          <p className="text-cream font-semibold text-md">Certified</p>
                         </Button>
                       ) : (
                         // IMAGE PREVIEW DIALOG
@@ -1580,12 +1580,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           <DialogTrigger asChild className="max-w-[90%]">
                             <Link
                               href="#"
-                              className="text-white bg-primary hover:bg-secondary font-semibold h-[45px]
+                              className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
                        w-[90%] md:w-40 mx-auto md:mx-0
                        text-sm md:text-md flex items-center justify-center
                        md:relative md:right-[10px]"
                             >
-                              <p className="text-white font-semibold text-md">Certified</p>
+                              <p className="text-cream font-semibold text-md">Certified</p>
                             </Link>
                           </DialogTrigger>
 
@@ -1629,7 +1629,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
                 {/* COUNTRY & DELIVERY */}
                 <div className="flex justify-start md:items-center items-start md:gap-8 gap-2 md:flex-row flex-col">
-                  <p className="text-md text-fontGray md:mt-4 mt-1">
+                  <p className="text-md text-brown md:mt-4 mt-1">
                     Country Of Origin :
                     <span className="text-secondary font-medium uppercase ml-1">
                       {totalProduct?.countryOfOrigin == "In"
@@ -1647,41 +1647,35 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     </p>
                   ) : (
                     <div className="flex md:flex-row flex-col justify-between md:items-center items-start md:mt-4 mt-2 md:gap-3 ">
-                      <p className="text-md text-fontGray flex items-center justify-start text-normal font-normal  ">
+                      <p className="text-md text-brown flex items-center justify-start text-normal font-normal  ">
                         Delivery:
 
                       </p>
-                      <div className="flex h-8 items-center justify-between w-fit  mt-2 md:mt-0">
+                      <div className="relative w-[250px] md:w-[250px]">
                         <Input
                           placeholder="Enter Pincode"
                           onChange={(e: any) => {
-                            if (e?.target?.value.length == 6) {
-                              setPincode(e?.target?.value);
+                            if (e.target.value.length === 6) {
+                              setPincode(e.target.value);
                               setShowMssg(false);
                             } else {
-                              setPincode(e?.target?.value);
+                              setPincode(e.target.value);
                             }
                           }}
-                          className="border border-borderGray text-[16px] text-black rounded-none h-10 md:h-10 md:w-[250px] w-[250px] md:text-md text-xs py-2 md:py-0"
-                        // customStyles={{
-                        //   border: "1px solid #BCBCBC",
-                        //   color: "#333",
-                        // }}
-                        // leftIcon={<CiLocationOn size={20} />}
-
-                        // extraClassnames="w-fit h-8 text-xs rounded-sm"
+                          className="border border-primary bg-cream text-[16px] text-brown h-10 pr-16 rounded-none"
                         />
+
                         <Button
-                          title={"Apply"}
                           variant="link"
-                          disabled={pincode.length == 6 ? false : true}
-                          className={`text-secondary relative right-[70px] ${pincode.length == 6 ? "opacity-100" : "opacity-50"
-                            } `}
+                          disabled={pincode.length !== 6}
                           onClick={() => CheckDelivery(pincode)}
+                          className={`absolute right-3 top-1/2 -translate-y-1/2 text-secondary 
+      ${pincode.length === 6 ? "opacity-100" : "opacity-50"}`}
                         >
                           Check
                         </Button>
                       </div>
+
                       {pincode &&
                         pincode.length > 0 &&
                         pincode.length == 6 &&
@@ -1713,7 +1707,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         size={26}
                       />{" "}
                       Expected Shipping By :{" "}
-                      <span className="text-black text-normal font-semibold ml-2">
+                      <span className="text-brown text-normal font-semibold ml-2">
                         {calculateShippingDate(
                           productData?.readyForShippingInDay
                         )}
@@ -1751,7 +1745,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
                               {totalProduct?.cancellationPolicy
                                 ?.cancellationPolicyDoc ? (
-                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[95px]">
+                                <p className="text-sm text-brown text-normal h-[45px] max-w-[95px]">
                                   {totalProduct?.cancellationPolicy?.cancellationPolicyDoc.endsWith(
                                     ".pdf"
                                   ) ? (
@@ -1761,7 +1755,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                       className="text-secondary text-sm font-normal"
                                     >
                                       Cancellation{" "}
-                                      <span className="text-black text-sm font-normal">
+                                      <span className="text-brown text-sm font-normal">
                                         Available.
                                       </span>
                                     </Link>
@@ -1776,7 +1770,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                           <Link href="#" className="mr-3">
                                             <p className="text-secondary text-sm font-normal">
                                               Cancellation{" "}
-                                              <span className="text-black text-sm font-normal cursor-default">
+                                              <span className="text-brown text-sm font-normal cursor-default">
                                                 Available
                                               </span>
                                             </p>
@@ -1839,14 +1833,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                   )}
                                 </p>
                               ) : (
-                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[95px]">
+                                <p className="text-sm text-brown text-normal h-[45px] max-w-[95px]">
                                   <div
                                     // target="_blank"
                                     // href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.cancellationPolicy?.cancellationPolicyDoc}`}
                                     className="text-secondary text-sm font-normal"
                                   >
                                     Cancellation{" "}
-                                    <span className="text-black text-sm font-normal">
+                                    <span className="text-brown text-sm font-normal">
                                       Available.
                                     </span>
                                   </div>
@@ -1877,7 +1871,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         Cancellation
                       </p> */}
                           <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
-                            <p className="text-sm text-fontGray text-normal h-[45px]  max-w-[140px] ">
+                            <p className="text-sm text-brown text-normal h-[45px]  max-w-[140px] ">
                               Cancellation <br></br> Not Available
                             </p>
                           </div>
@@ -1904,7 +1898,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             />
                             <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
                               {totalProduct?.returnPolicy?.returnPolicyDoc ? (
-                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
+                                <p className="text-sm text-brown text-normal h-[45px] max-w-[100px]">
                                   {/* {totalProduct?.returnPolicy?.durationInDays} days{" "}
                             <Link
                               target="_blank"
@@ -1920,7 +1914,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                     <Link
                                       target="_blank"
                                       href={`${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`}
-                                      className="text-black text-sm font-normal "
+                                      className="text-brown text-sm font-normal "
                                     >
                                       {totalProduct?.returnPolicy?.durationInDays}{" "}
                                       days{" "}
@@ -1938,7 +1932,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                         >
                                           {/* <Button variant="outline">View</Button> */}
                                           <Link href="#" className=" md:mr-3">
-                                            <p className="text-black text-sm font-normal cursor-default">
+                                            <p className="text-brown text-sm font-normal cursor-default">
                                               {
                                                 totalProduct?.returnPolicy
                                                   ?.durationInDays
@@ -2005,11 +1999,11 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                   )}
                                 </p>
                               ) : (
-                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
+                                <p className="text-sm text-brown text-normal h-[45px] max-w-[100px]">
                                   <div
                                     // target="_blank"
                                     // href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.returnPolicy?.returnPolicyDoc}`}
-                                    className="text-black text-sm font-normal "
+                                    className="text-brown text-sm font-normal "
                                   >
                                     {totalProduct?.returnPolicy?.durationInDays}{" "}
                                     days{" "}
@@ -2041,7 +2035,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             src={"/images/ReturnS.svg"}
                           />
                           <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
-                            <p className="text-sm text-fontGray text-normal h-[45px]  max-w-[140px] ">
+                            <p className="text-sm text-brown text-normal h-[45px]  max-w-[140px] ">
                               Return<br></br> Not Available
                             </p>
                           </div>
@@ -2072,14 +2066,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             />
                             <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
                               {totalProduct?.refundPolicy?.refundPolicyDoc ? (
-                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
+                                <p className="text-sm text-brown text-normal h-[45px] max-w-[100px]">
                                   {totalProduct?.refundPolicy?.refundPolicyDoc.endsWith(
                                     ".pdf"
                                   ) ? (
                                     <Link
                                       target="_blank"
                                       href={`${assetURL}/${totalProduct?.refundPolicy?.refundPolicyDoc}`}
-                                      className="text-black text-sm font-normal cursor-default"
+                                      className="text-brown text-sm font-normal cursor-default"
                                     >
                                       {totalProduct?.refundPolicy?.durationInDays}{" "}
                                       days{" "}
@@ -2096,7 +2090,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                           className="max-w-[90%]"
                                         >
                                           <Link href="#" className=" md:mr-3">
-                                            <p className="text-black text-sm font-normal cursor-default">
+                                            <p className="text-brown text-sm font-normal cursor-default">
                                               {
                                                 totalProduct?.refundPolicy
                                                   ?.durationInDays
@@ -2162,11 +2156,11 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                   )}
                                 </p>
                               ) : (
-                                <p className="text-sm text-fontGray text-normal h-[45px] max-w-[100px]">
+                                <p className="text-sm text-brown text-normal h-[45px] max-w-[100px]">
                                   <div
                                     //  target="_blank"
                                     //  href={`https://docs.google.com/viewer?url=${assetURL}/${totalProduct?.refundPolicy?.refundPolicyDoc}`}
-                                    className="text-black text-sm font-normal cursor-default"
+                                    className="text-brown text-sm font-normal cursor-default"
                                   >
                                     {totalProduct?.refundPolicy?.durationInDays}{" "}
                                     days{" "}
@@ -2199,7 +2193,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               src={"/images/RefundS.svg"}
                             />
                             <div className="flex flex-col pl-3 h-[45px] justify-center items-center">
-                              <p className="text-sm text-fontGray text-normal h-[45px]  max-w-[140px] ">
+                              <p className="text-sm text-brown text-normal h-[45px]  max-w-[140px] ">
                                 Refund <br></br> Not Available
                               </p>
                             </div>
@@ -2217,39 +2211,39 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
             </div>
           </div>
 
-          <div className="bg-[#F4F4F4] md:flex block w-full md:mx-auto  md:max-w-[87.5%] md:py-6 md:justify-center md:items-center py-8 px-4 rounded-lg">
+          <div className="bg-cream border border-primary md:flex block w-full md:mx-auto  md:max-w-[87.5%] md:py-6 md:justify-center md:items-center py-8 px-4 rounded-lg">
             <Tabs defaultValue="account" className="w-full">
-              <div className="lg:sticky   bg-[#F4F4F4] top-[128px] overflow-x-scroll no-scrollbar">
-                <TabsList className="border-b border-borderGray h-[45px] md:max-w-fit rounded-none md:mx-auto md:flex md:justify-center md:items-center pb-0 mb-6 overflow-x-scroll no-scrollbar">
+              <div className="   top-[128px] overflow-x-scroll no-scrollbar">
+                <TabsList className="border-b border-transparent h-[45px] w-full rounded-none flex justify-start items-center  pb-0 mb-6 overflow-x-scroll no-scrollbar">
                   <TabsTrigger
                     value="account"
-                    className="px-4 text-md bg-transparent text-[#333333] border-b-2 border-transparent rounded-none data-[state=active]:border-secondary data-[state=active]:text-secondary data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                    className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                   >
                     Overview
                   </TabsTrigger>
                   <TabsTrigger
                     value="specifications"
-                    className="px-4 text-md bg-transparent text-[#333333] border-b-2 border-transparent rounded-none data-[state=active]:border-secondary data-[state=active]:text-secondary data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                    className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary  data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                   >
                     Specifications
                   </TabsTrigger>
                   <TabsTrigger
                     value="sustainability"
-                    className="px-4 text-md bg-transparent text-[#333333] border-b-2 border-transparent rounded-none data-[state=active]:border-secondary data-[state=active]:text-secondary data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                    className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary  data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                   >
                     Sustainability
                   </TabsTrigger>
                   {attachments && attachments?.length !== 0 && (
                     <TabsTrigger
                       value="attachments"
-                      className="px-4 text-md bg-transparent text-[#333333] border-b-2 border-transparent rounded-none data-[state=active]:border-secondary data-[state=active]:text-secondary data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                    className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                     >
                       Attachments
                     </TabsTrigger>
                   )}
                 </TabsList>
               </div>
-              <TabsContent value="account" className="md:px-[50px]  px-[10px]">
+              <TabsContent value="account" className="md:pl-4 md:pr-0 px-[10px] text-brown">
                 {/* {specificationData.map((specification:any)=>(
               <div
                 className="text-sm"
@@ -2258,7 +2252,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               ></div>
             ))} */}
                 <div
-                  className="text-sm w-full max-w-full text-justify"
+                  className="text-sm w-full max-w-full text-justify-start"
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(productData?.description),
                   }}
@@ -2266,7 +2260,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               </TabsContent>
               <TabsContent
                 value="specifications"
-                className="md:px-[50px] px-[10px]"
+                className="md:pl-4 md:pr-0 px-[10px] text-brown"
               >
                 {specificationData &&
                   specificationData?.map((specification: any) => {
@@ -2299,7 +2293,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               </TabsContent> */}
               <TabsContent
                 value="sustainability"
-                className="md:px-[50px] px-[10px]"
+                className="md:pl-4 md:pr-0 px-[10px] text-brown"
               >
                 {sustainability &&
                   sustainability?.map((sustainability: any) => (
@@ -2312,13 +2306,13 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               {/* {attachments.length === 0 ?
           
           <TabsContent value="attachments" className="md:px-[50px] px-[10px] w-full">
-            <p className="text-black text-lg md:ml-8 ml-1 font-medium">No Attachments Found</p>
+            <p className="text-brown text-lg md:ml-8 ml-1 font-medium">No Attachments Found</p>
             </TabsContent>
           : */}
               {attachments && attachments?.length !== 0 && (
                 <TabsContent
                   value="attachments"
-                  className="md:px-[50px] px-[10px] w-full"
+                  className="md:px-0 px-[10px] w-full text-brown"
                 >
                   {attachments && attachments?.length === 0 ? (
                     <>
@@ -2328,7 +2322,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         className="flex mx-auto justify-center items-center md:w-[400px] md:h-[400px] w-[90%]"
                       />
 
-                      <p className="text-black text-lg md:ml-8 ml-1 font- w-full flex items-center justify-center">
+                      <p className="text-brown text-lg md:ml-8 ml-1 font- w-full flex items-center justify-center">
                         No Attachments Found
                       </p>
                     </>
@@ -2380,7 +2374,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                                 }}
                                 loading="lazy"
                               />
-                              <p className="text-black text-lg md:ml-8 ml-1 font-medium">
+                              <p className="text-brown text-lg md:ml-8 ml-1 font-medium">
                                 {attachment?.key}
                               </p>
                             </div>
@@ -2573,9 +2567,9 @@ export default ProductDetails;
 //           <FiFileText
 //             // color="#A92449"
 //             size={18}
-//             className="text-current text-secondary group-hover:text-white"
+//             className="text-current text-secondary group-hover:text-cream"
 //           />
-//           <p className="text-secondary text-md text-medium ml-3 group-hover:text-white">
+//           <p className="text-secondary text-md text-medium ml-3 group-hover:text-cream">
 //             Request Quote
 //           </p>
 //         </Button>
@@ -2621,9 +2615,9 @@ export default ProductDetails;
 //             <BsCartPlus
 //               color="#fff"
 //               size={18}
-//               className="text-current group-hover:text-white"
+//               className="text-current group-hover:text-cream"
 //             />
-//             <p className="text-white text-md text-medium ml-3 group-hover:text-white">
+//             <p className="text-cream text-md text-medium ml-3 group-hover:text-cream">
 //               Add to Cart
 //             </p>
 //           </>

@@ -149,7 +149,7 @@ export default function QuoteDetailsDialog() {
 
   if (loading) {
     return (
-      <div className="w-full flex justify-center h-[80vh] items-center bg-white">
+      <div className="w-full flex justify-center h-[80vh] items-center bg-cream">
         <Loader className="text-[#439787] spin-in-180 animate-spin" />
       </div>
     );
@@ -174,8 +174,8 @@ export default function QuoteDetailsDialog() {
       />
 
       <div className="px-4 md:px-28 py-8 md:py-10">
-        <div className=" bg-[#80808023] flex justify-between items-center rounded-lg shadow-sm p-6 mb-8">
-          {/* <h1 className="text-3xl font-bold text-gray-800">
+        <div className=" bg-cream border border-primary flex justify-between items-center rounded-lg shadow-sm p-6 mb-8">
+          {/* <h1 className="text-3xl font-bold text-brown">
             Quote {selectedView.quotationId}
           </h1> */}
           <div className="flex gap-3 md:w-32 justify-start">
@@ -239,7 +239,7 @@ export default function QuoteDetailsDialog() {
             return (
               <div
                 key={product._id}
-                className=" bg-[#80808023] rounded-lg shadow-sm"
+                className=" bg-cream border border-primary rounded-lg shadow-sm"
               >
                 <div className="p-6">
                   <Flex alignItems="center" className="mb-6">
@@ -278,7 +278,7 @@ export default function QuoteDetailsDialog() {
                       }}
                       loading="lazy"
                     />
-                    <h3 className="text-xl font-bold text-gray-800">
+                    <h3 className="text-xl font-bold text-brown">
                       {product.variantId.variantName === "Default"
                         ? product.variantId.productId.name
                         : `${product.variantId.variantName}`}
@@ -288,95 +288,95 @@ export default function QuoteDetailsDialog() {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {/* {Array.isArray(product?.variantId?.attributes) &&
                       product?.variantId?.attributes.map((attribute: any) => (
-                        <div key={attribute.name} className="bg-white p-4 rounded-lg">
-                          <Text className="text-gray-600 text-sm font-medium mb-1">
+                        <div key={attribute.name} className="bg-cream p-4 rounded-lg">
+                          <Text className="text-browntext-sm font-medium mb-1">
                             {attribute.name}
                           </Text>
-                          <Text className="text-gray-900 font-semibold">
+                          <Text className="text-brown font-semibold">
                             {attribute.value}
                           </Text>
                         </div>
                       ))} */}
-                    <div className="bg-white p-4 rounded-lg">
-                      <Text className="text-gray-600 text-sm font-medium mb-1">
+                    <div className="bg-cream border border-primary p-4 rounded-lg">
+                      <Text className="text-browntext-sm font-medium mb-1">
                         Quantity
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         {selectedView?.products[index]?.quantity}
                       </Text>
                     </div>
-                    <div className="bg-white p-4 rounded-lg">
-                      <Text className="text-gray-600 text-sm font-medium mb-1">
+                    <div className="bg-cream p-4 border border-primary rounded-lg">
+                      <Text className="text-browntext-sm font-medium mb-1">
                         Unit Price
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         <span className="text-xl font-normal font-mono">₹</span>
                         {selectedView?.products[index]?.unitPrice}
                       </Text>
                     </div>
-                    <div className="bg-white p-4 rounded-lg">
-                      <Text className="text-gray-600 text-sm font-medium mb-1">
+                    <div className="bg-cream border border-primary p-4 rounded-lg">
+                      <Text className="text-browntext-sm font-medium mb-1">
                         Delivery Date
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         {dayjs(
                           selectedView?.products[index]?.deliveryDate
                         ).format("DD-MM-YYYY")}
                       </Text>
                     </div>
                     {selectedView?.products[index]?.cgst == -1 ? null : (
-                      <div className="bg-white p-4 rounded-lg">
-                        <Text className="text-gray-600 text-sm font-medium mb-1">
+                      <div className="bg-cream border border-primary  p-4 rounded-lg">
+                        <Text className="text-browntext-sm font-medium mb-1">
                           CGST
                         </Text>
-                        <Text className="text-gray-900 font-semibold">
+                        <Text className="text-brown font-semibold">
                           {selectedView?.products[index]?.cgst}%
                         </Text>
                       </div>
                     )}
                     {selectedView?.products[index]?.sgst == -1 ? null : (
-                      <div className="bg-white p-4 rounded-lg">
-                        <Text className="text-gray-600 text-sm font-medium mb-1">
+                      <div className="bg-cream border border-primary  p-4 rounded-lg">
+                        <Text className="text-browntext-sm font-medium mb-1">
                           SGST
                         </Text>
-                        <Text className="text-gray-900 font-semibold">
+                        <Text className="text-brown font-semibold">
                           {selectedView?.products[index]?.sgst}%
                         </Text>
                       </div>
                     )}
                     {selectedView?.products[index]?.igst == -1 ? null : (
-                      <div className="bg-white p-4 rounded-lg">
-                        <Text className="text-gray-600 text-sm font-medium mb-1">
+                      <div className="bg-cream border border-primary p-4 rounded-lg">
+                        <Text className="text-browntext-sm font-medium mb-1">
                           IGST
                         </Text>
-                        <Text className="text-gray-900 font-semibold">
+                        <Text className="text-brown font-semibold">
                           {selectedView?.products[index]?.igst}%
                         </Text>
                       </div>
                     )}
-                    <div className="bg-white p-4 rounded-lg">
-                      <Text className="text-gray-600 text-sm font-medium mb-1">
+                    <div className="bg-cream border border-primary  p-4 rounded-lg">
+                      <Text className="text-browntext-sm font-medium mb-1">
                         Shipping Cost
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         <span className="text-xl font-normal font-mono">₹</span>
                         {selectedView?.products[index]?.shippingCost}
                       </Text>
                     </div>{" "}
-                    <div className="bg-white p-4 rounded-lg">
-                      <Text className="text-gray-600 text-sm font-medium mb-1">
+                    <div className="bg-cream border border-primary  p-4 rounded-lg">
+                      <Text className="text-browntext-sm font-medium mb-1">
                         Other Cost
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         <span className="text-xl font-normal font-mono">₹</span>
                         {selectedView?.products[index]?.otherCost}
                       </Text>
                     </div>
-                    <div className="bg-white p-4 rounded-lg">
-                      <Text className="text-gray-600 text-sm font-medium mb-1">
+                    <div className="bg-cream border border-primary  p-4 rounded-lg">
+                      <Text className="text-browntext-sm font-medium mb-1">
                         Taxable Amount
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         <span className="text-xl font-normal font-mono">₹</span>
                         {formatCurrencyInIndianStyle(
                           selectedView?.products[index]?.unitPrice *
@@ -384,24 +384,24 @@ export default function QuoteDetailsDialog() {
                         )}
                       </Text>
                     </div>
-                    <div className="bg-white p-4 rounded-lg">
-                      <Text className="text-gray-600 text-sm font-medium mb-1">
+                    <div className="bg-cream border border-primary  p-4 rounded-lg">
+                      <Text className="text-browntext-sm font-medium mb-1">
                         Tax Amount (
                         {selectedView?.products[index]?.sgst == -1
                           ? "IGST"
                           : "CGST + SGST"}
                         )
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         <span className="text-xl font-normal font-mono">₹</span>
                         {selectedView?.products[index]?.taxableAmount}
                       </Text>
                     </div>
-                    {/* <div className="bg-white p-4 rounded-lg">
-                      <Text className="text-gray-600 text-sm font-medium mb-1">
+                    {/* <div className="bg-cream p-4 rounded-lg">
+                      <Text className="text-browntext-sm font-medium mb-1">
                         Product Cost
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                       <span
                       className="text-xl "
                       style={{ fontWeight: "400", fontFamily: "monospace" }}
@@ -411,11 +411,11 @@ export default function QuoteDetailsDialog() {
                     </span>{(selectedView?.products[index]?.unitPrice)}
                       </Text>
                     </div> */}
-                    <div className="bg-white p-4 rounded-lg">
-                      <Text className="text-gray-600 text-sm font-medium mb-1">
+                    <div className="bg-cream border border-primary  p-4 rounded-lg">
+                      <Text className="text-browntext-sm font-medium mb-1">
                         Total Amount
                       </Text>
-                      <Text className="text-gray-900 font-semibold">
+                      <Text className="text-brown font-semibold">
                         <span className="text-xl font-normal font-mono">₹</span>
                         {selectedView?.products[index]?.totalAmount}
                       </Text>
@@ -424,12 +424,12 @@ export default function QuoteDetailsDialog() {
 
                   <div className="mt-6 space-y-4">
                     {selectedView?.products[index]?.notes && (
-                      <div className="bg-white p-4 rounded-lg">
-                        <Text className="text-gray-600 text-sm font-medium mb-1">
+                      <div className="bg-cream p-4 rounded-lg">
+                        <Text className="text-browntext-sm font-medium mb-1">
                           Notes
                         </Text>
                         <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                          <Text className="text-gray-900 whitespace-pre-wrap break-words text-wrap">
+                          <Text className="text-brown whitespace-pre-wrap break-words text-wrap">
                             {selectedView?.products[index]?.notes}
                           </Text>
                         </div>
@@ -437,12 +437,12 @@ export default function QuoteDetailsDialog() {
                     )}
 
                     {selectedView?.products[index]?.warranty && (
-                      <div className="bg-white p-4 rounded-lg">
-                        <Text className="text-gray-600 text-sm font-medium mb-1">
+                      <div className="bg-cream p-4 rounded-lg">
+                        <Text className="text-browntext-sm font-medium mb-1">
                           Warranty
                         </Text>
                         <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                          <Text className="text-gray-900 whitespace-pre-wrap break-words text-wrap">
+                          <Text className="text-brown whitespace-pre-wrap break-words text-wrap">
                             {selectedView?.products[index]?.warranty}
                           </Text>
                         </div>
@@ -456,14 +456,14 @@ export default function QuoteDetailsDialog() {
         </div>
 
         {/* Additional Requirements Section */}
-        <div className="space-y-6  bg-[#80808023] bg-gray-200 rounded-lg shadow-sm">
-          <h5 className="text-xl font-semibold text-gray-800   p-6 pb-0 rounded-lg">
+        <div className="space-y-6  bg-cream border border-primary bg-gray-200 rounded-lg shadow-sm">
+          <h5 className="text-xl font-semibold text-brown   p-6 pb-0 rounded-lg">
             Grand Total
           </h5>
           <div className=" rounded-lg gap-5 flex  p-6 py-2">
-            {/* <div className="bg-white p-4 rounded-lg w-full">
-                <p className="text-gray-600 text-sm font-medium mb-1">Shipping/Delivery Cost </p>
-                <p className="text-gray-900 font-semibold"> <span
+            {/* <div className="bg-cream p-4 rounded-lg w-full">
+                <p className="text-browntext-sm font-medium mb-1">Shipping/Delivery Cost </p>
+                <p className="text-brown font-semibold"> <span
                       className="text-xl "
                       style={{ fontWeight: "400", fontFamily: "monospace" }}
                     >
@@ -471,9 +471,9 @@ export default function QuoteDetailsDialog() {
                       ₹
                     </span>{selectedView?.shippingCost}</p>
               </div>
-              <div className="bg-white p-4 rounded-lg w-full">
-                <p className="text-gray-600 text-sm font-medium mb-1">Other Cost</p>
-                <p className="text-gray-900 font-semibold"> <span
+              <div className="bg-cream p-4 rounded-lg w-full">
+                <p className="text-browntext-sm font-medium mb-1">Other Cost</p>
+                <p className="text-brown font-semibold"> <span
                       className="text-xl "
                       style={{ fontWeight: "400", fontFamily: "monospace" }}
                     >
@@ -481,11 +481,11 @@ export default function QuoteDetailsDialog() {
                       ₹
                     </span>{selectedView?.otherCost}</p>
               </div> */}
-            <div className="bg-white p-4 rounded-lg w-full">
-              <p className="text-gray-600 text-sm font-medium mb-1">
+            <div className="bg-cream border border-primary p-4 rounded-lg w-[280px] h-auto">
+              <p className="text-browntext-sm font-medium mb-1">
                 Grand Total
               </p>
-              <p className="text-gray-900 font-semibold">
+              <p className="text-brown font-semibold">
                 {" "}
                 <span className="text-xl font-normal font-mono">₹</span>
                 {selectedView?.grandTotal}
@@ -517,38 +517,38 @@ export default function QuoteDetailsDialog() {
                 )}
             </div>
           </div>
-          <h5 className="text-xl font-semibold text-gray-800   px-6 pb-0 rounded-lg">
+          <h5 className="text-xl font-semibold text-brown   px-6 pb-0 rounded-lg">
             Terms and Conditions
           </h5>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-0 p-6">
-            <div className="  rounded-lg bg-white p-4  w-full">
-              <h3 className=" text-gray-600 text-sm font-medium mb-1">
+            <div className="  rounded-lg bg-cream border border-primary p-4  w-full">
+              <h3 className=" text-browntext-sm font-medium mb-1">
                 Delivery Terms
               </h3>
               <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                <p className="text-gray-700 whitespace-pre-wrap break-words text-wrap">
+                <p className="text-brown whitespace-pre-wrap break-words text-wrap">
                   {selectedView?.deliveryTerms || "-"}
                 </p>
               </div>
             </div>
 
-            <div className="  rounded-lg bg-white  w-full  p-6">
-              <h3 className=" text-gray-600 text-sm font-medium mb-1">
+            <div className="  rounded-lg bg-cream border border-primary w-full  p-6">
+              <h3 className=" text-browntext-sm font-medium mb-1">
                 Payment Terms
               </h3>
-              <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                <p className="text-gray-700  whitespace-pre-wrap break-words text-wrap">
+              <div className=" max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+                <p className="text-brown  whitespace-pre-wrap break-words text-wrap">
                   {selectedView?.paymentTerms || "-"}
                 </p>
               </div>
             </div>
 
-            <div className="  rounded-lg bg-white p-6  w-full  md:col-span-2">
-              <h3 className=" text-gray-600 text-sm font-medium mb-1">
+            <div className="  rounded-lg bg-cream border border-primary p-6  w-full  md:col-span-2">
+              <h3 className=" text-browntext-sm font-medium mb-1">
                 Other Terms and Conditions
               </h3>
               <div className="max-h-32 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-                <p className="text-gray-700 whitespace-pre-wrap break-words text-wrap">
+                <p className="text-brown whitespace-pre-wrap break-words text-wrap">
                   {selectedView?.otherTerms || "-"}
                 </p>
               </div>
@@ -557,7 +557,7 @@ export default function QuoteDetailsDialog() {
         </div>
 
         {/* Quote Validity */}
-        <div className="mt-8 bg-[#80808023] p-6 rounded-lg shadow-sm ">
+        <div className="mt-8 bg-cream border border-primary p-6 rounded-lg shadow-sm ">
           <Text className="text-red-600 font-semibold text-[#B90647] text-lg">
             Quote Validity{" "}
             <span className="text-primary-700 font-bold">
@@ -639,11 +639,11 @@ export default function QuoteDetailsDialog() {
 
 {
   /* <div className=" bg-[#80808023] rounded-lg shadow-sm p-6 md:col-span-2">
-              <h3 className="text-lg font-semibold mb-4 text-gray-800">Certification Required</h3>
+              <h3 className="text-lg font-semibold mb-4 text-brown">Certification Required</h3>
               <Flex
                 alignItems="center"
                 justify="space-between"
-                className="bg-white rounded-lg p-4"
+                className="bg-cream rounded-lg p-4"
               > */
 }
 {
@@ -661,7 +661,7 @@ export default function QuoteDetailsDialog() {
                     mr={8}
                     className="border border-gray-200"
                   />
-                  <Text className="text-lg font-medium text-gray-800">
+                  <Text className="text-lg font-medium text-brown">
                     Certificate provided
                   </Text>
                 </Flex> */
@@ -672,7 +672,7 @@ export default function QuoteDetailsDialog() {
                   <Link
                     href={`${assetUrl}/${selectedView.products[0].certificate}`}
                     target="_blank"
-                    className="text-secondary hover:text-secondary-dark font-medium px-4 py-2  bg-[#80808023] rounded-lg hover:bg-white transition-all"
+                    className="text-secondary hover:text-secondary-dark font-medium px-4 py-2  bg-[#80808023] rounded-lg hover:bg-cream transition-all"
                   >
                     View
                   </Link>
@@ -681,7 +681,7 @@ export default function QuoteDetailsDialog() {
                     <DialogTrigger asChild>
                       <Link
                         href="#"
-                        className="text-secondary hover:text-secondary-dark font-medium px-4 py-2  bg-[#80808023] rounded-lg hover:bg-white transition-all"
+                        className="text-secondary hover:text-secondary-dark font-medium px-4 py-2  bg-[#80808023] rounded-lg hover:bg-cream transition-all"
                       >
                         View
                       </Link>

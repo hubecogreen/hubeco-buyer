@@ -654,7 +654,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                   className="border md:w-full lg:w-full grid rounded border-slate-300 shadow-sm justify-start text-left md:p-5 p-3  mb-5"
                 >
                   <div>
-                    <p className="text-black text-md w-full flex leading-6  break-words  break-all">
+                    <p className="text-brown text-md w-full flex leading-6  break-words  break-all">
                       {address?.address.includes("|")
                         ? address.address.replace(/\|/g, ", ")
                         : address.address}
@@ -666,7 +666,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                     <div className="flex justify-start w-2/3 h-[22px]">
                     <button
                       onClick={() => onEditAddress(address)}
-                      className="hover:underline font-bold text-[#B90647]"
+                      className="hover:underline font-bold text-primary"
                     >
 
                         Edit
@@ -678,7 +678,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                           <span className="text-pink-600 ml-2">|</span>
 
                           <button
-                            className="hover:underline ml-2 font-bold text-[#B90647]"
+                            className="hover:underline ml-2 font-bold text-primary"
                             onClick={() => {
                               setIsOpen(true);
                               setDeleteId(address.id);
@@ -724,7 +724,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                     </div>
 
                     {address.isDefault ? (
-                      <h2 className="text-xs font-normal flex   justify-center mt-1 text-secondary w-16 text-center py-0 h-[20px] border border-secondary border-solid rounded ">
+                      <h2 className="text-xs font-normal flex   justify-center mt-1 text-primary w-16 text-center py-0 h-[20px] border border-primary border-solid rounded ">
                         Default
                       </h2>
                     ) : (
@@ -775,7 +775,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                 {/* <div style={{ display: "flex" }}> */}
                 <div className="flex flex-wrap md:flex-nowrap w-full">
                   <div className="md:w-3/6 w-full p-5">
-                    <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                    <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                       Address Line 1 <span className="text-red">*</span>
                     </label>
                     <Controller
@@ -802,7 +802,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                   </div>
 
                   <div className="md:w-3/6 w-full p-5">
-                    <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                    <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                       Land Mark
                     </label>
                     <Controller
@@ -831,7 +831,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                 {/* Pincode and Country */}
                 <div className="flex flex-wrap md:flex-nowrap w-full">
                   <div className="md:w-3/6 w-full p-5">
-                    <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                    <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                       Pincode <span className="text-red">*</span>
                     </label>
                     <Controller
@@ -861,7 +861,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                   </div>
 
                   <div className="md:w-3/6 w-full p-5">
-                    <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                    <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                       Country <span className="text-red">*</span>
                     </label>
 
@@ -878,7 +878,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                         >
                           <SelectTrigger className="w-full">
                             <SelectValue
-                              className="text-fontGray"
+                              className="text-brown"
                               placeholder="Select a Country"
                             />
                           </SelectTrigger>
@@ -911,7 +911,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                 {/* City and State */}
                 <div className="flex flex-wrap md:flex-nowrap w-full">
                   <div className="md:w-3/6 w-full p-5">
-                    <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                    <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                       State <span className="text-red">*</span>
                     </label>
                     <Controller
@@ -954,7 +954,7 @@ const B2C_editAddress: React.FC<AddressFormProps> = ({ nextStep }) => {
                     </div>
                   </div>
                   <div className="md:w-3/6 w-full p-5">
-                    <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                    <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                       City <span className="text-red">*</span>
                     </label>
                     <Controller

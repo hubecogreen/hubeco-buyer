@@ -282,12 +282,12 @@ const B2CPlans: React.FC<FormProps> = ({ prevStep }) => {
                   <h3 className="text-2xl font-bold text-left text-secondary">
                     {freePlanData?.name}
                   </h3>
-                  <p className="text-sm font-normal text-black text-left mt-5 h-[30px]">
+                  <p className="text-sm font-normal text-brown text-left mt-5 h-[30px]">
 
                     {freePlanData?.description}
                   </p>
                   <div className="flex justify-start items-center mb-4 mt-4">
-                    <h4 className="text-lg text-black font-bold mt-3 mb-1">
+                    <h4 className="text-lg text-brown font-bold mt-3 mb-1">
                       Free
                     </h4>
                   </div>
@@ -364,7 +364,7 @@ const B2CPlans: React.FC<FormProps> = ({ prevStep }) => {
                           }`}
                       >
                         <p
-                          className={` ${term === "Monthly" ? "text-white" : "text-black"
+                          className={` ${term === "Monthly" ? "text-white" : "text-brown"
                             } text-xs font-normal  px-4 py-1 `}
                         >
                           Monthly
@@ -380,7 +380,7 @@ const B2CPlans: React.FC<FormProps> = ({ prevStep }) => {
                           }`}
                       >
                         <p
-                          className={` ${term === "Yearly" ? "text-white" : "text-black"
+                          className={` ${term === "Yearly" ? "text-white" : "text-brown"
                             } text-xs font-normal  px-4 py-1`}
                         >
                           Yearly
@@ -388,7 +388,7 @@ const B2CPlans: React.FC<FormProps> = ({ prevStep }) => {
                       </div>
                     </div>
                   </div>
-                  <p className="text-sm font-normal text-black text-left mt-5 h-[30px]">
+                  <p className="text-sm font-normal text-brown text-left mt-5 h-[30px]">
                     {prePlanData?.description}
                   </p>
 
@@ -396,8 +396,8 @@ const B2CPlans: React.FC<FormProps> = ({ prevStep }) => {
                     {term === "Monthly" ? (
                       <>
                         {prePlanData?.monthlyDiscount == 0 ? (
-                          <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
-                            <span className="text-lg text-black mr-1 font-mono font-normal">
+                          <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
+                            <span className="text-lg text-brown mr-1 font-mono font-normal">
                               {" "}
                               ₹
                             </span>
@@ -410,14 +410,14 @@ const B2CPlans: React.FC<FormProps> = ({ prevStep }) => {
                         ) : (
                           <>
                             {" "}
-                            <p className="text-sm font-normal line-through  text-black">
-                              <span className="text-lg text-black mr-1 font-mono font-normal">
+                            <p className="text-sm font-normal line-through  text-brown">
+                              <span className="text-lg text-brown mr-1 font-mono font-normal">
                                 {" "}
                                 ₹
                               </span>
                               &nbsp;{prePlanData.monthlyPrice}
                             </p>
-                            <h4 className="text-lg font-bold ml-2 text-black">
+                            <h4 className="text-lg font-bold ml-2 text-brown">
                               ₹&nbsp;
                               {prePlanData.monthlyPrice -
                                 prePlanData.monthlyDiscount}
@@ -432,8 +432,8 @@ const B2CPlans: React.FC<FormProps> = ({ prevStep }) => {
                         )}
                       </>
                     ) : prePlanData?.yearlyDiscount == 0 ? (
-                      <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
-                        <span className="text-lg text-black mr-1 font-mono font-normal">
+                      <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
+                        <span className="text-lg text-brown mr-1 font-mono font-normal">
                           {" "}
                           ₹
                         </span>
@@ -446,15 +446,15 @@ const B2CPlans: React.FC<FormProps> = ({ prevStep }) => {
                     ) : (
                       <>
                         {" "}
-                        <p className="text-sm font-normal line-through  text-black">
-                        <span className="text-lg text-black mr-1 font-mono font-normal">
+                        <p className="text-sm font-normal line-through  text-brown">
+                        <span className="text-lg text-brown mr-1 font-mono font-normal">
                             {" "}
                             ₹
                           </span>
                           &nbsp;{prePlanData?.yearlyPrice}
                         </p>
-                        <h4 className="text-lg font-bold ml-2 text-black">
-                        <span className="text-lg text-black mr-1 font-mono font-normal">
+                        <h4 className="text-lg font-bold ml-2 text-brown">
+                        <span className="text-lg text-brown mr-1 font-mono font-normal">
                             {" "}
                             ₹
                           </span>
@@ -500,13 +500,13 @@ const B2CPlans: React.FC<FormProps> = ({ prevStep }) => {
       <div className="flex flex-col sm:flex-row justify-between mt-10">
         <CustomButton
           title={"Back"}
-          className="ml-3 hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-black "
-          customStyles={{ backgroundColor: "#E0E0E0" }}
+          className="ml-3 hover:bg-primary border border-primary h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-brown "
+          customStyles={{ backgroundColor: "#FFFEF8" }}
           onPress={prevStep}
         />
         <CustomButton
           title={"Continue"}
-          className="ml-3 bg-secondary hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-white "
+          className="ml-3 bg-primary hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-cream "
           customStyles={{}}
           onPress={selectedPlan == "free" ? buyFreePlan : buySubscription}
           type="submit"

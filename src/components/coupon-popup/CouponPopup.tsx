@@ -67,16 +67,16 @@ const CouponPopup: React.FC<PincodePopupProps> = ({ isOpen, onClose }) => {
 
               {/* Right Side: Coupon Details */}
               <div className="flex flex-col justify-between w-3/5 p-4 bg-white">
-                <span className="text-xs font-bold text-gray-500">
+                <span className="text-xs font-bold text-brown">
                   COUPON NAME
                 </span>
-                <span className="text-sm font-semibold text-gray-800">
+                <span className="text-sm font-semibold text-brown">
                   #Coupon Code
                 </span>
-                <span className="text-sm text-gray-800">
+                <span className="text-sm text-brown">
                   Code: {coupon.code}
                 </span>
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-brown">
                   Expiry: 31 Dec 2024{" "}
                   <span className="text-red-600 font-bold">*T&C</span>
                 </span>

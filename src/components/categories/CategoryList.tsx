@@ -1,203 +1,385 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { IoIosSearch } from "react-icons/io";
 import Link from "next/link";
-// import axios from "axios";
-// import { CircularProgress } from "@chakra-ui/react";
-// import Pagination from "../pagination/Pagination";
-// import * as Webservices from "../../network/WebServices";
-import * as getEndpoint from "../../network/EndPoints";
+import { GoArrowRight } from "react-icons/go";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+
 import LottieWrapper from "../LottieWrapper";
 import animationData from "../../../public/animations/nodatafound.json";
 import styles from "../home/categories/Category.module.css";
 import CustomButton from "../customButton/CustomButton";
-import { GoArrowRight } from "react-icons/go";
-import { useRouter } from "next/navigation";
-import store from "@/reduxStore";
-import { toast } from "react-hot-toast";
+
+import * as getEndpoint from "../../network/EndPoints";
 import useApi from "../Fetcher/useAPI";
-import { useDispatch } from "react-redux";
 import {
+  saveBuildingSystemCategories,
   saveCategories,
   saveCatTime,
 } from "@/reduxStore/slices/masterDataSlice";
 import { normalizePath } from "@/lib/utils";
 
-interface Category {
-  id: string;
-  displayImage: string;
-  companyName: string;
-  items: string;
-}
-
 const FALLBACK_IMAGE = "/images/product-placeholder.webp";
 
 const CategoryList = () => {
-  const [vendors, setVendors] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
-  const categories = store.getState().masterData.categories;
-  const [categoriesData, setCategoriesData] = useState<any>(categories);
+  const dispatch = useDispatch();
   const router = useRouter();
   const { callApi } = useApi();
-  const dispatch = useDispatch();
 
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
 
+  // Redux State
+  const categories = useSelector((state: any) => state.masterData.categories);
+  const buildingSystemCategories = useSelector(
+    (state: any) => state.masterData.buildingSystemCategories
+  );
+
   useEffect(() => {
-    getCategories();
+    fetchCategories();
   }, []);
 
-  const handleApiError = async (err: any) => {
+  // -----------------------------
+  // API ERROR HANDLER
+  // -----------------------------
+  const handleApiError = (err: any) => {
     const result = err?.response;
-    if (result?.status === 400) {
-      toast.error("Categories Not Found");
-    } else if (result?.status === 404) {
-      toast.error("Invalid Request");
+    const msg =
+      result?.data?.message ||
+      (result?.status === 400
+        ? "Categories Not Found"
+        : result?.status === 404
+          ? "Invalid Request"
+          : "Something went wrong");
+
+    toast.error(msg);
+  };
+
+  const chunkIntoRows = (arr: any[], size = 4) => {
+    const rows = [];
+    for (let i = 0; i < arr.length; i += size) {
+      rows.push(arr.slice(i, i + size));
+    }
+    return rows;
+  };
+
+
+const MobileRowCarousel = ({ items }: { items: any[] }) => {
+  const rowRef = React.useRef<HTMLDivElement | null>(null);
+  const [showLeft, setShowLeft] = useState(false);
+  const [showRight, setShowRight] = useState(items.length === 4);
+
+  const CARD_WIDTH = 110; // REQUIRED
+  const SCROLL_BY = CARD_WIDTH;
+  const ITEMS_PER_ROW = 4;
+  
+  // Create duplicated items for seamless continuous scrolling
+  const displayItems = items.length === 4 
+    ? [...items, ...items, ...items] // Duplicate twice for continuous scroll
+    : items;
+
+  useEffect(() => {
+    if (!rowRef.current) return;
+
+    const container = rowRef.current;
+
+    const interval = setInterval(() => {
+      if (!container) return;
+
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      
+      // Calculate if we're near the end of the scrollable area
+      const isNearEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+      
+      if (isNearEnd) {
+        // If we're at the end of duplicated items, instantly jump back to middle
+        container.scrollLeft = items.length * CARD_WIDTH;
+      } else {
+        // Continuous scroll to the right
+        container.scrollBy({ left: SCROLL_BY, behavior: "smooth" });
+      }
+    }, 2500); // 2.5s
+
+    return () => clearInterval(interval);
+  }, [items.length]);
+
+  const onScroll = () => {
+    if (!rowRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = rowRef.current;
+    
+    // Show left arrow when scrolled away from start (for all items)
+    setShowLeft(scrollLeft > 10);
+    
+    // Show right arrow logic
+    if (items.length === 4) {
+      // For 4-item rows with duplicated content
+      const firstSectionEnd = items.length * CARD_WIDTH;
+      const isInFirstSection = scrollLeft < firstSectionEnd;
+      setShowRight(isInFirstSection || scrollLeft + clientWidth < scrollWidth - 10);
     } else {
-      toast.error(result?.data?.message);
+      // For other cases
+      setShowRight(scrollLeft + clientWidth < scrollWidth - 10);
     }
   };
 
-  const handleSearch = (e: any) => {
-    setSearchTerm(e.target.value);
+  const scroll = (dir: "left" | "right") => {
+    if (!rowRef.current) return;
+    
+    const container = rowRef.current;
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    
+    if (dir === "right") {
+      // For right scroll - continuous behavior
+      if (items.length === 4) {
+        const isNearEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+        if (isNearEnd) {
+          // Jump back to middle for continuous loop
+          container.scrollLeft = items.length * CARD_WIDTH;
+        } else {
+          container.scrollBy({ left: SCROLL_BY, behavior: "smooth" });
+        }
+      } else {
+        container.scrollBy({ left: SCROLL_BY, behavior: "smooth" });
+      }
+    } else if (dir === "left") {
+      // For left scroll - normal behavior for ALL items
+      // Allow scrolling left as long as we're not at the very start
+      if (scrollLeft > 0) {
+        container.scrollBy({ left: -SCROLL_BY, behavior: "smooth" });
+      }
+    }
   };
 
-  const getCategories = async () => {
+  return (
+    <div className="relative lg:hidden">
+      {/* LEFT ARROW - Shows when user has scrolled to the right */}
+      {showLeft && (
+        <button
+          onClick={() => scroll("left")}
+          className="
+    absolute left-[10px] top-1/2 -translate-y-1/2 z-20
+    w-[40px] h-[40px]
+    rounded-full
+    bg-black/20
+    flex items-center justify-center
+    
+  "
+        >
+          <Image
+            src="https://framerusercontent.com/images/6tTbkXggWgQCAJ4DO2QEdXXmgM.svg"
+            alt="prev"
+            width={40}
+            height={40}
+          />
+        </button>
+      )}
+
+      {/* RIGHT ARROW */}
+      {showRight && (
+        <button
+          onClick={() => scroll("right")}
+          className="
+    absolute right-[10px] top-1/2 -translate-y-1/2 z-20
+    w-[40px] h-[40px]
+    rounded-full
+    bg-black/20
+    flex items-center justify-center
+    
+  "
+        >
+          <Image
+            src="https://framerusercontent.com/images/11KSGbIZoRSg4pjdnUoif6MKHI.svg"
+            alt="next"
+            width={40}
+            height={40}
+          />
+        </button>
+      )}
+
+      {/* ROW */}
+      <div
+        ref={rowRef}
+        onScroll={onScroll}
+        className="
+          flex gap-[6px]
+          overflow-x-auto
+          scrollbar-hide
+        "
+        style={{
+          width: '100%',
+          overflow: 'hidden'
+        }}
+      >
+        {displayItems.map((cat: any, index: number) => (
+          <div key={`${cat._id}-${index}`} className="shrink-0">
+            <CategoryCard category={cat} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+  // -----------------------------
+  // FETCH CATEGORY DATA
+  // -----------------------------
+  const fetchCategories = async () => {
     try {
-      const result = (await callApi(
+      const result: any = await callApi(
         getEndpoint.default.PRODUCTS_CATEGORIES,
         "GET"
-      )) as any;
-      if (result.data == null) {
-        handleApiError(result.errorData);
-      } else {
-        const cuurentTime = new Date();
-        // // console.log("first time", cuurentTime);
+      );
 
-        // Extract subcategories with their parent category info
-        const subCategoriesWithParent = (
-          result?.data[0]?.subCategories || []
-        ).map((subCat: any) => ({
-          ...subCat,
-          parentCategoryName: result?.data[0]?.name,
-          parentCategorySlug: result?.data[0]?.seoSlug,
-        }));
-
-        setCategoriesData(subCategoriesWithParent);
-        dispatch(saveCategories(subCategoriesWithParent));
-        dispatch(saveCatTime(cuurentTime));
+      if (!result?.data) {
+        handleApiError(result?.errorData);
+        return;
       }
+
+      const data = result.data;
+
+      // 1️⃣ Default Categories
+      const defaultCategory = data?.[0];
+
+      const formattedCategories =
+        defaultCategory?.subCategories?.map((sub: any) => ({
+          ...sub,
+          parentCategoryName: defaultCategory.name,
+          parentCategorySlug: defaultCategory.seoSlug,
+        })) || [];
+
+      dispatch(saveCategories(formattedCategories));
+
+      // 2️⃣ Building System Categories
+      const buildingSystemParent = data.find((c: any) => {
+        const name = c?.name?.toLowerCase();
+        return name === "building systems" || name === "building system";
+      });
+
+      const formattedBuildingSystems =
+        buildingSystemParent?.subCategories?.map((sub: any) => ({
+          ...sub,
+          parentCategoryName: buildingSystemParent?.name,
+          parentCategorySlug: buildingSystemParent?.seoSlug,
+        })) || [];
+
+      dispatch(saveBuildingSystemCategories(formattedBuildingSystems));
+      dispatch(saveCatTime(new Date()));
     } catch (error) {
       handleApiError(error);
     }
   };
 
-  return (
-    <div className="px-4 md:px-24 mt-8 md:mt-10">
-      <div className="block md:flex md:justify-between mb-6">
-        <h2 className="text-black font-bold text-2xl md:text-3xl">
-          Categories
-        </h2>
-        <div className="h-12 flex w-full md:w-96 mt-4 md:mt-0 opacity-0 hidden">
-          <input
-            className="focus:outline-none border border-gray-300 rounded-l-md p-2 w-full max-w-[400px]"
-            type="text"
-            placeholder="Search"
-            value={searchTerm}
-            onChange={(e: any) => handleSearch(e)}
+  // -----------------------------
+  // CATEGORY CARD
+  // -----------------------------
+  const CategoryCard = ({ category, index }: any) => (
+    <Link
+      href={`/products/${category?.parentCategorySlug}/${category?.seoSlug}?scid=${category?._id}`}
+    >
+      <div className="px-[5px] pb-4 ">
+        <div
+          className="
+    group border border-darkcream rounded-md
+    cursor-pointer
+    flex flex-col items-center
+
+    w-[95px] h-[124px]
+    lg:w-[282px] lg:h-[369px]
+    md:w-[195px] md:h-[255px]
+    p-[4px] lg:p-4
+
+    lg:hover:bg-primary
+    lg:hover:scale-105
+    lg:transition-transform lg:duration-300
+  "
+        >
+          <Image
+            src={
+              category?.image
+                ? normalizePath(`${assetURL}/${category.image}`)
+                : FALLBACK_IMAGE
+            }
+            alt={category?.name}
+            width={250}
+            height={250}
+            loading="lazy"
+            onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
+            className="
+  rounded-md object-cover
+  w-[84px] h-[84px]
+  md:w-[173px] md:h-[173px]
+  lg:w-[250px] lg:h-[250px]
+"
           />
 
-          <div className="hidden bg-pink p-3 h-12 flex items-center justify-center rounded-r-md">
-            <IoIosSearch
-              className="h-5 w-6 text-white"
-              onClick={() => handleSearch(searchTerm)}
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8">
-        {categories.map((category: any, index: any) => {
-          // // console.log('vvret',category)
-          return (
-            <Link
-              key={index}
-              href={`/products/${category?.parentCategorySlug}/${category?.seoSlug}?scid=${category?._id}`}
-              // href={`/brands/${vendor.businessInfo?.slug}`}
-              // key={vendor.businessInfo?.slug}
-            >
-              <div className="border rounded-md flex flex-col items-center justify-center  w-full  cursor-pointer hover:bg-slate-100 transform transition-transform duration-300 hover:scale-105">
-                <div
-                  className="relative w-full"
-                  onClick={() => router.push(`/products`)}
-                >
-                  <Image
-                    // src={category?.image}
-                    // src={category?.image ?  (assetURL+'/'+category?.image).includes('//admin') ? (assetURL+'/'+category?.image).replace('//admin', '/admin') : `${assetURL}/${category?.image}` : '/images/product-placeholder.webp'}
-                    src={
-                      category?.image
-                        ? normalizePath(`${assetURL}/${category.image}`)
-                        : "/images/product-placeholder.webp"
-                    }
-                    alt={`Slide ${index}`}
-                    width={300}
-                    height={300}
-                    onError={(e) => {
-                      e.currentTarget.src = "/images/product-placeholder.webp";
-                    }}
-                    loading="lazy"
-                    className={`rounded-[5px] object-cover  w-full h-[300px]  bg-black`}
-                  />
-                  <div className="absolute w-full inset-0 flex flex-row justify-between items-end bg-black h-[300px] opacity-40"></div>
-                  <div className="absolute  w-full inset-0 flex flex-row justify-between items-end justify-end text-white ">
-                    <p
-                      className={`${styles.cattitle} text-xl mb-6 text-white font-bold ml-5 z-20 cat-text`}
-                    >
-                      {category?.name}
-                    </p>
-                    <CustomButton
-                      title={"Shop Now"}
-                      onPress={() => router.push(`/products`)}
-                      className={`  py-2 mr-5 mb-4 h-8 md:h-10 text-white font-semibold z-20 text-sm  hover:bg-primary`}
-                      customStyles={{
-                        width: "150px",
-                        border: "1px solid white",
-                      }}
-                      rightIcon={<GoArrowRight />}
-                    />
-                  </div>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-
-      {categories.length === 0 && (
-        <>
-          <LottieWrapper
-            animationData={animationData}
-            loop={true}
-            className="flex mx-auto justify-center items-center w-[400px] h-[400px]"
-          />
-
-          <p className="text-center text-fontGray mt-4 text-lg font-bold ">
-            No Categories Found.
+          <p
+            className={`${styles.cattitle} text-[8px] lg:text-[18px] font-medium  text-primary group-hover:text-white mt-4 text-center `}
+          >
+            {category?.name}
           </p>
-        </>
-      )}
-
-      {error && (
-        <div className="w-full h-full flex justify-center items-center mt-4">
-          <p>Error loading Categories: {error}</p>
         </div>
-      )}
+      </div>
+    </Link>
+  );
+
+  // -----------------------------
+  // CATEGORY SECTION
+  // -----------------------------
+  const CategorySection = ({ title, data }: any) => (
+    <div
+      className={`px-4 bg-cream lg:max-w-[1440px] mx-auto ${title === "Building Systems"
+          ? "lg:px-[100px] p-[20px] lg:py-[0px]"
+          : "lg:px-[100px] py-[20px] lg:py-[80px]"
+        }`}
+    >
+      {/* 👇 CENTERED when width > 1440px */}
+      <div className="">
+
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-4">
+          <h2 className="text-xl lg:text-[43px] lg:text-start text-center text-brown">
+            {title}
+          </h2>
+
+          <CustomButton
+            title="View All"
+            className="lg:flex hidden bg-[#109989] rounded-[5px]
+            px-[14px] py-[10px] lg:!px-[25px] lg:!py-[10px] h-[53px]
+
+            gap-[12px] text-white text-[14px] lg:text-[18px]"
+            rightIcon={<GoArrowRight className="w-[18px] h-[18px] lg:w-[24px] lg:h-[24px]" />}
+            onPress={() => router.push("/products")}
+          />
+        </div>
+
+        <hr className="border-t border-primary mx-auto mt-[21px] mb-[10px] lg:mb-9" />
+
+        {/* Mobile */}
+        {chunkIntoRows(data || []).map((row, idx) => (
+          <MobileRowCarousel key={idx} items={row} />
+        ))}
+
+        {/* Desktop */}
+        <div className="hidden lg:grid lg:grid-cols-4 lg:gap-4 lg:px-[20px]">
+          {data?.map((cat: any, idx: number) => (
+            <CategoryCard key={idx} category={cat} />
+          ))}
+        </div>
+      </div>
     </div>
+  );
+
+
+  return (
+    <>
+      <CategorySection title="Building Materials" data={categories} />
+      <CategorySection
+        title="Building Systems"
+        data={buildingSystemCategories}
+      />
+    </>
   );
 };
 

@@ -92,11 +92,11 @@ export default function Page() {
         </div>
         <div className="bg-secondaryBg w-full">
           <div className="py-12 px-4 lg:px-20 mx-auto max-w-[100%] pb-0">
-            {/* <h1 className="text-base font-bold mb-4 mt-4 text-black">
+            {/* <h1 className="text-base font-bold mb-4 mt-4 text-brown">
               Hubeco Terms And Conditions
             </h1> */}
           </div>
-          <div className="py-12 px-4 lg:px-20 mx-auto max-w-[100%] pt-0 text-sm font-normal text-black tracking-wide leading-8">
+          <div className="py-12 px-4 lg:px-20 mx-auto max-w-[100%] pt-0 text-sm font-normal text-brown tracking-wide leading-8">
             {tandc ? (
               <Markdown
               remarkPlugins={[remarkGfm]}

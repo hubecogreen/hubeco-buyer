@@ -9,7 +9,7 @@
   padding-bottom: 20px;
   border-bottom: 1px solid #eaeaea;
   max-height: 106px;
-  height: 106px;
+  height: 79px;
 }
 
 .logo {
@@ -47,13 +47,13 @@
   }
 }
 
-.logo img {
+/* .logo img {
   height: 45px;
   max-width: 234px;
   width: 100%;
   margin-right: 10px;
   margin-left: 10px;
-}
+} */
 
 .logo span {
   font-size: 24px;

@@ -107,7 +107,7 @@ const BlogsSection = () => {
   return (
     <div className="px-4 md:px-16 mt-8 md:mt-10">
       <div className="flex justify-between mb-6 md:mb-6">
-        <h2 className="text-black font-bold text-2xl md:text-3xl">Blogs</h2>
+        <h2 className="text-brown font-bold text-2xl md:text-3xl">Blogs</h2>
           <div className="flex w-[75%] md:w-96 h-8 md:h-12">
             <input
               type="text"
@@ -125,7 +125,7 @@ const BlogsSection = () => {
               "
             />
             <div className="
-                bg-pink 
+                bg-primary 
                 p-2 
                 h-full 
                 flex 
@@ -193,7 +193,7 @@ const BlogsSection = () => {
                       </span>
                     </p> */}
                   </div>
-                  <p className={'text-sm text-fontGray mt-3'}>{truncateDescription(item.description,250)}</p>
+                  <p className={'text-sm text-brown mt-3'}>{truncateDescription(item.description,250)}</p>
                 </div>
               </div>
             </div>
@@ -208,7 +208,7 @@ const BlogsSection = () => {
               className="flex mx-auto justify-center items-center w-[400px] h-[400px]"
             />
 
-          <p className="text-center text-fontGray mt-4 text-lg font-bold ">No Blogs Found.</p>
+          <p className="text-center text-brown mt-4 text-lg font-bold ">No Blogs Found.</p>
           </>
         )}
     

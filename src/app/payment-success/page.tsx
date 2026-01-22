@@ -108,39 +108,39 @@ const PaymentSuccessful = () => {
           <h4  className='font-bold text-primary mb-4 md:text-3xl text-xl'>
             Payment Successful!
           </h4>
-          <p  className='text-gray-600'>
+          <p  className='text-brown'>
             Thank you for your payment. Your transaction has been completed.
           </p>
         </div>
 
         <div className='mb-4  p-5 rounded-lg max-w-fit-content inline-block'>
-          {/* <h6 className='font-bold text-gray-700'>
+          {/* <h6 className='font-bold text-brown'>
             Transaction Details
           </h6> */}
           {/* <Divider className='my-4' /> */}
           {/* <div className='flex justify-between'>
-            <p  className='font-medium text-gray-600 w-[150px] text-left'>
+            <p  className='font-medium text-brown w-[150px] text-left'>
               Transaction ID 
             </p>
-            <p  className='text-gray-800 ml-2 min-w-[200px] text-left'>
+            <p  className='text-brown ml-2 min-w-[200px] text-left'>
               {data?.transactionId}
              
         
             </p>
           </div> */}
           {/* <div className='flex justify-between mt-2'>
-            <p className='font-medium text-gray-600'>
+            <p className='font-medium text-brown'>
               Date:
             </p>
-            <p  className='text-gray-800'>
+            <p  className='text-brown'>
               {data?.txnTime?.split('T')[0]}
             </p>
           </div> */}
          {data?.txnAmount && <div className='flex justify-between mt-2'>
-            <p  className='font-medium text-gray-600 w-[150px] text-left'>
+            <p  className='font-medium text-brown w-[150px] text-left'>
               Amount 
             </p>
-            <p  className='text-gray-800 ml-2 min-w-[200px] text-left'>₹{formatCurrencyInIndianStyle(data?.txnAmount)}
+            <p  className='text-brown ml-2 min-w-[200px] text-left'>₹{formatCurrencyInIndianStyle(data?.txnAmount)}
             </p>
           </div>}
         </div>

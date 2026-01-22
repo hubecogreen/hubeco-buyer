@@ -25,7 +25,7 @@ interface VendorFiltersListProps {
   vendors: Vendor[]; // Array of vendors to display
   onVendorSelectionChange: (selectedVendors: string[]) => void; // Function prop to handle selected vendors
   refresh: any;
-  filter:any
+  filter: any
 }
 const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
   vendors,
@@ -58,7 +58,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
 
   useEffect(() => {
     getVendors(1); // Initial fetch
-  }, [refresh,filter]);
+  }, [refresh, filter]);
 
   useEffect(() => {
     if (refresh) {
@@ -175,7 +175,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
 
   return (
     <>
-      <div className="mt-2 mb-4 border-b border-borderGray ">
+      <div className="mt-2 mb-4  ">
         <>
           <h3 className="text-sm font-semibold mb-4">VENDORS</h3>
           {/* <input
@@ -187,14 +187,14 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
             /> */}
           <div className="relative flex flex-row items-center">
             {/* Search Icon */}
-            <span className="absolute inset-y-0 left-3 flex items-center text-fontGray h-[40px] ">
-              <Search size={16} color="#4d4d4d" className="text-fontGray" />
+            <span className="absolute inset-y-0 left-3 flex items-center text-brown h-[40px] ">
+              <Search size={16} color="#4d4d4d" className="text-brown" />
             </span>
             <Input
               placeholder="Search"
               value={vendorSearch || ""}
               onChange={(e: any) => handleVendorSearch(e)}
-              className="pl-[35px] bg-white md:text-md text-sm h-[40px] shadow-md text-fontGray mr-[1px] mb-4 rounded-[5px] w-full"
+              className="pl-[35px] bg-cream border border-brown md:text-md text-sm h-[40px] shadow-md text-brown mr-[1px] mb-4 rounded-[5px] w-full"
             />
 
           </div>
@@ -208,7 +208,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                   vendor && (
                     <div
                       key={vendor?.id?.id}
-                      className="flex items-center bg-primary/10 text-primary px-3 py-1 rounded text-sm"
+                      className="flex items-center bg-primary text-cream px-3 py-1 rounded text-sm"
                     >
                       {vendor?.id?.businessInfo?.companyName}{" "}
                       {/* Display vendor name here */}
@@ -226,7 +226,12 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                 <div key={vendor?.id} className="flex items-center py-[5px]">
                   <Checkbox
                     id={vendor?.id}
-                    className="mr-3"
+                    className="mr-3
+                     data-[state=unchecked]:bg-cream
+                     data-[state=unchecked]:border-brown 
+                     data-[state=checked]:bg-brown 
+                     data-[state=checked]:border-brown
+                     data-[state=checked]:text-cream"
                     checked={selectedVendors.includes(vendor?.id)}
                     onClick={() => {
                       onSelectVendor(vendor);
@@ -247,11 +252,11 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                         <div className="w-full flex justify-between items-center">
                           <div className="flex items-center flex-row mt-3 mb-4">
                             <MdKeyboardDoubleArrowLeft
-                              color={"#A92449"}
+                              color={"white"}
                               size={18}
                             />
                             <button
-                              className="text-sm text-secondary "
+                              className="text-sm text-cream "
                               onClick={handleShowLessVendors}
                             >
                               Show Less
@@ -259,13 +264,13 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                           </div>
                           <div className="flex items-center flex-row mt-3 mb-4">
                             <button
-                              className="text-sm text-secondary "
+                              className="text-sm text-cream "
                               onClick={handleShowMoreVendors}
                             >
                               Show More
                             </button>
                             <MdKeyboardDoubleArrowRight
-                              color={"#A92449"}
+                              color={"white"}
                               size={18}
                             />
                           </div>
@@ -274,13 +279,13 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                     ) : (
                       <div className="flex items-center flex-row mt-3 mb-4">
                         <button
-                          className="text-sm text-secondary "
+                          className="text-sm text-cream "
                           onClick={handleShowMoreVendors}
                         >
                           Show More
                         </button>
                         <MdKeyboardDoubleArrowRight
-                          color={"#A92449"}
+                          color={"white"}
                           size={18}
                         />
                       </div>
@@ -288,9 +293,9 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
                   </>
                 ) : (
                   <div className="flex items-center flex-row mt-3 mb-4">
-                    <MdKeyboardDoubleArrowLeft color={"#A92449"} size={18} />
+                    <MdKeyboardDoubleArrowLeft color={"white"} size={18} />
                     <button
-                      className="text-sm text-secondary "
+                      className="text-sm text-cream "
                       onClick={handleShowLessVendors}
                     >
                       Show Less
@@ -305,7 +310,7 @@ const VendorFiltersList: React.FC<VendorFiltersListProps> = ({
         ) : (
           <>
             <div className="w-full justify-start items-center ">
-              <p className="text-black text-sm font-medium py-2">
+              <p className="text-brown text-sm font-medium py-2">
                 No vendors found.Try adjusting your search.
               </p>
             </div>

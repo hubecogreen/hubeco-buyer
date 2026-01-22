@@ -88,8 +88,8 @@ const BuyerBenefits = () => {
           }}
           loading="lazy"
         />
-        <div className=" p-4 lg:p-8 lg:w-1/2 text-black">
-          <h1 className="text-xl md:text-3xl font-bold text-black mb-4">
+        <div className=" p-4 lg:p-8 lg:w-1/2 text-brown">
+          <h1 className="text-xl md:text-3xl font-bold text-brown mb-4">
             Benefits of becoming A Buyer
           </h1>
           <Accordion
@@ -108,7 +108,7 @@ const BuyerBenefits = () => {
                   <>
                     <h2>
                       <AccordionButton className="flex justify-between">
-                        <div className="flex items-center text-black">
+                        <div className="flex items-center text-brown">
                           <Image
                             src={item.imgSrc}
                             alt={item.alt}
@@ -143,7 +143,7 @@ const BuyerBenefits = () => {
                       </AccordionButton>
                     </h2>
                     <AccordionPanel
-                      className="text-left text-black text-sm text-medium mt-2 !text-navy-900 pl-10"
+                      className="text-left text-brown text-sm text-medium mt-2 !text-navy-900 pl-10"
                       pb={4}
                     >
                       {item.description}

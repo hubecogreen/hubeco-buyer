@@ -3,10 +3,10 @@ import Link from 'next/link';
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6 text-center">
+      <div className="max-w-md w-full bg-cream shadow-lg rounded-lg p-6 text-center">
         <div className="mb-4">
           <svg
-            className="mx-auto h-12 w-12 text-gray-400"
+            className="mx-auto h-12 w-12 text-brown"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -19,10 +19,10 @@ export default function NotFound() {
             />
           </svg>
         </div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-2">
+        <h2 className="text-lg font-semibold text-brown mb-2">
           Page not found
         </h2>
-        <p className="text-gray-600 mb-4">
+        <p className="text-brown mb-4">
           Sorry, we couldn't find the page you're looking for.
         </p>
         <Link

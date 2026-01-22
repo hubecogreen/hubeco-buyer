@@ -48,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, handleSectionClick ,se
    }
 
   return (
-    <aside className="w-full  lg:w-1/5 bg-secondaryBg  p-4 md:p-6 border border-gray-200 rounded-lg shadow-sm h-fit">
+    <aside className="w-full  lg:w-1/5 bg-cream  p-4 md:p-6 border border-primary rounded-lg shadow-sm h-fit">
       <h2 className="text-lg md:text-lg font-semibold text-[#31466B] mb-4 md:mb-6 flex">
         Hi, <span className="text-[#00A18A]"><ViewMore text={userInfo?.firstName+" "+userInfo?.lastName} length={35} className=""  /> </span>
       </h2>
@@ -81,7 +81,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, handleSectionClick ,se
                 className={
                   isOrdersExpanded
                     ? "text-[#B90647] font-semibold"
-                    : "text-[#31466B] hover:text-[#00A18A] font-medium"
+                    : "text-[#31466B] hover:text-[#31466B]font-medium"
                 }
               >
                 My Orders
@@ -101,7 +101,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, handleSectionClick ,se
                       className={`${
                         currentStaus === item?.label?.toLowerCase()
                           ? "text-[#B90647]"
-                          : "text-[#31466B]"
+                          : "text-primary"
                       } hover:text-[#00A18A]`}
                       onClick={() => {onClickStatus(item)}}
                     >

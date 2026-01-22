@@ -14,7 +14,7 @@ import AuthData from "@/components/authFlow/AuthData";
 
 export default function Page() {
   return (
-    <div className="bg-white ">
+    <div className="bg-cream ">
       {/* <Head>
         <title>Home | Blogs</title>
       </Head> */}

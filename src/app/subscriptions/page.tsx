@@ -90,7 +90,7 @@ export default function Page() {
 
 
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       {/* <Head>
         <title>Plans | Hubeco Buyer</title>
       </Head> */}

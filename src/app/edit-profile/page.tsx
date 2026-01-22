@@ -502,7 +502,7 @@ export default function Page() {
       </Head>
      {/* <Header /> */} 
       <div className="px-4 md:px-30 md:mt-20 pb-10 w-full md:w-11/12 mx-auto">
-      <div className="category-section pb-10 text-center text-black bg-white shadow-[8px_4px_8px_8px_rgba(149,157,165,0.2)]">
+      <div className="category-section pb-10 text-center text-brown bg-white shadow-[8px_4px_8px_8px_rgba(149,157,165,0.2)]">
 
           <div className="container mx-auto py-10">
           <div className="text-center">
@@ -543,7 +543,7 @@ export default function Page() {
                 
                   <CustomButton
                     title={"Back"}
-                    className="ml-3 hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-black "
+                    className="ml-3 hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-brown "
                     customStyles={{ backgroundColor:'#E0E0E0'}}
                     onPress={prevStep}
                   />

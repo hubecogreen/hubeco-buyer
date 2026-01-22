@@ -147,12 +147,12 @@ const CategorySection = () => {
             </span>
           </h2>
           <h2
-            className={`${styles.gradientText} ${styles.textAnimate} text-xl md:text-4xl font-bold mb-4 text-black`}
+            className={`${styles.gradientText} ${styles.textAnimate} text-xl md:text-4xl font-bold mb-4 text-brown`}
           >
             Where every choice is a
           </h2>
           <h2
-            className={`${styles.gradientText} ${styles.textAnimate} text-xl md:text-4xl font-bold mb-4 text-black`}
+            className={`${styles.gradientText} ${styles.textAnimate} text-xl md:text-4xl font-bold mb-4 text-brown`}
           >
             step towards Sustainability
           </h2>
@@ -165,7 +165,7 @@ const CategorySection = () => {
           />
         </div>
         <div className="items-center justify-center px-8 text-center z-20 pt-10 md:pt-10">
-          <p className="text-md md:text-big mx-auto text-black font-medium pt-5 text-justify md:text-justify max-w-[1390px]">
+          <p className="text-md md:text-big mx-auto text-brown font-medium pt-5 text-justify md:text-justify max-w-[1390px]">
             At hubeco, we are revolutionizing the way you build. We offer a
             comprehensive range of green building materials to help you create
             eco-friendly, energy efficient, and sustainable structures. Our

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function Blogs() {
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       <div
         className="relative bg-cover bg-center h-[200px] flex items-center justify-start text-white md:px-28 px-10"
         style={{

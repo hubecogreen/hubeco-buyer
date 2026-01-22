@@ -29,21 +29,25 @@ const schema = yup.object({
   gstin: yup
     .string()
     .transform((val) => (val ? val.toUpperCase() : ""))
-    .required("GST is required")
-    .matches(/^[0-9A-Za-z]*$/, "Special Characters are not allowed")
-    .test("valid-state-code", "Invalid state code in GST", (value) =>
-      value ? validGSTStateCodes.includes(value.substring(0, 2)) : false
-    )
+    .notRequired()
+    .matches(/^[0-9A-Za-z]*$/, {
+      message: "Special Characters are not allowed",
+      excludeEmptyString: true,
+    })
     .test(
-      "no-multiple-spaces",
-      "Double spaces are not allowed",
-      (value) => !/\s{2,}/.test(value || "")
+      "valid-state-code",
+      "Invalid state code in GST",
+      (value) =>
+        !value || validGSTStateCodes.includes(value.substring(0, 2))
     )
     .matches(
       /^[0-9]{2}[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}[1-9]{1}[zZ]{1}[0-9A-Z]{1}$/,
-      "GST format is invalid."
+      {
+        message: "GST format is invalid",
+        excludeEmptyString: true,
+      }
     )
-    .trim("GST cannot have empty space at the start or end"),
+    .trim(),
   agreedToTerms: yup
     .boolean()
     .oneOf([true], "You must agree to the terms and conditions"),
@@ -78,13 +82,13 @@ export default function GreenProjectFinancingForm({
     if (isOpen) {
       // Store the current scroll position
       const scrollY = window.scrollY;
-      
+
       // Prevent scrolling on body and html
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
-      
+
       // Also prevent scrolling on html element for better mobile support
       document.documentElement.style.overflow = 'hidden';
     } else {
@@ -95,7 +99,7 @@ export default function GreenProjectFinancingForm({
       document.body.style.top = '';
       document.body.style.width = '';
       document.documentElement.style.overflow = '';
-      
+
       // Restore scroll position
       if (scrollY) {
         window.scrollTo(0, parseInt(scrollY || '0') * -1);
@@ -110,7 +114,7 @@ export default function GreenProjectFinancingForm({
       document.body.style.top = '';
       document.body.style.width = '';
       document.documentElement.style.overflow = '';
-      
+
       if (scrollY) {
         window.scrollTo(0, parseInt(scrollY || '0') * -1);
       }
@@ -136,7 +140,7 @@ export default function GreenProjectFinancingForm({
           body: JSON.stringify({
             name: data.name,
             phoneNumber: `+91${data.phoneNumber}`,
-            gstNumber: data.gstin,
+             gstNumber: data.gstin ? data.gstin : "",
           }),
         }
       );
@@ -164,36 +168,36 @@ export default function GreenProjectFinancingForm({
   if (!isOpen) return null;
 
   return (
-    <div 
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden touch-none"
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black bg-opacity-50 overflow-hidden touch-none"
       style={{ touchAction: 'none' }}
     >
-      <div className="bg-white rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[95vh] flex flex-col">
+      <div className="bg-cream rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[85vh] md:max-h-[95vh] flex flex-col">
         {/* Header - Fixed */}
         <div
-          className="relative px-6 py-8 text-white flex-shrink-0"
+          className="relative px-6 py-3 md:py-8 lg:py-8 text-white flex-shrink-0"
           style={{
             backgroundImage: "url('/images/greenFinance/Form-BG.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
-          <div className="absolute inset-0 bg-opacity-30" />
+          <div className="absolute inset-0 bg-opacity-30 pointer-events-none" />
           <button
             onClick={handleClose}
-            className="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors z-10"
+            className="absolute top-4 right-4  text-white hover:text-brown transition-colors z-20"
           >
             <IoClose size={24} />
           </button>
-          <h2 className="text-2xl font-bold relative z-10 text-center pt-5 pb-5">
+          <h2 className="text-xl font-bold relative z-10 text-center pt-5 pb-5">
             Green Project Financing
           </h2>
         </div>
 
         {/* Form - Scrollable */}
-        <div 
-          className="px-8 md:px-20 py-20 overflow-y-auto flex-1 overscroll-contain"
-          style={{ 
+        <div
+          className="px-6 md:px-20 py-4 md:py-6 overflow-y-auto flex-1 overscroll-contain"
+          style={{
             WebkitOverflowScrolling: 'touch',
             scrollbarWidth: 'none',
             msOverflowStyle: 'none'
@@ -211,14 +215,14 @@ export default function GreenProjectFinancingForm({
           >
             {/* Name */}
             <div>
-              <label className="block text-gray-800 font-medium mb-2">
+              <label className="block text-brown font-medium mb-2">
                 Name*
               </label>
               <input
                 type="text"
                 {...register("name")}
                 placeholder="Enter Your Name"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
+                className="w-full px-4 py-3 bg-cream border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent"
                 required
               />
               {errors.name && (
@@ -230,18 +234,18 @@ export default function GreenProjectFinancingForm({
 
             {/* Phone Number */}
             <div>
-              <label className="block text-gray-800 font-medium mb-2 text-sm md:text-base">
+              <label className="block text-brown font-medium mb-2 text-sm md:text-base">
                 Phone Number*
               </label>
               <div className="flex">
                 <div className="flex items-center justify-center px-3 py-2 sm:px-4 sm:py-3 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 text-sm sm:text-base">
-                  <span className="text-gray-600">+91</span>
+                  <span className="text-brown">+91</span>
                 </div>
                 <input
                   type="tel"
                   {...register("phoneNumber")}
                   placeholder="Enter Phone Number"
-                  className="flex-1 px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent text-sm sm:text-base w-[20px]"
+                  className="flex-1 px-3 py-2 sm:px-4 sm:py-3 bg-cream border border-gray-300 rounded-r-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent text-sm sm:text-base w-[20px]"
                   required
                 />
               </div>
@@ -254,15 +258,14 @@ export default function GreenProjectFinancingForm({
 
             {/* GSTIN */}
             <div>
-              <label className="block text-gray-800 font-medium mb-2">
-                GSTIN*
+              <label className="block text-brown font-medium mb-2">
+                GSTIN
               </label>
               <input
                 type="text"
                 {...register("gstin")}
                 placeholder="Enter GSTIN"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
-                required
+                className="w-full px-4 py-3 border bg-cream border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
                 onInput={(e) => {
                   e.currentTarget.value = e.currentTarget.value.toUpperCase();
                 }}
@@ -279,10 +282,10 @@ export default function GreenProjectFinancingForm({
               <input
                 type="checkbox"
                 {...register("agreedToTerms")}
-                className="mt-1 w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                className="mt-1 w-4 h-4 bg-cream text-green-600 border-gray-300 rounded focus:ring-green-500"
                 required
               />
-              <label className="text-sm text-gray-600 leading-relaxed">
+              <label className="text-sm text-brown leading-relaxed">
                 I agree to Hubeco{" "}
                 <Link
                   href="/green-financing-terms-of-use"
@@ -313,27 +316,23 @@ export default function GreenProjectFinancingForm({
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-[#b90e47] text-white py-4 rounded-lg font-semibold text-lg transition-all duration-200 ${
-                loading ? "opacity-50 cursor-not-allowed" : "hover:bg-[#a00d3f]"
-              }`}
+              className={`w-full bg-primary text-cream py-4 rounded-lg font-semibold text-lg transition-all duration-200 ${loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                }`}
             >
               {loading ? "Submitting..." : "Submit"}
             </button>
-          </form>
 
-          {/* Logo */}
-          <div className="flex justify-center mt-8">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">H</span>
+            {/* Logo */}
+            <div className="flex justify-center mt-6 mb-4 md:mt-8">
+              <div className="flex items-center space-x-2">
+                <img
+                  src="/images/Logo-2.webp"
+                  alt="Hubeco Logo"
+                  className="h-12 md:h-14 w-auto"
+                />
               </div>
-              <img
-                src="/images/Logo-2.webp"
-                alt="Hubeco Logo"
-                className="h-8 w-auto"
-              />
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

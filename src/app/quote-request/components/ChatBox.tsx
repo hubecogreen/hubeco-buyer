@@ -282,7 +282,7 @@ export default function ChatBox({
 
   return (
     <div
-      className={`bg-white w-full max-w-${width} rounded-lg shadow-lg flex flex-col h-full relative`}
+      className={`bg-cream w-full max-w-${width} rounded-lg shadow-lg flex flex-col h-full relative`}
 
     >
       <div className="bg-[#B90647] text-white rounded-t-lg px-5 py-3 flex justify-between items-start sticky top-0 shadow-sm">
@@ -291,14 +291,14 @@ export default function ChatBox({
           <h6 className="text-lg font-semibold leading-tight">
             {receiver.name || "Receiver"}
           </h6>
-          {/* <p className="text-sm text-gray-200">
+          {/* <p className="text-sm text-brown">
           {formattedDay}, {formattedTime}
         </p> */}
         </div>
 
         {/* Right side — minimize icon */}
         {/* <button
-          className="text-white hover:text-gray-200 transition"
+          className="text-white hover:text-brown transition"
           title="Minimize"
         >
           <Minus size={20} strokeWidth={3} />
@@ -315,7 +315,7 @@ export default function ChatBox({
       >
         {mergedMessages.length === 0 ? (
           // 🟢 When there are no chats, show this placeholder
-          <div className="flex flex-col justify-center items-center text-center text-gray-500 h-full py-10">
+          <div className="flex flex-col justify-center items-center text-center text-brown h-full py-10">
             {<Image
               src="\images\Chat.svg" // optional decorative image
               alt="No chats yet"
@@ -323,7 +323,7 @@ export default function ChatBox({
               height={45}
               className="mb-4 opacity-80"
             />}
-            <p className="text-sm text-gray-600 max-w-[260px] mt-1">
+            <p className="text-sm text-brown max-w-[260px] mt-1">
               Start a conversation with your vendor to discuss RFQs, delivery, or pricing.
             </p>
           </div>
@@ -381,12 +381,12 @@ export default function ChatBox({
                       <div className="flex flex-col">
                         <div
                           className={`${message.senderId === myId
-                            ? "bg-white text-gray-900 shadow-[0px_1px_6px_0px_#2F2B3D1A] rounded-[9px]"
+                            ? "bg-white text-brown shadow-[0px_1px_6px_0px_#2F2B3D1A] rounded-[9px]"
                             : message?.isAQuery == false
-                              ? "bg-white text-gray-900 shadow-[0px_1px_6px_0px_#2F2B3D1A] rounded-[9px]"
+                              ? "bg-white text-brown shadow-[0px_1px_6px_0px_#2F2B3D1A] rounded-[9px]"
                               : message?.isAQuery == true
                                 ? "bg-[#B906471A] text-secondary"
-                                : "bg-white text-gray-900 shadow-[0px_1px_6px_0px_#2F2B3D1A] rounded-[9px]"
+                                : "bg-white text-brown shadow-[0px_1px_6px_0px_#2F2B3D1A] rounded-[9px]"
                             } rounded-lg px-4 py-2 max-w-xs`}
                         >
                           <p className="text-sm">
@@ -428,7 +428,7 @@ export default function ChatBox({
             onChange={(e) => setText(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && handleSend(text)}
             placeholder="Type your message here..."
-            className="border rounded-full px-4 py-2 focus:outline-none focus:border-[#009886]
+            className="bg-cream border rounded-full px-4 py-2 focus:outline-none focus:border-[#009886]
                  w-[80%] sm:w-full transition-all duration-200"
           />
           <button
@@ -473,10 +473,10 @@ export default function ChatBox({
           </div>
 
          
-          <h6 className='font-semibold text-lg text-gray-800 mb-1 text-center'>
+          <h6 className='font-semibold text-lg text-brown mb-1 text-center'>
             No Messages Yet
           </h6>
-          <p className='text-gray-600 text-sm text-center max-w-xs'>
+          <p className='text-brown text-sm text-center max-w-xs'>
             Start a conversation with your vendor/buyer to discuss RFQs, delivery or pricing
           </p>
         </div>

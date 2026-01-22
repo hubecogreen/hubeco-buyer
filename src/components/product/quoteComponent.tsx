@@ -66,12 +66,12 @@ export default function quoteComponent() {
             onClick={() => setIsOpen(false)}
             className="absolute top-4 right-4"
           >
-            <IoIosClose className="w-6 h-6 text-black" />
+            <IoIosClose className="w-6 h-6 text-brown" />
           </DialogClose>
 
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold">
-              Request Quote
+            <DialogTitle className="text-brown text-xl font-bold">
+              Request Pricing
             </DialogTitle>
           </DialogHeader>
           <div className="max-h-[500px] overflow-y-auto pr-2">
@@ -270,7 +270,7 @@ export default function quoteComponent() {
             onClick={() => setIsOpen(false)}
             className="absolute top-4 right-4"
           >
-            <IoIosClose className="w-6 h-6  z-10 bg-white  text-black" />
+            <IoIosClose className="w-6 h-6  z-10 bg-white  text-brown" />
           </DialogClose>
 
           <DialogHeader>
@@ -338,7 +338,7 @@ export default function quoteComponent() {
             </div>
           ))}
 
-          <p className="text-md text-fontGray text-normal mb-1">
+          <p className="text-md text-brown text-normal mb-1">
             Thickness
           </p>
           <div className="flex md:space-x-2 flex-wrap ">

@@ -276,7 +276,7 @@ const RenderButton = ({ orderId, order, justify = "center" }: any) => {
                         />
                       </div>
 
-                      <p className="text-center text-lg text-black mt-4">
+                      <p className="text-center text-lg text-brown mt-4">
                         Are you sure you want to cancel the order?
                       </p>
 
@@ -311,7 +311,7 @@ const RenderButton = ({ orderId, order, justify = "center" }: any) => {
                       >
                         <Button
                           type="button"
-                          className="py-2 px-4 bg-secondaryBg text-gray-700 rounded hover:bg-secondaryBg ml-6"
+                          className="py-2 px-4 bg-secondaryBg text-brown rounded hover:bg-secondaryBg ml-6"
                           onClick={() => setOpenCancel(false)}
                         >
                           Cancel

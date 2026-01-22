@@ -25,27 +25,27 @@ type ExpandedIndex = number | null | undefined;
 export default function Page() {
   const accordionItems = [
     {
-      imgSrc: "images/about/aboutEnv.webp",
+      imgSrc: "images/about/road.png",
       alt: "sustain",
       title: "Environmentally Responsible",
       description: "Sourced from sustainable practices and recycled content.",
     },
     {
-      imgSrc: "images/about/aboutEnergy.webp",
+      imgSrc: "images/about/renewable-energy.png",
       alt: "energy",
       title: "Energy Efficient",
       description:
         "Designed to reduce energy consumption and enhance building performance.",
     },
     {
-      imgSrc: "images/about/aboutHeart.webp",
+      imgSrc: "images/about/healthy-heart.png",
       alt: "healthy",
       title: "Healthy",
       description:
         " Low in VOCs and free from harmful chemicals, promoting better indoor air quality.",
     },
     {
-      imgSrc: "images/about/aboutDurable.webp",
+      imgSrc: "images/about/kettlebell.png",
       alt: "durable",
       title: "Durable",
       description:
@@ -95,16 +95,16 @@ export default function Page() {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   return (
-    <div className="bg-white md:mb-0 mb-[200px]">
+    <div className="bg-cream md:mb-0 ">
       <head>
         <title>About | Hubeco Buyer</title>
       </head>
-      
+
       <div className="banner-section h-102">
-        <div className="relative bg-cover bg-center h-[200px] flex items-center justify-start text-white px-20" 
-             style={{backgroundImage: 'url("images/about/aboutBanner1.webp")'}}>
+        <div className="relative bg-cover bg-center h-[200px] flex items-center justify-start text-white px-20"
+          style={{ backgroundImage: 'url("images/about/aboutBanner1.webp")' }}>
           <Link
             href="/"
             className="text-white flex items-center no-underline px-2.5 py-1 rounded"
@@ -123,17 +123,17 @@ export default function Page() {
         </div>
 
         <div
-          className="bg-white w-full flex items-center justify-center md:py-20 py-5 bg-cover bg-no-repeat bg-center relative"
-          style={{backgroundImage: "url('/images/about/aboutWavesBg.webp')"}}
+          className="z-100 bg-cream w-full flex items-center justify-center md:py-20 py-5 bg-cover bg-no-repeat bg-center relative lg:h-[500px]"
+          style={{ backgroundImage: "url('/images/about/Subtract (2).png')" }}
         >
-          <div className="text-center p-4 text-black">
+          <div className="text-center p-4 text-brown">
             <h1 className="text-4xl font-bold mb-4">ABOUT</h1>
             <p
-              className="md:text-lg text-md md:text-center text-justify font-normal mx-auto max-w-[93%]"
+              className="md:text-lg text-md md:text-center text-justify font-normal mx-auto max-w-[93%] text-brown"
             >
               I am delighted to introduce hubeco.market, our green sourcing
               platform for building and architectural products and services. Our
-              mission is to empower builders,architects and homeowners to make
+              mission is to empower builders architects and homeowners to make
               sustainable choices that positively impact our planet. We believe
               that every construction project, whether big or small, should
               prioritize eco-friendliness and energy efficiency without
@@ -144,74 +144,54 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="bg-secondaryBg w-full">
+        <div className=" w-full ">
           <div
-            className={`${styles.secondSection} flex flex-col lg:flex-row items-start justify-between md:py-12 py-6 px-2 lg:px-4 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto max-w-[90%]`}
+            className={`${styles.secondSection} flex flex-col md:flex-row items-center justify-between
+        md:py-12 py-6 px-2 lg:px-4 mx-auto max-w-[90%] gap-6 mb-12`}
           >
-            <div className="overflow-auto p-2 lg:p-4">
-              <h1 className="text-2xl font-bold mb-4 text-black">What We Do</h1>
-              <p className="max-w-2xl text-md font-thin text-black text-justify">
-                We provide a comprehensive marketplace that connects you with a
-                wide range of eco-friendly building materials. Our carefully
-                curated selection includes products that are :
+            {/* TEXT COLUMN */}
+            <div className="md:w-1/2 overflow-visible lg:overflow-auto p-2 lg:p-4">
+              <h1 className="text-2xl font-bold mb-4 text-brown">What We Do</h1>
+              <p className="text-md text-brown mb-6">
+                We provide a comprehensive marketplace that connects you with a wide
+                range of eco-friendly building materials.
               </p>
 
               <Accordion
-                className="w-full mt-10"
                 allowMultiple={false}
                 defaultIndex={selectedIndex ?? [0]}
                 onChange={handleAccordionChange}
               >
                 {accordionItems.map((item, index) => (
-                  <AccordionItem
-                  key={index}
-                  className="border-b border-[#B90647] py-[17px]"
-                >
-                
+                  <AccordionItem key={index} className="border-b border-primary py-4">
                     {({ isExpanded }) => (
                       <>
-                        <h2>
-                          <AccordionButton className="flex justify-between">
-                            <div className=" flex items-center">
-                              <Image
-                                src={item.imgSrc}
-                                alt={item.alt}
-                                className={`${
-                                  selectedIndex === index ||
+                        <AccordionButton className="flex justify-between">
+                          <div className="flex items-center gap-3">
+                            <Image
+                              src={item.imgSrc}
+                              alt={item.alt}
+                              width={32}
+                              height={32}
+                              className={
+                                selectedIndex === index ||
                                   (selectedIndex === undefined && index === 0)
-                                    ? "filter-none"
-                                    : "grayscale"
-                                }`}
-                                width={32}
-                                height={32}
-                                onError={e => {
-                                  e.currentTarget.src = 'images/product-placeholder.webp'
-                                }}
-                                loading="lazy"
-                              />
-                              <span
-                                className={`text-left text-black flex-1 font-semibold ml-2.5`}
-                              >
-                                {item.title}
-                              </span>
-                            </div>
-                            <div className="flex items-center">
-                              {isExpanded ? (
-                                <PiMinusCircleBold
-                                  className="text-[#B90647] text-lg"
-                                />
-                              ) : (
-                                <TbCirclePlus
-                                  className="text-[#B90647] text-lg"
-                                />
-                              )}
-                            </div>
-                          </AccordionButton>
-                        </h2>
-                        <AccordionPanel
-                          className="text-left text-sm text-black text-medium mt-2 pl-10"
-                          pb={4}
-                        >
+                                  ? ""
+                                  : "grayscale"
+                              }
+                            />
+                            <span className="font-semibold text-brown">
+                              {item.title}
+                            </span>
+                          </div>
+                          {isExpanded ? (
+                            <PiMinusCircleBold className="text-primary" />
+                          ) : (
+                            <TbCirclePlus className="text-primary" />
+                          )}
+                        </AccordionButton>
+
+                        <AccordionPanel className="pl-10 text-sm text-brown">
                           {item.description}
                         </AccordionPanel>
                       </>
@@ -221,26 +201,21 @@ export default function Page() {
               </Accordion>
             </div>
 
-            <div
-              className=" lg:flex justify-center items-center p-2 lg:p-4"
-            >
+            {/* IMAGE COLUMN (VISIBLE ON TABLET + DESKTOP) */}
+            <div className="flex md:flex md:w-1/2 justify-center items-center p-2 lg:p-4">
               <Image
                 src="images/about/aboutBanner2.webp"
-                alt="banner1"
-                className="w-full rounded-md md:w-full max-w-lg mx-auto"
-                height={512}
+                alt="What we do"
                 width={512}
-                onError={e => {
-                  e.currentTarget.src = 'images/product-placeholder.webp'
-                }}
-                loading="lazy"
+                height={512}
+                className="rounded-md max-w-lg w-full"
               />
             </div>
           </div>
 
           <div className="flex items-center justify-center md:pb-8 pb-4">
             <div className="text-center">
-              <h1 className="text-2xl font-bold md:mb-4 text-black">
+              <h1 className="text-2xl font-bold md:mb-4 text-brown">
                 Our Values
               </h1>
             </div>
@@ -251,7 +226,7 @@ export default function Page() {
             <div className="w-full lg:w-5/12 md:py-11 py-2 md:pr-5 pr-1">
               {valueItems.slice(0, 2).map((item, index) => (
                 <div key={index} className="flex p-4 items-start justify-start">
-                  <div className="align-middle bg-secondary hover:bg-primary mt-[5px] md:ml-4 md:p-1.5 p-[7px] rounded-md  ">
+                  <div className="align-middle bg-primary hover:bg-primary mt-[5px] md:ml-4 md:p-1.5 p-[7px] rounded-md  ">
                     <Image
                       src={item.imgSrc}
                       alt={item.alt}
@@ -261,15 +236,15 @@ export default function Page() {
                         e.currentTarget.src = 'images/product-placeholder.webp'
                       }}
                       loading="lazy"
-                      // className="md:h-[25px] md:w-[30px] h-[25px] w-[25px] "
-                      // style={{ height: "25px", width: "30px" }}
+                    // className="md:h-[25px] md:w-[30px] h-[25px] w-[25px] "
+                    // style={{ height: "25px", width: "30px" }}
                     />
                   </div>
                   <div className="ml-4">
-                    <h1 className="text-xl font-medium mb-4 text-black text-justify">
+                    <h1 className="text-xl font-medium mb-4 text-brown text-justify">
                       {item.title}
                     </h1>
-                    <p className="max-w-2xl text-black text-md font-normal text-justify">
+                    <p className="max-w-2xl text-brown text-md font-normal text-justify">
                       {item.description}
                     </p>
                   </div>
@@ -292,8 +267,8 @@ export default function Page() {
             <div className="w-full lg:w-2/5 py-11 md:pl-5">
               {valueItems.slice(2).map((item, index) => (
                 <div key={index} className="flex p-4 items-start justify-start">
-                  <div className="align-middle bg-secondary hover:bg-primary mt-[5px]  md:ml-4 md:p-1.5 p-[7px] rounded-md  ">
-                  <Image
+                  <div className="align-middle bg-primary hover:bg-primary mt-[5px]  md:ml-4 md:p-1.5 p-[7px] rounded-md  ">
+                    <Image
                       src={item.imgSrc}
                       alt={item.alt}
                       height={25}
@@ -302,15 +277,15 @@ export default function Page() {
                         e.currentTarget.src = 'images/product-placeholder.webp'
                       }}
                       loading="lazy"
-                      // className="rotate-on-hover"
-                      // style={{ height: "25px", width: "40px" }}
+                    // className="rotate-on-hover"
+                    // style={{ height: "25px", width: "40px" }}
                     />
                   </div>
                   <div className="ml-4">
-                    <h1 className="text-xl font-medium mb-4 text-black text-justify">
+                    <h1 className="text-xl font-medium mb-4 text-brown text-justify">
                       {item.title}
                     </h1>
-                    <p className="max-w-2xl text-black text-md text-justify">
+                    <p className="max-w-2xl text-brown text-md text-justify">
                       {item.description}
                     </p>
                   </div>
@@ -318,10 +293,10 @@ export default function Page() {
               ))}
             </div>
           </div>
-          <div className="flex items-center justify-center pb-12">
+          <div className="flex items-center justify-center">
             <CustomButton
-              title={"Shop Now"}
-              className="md:ml-3 bg-secondary hover:bg-primary h-12 md:h-12 md:w-48 w-32 md:text-md text-sm text-white"
+              title={"Explore Materials"}
+              className="md:ml-3 bg-primary hover:bg-primary h-12 md:h-12 md:w-48 w-44 md:text-md text-sm text-white whitespace-nowrap"
               customStyles={{}}
               rightIcon={<GoArrowRight />}
               onPress={() => router.push("/products")}
@@ -330,8 +305,8 @@ export default function Page() {
         </div>
 
         <div
-          className="bg-white w-full flex flex-col lg:flex-row items-start justify-center py-12 md:px-16 px-4 lg:px-20 space-y-8 lg:space-y-0 lg:space-x-4 bg-cover bg-no-repeat bg-center relative"
-          style={{backgroundImage: "url('/images/about/aboutWavesBg2.webp')"}}
+          className="bg-cream w-full flex flex-col lg:flex-row items-start justify-center py-12 md:px-16 px-4 lg:px-20 space-y-8 lg:space-y-0 lg:space-x-4 bg-cover bg-no-repeat bg-center relative"
+          // style={{backgroundImage: "url('/images/about/aboutWavesBg_2.png')"}}
         >
           <div className="flex flex-col items-start lg:w-1/2">
             <Image
@@ -346,11 +321,11 @@ export default function Page() {
               loading="lazy"
             />
             <div className="mt-4 max-w-2xl text-left">
-              <h1 className="text-2xl font-bold mb-4 text-black">
+              <h1 className="text-2xl font-bold mb-4 text-brown">
                 Our Mission
               </h1>
-              <p className="text-md text-black font-normal text-justify">
-                To empower builders, architects, and homeowners with access to a
+              <p className="text-md text-brown font-normal text-left md:text-justify">
+                To empower builders, architects and homeowners with access to a
                 comprehensive marketplace of high-quality green building
                 materials, fostering sustainable practices and environmental
                 stewardship in the construction industry.
@@ -370,16 +345,16 @@ export default function Page() {
               loading="lazy"
             />
             <div className="mt-4 max-w-2xl text-left">
-              <h1 className="text-2xl font-bold mb-4 text-black">
+              <h1 className="text-2xl font-bold mb-4 text-brown">
                 Our Vision
               </h1>
-              <p className="text-md text-black font-normal text-justify">
+              <p className="text-md text-brown font-normal text-left  md:text-justify">
                 Our vision is to lead the transformation of the construction
                 industry towards a sustainable future by connecting buyers and
                 vendors of green building materials on a global scale. We
                 envision a world where sustainable construction practices are
                 the norm, where buildings are energy-efficient, environmentally
-                friendly, and contribute positively to the well-being of people
+                friendly and contribute positively to the well-being of people
                 and the planet.
               </p>
             </div>
@@ -397,9 +372,9 @@ export default function Page() {
                   Join Us on Our Journey
                 </h1>
                 <p className="mb-6 md:mb-8 lg:mb-10 text-sm md:text-base lg:text-lg">
-                  Whether you are a builder, architect, or homeowner, I invite
+                  Whether you are a builder, architect or homeowner, I invite
                   you to join us on our journey towards a more sustainable
-                  future. Explore our marketplace, connect with our community,
+                  future. Explore our marketplace, connect with our community
                   and discover the difference that ecofriendly materials can
                   make.
                 </p>
@@ -407,10 +382,10 @@ export default function Page() {
                   <div className="flex flex-col md:flex-row gap-4">
                     <CustomButton
                       onPress={() => {
-                        router.push("/plans");
+                        window.location.href =`${process.env.NEXT_PUBLIC_VENDOR_URL}/login`;
                       }}
                       title={"Vendor Connect"}
-                      className="text-white bg-secondary hover:bg-primary font-semibold h-12 w-full md:w-40 text-sm md:text-md"
+                      className="text-white bg-primary hover:bg-primary font-semibold h-12 w-full md:w-40 text-sm md:text-md"
                       customStyles={{
                         border: "1px solid #FFFFFF",
                         color: "#FFFFFF",
@@ -420,7 +395,7 @@ export default function Page() {
                     />
                     <CustomButton
                       title={"Register as a Buyer"}
-                      className="text-white bg-secondary hover:bg-primary font-semibold h-12 w-full md:w-40 text-sm md:text-md"
+                      className="text-white bg-primary hover:bg-primary font-semibold h-12 w-full md:w-40 text-sm md:text-md"
                       customStyles={{
                         border: "1px solid #FFFFFF",
                         color: "#FFFFFF",
@@ -438,57 +413,99 @@ export default function Page() {
           </div>
         </div>
 
-        <div
-          className="bg-white w-full flex items-center justify-center p-6 md:p-20 bg-cover bg-no-repeat bg-center relative pb-20"
-          style={{backgroundImage: "url('/images/about/aboutWavesBg2.webp')"}}
-        >
-          <div className="w-full">
-            <div className="flex w-full justify-between bg-secondaryBg rounded mobile-sm:mb-20 mobile-sm:flex-wrap sm:flex-nowrap h-[500px] md:h-[450px]">
-              <div className="w-full p-2 md:h-[450px] h-fit-content md:w-8/12 flex flex-col items-start">
-                <div className="w-full lg:w-2/3 pl-4 md:pl-8">
-                  <h1 className="text-3xl md:text-5xl font-medium text-left px-2 md:px-4 text-black py-[5%] leading-tight">
-                    Together, let&#39;s build a greener tomorrow with{" "}
-                    <span className="text-primary font-medium text-3xl md:text-5xl">
-                      hubeco.market
+        {/* PROFILE SECTION */}
+        <div className="bg-cream w-full flex items-center justify-center p-6 md:p-12 bg-cover bg-no-repeat bg-center relative pb-0 lg:pb-20">
+          <div className="w-full flex justify-center">
+            {/* Main Container: 1280px x 542px */}
+            <div className="relative flex flex-col lg:flex-row w-full max-w-[400px] h-[542px] md:max-w-[770px] md:h-[952.5px] md:px-[6.95px] lg:pr-0 lg:max-w-[1280px] lg:h-auto border border-primary bg-cream rounded-xl overflow-hidden">
+
+
+              {/* TEXT COLUMN: Properties based on Figma Auto Layout */}
+              <div className="flex-1 flex flex-col items-start justify-start px-4 md:px-12 lg:px-16 lg:pt-[95px] pt-2">
+                {/* Text Container: Set to Fill width and Hug height */}
+                <div className="w-full h-auto flex flex-col items-start gap-0">
+                  <h1 className="text-[40px] md:text-[56px] lg:text-[60px] font-bold text-brown leading-[1.1] lg:mb-[52px] mb-[20px]">
+                    <span className="whitespace-nowrap">
+                      Together,&nbsp;let&apos;s
                     </span>
+                    <br />
+                    <span className="whitespace-nowrap">
+                      build&nbsp;a&nbsp;<span className="text-primary">greener</span>
+                    </span>
+                    <br />
+                    tomorrow
                   </h1>
-                </div>
-                <div className="w-full md:w-2/3 flex flex-col md:flex-row items-start md:items-center pl-4 md:pl-8 mt-5 md:mb-0 mb-4 md:mt-24">
-                  <div className="md:mr-4">
-                    <h1 className="text-xl font-bold text-left px-2 md:pr-4 text-black">
-                      SaiPadma Potluri
-                    </h1>
-                    <p className="text-left mb-2 px-2 md:pr-4 text-black text-sm">
-                      Founder & CEO
-                    </p>
-                    <div className="ml-4 md:ml-2 mt-4 md:mt-0 flex-shrink-0">
-                      <div
-                        onClick={() =>
-                          window.open(
-                            "https://www.linkedin.com/in/saipadmap/",
-                            "_blank"
-                          )
-                        }
-                        className="p-1.5 rounded-md h-8 w-8 bg-secondary hover:bg-primary flex items-center cursor-pointer justify-center"
-                      >
-                        <BiLogoLinkedin className="text-white" size={20} />
+                  {/* <span className="text-brown-medium">
+                      hubeco.market
+                    </span> */}
+                  <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mt-auto lg:pb-[95px]">
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-3">
+                        <h2 className="text-2xl font-bold text-brown">
+                          SaiPadma Potluri
+                        </h2>
+                        <Link
+                          href="https://www.linkedin.com/in/saipadmap/"
+                          target="_blank"
+                          className="hidden lg:flex p-1 rounded-md h-7 w-7 bg-primary hover:opacity-90 flex items-center justify-center transition-all"
+                        >
+                          <BiLogoLinkedin className="text-white" size={24} />
+                        </Link>
                       </div>
+                      <p className="text-brown text-lg">
+                        Founder & CEO
+                      </p>
+                      <Link
+                        href="https://www.linkedin.com/in/saipadmap/"
+                        target="_blank"
+                        className="lg:hidden mt-1 p-1 rounded-md h-7 w-7 bg-primary hover:opacity-90 flex items-center justify-center transition-all"
+                      >
+                        <BiLogoLinkedin className="text-white" size={24} />
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="w-full md:w-fit flex items-center justify-center md:h-[450px] h-fit-content">
+
+              {/* IMAGE COLUMN: Fixed 668px width */}
+              <div className="relative w-full h-[400px] md:w-[756.11px] md:h-[678.58px] lg:w-[668px] lg:h-[542px]">
                 <Image
-                  src="images/about/profile-pic.webp"
-                  alt="banner1"
-                  style={{ width: "100%", height: "100%" }}
-                  width={317.81}
-                  height={450}
-                  onError={e => {
-                    e.currentTarget.src = 'images/product-placeholder.webp'
+                  src="/images/about/blob-mobile.png"
+                  alt="SaiPadma Potluri - Founder & CEO"
+                  fill
+                  className="object-cover object-top md:hidden"
+                  loading="lazy"
+                />
+                <Image
+                  src="/images/about/blob-tab.png"
+                  alt="SaiPadma Potluri - Founder & CEO"
+                  width={756}
+                  height={678}
+                  className="hidden md:block lg:hidden absolute bottom-0 left-[49%] -translate-x-1/2"
+                  loading="lazy"
+                />
+
+                <Image
+                  src="/images/about/blob-desktop.png"
+                  alt="SaiPadma Potluri - Founder & CEO"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className="hidden lg:block object-cover rounded-r-xl"
+                  onError={(e) => {
+                    e.currentTarget.src = 'images/product-placeholder.webp';
                   }}
                   loading="lazy"
-                  className="md:w-auto md:max-w-full rounded-r"
+                />
+
+              </div>
+              <div className="hidden lg:block md:hidden absolute bottom-0 left-[-40px]">
+                <Image
+                  src="/images/about/leaf.png"
+                  alt="decorative leaf"
+                  width={300}
+                  height={500}
+
+                  priority
                 />
               </div>
             </div>

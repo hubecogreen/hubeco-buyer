@@ -70,22 +70,26 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
   const [clickedResult, setClickedResult] = useState(false);
 
   // Rotate placeholders with animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Start animation
-      setIsAnimating(true);
-      
-      // After animation completes, change the placeholder
-      setTimeout(() => {
-        setCurrentPlaceholderIndex((prev) => 
-          (prev + 1) % rotatingPlaceholders.length
-        );
-        setIsAnimating(false);
-      }, 1000); // Match the CSS animation duration
-    }, 2000); // Change every 2 seconds
+useEffect(() => {
+  const interval = setInterval(() => {
 
-    return () => clearInterval(interval);
-  }, [rotatingPlaceholders.length]);
+    // 1️⃣ Change category first
+    setCurrentPlaceholderIndex((prev) =>
+      (prev + 1) % rotatingPlaceholders.length
+    );
+
+    // 2️⃣ Immediately start roll animation for NEW text
+    setIsAnimating(true);
+
+    // Stop animation after it completes
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 1000); // match CSS duration
+
+  }, 2000); // change every 2 seconds
+
+  return () => clearInterval(interval);
+}, [rotatingPlaceholders.length]);
 
   // Trigger initial animation after mount
   useEffect(() => {
@@ -409,13 +413,13 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
         <div className="fixed inset-0 z-[9999] bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white rounded-lg p-6 flex flex-col items-center space-y-4">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#B90647]"></div>
-            <p className="text-gray-700 font-medium">Redirecting...</p>
+            <p className="text-brown font-medium">Redirecting...</p>
           </div>
         </div>
       )}
 
       {/* Input Component */}
-      <div className="relative w-full">
+      <div className="relative w-full ">
         <Input
           placeholder=""
           value={searchQuery}
@@ -429,7 +433,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
             // Reset the flag after a short delay
             setTimeout(() => setClickedResult(false), 100);
           }}
-          className={`pl-3 !bg-white border-[1px] border-[#d9d9d9] border-solid md:text-base text-xs lg:text-sm w-full h-[47px] shadow-lg text-fontGray rounded-[5px] mr-[1px] ${
+          className={`pl-3 bg-cream  border-[1px] border-[#E8E3C5] border-solid md:text-base text-xs lg:text-sm w-full h-[47px] shadow-lg text-brown rounded-[5px] mr-[1px] ${
             isExpanded ? 'w-full' : 'w-12 h-12 rounded-lg'
           }`}
         />
@@ -437,7 +441,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
         {/* Animated Placeholder */}
         {!searchQuery && (
           <div className="absolute inset-0 flex items-center pointer-events-none overflow-hidden">
-            <div className="pl-3 text-gray-400 text-sm">
+            <div className="pl-3 text-brown text-sm">
               <div 
                 className={`${isAnimating ? 'slide-up-continuous' : ''} transition-all duration-1000 ease-in-out`}
               >
@@ -446,18 +450,21 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
             </div>
           </div>
         )}
+         <span className="absolute inset-y-0 right-3 top-[6px] flex items-center text-brown bg-primary w-[34px] h-[34px] rounded-md justify-center  ">
+        <Search size={18} color="#ffffff"  />
+      </span>
       </div>
 
       {/* Search Icon */}
-      <span className="absolute inset-y-0 right-3 flex items-center text-fontGray">
-        <Search size={16} color="#A92449" className="text-secondary" />
-      </span>
+      <div>
+     
+      </div>
 
       {/* Render search results grouped by type */}
       {isDropdownOpen && (
         <div
           ref={dropdownRef}
-          className="absolute top-14 z-50 w-full bg-white shadow-lg rounded-lg max-h-96 overflow-y-auto"
+          className="absolute top-14 z-50 w-full bg-cream shadow-lg rounded-lg max-h-96 overflow-y-auto"
         >
           {noSearch ? (
             <>
@@ -469,7 +476,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                     className="w-[200px] h-[200px]"
                   />
 
-                  <p className="font-semibold text-sm text-center mb-4">
+                  <p className="font-semibold text-sm text-center mb-4 ">
                     Oops, looks like there's nothing here. Try adjusting your
                     search again!
                   </p>
@@ -537,7 +544,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                             />
                           )}
                           <div>
-                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
+                            <p className=" ml-2 text-brown group-hover:text-secondary group-hover:font-medium text-normal text-sm">
                               {childCategory?.name}
                             </p>
                           </div>
@@ -607,7 +614,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                             />
                           )}
                           <div>
-                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
+                            <p className=" ml-2 text-brown group-hover:text-secondary group-hover:font-medium text-normal text-sm">
                               {subCategory?.name}
                             </p>
                           </div>
@@ -686,12 +693,12 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                             className="w-[30px] h-[30px] rounded"
                           />
                           <div>
-                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
+                            <p className=" ml-2 text-brown group-hover:text-secondary group-hover:font-medium text-normal text-sm">
                               {product?.productName == "N/A"
                                 ? product?.name
                                 : product?.productName}
                             </p>
-                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-[10px]">
+                            <p className=" ml-2 text-brown group-hover:text-secondary group-hover:font-medium text-normal text-[10px]">
                               SKU : {product?.variantSku}
                             </p>
                           </div>
@@ -749,7 +756,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                             />
                           )}
                           <div>
-                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
+                            <p className=" ml-2 text-brown group-hover:text-secondary group-hover:font-medium text-normal text-sm">
                               {category?.name}
                             </p>
                           </div>
@@ -810,7 +817,7 @@ const SearchBar: React.FC<CustomSearchBarProps> = ({
                               />
                             )}
                           <div>
-                            <p className=" ml-2 text-fontGray group-hover:text-secondary group-hover:font-medium text-normal text-sm">
+                            <p className=" ml-2 text-brown group-hover:text-secondary group-hover:font-medium text-normal text-sm">
                               {vendor?.businessInfo?.companyName}
                             </p>
                           </div>

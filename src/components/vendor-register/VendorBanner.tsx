@@ -1,4 +1,4 @@
-// components/ImageSlider.js
+// components/HeroSection.js
 "use client";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,7 +12,7 @@ import { GoArrowRight } from "react-icons/go";
 import CustomButton from "../customButton/CustomButton";
 import Image from "next/image";
 
-const ImageSlider = () => {
+const HeroSection = () => {
 
   const router = useRouter();
 
@@ -82,4 +82,4 @@ const ImageSlider = () => {
   );
 };
 
-export default ImageSlider;
+export default HeroSection;

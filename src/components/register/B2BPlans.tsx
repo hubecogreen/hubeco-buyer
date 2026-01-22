@@ -322,26 +322,26 @@ const B2BPlans: React.FC<FormProps> = ({
               <h3 className="text-2xl font-bold text-left text-secondary">
                 {freePlanData.name}
               </h3>
-              <p className="text-sm font-normal text-black text-left mt-5 h-[30px]">
+              <p className="text-sm font-normal text-brown text-left mt-5 h-[30px]">
                 {freePlanData.description}
               </p>
 
               <div className="flex justify-start items-center mb-6 mt-8">
                 {freePlanData.monthlyDiscount === 0 ? (
-                  <h4 className="text-4xl font-bold ml-2 text-black">
+                  <h4 className="text-4xl font-bold ml-2 text-brown">
                     ₹ {freePlanData.monthlyPrice}
                   </h4>
                 ) : (
                   <>
-                    <p className="text-sm font-normal line-through text-black">
+                    <p className="text-sm font-normal line-through text-brown">
                       ₹ {freePlanData.monthlyPrice}
                     </p>
-                    <h4 className="text-4xl font-bold ml-2 text-black">
+                    <h4 className="text-4xl font-bold ml-2 text-brown">
                       ₹ {freePlanData.monthlyPrice - freePlanData.monthlyDiscount}
                     </h4>
                   </>
                 )}
-                <p className="text-sm font-normal ml-2 text-gray-500">/ month</p>
+                <p className="text-sm font-normal ml-2 text-brown">/ month</p>
               </div>
             </div>
 
@@ -362,9 +362,9 @@ const B2BPlans: React.FC<FormProps> = ({
 
                 {disableFreemium.map((product, index) => (
                   <div key={index} className="flex items-start mb-5">
-                    <GiCircle className="h-4 w-5 text-gray-300" />
+                    <GiCircle className="h-4 w-5 text-brown" />
                     <div className="ml-2">
-                      <p className="text-sm font-normal text-gray-300">
+                      <p className="text-sm font-normal text-brown">
                         {product.plan}
                       </p>
                     </div>
@@ -411,7 +411,7 @@ const B2BPlans: React.FC<FormProps> = ({
           >
             <p
               className={`${
-                term === "Monthly" ? "text-white" : "text-black"
+                term === "Monthly" ? "text-white" : "text-brown"
               } text-xs font-normal px-4 py-1`}
             >
               Monthly
@@ -430,7 +430,7 @@ const B2BPlans: React.FC<FormProps> = ({
           >
             <p
               className={`${
-                term === "Yearly" ? "text-white" : "text-black"
+                term === "Yearly" ? "text-white" : "text-brown"
               } text-xs font-normal px-4 py-1`}
             >
               Yearly
@@ -439,27 +439,27 @@ const B2BPlans: React.FC<FormProps> = ({
         </div>
       </div>
 
-      <p className="text-sm font-normal text-black text-left mt-5 h-[30px]">
+      <p className="text-sm font-normal text-brown text-left mt-5 h-[30px]">
         {prePlanData.description}
       </p>
 
       <div className="flex justify-start items-center mb-6 mt-8">
         {prePlanData.monthlyDiscount === 0 ? (
-          <h4 className="text-4xl font-bold ml-2 text-black">
+          <h4 className="text-4xl font-bold ml-2 text-brown">
             ₹ {prePlanData.monthlyPrice}
           </h4>
         ) : (
           <>
-            <p className="text-sm font-normal line-through text-black">
+            <p className="text-sm font-normal line-through text-brown">
               ₹ {prePlanData.monthlyPrice}
             </p>
-            <h4 className="text-4xl font-bold ml-2 text-black">
+            <h4 className="text-4xl font-bold ml-2 text-brown">
               ₹{" "}
               {prePlanData.monthlyPrice - prePlanData.monthlyDiscount}
             </h4>
           </>
         )}
-        <p className="text-sm font-normal ml-2 text-gray-500">/ month</p>
+        <p className="text-sm font-normal ml-2 text-brown">/ month</p>
       </div>
     </div>
 
@@ -482,7 +482,7 @@ const B2BPlans: React.FC<FormProps> = ({
   <div className="flex flex-col sm:flex-row justify-between mt-10">
     <CustomButton
       title={"Back"}
-      className="ml-3 hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-black "
+      className="ml-3 hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-brown "
       customStyles={{ backgroundColor: "#E0E0E0" }}
       onPress={prevStep}
     />

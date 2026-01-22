@@ -140,7 +140,7 @@ const BlogsDetails = ({ id }: any) => {
           <div className="px-4 md:px-28 mt-8 md:mt-10">
             {blogData ? (
               <>
-                <h1 className="text-black  text-lg md:text-3xl font-bold">
+                <h1 className="text-brown  text-lg md:text-3xl font-bold">
                   {blogData?.title}
                 </h1>
                 <div className="py-8 md:pt-10 md:pb-2">
@@ -149,12 +149,12 @@ const BlogsDetails = ({ id }: any) => {
                       {/* <p className="text-sm mr-3 md:mr-3 ">By</p> */}
                       <div className="flex md:flex ">
                         <div className="mr-3 md:mr-3 ">
-                          <p className="text-black md:text-md text-xs mt-1 md:mt-1">Published On : {createdDate}</p>
+                          <p className="text-brown md:text-md text-xs mt-1 md:mt-1">Published On : {createdDate}</p>
 
-                          <p className="text-black md:text-md text-xs mt-1 md:mt-1 justify-center items-center flex whitespace-nowrap" > Published By :<h1 className=" px-2 font-semibold text-black text-sm md:text-sm">
+                          <p className="text-brown md:text-md text-xs mt-1 md:mt-1 justify-center items-center flex whitespace-nowrap" > Published By :<h1 className=" px-2 font-semibold text-brown text-sm md:text-sm">
                             hubeco team
                           </h1></p>
-                          {/* <p className="text-black text-xs mt-1 md:mt-1">
+                          {/* <p className="text-brown text-xs mt-1 md:mt-1">
                     Founder & CEO
                   </p> */}
                         </div>
@@ -167,7 +167,7 @@ const BlogsDetails = ({ id }: any) => {
                       </div>
                     </div>
                     <div>
-                      {/* <p className="text-black md:text-md text-xs mt-1 md:mt-1">Published On : {createdDate}</p> */}
+                      {/* <p className="text-brown md:text-md text-xs mt-1 md:mt-1">Published On : {createdDate}</p> */}
                     </div>
                   </div>
                   <Image
@@ -204,7 +204,7 @@ const BlogsDetails = ({ id }: any) => {
                   className="flex mx-auto justify-center items-center w-[90%] md:w-[400px] md:h-[400px]"
                 />
 
-                <p className="flex mx-auto justify-center items-center text-black text-xs md:text-lg mt-1 md:mt-1">No Blog Found.</p>
+                <p className="flex mx-auto justify-center items-center text-brown text-xs md:text-lg mt-1 md:mt-1">No Blog Found.</p>
               </>
             )}
 
@@ -252,7 +252,7 @@ const BlogsDetails = ({ id }: any) => {
                           className="rounded-[5px] h-[300px] w-[400px] cursor-pointer"
                         />
 
-                        <div className="w-full text-black">
+                        <div className="w-full text-brown">
                           <div className={styles.itemTimings}>
                             <p className={styles.timeText}>13 mins read</p>
                             <p className={styles.timeText}>

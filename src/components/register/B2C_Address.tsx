@@ -434,7 +434,7 @@ const B2CAddress: React.FC<AddressFormProps> = ({
       {/* Address Line 1 and Land Mark */}
       <div className="flex">
         <div className="w-3/6 p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Address Line 1 <span className="text-red">*</span>
           </label>
           <Controller
@@ -459,7 +459,7 @@ const B2CAddress: React.FC<AddressFormProps> = ({
         </div>
 
         <div className="w-3/6 p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Land Mark
           </label>
           <Controller
@@ -486,7 +486,7 @@ const B2CAddress: React.FC<AddressFormProps> = ({
       {/* Pincode and Country */}
       <div className="flex">
         <div className="w-3/6 p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Pincode <span className="text-red">*</span>
           </label>
           <Controller
@@ -518,7 +518,7 @@ const B2CAddress: React.FC<AddressFormProps> = ({
         </div>
 
         <div className="w-3/6 p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Country <span className="text-red">*</span>
           </label>
 
@@ -530,7 +530,7 @@ const B2CAddress: React.FC<AddressFormProps> = ({
             render={({ field: { onChange, value } }) => (
               <Select onValueChange={(e) => { onChangeCountry(e, 'dropdown'), onChange(e) }} value={value}  >
                 <SelectTrigger className="w-full">
-                  <SelectValue className="text-fontGray" placeholder="Select a Country" />
+                  <SelectValue className="text-brown" placeholder="Select a Country" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
@@ -560,7 +560,7 @@ const B2CAddress: React.FC<AddressFormProps> = ({
       <div style={{ display: "flex" }}>
         <div className="w-3/6 p-5">
 
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             State <span className="text-red">*</span>
           </label>
           <Controller
@@ -597,7 +597,7 @@ const B2CAddress: React.FC<AddressFormProps> = ({
         </div>
         <div className="w-3/6 p-5">
 
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             City <span className="text-red">*</span>
           </label>
           <Controller
@@ -661,7 +661,7 @@ const B2CAddress: React.FC<AddressFormProps> = ({
       <div className="flex p-5">
         <CustomButton
           title={"Back"}
-          className="ml-3 hover:bg-primary h-12 md:h-12 md:w-48 w-30 md:text-md text-sm text-black"
+          className="ml-3 hover:bg-primary h-12 md:h-12 md:w-48 w-30 md:text-md text-sm text-brown"
           customStyles={{ backgroundColor: "#E0E0E0" }}
           onPress={prevStep}
         />

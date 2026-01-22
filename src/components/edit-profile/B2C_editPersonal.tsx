@@ -865,7 +865,7 @@ const B2C_editPersonal: React.FC<ProfileFormProps> = ({
         </div>
         <div className="flex flex-col sm:flex-row">
           <div className="w-full sm:w-1/2 p-2 sm:p-5">
-            <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+            <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
               First Name <span className="text-red">*</span>
             </label>
             <Controller
@@ -881,6 +881,7 @@ const B2C_editPersonal: React.FC<ProfileFormProps> = ({
                     borderRadius: "5px",
                     border: "1px solid #ccc",
                     color: "black",
+                    backgroundColor: "#FFFEF8",
                   }}
                   errorMessage={errors.firstName?.message}
                 />
@@ -889,7 +890,7 @@ const B2C_editPersonal: React.FC<ProfileFormProps> = ({
             />
           </div>
           <div className="w-full sm:w-1/2 p-2 sm:p-5">
-            <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+            <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
               Last Name
             </label>
             <Controller
@@ -917,7 +918,7 @@ const B2C_editPersonal: React.FC<ProfileFormProps> = ({
         <div className="flex flex-col sm:flex-row">
           <div className="w-full sm:w-1/2 p-2 sm:p-5">
             <div className="flex  justify-between items-start">
-              <label className="flex items-center justify-between  text-gray-700 mb-2 text-black text-base font-medium text-left">
+              <label className="flex items-center justify-between  text-brown mb-2 text-brown text-base font-medium text-left">
                 Email Address <span className="text-red mr-3 ml-1"> *</span>
               </label>
               <p
@@ -1001,7 +1002,7 @@ const B2C_editPersonal: React.FC<ProfileFormProps> = ({
           </div>
           <div className="w-full sm:w-1/2 p-2 sm:p-5">
             <div className="flex  justify-between items-center">
-              <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+              <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                 Phone Number <span className="text-red">*</span>
               </label>
               <p
@@ -1082,7 +1083,7 @@ const B2C_editPersonal: React.FC<ProfileFormProps> = ({
           <DialogTrigger asChild></DialogTrigger>
           <DialogContent className="sm:max-w-max">
             {/* <DialogClose className='absolute right-4 top-4'>
-            <button className="text-gray-600 hover:text-gray-800" type="button" onClick={onCLickClose}>
+            <button className="text-brown hover:text-brown" type="button" onClick={onCLickClose}>
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
@@ -1093,13 +1094,13 @@ const B2C_editPersonal: React.FC<ProfileFormProps> = ({
                 Verify OTP
               </DialogTitle>
               <div className="flex items-center justify-center w-max">
-                <p className="my-2 md:my-2 lg:my-2 text-sm md:text-sm text-black  text-center">
+                <p className="my-2 md:my-2 lg:my-2 text-sm md:text-sm text-brown  text-center">
                   Enter the code we sent to the{" "}
                   {changeType === "email" ? "Email" : "Mobile"}
                 </p>
               </div>
               <div className="flex items-center justify-center">
-                <p className=" flex text-sm md:text-sm text-black  text-center font-bold">
+                <p className=" flex text-sm md:text-sm text-brown  text-center font-bold">
                   {changeType === "email" ? formattedEmail : formattedNumber}
                 </p>
               </div>
@@ -1140,7 +1141,7 @@ const B2C_editPersonal: React.FC<ProfileFormProps> = ({
                                   index
                                 )
                               }
-                              className="text-black text-center border border-slate-400 rounded-lg p-3"
+                              className="text-brown text-center border border-slate-400 rounded-lg p-3"
                               style={{ width: "70px", height: "55px" }}
                             />
                           )}

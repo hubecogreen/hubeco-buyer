@@ -161,11 +161,11 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
       </h2>
 
       <div
-        className="bg-white border border-[#E5E7EB] rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A]  overflow-y-auto scrollbar w-full"
+        className="bg-cream border border-primary rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A]  overflow-y-auto scrollbar w-full"
         style={{ opacity: 1 }}
       >
         <table className="w-full border-collapse text-sm table-auto">
-          <thead className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
+          <thead className="bg-cream border-b border-primary">
             <tr>
               <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">Payment ID</th>
               <th className="py-3 px-4 text-left font-semibold text-[#2F2B3DB2]">Payment For</th>
@@ -228,9 +228,9 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
                           "buyer/sample-invoice.pdf"
                         )
                       }
-                      className="bg-[#B90647] text-white text-sm font-semibold px-4 py-2 rounded-[6px] hover:bg-[#9B314A] flex items-center gap-1"
+                      className="bg-primary text-white text-sm font-semibold px-4 py-2 rounded-[6px]  flex items-center gap-1"
                     >
-                      <MdOutlineFileDownload size={18} />
+                      <MdOutlineFileDownload size={18} color="#ffffffff" />
                       Payment Receipt
                     </button>
                   ) : (
@@ -263,13 +263,13 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
             <div className="space-y-6">
               {/* Direct Bank Transfer Section */}
               <div className="space-y-4">
-                <p className="text-gray-700">
+                <p className="text-brown">
                   For directly remitting to Hubeco Bank Account – please use the following bank details:
                 </p>
 
                 <div className="space-y-1">
                   <p className="text-sm font-medium text-blue-600">Account name</p>
-                  <p className="font-semibold text-gray-900">
+                  <p className="font-semibold text-brown">
                     HUBECO GREEN VENTURES PRIVATE LIMITED
                   </p>
                 </div>
@@ -277,12 +277,12 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <p className="text-sm font-medium text-blue-600">Account no</p>
-                    <p className="font-semibold text-gray-900">99909705044055</p>
+                    <p className="font-semibold text-brown">99909705044055</p>
                   </div>
 
                   <div className="space-y-2">
                     <p className="text-sm font-medium text-blue-600">IFSC Code</p>
-                    <p className="font-semibold text-gray-900">HDFC0000317</p>
+                    <p className="font-semibold text-brown">HDFC0000317</p>
                   </div>
                 </div>
               </div>
@@ -291,13 +291,13 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
               <div className="relative flex items-center justify-center">
                 <div className="absolute w-full border-t border-gray-300" />
                 <div className="relative px-4 bg-white">
-                  <span className="text-sm text-gray-500 uppercase">or</span>
+                  <span className="text-sm text-brown uppercase">or</span>
                 </div>
               </div>
 
               {/* PayU Section */}
               <div className="space-y-4">
-                <p className="text-gray-700">
+                <p className="text-brown">
                   Please use PayU Payment Gateway for initiating{" "}
                   {selectedPayment.applicablePaymentMethod === "RTGS_NEFT"
                     ? "RTGS/NEFT Transfer"

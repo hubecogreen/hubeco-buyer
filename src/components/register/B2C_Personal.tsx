@@ -598,7 +598,7 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
       </div>
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             First Name <span className="text-red">*</span>
           </label>
           <Controller
@@ -612,8 +612,7 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
                 isTextArea={false}
                 required={true}
                 customStyles={{
-                  borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  borderRadius: "5px",                  
                   color: "black",
                 }}
                 errorMessage={errors.firstName?.message}
@@ -623,7 +622,7 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
           />
         </div>
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Last Name <span className="text-red">*</span>
           </label>
           <Controller
@@ -638,7 +637,6 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
                 required={true}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
                   color: "black",
                 }}
                 errorMessage={errors.lastName?.message}
@@ -650,7 +648,7 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
       </div>
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Email Address <span className="text-red">*</span>
           </label>
           <Controller
@@ -665,7 +663,6 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
                 disabled={personalInfo?.email ? true : false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
                   color: "black",
                 }}
                 errorMessage={errors.email?.message}
@@ -675,7 +672,7 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
           />
         </div>
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Phone Number<span className="text-red">*</span>
           </label>
           <Controller
@@ -713,13 +710,13 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
                   type="checkbox"
                   onChange={onChange}
                   checked={value}
-                  className="w-4 h-4 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 accent-[#B90647]"
+                  className="w-4 h-4 bg-gray-100 border-gray-300 rounded accent-primary"
                 />
               )}
             />
             <label
               htmlFor="tandc"
-              className="ms-2 mt-2 text-base font-medium text-gray-900 dark:text-gray-300"
+              className="ms-2 mt-2 text-base font-medium text-brown dark:text-brown"
             >
               I agree to the{" "}
               <a
@@ -749,13 +746,13 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
                   // {...field}
                   onChange={onChange}
                   checked={value}
-                  className="w-4 h-4 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 accent-[#B90647]"
+                  className="w-4 h-4 bg-gray-100 border-gray-300 rounded  accent-primary"
                 />
               )}
             />
             <label
               htmlFor="privacyPolicy"
-              className="ms-2 mt-2 text-base font-medium text-gray-900 dark:text-gray-300"
+              className="ms-2 mt-2 text-base font-medium text-brown dark:text-brown"
             >
               I agree to the{" "}
               <Link
@@ -779,10 +776,10 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
       <div className="flex flex-col sm:flex-row justify-start mt-4">
         <CustomButton
           title={"Back"}
-          className={`ml-3 hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-black ${
+          className={`ml-3 border border-primary hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-brown ${
             disableBack ? "opacity-50" : "opacity-100"
           } `}
-          customStyles={{ backgroundColor: "#E0E0E0" }}
+          customStyles={{ backgroundColor: "#FFFEF8" }}
           onPress={onPressBack}
           // onPress={()=>{// console.log('hit this url',`/select-buyer-type?mobile=${mobileNumber}`)}}
         />
@@ -792,7 +789,7 @@ const B2CPersonal: React.FC<ProfileFormProps> = ({ imgSrc, nextStep }) => {
             <Button
               title={"Save & Continue"}
               onClick={onSave}
-              className="ml-3 bg-secondary hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-white "
+              className="ml-3 bg-primary hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-cream "
             >
               Save & Continue
             </Button>

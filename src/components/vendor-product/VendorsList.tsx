@@ -117,6 +117,7 @@ const VendorsList = () => {
             value={searchTerm}
             onChange={handleSearch}
             className="
+                bg-cream
                 focus:outline-none
                 border border-gray-300
                 rounded-[5px] rounded-tr-none rounded-br-none
@@ -125,7 +126,7 @@ const VendorsList = () => {
               "
           />
 
-          <div className="bg-pink p-3 h-12 flex items-center justify-center rounded-r-md">
+          <div className="bg-primary p-3 h-12 flex items-center justify-center rounded-r-md">
             <IoIosSearch className="h-5 w-6 text-white" />
           </div>
         </div>
@@ -229,7 +230,7 @@ const VendorsList = () => {
             className="mx-auto w-[400px] h-[400px]"
           />
 
-          <p className="text-center text-fontGray mt-4 text-lg font-bold ">
+          <p className="text-center text-brown mt-4 text-lg font-bold ">
             No Brands Found.
           </p>
         </>

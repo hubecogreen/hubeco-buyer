@@ -98,7 +98,7 @@ const QuoteRequest = () => {
       },
       {
         statuses: ["pending"],
-        textColor: "text-black",
+        textColor: "text-brown",
         bgColor: "text-[#fdba74]",
       },
       {
@@ -123,7 +123,7 @@ const QuoteRequest = () => {
       },
       {
         statuses: ["partial_payment_made"],
-        textColor: "text-black",
+        textColor: "text-brown",
         bgColor: "text-[#fdba74]",
       },
       {
@@ -143,7 +143,7 @@ const QuoteRequest = () => {
       },
     ];
 
-    const defaultStyles = { textColor: "text-black", bgColor: "bg-gray-300" };
+    const defaultStyles = { textColor: "text-brown", bgColor: "bg-gray-300" };
 
     // Find the matching style based on the status
     const style = statusStyles.find((item) =>
@@ -174,7 +174,7 @@ const QuoteRequest = () => {
   }
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="  bg-cream min-h-screen">
       <head>
         <title>Hubeco | Quote Requests</title>
       </head>
@@ -213,7 +213,7 @@ const QuoteRequest = () => {
           />
           <section className="flex-1">
             <div className="flex gap-3 items-start justify-between">
-              <h1 className="whitespace-nowrap text-3xl font-bold text-gray-800  border-b border-gray-300 pb-10">
+              <h1 className="whitespace-nowrap text-3xl font-bold text-brown  border-b border-gray-300 pb-10">
                 Quote Requests
               </h1>
               <div className="relative w-full max-w-md h-[43px] border !border-gray rounded-md">
@@ -222,10 +222,10 @@ const QuoteRequest = () => {
                   placeholder="Search Quote by ID"
                   value={searchTerm}
                   onChange={handleInputChange}
-                  className="pl-2 w-full h-full rounded-sm"
+                  className="pl-2 w-full h-full rounded-sm bg-cream border border-primary"
                   // className="border border-gray-300 rounded-md py-2 px-3 w-[50%] focus:outline-none focus:border-blue-500"
                 />
-                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none bg-secondary p-3">
+                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none bg-primary p-3">
                   <IoIosSearch
                     className="h-5 w-5 text-white rounded-r"
                     aria-hidden="true"
@@ -243,8 +243,8 @@ const QuoteRequest = () => {
                 {" "}
                 {data.length > 0 ? (
                   data.map((quote, index) => (
-                    <div key={index} className="mb-6 bg-gray-100 rounded-md">
-                      <div className="flex justify-between items-center mb-4 bg-secondaryBg  p-5">
+                    <div key={index} className="mb-6 bg-cream border border-primary rounded-md">
+                      <div className="flex justify-between items-center p-5 border-b border-primary">
                         <div className="flex flex-col">
                           <div className="flex">
                             {" "}
@@ -263,7 +263,7 @@ const QuoteRequest = () => {
                             </button>
                           </div>
                           <div className="flex">
-                            <h2 className="font-normal text-lg text-gray-600">
+                            <h2 className="font-normal text-lg text-brown">
                               Quote Requested On :
                             </h2>
                             <span className="font-bold px-3">
@@ -271,7 +271,7 @@ const QuoteRequest = () => {
                             </span>
                           </div>
                           <div className="flex ">
-                            {/* <h2 className="font-normal text-lg text-gray-600">
+                            {/* <h2 className="font-normal text-lg text-brown">
                               Quote Created On :
                             </h2>
                             <span className="px-3 font-bold">
@@ -286,7 +286,7 @@ const QuoteRequest = () => {
                           <div className="flex gap-3 pt-3">
                             <Link
                               href={`/quote-request/${quote._id}`}
-                              className="text-[#B90647] font-bold"
+                              className="text-primary font-bold"
                             >
                               View Quote Detail
                             </Link>
@@ -296,7 +296,7 @@ const QuoteRequest = () => {
                       {quote?.products?.map((item: any, idx: number) => (
                         <div
                           key={idx}
-                          className="flex items-start justify-between py-4 border-b border-gray-300"
+                          className="flex items-start justify-between py-4 px-5 border-b border-primary last:border-b-0"
                         >
                           <div className="flex">
                             <Image
@@ -352,7 +352,7 @@ const QuoteRequest = () => {
                       className="flex mx-auto justify-center items-center w-[400px] h-[400px]"
                     />
 
-                    <p className="text-center text-fontGray mt-4 text-lg font-bold">
+                    <p className="text-center text-brown mt-4 text-lg font-bold">
                       No quote found.
                     </p>
                   </>
@@ -364,7 +364,7 @@ const QuoteRequest = () => {
       </div>
 
       {totalPages > 1 && (
-        <div className="flex justify-center mb-4 items-center border-t border-t-transparent mt-8">
+        <div className="flex justify-center items-center border-t border-t-transparent pt-8 pb-4 bg-cream">
           <Pagination
             totalItems={totalPages}
             itemsPerPage={limit}

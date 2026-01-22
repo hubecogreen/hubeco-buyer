@@ -697,7 +697,7 @@ setAddresses(result.data)
             <div>
           
              
-            <p className="text-black text-md w-full flex leading-6  break-words  break-all">
+            <p className="text-brown text-md w-full flex leading-6  break-words  break-all">
              {address?.address.includes("|") ? address.address.replace(/\|/g, ', '):address.address},{' '}{address.city},{' '} {address.state}, {' '}{address.country},{' '} {address.postCode}
           
              </p>
@@ -706,7 +706,7 @@ setAddresses(result.data)
               <div className={`" flex justify-start w-2/3 h-[22px] " ${address.id} ${addId}`}>
                <button
                  onClick={() => onEditAddress(address)}
-                 className={`hover:underline font-bold text-[#B90647] ${addId === address.id ? "opacity-50" : ""}`}
+                 className={`hover:underline font-bold text-primary ${addId === address.id ? "opacity-50" : ""}`}
 
                  disabled={addId==address.id}
                >
@@ -718,7 +718,7 @@ setAddresses(result.data)
             
             
              <button
-               className={`hover:underline ml-2 font-bold text-[#B90647] ${addId === address.id ? "opacity-50" : ""}`}
+               className={`hover:underline ml-2 font-bold text-secondary ${addId === address.id ? "opacity-50" : ""}`}
 
                onClick={() => {setIsOpen(true),setDeleteId(address.id)}}
                disabled={addId==address.id}
@@ -750,7 +750,7 @@ setAddresses(result.data)
 
     {
                 address.isDefault?(
-                <h2 className="text-xs font-normal flex   justify-center mt-1 text-secondary w-16 text-center py-0 h-[20px] border border-secondary border-solid rounded ">Default</h2>
+                <h2 className="text-xs font-normal flex   justify-center mt-1 text-primary w-16 text-center py-0 h-[20px] border border-primary border-solid rounded ">Default</h2>
                 ):<></>
               }
              </div>
@@ -764,7 +764,7 @@ setAddresses(result.data)
         <div>
           <button
             onClick={toggleForm}
-            className="block ml-0 bg-secondary rounded-md text-white p-3 hover:bg-primary"
+            className="block ml-0 bg-primary rounded-md text-white p-3 hover:bg-primary"
           >
             Add New Address
           </button>
@@ -775,7 +775,7 @@ setAddresses(result.data)
       {isFormVisible && (
         <>
            <div className='w-full flex justify-start items-center'>
-           <Button  className="bg-secondary hover:bg-primary h-[45px] md:h-[45px] md:w-48  w-48 px-2 md:text-md text-sm text-white flex items-center justify-center"  onClick={()=>getCurrentLocation()} >
+           <Button  className="bg-primary hover:bg-secondary h-[45px] md:h-[45px] md:w-48  w-48 px-2 md:text-md text-sm text-white flex items-center justify-center"  onClick={()=>getCurrentLocation()} >
             {loading?
             <CircularProgress color="#ffffff" size={15} />
             :
@@ -795,7 +795,7 @@ setAddresses(result.data)
          {/* <div style={{ display: "flex" }}> */}
          <div className="flex flex-wrap md:flex-nowrap w-full">
              <div className="md:w-3/6 w-full p-5">
-               <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+               <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                  Address Line 1 <span className="text-red">*</span>
                </label>
                <Controller
@@ -810,7 +810,7 @@ setAddresses(result.data)
                      isTextArea={false}
                      customStyles={{
                        borderRadius: "5px",
-                       border: "1px solid #ccc",
+                       
                        color: "black",
                      }}
                      errorMessage={errors.address?.message}
@@ -820,7 +820,7 @@ setAddresses(result.data)
              </div>
      
              <div className="md:w-3/6 w-full p-5">
-               <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+               <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                  Land Mark
                </label>
                <Controller
@@ -834,7 +834,7 @@ setAddresses(result.data)
                      isTextArea={false}
                      customStyles={{
                        borderRadius: "5px",
-                       border: "1px solid #ccc",
+                       
                        color: "black",
                      }}
                      errorMessage={errors.landmark?.message}
@@ -847,7 +847,7 @@ setAddresses(result.data)
             {/* Pincode and Country */}
             <div className="flex flex-wrap md:flex-nowrap w-full">
              <div className="md:w-3/6 w-full p-5">
-               <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+               <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                  Pincode <span className="text-red">*</span>
                </label>
                <Controller
@@ -868,7 +868,7 @@ setAddresses(result.data)
                      
                      customStyles={{
                        borderRadius: "5px",
-                       border: "1px solid #ccc",
+                       
                        color: "black",
                      }}
                   
@@ -879,7 +879,7 @@ setAddresses(result.data)
              </div>
      
              <div className="md:w-3/6 w-full p-5">
-               <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+               <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                  Country <span className="text-red">*</span>
                </label>
      
@@ -891,7 +891,7 @@ setAddresses(result.data)
                  render={({ field: { onChange, value } }) => (
            <Select onValueChange={(e)=>{onChangeCountry(e,'dropdown'),onChange(e)}} value={value}  >
              <SelectTrigger className="w-full ">
-               <SelectValue className="text-fontGray " placeholder="Select a Country" />
+               <SelectValue className="text-brown " placeholder="Select a Country" />
              </SelectTrigger>
              <SelectContent>
                <SelectGroup>
@@ -921,7 +921,7 @@ setAddresses(result.data)
            <div className="flex flex-wrap md:flex-nowrap w-full">
            <div className="md:w-3/6 w-full p-5">
                
-               <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+               <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                  State <span className="text-red">*</span>
                </label>
                <Controller
@@ -958,7 +958,7 @@ setAddresses(result.data)
              </div>
              <div className="md:w-3/6 w-full p-5">
               
-               <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+               <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                  City <span className="text-red">*</span>
                </label>
                 <Controller
@@ -1025,14 +1025,14 @@ setAddresses(result.data)
            <div className="flex p-5">
            <CustomButton
                title={"Cancel"}
-               className="ml-3 bg-lightGray   h-12 md:h-12 md:w-36 w-24 md:text-md text-sm text-white"
+               className="ml-3 bg-cream border border-primary h-12 md:h-12 md:w-36 w-24 md:text-md text-sm text-white"
                customStyles={{color:"#000"}}
               onPress={toggleForm}
              />
            
              <CustomButton
                title={"Submit"}
-               className="ml-3 bg-secondary hover:bg-primary h-12 md:h-12 md:w-48 w-24 md:text-md text-sm text-white"
+               className="ml-3 bg-primary hover:bg-secondary h-12 md:h-12 md:w-48 w-24 md:text-md text-sm text-white"
                customStyles={{}}
               // onPress={onSubmit}
                type='submit'

@@ -150,10 +150,10 @@ export default function GreenHomeLoanForm({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-hidden touch-none"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black bg-opacity-50 overflow-hidden touch-none"
       style={{ touchAction: 'none' }}
     >
-      <div className="bg-white rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[95vh] flex flex-col">
+      <div className="bg-cream rounded-3xl w-full max-w-[650px] mx-4 my-4 relative overflow-hidden max-h-[80vh]  md:max-h-[95vh] flex flex-col">
         {/* Header - Fixed */}
         <div
           className="relative px-6 py-8 text-white flex-shrink-0"
@@ -166,7 +166,7 @@ export default function GreenHomeLoanForm({
           <div className="absolute inset-0  bg-opacity-30" />
           <button
             onClick={handleClose}
-            className="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors z-10"
+            className="absolute top-4 right-4 text-white hover:text-brown transition-colors z-10"
           >
             <IoClose size={24} />
           </button>
@@ -177,7 +177,7 @@ export default function GreenHomeLoanForm({
 
         {/* Form - Scrollable */}
         <div 
-          className="md:px-20 px-8 py-20 overflow-y-auto flex-1 overscroll-contain"
+          className="px-6 md:px-20 py-4 md:py-20 overflow-y-auto flex-1 overscroll-contain"
           style={{ 
             WebkitOverflowScrolling: 'touch',
             scrollbarWidth: 'none',
@@ -196,14 +196,14 @@ export default function GreenHomeLoanForm({
           >
             {/* Name */}
             <div>
-              <label className="block text-gray-800 font-medium mb-2">
+              <label className="block text-brown font-medium mb-2">
                 Name*
               </label>
               <input
                 type="text"
                 {...register("name")}
                 placeholder="Enter Your Name"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
+                className="w-full px-4 py-3 bg-cream border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent"
                 required
               />
               {errors.name && (
@@ -215,18 +215,18 @@ export default function GreenHomeLoanForm({
 
             {/* Phone */}
             <div>
-              <label className="block text-gray-800 font-medium mb-2 text-sm md:text-base">
+              <label className="block text-brown font-medium mb-2 text-sm md:text-base">
                 Phone Number*
               </label>
               <div className="flex">
                 <div className="flex items-center justify-center px-3 py-2 sm:px-4 sm:py-3 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 text-sm sm:text-base">
-                  <span className="text-gray-600">+91</span>
+                  <span className="text-brown">+91</span>
                 </div>
                 <input
                   type="tel"
                   {...register("phoneNumber")}
                   placeholder="Enter Phone Number"
-                  className="flex-1 px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-r-lg focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent text-sm sm:text-base w-[20px]"
+                  className="flex-1 px-3 py-2 sm:px-4 sm:py-3 bg-cream border border-gray-300 rounded-r-lg focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent text-sm sm:text-base w-[20px]"
                   required
                 />
               </div>
@@ -242,10 +242,10 @@ export default function GreenHomeLoanForm({
               <input
                 type="checkbox"
                 {...register("agreedToTerms")}
-                className="mt-1 w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                className="mt-1 w-4 h-4 bg-cream text-green-600 border-gray-300 rounded focus:ring-green-500"
                 required
               />
-              <label className="text-sm text-gray-600 leading-relaxed">
+              <label className="text-sm text-brown leading-relaxed">
                 I agree to Hubeco{" "}
                 <Link
                   href="/green-financing-terms-of-use"
@@ -276,8 +276,8 @@ export default function GreenHomeLoanForm({
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-[#b90e47] text-white py-4 rounded-lg font-semibold text-lg transition-all duration-200 ${
-                loading ? "opacity-50 cursor-not-allowed" : "hover:bg-[#a00d3f]"
+              className={`w-full bg-primary text-cream py-4 rounded-lg font-semibold text-lg transition-all duration-200 ${
+                loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
               }`}
             >
               {loading ? "Submitting..." : "Submit"}
@@ -285,15 +285,12 @@ export default function GreenHomeLoanForm({
           </form>
 
           {/* Logo */}
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-6 mb-4 md:mt-8">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-green-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">H</span>
-              </div>
               <img
                 src="/images/Logo-2.webp"
                 alt="Hubeco Logo"
-                className="h-8 w-auto"
+                className="h-12 md:h-14 w-auto"
               />
             </div>
           </div>

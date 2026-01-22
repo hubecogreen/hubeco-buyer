@@ -10,18 +10,20 @@ export default function GreenFinancingSection() {
   const [isProjectFormOpen, setIsProjectFormOpen] = useState(false);
 
   return (
-    <>
-      <div className="relative w-full h-[500px] overflow-hidden rounded-[48px] mx-auto max-w-[1440px] top-8">
+    <div className ="md:px-2 px-0 lg:px-0">
+      <div className="relative w-full h-[500px] overflow-hidden rounded-[48px] mx-auto max-w-[1440px] top-8 ">
         {/* Background Image */}
-        <div className="absolute inset-0 m-4">
+        <div className="absolute inset-0 m-4 md:m-2
+
+      ">
           <Image
             src="/images/greenFinance/greenFinanceBanner.webp"
             alt="Modern sustainable home interior"
             fill
-            className="object-fit rounded-[48px]"
+            className="object-fit rounded-[40px]"
             priority
           />
-          <div className="absolute inset-0 bg-black/50 rounded-[48px]" />
+          <div className="absolute inset-0 bg-black/50 rounded-[40px]" />
         </div>
 
         {/* Content */}
@@ -42,17 +44,17 @@ export default function GreenFinancingSection() {
             <div className="flex flex-wrap gap-4 sm:gap-6">
               <button
                 onClick={() => setIsHomeLoanFormOpen(true)}
-                className="flex items-center gap-2 bg-transparent border border-white text-white px-6 py-3 rounded-md text-base font-semibold hover:text-gray-900 transition"
+                className="flex items-center justify-between gap-2 bg-cream border border-white text-primary px-6 py-3 rounded-md text-base font-semibold hover:text-brown transition w-[275px]"
               >
-                Apply for Green Home Loan
+                Apply for Home Loan
                 <GoArrowRight className="text-lg" />
               </button>
 
               <button
                 onClick={() => setIsProjectFormOpen(true)}
-                className="flex items-center gap-2 bg-[#B90647] text-white px-6 py-3 rounded-md text-base font-semibold hover:bg-[#B90647] transition"
+                className="flex items-center gap-2 bg-primary text-cream px-6 py-3 rounded-md text-base font-semibold hover:bg-primary transition"
               >
-                Apply for Green Project Financing
+                Apply for Project Finance
                 <GoArrowRight className="text-lg" />
               </button>
             </div>
@@ -70,6 +72,6 @@ export default function GreenFinancingSection() {
         isOpen={isProjectFormOpen}
         onClose={() => setIsProjectFormOpen(false)}
       />
-    </>
+    </div>
   );
 }

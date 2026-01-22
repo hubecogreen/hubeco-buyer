@@ -261,7 +261,7 @@ export default function Page() {
       });
   };
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       <Head>
         <title>Contact Us | Hubeco Buyer</title>
       </Head>
@@ -293,43 +293,43 @@ export default function Page() {
             </Link>
           </Link>
         </div>
-        <div className="bg-white  md:py-20">
-          <div className="md:flex flex-col lg:flex-row items-start justify-start space-y-4 lg:space-x-4 lg:space-y-0 bg-cover bg-no-repeat bg-center bg-[url('/images/home/contactbg.webp')]">
+        <div className="bg-cream  md:py-20">
+          <div className="md:flex flex-col lg:flex-row items-start justify-start space-y-4 lg:space-x-4 lg:space-y-0 bg-cover bg-no-repeat bg-center bg-[url('/images/home/contactbg-1.png')]">
             <div className="md:w-11/12 mx-auto md:flex">
-              <div className="md:w-1/2 w-full md:overflow-auto p-4">
-                <h1 className="md:text-3xl text-2xl  text-center md:text-left font-bold md:mb-4 text-black">
+              <div className=" md:w-1/2 w-full md:overflow-auto p-4">
+                <h1 className="md:text-3xl text-2xl  text-center md:text-left font-bold md:mb-4 text-brown">
                   Customer Support
                 </h1>
-                <p className="max-w-2xl mb-4 py-4 text-justify text-black md:text-lg text-md">
+                <p className="max-w-2xl mb-4 py-4 text-justify text-brown md:text-lg text-md">
                   For any inquiries or support related to your purchases,
                   account, or our services, feel free to reach out to us:
                 </p>
                 <div className="flex flex-col space-y-4 max-w-md">
                   <div className="flex items-start">
-                    <div className="bg-secondary hover:bg-primary  p-1.5 rounded-md h-10 flex items-center justify-center">
+                    <div className="bg-primary hover:bg-secondary  p-1.5 rounded-md h-10 flex items-center justify-center">
                       <PiPhoneLight className="h-6 w-7 text-white" />
                     </div>
                     <div className="ml-4 flex flex-col">
-                      <h6 className="font-regular text-sm md:text-base text-secondary">
+                      <h6 className="font-regular text-sm md:text-base text-primary">
                         Phone
                       </h6>
-                      <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-black">
+                      <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-brown">
                         +91 9985544055
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start">
-                    <div className="bg-secondary hover:bg-primary  p-1.5 rounded-md h-10 flex items-center justify-center">
+                    <div className="bg-primary hover:bg-secondary  p-1.5 rounded-md h-10 flex items-center justify-center">
                       <TfiEmail className="h-5 w-7 text-white" />
                     </div>
                     <div className="ml-4 flex flex-col">
-                      <h6 className="font-regular text-sm md:text-base text-secondary">
+                      <h6 className="font-regular text-sm md:text-base text-primary">
                         Email
                       </h6>
                       <Link
                         href="mailto:info@hubeco.market"
-                        className="font-medium text-xs md:text-sm text-black no-underline overflow-hidden text-ellipsis whitespace-nowrap"
+                        className="font-medium text-xs md:text-sm text-brown no-underline overflow-hidden text-ellipsis whitespace-nowrap"
                       >
                         info@hubeco.market
                       </Link>
@@ -346,22 +346,22 @@ export default function Page() {
                       <h6 className="font-regular text-sm md:text-base text-secondary">
                         Live Chat
                       </h6>
-                      <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-black">
+                      <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-brown">
                         9 AM to 6 PM <br /> (Monday to Friday)
                       </p>
                     </div>
                   </div> */}
 
                   <div className="flex items-start">
-                    <div className="bg-secondary hover:bg-primary p-1.5 rounded-md h-10 flex items-center justify-center">
+                    <div className="bg-primary hover:bg-secondary p-1.5 rounded-md h-10 flex items-center justify-center">
                       <PiMapPinAreaLight className="h-5 w-[30px] text-white" />
                     </div>
                     <div className="ml-4 flex flex-col">
-                      <h6 className="font-regular text-sm md:text-base text-secondary">
+                      <h6 className="font-regular text-sm md:text-base text-primary">
                         Address
                       </h6>
-                      <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis text-black">
-                        Hubeco Green Ventures Pvt Ltd<br></br>
+                      <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis text-brown">
+                        Hubeco Green Ventures Pvt. Ltd<br></br>
                         Awfis Space Solutions Ltd, NSL Icon<br></br>
                         3rd Floor, Road No. 12, Anand Banjara Colony<br></br>
                         Banjara Hills, Hyderabad, Telangana - 500034<br></br>
@@ -378,9 +378,9 @@ export default function Page() {
                     className="md:flex w-full md:flex-col md:gap-5"
                   >
                     <div className="flex justify-center">
-                      <div className="inline-block max-w-full w-11/12 md:w-full p-6 bg-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
+                      <div className="inline-block max-w-full w-11/12 md:w-full p-6 bg-cream shadow-[0px_8px_24px_rgba(149,157,165,0.2)]">
                         <div className="md:p-4 py-4">
-                          <label className="block text-gray-700 mb-2 text-black text-base font-medium">
+                          <label className="block text-brown mb-2 text-brown text-base font-medium">
                             Name <span className="text-red">*</span>
                           </label>
                           <Controller
@@ -392,7 +392,7 @@ export default function Page() {
                                 onChange={onChange}
                                 value={value}
                                 customStyles={{
-                                  backgroundColor: "#F3F3F3",
+                                  // backgroundColor: "#F3F3F3",
                                   borderRadius: "5px",
                                   // width: "500px",
                                 }}
@@ -404,7 +404,7 @@ export default function Page() {
                           />
                         </div>
                         <div className="md:p-4 py-4">
-                          <label className="block text-gray-700 mb-2 text-black text-base font-medium">
+                          <label className="block text-brown mb-2 text-brown text-base font-medium">
                             Email <span className="text-red">*</span>
                           </label>
                           <Controller
@@ -416,7 +416,7 @@ export default function Page() {
                                 onChange={onChange}
                                 value={value}
                                 customStyles={{
-                                  backgroundColor: "#F3F3F3",
+                                  // backgroundColor: "#F3F3F3",
                                   borderRadius: "5px",
                                   // width: "500px",
                                 }}
@@ -428,7 +428,7 @@ export default function Page() {
                           />
                         </div>
                         <div className="md:p-4 py-4">
-                          <label className="block text-gray-700 mb-2 text-black text-base font-medium">
+                          <label className="block text-brown mb-2 text-brown text-base font-medium">
                             Phone Number <span className="text-red">*</span>
                           </label>
                           <Controller
@@ -441,7 +441,6 @@ export default function Page() {
                                 onChange={onChange}
                                 value={value}
                                 customStyles={{
-                                  backgroundColor: "#F3F3F3",
                                   borderRadius: "5px",
                                   // width: "500px",
                                 }}
@@ -454,7 +453,7 @@ export default function Page() {
                           />
                         </div>
                         <div className="md:p-4 py-4">
-                          <label className="block text-gray-700 mb-2 text-black text-base font-medium">
+                          <label className="block text-brown mb-2 text-brown text-base font-medium">
                             Your Message <span className="text-red">*</span>
                           </label>
                           <Controller
@@ -466,7 +465,6 @@ export default function Page() {
                                 onChange={onChange}
                                 value={value}
                                 customStyles={{
-                                  backgroundColor: "#F3F3F3",
                                   borderRadius: "5px",
                                   width: "100%",
                                   height: "100px",
@@ -483,7 +481,7 @@ export default function Page() {
                         <div className="md:mt-0 mt-5 text-center lg:text-left">
                           <CustomButton
                             title="Send Message"
-                            className="px-2 py-3  font-semibold text-sm bg-secondary w-44 hover:bg-primary"
+                            className="px-2 py-3  font-semibold text-sm bg-primary w-44 hover:bg-secondary"
                             type="submit"
                             customStyles={{
                               marginLeft: "15px",
@@ -514,11 +512,11 @@ export default function Page() {
                             className="w-[300px] h-[300px]"
                           />
                         </div>
-                        <h1 className="text-4xl md:text-3xl font-bold mb-4 text-black">
+                        <h1 className="text-4xl md:text-3xl font-bold mb-4 text-brown">
                           Thank you !
                         </h1>
                         <div className="flex items-center justify-center">
-                          <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-base text-black w-10/12 text-center">
+                          <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-base text-brown w-10/12 text-center">
                             Your enquiry has been submitted successfully
                           </p>
                         </div>
@@ -581,17 +579,17 @@ export default function Page() {
           </div>
 
           <div className="text-center p-4 ">
-            <h1 className="md:text-4xl text-2xl font-bold mb-6 text-black">
+            <h1 className="md:text-4xl text-2xl font-bold mb-6 text-brown">
               Connect With Us
             </h1>
-            <p className="mb-4 md:text-big text-md md:text-center text-justify font-normal text-black">
+            <p className="mb-4 md:text-big text-md md:text-center text-justify font-normal text-brown">
               Stay connected and follow us on social media for the latest
               updates, news, and promotions:
             </p>
 
             <div className="flex justify-center">
-              <div className="inline-block max-w-full p-6 bg-white border-white shadow-[0px_8px_24px_rgba(149,157,165,0.2)] dark:bg-gray-800 dark:border-gray-700">
-                <div className="grid grid-cols-1 xl:gap-28 lg:gap-18 sm:grid-cols-2 md:grid-cols-4 gap-y-8">
+              <div className="inline-block max-w-full md:p-6 p-0 bg-cream border border-primary shadow-[0px_8px_24px_rgba(149,157,165,0.2)] dark:bg-gray-800 dark:border-gray-700">
+                <div className="grid grid-cols-2 xl:gap-28 lg:gap-18 sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-2 gap-y-8">
                   {/* {valueItems.slice(0, 4).map((item, index) => ( */}
                   <div
                     // key={index}
@@ -604,16 +602,16 @@ export default function Page() {
                     }
                   >
                     <FaFacebookF
-                      className="bg-secondary group-hover:bg-primary p-4 rounded-md   font-semibold"
+                      className="bg-primary group-hover:bg-secondary p-4 rounded-md   font-semibold"
                       size={60}
                       color="#ffffff"
                     />
-                    <div className="ml-4 text-left flex-1">
-                      <h6 className="font-bold text-sm md:text-base mb-2 text-secondary group-hover:text-primary">
+                    <div className="md:ml-4 ml-2 text-left flex-1">
+                      <h6 className="font-bold text-sm md:text-base mb-2 text-primary group-hover:text-secondary">
                         {/* {item.title} */}
                         Facebook
                       </h6>
-                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-black">
+                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-brown">
                  
                         Hubeco.Market
                       </p> */}
@@ -631,16 +629,16 @@ export default function Page() {
                     }
                   >
                     <FaYoutube
-                      className=" bg-secondary group-hover:bg-primary p-4 rounded-md   font-semibold"
+                      className=" bg-primary group-hover:bg-secondary p-4 rounded-md   font-semibold"
                       size={60}
                       color="#ffffff"
                     />
-                    <div className="ml-4 text-left flex-1">
-                      <h6 className="font-bold text-sm md:text-base mb-2 text-secondary group-hover:text-primary">
+                    <div className="md:ml-4 ml-2 text-left flex-1">
+                      <h6 className="font-bold text-sm md:text-base mb-2 text-primary group-hover:text-secondary">
                         {/* {item.title} */}
                         Youtube
                       </h6>
-                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-black">
+                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-brown">
                        
                         hubeco.market
                       </p> */}
@@ -657,16 +655,16 @@ export default function Page() {
                     }
                   >
                     <FaInstagram
-                      className=" bg-secondary group-hover:bg-primary p-4 rounded-md   font-semibold"
+                      className=" bg-primary group-hover:bg-secondary p-4 rounded-md   font-semibold"
                       size={60}
                       color="#ffffff"
                     />
-                    <div className="ml-4 text-left flex-1">
-                      <h6 className="font-bold text-sm md:text-base mb-2 text-secondary group-hover:text-primary">
+                    <div className="md:ml-4 ml-2 text-left flex-1">
+                      <h6 className="font-bold text-sm md:text-base mb-2 text-primary group-hover:text-secondary">
                         {/* {item.title} */}
                         Instagram
                       </h6>
-                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-black">
+                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-brown">
                       
                         hubeco.market
                       </p> */}
@@ -683,16 +681,16 @@ export default function Page() {
                     }
                   >
                     <FaLinkedinIn
-                      className=" bg-secondary group-hover:bg-primary p-4 rounded-md   font-semibold"
+                      className=" bg-primary group-hover:bg-secondary p-4 rounded-md   font-semibold"
                       size={60}
                       color="#ffffff"
                     />
-                    <div className="ml-4 text-left flex-1">
-                      <h6 className="font-bold text-sm md:text-base mb-2 text-secondary group-hover:text-primary">
+                    <div className="md:ml-4 ml-2 text-left flex-1">
+                      <h6 className="font-bold text-sm md:text-base mb-2 text-primary group-hover:text-secondary">
                         {/* {item.title} */}
                         LinkedIn
                       </h6>
-                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-black">
+                      {/* <p className="font-medium text-xs md:text-sm overflow-hidden overflow-ellipsis whitespace-nowrap text-brown">
                  
                         hubeco.market
                       </p> */}
@@ -704,10 +702,10 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="bg-secondaryBg w-full">
+        <div className="bg-cream w-full">
           <div className="flex items-center justify-center md:py-8 py-4">
             <div className="text-center">
-              <h1 className="md:text-3xl text-2xl font-bold mt-4 text-black">
+              <h1 className="md:text-3xl text-2xl font-bold mt-4 text-brown">
                 Frequently Asked Questions
               </h1>
             </div>
@@ -743,21 +741,21 @@ export default function Page() {
                         <h2>
                           <AccordionButton className="flex justify-between text-left">
                             <div className="items-center">
-                              <span className="text-left font-bold  flex-1 text-black text-base">
+                              <span className="text-left font-bold  flex-1 text-brown text-base">
                                 {item.title}
                               </span>
                             </div>
                             <div className="flex items-center">
                               {isExpanded ? (
-                                <PiMinusCircleBold className="text-[#B90647] text-[18px]" />
+                                <PiMinusCircleBold className="text-primary text-[18px]" />
                               ) : (
-                                <TbCirclePlus className="text-[#B90647] text-[18px]" />
+                                <TbCirclePlus className="text-primary text-[18px]" />
                               )}
                             </div>
                           </AccordionButton>
                         </h2>
                         <AccordionPanel
-                          className="text-justify text-medium mt-2 text-sm  text-fontGray"
+                          className="text-justify text-medium mt-2 text-sm  text-brown"
                           pb={4}
                         >
                           {item.description}
@@ -770,7 +768,7 @@ export default function Page() {
               <div className="md:mt-0 mt-10 pt-5 pb-10 text-center lg:text-left">
                 <CustomButton
                   title={"View More FAQs"}
-                  className="px-3 py-3 ml-0 h-12 md:h-12 font-semibold text-sm text-white bg-secondary w-72 hover:bg-primary"
+                  className="px-3 py-3 ml-0 h-12 md:h-12 font-semibold text-sm text-white bg-primary w-72 hover:bg-secondary"
                   customStyles={{
                     width: "200px",
                     // marginLeft: "10px",

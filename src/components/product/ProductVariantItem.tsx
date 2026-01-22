@@ -139,7 +139,7 @@ const ProductVariantItem = ({
                   type="number"
                   value={quantityForQuote}
                   onChange={(e) => handleChangeForQuote(e, index)}
-                  className="w-16 text-center border-0 focus:ring-0"
+                  className="bg-cream w-16 text-center border-0 focus:ring-0"
                 />
                 <Button
                   type="button"

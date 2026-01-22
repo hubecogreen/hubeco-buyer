@@ -8,14 +8,14 @@ const RefundNotification = () => {
           <span className="text-[#F9A31A] text-lg sm:text-xl font-semibold">
             Refund Processed
           </span>
-          <span className="text-black text-sm sm:text-xl font-semibold py-2 sm:py-5">
+          <span className="text-brown text-sm sm:text-xl font-semibold py-2 sm:py-5">
             (Refund ID: 121029944548654748172)
           </span>
         </div>
 
         <p className="text-[#2E2E2EB8] text-xs sm:text-sm">
           Your refund is being processed. It should reflect{" "}
-          <span className="text-gray-800">
+          <span className="text-brown">
             in your bank account within 3-5 business days
           </span>{" "}
           (excluding bank holidays)

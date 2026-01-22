@@ -126,20 +126,20 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
 
         return (
           <div key={attributeName} className="w-full">
-            <p className="text-md text-fontGray text-normal mb-3 capitalize">
+            <p className="text-md text-brown text-normal mb-3 capitalize">
               {attributeName}
             </p>
             <Select
               onValueChange={(value) => onClickVariant(attributeName, value)}
               value={selectedAttributes && selectedAttributes[attributeName] || ""}
             >
-              <SelectTrigger className="border border-secondary px-4 py-2 rounded bg-white !text-secondary">
+              <SelectTrigger className="border border-primary px-4 py-2 rounded bg-cream !text-brown">
                 <SelectValue
                   placeholder={`Select ${attributeName}`}
                   className={`text-sm ${
                     selectedAttributes && selectedAttributes[attributeName]
                       ? "text-secondary"
-                      : "text-fontGray"
+                      : "text-brown"
                   }`}
                 />
               </SelectTrigger>
@@ -151,7 +151,7 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
                     handleSearchChange(attributeName, e.target.value)
                   }
                   placeholder="Search..."
-                  className="mb-2 p-2 border max-w-[95%] mx-auto h-[35px] mt-2 border-borderGray rounded"
+                  className="bg-cream mb-2 p-2 border max-w-[95%] mx-auto h-[35px] mt-2 border-primary rounded"
                 />
 
                 {filteredValues.length > 0 ? (
@@ -161,15 +161,15 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
                       value={value}
                       className={`text-sm ${
                        selectedAttributes &&  selectedAttributes[attributeName] === value
-                          ? "text-secondary bg-gray-200 hover:bg-gray-200 hover:text-secondary focus:bg-gray-200 focus:text-secondary"
-                          : "text-black"
+                          ? "text-brown bg-gray-200 hover:bg-gray-200 hover:text-primary focus:bg-gray-200 focus:text-primary"
+                          : "text-brown"
                       }`}
                     >
                       {value}
                     </SelectItem>
                   ))
                 ) : (
-                  <p className="text-sm text-gray-400 pl-3">No results found</p>
+                  <p className="text-sm text-brown pl-3">No results found</p>
                 )}
               </SelectContent>
             </Select>

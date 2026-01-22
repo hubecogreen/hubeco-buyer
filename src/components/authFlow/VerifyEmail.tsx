@@ -84,11 +84,11 @@ const VerifyEmail:React.FC<VerfiyEmailProps> = ({ mobileNumber }) => {
       >
         <div className="bg-opacity-90 h-full flex items-center justify-center py-20 md:py-20">
           <div className="text-center md:p-10 md:pt-10 py-10 md:py-15 max-w-md md:max-w-lg text-white bg-white">
-            <h1 className="text-4xl md:text-3xl font-bold mb-4 text-black">
+            <h1 className="text-4xl md:text-3xl font-bold mb-4 text-brown">
               Verify your Email
             </h1>
             <div className="flex items-center justify-center">
-              <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-sm text-black w-10/12 text-center">
+              <p className="mb-2 md:mb-2 lg:mb-4 text-sm md:text-sm text-brown w-10/12 text-center">
               To proceed, please ensure that you have verified your registered email address.A link is sent to your registered email.
               </p>
             </div>
@@ -99,7 +99,7 @@ const VerifyEmail:React.FC<VerfiyEmailProps> = ({ mobileNumber }) => {
              
                 <div className="flex items-center justify-center">
                   <div className="flex flex-col md:flex-row gap-2 items-center">
-                    <p className="text-black text-sm">Didn't get the mail?</p>
+                    <p className="text-brown text-sm">Didn't get the mail?</p>
                     {isLoading?
                     <CircularProgress  isIndeterminate size={20} color="#A92449"  />
                     :

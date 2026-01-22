@@ -16,7 +16,7 @@ export default function CustomTabs({ id , searchTerm}: any) {
         <TabsTrigger
           value="products"
           className={cn(
-            "px-4 py-2 text-gray-700 transition-colors duration-200 text-[20px]",
+            "px-4 py-2 text-brown transition-colors duration-200 text-[20px]",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500",
             "data-[state=active]:bg-[#B906471A] data-[state=active]:text-[#B90647] font-semibold"
           )}

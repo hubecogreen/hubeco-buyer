@@ -42,7 +42,7 @@ export default function AddVariantToQuote({
           }}
           className="absolute top-4 right-4"
         >
-          <IoIosClose className="w-6 h-6  z-10 bg-white  text-black" />
+          <IoIosClose className="w-6 h-6  z-10 bg-white  text-brown" />
         </DialogClose> */}
 
         <DialogHeader>
@@ -105,7 +105,7 @@ export default function AddVariantToQuote({
             );
           })}
 
-        <p className="text-md text-fontGray text-normal">Select Variant</p>
+        <p className="text-md text-brown text-normal">Select Variant</p>
         <div className="flex md:space-x-2 flex-wrap  w-full">
           <AttributeDisplayForQuote
             attributes={combinations}

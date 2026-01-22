@@ -22,8 +22,8 @@ const B2CMain: React.FC<B2CProps> = ({ mobileParam }) => {
   // const mobileParam=searchParams.get('mobile');
 
   const steps = [
-    { label: "Personal Information", img: "/images/register/personal.webp" },
-    { label: "Plans", img: "/images/register/company.webp" },
+    { label: "Personal Information", img: "/images/register/user.png" },
+    { label: "Plans", img: "/images/register/add.png" },
   ];
 
   const [activeStep, setActiveStep] = useState(0);
@@ -73,19 +73,19 @@ const B2CMain: React.FC<B2CProps> = ({ mobileParam }) => {
 
   return (
     <B2CContextProvider>
-      <div className="bg-white">
+      <div className="bg-cream">
         <Head>
           <title>B2C</title>
         </Head>
         {/* <Header /> */}
         <div className="px-4 md:px-10 pb-10 w-full md:w-[90%] mx-5 md:mx-20">
-        <div className="category-section pb-10 text-center text-black bg-white shadow-2xl">
+        <div className="category-section pb-10 text-center text-brown bg-cream shadow-lg">
             <div className="container mx-auto py-10 md:mt-20 ">
               <div className="text-center">
                 <h1 className="text-2xl md:text-4xl font-bold mb-5">
                   Welcome to <span className="text-teal-500">hubeco</span> 👋
                 </h1>
-                <p className="text-lg md:text-xl text-gray-500 mb-10">
+                <p className="text-lg md:text-xl text-brown mb-10">
                   Let&#39;s set up your B2C profile
                 </p>
               </div>
@@ -101,11 +101,11 @@ const B2CMain: React.FC<B2CProps> = ({ mobileParam }) => {
                       } flex flex-col md:flex-row items-center justify-center cursor-default mb-4 md:mb-0`}
                       // onClick={() => setActiveStep(index)}
                     >
-                      <div className="h-12 w-12 mb-2 md:mb-0 md:mr-2">
+                      <div className="h-8 w-8 mb-2 md:mb-0 md:mr-2">
                         <Image src={step.img} alt="Image" width={48} height={48} />
                       </div>
                       <div
-                        className={`${styles.stepLabel} text-center md:text-left`}
+                        className={`${styles.stepLabel}  text-center md:text-left`}
                       >
                         {step.label}
                       </div>

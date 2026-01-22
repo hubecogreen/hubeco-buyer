@@ -1,5 +1,5 @@
 "use client";
-import React, {  } from "react";
+import React, { } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { ChevronDown, ChevronUp, Search } from "lucide-react";
@@ -29,21 +29,21 @@ const FilterHTML = ({
     <>
       {catCount > 0 ? (
         <>
-          <div className="mt-2 mb-4 border-b border-borderGray">
-            <h3 className="text-sm text-black font-semibold mb-4">
+          <div className="mt-2 mb-4 border-b border-primary">
+            <h3 className="text-sm text-brown  font-semibold mb-4">
               CATEGORIES
             </h3>
 
             <div className="relative flex flex-row items-center">
               {/* Search Icon */}
-              <span className="absolute inset-y-0 left-3 flex items-center text-fontGray h-[40px] ">
-                <Search size={16} color="#4d4d4d" className="text-fontGray" />
+              <span className="absolute  inset-y-0 left-3 flex items-center text-white  h-[40px] ">
+                <Search size={16} color="#4d4d4d" className="text-brown" />
               </span>
               <Input
                 placeholder="Search"
                 value={categorySearch || ""}
                 onChange={(e: any) => handleCategorySearch(e)}
-                className="pl-[35px] bg-white md:text-md text-sm w-full h-[40px] shadow-md text-fontGray mr-[1px] mb-4 rounded-[5px]"
+                className="border border-brown pl-[35px] bg-cream md:text-md text-sm w-full h-[40px] shadow-md text-brown mr-[1px] mb-4 rounded-[5px]"
               />
 
             </div>
@@ -76,35 +76,38 @@ const FilterHTML = ({
                     >
                       <Checkbox
                         id={category?._id}
-                        className="mr-3"
+                        className="mr-3 border-brown 
+                        data-[state=unchecked]:bg-cream
+                        data-[state=unchecked]:border-brown 
+                        data-[state=checked]:bg-brown 
+                        data-[state=checked]:border-brown
+                        data-[state=checked]:text-cream"
                         checked={selectedParentid.includes(category?._id)}
                         onClick={() => {
                           onSelectParentCat(category?._id);
 
-                        //   setOpenCategory(
-                        //     openCategory === category.name ? "" : category.name
-                        //   );
+                          //   setOpenCategory(
+                          //     openCategory === category.name ? "" : category.name
+                          //   );
                         }}
                       />
                       <button
-                        className={`flex items-center justify-between w-full text-left text-md ${
-                          selectedParentid.includes(category?._id)
+                        className={`flex items-center justify-between w-full text-left text-md ${selectedParentid.includes(category?._id)
                             ? "text-secondary"
-                            : "text-black "
-                        }`}
-                        // onClick={() => {
-                        //   setOpenCategory(
-                        //     openCategory === category.name ? "" : category.name
-                        //   );
-                        // }}
+                            : "text-brown "
+                          }`}
+                      // onClick={() => {
+                      //   setOpenCategory(
+                      //     openCategory === category.name ? "" : category.name
+                      //   );
+                      // }}
                       >
                         <span
                           onClick={() => onSelectParentCat(category._id)}
-                          className={`text-[14px] text-black font-normal ${
-                            selectedParentid.includes(category?._id)
-                              ? "text-secondary"
-                              : "text-black "
-                          }`}
+                          className={`text-[14px] text-brown font-normal ${selectedParentid.includes(category?._id)
+                              ? "text-brown"
+                              : "text-brown "
+                            }`}
                         >
                           {category.name}
                         </span>
@@ -118,9 +121,9 @@ const FilterHTML = ({
                           }}
                         >
                           {openCategory === category.name ? (
-                            <ChevronUp size={16} className="" />
+                            <ChevronUp size={16} className="text-white" />
                           ) : (
-                            <ChevronDown size={16} className="" />
+                            <ChevronDown size={16} className="text-white" />
                           )}
                         </div>
                       </button>
@@ -136,17 +139,16 @@ const FilterHTML = ({
                               >
                                 <Checkbox
                                   id={childCat?._id}
-                                  className="mr-3"
+                                  className="mr-3 text-white border-white"
                                   checked={selectedCats.includes(childCat?._id)}
                                   onClick={() => onSelectCat(childCat?._id)}
                                 />
                                 <li
                                   key={childCat.name}
-                                  className={`text-[14px]  font-normal py-[5px] ${
-                                    selectedCats.includes(childCat?._id)
-                                      ? "text-secondary"
-                                      : "text-black"
-                                  } `}
+                                  className={`text-[14px]  font-normal py-[5px] ${selectedCats.includes(childCat?._id)
+                                      ? "text-white"
+                                      : "text-white"
+                                    } `}
                                   onClick={() => onSelectCat(childCat?._id)}
                                 >
                                   {childCat.name}
@@ -174,7 +176,7 @@ const FilterHTML = ({
                 ) : (
                   <div className="flex items-center flex-row mt-3 mb-4">
                     <button
-                      className="text-sm text-secondary "
+                      className="text-sm text-white "
                       onClick={handleShowMoreCats}
                     >
                       Show More

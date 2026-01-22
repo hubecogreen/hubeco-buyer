@@ -52,7 +52,7 @@ const FiltersSidebar = () => {
               category.subcategories.length > 0 && (
                 <ul className="ml-4 mt-1">
                   {category.subcategories.map((sub) => (
-                    <li key={sub} className="text-sm text-gray-600">
+                    <li key={sub} className="text-sm text-brown">
                       {sub}
                     </li>
                   ))}

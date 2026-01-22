@@ -176,20 +176,20 @@ const B2BMain:React.FC<B2BProps> = ({mobileParam}) =>  {
   // }
   return (
     <B2CContextProvider>
-    <div className="bg-white">
+    <div className="bg-cream">
       <Head>
         <title>B2B</title>
       </Head>
      {/* <Header /> */} 
       <div className="md:px-10 pb-10 md:w-[90%] w-[98%] md:m-20 m-2">
-      <div className="category-section pb-10 text-center text-black bg-white shadow-[8px_4px_8px_8px_rgba(149,157,165,0.2)]">
+      <div className="category-section pb-10 text-center text-brown bg-white shadow-[8px_4px_8px_8px_rgba(149,157,165,0.2)]">
 
           <div className="container mx-auto py-10 w-full mobile-sm:px-5">
             <div className="text-center">
               <h1 className="text-[24px] md:text-4xl font-bold mb-5">
                 Welcome to <span className="text-teal-500">hubeco</span> 👋
               </h1>
-              <p className="text-base md:text-xl text-gray-500 mb-10">
+              <p className="text-base md:text-xl text-brown mb-10">
                 Let&#39;s set up your <span className="font-semibold">B2B</span> profile
               </p>
             </div>

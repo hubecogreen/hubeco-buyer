@@ -309,8 +309,8 @@ useEffect(() => {
   };
 
   return (
-    <div className="w-full bg-[#F4F4F4] p-4 opacity-90 cursor-pointer">
-      <div className="flex items-center justify-between mb-4 border-b border-borderGray pb-2">
+    <div className="w-full border-[1.5px] border-primary rounded-[10px] p-4 opacity-90 cursor-pointer text-brown  ">
+      <div className="flex items-center justify-between mb-4  pb-2">
         <h2 className="text-xl font-medium  ">Filters</h2>
         {Object.entries(selectedFilters).some(([key, filter]) => {
           return (
@@ -319,14 +319,14 @@ useEffect(() => {
         }) && (
           <button
             onClick={handleClearAll}
-            className="flex items-center cursor-pointer text-sm font-medium text-secondary bg-secondary/10 p-2 rounded h-[35px]"
+            className="flex items-center cursor-pointer text-sm font-medium text-primary border border-primary bg-cream p-2 rounded h-[35px]"
           >
-            <IoClose className="mr-2 text-secondary" />
+            <IoClose className="mr-2 text-primary" />
             Clear All
           </button>
         )}
       </div>
-      <div className="max-h-[1030px] overflow-y-scroll no-scrollbar">
+      <div className="max-h-[calc(100vh-140px)] lg:max-h-[1030px] overflow-y-auto no-scrollbar">
         {/* CATEGORIES FILTER */}
         <CategoryFiltersList
           onCategorySelectionChange={filterWithChildCategories}
@@ -335,7 +335,7 @@ useEffect(() => {
         />
 
         {/* PRICE RANGE FILTER */}
-        <div className="mt-2 mb-4 border-b border-borderGray">
+        <div className="mt-2 mb-4 border-b border-primary">
           <h3 className="text-sm font-semibold mb-8 flex items-center justify-between">
             PRICE RANGE
           </h3>
@@ -361,14 +361,14 @@ useEffect(() => {
 
         {/* ATTRIBUTES FILTER */}
 
-        <AttributeFilters
+        {/* <AttributeFilters
           onSelectAttributeSelection={filterWithAttrs}
           refresh={refreshp}
           catId={catId}
           subCatId={subCatId}
           childCatId={childCatId}
           check={paramsObj}
-        />
+        /> */}
       </div>
     </div>
   );

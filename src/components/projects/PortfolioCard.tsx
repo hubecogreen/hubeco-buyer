@@ -171,7 +171,7 @@ const PortfolioCard = () => {
       </head>
       <div className="max-w-full px-0">
         <div className="block md:flex md:justify-between mb-6 md:mb-6">
-          <h2 className="text-black font-bold text-2xl md:text-3xl">
+          <h2 className="text-brown font-bold text-2xl md:text-3xl">
             Projects
           </h2>
           <div className="h-12 block flex md:w-96 ">
@@ -305,7 +305,7 @@ const PortfolioCard = () => {
   className="flex mx-auto justify-center items-center w-[400px] h-[400px]"
 />
 
-            <p className="text-center text-fontGray mt-4 text-lg font-bold">
+            <p className="text-center text-brown mt-4 text-lg font-bold">
               No Projects Found.
             </p>
           </>

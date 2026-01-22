@@ -1,307 +1,244 @@
 "use client";
+import { autoBatchEnhancer } from "@reduxjs/toolkit";
 import React, { useState, useCallback, useMemo } from "react";
-// import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-// import CustomButton from "@/components/customButton/CustomButton";
-// import { GoArrowRight } from "react-icons/go";
-// import BlogCard from "@/components/blogCard/BlogCard";
-// import { headers } from "next/headers";
-import Image from "next/image";
+
+interface CustomButtonProps {
+  onPress: () => void;
+  className: string;
+  customStyles?: React.CSSProperties;
+  title: string;
+  rightIcon: React.ReactNode;
+}
+
+const CustomButton = ({
+  onPress,
+  className,
+  customStyles,
+  title,
+  rightIcon,
+}: CustomButtonProps) => (
+  <button onClick={onPress} className={className} style={customStyles}>
+    <span>{title}</span>
+    {rightIcon}
+  </button>
+);
+
+interface ImageProps {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  className?: string;
+  [key: string]: any;
+}
+
+const Image = ({ src, alt, width, height, className, ...props }: ImageProps) => (
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    className={className}
+    {...props}
+  />
+);
 
 const WorksSection = () => {
-  const [showBuyer, setShowBuyer] = useState<boolean>(true);
+  const [showBuyer, setShowBuyer] = useState(true);
 
-  // Memoize click handlers
-  const handleBuyerClick = useCallback(() => {
-    setShowBuyer(true);
-  }, []);
+  const handleBuyerClick = useCallback(() => setShowBuyer(true), []);
+  const handleVendorClick = useCallback(() => setShowBuyer(false), []);
 
-  const handleVendorClick = useCallback(() => {
-    setShowBuyer(false);
-  }, []);
-
-  // Memoize buyer content to prevent re-rendering
   const buyerContent = useMemo(
     () => (
-      <div className="flex flex-col space-y-4 pt-5">
-        <div className="flex items-start items-start mt-4 lg:mt-4">
-          <div className="p-1.5 rounded-md h-10 flex items-center justify-center">
-            <Image
-              src="/images/home/latest/browse-products.webp"
-              alt="Browse products icon"
-              width={60}
-              height={60}
-              quality={85}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              onError={(e) => {
-                e.currentTarget.src = "/images/product-placeholder.webp";
-              }}
-              loading="lazy"
-            />
-          </div>
-          <div className="ml-4 flex flex-col mb-2">
-            <h6 className="font-bold text-sm md:text-base text-black">
-              Browse Products
-            </h6>
-            <p className="text-justify text-sm text-medium mt-2 text-black">
-              Explore our wide range of green building materials, each carefully
-              selected for sustainability and performance.
-            </p>
-          </div>
-        </div>
+      <div className="grid grid-cols-2 lg:grid-cols-2 gap-[10px] pt-5">
+        {[
+          {
+            img: "/images/home/howitwork/search-icon.png",
+            text: "Filter products by material, specs or category",
+          },
+          {
+            img: "/images/home/howitwork/correct-icon.png",
+            text: "Select products and request quotes from verified suppliers",
+          },
+          {
+            img: "/images/home/howitwork/cart-icon.png",
+            text: "Approve orders and track CO₂ savings",
+          },
+          {
+            img: "/images/home/howitwork/recycle-icon.png",
+            text: "Build with curated green materials",
+          },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-primary h-[140px] w-full lg:px-5 lg:pt-10 lg:pb-5 lg:h-[215px] lg:w-[300px]"
+          >
+            <div className="flex flex-col gap-3 lg:gap-5">
+              <div className="h-[32px] lg:h-[52px] flex items-center">
 
-        <div className="flex items-start items-start">
-          <div className="p-1.5 pt-0 rounded-md h-10 flex items-center justify-center">
-            <Image
-              src="/images/home/latest/compare.webp"
-              alt="Compare products icon"
-              width={70}
-              height={70}
-              quality={85}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              onError={(e) => {
-                e.currentTarget.src = "/images/product-placeholder.webp";
-              }}
-              loading="lazy"
-            />
+              <Image
+                src={item.img}
+                alt="icon"
+               width={52}
+                height={32}
+                className="w-[30px] h-auto lg:w-[52px] lg:h-auto"
+              />
+              </div>
+              <p className="text-[13px] lg:text-[24px]  lg:leading-6 text-brown">
+                {item.text}
+              </p>
+            </div>
           </div>
-          <div className="ml-4 pl-[4px] flex flex-col mb-2">
-            <h6 className="font-bold text-sm md:text-base text-black">
-              Compare and Choose
-            </h6>
-            <p className="text-justify text-sm text-medium mt-2 text-black">
-              Use our platform to compare products, read green certifications
-              and specifications, read reviews, and select the best materials
-              for your project.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-start items-start">
-          <div className="p-1.5 pt-0 rounded-md h-10 flex items-center justify-center">
-            <Image
-              src="/images/home/latest/place-order.webp"
-              alt="Place order icon"
-              width={75}
-              height={75}
-              quality={85}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              onError={(e) => {
-                e.currentTarget.src = "/images/product-placeholder.webp";
-              }}
-              loading="lazy"
-            />
-          </div>
-          <div className="ml-3 flex flex-col mb-2">
-            <h6 className="font-bold text-sm md:text-base text-black">
-              Place Your Order
-            </h6>
-            <p className="text-justify text-sm text-medium mt-2 text-black">
-              Enjoy a seamless shopping experience with secure payment options
-              and efficient delivery services from the vendors.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-start items-start">
-          <div className="p-1.5 pt-0 rounded-md h-10 flex items-center justify-center">
-            <Image
-              src="/images/home/latest/sustainability.webp"
-              alt="Sustainability icon"
-              width={60}
-              height={60}
-              quality={85}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              onError={(e) => {
-                e.currentTarget.src = "/images/product-placeholder.webp";
-              }}
-              loading="lazy"
-            />
-          </div>
-          <div className="ml-4 flex flex-col mb-2">
-            <h6 className="font-bold text-sm md:text-base text-black">
-              Build Sustainably
-            </h6>
-            <p className="text-justify text-sm text-medium mt-2 text-black">
-              Use our materials to create eco-friendly structures that benefit
-              both the environment and your bottom line.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     ),
     []
   );
 
-  // Memoize vendor content to prevent re-rendering
   const vendorContent = useMemo(
     () => (
-      <div className="flex flex-col space-y-4 pt-5">
-        <div className="flex items-start mt-4 lg:mt-4">
-          <div className="p-1.5 pt-0 rounded-md h-10 flex items-center justify-center">
-            <Image
-              src="/images/home/latest/register.webp"
-              alt="Registration icon"
-              width={50}
-              height={50}
-              quality={85}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              onError={(e) => {
-                e.currentTarget.src = "/images/product-placeholder.webp";
-              }}
-              priority={true}
-            />
-          </div>
-          <div className="ml-4 flex flex-col mb-2">
-            <h6 className="font-bold text-sm md:text-base text-black">
-              Registration
-            </h6>
-            <p className="text-justify text-sm text-medium mt-2 text-black">
-              Sign up quickly with our simple registration process to become a
-              vendor on our platform.
-            </p>
-          </div>
-        </div>
+      <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 pt-5">
+        {[
+          {
+            img: "/images/home/howitwork/user-icon.png",
+            text: "Sign up easily to become a vendor",
+          },
+          {
+            img: "/images/home/howitwork/cloud-icon.png",
+            text: "List products with specs, certifications and prices",
+          },
+          {
+            img: "/images/home/howitwork/shop-icon.png",
+            text: "Reach buyers and receive RFQ’s",
+          },
+          {
+            img: "/images/home/howitwork/graph-icon.png",
+            text: "Track sales and revenue in your vendor dashboard",
+          },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-secondary h-[140px] w-full lg:px-5 lg:pt-10 lg:pb-5 lg:h-[215px] lg:w-[300px]"
+          >
+            <div className="flex flex-col gap-3 lg:gap-5">
+                            <div className="h-[32px] lg:h-[52px] flex items-center">
 
-        <div className="flex items-start">
-          <div className="p-1.5 pt-0 rounded-md h-10 flex items-center justify-center">
-            <Image
-              src="/images/home/latest/cubes.webp"
-              alt="Upload products icon"
-              width={60}
-              height={60}
-              quality={85}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              onError={(e) => {
-                e.currentTarget.src = "/images/product-placeholder.webp";
-              }}
-              priority={true}
-            />
+              <Image
+                src={item.img}
+                alt="icon"
+                width={52}
+                height={32}
+                className="w-[30px] h-auto lg:w-[52px] lg:h-auto"
+              />
+              </div>
+              <p className="text-[13px]  lg:text-[24px] lg:leading-6 text-brown">
+                {item.text}
+              </p>
+            </div>
           </div>
-          <div className="ml-4 flex flex-col mb-2">
-            <h6 className="font-bold text-sm md:text-base text-black">
-              Upload products
-            </h6>
-            <p className="text-justify text-sm text-medium mt-2 text-black">
-              Easily list your products with detailed specifications,
-              sustainability data, product certifications, images and prices.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-start">
-          <div className="p-1.5 pl-[5px] pt-0 rounded-md h-10 flex items-center justify-center">
-            <Image
-              src="/images/home/latest/sell.webp"
-              alt="Start selling icon"
-              width={55}
-              height={55}
-              quality={85}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              onError={(e) => {
-                e.currentTarget.src = "/images/product-placeholder.webp";
-              }}
-              priority={true}
-            />
-          </div>
-          <div className="ml-3 flex flex-col mb-2">
-            <h6 className="font-bold text-sm md:text-base text-black">
-              Start Selling
-            </h6>
-            <p className="text-justify text-sm text-medium mt-2 text-black">
-              Begin selling to a wide audience and manage your orders
-              effortlessly from your vendor dashboard.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     ),
     []
   );
 
   return (
-    <section className="md:flex block max-w-7xl md:my-14 my-4 px-5 pb-8 md:pb-0 shadow-md mx-auto items-start h-fit justify-center border border-[#dcdcdc] bg-[#F4F4F4]">
-      <div className="md:w-1/2 md:pt-14 pt-8 pr-2 md:pr-10 md:border-r md:border-[#eaeaea] md:border-solid">
-        <div className="md:pl-20">
-          <h2 className="text-center md:text-left text-2xl pt-5 md:text-4xl font-bold text-black mt-30">
-            How it works
-          </h2>
-          <p className="md:text-big text-md text-justify md:text-justify pt-5 mx-auto md:pr-[15px] text-fontGray ">
-            We are passionate about driving the transition towards sustainable
-            living by providing eco-friendly construction materials for both B2B
-            and B2C markets.
-          </p>
-          <div className="relative flex md:block items-center justify-start mb-5 md:mb-0 z-20 mt-10">
-            <h2
-              className={`md:text-6xl text-xl hover:cursor-pointer ${
-                showBuyer
-                  ? "border-b-2 border-secondary border-solid"
-                  : "border-0"
-              } md:border-0 pb-2 md:pb-0 font-bold ${
-                showBuyer ? "text-[#A92449]" : "text-[#C7C6C7]"
-              }`}
-              onClick={handleBuyerClick}
-            >
-              Buyer
-            </h2>
-            <p></p>
-            <h2
-              className={`md:text-6xl text-xl hover:cursor-pointer ${
-                !showBuyer
-                  ? "border-b-2 border-secondary border-solid"
-                  : "border-0"
-              } md:border-0 pb-2 md:pb-0 font-bold md:mt-10 md:ml-0 ml-10 ${
-                !showBuyer ? "text-[#A92449]" : "text-[#C7C6C7]"
-              }`}
-              onClick={handleVendorClick}
-            >
-              Vendor
-            </h2>
-          </div>
-        </div>
-        <Image
-          src={"/images/home/latest/Vector.webp"}
-          alt="How it works illustration"
-          className="hidden md:block w-full -mt-10"
-          width={100}
-          height={100}
-          loading="lazy"
-          quality={85}
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-          onError={(e) => {
-            e.currentTarget.src = "/images/product-placeholder.webp";
-          }}
-        />
-      </div>
-      <div className="md:w-1/2 md:pr-20 md:pl-10 md:pt-14 pt-8">
-        <Image
-          src={"/images/home/latest/worksImg.webp"}
-          className="rounded-md w-full h-auto"
-          alt="How it works process illustration"
-          width={600}
-          height={600}
-          priority={true}
-          quality={85}
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-          onError={(e) => {
-            e.currentTarget.src = "/images/product-placeholder.webp";
-          }}
-        />
-        <div className="w-full">{showBuyer ? buyerContent : vendorContent}</div>
-      </div>
-    </section>
+ <section className="relative block bg-cream mx-auto lg:flex  lg:p-[100px] p-[20px] lg:max-w-[1440px] ">
+  {/* Background Image - Positioned to match reference */}
+  <Image
+    src="/images/home/latest/Vector.webp"
+    alt="Center Vector"
+    width={700}
+    height={300}
+    className="hidden lg:block absolute left-[600px] top-[365px] -translate-x-3/4 -translate-y-1/2 opacity-80 pointer-events-none z-0"
+  />
+
+  {/* Left Div */}
+  <div className="flex lg:flex-row flex-col justify-start lg:gap-[162px]">
+  <div className="relative z-10  ">
+    <h2 className="text-center text-[43px] text-brown pb-3 lg:text-left lg:text-[43px] lg:pb-5">
+      How it Works
+    </h2>
+
+    <p className="text-[12px] leading-relaxed text-lightGraytext mb-4 lg:text-[18px] lg:leading-[30px] lg:w-[390px] lg:mb-10">
+      We are passionate about driving the transition towards sustainable
+      living by providing eco-friendly construction materials for both B2B
+      and B2C customers.
+    </p>
+
+    <div className="flex gap-3 mt-4 lg:block lg:mt-10 ">
+      <CustomButton
+        onPress={handleBuyerClick}
+        className={`flex items-center shadow-primary justify-center lg:w-[380px] lg:h-[80px] gap-2 rounded-md border font-bold w-full py-3 text-[16px]  lg:p-[22px] h-[60px] lg:text-[30px] lg:justify-between mb-0 lg:mb-6 ${
+          showBuyer
+            ? "bg-primary text-white border-primary"
+            : "bg-transparent text-primary border-primary"
+        }`}
+        title="Buyer"
+        rightIcon={
+          showBuyer ? (
+            <Image
+              src="/images/home/howitwork/white-arrao-icon.png"
+              alt="arrow"
+              width={25}
+              height={25}
+              className="hidden lg:block"
+            />
+          ) : (
+            <Image
+              src="/images/home/howitwork/green-arrow-icon.png"
+              alt="arrow"
+              width={25}
+              height={25}
+              className="hidden lg:block"
+            />
+          )
+        }
+      />
+
+      <CustomButton
+        onPress={handleVendorClick}
+        className={`flex items-center justify-center shadow-secondary lg:w-[380px] lg:h-[80px] gap-2 rounded-md border font-bold w-full py-3 text-[16px]  lg:p-[22px] h-[60px] lg:text-[30px] lg:justify-between ${
+          !showBuyer
+            ? "bg-secondary text-white border-secondary"
+            : "bg-transparent text-secondary border-secondary"
+        }`}
+        title="Vendor"
+        rightIcon={
+          !showBuyer ? (
+            <Image
+              src="/images/home/howitwork/white-arrao-icon.png"
+              alt="arrow"
+              width={25}
+              height={25}
+              className="hidden lg:block"
+            />
+          ) : (
+            <Image
+              src="/images/home/howitwork/red-arrow-icon.png"
+              alt="arrow"
+              width={25}
+              height={25}
+              className="hidden lg:block"
+            />
+          )
+        }
+      />
+    </div>
+  </div>
+
+  {/* Right Div */}
+  <div className="relative z-10  ">
+    {showBuyer ? buyerContent : vendorContent}
+  </div>
+
+  </div>
+</section>
   );
 };
 

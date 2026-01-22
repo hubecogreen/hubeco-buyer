@@ -24,7 +24,7 @@ const AttributeFilters: React.FC<VendorFiltersListProps> = ({
   const { callApi } = useApi();
   const [attributes, setAttributes] = useState<any>([]);
   const [selectedAttributes, setSelectedAttributes] = useState<any>([]);
-// console.log('check', check)
+  // console.log('check', check)
   // State Management
   const buyerInfo = sessionStorage.getItem("buyerUserInfo") as any;
   const prefferedPlan = JSON.parse(buyerInfo)?.preferredPlan;
@@ -65,25 +65,25 @@ const AttributeFilters: React.FC<VendorFiltersListProps> = ({
 
 
   // Debounced filter fetching when category states change
-useEffect(() => {
-  const timeout = setTimeout(() => {
-    getFliters();
-  }, 300); // wait 400ms before firing API
-
-  return () => clearTimeout(timeout); // cancel previous timer if any dep changes again
-}, [catId, subCatId, check, childCatId]);
-
-// Debounced refresh handling
-useEffect(() => {
-  if (refresh) {
+  useEffect(() => {
     const timeout = setTimeout(() => {
-      setSelectedAttributes([]);
-      getFliters(true);
-    }, 400); // debounce refresh call as well
+      getFliters();
+    }, 300); // wait 400ms before firing API
 
-    return () => clearTimeout(timeout);
-  }
-}, [refresh, check]);
+    return () => clearTimeout(timeout); // cancel previous timer if any dep changes again
+  }, [catId, subCatId, check, childCatId]);
+
+  // Debounced refresh handling
+  useEffect(() => {
+    if (refresh) {
+      const timeout = setTimeout(() => {
+        setSelectedAttributes([]);
+        getFliters(true);
+      }, 400); // debounce refresh call as well
+
+      return () => clearTimeout(timeout);
+    }
+  }, [refresh, check]);
 
 
   const buildUrl = (baseUrl: string, params: Record<string, any>) => {
@@ -145,7 +145,7 @@ useEffect(() => {
     try {
       // If selectedAttributes is an object, we need to convert it to the expected format
       let formattedAttributes = selectedAttributes;
-      
+
       // Check if selectedAttributes is an object rather than an array of strings
       if (selectedAttributes && typeof selectedAttributes === 'object' && !Array.isArray(selectedAttributes)) {
         formattedAttributes = [];
@@ -158,7 +158,7 @@ useEffect(() => {
           }
         });
       }
-  
+
       const params = {
         page: page || null,
         limit,
@@ -182,7 +182,7 @@ useEffect(() => {
         PriceSort: sortBy || null,
         productAttributes: formattedAttributes || null,
       };
-  
+
       // console.log("check in product attributefilters.tsx", formattedAttributes);
       const apiUrl = buildUrl(
         getEndpoint.default.FLITERS,
@@ -201,7 +201,7 @@ useEffect(() => {
       setGridLoading(false);
     }
   }
-  
+
   // const onSelectAttribute = (data: any, att: any) => {
   //   setSelectedAttributes((prevSelectedAttributes: any) => {
   //     // Clone the previous attributes to avoid mutation
@@ -328,7 +328,7 @@ useEffect(() => {
       {attributes.map((attribute: any) => {
         return (
           <div key={attribute._id}>
-            <div className="mt-2 mb-4 border-b border-borderGray">
+            <div className="mt-2 mb-4 border-b border-primary">
               <h3 className="text-sm font-semibold mb-4 flex items-center justify-between uppercase">
                 {attribute?._id}
               </h3>
@@ -346,7 +346,12 @@ useEffect(() => {
                       <div key={value} className="flex items-center py-[5px]">
                         <Checkbox
                           id={value}
-                          className="mr-3"
+                          className="mr-3
+                          data-[state=unchecked]:bg-cream
+                          data-[state=unchecked]:border-brown 
+                          data-[state=checked]:bg-brown 
+                          data-[state=checked]:border-brown
+                          data-[state=checked]:text-cream"
                           checked={isChecked}
                           onClick={() => onSelectAttribute(attribute, value)}
                         />

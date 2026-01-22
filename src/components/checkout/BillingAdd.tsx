@@ -388,7 +388,7 @@ export default function BillingAdd({
                 />
                 <label
                   htmlFor="email"
-                  className="ms-2 mt-2 text-base font-medium text-gray-900 dark:text-gray-300"
+                  className="ms-2 mt-2 text-base font-medium text-brown dark:text-brown"
                 >
                   Email me with news and offers
                 </label>
@@ -398,7 +398,7 @@ export default function BillingAdd({
           <div className="mb-8">
             {/* <div className="flex flex-col sm:flex-row gap-3 my-5">
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           First Name <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -423,7 +423,7 @@ export default function BillingAdd({
                         />
                       </div>
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           Last Name
                         </label>
                         <Controller
@@ -450,7 +450,7 @@ export default function BillingAdd({
                     </div> */}
             <div className="flex flex-col sm:flex-row gap-3 my-5">
               <div className="w-full sm:w-1/2">
-                <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                   Address Line 1 <span className="text-red">*</span>
                 </label>
                 <Controller
@@ -475,7 +475,7 @@ export default function BillingAdd({
                 />
               </div>
               <div className="w-full sm:w-1/2">
-                <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                   Land Mark
                 </label>
                 <Controller
@@ -502,7 +502,7 @@ export default function BillingAdd({
             </div>
             <div className="flex flex-col sm:flex-row gap-3 my-5">
               <div className="w-full sm:w-1/2">
-                <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                   Pin code <span className="text-red">*</span>
                 </label>
                 <Controller
@@ -531,7 +531,7 @@ export default function BillingAdd({
                 />
               </div>
               <div className="w-full sm:w-1/2">
-                <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                   Country<span className="text-red">*</span>
                 </label>
                 <Controller
@@ -575,7 +575,7 @@ export default function BillingAdd({
             </div>
             <div className="flex flex-col sm:flex-row gap-3 my-5">
               <div className="w-full sm:w-1/2">
-                <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                   State <span className="text-red">*</span>
                 </label>
                 <Controller
@@ -616,7 +616,7 @@ export default function BillingAdd({
                 </div>
               </div>
               <div className="w-full sm:w-1/2">
-                <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                   City <span className="text-red">*</span>
                 </label>
                 <Controller
@@ -659,7 +659,7 @@ export default function BillingAdd({
 
             {/* <div className="flex flex-col sm:flex-row gap-3 my-5">
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           Phone Number <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -684,7 +684,7 @@ export default function BillingAdd({
                         />
                       </div>
                       <div className="w-full sm:w-1/2">
-                        <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+                        <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
                           Email <span className="text-red">*</span>
                         </label>
                         <Controller
@@ -718,7 +718,7 @@ export default function BillingAdd({
                 onClose();
                 reset();
               }}
-              className="bg-[#e7e7e7] hover:bg-[#e7e7e7] h-10 md:h-10 md:w-full w-full md:text-md text-sm text-black font-medium z-10 mr-3"
+              className="bg-[#e7e7e7] hover:bg-[#e7e7e7] h-10 md:h-10 md:w-full w-full md:text-md text-sm text-brown font-medium z-10 mr-3"
               customStyles={{}}
               type="button"
               // loading={isLoading}

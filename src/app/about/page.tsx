@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function MyApp() {
   return (
-    <div className="bg-white ">
+    <div className="bg-cream ">
       <AboutPage />
     </div>
   );

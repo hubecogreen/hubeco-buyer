@@ -137,11 +137,11 @@ const PriceRangeSlider = React.forwardRef<
             onValueChange={handleSliderChange}
             {...props}
           >
-            <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-white shadow-sm">
-              <SliderPrimitive.Range className="absolute h-full bg-secondary" />
+            <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-cream shadow-sm">
+              <SliderPrimitive.Range className="absolute h-full bg-brown" />
             </SliderPrimitive.Track>
-            <SliderPrimitive.Thumb className="block h-4 w-4 rounded-full border border-secondary bg-white ring-offset-background transition-colors focus-visible:outline-none hover:cursor-pointer disabled:pointer-events-none disabled:opacity-50" />
-            <SliderPrimitive.Thumb className="block h-4 w-4 rounded-full border border-secondary bg-white ring-offset-background transition-colors focus-visible:outline-none hover:cursor-pointer disabled:pointer-events-none disabled:opacity-50" />
+            <SliderPrimitive.Thumb className="block h-4 w-4 rounded-full border border-brown bg-cream ring-offset-background transition-colors focus-visible:outline-none hover:cursor-pointer disabled:pointer-events-none disabled:opacity-50" />
+            <SliderPrimitive.Thumb className="block h-4 w-4 rounded-full border border-brown bg-cream ring-offset-background transition-colors focus-visible:outline-none hover:cursor-pointer disabled:pointer-events-none disabled:opacity-50" />
           </SliderPrimitive.Root>
         </div>
         <div className="flex my-4 items-center justify-between">
@@ -149,18 +149,18 @@ const PriceRangeSlider = React.forwardRef<
             <Input
               value={String(range[0])}
               onChange={(event) => handleInputChange(0, event)}
-              className="border border-bgGray rounded text-center bg-secondaryBg pr-2"
+              className="border border-brown rounded text-center bg-cream text-brown pr-2"
               placeholder="Min"
             />
           </div>
           <div>
-            <p className="text-center text-fontGray text-sm">to</p>
+            <p className="text-center text-brown text-sm">to</p>
           </div>
           <div className="w-2/5">
             <Input
               value={String(range[1])}
               onChange={(event) => handleInputChange(1, event)}
-              className="border border-bgGray rounded text-center bg-secondaryBg pr-2"
+              className="border border-brown rounded text-center bg-cream text-brown pr-2"
               placeholder="Max"
             />
           </div>

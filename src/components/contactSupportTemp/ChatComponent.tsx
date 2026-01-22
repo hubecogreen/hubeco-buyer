@@ -171,7 +171,7 @@ export default function ChatBox({ sender, receiver, receiverId, chatEndPoint,roo
               )}
               <div className="flex flex-col">
                 {message.senderId !== myId && (
-                  <h4 className="text-sm font-medium text-gray-900">
+                  <h4 className="text-sm font-medium text-brown">
                     {receiver.name || "Receiver"}
                   </h4>
                 )}
@@ -179,12 +179,12 @@ export default function ChatBox({ sender, receiver, receiverId, chatEndPoint,roo
                   className={`${
                     message.senderId === myId
                       ? "bg-[#009886] text-white"
-                      : "bg-gray-100 text-gray-900"
+                      : "bg-gray-100 text-brown"
                   } rounded-lg px-4 py-2 max-w-xs`}
                 >
                   <p className="text-sm">{message.content}</p>
                 </div>
-                {/* <p className="text-xs text-gray-500 mt-1">{message.createdAt}</p> */}
+                {/* <p className="text-xs text-brown mt-1">{message.createdAt}</p> */}
               </div>
               {message.senderId === myId && sender.displayImage && (
                 <Image 

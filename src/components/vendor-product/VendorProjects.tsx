@@ -81,11 +81,11 @@ const BuildingCard = ({
         </div>
       )}
         <h3 className="text-lg font-semibold mb-2">{project?.title}</h3>
-        <div className="flex items-center text-sm text-gray-600 mb-1">
+        <div className="flex items-center text-sm text-brown mb-1">
           <Building size={16} className="mr-1" />
           <span>{project?.vendor?.companyName}</span>
         </div>
-        <div className="flex items-center text-sm text-gray-600">
+        <div className="flex items-center text-sm text-brown">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4 mr-1"
@@ -190,7 +190,7 @@ const VendorProjects = (id: any, search: any) => {
                   className="mx-auto w-[200px] h-[200px]"
                 />
 
-              <p className="text-center text-fontGray mt-4 text-lg font-bold ">
+              <p className="text-center text-brown mt-4 text-lg font-bold ">
                 No Projects found.
               </p>
             </>

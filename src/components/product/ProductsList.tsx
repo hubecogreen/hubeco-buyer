@@ -341,7 +341,7 @@ useEffect(() => {
         link1={{ name: "Home", href: "/" }}
         link2={{ name: h1Tag, href: "/products" }}
       />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 px-4 md:px-24 md:pt-16 pt-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 px-4 md:px-24 md:pt-16 pt-6 bg-cream">
       {/* Desktop Filter Sidebar */}
       <div className="hidden lg:block col-span-3">
         <FiltersSidebar
@@ -358,13 +358,13 @@ useEffect(() => {
         <Sheet>
           <SheetTrigger asChild>
             <button
-              className="bg-primary text-white p-3 rounded-full shadow-lg flex items-center space-x-2 hover:bg-primary/90 transition-colors"
+              className="bg-primary text-cream p-3 rounded-full shadow-lg flex items-center space-x-2 hover:bg-primary/90 transition-colors"
               aria-label="Open Filters"
             >
               <Filter className="w-6 h-6" />
             </button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[300px] sm:w-[400px] pt-10">
+          <SheetContent side="left" className="w-[300px] sm:w-[400px] pt-10 bg-cream">
             <FiltersSidebar
               onVendorSelectionChange={filterWithVendors}
               onChildCategorySelectionChange={filterWithChildCategories}
@@ -379,18 +379,18 @@ useEffect(() => {
       {/* Main Content */}
       <div className="col-span-12 lg:col-span-9">
         <div className="block md:flex md:justify-between mb-8 px-4 items-center">
-          <h1 className="text-black font-bold text-2xl md:text-3xl mt-[20px] md:mt-0">
+          <h1 className="text-brown font-bold text-2xl md:text-3xl mt-[20px] md:mt-0">
             {h1Tag}
           </h1>
           <div className="flex justify-end items-center">
             <div className="h-[40px] md:flex w-full md:w-56 mt-4 md:mt-0 mobile-sm:hidden">
-              <SearchInput
+              {/* <SearchInput
                 customStyles="!top-[0px]"
                 placeholder="Search Product"
                 onChange={handleInputChange}
-              />
+              /> */}
             </div>
-            <div className="h-[40px] md:flex w-full md:w-fit mt-4 md:mt-0 mobile-sm:hidden ml-3">
+            {/* <div className="h-[40px] md:flex w-full md:w-fit mt-4 md:mt-0 mobile-sm:hidden ml-3">
               <Select value={sortBy} onValueChange={handleSelectSortBy}>
                 <SelectTrigger className="select-trigger h-[43px]">
                   <SelectValue placeholder="Sort By" />
@@ -415,7 +415,7 @@ useEffect(() => {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-            </div>
+            </div> */}
           </div>
         </div>
 

@@ -24,10 +24,10 @@ const BuyerWorking = () => {
                       />
                     </div>
                     <div className="ml-4 flex flex-col mb-2">
-                      <h6 className="font-regular text-sm md:text-base text-black">
+                      <h6 className="font-regular text-sm md:text-base text-brown">
                         Sign Up
                       </h6>
-                      <p className="text-left text-sm text-medium mt-2 text-black">
+                      <p className="text-left text-sm text-medium mt-2 text-brown">
                         Visit our Buyer Registration page and fill out the
                         sign-up form with your details.
                       </p>
@@ -49,10 +49,10 @@ const BuyerWorking = () => {
                       />
                     </div>
                     <div className="ml-4 flex flex-col mb-2">
-                      <h6 className="font-regular text-sm md:text-base text-black">
+                      <h6 className="font-regular text-sm md:text-base text-brown">
                         Create a profile
                       </h6>
-                      <p className="text-left text-sm text-medium mt-2 text-black">
+                      <p className="text-left text-sm text-medium mt-2 text-brown">
                         Set up your profile to personalize your shopping
                         experience
                       </p>
@@ -74,10 +74,10 @@ const BuyerWorking = () => {
                       />
                     </div>
                     <div className="ml-4 flex flex-col mb-2">
-                      <h6 className="font-regular text-sm md:text-base text-black">
+                      <h6 className="font-regular text-sm md:text-base text-brown">
                         Explore Products
                       </h6>
-                      <p className="text-left text-sm text-medium mt-2 text-black">
+                      <p className="text-left text-sm text-medium mt-2 text-brown">
                         Browse our extensive catalog of eco-friendly building
                         materials
                       </p>
@@ -99,10 +99,10 @@ const BuyerWorking = () => {
                       />
                     </div>
                     <div className="ml-4 flex flex-col mb-2">
-                      <h6 className="font-regular text-sm md:text-base text-black">
+                      <h6 className="font-regular text-sm md:text-base text-brown">
                         Start Shopping
                       </h6>
-                      <p className="text-left text-sm text-medium mt-2 text-black">
+                      <p className="text-left text-sm text-medium mt-2 text-brown">
                         Add products to your cart and proceed to a seamless
                         checkout process
                       </p>
@@ -112,7 +112,7 @@ const BuyerWorking = () => {
               </div>
               <div className="hidden lg:block border-r border-[#C1C1C1] mx-8"></div>
               <div className="p-4 lg:p-5 w-full lg:w-1/2 lg:px-10">
-                <h1 className="font-bold text-2xl lg:text-4xl mb-4 text-black">
+                <h1 className="font-bold text-2xl lg:text-4xl mb-4 text-brown">
                   How it works
                 </h1>
                 <Image

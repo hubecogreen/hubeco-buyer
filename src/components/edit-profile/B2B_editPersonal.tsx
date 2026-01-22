@@ -935,7 +935,7 @@ reset1()
       </div>
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             First Name <span className="text-red">*</span>
           </label>
           <Controller
@@ -949,8 +949,9 @@ reset1()
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
+                  backgroundColor: '#FFFEF8'
                 }}
                 errorMessage={errors.firstName?.message}
               />
@@ -959,7 +960,7 @@ reset1()
           />
         </div>
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Last Name
           </label>
           <Controller
@@ -974,8 +975,9 @@ reset1()
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
+                  backgroundColor: '#FFFEF8'
                 }}
                 errorMessage={errors.lastName?.message}
               />
@@ -987,11 +989,11 @@ reset1()
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
         <div className="flex  justify-between items-center">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Email Address <span className="text-red">*</span>
 
           </label>
-          <p onClick={onClickEditEmail} className={`${editEmail ? 'text-gray' : 'text-secondary'} text-md cursor-pointer font-semibold mr-1`}>{editEmail ? 'Cancel' :'Edit'}</p>
+          <p onClick={onClickEditEmail} className={`${editEmail ? 'text-primary' : 'text-primary'} text-md cursor-pointer font-semibold mr-1`}>{editEmail ? 'Cancel' :'Edit'}</p>
           </div>
           <div className="flex justify-between items-start">
           {editEmail ?
@@ -1007,7 +1009,6 @@ reset1()
                 disabled={editEmail ? false:true}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
                   color: "black",
                 }}
                 errorMessage={errors.email?.message}
@@ -1033,7 +1034,7 @@ reset1()
 }
 
   {editEmail?
-  <Button variant={'outline'} onClick={()=>sendOTP('fromEmail')} type="button"  title="Verify" color="secondary" className="text-secondary hover:text-secondary hover:bg-white  border-secondary ml-2">Verify</Button>
+  <Button variant={'outline'} onClick={()=>sendOTP('fromEmail')} type="button"  title="Verify" color="secondary" className="text-cream bg-primary hover:text-secondary hover:bg-white  hover:border-secondary ml-2">Verify</Button>
 
 :<></>}</div>
 <div className="text-left mt-3">
@@ -1042,10 +1043,10 @@ reset1()
         </div>
         <div className="w-full sm:w-1/2 p-2 sm:p-5">
         <div className="flex  justify-between items-center">
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Phone Number <span className="text-red">*</span>
           </label>
-          <p onClick={onClickEdit} className={`${editMobile ? 'text-gray' : 'text-secondary'} text-md cursor-pointer font-semibold mr-1`}>{editMobile ? 'Cancel' :'Edit'}</p>
+          <p onClick={onClickEdit} className={`${editMobile ? 'text-primary' : 'text-primary'} text-md cursor-pointer font-semibold mr-1`}>{editMobile ? 'Cancel' :'Edit'}</p>
           </div>
           <div className="flex justify-between items-start">
 {editMobile ?
@@ -1062,7 +1063,7 @@ reset1()
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
                 }}
                 errorMessage={errors.mobile?.message}
@@ -1090,7 +1091,7 @@ reset1()
 }
 
         {editMobile?
-        <Button variant={'outline'} onClick={()=>sendOTP('fromMobile')} type="button"  title="Verify" color="secondary" className="text-secondary hover:text-secondary hover:bg-white  border-secondary ml-2">Verify</Button>
+        <Button variant={'outline'} onClick={()=>sendOTP('fromMobile')} type="button"  title="Verify" color="secondary" className="text-cream bg-primary hover:text-secondary hover:bg-white  hover:border-secondary ml-2">Verify</Button>
   
     :<></>}
 
@@ -1105,7 +1106,7 @@ reset1()
          title={"Save "}
          onPress={handleSubmit(handleProfileSubmit)}
          loading={isLoading1}
-         className="ml-3 bg-secondary hover:bg-primary  h-12 md:h-12 md:w-32  w-30 md:text-md text-sm text-white "
+         className="ml-3 bg-primary hover:bg-primary  h-12 md:h-12 md:w-32  w-30 md:text-md text-sm text-white "
         />
        
           
@@ -1118,7 +1119,7 @@ reset1()
       </DialogTrigger>
       <DialogContent className="sm:max-w-max">
     {/*   <DialogClose className='absolute right-4 top-4'>
-            <button className="text-gray-600 hover:text-gray-800" type="button" onClick={onCLickClose}>
+            <button className="text-brown hover:text-brown" type="button" onClick={onCLickClose}>
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
@@ -1127,12 +1128,12 @@ reset1()
         <DialogHeader className="flex sm:justify-center justify-center items-center ">
           <DialogTitle className="text-center text-2xl mb-4">Verify OTP</DialogTitle>
           <div className="flex items-center justify-center w-max">
-              <p className="my-2 md:my-2 lg:my-2 text-sm md:text-sm text-black  text-center">
+              <p className="my-2 md:my-2 lg:my-2 text-sm md:text-sm text-brown  text-center">
                 Enter the code we sent to the{' '}{changeType === "email" ? 'Email' : 'Mobile'} 
               </p>
             </div>
             <div className="flex items-center justify-center">
-              <p className=" flex text-sm md:text-sm text-black  text-center font-bold">
+              <p className=" flex text-sm md:text-sm text-brown  text-center font-bold">
                 {changeType === "email" ? formattedEmail : formattedNumber}
               </p>
             </div>
@@ -1161,7 +1162,7 @@ reset1()
                     ref={(el: any) => (inputRefs.current[index] = el)} // Set ref to each input field
                     value={value}
                     onChange={(e) => handleInputChange(onChange, e.target.value, index, field)}
-                    className="otpfield text-black text-center border border-slate-400 rounded-lg p-3 w-[70px] h-[55px]"
+                    className="otpfield text-brown text-center border border-slate-400 rounded-lg p-3 w-[70px] h-[55px]"
                   />
                 )}
               />

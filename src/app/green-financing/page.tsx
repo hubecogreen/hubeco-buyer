@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function GreenFinancePage() {
   return (
-    <div>
+    <div className="bg-cream">
       <GreenFinancingSection />
       <HubecoBeliefSection />
       <ReadyToBuildCTA />

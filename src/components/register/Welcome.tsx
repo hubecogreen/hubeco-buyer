@@ -19,7 +19,7 @@ export default function Page() {
       </Head>
       {/* <Header /> */}
       <div className="px-10 pb-10 w-90% m-20">
-        <div className="category-section pb-10 text-center text-black bg-white shadow-lg [box-shadow:rgba(149,157,165,0.2)_8px_4px_8px_8px]">
+        <div className="category-section pb-10 text-center text-brown bg-white shadow-lg [box-shadow:rgba(149,157,165,0.2)_8px_4px_8px_8px]">
           <div className="container mx-auto py-10">
             <div className="flex justify-center">
               <LottieWrapper
@@ -32,7 +32,7 @@ export default function Page() {
               <h1 className="text-4xl font-bold mb-5">
                 Welcome to <span className="text-teal-500">hubeco</span> 👋
               </h1>
-              <p className="text-base text-gray-500">
+              <p className="text-base text-brown">
                 Lorem ipsum is placeholder text commonly used in the graphic,
                 print, and <br />
                 publishing industries for previewing layouts and visual mockups

@@ -231,31 +231,31 @@ export default function Page() {
     }
   };
 
-  if(!isClient)
+  if (!isClient)
     return <></>
 
   return (
     <div>
-      <div className="bg-white w-full md:px-24 ">
-        <div className="overflow-auto p-2 lg:p-4 w-full bg-[#f8f8f8] shadow-md my-5 rounded-md ">
+      <div className="bg-cream w-full md:px-24 ">
+        <div className="overflow-auto p-2 lg:p-4 w-full bg-cream shadow-md my-5 rounded-md ">
           <div className="flex flex-col gap-4 ">
             <div className="p-2 md:flex gap-6 justify-between">
               <div className="flex flex-col gap-6 md:w-[60%]">
                 <div className="flex flex-col gap-1">
-                  <p color="text.primary" className="font-medium">
+                  <p color="text.primary" className="font-medium text-brown">
                     Your Current Plan is{" "}
                     <span className="text-primary">
                       {" "}
                       {subData?.plan?.name ?? "Freemium"}
                     </span>
                   </p>
-                  <p>{prePlanData.description}</p>
+                  <p className="text-brown">{prePlanData.description}</p>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <p color="text.primary" className="font-medium tracking-wide">
+                  <p color="text.primary" className="font-medium tracking-wide text-brown">
                     Active until {daysRemain.expiryDate}
                   </p>
-                  <p>
+                  <p className="text-brown">
                     We will send you a notification upon Subscription expiration
                   </p>
                 </div>
@@ -282,10 +282,10 @@ export default function Page() {
                   )}
                 <div className="flex flex-col gap-1 mt-4">
                   <div className="flex items-center justify-between">
-                    <p color="text.primary" className="font-medium">
+                    <p color="text.primary" className="text-brown font-medium">
                       Days
                     </p>
-                    <p color="text.primary" className="font-medium">
+                    <p color="text.primary" className="text-brown font-medium">
                       {daysRemain.daysPassed} of {daysRemain.totalDays} Days
                     </p>
                   </div>
@@ -298,7 +298,7 @@ export default function Page() {
                     value={Number(daysRemain.percentage)}
                     className=" h-[10px] rounded my-1"
                   />
-                  <p>
+                  <p className="text-brown">
                     {daysRemain.remainingDays} days remaining until your plan
                     requires update
                   </p>
@@ -308,10 +308,14 @@ export default function Page() {
                     onClick={() =>
                       handleDownload(`${assetURL}/${subData?.invoiceLink}`)
                     }
-                    variant={"outline"}
-                    className="mt-2 !py-0 w-fit !h-[35px] !px-2 border-secondary text-secondary rounded-none bg:white hover:bg-white hover:text-secondary "
+                    variant="outline"
+                    className="group mt-2 !py-0 w-fit !h-[35px] !px-2 border-primary rounded-[6px] 
+             bg-primary text-cream hover:bg-cream hover:border-secondary"
                   >
-                    <MdOutlineFileDownload color="#9B314A" /> Download Invoice
+                    <MdOutlineFileDownload className="mr-1 text-cream group-hover:text-secondary" />
+                    <span className="text-cream group-hover:text-secondary">
+                      Download Invoice
+                    </span>
                   </Button>
                 )}
               </div>
@@ -331,8 +335,8 @@ export default function Page() {
       </div>
       <div className="flex flex-col lg:flex-row items-start justify-between py-12 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full bg-cover bg-no-repeat bg-left-10% relative max-w-full">
         <div className="overflow-auto p-2 lg:p-4 w-full lg:w-6/12">
-          <h1 className="text-4xl font-bold mb-4 text-black">Buyer Plans</h1>
-          <p className="text-lg font-thin text-justify text-black leading-custom-1.7">
+          <h1 className="text-4xl font-bold mb-4 text-brown">Buyer Plans</h1>
+          <p className="text-lg font-thin text-justify text-brown leading-custom-1.7">
             At Hubeco, we offer a variety of subscription plans designed to
             support buyers at every stage of their purchasing journey. Whether
             you&#39;re a small business looking for cost-effective resources or
@@ -358,14 +362,14 @@ export default function Page() {
                     </h3>
                     {/* <div className="flex rounded-full  justify-between items-center bg-white  shadow-lg" style={{marginTop:'-2px'}}>
                                 <div onClick={()=>{setTerm('Monthly'),setCookie('term','Monthly')}} className={`${term==='Monthly' ? 'bg-primary border border-primary rounded-full' : ''}`}>
-                                    <p className={` ${term==='Monthly' ? 'text-white' : 'text-black'} text-xs font-normal  px-4 py-1 `}>Monthly</p>
+                                    <p className={` ${term==='Monthly' ? 'text-white' : 'text-brown'} text-xs font-normal  px-4 py-1 `}>Monthly</p>
                                 </div>
                                 <div onClick={()=>{setTerm('Yearly'),setCookie('term','Yearly')}} className={`${term==='Yearly' ? 'bg-primary border border-primary rounded-full' : ''}`}>
-                                    <p className={` ${term==='Yearly' ? 'text-white' : 'text-black'} text-xs font-normal  px-4 py-1`}>Yearly</p>
+                                    <p className={` ${term==='Yearly' ? 'text-white' : 'text-brown'} text-xs font-normal  px-4 py-1`}>Yearly</p>
                                 </div>
                             </div> */}
                   </div>
-                  <p className="text-sm font-normal text-black text-left mt-5 h-[30px]">
+                  <p className="text-sm font-normal text-brown text-left mt-5 h-[30px]">
                     {prePlanData.description}
                   </p>
                 </div>
@@ -374,11 +378,11 @@ export default function Page() {
                     {premium.map((product: any, index: any) => (
                       <div key={index} className="flex  mb-5 items-center">
                         <div>
-                          <GoCheckCircleFill className="w-[20px] h-[16px] text-[#B90647]" />
+                          <GoCheckCircleFill className="w-[20px] h-[16px] text-[#109899]" />
                         </div>
 
                         <div className="ml-2">
-                          <p className="text-sm font-normal">
+                          <p className="text-brown text-sm font-normal">
                             {product?.feature.title}
                           </p>
                         </div>

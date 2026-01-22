@@ -1,7 +1,7 @@
 "use client";
 // import Footer from "@/components/footer/MainFooter";
 // import Header from "@/components/header/MainHeader";
-// import ImageSlider from "@/components/home/imageCarousel/Swiper";
+// import HeroSection from "@/components/home/imageCarousel/Swiper";
 // import CategorySection from "@/components/home/categories/Category";
 // import FeaturedProducts from "@/components/home/featured/FeaturedProducts";
 // import BrandsSection from "@/components/home/brands/BrandsSection";

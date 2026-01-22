@@ -86,7 +86,7 @@ const PincodePopup: React.FC<PincodePopupProps> = ({ isOpen, onClose }) => {
       <div className="bg-white pb-4 rounded-md w-96 z-50">
       <div className="flex h-12 px-4 items-center justify-between border-b border-[#f0f0f0]">
 
-          <h2 className="text-black font-medium text-base">Choose your location</h2>
+          <h2 className="text-brown font-medium text-base">Choose your location</h2>
           <AiFillCloseCircle
             className="hover:cursor-pointer"
             size={22}
@@ -95,7 +95,7 @@ const PincodePopup: React.FC<PincodePopupProps> = ({ isOpen, onClose }) => {
           />
         </div>
 
-        <p className="text-black px-4 font-normal text-xs mt-4">
+        <p className="text-brown px-4 font-normal text-xs mt-4">
           Select a delivery location to see product availability and delivery options
         </p>
         {
@@ -142,7 +142,7 @@ const PincodePopup: React.FC<PincodePopupProps> = ({ isOpen, onClose }) => {
         </div>
           </>:<>
           <div className="flex justify-center items-center flex-col mt-4">
-          {/* <p className="text-black px-4 font-normal text-xs my-4">
+          {/* <p className="text-brown px-4 font-normal text-xs my-4">
           No address found
         </p> */}
         <Button variant={'outline'} onClick={onClickAdd} className="border-secondary rounded mb-4 text-secondary hover:text-secondary hover:bg-white">

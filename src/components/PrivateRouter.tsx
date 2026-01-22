@@ -34,6 +34,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
     '/order-sucesss',
     '/order-failed',
     '/checkout',
+    '/orders',
   ]
 
   // if (pathname.includes('reset-password')) {

@@ -264,7 +264,7 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
             />
           </div>
 
-          <p className="text-center text-lg text-black mt-4">
+          <p className="text-center text-lg text-brown mt-4">
             Are you sure you want to return the order?
           </p>
           <div></div>
@@ -325,14 +325,14 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
               multiple
               accept="image/jpeg, image/png, application/pdf"
               onChange={handleFileInputChange}
-              className="block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer"
+              className="block w-full text-sm text-brown border border-gray-300 rounded cursor-pointer"
             
             /> */}
             <label
               htmlFor="file"
               className="flex flex-col items-center justify-center gap-2 p-4 border border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition"
             >
-              <div className="icon text-gray-500">
+              <div className="icon text-brown">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -346,7 +346,7 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
                   ></path>
                 </svg>
               </div>
-              <div className="text text-gray-700">
+              <div className="text text-brown">
                 <span>Click to Upload Images</span>
               </div>
               <input
@@ -432,7 +432,7 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
           <div className="flex justify-end items-center mt-6">
             <Button
               type="button"
-              className="py-2 px-4 bg-secondaryBg text-gray-700 rounded hover:bg-secondaryBg ml-6"
+              className="py-2 px-4 bg-secondaryBg text-brown rounded hover:bg-secondaryBg ml-6"
               onClick={onClose}
             >
               Cancel

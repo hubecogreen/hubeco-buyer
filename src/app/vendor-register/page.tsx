@@ -1,7 +1,7 @@
 "use client";
 // import Footer from "@/components/footer/MainFooter";
 // import Header from "@/components/header/MainHeader";
-import ImageSlider from "@/components/vendor-register/VendorBanner";
+import HeroSection from "@/components/vendor-register/VendorBanner";
 import Benefits from "@/components/vendor-register/Benefits";
 import Working from "@/components/vendor-register/Working";
 import JoinUs from "@/components/vendor-register/JoinUs";
@@ -49,7 +49,7 @@ export default function Home() {
       </Head>
       {/* <Header /> */}
       <div className="banner-section  mx-auto h-64 md:h-full" style={{}}>
-        <ImageSlider />
+        <HeroSection />
       </div>
 
       <div

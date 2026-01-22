@@ -61,10 +61,10 @@ const Checkout = () => {
                 </h1>
               </div>
             </div>
-            <p className="text-xs md:text-sm mt-2 font-semibold text-black">
+            <p className="text-xs md:text-sm mt-2 font-semibold text-brown">
               Order ID: #H00917725
             </p>
-            <p className="mt-4 text-gray-700 text-xs md:text-base px-4 md:px-0">
+            <p className="mt-4 text-brown text-xs md:text-base px-4 md:px-0">
               Thank you for choosing hubeco – your partner in sustainable
               building materials. We look forward to assisting you!
             </p>
@@ -72,12 +72,12 @@ const Checkout = () => {
 
           {/* Customer Information Section */}
           <div className="mt-8 border border-gray-200 rounded-lg p-4 md:p-6 w-full max-w-4xl mx-auto">
-            <h2 className="text-gray-500 text-xs md:text-sm font-semibold mb-4">
+            <h2 className="text-brown text-xs md:text-sm font-semibold mb-4">
               Customer information
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 text-xs md:text-sm">
               {/* Shipping Address */}
-              <div className="text-gray-700">
+              <div className="text-brown">
                 <h3 className="font-semibold mb-2">Shipping address</h3>
                 <p>Abin Krishnan</p>
                 <p>Lal Sadan</p>
@@ -87,7 +87,7 @@ const Checkout = () => {
               </div>
 
               {/* Billing Address */}
-              <div className="text-gray-700">
+              <div className="text-brown">
                 <h3 className="font-semibold mb-2">Billing address</h3>
                 <p>Abin Krishnan</p>
                 <p>Lal Sadan</p>
@@ -97,7 +97,7 @@ const Checkout = () => {
               </div>
 
               {/* Shipping Method */}
-              <div className="text-gray-700">
+              <div className="text-brown">
                 <h3 className="font-semibold mb-2">Shipping method</h3>
                 <p>UPI Payment</p>
                 <p>Heavy Goods Shipping 325 Rs</p>
@@ -117,7 +117,7 @@ const Checkout = () => {
         </div>
         {/* Right Column: Order Summary */}
         <div className="p-6 bg-[#F4F4F4] h-fit">
-          <h2 className="text-lg font-semibold mb-4 text-black">Order Summary</h2>
+          <h2 className="text-lg font-semibold mb-4 text-brown">Order Summary</h2>
           <div className="w-full">
             {products.map((product, index) => (
               <div className="flex w-full py-3" key={index}>
@@ -132,18 +132,18 @@ const Checkout = () => {
                   }}
                   loading="lazy"
                 />
-                <div className="w-full text-black">
+                <div className="w-full text-brown">
                   <p className="font-semibold">{product.title}</p>
                   <div className="flex justify-between">
-                    <p className="text-gray-500">Quantity : 100 piece</p>
-                    <p className="text-gray-500">{product.currentPrice}</p>
+                    <p className="text-brown">Quantity : 100 piece</p>
+                    <p className="text-brown">{product.currentPrice}</p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="py-7 px-2 text-black">
+          <div className="py-7 px-2 text-brown">
             <div className="flex justify-between mb-2">
               <p>Coupon</p>
               <p>₹400.00</p>
@@ -155,7 +155,7 @@ const Checkout = () => {
 
             <div className="flex justify-between mb-2">
               <p>Shipping</p>
-              <p className="text-gray-400">Enter shipping address</p>
+              <p className="text-brown">Enter shipping address</p>
             </div>
 
             <div className="flex justify-between mb-2">

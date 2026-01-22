@@ -178,7 +178,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
       {/* <div style={{ display: "flex" }}> */}
       <div className="flex flex-wrap md:flex-nowrap w-full">
         <div className={"md:w-3/6 w-full p-5"}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Current Password <span className="text-red">*</span>
           </label>
           <Controller
@@ -193,7 +193,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
                 }}
                 errorMessage={errors.currentPassword?.message}
@@ -206,7 +206,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
       {/* <div style={{ display: "flex" }}> */}
       <div className="flex flex-wrap md:flex-nowrap w-full">
         <div className={"md:w-3/6 w-full p-5"}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             New Password <span className="text-red">*</span>
           </label>
           <Controller
@@ -221,7 +221,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
                 }}
                 errorMessage={errors.newPassword?.message}
@@ -231,7 +231,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
           />
         </div>
         <div className={"md:w-3/6 w-full p-5"}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Confirm Password <span className="text-red">*</span>
           </label>
           <Controller
@@ -246,7 +246,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
                 }}
                 errorMessage={errors.confirmNewPassword?.message}
@@ -289,7 +289,7 @@ const B2B_changePassword: React.FC<SecurityFormProps> = ({
       <div className="flex flex-col sm:flex-row justify-start mt-4">
         <CustomButton
           title={"Save Changes"}
-          className="ml-3 bg-secondary hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-white "
+          className="ml-3 bg-primary hover:bg-primary  h-12 md:h-12 md:w-48  w-30 md:text-md text-sm text-white "
           customStyles={{}}
           //onPress={onSubmit}
           type='submit'

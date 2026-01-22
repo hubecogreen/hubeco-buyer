@@ -137,7 +137,7 @@ const CustomPopup = (orderNum: any, order: any) => {
             />
           </div>
 
-          <p className="text-center text-lg text-black mt-4">
+          <p className="text-center text-lg text-brown mt-4">
             Are you sure you want to cancel the order?
           </p>
 
@@ -170,7 +170,7 @@ const CustomPopup = (orderNum: any, order: any) => {
           <div className="flex justify-end items-center mt-6">
             <Button
               type="button"
-              className="py-2 px-4 bg-secondaryBg text-gray-700 rounded hover:bg-secondaryBg ml-6"
+              className="py-2 px-4 bg-secondaryBg text-brown rounded hover:bg-secondaryBg ml-6"
               onClick={() => setOpenCancel(false)}
             >
               Cancel

@@ -329,31 +329,31 @@ export default function Page() {
   };
   return (
     <div>
-      <div className="bg-white w-full md:px-24 ">
-        <div className="overflow-auto p-2 lg:p-4 w-full bg-[#f8f8f8] shadow-md my-5 rounded-md ">
+      <div className="bg-cream w-full md:px-24 ">
+        <div className="overflow-auto p-2 lg:p-4 w-full bg-cream border border-primary shadow-md my-5 rounded-md ">
           <div className="flex flex-col gap-4 ">
             <div className="p-2 md:flex gap-6 justify-between">
               <div className="flex flex-col gap-6 md:w-[60%]">
                 <div className="flex flex-col gap-1">
-                  <p color="text.primary" className="font-medium">
+                  <p color="text.primary" className="text-brown font-medium">
                     Your Current Plan is{" "}
                     <span className="text-primary">
                       {" "}
                       {subData?.plan?.name ?? "Freemium"}
                     </span>
                   </p>
-                  <p>Ideal for buyers exploring sustainable products.</p>
+                  <p className="text-brown">Ideal for buyers exploring sustainable products.</p>
                 </div>
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-1.5">
-                    <p color="text.primary" className="font-medium">
+                    <p color="text.primary" className="text-brown font-medium">
                       Rs. {prePlanData?.monthlyPrice}/- Per Month
                     </p>
                     <p className="py-[5px] px-[10px]  bg-[#049b8917] text-primary rounded text-[14px]">
-                      Popular
+                      {subData?.plan?.name ?? "Freemium"}
                     </p>
                   </div>
-                  <p>
+                  <p className="text-brown">
                     Ideal for dedicated buyers seeking a wide range of
                     sustainable products.
                   </p>
@@ -364,7 +364,7 @@ export default function Page() {
               {/* <Button
               variant="secondary"
               color="primary"
-              className="text-white"
+              className="text-cream"
               onClick={() => alert("Renew Subscription clicked!")}
             >
               Upgrade
@@ -374,22 +374,22 @@ export default function Page() {
                   <Button
                     variant="secondary"
                     color="primary"
-                    className="text-white text-center"
+                    className="text-cream text-center"
                   >
                     Upgrade
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="md:w-[40%] flex flex-col justify-center items-center p-6">
+                <DialogContent className="md:w-[40%] flex flex-col justify-center items-center p-6 bg-cream">
                   <DialogHeader>
-                    <DialogTitle className="text-center sm:text-center mb-3">
+                    <DialogTitle className="text-brown text-center sm:text-center mb-3">
                       Upgrade Plan
                     </DialogTitle>
-                    <DialogDescription className="text-center sm:text-center mb-4">
+                    <DialogDescription className="text-brown text-center sm:text-center mb-4">
                       Choose the best plan for you
                     </DialogDescription>
                   </DialogHeader>
                   <div
-                    className="flex rounded-full  justify-between mt-[5px] items-center bg-white border-broderGray border  shadow-lg"
+                    className="flex rounded-full cursor-pointer justify-between mt-[5px] items-center bg-cream border-broderGray border  shadow-lg"
                     style={{}}
                   >
                     <div
@@ -398,13 +398,13 @@ export default function Page() {
                       }}
                       className={`${
                         term === "Monthly"
-                          ? "bg-primary border border-primary rounded-full"
+                          ? "bg-primary border border-primary rounded-full cursor-pointer"
                           : ""
                       }`}
                     >
                       <p
                         className={` ${
-                          term === "Monthly" ? "text-white" : "text-black"
+                          term === "Monthly" ? "text-cream" : "text-brown"
                         } text-xs font-normal  px-6 py-3 `}
                       >
                         Monthly
@@ -416,13 +416,13 @@ export default function Page() {
                       }}
                       className={`${
                         term === "Yearly"
-                          ? "bg-primary border border-primary rounded-full"
+                          ? "bg-primary border border-primary rounded-full cursor-pointer"
                           : ""
                       }`}
                     >
                       <p
                         className={` ${
-                          term === "Yearly" ? "text-white" : "text-black"
+                          term === "Yearly" ? "text-cream" : "text-brown"
                         } text-xs font-normal  px-6 py-3`}
                       >
                         Yearly
@@ -431,16 +431,16 @@ export default function Page() {
                   </div>
 
                   <div className="px-4 rounded-lg text-center">
-                    <p className="font-semibold text-lg mt-3">Premium Plan</p>
+                    <p className="text-brown font-semibold text-lg mt-3">Premium Plan</p>
                
                     <div className="flex justify-start items-center mb-2 mt-4">
                       {term === "Monthly" ? (
                         <>
                           {prePlanData?.monthlyDiscount == 0 ? (
-                            <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
+                            <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
                       {" "}
                               <span
-                                className="text-lg text-black mr-1"
+                                className="text-lg text-brown mr-1"
                                 style={{
                                   fontWeight: "400",
                                   fontFamily: "monospace",
@@ -451,16 +451,16 @@ export default function Page() {
                               </span>
                               &nbsp;
                               {prePlanData?.monthlyPrice}
-                              <p className="text-sm font-normal ml-2 text-gray">
+                              <p className="text-sm font-normal ml-2 text-brown">
                                 + {prePlanData?.gst}% GST
                               </p>
                             </h4>
                           ) : (
                             <>
                               {" "}
-                              <p className="text-sm font-normal line-through  text-black">
+                              <p className="text-sm font-normal line-through  text-brown">
                                 <span
-                                  className="text-sm text-black mr-1"
+                                  className="text-sm text-brown mr-1"
                                   style={{
                                     fontWeight: "400",
                                     fontFamily: "monospace",
@@ -471,25 +471,25 @@ export default function Page() {
                                 </span>
                                 &nbsp;{prePlanData.monthlyPrice}
                               </p>
-                              <h4 className="text-lg font-bold ml-2 text-black">
+                              <h4 className="text-lg font-bold ml-2 text-brown">
                   ₹&nbsp;
                                 {prePlanData.monthlyPrice -
                                   prePlanData.monthlyDiscount}
                               </h4>
-                              <p className="text-sm font-normal ml-2 text-gray">
+                              <p className="text-sm font-normal ml-2 text-brown">
                                 / month
                               </p>
-                              <p className="text-sm font-normal ml-2 text-gray">
+                              <p className="text-sm font-normal ml-2 text-brown">
                                 + {prePlanData.gst}% GST
                               </p>
                             </>
                           )}
                         </>
                       ) : prePlanData?.yearlyDiscount == 0 ? (
-                        <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
+                        <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
            {" "}
                           <span
-                            className="text-lg text-black mr-1"
+                            className="text-lg text-brown mr-1"
                             style={{
                               fontWeight: "400",
                               fontFamily: "monospace",
@@ -500,16 +500,16 @@ export default function Page() {
                           </span>
                           &nbsp;
                           {prePlanData?.yearlyPrice}
-                          <p className="text-sm font-normal ml-2 text-gray">
+                          <p className="text-sm font-normal ml-2 text-brown">
                             + {prePlanData?.gst}% GST
                           </p>
                         </h4>
                       ) : (
                         <>
                           {" "}
-                          <p className="text-sm font-normal line-through  text-black">
+                          <p className="text-sm font-normal line-through  text-brown">
                             <span
-                              className="text-sm text-black mr-1"
+                              className="text-sm text-brown mr-1"
                               style={{
                                 fontWeight: "400",
                                 fontFamily: "monospace",
@@ -520,29 +520,29 @@ export default function Page() {
                             </span>
                             &nbsp;{prePlanData?.yearlyPrice}
                           </p>
-                          <h4 className="text-lg font-bold ml-2 text-black">
+                          <h4 className="text-lg font-bold ml-2 text-brown">
                    ₹&nbsp;
                             {prePlanData?.yearlyPrice -
                               prePlanData?.yearlyDiscount}
                           </h4>
-                          <p className="text-sm font-normal ml-2 text-gray">
+                          <p className="text-sm font-normal ml-2 text-brown">
                             / year
                           </p>
-                          <p className="text-sm font-normal ml-2 text-gray">
+                          <p className="text-sm font-normal ml-2 text-brown">
                             + {prePlanData?.gst}% GST
                           </p>
                         </>
                       )}
                     </div>
                     <Button
-                      className="mt-4 text-white"
+                      className="mt-4 text-cream"
                       onClick={buySubscription}
                     >
                       Upgrade Plan
                     </Button>
                   </div>
 
-                  <p className="mt-6 text-sm text-gray-500">
+                  <p className="mt-6 text-sm text-brown">
                     Need help choosing? Contact our support team.
                   </p>
                 </DialogContent>
@@ -555,7 +555,7 @@ export default function Page() {
       <div
         className="flex flex-col lg:flex-row items-start justify-between py-12 px-4 md:px-16 lg:px-20 space-y-4 lg:space-x-4 lg:space-y-0 mx-auto w-full"
         style={{
-          backgroundImage: "url('/images/home/contactbg.webp')",
+          backgroundImage: "url('/images/home/contactbg-1.png')",
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "left 10%",
@@ -564,9 +564,9 @@ export default function Page() {
         }}
       >
         <div className="overflow-auto p-2 lg:p-4 w-full lg:w-4/12">
-          <h1 className="text-4xl font-bold mb-4 text-black">Buyer Plans</h1>
+          <h1 className="text-4xl font-bold mb-4 text-brown">Buyer Plans</h1>
           <p
-            className="text-lg font-thin text-justify text-black"
+            className="text-lg font-thin text-justify text-brown"
             style={{ lineHeight: "1.7" }}
           >
             At Hubeco, we offer a variety of subscription plans designed to
@@ -648,21 +648,21 @@ export default function Page() {
                       {/* First Column */}
                       <div className="w-full lg:w-5/12 relative border-r border-gray-100">
                         <div
-                          className=" pr-4"
+                          className="pr-4"
                           style={{ borderColor: "#E5E7EB", color: "initial" }}
                         >
-                          <h3 className="text-2xl font-bold">
+                          <h3 className="text-brown text-2xl font-bold">
                             {freePlanData.name}
                           </h3>
                           <p
-                            className="text-sm font-normal text-black"
+                            className="text-sm font-normal text-brown"
                             style={{ marginTop: "20px", height: "40px" }}
                           >
                             {/* Ideal for small businesses and new vendors. */}
                             {freePlanData.description}
                           </p>
                        
-                          <h4 className="text-lg text-black font-bold mt-3 mb-1">
+                          <h4 className="text-lg text-brown font-bold mt-3 mb-1">
                             Free
                           </h4>
                           <div className="mt-10">
@@ -689,7 +689,7 @@ export default function Page() {
                                     />
                                   </div>
                                   <div className="ml-2">
-                                    <p className="text-sm font-normal">
+                                    <p className="text-sm font-normal text-brown">
                                       {product.feature.title}
                                       {product.feature.title ===
                                         "Product Listings" &&
@@ -715,7 +715,7 @@ export default function Page() {
                                   </div>
                                   <div className="ml-2">
                                     <p
-                                      className="text-sm font-normal"
+                                      className="text-sm font-normal text-brown"
                                       style={{ color: "#D3D4D9" }}
                                     >
                                       {product.plan}
@@ -734,11 +734,11 @@ export default function Page() {
                           className=" pr-4"
                           style={{ borderColor: "#E5E7EB", color: "initial" }}
                         >
-                          <h3 className="text-2xl text-black font-bold">
+                          <h3 className="text-2xl text-brown font-bold">
                             {prePlanData.name}
                           </h3>
                           <p
-                            className="text-sm font-normal mb-2"
+                            className="text-brown text-sm font-normal mb-2"
                             style={{ marginTop: "20px", height: "40px" }}
                           >
                             {prePlanData.description}
@@ -746,9 +746,9 @@ export default function Page() {
 
                           <div className="flex justify-start items-center mt-5">
                             {prePlanData.monthlyDiscount == 0 ? (
-                              <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
+                              <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
                                 <span
-                                  className="text-lg text-black mr-1"
+                                  className="text-lg text-brown mr-1"
                                   style={{
                                     fontWeight: "400",
                                     fontFamily: "monospace",
@@ -759,16 +759,16 @@ export default function Page() {
                                 </span>
                                 &nbsp;
                                 {prePlanData.monthlyPrice}
-                                <p className="text-sm font-normal ml-2 text-gray">
+                                <p className="text-sm font-normal ml-2 text-brown">
                                   + {prePlanData.gst}% GST
                                 </p>
                               </h4>
                             ) : (
                               <>
                                 {" "}
-                                <p className="text-sm font-normal line-through  text-black">
+                                <p className="text-sm font-normal line-through  text-brown">
                                   <span
-                                    className="text-sm text-black mr-1"
+                                    className="text-sm text-brown mr-1"
                                     style={{
                                       fontWeight: "400",
                                       fontFamily: "monospace",
@@ -779,15 +779,15 @@ export default function Page() {
                                   </span>
                                   &nbsp;{prePlanData.monthlyPrice}
                                 </p>
-                                <h4 className="text-lg font-bold ml-2 text-black">
+                                <h4 className="text-lg font-bold ml-2 text-brown">
                                   ₹&nbsp;
                                   {prePlanData.monthlyPrice -
                                     prePlanData.monthlyDiscount}
                                 </h4>
-                                <p className="text-sm font-normal ml-2 text-gray">
+                                <p className="text-sm font-normal ml-2 text-brown">
                                   / month
                                 </p>
-                                <p className="text-sm font-normal ml-2 text-gray">
+                                <p className="text-sm font-normal ml-2 text-brown">
                                   + {prePlanData.gst}% GST
                                 </p>
                               </>
@@ -815,12 +815,12 @@ export default function Page() {
                                       style={{
                                         height: "16px",
                                         width: "20px",
-                                        color: "#B90647",
+                                        color: "#109899",
                                       }}
                                     />
                                   </div>
                                   <div className="ml-2">
-                                    <p className="text-sm font-normal">
+                                    <p className="text-sm font-normal text-brown">
                                       {product?.feature.title}
                                       {product?.feature.title ===
                                         "Product Listings" &&
@@ -845,11 +845,11 @@ export default function Page() {
                           className="border-r border-gray-100 pr-4"
                           style={{ borderColor: "#E5E7EB", color: "initial" }}
                         >
-                          <h3 className="text-2xl font-bold">
+                          <h3 className="text-brown text-2xl font-bold">
                             {freePlanData.name}
                           </h3>
                           <p
-                            className="text-sm font-normal text-black"
+                            className="text-sm font-normal text-brown"
                             style={{ marginTop: "20px", height: "40px" }}
                           >
                             {freePlanData.description}
@@ -862,7 +862,7 @@ export default function Page() {
                   >
                     <CustomButton
                       title={"Choose Freemium plan"}
-                      className="bg-secondary h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-white opacity-0"
+                      className="bg-secondary h-12 md:h-12 md:w-90 w-full md:text-md text-sm text-cream opacity-0"
                       rightIcon={<GoArrowRight />}
                       onPress={()=>{
                         setCookie('selectedPlanId','67d7f49a-d601-4d83-ae81-ba1789eddac5'),
@@ -870,7 +870,7 @@ export default function Page() {
                       }}                               
                       />
                   </div> */}
-                          <h4 className="text-lg text-black font-bold mt-3 mb-1">
+                          <h4 className="text-lg text-brown font-bold mt-3 mb-1">
                             Free
                           </h4>
                           <div className="mt-10">
@@ -897,7 +897,7 @@ export default function Page() {
                                     />
                                   </div>
                                   <div className="ml-2">
-                                    <p className="text-sm font-normal">
+                                    <p className="text-sm font-normal text-brown">
                                       {product.feature.title}
                                       {product.feature.title ===
                                         "Product Listings" &&
@@ -941,11 +941,11 @@ export default function Page() {
                           className="border-r border-gray-100 pr-4"
                           style={{ borderColor: "#E5E7EB", color: "initial" }}
                         >
-                          <h3 className="text-2xl text-black font-bold">
+                          <h3 className="text-2xl text-brown font-bold">
                             {prePlanData.name}
                           </h3>
                           <p
-                            className="text-sm font-normal mb-2"
+                            className="text-sm font-normal mb-2 text-brown"
                             style={{ marginTop: "20px", height: "40px" }}
                           >
                             {prePlanData.description}
@@ -954,9 +954,9 @@ export default function Page() {
                           <div className="flex justify-start items-center mt-5">
                             {prePlanData.yearlyDiscount == 0 ? (
                               <>
-                                <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-black">
+                                <h4 className="text-lg flex items-center justify-start font-bold ml-2 text-brown">
                                   <span
-                                    className="text-lg text-black mr-1"
+                                    className="text-lg text-brown mr-1"
                                     style={{
                                       fontWeight: "400",
                                       fontFamily: "monospace",
@@ -967,16 +967,16 @@ export default function Page() {
                                   </span>
                                   &nbsp;
                                   {prePlanData.yearlyPrice}
-                                  <p className="text-sm font-normal ml-2 text-gray">
+                                  <p className="text-sm font-normal ml-2 text-brown">
                                     + {prePlanData.gst}% GST
                                   </p>
                                 </h4>
                               </>
                             ) : (
                               <>
-                                <p className="text-sm font-normal line-through  text-black">
+                                <p className="text-sm font-normal line-through  text-brown">
                                   <span
-                                    className="text-sm text-black mr-1"
+                                    className="text-sm text-brown mr-1"
                                     style={{
                                       fontWeight: "400",
                                       fontFamily: "monospace",
@@ -987,9 +987,9 @@ export default function Page() {
                                   </span>
                                   &nbsp;{prePlanData.yearlyPrice}
                                 </p>
-                                <h4 className="text-lg font-bold ml-2 text-black">
+                                <h4 className="text-lg font-bold ml-2 text-brown">
                                   <span
-                                    className="text-lg text-black mr-1"
+                                    className="text-lg text-brown mr-1"
                                     style={{
                                       fontWeight: "400",
                                       fontFamily: "monospace",
@@ -1002,10 +1002,10 @@ export default function Page() {
                                   {prePlanData.yearlyPrice -
                                     prePlanData.yearlyDiscount}
                                 </h4>
-                                <p className="text-sm font-normal ml-2 text-gray">
+                                <p className="text-sm font-normal ml-2 text-brown">
                                   / year
                                 </p>
-                                <p className="text-sm font-normal ml-2 text-gray">
+                                <p className="text-sm font-normal ml-2 text-brown">
                                   + {prePlanData.gst}% GST
                                 </p>
                               </>
@@ -1040,7 +1040,7 @@ export default function Page() {
                                     />
                                   </div>
                                   <div className="ml-2">
-                                    <p className="text-sm font-normal">
+                                    <p className="text-sm font-normal text-brown">
                                       {product.feature.title}
                                       {product.feature.title ===
                                         "Product Listings" &&

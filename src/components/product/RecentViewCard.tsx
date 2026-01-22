@@ -244,7 +244,7 @@ const RecentViewCard = ({
 
   return (
     <div
-      className={`bg-white group border border-borderGray rounded-sm overflow-hidden shadow-sm hover:bg-[#E8E8E8] hover:shadow-lg transition-shadow duration-300 cursor-pointer`}
+      className={`bg-cream group border border-borderGray rounded-sm overflow-hidden shadow-sm hover:border-primary hover:shadow-lg transition-shadow duration-300 cursor-pointer`}
     >
       <div className="relative">
         <Image
@@ -293,7 +293,7 @@ const RecentViewCard = ({
               {isClicked ? (
                 <>
                   <IoBookmark
-                    color="#A92449" // Change stroke color on click
+                    color="#109989" // Change stroke color on click
                     className="group-hover:text-white cursor-pointer z-50"
                     size={25}
                     onClick={() => deleteWishlist(product?._id)}
@@ -303,7 +303,7 @@ const RecentViewCard = ({
               ) : (
                 <>
                   <CiBookmark
-                    color="#A92449" // Change stroke color on click
+                    color="#109989" // Change stroke color on click
                     className="group-hover:text-white cursor-pointer z-50"
                     size={25}
                     onClick={() => addToWishlist(product?._id)}
@@ -352,7 +352,7 @@ const RecentViewCard = ({
             )}
           </div> */}
         </div>
-        {/* <p className="text-sm text-gray-600 mb-2">{product.description}</p> */}
+        {/* <p className="text-sm text-brown mb-2">{product.description}</p> */}
         {/* <div className="flex items-center justify-between space-x-3 mt-2 ">
           <Button
             disabled={loadingCartButton}

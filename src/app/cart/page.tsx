@@ -313,7 +313,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-cream min-h-screen">
       <head>
         <title>My Cart | Hubeco</title>
         {/* <meta name="description" content='' />
@@ -369,12 +369,12 @@ const Cart = () => {
       {/* Main Content */}
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-black">My Cart</h1>
+          <h1 className="text-3xl font-bold text-brown">My Cart</h1>
           {cartData && cartData.length > 0 ? (
             <CustomButton
               title={"Clear Cart"}
               className={
-                "lg:px-2 bg-secondary hover:bg-secondary md:w-32 w-32 md:p-md p-0.5 h-8 md:h-12 justify-around items-center font-semibold text-tiny md:text-sm text-white pl-5"
+                "lg:px-2 bg-primary hover:bg-primary md:w-32 w-32 md:p-md p-0.5 h-8 md:h-12 justify-around items-center font-semibold text-tiny md:text-sm text-white pl-5"
               }
               hoverBgColor="#439787" // Hover background color
               hoverColor="#ffffff" // Hover text color
@@ -429,21 +429,21 @@ const Cart = () => {
             {cartData && cartData.length > 0 ? (
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2">
-                  <div className="bg-white shadow rounded-lg p-4 sm:py-6 sm:px-4 max-w-2/3">
+                  <div className="bg-cream shadow rounded-lg p-4 sm:py-6 sm:px-4 max-w-2/3 border border-primary">
                     <div className="sm:block">
                       <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                          <thead className="bg-[#F4F4F4]">
+                          <thead className="bg-cream ">
                             <tr className="border-b">
-                              <th className="py-4 pl-2 pr-4 max-w-[45%]">
+                              <th className="text-brown py-4 pl-2 pr-4 max-w-[45%]">
                                 Product
                               </th>
-                              <th className="py-4 px-4 max-w-1/6">
+                              <th className="text-brown py-4 px-4 max-w-1/6">
                                 Unit Price
                               </th>
-                              <th className="py-4 px-4 max-w-1/6">Quantity</th>
-                              <th className="py-4 px-4 max-w-1/6">Total</th>
-                              <th className="py-4 max-w-1/6"></th>
+                              <th className="text-brown py-4 px-4 max-w-1/6">Quantity</th>
+                              <th className="text-brown py-4 px-4 max-w-1/6">Total</th>
+                              <th className="text-brown py-4 max-w-1/6"></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -485,12 +485,12 @@ const Cart = () => {
                 </div>
 
                 <div>
-                  <div className="bg-white shadow rounded-lg p-6">
+                  <div className="bg-cream border border-primary shadow rounded-lg p-6">
                     <div
-                      className="flex justify-between bg-[#F4F4F4] items-center py-3 px-4 cursor-pointer"
+                      className="flex justify-between bg-cream border border-primary items-center py-3 px-4 cursor-pointer"
                       onClick={() => setOpenShipping(!openShipping)}
                     >
-                      <h2 className="flex justify-between items-center font-semibold text-lg">
+                      <h2 className="text-brown flex justify-between items-center font-semibold text-lg">
                         Calculate Shipping
                       </h2>
                       <div className="transition-all duration-300">
@@ -516,7 +516,7 @@ const Cart = () => {
                                 className="form-radio h-4 w-4 text-indigo-600 accent-[#B90647]"
                               />
 
-                              <p className="text-sm text-gray-700 ">
+                              <p className="text-sm text-brown ">
                                 {address?.address}, {address?.city},{" "}
                                 {address?.state}, {address?.country},{" "}
                                 {address?.postCode}
@@ -525,7 +525,7 @@ const Cart = () => {
                           ))
                         ) : (
                           <>
-                            <p className="text-[14px] text-black">
+                            <p className="text-[14px] text-brown">
                               No addresses available.
                               <span
                                 className="text-[14px] text-secondary hover:underline font-medium cursor-pointer"
@@ -568,11 +568,11 @@ const Cart = () => {
                     ) : (
                       <>
                         <div className="p-4 border-t-2">
-                          <div className="flex justify-between items-center mb-4">
+                          <div className="text-brown flex justify-between items-center mb-4">
                             <p>Subtotal </p>
                             {Number(cost?.price - cost?.taxes) ? (
-                              <p className="text-black font-regular text-md">
-                                <span className="text-black text-lg font-normal font-mono mr-[5px]">
+                              <p className="text-brown font-regular text-md">
+                                <span className="text-brown text-lg font-normal font-mono mr-[5px]">
   {/* Content here */}
 
 
@@ -588,12 +588,12 @@ const Cart = () => {
                             )}
                           </div>
                           {cost?.discount > 0 && (
-                            <div className="flex justify-between items-center mb-4">
+                            <div className="text-brown flex justify-between items-center mb-4">
                               <p>Discount</p>
                               <p className="text-[#009886] font-regular text-md">
                                 -{" "}
                                 <span
-                                  className="text-black text-lg font-normal font-mono mr-[5px]"
+                                  className="text-brown text-lg font-normal font-mono mr-[5px]"
 
                                 >
                                   {" "}
@@ -611,7 +611,7 @@ const Cart = () => {
                                 cost?.deliveryCharges > 0 ? (
                                   <span className="">
                                     <span
-                                     className="text-black text-lg font-normal font-mono mr-[5px]"
+                                     className="text-brown text-lg font-normal font-mono mr-[5px]"
                                     >
                                       ₹
                                     </span>
@@ -623,7 +623,7 @@ const Cart = () => {
                                   <span className="text-[#009886]">Free</span>
                                 )
                               ) : (
-                                <span className="text-gray-500">Not Available</span>
+                                <span className="text-brown">Not Available</span>
                               )}
                             </p>
                           </div>
@@ -632,9 +632,9 @@ const Cart = () => {
                             {Number(cost?.taxes) ? (
                               <p>
                                 {cost?.taxes > 0 ? (
-                                  <span className="text-black font-regular text-md">
+                                  <span className="text-brown font-regular text-md">
                                     <span
-                                      className="text-black text-lg font-normal font-mono mr-[5px]"
+                                      className="text-brown text-lg font-normal font-mono mr-[5px]"
 
                                     >
                                       ₹
@@ -653,16 +653,16 @@ const Cart = () => {
                           </div>
                         </div>
                         <div>
-                          <div className="flex justify-between items-center font-semibold text-lg mt-0 py-3 px-4 bg-secondaryBg ">
+                          <div className="flex justify-between items-center font-semibold text-lg mt-0 py-3 px-4 bg-cream border border-primary">
                             <p>Total</p>
-                            <p className="text-black font-semibold text-md">
+                            <p className="text-brown font-semibold text-md">
                               {summaryLoading ? (
                                 <Skeleton className="h-[10px] w-[180px] mb-4" />
                               ) : (
                                 <>
                                   {" "}
                                   <span
-                                   className="text-black text-lg font-normal font-mono mr-[5px]"
+                                   className="text-brown text-lg font-normal font-mono mr-[5px]"
 
                                   >
                                     ₹
@@ -673,11 +673,11 @@ const Cart = () => {
                             </p>
                           </div>
                           {cost?.roundedValue !== 0 && (
-                            <p className="text-black w-full text-start px-2 text-xs font-regular">
+                            <p className="text-brown w-full text-start px-2 text-xs font-regular">
                               {" "}
                               Amount rounded off to{" "}
                               <span
-                                className="text-black text-xs font-normal font-mono mr-0"
+                                className="text-brown text-xs font-normal font-mono mr-0"
 
                               >
                                 ₹
@@ -696,7 +696,7 @@ const Cart = () => {
                     <div className="mt-6">
                       <label
                         htmlFor="remarks"
-                        className="block text-gray-700 text-sm font-medium mb-2"
+                        className="block text-brown text-sm font-medium mb-2"
                       >
                         Order Instructions
                       </label>
@@ -705,8 +705,9 @@ const Cart = () => {
                         isTextArea={true}
                         customStyles={{
                           borderRadius: "5px",
-                          border: "1px solid #ccc",
+                      
                           color: "black",
+                          backgroundColor: "#FFFEF8"
                         }}
                         onChange={(e: any) => {
                           setCookie("CheckoutReason", e);
@@ -729,7 +730,7 @@ const Cart = () => {
 
                     {/* Checkout Button */}
                     <div className="mt-6">
-                      <p className="text-sm text-gray-500 mb-4 my-3">
+                      <p className="text-sm text-brown mb-4 my-3">
                         Price includes tax.
                         <span className="text-[#009886]">
                           {" "}
@@ -746,7 +747,7 @@ const Cart = () => {
                         onClick={handleOnClickCheckout}
                         className={`${
                           enableCheckout ? "opacity-100" : "opacity-50"
-                        } my-3 bg-secondary hover:bg-primary   h-12 md:h-12 md:w-full w-full md:text-md text-sm text-white`}
+                        } my-3 bg-primary hover:bg-primary   h-12 md:h-12 md:w-full w-full md:text-md text-sm text-white`}
                       >
                         Checkout
                       </Button>

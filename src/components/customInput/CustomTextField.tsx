@@ -18,7 +18,7 @@ interface CustomInputProps {
   outlineStyle?: React.CSSProperties;
   secureTextEntry?: boolean;
   keyboardType?: string;
-  onEndEditing?: (data:any) => void;
+  onEndEditing?: (data: any) => void;
   errorStyle?: React.CSSProperties;
   editable?: boolean;
   focus?: () => void;
@@ -33,7 +33,7 @@ interface CustomInputProps {
   isMobileInput?: boolean;
   inputClassNames?: string;
   iconStyles?: React.CSSProperties;
-  type?:string,
+  type?: string,
   required?: boolean;
 }
 
@@ -115,11 +115,11 @@ const CustomInput: React.FC<CustomInputProps> = ({
         )}
         {isTextArea ? (
           <textarea
-            className={`py-2 h-full w-full focus:outline-none bg-gray-100 rounded-lg text-inputColor ${
-              isFocused ? "bg-white" : ""
-            } ${disabled ? "bg-gray-200" : ""} ${inputClassNames} placeholder-custom`}
+            className={`py-2 h-full w-full focus:outline-none bg-cream rounded-lg text-inputColor border border-primary rounded-md
+            ${disabled ? "opacity-50" : ""} 
+            ${inputClassNames} placeholder-custom`}
             placeholder={placeholder}
-            value={inputValue?inputValue:''}
+            value={inputValue ? inputValue : ''}
             onChange={handleInputChange}
             onFocus={() => {
               setIsFocused(true);
@@ -143,12 +143,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
           />
         ) : (
           <input
-            className={` py-2 w-full h-full focus:outline-none text-inputColor  ${
-              isFocused ? "bg-white" : ""
-            } ${disabled ? "opacity-50 " : ""} ${inputClassNames} placeholder-custom`}
+            className={`py-2 w-full h-full focus:outline-none text-inputColor border border-primary rounded-md
+            bg-cream focus:bg-cream
+            ${disabled ? "opacity-50" : ""} 
+            ${inputClassNames} placeholder-custom`}
+
             type={showPassword ? 'text' : type}
             placeholder={placeholder}
-            value={inputValue?inputValue:''}
+            value={inputValue ? inputValue : ''}
             onChange={handleInputChange}
             required={required}
             onFocus={() => {
@@ -172,22 +174,22 @@ const CustomInput: React.FC<CustomInputProps> = ({
             readOnly={!editable}
           />
         )}
-       
+
       </div>
       {type === 'password' ? (
         <span
           onClick={handleTogglePassword}
-          className={`absolute right-3 ${errorMessage ?'top-1/3':'top-1/2'} transform -translate-y-1/2 cursor-pointer text-black`}
+          className={`absolute right-3 ${errorMessage ? 'top-1/3' : 'top-1/2'} transform -translate-y-1/2 cursor-pointer text-brown`}
         >
-          {showPassword ? <FaEyeSlash  className={'text-black w-4 h-4'} /> : <FaEye className={'text-black w-4 h-4 text-black'} />}
+          {showPassword ? <FaEyeSlash className={'text-brown w-4 h-4'} /> : <FaEye className={'text-brown w-4 h-4 text-brown'} />}
         </span>
-      ):(
+      ) : (
         <></>
       )}
-    
+
       {rightIcon && (
         <span
-          className={`absolute z-10  ${errorMessage ? 'top-1/3':'top-1/2'} transform -translate-y-1/2 ${iconClassnames}`}
+          className={`absolute z-10  ${errorMessage ? 'top-1/3' : 'top-1/2'} transform -translate-y-1/2 ${iconClassnames}`}
           style={{ ...iconStyles }}
         >
           {rightIcon}
@@ -196,8 +198,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
       {errorMessage && (
         <p
           className="w-full text-sm mt-1 text-left"
-          style={{ ...errorStyle,color:'#d22525'}}
-        > 
+          style={{ ...errorStyle, color: '#d22525' }}
+        >
           {errorMessage}
         </p>
       )}

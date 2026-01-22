@@ -159,20 +159,20 @@
 //         >
 //           <a
 //             href="/"
-//             className="text-white flex items-center "
+//             className="text-cream flex items-center "
 //             className={{
 //               textDecoration: "none",
 //               padding: "5px 10px",
 //               borderRadius: "5px",
 //             }}
 //           >
-//             <AiFillHome size={16} className="text-white mr-1.5" />
+//             <AiFillHome size={16} className="text-cream mr-1.5" />
 //             Home
 //           </a>
-//           <span className="text-white mx-2">/</span>
+//           <span className="text-cream mx-2">/</span>
 //           <a
 //             href="#"
-//             className="text-white"
+//             className="text-cream"
 //             className={{
 //               textDecoration: "none",
 //               padding: "5px 10px",
@@ -183,7 +183,7 @@
 //           </a>
 //         </div>
 //         {/* <div className="bg-secondaryBg w-full"> */}
-//           {/* <div className={{height:h}} className="py-12 px-4 lg:px-20 mx-auto max-w-[100%] pt-12 text-sm font-normal text-black tracking-wide leading-8"> */}
+//           {/* <div className={{height:h}} className="py-12 px-4 lg:px-20 mx-auto max-w-[100%] pt-12 text-sm font-normal text-brown tracking-wide leading-8"> */}
 //             {/* {privacyPolicy ? (
 //               <div className={{  }} className="h-full">
 
@@ -194,7 +194,7 @@
 //             ) : (
 //               <CircularProgress isIndeterminate color="#A92449"  />
 //             )} */}
-//             <div className={`w-full flex justify-center items-center mx-auto max-w-[100%]  text-sm  text-black  leading-8 `} >
+//             <div className={`w-full flex justify-center items-center mx-auto max-w-[100%]  text-sm  text-brown  leading-8 `} >
 //         <Worker
 
 //           workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}
@@ -221,36 +221,36 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       <head>
         <title>Terms of Use | Hubeco</title>
       </head>
       {/* <Header /> */}
       <div className="banner-section h-[100%]">
         <div
-          className="md:px-20 px-10 relative bg-cover bg-center h-[200px] flex items-center justify-start text-white"
+          className="md:px-20 px-10 relative bg-cover bg-center h-[200px] flex items-center justify-start text-cream"
           style={{
             backgroundImage: 'url("images/about/aboutBanner1.webp")',
           }}
         >
           <Link
             href="/"
-            className="text-white flex items-center no-underline px-2.5 py-1.5 rounded"
+            className="text-cream flex items-center no-underline px-2.5 py-1.5 rounded"
           >
-            <AiFillHome size={16} className="text-white mr-1.5" />
+            <AiFillHome size={16} className="text-cream mr-1.5" />
             Home
           </Link>
-          <span className="text-white mx-2">/</span>
+          <span className="text-cream mx-2">/</span>
           <Link
             href="#"
-            className="text-white no-underline px-2.5 py-1.5 rounded"
+            className="text-cream no-underline px-2.5 py-1.5 rounded"
           >
             Terms of Use
           </Link>
         </div>
 
         <div
-          className={`w-full flex justify-center items-center mx-auto max-w-[100%]  text-sm  text-black  leading-8 `}
+          className={`w-full flex justify-center items-center mx-auto max-w-[100%]  text-sm  text-brown  leading-8 `}
         >
           <div className="p-10 leading-loose text-justify">
             <p

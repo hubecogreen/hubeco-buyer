@@ -20,7 +20,7 @@ function page({ params }: { params: { slug: string } }) {
 
  // // console.log(token, 'tokentoken')
   return (
-    <div className="bg-white ">
+    <div className="bg-cream ">
       <head>
         <title>Set Password | Hubeco</title>
         {/* <meta name="description" content='' />

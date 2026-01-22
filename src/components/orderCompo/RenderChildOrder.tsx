@@ -10,7 +10,7 @@ import RenderButton from "./RenderButton";
 import { normalizePath } from "@/lib/utils";
 
 const statusInfo = {
-  pending: { label: "Pending", color: "text-gray-500" },
+  pending: { label: "Pending", color: "text-brown" },
   payment_success: { label: "Payment Success", color: "text-green-500" },
   payment_failed: { label: "Payment Failed", color: "text-red-500" },
   confirmed: { label: "Confirmed", color: "text-emerald-500" },
@@ -18,7 +18,7 @@ const statusInfo = {
   on_hold: { label: "On Hold", color: "text-yellow-500" },
   shipped: { label: "Shipped", color: "text-blue-400" },
   delivered: { label: "Delivered", color: "text-green-600" },
-  cancelled: { label: "Cancelled", color: "text-gray-400" },
+  cancelled: { label: "Cancelled", color: "text-brown" },
   return_requested: { label: "Return Requested", color: "text-orange-500" },
   return_rejected: { label: "Return Rejected", color: "text-red-500" },
   return_product_received: {
@@ -67,7 +67,7 @@ const RenderChildOrder = (order: any, orderLength: any) => {
   const status = order?.order?.status as any;
   const { label, color } = statusInfo[status] || {
     label: status,
-    color: "text-gray-500",
+    color: "text-brown",
   };
 
   const calculateShippingDate = (numberOfDays: any) => {
@@ -80,14 +80,14 @@ const RenderChildOrder = (order: any, orderLength: any) => {
   const renderInfo = (data: any) => {
     if (data?.status === "payment_success" && data.shippingInDays) {
       return (
-        <p className="text-sm text-black my-2 text-center w-full capitalize">
+        <p className="text-sm text-brown my-2 text-center w-full capitalize">
           Expected Shipping by {calculateShippingDate(data?.shippingInDays)}
         </p>
       );
     }
     if (data?.status === "shipped" && data?.shippingInfo) {
       return (
-        <p className="text-sm text-black my-2 text-center w-full capitalize">
+        <p className="text-sm text-brown my-2 text-center w-full capitalize">
           {data?.shippingInfo} on {dayjs(data?.updatedAt).format("DD MMM YYYY")}
         </p>
       );
@@ -135,7 +135,7 @@ const RenderChildOrder = (order: any, orderLength: any) => {
           >
             {order?.order?.orderId}
           </p>
-          <p className="text-base text-black font-semibold w-full">
+          <p className="text-base text-brown font-semibold w-full">
             {order?.order?.item?.productName}
           </p>
         </div>
@@ -144,11 +144,11 @@ const RenderChildOrder = (order: any, orderLength: any) => {
       {/* Price Section */}
       <div className="flex flex-col w-full sm:w-[30%] justify-center items-start sm:items-center mt-4 sm:mt-0">
         {!order?.order?.isRFQOrder && (
-          <p className="text-xl text-black font-semibold">
+          <p className="text-xl text-brown font-semibold">
             ₹ {order?.order?.item?.totalPrice.toLocaleString("en-IN")} /-
           </p>
         )}
-        <p className="text-sm text-fontGray mt-2">
+        <p className="text-sm text-brown mt-2">
           Quantity: {order?.order?.item?.quantity}
         </p>
       </div>

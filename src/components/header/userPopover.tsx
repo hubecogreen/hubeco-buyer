@@ -40,25 +40,34 @@ const UserPopover: React.FC<UserPopoverProps> = ({
   const {callApi}=useApi()
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL
 
-const isClient = useClient()
+  const isClient = useClient()
 
+  // Fixed: Use 'click' event instead of 'mousedown' to allow menu items to be clicked first
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
-        onClose();  // Close the popover if clicking outside of it
+        onClose();
       }
     };
 
     if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+      // Use 'click' instead of 'mousedown' - click fires AFTER mousedown and mouseup
+      // This allows the menu item click to complete before closing
+      document.addEventListener("click", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
+
+  // Handle navigation
+  const handleNavigation = (path: string) => {
+    router.push(path);
+    onClose();
+  };
 
   const Logout = async () => {
     const res = (await callApi('auth/logout', 'POST')) as any;
@@ -111,8 +120,8 @@ const isClient = useClient()
 
 
   return (
-    <div ref={popoverRef} className={`${styles.popover} ${token?'md:right-[50px] mobile-sm:right-[10px] ':'md:right-[150px] mobile-sm:right-[10px]'} `}>
-      <div className={styles.popoverContent}>
+    <div ref={popoverRef} className={`${styles.popover} ${token?'md:right-[170px] mobile-sm:right-[10px] ':'md:right-[150px] mobile-sm:right-[10px]'} `}>
+      <div className={`${styles.popoverContent} bg-cream`}>
         {token ? (
           <>
           {buyerInfo?.firstName + buyerInfo?.lastName ?
@@ -132,7 +141,7 @@ const isClient = useClient()
 
               
 
-              <div className="ml-3">
+              <div className="ml-3 ">
                 <p className={styles.userName}>{(userInfo?.firstName + userInfo?.lastName).length>20?(userInfo?.firstName + userInfo?.lastName).substring(0,20):userInfo?.firstName + userInfo?.lastName}</p>
                 <p className={styles.userEmail}>{userInfo?.email}</p>
               </div>
@@ -140,48 +149,54 @@ const isClient = useClient()
             <div className={styles.separator}></div></>
             : null}
             <ul className={styles.menu}>
-              <li className="flex items-center justify-start cursor-pointer">
-                <FaRegUser color="#000" />
-                <Link href="/profile?tab=profile" className="ml-2">
-                  My Profile
-                </Link>
+              <li 
+                className="flex items-center justify-start cursor-pointer" 
+                onClick={() => handleNavigation('/profile?tab=profile')}
+              >
+                <FaRegUser color="#3d3529" />
+                <span className="ml-2 text-brown">My Profile</span>
               </li>
-              <li className="flex items-center justify-start cursor-pointer">
-                <CgShoppingBag color="#000" />
-                <Link href="/orders" className="ml-2">
-                  Orders
-                </Link>
+              <li 
+                className="flex items-center justify-start cursor-pointer" 
+                onClick={() => handleNavigation('/orders')}
+              >
+                <CgShoppingBag color="#3d3529" />
+                <span className="ml-2 text-brown">Orders</span>
               </li>
-              <li className="flex items-center justify-start cursor-pointer">
-                <FiFileText color="#000"/>
-                <Link href="/quote-request" className="ml-2">
-                  Quote Requests
-                </Link>
+              <li 
+                className="flex items-center justify-start cursor-pointer" 
+                onClick={() => handleNavigation('/quote-request')}
+              >
+                <FiFileText color="#3d3529" />
+                <span className="ml-2 text-brown">Quote Requests</span>
               </li>
-              <li className="flex items-center justify-start cursor-pointer">
-                <BsCardChecklist color="#000" />
-                <Link href="/subscriptions" className="ml-2">
-                  Subscriptions
-                </Link>
+              <li 
+                className="flex items-center justify-start cursor-pointer" 
+                onClick={() => handleNavigation('/subscriptions')}
+              >
+                <BsCardChecklist color="#3d3529" />
+                <span className="ml-2 text-brown">Subscriptions</span>
               </li>
-              <li className="flex items-center justify-start cursor-pointer">
-                <TbCubePlus color="#000" />
-                <Link href="/wishlist" className="ml-2">
-                  Wishlist
-                </Link>
+              <li 
+                className="flex items-center justify-start cursor-pointer" 
+                onClick={() => handleNavigation('/wishlist')}
+              >
+                <TbCubePlus color="#3d3529" />
+                <span className="ml-2 text-brown">Wishlist</span>
               </li>
-              <li className="flex items-center justify-start cursor-pointer">
-              <GrTicket color="#000" />
-                <Link href="/tickets" className="ml-2">
-                  Tickets Raised
-                </Link>
+              <li 
+                className="flex items-center justify-start cursor-pointer" 
+                onClick={() => handleNavigation('/tickets')}
+              >
+                <GrTicket color="#3d3529" />
+                <span className="ml-2 text-brown">Tickets Raised</span>
               </li>
               <li onClick={Logout} className="flex items-center justify-start cursor-pointer">
-              
-                <AiOutlineLogout color="#000" />
-                <Link href="/logout" className="ml-2">
+
+                <AiOutlineLogout color="#3d3529" />
+                <span className="ml-2 text-brown">
                   Logout
-                </Link>
+                </span>
               </li>
             </ul>
           </>
@@ -196,7 +211,7 @@ const isClient = useClient()
                 onPress={() => router.push("/login")}
               />
               <div className="flex mx-auto w-11/12 justify-between mt-4 items-center">
-                <p className="text-black text-semibold text-sm">New Customer?</p>
+                <p className="text-brown text-semibold text-sm">New Customer?</p>
                 <Link href='/login' className="text-secondary hover:cursor-pointer text-bold text-sm">Sign Up</Link>
               </div>
             </div>

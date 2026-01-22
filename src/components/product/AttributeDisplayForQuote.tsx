@@ -97,7 +97,7 @@ const AttributeDisplayForQuote = ({
 
         return (
           <div key={attributeName} className="mb-3">
-            <p className="text-md text-fontGray text-normal mb-2 capitalize">
+            <p className="text-md text-brown text-normal mb-2 capitalize">
               {attributeName}
             </p>
             <Select
@@ -110,7 +110,7 @@ const AttributeDisplayForQuote = ({
                   className={`text-sm ${
                     selectedAttributes[attributeName]
                       ? "text-secondary"
-                      : "text-fontGray"
+                      : "text-brown"
                   }`}
                 />
               </SelectTrigger>
@@ -133,14 +133,14 @@ const AttributeDisplayForQuote = ({
                       className={`text-sm ${
                         selectedAttributes[attributeName] === value
                           ? "text-secondary bg-gray-200 hover:bg-gray-200 hover:text-secondary focus:bg-gray-200 focus:text-secondary"
-                          : "text-black"
+                          : "text-brown"
                       }`}
                     >
                       {value}
                     </SelectItem>
                   ))
                 ) : (
-                  <p className="text-sm text-gray-400 pl-3">No results found</p>
+                  <p className="text-sm text-brown pl-3">No results found</p>
                 )}
               </SelectContent>
             </Select>

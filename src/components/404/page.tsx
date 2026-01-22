@@ -9,8 +9,8 @@ const Lottie = dynamic(() => import('lottie-react'), {
 
 const Custom404: React.FC = () => {
   return (
-    <div className="bg-white">
-      <div className="flex items-center flex-col text-center bg-white">
+    <div className="bg-cream">
+      <div className="flex items-center flex-col text-center bg-cream">
         <Lottie
           animationData={animationData}
           loop={true}
@@ -18,10 +18,10 @@ const Custom404: React.FC = () => {
         />
 
         <div className="flex flex-col gap-2 w-[90vw] sm:w-auto mb-6">
-          <h2 className="text-4xl text-gray-800 font-semibold">
+          <h2 className="text-4xl text-brown font-semibold">
             Page Not Found ⚠️
           </h2>
-          <p className="text-gray-700">
+          <p className="text-brown">
             We couldn&#39;t find the page you are looking for.
           </p>
         </div>

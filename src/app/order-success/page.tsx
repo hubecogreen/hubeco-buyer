@@ -104,14 +104,14 @@ const PaymentSuccessful = () => {
           <h4 className="font-bold text-primary mb-4 md:text-3xl text-xl">
           {!isPendingScreen?"Thank you for your order!":"Thank you for you order!"}
           </h4>
-          <p className="text-gray-600 max-w-[480px] mx-auto">
+          <p className="text-brown max-w-[480px] mx-auto">
            { !isPendingScreen ?"We appreciate your purchase! Your order has been successfully placed and is now being processed.":"Thank you for your purchase! Your order has been successfully placed, and payment is being processed. You’ll receive an email update shortly."}
           </p>
         </div>
 
         <div className=" max-w-[280px] mx-auto my-4">
           <div className="mb-2 flex  items-center max-w-[280px]">
-            <p className="text-black font-medium text-md text-left w-[150px]">
+            <p className="text-brown font-medium text-md text-left w-[150px]">
               Order ID
             </p>
             <p className="text-primary font-medium text-md text-left  w-[150px] flex justify-start items-center">
@@ -120,7 +120,7 @@ const PaymentSuccessful = () => {
             </p>
           </div>
           <div className="mb-2 flex  items-center max-w-[280px]">
-            <p className="text-black font-medium text-md text-left w-[150px]">
+            <p className="text-brown font-medium text-md text-left w-[150px]">
               Total Amount
             </p>
             <p className="text-primary font-medium text-md text-left flex items-center  w-[150px]">

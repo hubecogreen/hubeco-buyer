@@ -152,11 +152,11 @@
 //                                 </span>
 //                               )}
 //                             </p>
-//                             <p className="text-xl text-black font-semibold w-full">
+//                             <p className="text-xl text-brown font-semibold w-full">
 //                               {order?.item?.productName}
 //                             </p>
-//                             <p className="text-sm text-fontGray font-regular flex justify-start items-center mt-2">
-//                               <IoCalendarOutline className="mr-2 text-fontGray" />
+//                             <p className="text-sm text-brown font-regular flex justify-start items-center mt-2">
+//                               <IoCalendarOutline className="mr-2 text-brown" />
 
 //                               {dayjs(order?.order?.createdAt).format(
 //                                 "DD MMMM YYYY"
@@ -165,9 +165,9 @@
 //                           </div>
 //                         </div>
 //                         <div className="flex flex-col justify-center items-center w-[20%]">
-//                           <p className="text-xl text-black font-semibold">
+//                           <p className="text-xl text-brown font-semibold">
 //                             <span
-//                               className="text-black text-xl"
+//                               className="text-brown text-xl"
 //                               
 //                             >
 //                               {" "}
@@ -175,7 +175,7 @@
 //                             </span>{" "}
 //                             {order?.item?.totalPrice} /-
 //                           </p>
-//                           <p className="text-sm text-fontGray font-regular flex justify-start items-center mt-2">
+//                           <p className="text-sm text-brown font-regular flex justify-start items-center mt-2">
 //                             Quantity : {order?.item?.quantity}
 //                           </p>
 //                           <div className="mt-2 w-full"></div>
@@ -183,12 +183,12 @@
 //                       </div>
 //                 <div className="grid grid-cols-2 gap-3 md:flex md:flex-row md:justify-between md:items-start p-3 mb-6">
 //                   <div className="w-[50%]">
-//                     <p className="text-md text-black font-semibold mb-2">
+//                     <p className="text-md text-brown font-semibold mb-2">
 //                       Delivery To
 //                     </p>
 //                     <div className="flex flex-col justify-start items-center">
-//                       <p className="text-[14px] text-black font-regular mb-2">
-//                         <span className="text-[14px] text-black font-semibold">
+//                       <p className="text-[14px] text-brown font-regular mb-2">
+//                         <span className="text-[14px] text-brown font-semibold">
 //                           {" "}
 //                           {orderData?.name}
 //                         </span>
@@ -197,7 +197,7 @@
 //                           ? orderData?.cartId?.actualAddress
 //                           : orderData?.shippingAddress}
 //                       </p>
-//                       <p className="text-[14px] text-black font-regular flex justify-start items-center mt-2 w-full">
+//                       <p className="text-[14px] text-brown font-regular flex justify-start items-center mt-2 w-full">
 //                         <FiPhoneCall
 //                           size={15}
 //                           className="text-secondary mr-3"
@@ -205,7 +205,7 @@
 //                         {orderData?.phoneNumber}
 //                       </p>
 //                       {orderData?.alternateNumber && (
-//                         <p className="text-[14px] text-black font-regular flex justify-start items-center mt-2 w-full">
+//                         <p className="text-[14px] text-brown font-regular flex justify-start items-center mt-2 w-full">
 //                           <FiPhoneCall
 //                             size={15}
 //                             className="text-secondary mr-3 "
@@ -216,14 +216,14 @@
 //                     </div>
 //                   </div>
 //                   <div className="w-[40%]">
-//                     <p className="text-md text-black font-semibold  mb-2">
+//                     <p className="text-md text-brown font-semibold  mb-2">
 //                       Cost Summary
 //                     </p>
 //                     <div className="flex justify-between items-center">
-//                       <p className="text-md text-black font-regular">
+//                       <p className="text-md text-brown font-regular">
 //                         SubTotal
 //                       </p>
-//                       <p className="text-md text-black font-regular">
+//                       <p className="text-md text-brown font-regular">
 //
 //                           {" "}
 //                           ₹
@@ -232,12 +232,12 @@
 //                       </p>
 //                     </div>
 //                     <div className="flex justify-between items-center mt-2">
-//                       <p className="text-md text-black font-regular">
+//                       <p className="text-md text-brown font-regular">
 //                         Delivery Charges
 //                       </p>
-//                       <p className="text-md text-black font-regular">
+//                       <p className="text-md text-brown font-regular">
 //                         <span
-//                           className="text-black text-lg"
+//                           className="text-brown text-lg"
 //                           style={{ fontWeight: "400", fontFamily: "monospace" }}
 //                         >
 //                           {" "}
@@ -247,7 +247,7 @@
 //                       </p>
 //                     </div>
 //                     <div className="flex justify-between items-center mt-2">
-//                       <p className="text-md text-black font-regular">Total</p>
+//                       <p className="text-md text-brown font-regular">Total</p>
 //                       <p className="text-md text-secondary font-semibold ">
 //                         <span
 //                           className="text-secondary text-lg"
@@ -262,17 +262,17 @@
 //                   </div>
 //                 </div>
 //                 <div className="w-full my-4 p-3">
-//                   <p className="text-md text-black font-semibold">
+//                   <p className="text-md text-brown font-semibold">
 //                     Order Instructions
 //                   </p>
-//                   <p className="text-md text-black font-regular">
+//                   <p className="text-md text-brown font-regular">
 //                     {orderData?.cartId?.orderInstructions}
 //                   </p>
 //                 </div>
 //               </div>
 //             </div>
 //             <div className="w-full p-3  border border-borderGray shadow-md">
-//               <p className="text-lg text-black font-semibold pl-3 mb-3">
+//               <p className="text-lg text-brown font-semibold pl-3 mb-3">
 //                 Shipping Activity
 //               </p>
 //               <OrderTimeline
@@ -411,7 +411,7 @@ export default function Page({ params }: any) {
         <title>Order Support</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <div className="category-section py-7 mx-auto pb-10 lg:px-24 md:px-12 px-2">
+      <div className="bg-cream category-section py-7 mx-auto pb-10 lg:px-24 md:px-12 px-2">
         <div className="flex justify-between">
           <h1 className="text-3xl font-bold py-5 mx-8 text-center md:text-left">
             Chat with us now
@@ -439,9 +439,9 @@ export default function Page({ params }: any) {
             />
             {/* <RefundNotification /> */}
           </div>
-          <div className="flex flex-col gap-1 md:mt-3 border border-borderGray">
+          <div className="flex flex-col gap-1 md:mt-3 border border-primary">
             <div className="w-full shadow-md border border-borderGray">
-              <div className="md:flex  block justify-between bg-secondaryBg">
+              <div className="md:flex  block justify-between bg-cream">
                 <div className="md:flex block md:justify-start justify-center items-center md:w-[80%] w-full">
                   <div
                     className="min-w-[160px] md:flex block md:justify-start justify-center ml-[6rem] md:ml-0 items-center"
@@ -492,11 +492,11 @@ export default function Page({ params }: any) {
                         </span>
                       )}
                     </p>
-                    <p className="text-xl text-black font-semibold w-full flex md:justify-start justify-center">
+                    <p className="text-xl text-brown font-semibold w-full flex md:justify-start justify-center">
                       {orderData?.item?.productName}
                     </p>
-                    <p className="text-sm text-fontGray font-regular flex md:justify-start justify-center items-center mt-2">
-                      <IoCalendarOutline className="mr-2 text-fontGray" />
+                    <p className="text-sm text-brown font-regular flex md:justify-start justify-center items-center mt-2">
+                      <IoCalendarOutline className="mr-2 text-brown" />
                       {dayjs(orderData?.order?.createdAt).format(
                         "DD MMMM YYYY"
                       )}
@@ -504,14 +504,14 @@ export default function Page({ params }: any) {
                   </div>
                 </div>
                 <div className="flex flex-col justify-center items-center md:w-[20%] w-full">
-                  <p className="text-xl text-black font-semibold flex md:justify-start justify-center">
-                  <span className="text-black text-xl font-normal font-mono">
+                  <p className="text-xl text-brown font-semibold flex md:justify-start justify-center">
+                  <span className="text-brown text-xl font-normal font-mono">
 
                       ₹
                     </span>{" "}
                     {formatCurrencyInIndianStyle(orderData?.item?.totalPrice)} /-
                   </p>
-                  <p className="text-sm text-fontGray font-regular flex md:justify-start justify-center items-center mt-2">
+                  <p className="text-sm text-brown font-regular flex md:justify-start justify-center items-center mt-2">
                     Quantity: {orderData?.item?.quantity}
                   </p>
                 </div>
@@ -519,12 +519,12 @@ export default function Page({ params }: any) {
             </div>
             <div className="grid md:grid-cols-2 grid-cols-1 gap-3 md:flex md:justify-between md:items-start p-3 mb-6">
               <div className="md:w-[50%] w-full">
-                <p className="text-md text-black font-semibold mb-2">
+                <p className="text-md text-brown font-semibold mb-2">
                   Delivery To
                 </p>
                 <div className="flex flex-col justify-start items-center">
-                  <p className="text-[14px] text-black font-regular mb-2">
-                    <span className="text-[14px] text-black font-semibold">
+                  <p className="text-[14px] text-brown font-regular mb-2">
+                    <span className="text-[14px] text-brown font-semibold">
                       <ViewMore text={orderData?.name} length={35} />
                     </span>
                     {" "}
@@ -532,12 +532,12 @@ export default function Page({ params }: any) {
                       ? orderData?.cartId?.actualAddress
                       : orderData?.shippingAddress}
                   </p>
-                  <p className="text-[14px] text-black font-regular flex justify-start items-center mt-2 w-full">
+                  <p className="text-[14px] text-brown font-regular flex justify-start items-center mt-2 w-full">
                     <FiPhoneCall size={15} className="text-secondary mr-3" />{" "}
                     {orderData?.phoneNumber}
                   </p>
                   {/* {orderData?.alternateNumber && (
-                    <p className="text-[14px] text-black font-regular flex justify-start items-center mt-2 w-full">
+                    <p className="text-[14px] text-brown font-regular flex justify-start items-center mt-2 w-full">
                       <FiPhoneCall size={15} className="text-secondary mr-3" />{" "}
                       {orderData?.alternateNumber}
                     </p>
@@ -545,13 +545,13 @@ export default function Page({ params }: any) {
                 </div>
               </div>
               <div className="md:w-[40%] w-full">
-                <p className="text-md text-black font-semibold mb-2">
+                <p className="text-md text-brown font-semibold mb-2">
                   Cost Summary
                 </p>
                 <div className="flex justify-between items-center">
-                  <p className="text-md text-black font-regular">SubTotal</p>
-                  <p className="text-md text-black font-regular">
-                  <span className="text-black text-lg font-normal font-mono">
+                  <p className="text-md text-brown font-regular">SubTotal</p>
+                  <p className="text-md text-brown font-regular">
+                  <span className="text-brown text-lg font-normal font-mono">
 
                       ₹
                     </span>{" "}
@@ -559,11 +559,11 @@ export default function Page({ params }: any) {
                   </p>
                 </div>
                 <div className="flex justify-between items-center mt-2">
-                  <p className="text-md text-black font-regular">
+                  <p className="text-md text-brown font-regular">
                     Delivery Charges
                   </p>
-                  <p className="text-md text-black font-regular">
-                  <span className="text-black text-lg font-normal font-mono">
+                  <p className="text-md text-brown font-regular">
+                  <span className="text-brown text-lg font-normal font-mono">
 
                       ₹
                     </span>{" "}
@@ -571,9 +571,9 @@ export default function Page({ params }: any) {
                   </p>
                 </div>
                 <div className="flex justify-between items-center mt-2">
-                  <p className="text-md text-black font-regular">Total Price</p>
-                  <p className="text-md text-black font-regular">
-                  <span className="text-black text-lg font-normal font-mono">
+                  <p className="text-md text-brown font-regular">Total Price</p>
+                  <p className="text-md text-brown font-regular">
+                  <span className="text-brown text-lg font-normal font-mono">
 
                       ₹
                     </span>{" "}
@@ -583,24 +583,24 @@ export default function Page({ params }: any) {
               </div>
             </div>
             <div className="w-full p-3">
-              <p className="text-md text-black font-semibold">
+              <p className="text-md text-brown font-semibold">
                 Order Instructions
               </p>
-              <p className="text-md text-black font-regular">
+              <p className="text-md text-brown font-regular">
                 {orderData?.orderInstructions || "No instructions Provided"}
               </p>
             </div>
             <div className="w-full p-3">
-              <p className="text-md text-black font-semibold pb-2">
+              <p className="text-md text-brown font-semibold pb-2">
                 Ticket Information
               </p>
-              <p className="text-sm text-black font-regular pb-1">
+              <p className="text-sm text-brown font-regular pb-1">
                 <strong>Ticket ID:</strong> {ticketData?.ticketId || "-"}
               </p>
-              <p className="text-sm text-black font-regular pb-1">
+              <p className="text-sm text-brown font-regular pb-1">
                 <strong>Status:</strong> {ticketData?.status?.replace(/_/g, ' ') || "-"}
               </p>
-              <p className="text-sm text-black font-regular pb-1">
+              <p className="text-sm text-brown font-regular pb-1">
                 <strong>Description:</strong> {ticketData?.description || "-"}
               </p>
             </div>
@@ -608,7 +608,7 @@ export default function Page({ params }: any) {
           </div>
           {/* <div className="w-full md:w-[600px] md:ml-[30px] mx-4 my-4">
               <div className="w-full    p-3  border border-borderGray shadow-md">
-                <p className="text-lg text-black font-semibold pl-3 mb-3">
+                <p className="text-lg text-brown font-semibold pl-3 mb-3">
                   Shipping Activity
                 </p>
                 <OrderTimeline

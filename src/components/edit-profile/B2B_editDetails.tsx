@@ -655,7 +655,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
     >
          <div className="flex flex-wrap w-full">
         <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Company Name <span className="text-red">*</span>
           </label>
           <Controller
@@ -670,8 +670,9 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
+                  backgroundColor: "#FFFEF8",
                 }}
                 extraClassnames="custom-input"
                 errorMessage={errors.companyName?.message}
@@ -680,7 +681,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
           />
         </div>
         <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Business Type <span className="text-red">*</span>
           </label>
           <Controller
@@ -729,10 +730,10 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                     : ""
                 }
               >
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full bg-[#FFFEF8] ">
                   <SelectValue placeholder="Select Business Type" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-[#FFFEF8]">
                   <SelectGroup>
                     <SelectItem>Select Business Type</SelectItem>
                     {Array.isArray(businessTypes) &&
@@ -757,7 +758,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
         </div>
         {others ? (
           <div className={"md:w-3/6 w-full p-5 "}>
-            <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+            <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
               Other Business Type<span className="text-red">*</span>
             </label>
             {/* <Controller
@@ -795,8 +796,9 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
               isTextArea={false}
               customStyles={{
                 borderRadius: "5px",
-                border: "1px solid #ccc",
+                
                 color: "black",
+                backgroundColor: "#FFFEF8",
               }}
               extraClassnames="custom-input"
               errorMessage={otherbusinessTypeErr}
@@ -809,7 +811,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
         {/* </div> */}
         {/* <div style={{ display: "flex" }}> */}
         <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             GST <span className="text-red">*</span>
           </label>
           <div className="flex juistify-between items-start">
@@ -828,8 +830,9 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   textInputStyle={{ textTransform: "uppercase" }}
                   customStyles={{
                     borderRadius: "5px",
-                    border: "1px solid #ccc",
+                    
                     color: "black",
+                    backgroundColor: "#FFFEF8",
                   }}
                   extraClassnames="custom-input "
                   errorMessage={errors.gst?.message}
@@ -850,7 +853,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   type="button"
                   color="primary"
                   disabled={!!gstExtractPathUrl}
-                  className="text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
+                  className="bg-cream text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
                 >
 
                 <FiUpload />
@@ -876,9 +879,9 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
             {gstExtractPathUrl.length === 0 ? (
               ""
             ) : (
-              <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
+              <div className="flex items-center justify-between p-2 bg-cream border border-primary rounded">
                 <p
-                  className="truncate text-black text-[14px] w-[300px] mr-[10px]"
+                  className="truncate text-brown text-[14px] w-[300px] mr-[10px]"
 
                 >
                   {gstExtractPathUrl.split("/").pop()}
@@ -917,7 +920,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
           </div>
         </div>
         <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             TAN 
           </label>
           <div className="flex juistify-between items-start">
@@ -934,8 +937,9 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   isTextArea={false}
                   customStyles={{
                     borderRadius: "5px",
-                    border: "1px solid #ccc",
+                    
                     color: "black",
+                    backgroundColor: "#FFFEF8",
                   }}
                   extraClassnames="custom-input"
                   errorMessage={errors.tan?.message}
@@ -956,7 +960,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   type="button"
                   color="primary"
                   disabled={!!tanExtractPathUrl}
-                  className="text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
+                  className="bg-cream text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
                 >
 
                 <FiUpload />
@@ -982,9 +986,9 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
             {tanExtractPathUrl.length === 0 ? (
               ""
             ) : (
-              <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
+              <div className="flex items-center justify-between p-2 bg-cream rounded">
                 <p
-                  className="truncate text-black text-[14px] w-[300px] mr-[10px]"
+                  className="truncate text-brown text-[14px] w-[300px] mr-[10px]"
 
                 >
                   {tanExtractPathUrl.split("/").pop()}
@@ -1026,7 +1030,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
         </div>
         <div className="flex flex-wrap w-full">
         <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             PAN <span className="text-red">*</span>
           </label>
           <div className="flex juistify-between items-start">
@@ -1043,8 +1047,9 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   textInputStyle={{ textTransform: "uppercase" }}
                   customStyles={{
                     borderRadius: "5px",
-                    border: "1px solid #ccc",
+                    
                     color: "black",
+                    backgroundColor: "#FFFEF8", 
                   }}
                   extraClassnames="custom-input"
                   errorMessage={errors.pan?.message}
@@ -1066,7 +1071,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                   type="button"
                   color="primary"
                   disabled={!!panExtractPathUrl}
-                  className="text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
+                  className="bg-cream text-primary border-primary relative opacity-100 cursor-pointer hover:opacity-100 whitespace-nowrap"
                 >
 
                 <FiUpload />
@@ -1092,9 +1097,9 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
             {panExtractPathUrl.length === 0 ? (
               ""
             ) : (
-              <div className="flex items-center justify-between p-2 bg-[#f6f6f6] rounded">
+              <div className="flex items-center justify-between p-2 bg-cream border border-primary rounded">
                 <p
-                  className="truncate text-black text-[14px] w-[300px] mr-[10px]"
+                  className="truncate text-brown text-[14px] w-[300px] mr-[10px]"
 
                 >
                   {panExtractPathUrl.split("/").pop()}
@@ -1136,7 +1141,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
           </div>
         </div>
         <div className={"md:w-3/6 w-full p-5 "}>
-          <label className="block text-gray-700 mb-2 text-black text-base font-medium text-left">
+          <label className="block text-brown mb-2 text-brown text-base font-medium text-left">
             Company Address <span className="text-red">*</span>
           </label>
           <Controller
@@ -1151,8 +1156,9 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
                 isTextArea={false}
                 customStyles={{
                   borderRadius: "5px",
-                  border: "1px solid #ccc",
+                  
                   color: "black",
+                  backgroundColor: "#FFFEF8",
                 }}
                 extraClassnames="custom-input"
                 errorMessage={errors.companyAddress?.message}
@@ -1168,7 +1174,7 @@ const B2B_editDetails: React.FC<CompanyDetailsFormProps> = ({ nextStep }) => {
       <div className="block p-5">
         <CustomButton
           title={"Save"}
-          className="ml-3 bg-secondary hover:bg-primary h-12 md:h-12 md:w-32 w-30 md:text-md text-sm text-white"
+          className="ml-3 bg-primary hover:bg-primary h-12 md:h-12 md:w-32 w-30 md:text-md text-sm text-white"
           customStyles={{}}
           //onPress={onSubmit}
           type="submit"

@@ -145,7 +145,7 @@ const QuoteDetails = ({ id }: any) => {
       {
         statuses: ["pending"],
 
-        textColor: "text-black",
+        textColor: "text-brown",
 
         bgColor: "text-[#fdba74]",
       },
@@ -185,7 +185,7 @@ const QuoteDetails = ({ id }: any) => {
       {
         statuses: ["partial_payment_made"],
 
-        textColor: "text-black",
+        textColor: "text-brown",
 
         bgColor: "text-[#fdba74]",
       },
@@ -210,7 +210,7 @@ const QuoteDetails = ({ id }: any) => {
       },
     ];
 
-    const defaultStyles = { textColor: "text-black", bgColor: "bg-gray-300" };
+    const defaultStyles = { textColor: "text-brown", bgColor: "bg-gray-300" };
 
     // Find the matching style based on the status
 
@@ -369,9 +369,9 @@ const QuoteDetails = ({ id }: any) => {
         }}
       />
 
-      <div className="max-w-[1440px] mx-auto px-[40px] mt-0">
+      <div className="max-w-[1440px] mx-auto px-[40px] mt-0 bg-cream">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 bg-white border-b border-[#E5E7EB] shadow-[0px_1px_2px_0px_#0000000D] px-4 md:px-[40px] py-4 md:py-[20px] w-full max-w-[1440px] mx-auto rounded-none">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center  mb-8  border-b border-primary shadow-[0px_1px_2px_0px_#0000000D] px-4 md:px-[40px] py-4 md:py-[20px] w-full max-w-[1440px] mx-auto rounded-none">
           {/* Left side — Quote ID and Status inline */}
           <div className="flex flex-wrap items-center gap-2 md:gap-3">
             <h1 className="text-lg md:text-[22px] font-bold text-[#2F2B3D] leading-[26px] md:leading-[28px] tracking-[0.2px] break-words">
@@ -418,13 +418,13 @@ const QuoteDetails = ({ id }: any) => {
                 {/* Product Details Card */}
                 <div className="w-full lg:w-auto">
                   <div
-                    className="bg-white border border-[#E5E7EB] rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A] p-5 flex flex-col gap-3 w-full sm:w-[526px] min-h-[424.56px]"
+                    className="bg-cream border border-[#E5E7EB] rounded-[10px] shadow-[0px_2px_4px_0px_#0000001A] p-5 flex flex-col gap-3 w-full sm:w-[526px] min-h-[424.56px]"
                   >
 
                     {initialState.products.map((product: any) => (
                       <div key={product._id} className="flex flex-col gap-3">
                         {/* Product Image */}
-                        <div className="overflow-hidden border border-[#009886]/30 rounded-[10px] w-full h-[219px]">
+                        <div className="overflow-hidden border border-primary rounded-[10px] w-full h-[219px]">
                           <Image
                             src={
                               product.variantId.thumbnail
@@ -460,14 +460,14 @@ const QuoteDetails = ({ id }: any) => {
                         {/* Info Grid */}
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-3 gap-x-4 text-sm text-[#2F2B3D]">
                           <div>
-                            <p className="text-gray-500 font-medium">Quote ID</p>
+                            <p className="text-brown font-medium">Quote ID</p>
                             <p className="font-semibold break-all">
                               {initialState.quoteId}
                             </p>
                           </div>
 
                           <div>
-                            <p className="text-gray-500 font-medium">
+                            <p className="text-brown font-medium">
                               Quote Requested by
                             </p>
                             <p className="font-semibold break-words">
@@ -477,7 +477,7 @@ const QuoteDetails = ({ id }: any) => {
                           </div>
 
                           <div>
-                            <p className="text-gray-500 font-medium">
+                            <p className="text-brown font-medium">
                               Quote Requested on
                             </p>
                             <p className="font-semibold">
@@ -488,7 +488,7 @@ const QuoteDetails = ({ id }: any) => {
                           </div>
 
                           <div>
-                            <p className="text-gray-500 font-medium">
+                            <p className="text-brown font-medium">
                               Quote Created on
                             </p>
                             <p className="font-semibold">
@@ -500,7 +500,7 @@ const QuoteDetails = ({ id }: any) => {
 
                           {/* Dynamic Unit Price fix */}
                           <div>
-                            <p className="text-gray-500 font-medium">
+                            <p className="text-brown font-medium">
                               Unit Price
                             </p>
                             <p className="font-semibold">
@@ -535,7 +535,7 @@ const QuoteDetails = ({ id }: any) => {
 
                           {/* Quantity */}
                           <div>
-                            <p className="text-gray-500 font-medium">Quantity</p>
+                            <p className="text-brown font-medium">Quantity</p>
                             <p className="font-semibold">
                               {(() => {
                                 const quote = initialState?.quotations?.[0];
@@ -565,7 +565,7 @@ const QuoteDetails = ({ id }: any) => {
                 {/* Middle Section: Cost Breakdown */}
                 <div className="flex flex-col gap-5 flex-shrink-0 w-full sm:w-[350px]">
                   <div
-                    className="bg-white rounded-[8px] border border-[#E5E7EB] shadow-[0px_2px_4px_0px_#0000001A] p-[15px] w-full sm:w-[350px] min-h-[424.56px]"
+                    className="bg-cream rounded-[8px] border border-[#E5E7EB] shadow-[0px_2px_4px_0px_#0000001A] p-[15px] w-full sm:w-[350px] min-h-[424.56px]"
                   >
                     {/* --- Cost Breakdown header + Approve/Reject section --- */}
                     <div className="flex items-center justify-between mb-3">
@@ -830,7 +830,8 @@ const QuoteDetails = ({ id }: any) => {
             )}
           </div>
         </div>
-        <div className="w-full overflow-x-auto mt-4">
+        <div className="bg-cream pb-16">
+        <div className="w-full overflow-x-auto mt-4 ">
           <div className="min-w-[600px]">
             {initialState.paymentsSchedule?.length > 0 ? (
               <PaymentSchedule
@@ -843,6 +844,7 @@ const QuoteDetails = ({ id }: any) => {
               </div>
             ) : null}
           </div>
+        </div>
         </div>
 
 
@@ -935,7 +937,7 @@ export default QuoteDetails;
 //         <p className="text-sm font-medium text-blue-600">
 //           Account name
 //         </p>
-//         <p className="font-semibold text-gray-900 text-base">
+//         <p className="font-semibold text-brown text-base">
 //           HUBECO GREEN VENTURES PRIVATE LIMITED
 //         </p>
 //       </div>
@@ -946,7 +948,7 @@ export default QuoteDetails;
 //           <p className="text-sm font-medium text-blue-600">
 //             Account no
 //           </p>
-//           <p className="font-semibold text-gray-900 border-0 ">
+//           <p className="font-semibold text-brown border-0 ">
 //             99909705044055
 //           </p>
 //         </div>
@@ -955,7 +957,7 @@ export default QuoteDetails;
 //           <p className="text-sm font-medium text-blue-600 border-0">
 //             IFSC Code
 //           </p>
-//           <p className="font-semibold text-gray-900 border-0">
+//           <p className="font-semibold text-brown border-0">
 //             HDFC0000317
 //           </p>
 //         </div>

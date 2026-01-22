@@ -136,37 +136,37 @@ const Tickets: React.FC = () => {
         link1={{ name: "Home", href: "/" }}
         link2={{ name: "Tickets", href: "#" }}
       />
-      <div className="min-h-screen bg-white p-4">
+      <div className="min-h-screen bg-cream  p-4">
         <div className="max-w-full mx-auto md:mx-10 mt-10">
           {/* <h1 className="text-xl font-bold text-center mb-4">Tickets</h1> */}
-          <h1 className="text-2xl font-bold mb-4">Tickets</h1>
+          <h1 className="text-2xl font-bold mb-4 text-brown">Tickets</h1>
           {/* Tickets Table */}
-          <div className="bg-gray-50 shadow-md rounded-md overflow-hidden">
+          <div className="bg-gray-50 shadow-md rounded-md ">
             {loading ? (
               <tr>
-                <td colSpan={6} className="text-center py-4">
+                <td colSpan={6} className="text-center py-4 text-brown">
                   Loading...
                 </td>
               </tr>
             ) : tableData.length > 0 ? (
-              <div className="sm:block">
+              <div className="sm:block border border-primary">
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
-                    <thead className="bg-secondaryBg">
+                    <thead className="bg-cream border border-b-primary">
                       <tr>
-                        <th className="py-6 px-4 text-sm font-semibold">
+                        <th className="text-brown py-6 px-4 text-sm font-semibold">
                           Date
                         </th>
-                        <th className="py-2 px-4 text-sm font-semibold">
+                        <th className="text-brown py-2 px-4 text-sm font-semibold">
                           Ticket ID
                         </th>
-                        <th className="py-2 px-4 text-sm font-semibold">
+                        <th className="text-brown py-2 px-4 text-sm font-semibold">
                           Description
                         </th>
-                        <th className="py-2 px-4 text-sm font-semibold">
+                        <th className="text-brown py-2 px-4 text-sm font-semibold">
                           Ticket Type
                         </th>
-                        <th className="py-2 px-4 text-sm font-semibold">
+                        <th className="text-brown py-2 px-4 text-sm font-semibold">
                           Status
                         </th>
                       </tr>
@@ -176,10 +176,10 @@ const Tickets: React.FC = () => {
                       <tbody>
                         {tableData.map((ticket) => (
                           <tr key={ticket.id} className="border-b">
-                            <td className="py-6 px-4 text-sm">
+                            <td className="text-brown py-6 px-4 text-sm">
                               {formatDateTime(ticket.createdAt)}
                             </td>
-                            <td className="py-2 px-4 text-sm">
+                            <td className="text-brown py-2 px-4 text-sm">
                               <div className="flex">
                                 {ticket.ticketId} -
                                 <h6
@@ -197,10 +197,10 @@ const Tickets: React.FC = () => {
                               <ViewMore
                                 text={ticket.description}
                                 length={65}
-                                className="md:w-full "
+                                className="md:w-full text-brown"
                               />
                             </td>
-                            <td className="py-2 px-4 text-sm">
+                            <td className="py-2 px-4 text-sm text-brown">
                               {ticket.ticketType === "QUALITY_INQUIRY"
                                 ? "Quality Inquiry"
                                 : ticket.ticketType === "ORDER_INQUIRY"
@@ -216,16 +216,16 @@ const Tickets: React.FC = () => {
                               <div
                                 className={`border w-fit px-2 rounded-lg ${
                                   ticket.status === "OPEN"
-                                    ? "bg-[#EEFFFD] text-[#009886] border-[#EEFFFD]"
+                                    ? "bg-[#EEFFFD] text-[#009886] border-[#009886]"
                                     : ticket.status.includes("PENDING")
-                                    ? "bg-[#FF9F4329] text-[#FF9F43] border-[#FF9F4329]"
+                                    ? "bg-[#FFFDD0] text-brown border-brown"
                                     : ticket.status === "ESCALATED"
-                                    ? "bg-[#FFE9EA] text-[#FF4C51] border-[#FFE9EA]"
+                                    ? "bg-[#FFE9EA] text-[#FF4C51] border-[#FF4C51]"
                                     : ticket.status === "IN_PROGRESS"
-                                    ? "bg-[#00BAD129] text-[#00BAD1] border-[#00BAD129]"
+                                    ? "bg-[#FFFDD0] text-brown border-brown"
                                     : ticket.status === "CLOSED" ||
                                       ticket.status === "RESOLVED"
-                                    ? "bg-[#28C76F29] text-[#28C76F] border-[#28C76F29]"
+                                    ? "bg-[#2DD4BF] text-cream border-cream"
                                     : //   ? "bg-[#00BAD129] text-[#00BAD1] border-[#00BAD129]"
                                       "bg-gray-500" // Default color if no match
                                 }`}
@@ -248,7 +248,7 @@ const Tickets: React.FC = () => {
                   className="flex mx-auto justify-center items-center w-full h-[200px]"
                 />
 
-                <p className="text-center text-fontGray mt-4 text-lg font-bold ">
+                <p className="text-center text-brown mt-4 text-lg font-bold ">
                   No Tickets found.
                 </p>
               </div>

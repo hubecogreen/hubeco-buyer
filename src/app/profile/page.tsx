@@ -122,15 +122,15 @@ export default function Page() {
   };
 
   const stepsB2B = [
-    { label: "Personal Information", img: "/images/register/personal.webp" },
-    { label: "Company Details", img: "/images/register/company.webp" },
-    { label: "Shipping Address", img: "/images/register/shipping.webp" },
-    { label: "Account Settings", img: "/images/register/account.webp" },
+    { label: "Personal Information", img: "/images/register/user.png" },
+    { label: "Company Details", img: "/images/register/add.png" },
+    { label: "Shipping Address", img: "/images/register/home.png" },
+    { label: "Account Settings", img: "/images/register/lock.png" },
   ];
   const stepsB2C = [
-    { label: "Personal Information", img: "/images/register/personal.webp" },
-    { label: "Shipping Address", img: "/images/register/shipping.webp" },
-    { label: "Account Settings", img: "/images/register/account.webp" },
+    { label: "Personal Information", img: "/images/register/user.png" },
+    { label: "Shipping Address", img: "/images/register/home.png" },
+    { label: "Account Settings", img: "/images/register/lock.png" },
   ];
 
   //s// console.log('getvaluessss',getValues1())
@@ -237,7 +237,7 @@ export default function Page() {
           <CircularProgress isIndeterminate color="#A92449" />
         </div>
       ) : (
-        <div className="bg-white">
+        <div className="bg-cream">
           {/* <Head>
         <title>Edit Profile</title>
       </Head> */}
@@ -252,7 +252,7 @@ export default function Page() {
           <div className="px-4 md:px-30 md:mt-20 pb-10 w-full md:w-11/12 mx-auto">
             
             <div
-  className="category-section pb-10 text-center text-black bg-white shadow-[rgba(149,157,165,0.2)_8px_4px_8px_8px]"
+  className="category-section pb-10 text-center text-brown bg-cream shadow-[rgba(149,157,165,0.2)_8px_4px_8px_8px]"
 >
 
               <div className="container mx-auto py-10">
@@ -277,7 +277,7 @@ export default function Page() {
                           <Image
                             src={step.img}
                             alt="Step"
-                            className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                            className="w-8 h-8 md:w-8 md:h-8 object-contain mt-2"
                             width={10}
                             height={10}
                             onError={e => {

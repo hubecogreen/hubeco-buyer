@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div className="bg-white">
+    <div className="bg-cream">
       <head>
         <title>Privacy Policy | Hubeco</title>
       </head>
@@ -34,7 +34,7 @@ export default function Page() {
         </div>
 
         <div
-          className={`w-full flex justify-center items-center mx-auto max-w-[100%]  text-sm  text-black  leading-8 `}
+          className={`w-full flex justify-center items-center mx-auto max-w-[100%]  text-sm  text-brown  leading-8 `}
         >
           <div className="p-10 leading-loose text-justify">
             <p

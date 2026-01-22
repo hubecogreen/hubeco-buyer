@@ -11,10 +11,11 @@ const WhatsAppWidget = () => {
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-50"
+      className="fixed bottom-5 right-5 z-40 pointer-events-auto"
+      style={{ pointerEvents: 'auto' }}
     >
       <Image
-        src="/images/whatsapp.webp" // Place a WhatsApp icon image in your public folder as whatsapp-icon.webp
+        src="/images/whatsapp-1.png" // Place a WhatsApp icon image in your public folder as whatsapp-icon.webp "D:\hubeco\hubeco-buyer\public\images\whatsapp (1).png"
         alt="Chat on WhatsApp"
         width={50}
         height={50}

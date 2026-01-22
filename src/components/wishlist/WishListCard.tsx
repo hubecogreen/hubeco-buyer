@@ -206,7 +206,7 @@ const WishListCard: React.FC<ProductCardProps> = ({
 
   return (
     <div
-      className={`${styles.productCard} flex flex-col md:flex-row mx-auto my-2 md:my-4 hover-card w-full md:w-1/2 lg:w-full`}
+      className={`${styles.productCard} flex flex-col md:flex-row mx-auto my-2 md:my-4 hover:border-primary w-full md:w-1/2 lg:w-full`}
     >
       <div className="product-card-body w-full">
         <Image
@@ -287,7 +287,7 @@ const WishListCard: React.FC<ProductCardProps> = ({
                     </AlertDialogCancel>
                     <CustomButton
                       title={"Yes"}
-                      className="ml-3 bg-secondary hover:bg-primary h-[35px] md:h-[45px] md:w-24  w-16 md:text-md text-sm text-white "
+                      className="ml-3 bg-secondary hover:bg-primary h-[35px] md:h-[45px] md:w-24  w-16 md:text-md text-sm text-cream "
                       customStyles={{}}
                       onPress={() => deleteWishlist(product?._id)}
                       type="submit"
@@ -299,7 +299,7 @@ const WishListCard: React.FC<ProductCardProps> = ({
             ) : null}
           </div>
         </div>
-        {/* <p className="text-fontGray text-xs text-left mt-3 mb-5 product-card-desc">
+        {/* <p className="text-brown text-xs text-left mt-3 mb-5 product-card-desc">
           {product && product?.description}
         </p> */}
         <div
@@ -308,7 +308,7 @@ const WishListCard: React.FC<ProductCardProps> = ({
           {product?.productId.purchaseType === "QUOTE" ? (
             <CustomButton
               title={loadingQuoteButton ? "Loading..." : "Request Quote"}
-              className={`${styles.addToCart} bg-secondary hover:bg-secondary  w-36 p-2 h-12 md:h-10 justify-around items-center font-semibold text-xs md:text-xs text-white`}
+              className={`${styles.addToCart} bg-primary hover:bg-secondary  w-36 p-2 h-12 md:h-10 justify-around items-center font-semibold text-xs md:text-xs text-cream`}
               onPress={() => OnClickQuote(product?.slug)}
               loading={loadingQuoteButton}
             />
@@ -317,9 +317,9 @@ const WishListCard: React.FC<ProductCardProps> = ({
               title={
                 product?.status === "PUBLISHED" ? "Add to Cart" : "Out of Stock"
               }
-              className={`${styles.addToCart} bg-secondary ${
+              className={`${styles.addToCart} bg-primary ${
                 product?.status === "PUBLISHED" ? "hover:bg-primary" : ""
-              } w-36 p-2 h-12 md:h-10 justify-around items-center font-semibold text-xs md:text-xs text-white`}
+              } w-36 p-2 h-12 md:h-10 justify-around items-center font-semibold text-xs md:text-xs text-cream hover:text-cream`}
               hoverBgColor="#439787"
               hoverColor="#ffffff"
               rightIcon={<GoArrowRight />}

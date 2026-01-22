@@ -1,7 +1,7 @@
 "use client";
 // import Footer from "@/components/footer/MainFooter";
 // import Header from "@/components/header/MainHeader";
-import ImageSlider from "@/components/buyer-register/BuyerBanner";
+import HeroSection from "@/components/buyer-register/BuyerBanner";
 import BuyerBenefits from "@/components/buyer-register/BuyerBenefits";
 import BuyerWorking from "@/components/buyer-register/BuyerWorking";
 import BuyerJoinUs from "@/components/buyer-register/BuyerJoinUs";
@@ -50,7 +50,7 @@ export default function Home() {
       {/* <Header /> */}
       <div className="banner-section mx-auto h-64 md:h-full">
 
-        <ImageSlider />
+        <HeroSection />
       </div>
       <div
         className="benefits-section pt-10 mx-auto pb-10 bg-cover bg-no-repeat bg-[center_190%] h-[500px] bg-white"

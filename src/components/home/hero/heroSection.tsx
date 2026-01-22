@@ -18,8 +18,10 @@ const logos = [
 const greenProLabels = ["GreenPro", "EPD", "GRIHA"];
 
 
-const ImageSlider = () => {
+const HeroSection = () => {
   const router=useRouter();
+    const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
+
 
 
   return (
@@ -32,7 +34,7 @@ const ImageSlider = () => {
         playsInline
         className="absolute inset-0 w-full h-full object-cover brightness-95 z-0"
       >
-        <source src="/images/home/hero/hero-video.mp4" type="video/mp4" />
+        <source src={assetURL+"/buyer/home-video/hero-video.mp4"} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -172,4 +174,4 @@ const ImageSlider = () => {
   );
 };
 
-export default ImageSlider;
+export default HeroSection;

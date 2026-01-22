@@ -1,4 +1,4 @@
-import ImageSlider from "@/components/home/imageCarousel/Swiper";
+import HeroSection from "@/components/home/hero/heroSection";
 import CategorySection from "@/components/home/categories/Category";
 import FeaturedProducts from "@/components/home/featured/FeaturedProducts";
 import BrandsSection from "@/components/home/brands/BrandsSection";
@@ -18,7 +18,7 @@ const HomePage = () => {
     <div className="bg-cream">
       {/* Optimize for Speed Index - Load everything immediately but efficiently */}
       <div className="banner-section mx-auto md:h-full ">
-        <ImageSlider />
+        <HeroSection />
       </div>
 
       <div className="category-section mx-auto">

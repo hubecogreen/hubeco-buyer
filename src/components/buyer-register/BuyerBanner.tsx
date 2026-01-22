@@ -1,4 +1,4 @@
-// components/ImageSlider.js
+// components/HeroSection.js
 "use client";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,7 +11,7 @@ import { GoArrowRight } from "react-icons/go";
 import CustomButton from "../customButton/CustomButton";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-const ImageSlider = () => {
+const HeroSection = () => {
   const router=useRouter()
   const images = [
     "/images/buyer-register/buyerBannerN.webp",
@@ -77,4 +77,4 @@ const ImageSlider = () => {
   );
 };
 
-export default ImageSlider;
+export default HeroSection;

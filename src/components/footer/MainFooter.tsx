@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useApi from "@/components/Fetcher/useAPI";
 import * as getEndpoint from "../../network/EndPoints";
 import { GoArrowRight } from "react-icons/go";
@@ -28,6 +28,26 @@ const Footer = () => {
   if (!rehydrated) return null;
   const { callApi } = useApi();
   const [categoryIdMap, setCategoryIdMap] = useState<Record<string, string>>({});
+
+
+  const finalCategories = useMemo(() => {
+  const BASE_CATEGORIES = ["Bricks", "Sand", "Paints", "Tiles"];
+
+  const hasAdhesives = !!categoryIdMap["adhesives"];
+  const hasSanitary = !!categoryIdMap["sanitary & bath fittings"];
+
+  let extraCategories: string[] = [];
+
+  if (hasAdhesives || hasSanitary) {
+    if (hasAdhesives) extraCategories.push("Adhesives");
+    if (hasSanitary) extraCategories.push("Sanitary & Bath Fittings");
+  } else {
+    extraCategories = ["Pavers", "Steel"];
+  }
+
+  return [...BASE_CATEGORIES, ...extraCategories].slice(0, 6);
+}, [categoryIdMap]);
+
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -147,32 +167,19 @@ const Footer = () => {
             {/* Products */}
             <div className="w-full md:w-full lg:w-[112px]">
               <h4 className="text-[14px] text-primary mb-2">Products</h4>
-              <ul className="space-y-1 text-[13px] lg:text-[14px]">
-                <button onClick={() => goToCategory("Bricks")} className="text-brown">
-                  Bricks
-                </button><br />
-                {/* <button onClick={() => goToCategory("Adhesives")} className="text-brown">
-                  Adhesives
-                </button><br /> */}
-                <button onClick={() => goToCategory("Sand")} className="text-brown">
-                  Sand
-                </button><br />
-                <button onClick={() => goToCategory("Paints")} className="text-brown">
-                  Paints
-                </button><br />
-                <button onClick={() => goToCategory("Tiles")} className="text-brown">
-                  Tiles
-                </button><br />
-                {/* <button onClick={() => goToCategory("Sanitary & Bath Fittings")} className="text-brown">
-                  Bath Fittings
-                </button><br/> */}
-                <button onClick={() => goToCategory("Pavers")} className="text-brown">
-                  Pavers
-                </button><br />
-                <button onClick={() => goToCategory("Steel")} className="text-brown">
-                  Steel
-                </button>
-              </ul>
+             <ul className="space-y-1 text-[13px] lg:text-[14px]">
+  {finalCategories.map((cat) => (
+    <li key={cat}>
+      <button
+        onClick={() => goToCategory(cat)}
+        className="text-brown"
+      >
+        {cat === "Sanitary & Bath Fittings" ? "Bath Fittings" : cat}
+      </button>
+    </li>
+  ))}
+</ul>
+
             </div>
 
             {/* Quick Links */}

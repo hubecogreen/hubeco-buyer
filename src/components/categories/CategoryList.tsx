@@ -20,6 +20,11 @@ import {
   saveCatTime,
 } from "@/reduxStore/slices/masterDataSlice";
 import { normalizePath } from "@/lib/utils";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+import "swiper/css";
+
 
 const FALLBACK_IMAGE = "/images/product-placeholder.webp";
 
@@ -69,160 +74,46 @@ const CategoryList = () => {
 
 
 const MobileRowCarousel = ({ items }: { items: any[] }) => {
-  const rowRef = React.useRef<HTMLDivElement | null>(null);
-  const [showLeft, setShowLeft] = useState(false);
-  const [showRight, setShowRight] = useState(items.length === 4);
+  const shouldAutoSlide = items.length >= 4;
 
-  const CARD_WIDTH = 110; // REQUIRED
-  const SCROLL_BY = CARD_WIDTH;
-  const ITEMS_PER_ROW = 4;
-  
-  // Create duplicated items for seamless continuous scrolling
-  const displayItems = items.length === 4 
-    ? [...items, ...items, ...items] // Duplicate twice for continuous scroll
+  // Only duplicate when auto sliding
+  const marqueeItems = shouldAutoSlide
+    ? [...items, ...items, ...items]
     : items;
 
-  useEffect(() => {
-    if (!rowRef.current) return;
-
-    const container = rowRef.current;
-
-    const interval = setInterval(() => {
-      if (!container) return;
-
-      const { scrollLeft, scrollWidth, clientWidth } = container;
-      
-      // Calculate if we're near the end of the scrollable area
-      const isNearEnd = scrollLeft + clientWidth >= scrollWidth - 10;
-      
-      if (isNearEnd) {
-        // If we're at the end of duplicated items, instantly jump back to middle
-        container.scrollLeft = items.length * CARD_WIDTH;
-      } else {
-        // Continuous scroll to the right
-        container.scrollBy({ left: SCROLL_BY, behavior: "smooth" });
-      }
-    }, 2500); // 2.5s
-
-    return () => clearInterval(interval);
-  }, [items.length]);
-
-  const onScroll = () => {
-    if (!rowRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = rowRef.current;
-    
-    // Show left arrow when scrolled away from start (for all items)
-    setShowLeft(scrollLeft > 10);
-    
-    // Show right arrow logic
-    if (items.length === 4) {
-      // For 4-item rows with duplicated content
-      const firstSectionEnd = items.length * CARD_WIDTH;
-      const isInFirstSection = scrollLeft < firstSectionEnd;
-      setShowRight(isInFirstSection || scrollLeft + clientWidth < scrollWidth - 10);
-    } else {
-      // For other cases
-      setShowRight(scrollLeft + clientWidth < scrollWidth - 10);
-    }
-  };
-
-  const scroll = (dir: "left" | "right") => {
-    if (!rowRef.current) return;
-    
-    const container = rowRef.current;
-    const { scrollLeft, scrollWidth, clientWidth } = container;
-    
-    if (dir === "right") {
-      // For right scroll - continuous behavior
-      if (items.length === 4) {
-        const isNearEnd = scrollLeft + clientWidth >= scrollWidth - 10;
-        if (isNearEnd) {
-          // Jump back to middle for continuous loop
-          container.scrollLeft = items.length * CARD_WIDTH;
-        } else {
-          container.scrollBy({ left: SCROLL_BY, behavior: "smooth" });
-        }
-      } else {
-        container.scrollBy({ left: SCROLL_BY, behavior: "smooth" });
-      }
-    } else if (dir === "left") {
-      // For left scroll - normal behavior for ALL items
-      // Allow scrolling left as long as we're not at the very start
-      if (scrollLeft > 0) {
-        container.scrollBy({ left: -SCROLL_BY, behavior: "smooth" });
-      }
-    }
-  };
-
   return (
-    <div className="relative lg:hidden">
-      {/* LEFT ARROW - Shows when user has scrolled to the right */}
-      {showLeft && (
-        <button
-          onClick={() => scroll("left")}
-          className="
-    absolute left-[10px] top-1/2 -translate-y-1/2 z-20
-    w-[40px] h-[40px]
-    rounded-full
-    bg-black/20
-    flex items-center justify-center
-    
-  "
-        >
-          <Image
-            src="https://framerusercontent.com/images/6tTbkXggWgQCAJ4DO2QEdXXmgM.svg"
-            alt="prev"
-            width={40}
-            height={40}
-          />
-        </button>
-      )}
-
-      {/* RIGHT ARROW */}
-      {showRight && (
-        <button
-          onClick={() => scroll("right")}
-          className="
-    absolute right-[10px] top-1/2 -translate-y-1/2 z-20
-    w-[40px] h-[40px]
-    rounded-full
-    bg-black/20
-    flex items-center justify-center
-    
-  "
-        >
-          <Image
-            src="https://framerusercontent.com/images/11KSGbIZoRSg4pjdnUoif6MKHI.svg"
-            alt="next"
-            width={40}
-            height={40}
-          />
-        </button>
-      )}
-
-      {/* ROW */}
-      <div
-        ref={rowRef}
-        onScroll={onScroll}
-        className="
-          flex gap-[6px]
-          overflow-x-auto
-          scrollbar-hide
-        "
-        style={{
-          width: '100%',
-          overflow: 'hidden'
-        }}
+    <div className="lg:hidden">
+      <Swiper
+        modules={[Autoplay]}
+        slidesPerView="auto"
+        spaceBetween={6}
+        loop={false}
+        allowTouchMove={false}
+        autoplay={
+          shouldAutoSlide
+            ? {
+                delay: 0, // continuous
+                disableOnInteraction: false,
+              }
+            : false
+        }
+        speed={shouldAutoSlide ? 5000 : 0}
+        className="w-full"
       >
-        {displayItems.map((cat: any, index: number) => (
-          <div key={`${cat._id}-${index}`} className="shrink-0">
+        {marqueeItems.map((cat: any, index: number) => (
+          <SwiperSlide
+            key={`${cat._id}-${index}`}
+            className="!w-auto"
+          >
             <CategoryCard category={cat} />
-          </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   );
 };
+
+
 
   // -----------------------------
   // FETCH CATEGORY DATA

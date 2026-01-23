@@ -292,7 +292,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
           />
 
           <p
-            className={`${styles.cattitle} text-[13px] md:text-[18px] lg:text-[18px] font-medium  text-primary group-hover:text-white md:mt-4 mt-2 text-center `}
+            className={`${styles.cattitle} text-[9px] md:text-[18px] lg:text-[18px] font-medium  text-primary group-hover:text-white md:mt-4 mt-1 text-center `}
           >
             {category?.name}
           </p>

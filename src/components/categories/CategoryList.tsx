@@ -38,8 +38,11 @@ const CategoryList = () => {
   );
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
+    // Only fetch if categories don't exist in Redux
+    if (!categories || categories.length === 0) {
+      fetchCategories();
+    }
+  }, [categories]);
 
   // -----------------------------
   // API ERROR HANDLER
@@ -288,7 +291,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
     w-[95px] h-[124px]
     lg:w-[282px] lg:h-[369px]
     md:w-[195px] md:h-[255px]
-    p-[4px] lg:p-4
+    p-[4px] md:pt-[18px] md:px-[11px] md:pb-4 lg:p-4
 
     lg:hover:bg-primary
     lg:hover:scale-105
@@ -315,7 +318,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
           />
 
           <p
-            className={`${styles.cattitle} text-[8px] lg:text-[18px] font-medium  text-primary group-hover:text-white mt-4 text-center `}
+            className={`${styles.cattitle} text-[13px] md:text-[18px] lg:text-[18px] font-medium  text-primary group-hover:text-white md:mt-4 mt-2 text-center `}
           >
             {category?.name}
           </p>
@@ -343,7 +346,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
             {title}
           </h2>
 
-          <CustomButton
+          {/* <CustomButton
             title="View All"
             className="lg:flex hidden bg-[#109989] rounded-[5px]
             px-[14px] py-[10px] lg:!px-[25px] lg:!py-[10px] h-[53px]
@@ -351,7 +354,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
             gap-[12px] text-white text-[14px] lg:text-[18px]"
             rightIcon={<GoArrowRight className="w-[18px] h-[18px] lg:w-[24px] lg:h-[24px]" />}
             onPress={() => router.push("/products")}
-          />
+          /> */}
         </div>
 
         <hr className="border-t border-primary mx-auto mt-[21px] mb-[10px] lg:mb-9" />

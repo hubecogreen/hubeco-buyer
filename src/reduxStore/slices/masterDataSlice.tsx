@@ -9,7 +9,6 @@ export const masterDataSlice = createSlice({
     // for storing the JWT
     services: [],
     categories:[],
-    buildingSystemCategories:[],
     catetime:0
   },
   reducers: {
@@ -34,12 +33,9 @@ export const masterDataSlice = createSlice({
     saveCatTime: (state, action: PayloadAction<any>) => {
       state.catetime = action.payload;
     },
-    saveBuildingSystemCategories: (state, action: PayloadAction<any>) => {
-      state.buildingSystemCategories = action.payload;
-    }
   },
 });
 
-export const { saveCountries, saveStates, saveCities, saveServices, saveCategories, saveCatTime,saveBuildingSystemCategories } =
+export const { saveCountries, saveStates, saveCities, saveServices, saveCategories, saveCatTime } =
   masterDataSlice.actions;
 export default masterDataSlice.reducer;

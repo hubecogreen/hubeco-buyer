@@ -16,7 +16,6 @@ import CustomButton from "../customButton/CustomButton";
 import * as getEndpoint from "../../network/EndPoints";
 import useApi from "../Fetcher/useAPI";
 import {
-  saveBuildingSystemCategories,
   saveCategories,
   saveCatTime,
 } from "@/reduxStore/slices/masterDataSlice";
@@ -38,8 +37,11 @@ const CategoryList = () => {
   );
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
+    // Only fetch if categories don't exist in Redux
+    if (!categories || categories.length === 0) {
+      fetchCategories();
+    }
+  }, [categories]);
 
   // -----------------------------
   // API ERROR HANDLER
@@ -239,32 +241,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
 
       const data = result.data;
 
-      // 1️⃣ Default Categories
-      const defaultCategory = data?.[0];
-
-      const formattedCategories =
-        defaultCategory?.subCategories?.map((sub: any) => ({
-          ...sub,
-          parentCategoryName: defaultCategory.name,
-          parentCategorySlug: defaultCategory.seoSlug,
-        })) || [];
-
-      dispatch(saveCategories(formattedCategories));
-
-      // 2️⃣ Building System Categories
-      const buildingSystemParent = data.find((c: any) => {
-        const name = c?.name?.toLowerCase();
-        return name === "building systems" || name === "building system";
-      });
-
-      const formattedBuildingSystems =
-        buildingSystemParent?.subCategories?.map((sub: any) => ({
-          ...sub,
-          parentCategoryName: buildingSystemParent?.name,
-          parentCategorySlug: buildingSystemParent?.seoSlug,
-        })) || [];
-
-      dispatch(saveBuildingSystemCategories(formattedBuildingSystems));
+    dispatch(saveCategories(data || []));
       dispatch(saveCatTime(new Date()));
     } catch (error) {
       handleApiError(error);
@@ -288,7 +265,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
     w-[95px] h-[124px]
     lg:w-[282px] lg:h-[369px]
     md:w-[195px] md:h-[255px]
-    p-[4px] lg:p-4
+    p-[4px] md:pt-[18px] md:px-[11px] md:pb-4 lg:p-4
 
     lg:hover:bg-primary
     lg:hover:scale-105
@@ -315,7 +292,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
           />
 
           <p
-            className={`${styles.cattitle} text-[8px] lg:text-[18px] font-medium  text-primary group-hover:text-white mt-4 text-center `}
+            className={`${styles.cattitle} text-[9px] md:text-[18px] lg:text-[18px] font-medium  text-primary group-hover:text-white md:mt-4 mt-1 text-center `}
           >
             {category?.name}
           </p>
@@ -327,7 +304,15 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
   // -----------------------------
   // CATEGORY SECTION
   // -----------------------------
-  const CategorySection = ({ title, data }: any) => (
+  const CategorySection = ({ title, data }: any) => {
+   // Find correct parent by title
+  const parentCategory = data.find(
+    (c: any) => c?.name?.toLowerCase() === title.toLowerCase()
+  );
+
+  // Extract subCategories (Bricks, Sand, Cement, etc)
+  const subCategories = parentCategory?.subCategories || [];
+return(
     <div
       className={`px-4 bg-cream lg:max-w-[1440px] mx-auto ${title === "Building Systems"
           ? "lg:px-[100px] p-[20px] lg:py-[0px]"
@@ -343,7 +328,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
             {title}
           </h2>
 
-          <CustomButton
+          {/* <CustomButton
             title="View All"
             className="lg:flex hidden bg-[#109989] rounded-[5px]
             px-[14px] py-[10px] lg:!px-[25px] lg:!py-[10px] h-[53px]
@@ -351,25 +336,26 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
             gap-[12px] text-white text-[14px] lg:text-[18px]"
             rightIcon={<GoArrowRight className="w-[18px] h-[18px] lg:w-[24px] lg:h-[24px]" />}
             onPress={() => router.push("/products")}
-          />
+          /> */}
         </div>
 
         <hr className="border-t border-primary mx-auto mt-[21px] mb-[10px] lg:mb-9" />
 
         {/* Mobile */}
-        {chunkIntoRows(data || []).map((row, idx) => (
+        {chunkIntoRows(subCategories || []).map((row, idx) => (
           <MobileRowCarousel key={idx} items={row} />
         ))}
 
         {/* Desktop */}
         <div className="hidden lg:grid lg:grid-cols-4 lg:gap-4 lg:px-[20px]">
-          {data?.map((cat: any, idx: number) => (
+          {subCategories?.map((cat: any, idx: number) => (
             <CategoryCard key={idx} category={cat} />
           ))}
         </div>
       </div>
     </div>
-  );
+)
+  };
 
 
   return (
@@ -377,7 +363,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
       <CategorySection title="Building Materials" data={categories} />
       <CategorySection
         title="Building Systems"
-        data={buildingSystemCategories}
+        data={categories}
       />
     </>
   );

@@ -16,7 +16,6 @@ import CustomButton from "../customButton/CustomButton";
 import * as getEndpoint from "../../network/EndPoints";
 import useApi from "../Fetcher/useAPI";
 import {
-  saveBuildingSystemCategories,
   saveCategories,
   saveCatTime,
 } from "@/reduxStore/slices/masterDataSlice";
@@ -242,32 +241,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
 
       const data = result.data;
 
-      // 1️⃣ Default Categories
-      const defaultCategory = data?.[0];
-
-      const formattedCategories =
-        defaultCategory?.subCategories?.map((sub: any) => ({
-          ...sub,
-          parentCategoryName: defaultCategory.name,
-          parentCategorySlug: defaultCategory.seoSlug,
-        })) || [];
-
-      dispatch(saveCategories(formattedCategories));
-
-      // 2️⃣ Building System Categories
-      const buildingSystemParent = data.find((c: any) => {
-        const name = c?.name?.toLowerCase();
-        return name === "building systems" || name === "building system";
-      });
-
-      const formattedBuildingSystems =
-        buildingSystemParent?.subCategories?.map((sub: any) => ({
-          ...sub,
-          parentCategoryName: buildingSystemParent?.name,
-          parentCategorySlug: buildingSystemParent?.seoSlug,
-        })) || [];
-
-      dispatch(saveBuildingSystemCategories(formattedBuildingSystems));
+    dispatch(saveCategories(data || []));
       dispatch(saveCatTime(new Date()));
     } catch (error) {
       handleApiError(error);
@@ -330,7 +304,15 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
   // -----------------------------
   // CATEGORY SECTION
   // -----------------------------
-  const CategorySection = ({ title, data }: any) => (
+  const CategorySection = ({ title, data }: any) => {
+   // Find correct parent by title
+  const parentCategory = data.find(
+    (c: any) => c?.name?.toLowerCase() === title.toLowerCase()
+  );
+
+  // Extract subCategories (Bricks, Sand, Cement, etc)
+  const subCategories = parentCategory?.subCategories || [];
+return(
     <div
       className={`px-4 bg-cream lg:max-w-[1440px] mx-auto ${title === "Building Systems"
           ? "lg:px-[100px] p-[20px] lg:py-[0px]"
@@ -360,19 +342,20 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
         <hr className="border-t border-primary mx-auto mt-[21px] mb-[10px] lg:mb-9" />
 
         {/* Mobile */}
-        {chunkIntoRows(data || []).map((row, idx) => (
+        {chunkIntoRows(subCategories || []).map((row, idx) => (
           <MobileRowCarousel key={idx} items={row} />
         ))}
 
         {/* Desktop */}
         <div className="hidden lg:grid lg:grid-cols-4 lg:gap-4 lg:px-[20px]">
-          {data?.map((cat: any, idx: number) => (
+          {subCategories?.map((cat: any, idx: number) => (
             <CategoryCard key={idx} category={cat} />
           ))}
         </div>
       </div>
     </div>
-  );
+)
+  };
 
 
   return (
@@ -380,7 +363,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
       <CategorySection title="Building Materials" data={categories} />
       <CategorySection
         title="Building Systems"
-        data={buildingSystemCategories}
+        data={categories}
       />
     </>
   );

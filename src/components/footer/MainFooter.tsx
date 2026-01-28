@@ -261,15 +261,17 @@ const Footer = () => {
         {/* BOTTOM LOGO */}
         <div className="w-full flex mt-[90px] pb-[16px] md:pb-[2px] lg:pb-[58px] px-4 lg:px-0">
           <div className="max-w-[1200px] w-full">
-            <div className="relative lg:w-[717px] lg:h-[162px]  w-[279px] h-[63px] md:w-[497px] md:h-[112px]">
-              <Image
-                src="/images/logo3.png"
-                alt="Hubeco Logo"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
+            <Link href="/">
+              <div className="relative lg:w-[717px] lg:h-[162px]  w-[279px] h-[63px] md:w-[497px] md:h-[112px]">
+                <Image
+                  src="/images/logo3.png"
+                  alt="Hubeco Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </Link>
           </div>
         </div>
       </div>

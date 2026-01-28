@@ -5,6 +5,7 @@ import * as getEndpoint from "../../../../network/EndPoints";
 import toast from "react-hot-toast";
 import { usePathname, useSearchParams } from "next/navigation";
 import FilterHTML from "./FilterHTML";
+import { useRouter } from "next/navigation";
 
 interface VendorFiltersListProps {
   onCategorySelectionChange: (selectedCats: string[]) => void; // Function prop to handle selected vendors
@@ -21,6 +22,8 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
   const searchParams = useSearchParams();
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
   const [selectedParentid, setSelectedParentId] = useState<string[]>([]);
+  const [lastActiveParent, setLastActiveParent] = useState<string | null>(null);
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([]); 
 
   const [catCount, setCatCount] = useState<any>(null);
   const [categorySearch, setCategorySearch] = useState("");
@@ -34,13 +37,16 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
   const ccid = searchParams?.get("ccid") as any;
 
   const pathname = usePathname();
-
+const router = useRouter();
+console.log("expandedCategories", expandedCategories);
   useEffect(() => {
     const resetOptions = () => {
       // Reset selected categories and parent
       setSelectedParentId([]);
       setSelectedCats([]);
       setCategorySearch("");
+      setLastActiveParent(null);
+       setExpandedCategories([]); 
     };
     resetOptions();
   }, [pathname, searchParams, refresh]);
@@ -112,98 +118,58 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
     setVisibleCategoriesCount(10);
   };
 
-  const onSelectCat = (id: string, status = "non") => {
-    setSelectedCats((prevSelectedCats) => {
-      const updatedCats = prevSelectedCats.includes(id)
-        ? prevSelectedCats.filter((catId) => catId !== id)
-        : [...prevSelectedCats, id];
+   const onSelectCat = (id: string) => {
+    setSelectedCats((prevCats) => {
+      const isSelected = prevCats.includes(id);
+      
+      // Allow multiple child selections
+      const updatedCats = isSelected 
+        ? prevCats.filter(catId => catId !== id) // Remove if already selected
+        : [...prevCats, id]; // Add to existing selections
+
       onCategorySelectionChange(updatedCats);
-      // Find the parent subcategory id for the selected child
-      const parentCategory = categoriesData.find((cat: any) =>
-        cat.childCategories?.some((child: any) => child._id === id)
-      );
-
-      // Send both child and subcategory id to parent
-
-      // Check if the parent category should be unselected if any child is unselected
-
-      // Check if the parent category should be unselected if any child is unselected
-      if (parentCategory) {
-        const allChildrenSelected = parentCategory.childCategories?.every(
-          (child: any) => updatedCats.includes(child._id)
-        );
-
-        if (!allChildrenSelected) {
-          setSelectedParentId((prevParentIds) =>
-            (prevParentIds || []).filter(
-              (catId) => catId !== parentCategory._id
-            )
-          );
-          setSelectedParentId((prevParentIds) => {
-            const updatedParentIds = (prevParentIds || []).filter(
-              (catId) => catId !== parentCategory._id
-            );
-            onChangeParentSelectionChange(updatedParentIds);
-            return updatedParentIds;
-          });
-        } else {
-          setSelectedParentId((prevParentIds) => {
-            if (!prevParentIds.includes(parentCategory._id)) {
-              return [...prevParentIds, parentCategory._id];
-            }
-            return prevParentIds;
-          });
-        }
-      }
-
       return updatedCats;
     });
   };
 
-  const onSelectParentCat = (id: string) => {
-    const findChildCate = categoriesData.find((cat: any) => cat._id === id);
+ const onSelectParentCat = (id: string) => {
+  setSelectedParentId((prevParents) => {
+    const isSelected = prevParents.includes(id);
 
-    setSelectedParentId((prevSelectedParentCats) => {
-      const updatedParents = prevSelectedParentCats.includes(id)
-        ? prevSelectedParentCats.filter((catId) => catId !== id)
-        : [...prevSelectedParentCats, id];
+    if (isSelected) {
+      // unselect → clear route
+      // setExpandedCategories([]);
+      setSelectedCats([]);
+      onCategorySelectionChange([]);
+      onChangeParentSelectionChange([]);
 
-      onChangeParentSelectionChange(updatedParents);
+      router.push(pathname); // 🔴 remove scid from URL
+      return [];
+    } else {
+      // select → update route
+      setExpandedCategories([id]);
+      setSelectedCats([]);
+      onCategorySelectionChange([]);
+      onChangeParentSelectionChange([id]);
 
-      // When selecting a parent, also select all child categories
-      if (findChildCate?.childCategories) {
-        const updatedCats = findChildCate.childCategories.map(
-          (child: any) => child._id
-        );
-        setSelectedCats((prevSelectedCats) => {
-          const newSelectedCats = [
-            ...Array.from(new Set([...prevSelectedCats, ...updatedCats])),
-          ];
-          onCategorySelectionChange(newSelectedCats);
-          // Do NOT call onCategorySelectionChange here, as it now expects an object for single child selection only
-          return newSelectedCats;
-        });
+      router.push(`${pathname}?scid=${id}`); // ✅ UPDATE URL
+      return [id];
+    }
+  });
+};
+
+
+   // ✅ Toggle expansion without selecting (optional - for chevron button)
+  const toggleExpansion = (id: string) => {
+    setExpandedCategories((prevExpanded) => {
+      if (prevExpanded.includes(id)) {
+        return prevExpanded.filter(expId => expId !== id);
+      } else {
+        return [...prevExpanded, id];
       }
-
-      // When unselecting the parent, remove all its child categories as well
-      if (!updatedParents.includes(id)) {
-        setSelectedCats((prevSelectedCats) => {
-          const updatedCats = prevSelectedCats.filter(
-            (catId) =>
-              !findChildCate?.childCategories?.some(
-                (child: any) => child._id === catId
-              )
-          );
-          onCategorySelectionChange(updatedCats);
-
-          // Do NOT call onCategorySelectionChange here, as it now expects an object for single child selection only
-          return updatedCats;
-        });
-      }
-
-      return updatedParents;
     });
   };
+
 
   useEffect(() => {
     fetchCategories();
@@ -236,12 +202,12 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
       catCount={catCount}
       scid={scid}
       selectedParentid={selectedParentid}
+      expandedSubCats={selectedParentid}   // ✅ ADD
+      toggleExpansion={toggleExpansion}
       onSelectParentCat={onSelectParentCat}
       filteredCategories={filteredCategories}
-      setOpenCategory={setOpenCategory}
       categorySearch={categorySearch}
       handleCategorySearch={handleCategorySearch}
-      openCategory={openCategory}
       handleShowMoreCats={handleShowMoreCats}
       onSelectCat={onSelectCat}
       showMore={showMore}

@@ -286,6 +286,7 @@ export default function GreenHomeLoanForm({
 
           {/* Logo */}
           <div className="flex justify-center mt-6 mb-4 md:mt-8">
+            <Link href="/">
             <div className="flex items-center space-x-2">
               <img
                 src="/images/Logo-2.webp"
@@ -293,6 +294,7 @@ export default function GreenHomeLoanForm({
                 className="h-12 md:h-14 w-auto"
               />
             </div>
+            </Link>
           </div>
         </div>
       </div>

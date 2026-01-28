@@ -12,12 +12,11 @@ const FilterHTML = ({
   catCount,
   scid,
   selectedParentid,
+  expandedSubCats,
   onSelectParentCat,
   filteredCategories,
-  setOpenCategory,
   categorySearch,
   handleCategorySearch,
-  openCategory,
   handleShowMoreCats,
   onSelectCat,
   showMore,
@@ -67,6 +66,14 @@ const FilterHTML = ({
                 return isSelectedA - isSelectedB;
               })
               .slice(0, visibleCategoriesCount)
+              .filter((category: any) => {
+                // If a parent is selected, only show that one
+                if (selectedParentid.length > 0) {
+                  return selectedParentid.includes(category._id);
+                }
+                // Otherwise show all
+                return true;
+              })
               .map((category: any) => {
                 return (
                   <div key={category.name} className="mb-2">
@@ -93,8 +100,8 @@ const FilterHTML = ({
                       />
                       <button
                         className={`flex items-center justify-between w-full text-left text-md ${selectedParentid.includes(category?._id)
-                            ? "text-secondary"
-                            : "text-brown "
+                          ? "text-secondary"
+                          : "text-brown "
                           }`}
                       // onClick={() => {
                       //   setOpenCategory(
@@ -105,13 +112,13 @@ const FilterHTML = ({
                         <span
                           onClick={() => onSelectParentCat(category._id)}
                           className={`text-[14px] text-brown font-normal ${selectedParentid.includes(category?._id)
-                              ? "text-brown"
-                              : "text-brown "
+                            ? "text-brown"
+                            : "text-brown "
                             }`}
                         >
                           {category.name}
                         </span>
-                        <div
+                        {/* <div
                           onClick={() => {
                             setOpenCategory(
                               openCategory === category.name
@@ -125,10 +132,10 @@ const FilterHTML = ({
                           ) : (
                             <ChevronDown size={16} className="text-white" />
                           )}
-                        </div>
+                        </div> */}
                       </button>
                     </div>
-                    {openCategory === category.name &&
+                    {expandedSubCats.includes(category._id) &&
                       category?.childCategories?.length > 0 && (
                         <ul className="ml-4 my-1">
                           {category.childCategories.map((childCat: any) => {
@@ -139,15 +146,21 @@ const FilterHTML = ({
                               >
                                 <Checkbox
                                   id={childCat?._id}
-                                  className="mr-3 text-white border-white"
+                                  className="mr-3
+    data-[state=unchecked]:bg-cream
+    data-[state=unchecked]:border-brown
+    data-[state=checked]:bg-brown
+    data-[state=checked]:border-brown
+    data-[state=checked]:text-cream"
                                   checked={selectedCats.includes(childCat?._id)}
                                   onClick={() => onSelectCat(childCat?._id)}
                                 />
+
                                 <li
                                   key={childCat.name}
                                   className={`text-[14px]  font-normal py-[5px] ${selectedCats.includes(childCat?._id)
-                                      ? "text-white"
-                                      : "text-white"
+                                    ? "text-brown font-medium"
+                                    : "text-brown"
                                     } `}
                                   onClick={() => onSelectCat(childCat?._id)}
                                 >

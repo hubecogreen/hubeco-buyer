@@ -153,9 +153,9 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
     cursor-pointer
     flex flex-col items-center
 
-    w-[95px] h-[124px]
+    w-[115px] h-[150px]
     lg:w-[282px] lg:h-[369px]
-    md:w-[195px] md:h-[255px]
+    md:w-[170px] md:h-[223px]
     p-[4px] md:pt-[18px] md:px-[11px] md:pb-4 lg:p-4
 
     lg:hover:bg-primary
@@ -176,14 +176,14 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
             onError={(e) => (e.currentTarget.src = FALLBACK_IMAGE)}
             className="
   rounded-md object-cover
-  w-[84px] h-[84px]
-  md:w-[173px] md:h-[173px]
+  w-[103px] h-[103px]
+  md:w-[151px] md:h-[151px]
   lg:w-[250px] lg:h-[250px]
 "
           />
 
           <p
-            className={`${styles.cattitle} text-[9px] md:text-[18px] lg:text-[18px] font-medium  text-primary lg:group-hover:text-white md:mt-4 mt-1 text-center `}
+            className={`${styles.cattitle} text-[12px] md:text-[14px] lg:text-[18px] font-medium  text-primary lg:group-hover:text-white md:mt-4 mt-1 text-center `}
           >
             {category?.name}
           </p>
@@ -233,12 +233,12 @@ return(
         <hr className="border-t border-primary mx-auto mt-[21px] mb-[10px] lg:mb-9" />
 
         {/* Mobile */}
-        {chunkIntoRows(subCategories || []).map((row, idx) => (
+        {/* {chunkIntoRows(subCategories || []).map((row, idx) => (
           <MobileRowCarousel key={idx} items={row} />
-        ))}
+        ))} */}
 
         {/* Desktop */}
-        <div className="hidden lg:grid lg:grid-cols-4 lg:gap-4 lg:px-[20px]">
+        <div className="grid md:grid-cols-4 grid-cols-3 md:gap-4 lg:px-[20px] md:px-[16px]">
           {subCategories?.map((cat: any, idx: number) => (
             <CategoryCard key={idx} category={cat} />
           ))}

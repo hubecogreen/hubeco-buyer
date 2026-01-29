@@ -62,7 +62,7 @@ const ProcureSection: React.FC = () => {
             h-[280px]
             xs:h-[320px]
             sm:h-[400px]
-            md:h-[778px]
+            md:h-[600px] 
             lg:h-[598px]
             rounded-[12px]
             overflow-hidden
@@ -72,7 +72,12 @@ const ProcureSection: React.FC = () => {
                         <img
                             src="/images/procurement/img1.png"
                             alt="Procurement Benefits"
-                            className="w-full h-full object-cover lg:object-cover md:object-cover"
+                            className="w-full h-full object-cover lg:object-cover md:object-cover md:hidden lg:block block"
+                        />
+                        <img
+                            src="/images/procurement/img1-tab.png"
+                            alt="Procurement Benefits"
+                            className="w-full h-full object-cover lg:object-cover md:object-cover md:block lg:hidden hidden"
                         />
                     </div>
 

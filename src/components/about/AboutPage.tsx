@@ -213,7 +213,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="flex items-center justify-center md:pb-8 pb-4">
+          <div className="flex items-center justify-center md:pb-2 pb-4">
             <div className="text-center">
               <h1 className="text-2xl font-bold md:mb-4 text-brown">
                 Our Values
@@ -223,7 +223,7 @@ export default function Page() {
           <div
             className="flex flex-col lg:flex-row justify-evenly mx-auto max-w-[94%]"
           >
-            <div className="w-full lg:w-5/12 md:py-11 py-2 md:pr-5 pr-1">
+            <div className="w-full lg:w-5/12 md:py-2 py-2 md:pr-5 pr-1">
               {valueItems.slice(0, 2).map((item, index) => (
                 <div key={index} className="flex p-4 items-start justify-start">
                   <div className="align-middle bg-primary hover:bg-primary mt-[5px] md:ml-4 md:p-1.5 p-[7px] rounded-md  ">
@@ -252,10 +252,10 @@ export default function Page() {
               ))}
             </div>
             <div className="w-full lg:w-3/12 py-5 flex justify-center items-center">
-              <Image
+            <Image
                 src="images/about/values.webp"
                 alt="banner1"
-                className=" w-full  h-auto rounded-md max-w-xs lg:max-w-sm mx-auto"
+                className=" w-full  h-auto rounded-md max-w-xs lg:max-w-sm mx-auto md:hidden lg:block block"
                 width={332.69}
                 height={332.69}
                 onError={e => {
@@ -263,16 +263,27 @@ export default function Page() {
                 }}
                 loading="lazy"
               />
+              <Image
+                src="images/about/values-tab.jpg"
+                alt="banner1"
+                className=" min-w-[720px] h-auto rounded-md max-w-xs lg:max-w-sm mx-auto md:block lg:hidden hidden"
+                width={720.69}
+                height={332.69}
+                onError={e => {
+                  e.currentTarget.src = 'images/product-placeholder.webp'
+                }}
+                loading="lazy"
+              />
             </div>
-            <div className="w-full lg:w-2/5 py-11 md:pl-5">
+            <div className="w-full lg:w-2/5 md:py-2 py-11 md:pl-5">
               {valueItems.slice(2).map((item, index) => (
                 <div key={index} className="flex p-4 items-start justify-start">
-                  <div className="align-middle bg-primary hover:bg-primary mt-[5px]  md:ml-4 md:p-1.5 p-[7px] rounded-md  ">
+                  <div className="align-middle bg-primary hover:bg-primary mt-[5px] lg:ml-4 md:ml-[-5px] md:p-1.5 p-[7px] rounded-md  ">
                     <Image
                       src={item.imgSrc}
                       alt={item.alt}
-                      height={25}
-                      width={40}
+                      height={20}
+                      width={35}
                       onError={e => {
                         e.currentTarget.src = 'images/product-placeholder.webp'
                       }}
@@ -308,11 +319,11 @@ export default function Page() {
           className="bg-cream w-full flex flex-col lg:flex-row items-start justify-center py-12 md:px-16 px-4 lg:px-20 space-y-8 lg:space-y-0 lg:space-x-4 bg-cover bg-no-repeat bg-center relative"
           // style={{backgroundImage: "url('/images/about/aboutWavesBg_2.png')"}}
         >
-          <div className="flex flex-col items-start lg:w-1/2">
+          <div className="flex flex-col items-start md:w-[100%] lg:w-1/2 md:pl-0">
             <Image
               src="images/about/aboutBanner3.webp"
               alt="banner1"
-              className="h-64 lg:h-72 w-full rounded-md md:w-4/5 lg:w-full"
+              className="h-64 lg:h-72 w-full rounded-md md:w-full lg:w-full"
               width={668.28}
               height={288}
               onError={e => {
@@ -320,7 +331,7 @@ export default function Page() {
               }}
               loading="lazy"
             />
-            <div className="mt-4 max-w-2xl text-left">
+            <div className="mt-4 max-w-full text-left">
               <h1 className="text-2xl font-bold mb-4 text-brown">
                 Our Mission
               </h1>
@@ -332,11 +343,11 @@ export default function Page() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col items-start lg:w-1/2 md:pl-5">
+          <div className="flex flex-col items-start md:w-[100%] lg:w-1/2 md:pl-0">
             <Image
               src="images/about/aboutBanner4.webp"
               alt="banner2"
-              className="h-64 lg:h-72 w-full rounded-md md:w-4/5 lg:w-full"
+              className="h-64 lg:h-72 w-full rounded-md md:w-full lg:w-full"
               width={648.53}
               height={288}
               onError={e => {
@@ -344,7 +355,7 @@ export default function Page() {
               }}
               loading="lazy"
             />
-            <div className="mt-4 max-w-2xl text-left">
+            <div className="mt-4 max-w-full text-left">
               <h1 className="text-2xl font-bold mb-4 text-brown">
                 Our Vision
               </h1>

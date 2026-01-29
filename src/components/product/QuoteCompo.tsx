@@ -322,14 +322,14 @@ export default function QuoteCompo({
         }}
       >
         <DialogContent
-          className={`max-w-lg h-full pb-12 bg-cream ${addOpen && "hidden"}`}
+          className={`max-w-lg h-full pb-28 md:pb-16 bg-cream ${addOpen && "hidden"}`}
         >
           <DialogHeader>
             <DialogTitle className="text-brown text-xl font-bold">
               Request Pricing
             </DialogTitle>
           </DialogHeader>
-          <div className="h-[98%] scrollbar overflow-y-auto mb-7 pr-2">
+          <div className="h-[98%] scrollbar overflow-y-auto  pr-2">
             {/* Product List */}
             {totalProduct.isSingleProduct == true ? (
               <ProductVariantItem
@@ -501,15 +501,15 @@ export default function QuoteCompo({
             </div>
           </div>
           {/* Footer Actions */}
-          <DialogFooter className="flex justify-between fixed bottom-0 w-full px-5 py-5">
+          <DialogFooter className="flex flex-row sm:flex-row justify-between fixed bottom-0 w-full px-5 py-5 gap-2 md:gap-0 lg:gap-0 bg-cream z-50">
             <Button
               onClick={() => handleClose()}
-              className="bg-gray-200 text-brown px-4 py-2 border border-primary w-full w-1/2 hover:text-cream"
+              className="bg-gray-200 text-brown px-4 py-2 border border-primary w-full sm:w-1/2 hover:text-cream"
             >
               Cancel
             </Button>
             <Button
-              className="bg-primary text-white px-4 py-2 w-full w-1/2"
+              className="bg-primary text-white px-4 py-2 w-full sm:w-1/2"
               onClick={async () => {
                 await handleQuoteSubmit();
               }}

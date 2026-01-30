@@ -74,18 +74,19 @@ const FiltersSidebar: React.FC<FilterProps> = ({
   const [selectedAttributes, setSelectedAttributes] = useState<any>([]);
   const [sortBy, setSortBy] = useState("");
   const [filter, setFilter] = useState();
-  const [paramsObj , setParamsObj] = useState()
+  const [paramsObj, setParamsObj] = useState()
+
 
   const { callApi } = useApi();
 
-useEffect(() => {
-  const timeout = setTimeout(() => {
-    getFliters();
-  }, 300); // wait 400ms after last change
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      getFliters();
+    }, 300); // wait 400ms after last change
 
-  // Cleanup previous timeout if any dependency changes again
-  return () => clearTimeout(timeout);
-}, [catId, subCatId, childCatId, selectedAttributes]);
+    // Cleanup previous timeout if any dependency changes again
+    return () => clearTimeout(timeout);
+  }, [catId, subCatId, childCatId, selectedAttributes]);
 
 
   // useEffect(() => {
@@ -110,14 +111,21 @@ useEffect(() => {
         page: page || null,
         limit,
         searchTerm: searchTerm || null,
-        planType:
-          planType === "FREE" || planType === "PAID" ? planType : undefined,
+        planType: planType === "FREE" || planType === "PAID" ? planType : undefined,
         brandId: brandCode || null,
         purchaseType: purchaseType || null,
         isSingleProduct: isSingle || null,
         categoryId: catId || null,
-        subCategoryId: subCatId || null,
-        childCategories: childCatId || null,
+        // subCategoryId: subCatId || null,
+        // ✅ Handle multiple subcategories
+        subCategoryId: subCatId && Array.isArray(subCatId)
+          ? subCatId.join(',')  // "id1,id2,id3"
+          : subCatId || null,
+        // ✅ Handle multiple child categories
+        childCategories: childCatId && Array.isArray(childCatId)
+          ? childCatId.join(',')  // Join multiple IDs with comma
+          : childCatId || null,
+
         targetCustomer: buyerType || null,
         countryOfOrigin: country || null,
         status: status || null,
@@ -148,7 +156,7 @@ useEffect(() => {
     } catch (error) {
       handleApiError(error);
     }
-    finally{
+    finally {
       setGridLoading(false);
     }
   };
@@ -202,17 +210,31 @@ useEffect(() => {
     setParamsObj(params)
   };
 
-  const filterWithChildCategories = (childCats: any) => {
-    // // console.log("params from fun2 track back", childCats);
+  const filterWithChildCategories = (childCats: any[]) => {
+    // Now handles MULTIPLE child categories
+    if (childCats.length > 0) {
+      // ✅ Children selected → set all of them
+      setChildCatId(childCats); // Pass entire array instead of just first one
+    } else {
+      // ✅ No children selected → clear
+      setChildCatId(null);
+    }
+
     onChildCategorySelectionChange(childCats);
     setSelectedFilters((prev: any) => ({ ...prev, childCats }));
-    setChildCatId(childCats);
   };
 
-  const filterWithCategories = (categories: any) => {
+
+  const filterWithCategories = (categories: any[]) => {
+    const subCatIdValue = categories?.length ? categories[0] : null;
+
+    setSubCatId(subCatIdValue);
+
+    // When parent changes, clear child filter
+    setChildCatId(null);
+
     onSubCategorySelectionChange(categories);
     setSelectedFilters((prev: any) => ({ ...prev, categories }));
-    setSubCatId(categories);
   };
 
   // const filterWithAttrs = (attributes: any) => {
@@ -287,25 +309,29 @@ useEffect(() => {
       attributes: [],
       priceRange: [],
     });
+
+    // ✅ Clear all states
+    setVendorCode([]);
+    setSubCatId(null);
+    setChildCatId(null);
+    setPriceRangeObj([]);
+    setSelectedAttributes([]);
+
     onVendorSelectionChange([]);
     onChildCategorySelectionChange([]);
     onSubCategorySelectionChange([]);
     onPirceRangeChange([]);
     onSelectAttributeChange([]);
+
     setRefresht((refresht: any) => refresht + 1);
     setRefreshp((refreshp: any) => refreshp + 1);
 
     const url = window.location.href;
-
-    // Find the index of the '?'
     const queryIndex = url.indexOf("?");
-
-    // If there are query parameters, remove them
     if (queryIndex !== -1) {
-      const newUrl = url.substring(0, queryIndex); // Keep only the part before '?'
-      window.history.replaceState(null, "", newUrl); // Update the URL without reloading the page
+      const newUrl = url.substring(0, queryIndex);
+      window.history.replaceState(null, "", newUrl);
     }
-    // window.location.href()
   };
 
   return (
@@ -317,14 +343,14 @@ useEffect(() => {
             key !== "priceRange" && Array.isArray(filter) && filter.length > 0
           );
         }) && (
-          <button
-            onClick={handleClearAll}
-            className="flex items-center cursor-pointer text-sm font-medium text-primary border border-primary bg-cream p-2 rounded h-[35px]"
-          >
-            <IoClose className="mr-2 text-primary" />
-            Clear All
-          </button>
-        )}
+            <button
+              onClick={handleClearAll}
+              className="flex items-center cursor-pointer text-sm font-medium text-primary border border-primary bg-cream p-2 rounded h-[35px]"
+            >
+              <IoClose className="mr-2 text-primary" />
+              Clear All
+            </button>
+          )}
       </div>
       <div className="max-h-[calc(100vh-140px)] lg:max-h-[1030px] overflow-y-auto no-scrollbar">
         {/* CATEGORIES FILTER */}

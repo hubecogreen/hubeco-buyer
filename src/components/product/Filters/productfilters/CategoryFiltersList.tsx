@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import useApi from "@/components/Fetcher/useAPI";
 import * as getEndpoint from "../../../../network/EndPoints";
 import toast from "react-hot-toast";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import FilterHTML from "./FilterHTML";
 
 interface VendorFiltersListProps {
-  onCategorySelectionChange: (selectedCats: string[]) => void; // Function prop to handle selected vendors
+  onCategorySelectionChange: (selectedCats: string[]) => void;
   onChangeParentSelectionChange: (selectedParentid: string[]) => void;
   refresh: any;
 }
@@ -19,31 +19,28 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
 }) => {
   const { callApi } = useApi();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const scid = searchParams.get("scid");
+  const ccid = searchParams.get("ccid");
+
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
   const [selectedParentid, setSelectedParentId] = useState<string[]>([]);
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
 
-  const [catCount, setCatCount] = useState<any>(null);
-  const [categorySearch, setCategorySearch] = useState("");
   const [categoriesData, setCategoriesData] = useState<any[]>([]);
   const [filteredCategories, setFilteredCategories] = useState<any[]>([]);
-  const [openCategory, setOpenCategory] = useState("Office & Commercial");
+  const [catCount, setCatCount] = useState<number>(0);
+  const [categorySearch, setCategorySearch] = useState("");
   const [visibleCategoriesCount, setVisibleCategoriesCount] = useState(10);
-  const [showMore, setShowMore] = useState<any>(false);
+  const [showMore, setShowMore] = useState(false);
 
-  const scid = searchParams?.get("scid") as any;
-  const ccid = searchParams?.get("ccid") as any;
-
-  const pathname = usePathname();
+  /* ================= FETCH ================= */
 
   useEffect(() => {
-    const resetOptions = () => {
-      // Reset selected categories and parent
-      setSelectedParentId([]);
-      setSelectedCats([]);
-      setCategorySearch("");
-    };
-    resetOptions();
-  }, [pathname, searchParams, refresh]);
+    fetchCategories();
+  }, []);
 
   const fetchCategories = async () => {
     try {
@@ -51,202 +48,155 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
         getEndpoint.default.PRODUCTS_CATEGORIES,
         "GET"
       );
-      if (!Array.isArray(result?.data) || result.data.length === 0) {
-        throw new Error("No categories found");
-      }
 
-      // Get all subcategories from all categories (filter out empty/undefined subcategories)
-      const allSubCategories = (result.data as any[]).flatMap(
-        (category) => category.subCategories || []
+      const allSubCategories = result.data.flatMap(
+        (cat: any) => cat.subCategories || []
       );
 
       setCategoriesData(allSubCategories);
       setFilteredCategories(allSubCategories);
       setCatCount(allSubCategories.length);
-    } catch (error) {
-      handleApiError(error);
+    } catch (err) {
+      toast.error("Failed to load categories");
     }
   };
+
+  /* ============ RESET (ONLY MANUAL CLEAR) ============ */
+
+  useEffect(() => {
+    if (!refresh) return;
+
+    setSelectedCats([]);
+    setSelectedParentId([]);
+    setExpandedCategories([]);
+    setCategorySearch("");
+  }, [refresh]);
+
+  /* ============ URL → STATE SYNC (NO PUSH HERE) ============ */
+
+  useEffect(() => {
+    if (!categoriesData.length) return;
+
+    if (scid) {
+      setSelectedParentId([scid]);
+      setExpandedCategories([scid]);
+      onChangeParentSelectionChange([scid]);
+    }
+
+    if (ccid) {
+      const ccids = ccid.split(",");
+      setSelectedCats(ccids);
+      onCategorySelectionChange(ccids);
+    }
+  }, [scid, ccid, categoriesData]);
+
+  /* ================= HANDLERS ================= */
+
+  const onSelectCat = (id: string) => {
+    setSelectedCats(prev => {
+      const updated = prev.includes(id)
+        ? prev.filter(x => x !== id)
+        : [...prev, id];
+
+      onCategorySelectionChange(updated);
+
+      const params = new URLSearchParams(searchParams.toString());
+      updated.length
+        ? params.set("ccid", updated.join(","))
+        : params.delete("ccid");
+
+      router.push(`${pathname}?${params.toString()}`);
+      return updated;
+    });
+  };
+
+  const onSelectParentCat = (id: string) => {
+    setSelectedParentId(prev => {
+      const isSelected = prev.includes(id);
+
+      const params = new URLSearchParams(searchParams.toString());
+
+      if (isSelected) {
+        params.delete("scid");
+        params.delete("ccid");
+
+        setSelectedCats([]);
+        onCategorySelectionChange([]);
+        onChangeParentSelectionChange([]);
+
+        router.push(pathname);
+        return [];
+      }
+
+      params.set("scid", id);
+      params.delete("ccid");
+
+      setExpandedCategories([id]);
+      setSelectedCats([]);
+      onCategorySelectionChange([]);
+      onChangeParentSelectionChange([id]);
+
+      router.push(`${pathname}?${params.toString()}`);
+      return [id];
+    });
+  };
+
+  const toggleExpansion = (id: string) => {
+    setExpandedCategories(prev =>
+      prev.includes(id)
+        ? prev.filter(x => x !== id)
+        : [...prev, id]
+    );
+  };
+
+  /* ================= SEARCH ================= */
 
   const handleCategorySearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLowerCase();
     setCategorySearch(value);
 
-    const filtered = categoriesData.filter((category: any) => {
-      const matchesParent = category.name.toLowerCase().includes(value);
-      const matchesChild = category.childCategories?.some((child: any) =>
-        child.name.toLowerCase().includes(value)
-      );
-      if (matchesChild) {
-        setOpenCategory(category.name);
-      }
-
-      return matchesParent || matchesChild;
-    });
-    if (filtered.length > 0) {
-      setShowMore(false);
-    }
+    const filtered = categoriesData.filter(cat =>
+      cat.name.toLowerCase().includes(value) ||
+      cat.childCategories?.some((c: any) =>
+        c.name.toLowerCase().includes(value)
+      )
+    );
 
     setFilteredCategories(filtered);
-  };
-
-  const handleApiError = async (err: any) => {
-    const result = err?.response;
-    if (result?.status === 400) {
-      toast.error("Buyer Not Found");
-    } else if (result?.status === 404) {
-      toast.error("Invalid Request");
-    } else {
-      toast.error(result?.data?.message);
-    }
+    setShowMore(false);
   };
 
   const handleShowMoreCats = () => {
     setFilteredCategories(categoriesData);
-    setShowMore(true);
     setVisibleCategoriesCount(categoriesData.length);
+    setShowMore(true);
   };
+
   const handleShowLessCats = () => {
     setFilteredCategories(categoriesData.slice(0, 10));
-    setShowMore(false);
     setVisibleCategoriesCount(10);
+    setShowMore(false);
   };
 
-  const onSelectCat = (id: string, status = "non") => {
-    setSelectedCats((prevSelectedCats) => {
-      const updatedCats = prevSelectedCats.includes(id)
-        ? prevSelectedCats.filter((catId) => catId !== id)
-        : [...prevSelectedCats, id];
-      onCategorySelectionChange(updatedCats);
-      // Find the parent subcategory id for the selected child
-      const parentCategory = categoriesData.find((cat: any) =>
-        cat.childCategories?.some((child: any) => child._id === id)
-      );
-
-      // Send both child and subcategory id to parent
-
-      // Check if the parent category should be unselected if any child is unselected
-
-      // Check if the parent category should be unselected if any child is unselected
-      if (parentCategory) {
-        const allChildrenSelected = parentCategory.childCategories?.every(
-          (child: any) => updatedCats.includes(child._id)
-        );
-
-        if (!allChildrenSelected) {
-          setSelectedParentId((prevParentIds) =>
-            (prevParentIds || []).filter(
-              (catId) => catId !== parentCategory._id
-            )
-          );
-          setSelectedParentId((prevParentIds) => {
-            const updatedParentIds = (prevParentIds || []).filter(
-              (catId) => catId !== parentCategory._id
-            );
-            onChangeParentSelectionChange(updatedParentIds);
-            return updatedParentIds;
-          });
-        } else {
-          setSelectedParentId((prevParentIds) => {
-            if (!prevParentIds.includes(parentCategory._id)) {
-              return [...prevParentIds, parentCategory._id];
-            }
-            return prevParentIds;
-          });
-        }
-      }
-
-      return updatedCats;
-    });
-  };
-
-  const onSelectParentCat = (id: string) => {
-    const findChildCate = categoriesData.find((cat: any) => cat._id === id);
-
-    setSelectedParentId((prevSelectedParentCats) => {
-      const updatedParents = prevSelectedParentCats.includes(id)
-        ? prevSelectedParentCats.filter((catId) => catId !== id)
-        : [...prevSelectedParentCats, id];
-
-      onChangeParentSelectionChange(updatedParents);
-
-      // When selecting a parent, also select all child categories
-      if (findChildCate?.childCategories) {
-        const updatedCats = findChildCate.childCategories.map(
-          (child: any) => child._id
-        );
-        setSelectedCats((prevSelectedCats) => {
-          const newSelectedCats = [
-            ...Array.from(new Set([...prevSelectedCats, ...updatedCats])),
-          ];
-          onCategorySelectionChange(newSelectedCats);
-          // Do NOT call onCategorySelectionChange here, as it now expects an object for single child selection only
-          return newSelectedCats;
-        });
-      }
-
-      // When unselecting the parent, remove all its child categories as well
-      if (!updatedParents.includes(id)) {
-        setSelectedCats((prevSelectedCats) => {
-          const updatedCats = prevSelectedCats.filter(
-            (catId) =>
-              !findChildCate?.childCategories?.some(
-                (child: any) => child._id === catId
-              )
-          );
-          onCategorySelectionChange(updatedCats);
-
-          // Do NOT call onCategorySelectionChange here, as it now expects an object for single child selection only
-          return updatedCats;
-        });
-      }
-
-      return updatedParents;
-    });
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []); // Run once when the component mounts
-
-  useEffect(() => {
-    if (!categoriesData.length) return; // Ensure categories are loaded before proceeding.
-
-    // If `scid` exists, select the parent category and its children
-    if (scid) {
-      onSelectParentCat(scid); // This will select the parent and its children
-    }
-
-    // If `ccid` exists, select the specific child category without selecting the parent
-    if (ccid) {
-      const parentCategory = categoriesData.find((category: any) =>
-        category.childCategories?.some((child: any) => child._id === ccid)
-      );
-
-      if (parentCategory) {
-        setOpenCategory(parentCategory?.name);
-        onSelectCat(ccid, "direct"); // Select only the child category
-      }
-    }
-  }, [scid, ccid, categoriesData]); // Depend on categoriesData, scid, and ccid.
+  /* ================= RENDER ================= */
 
   return (
     <FilterHTML
       ccid={ccid}
-      catCount={catCount}
       scid={scid}
+      catCount={catCount}
       selectedParentid={selectedParentid}
+      expandedSubCats={expandedCategories}
+      toggleExpansion={toggleExpansion}
       onSelectParentCat={onSelectParentCat}
       filteredCategories={filteredCategories}
-      setOpenCategory={setOpenCategory}
       categorySearch={categorySearch}
       handleCategorySearch={handleCategorySearch}
-      openCategory={openCategory}
       handleShowMoreCats={handleShowMoreCats}
-      onSelectCat={onSelectCat}
-      showMore={showMore}
       handleShowLessCats={handleShowLessCats}
       visibleCategoriesCount={visibleCategoriesCount}
+      showMore={showMore}
+      onSelectCat={onSelectCat}
       selectedCats={selectedCats}
     />
   );

@@ -76,9 +76,9 @@ const WorksSection = () => {
         ].map((item, i) => (
           <div
             key={i}
-            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-primary h-[140px] w-full lg:px-5 lg:pt-10 lg:pb-5 lg:h-[215px] lg:w-[300px]"
+            className="flex items-start md:items-center px-3 pt-5 pb-3 md:p-[25px] rounded-xl border-[1px] border-primary h-[140px] md:h-[220px] w-full lg:px-5 lg:pt-10 lg:pb-5 lg:h-[215px] lg:w-[300px]"
           >
-            <div className="flex flex-col gap-3 lg:gap-5">
+            <div className="flex flex-col gap-3 md:gap-[20px] lg:gap-5">
               <div className="h-[32px] lg:h-[52px] flex items-center">
 
               <Image
@@ -86,10 +86,10 @@ const WorksSection = () => {
                 alt="icon"
                width={52}
                 height={32}
-                className="w-[30px] h-auto lg:w-[52px] lg:h-auto"
+                className="w-[30px] h-auto lg:w-[52px] lg:h-auto md:h-[52px] md:w-[52px]"
               />
               </div>
-              <p className="text-[13px] lg:text-[24px]  lg:leading-6 text-brown">
+              <p className="text-[13px] md:text-[22px] md:font-medium lg:text-[24px]  lg:leading-6 text-brown">
                 {item.text}
               </p>
             </div>
@@ -123,9 +123,9 @@ const WorksSection = () => {
         ].map((item, i) => (
           <div
             key={i}
-            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-secondary h-[140px] w-full lg:px-5 lg:pt-10 lg:pb-5 lg:h-[215px] lg:w-[300px]"
+            className="flex items-start md:items-center px-3 pt-5 pb-3 md:p-[30px] rounded-xl border-[1px] border-secondary h-[140px] md:h-[220px] w-full lg:px-5 lg:pt-10 lg:pb-5 lg:h-[215px] lg:w-[300px]"
           >
-            <div className="flex flex-col gap-3 lg:gap-5">
+            <div className="flex flex-col gap-3 md:gap-[20px] lg:gap-5">
                             <div className="h-[32px] lg:h-[52px] flex items-center">
 
               <Image
@@ -133,10 +133,10 @@ const WorksSection = () => {
                 alt="icon"
                 width={52}
                 height={32}
-                className="w-[30px] h-auto lg:w-[52px] lg:h-auto"
+                className="w-[30px] h-auto lg:w-[52px] lg:h-auto md:h-[52px] md:w-[52px]"
               />
               </div>
-              <p className="text-[13px]  lg:text-[24px] lg:leading-6 text-brown">
+              <p className="text-[13px] md:text-[22px] md:font-medium lg:text-[24px] lg:leading-6 text-brown">
                 {item.text}
               </p>
             </div>
@@ -161,11 +161,11 @@ const WorksSection = () => {
   {/* Left Div */}
   <div className="flex lg:flex-row flex-col justify-start lg:gap-[162px]">
   <div className="relative z-10  ">
-    <h2 className="text-center text-[43px] text-brown pb-3 lg:text-left lg:text-[43px] lg:pb-5">
+    <h2 className="text-center text-[43px] text-brown pb-3 lg:text-left lg:text-[43px] md:text-[27px] lg:pb-5">
       How it Works
     </h2>
 
-    <p className="text-[12px] leading-relaxed text-lightGraytext mb-4 lg:text-[18px] lg:leading-[30px] lg:w-[390px] lg:mb-10">
+    <p className="text-[12px] leading-relaxed text-lightGraytext mb-4 lg:text-[18px] md:text-[18px] lg:leading-[30px] lg:w-[390px] lg:mb-10">
       We are passionate about driving the transition towards sustainable
       living by providing eco-friendly construction materials for both B2B
       and B2C customers.

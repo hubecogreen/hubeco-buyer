@@ -6,7 +6,7 @@ export default function GreenFinancing() {
   const router = useRouter();
   return (
     <section className="w-full bg-[#FFFEF8] ">
-      <div className="w-full lg:max-w-[1440px] mx-auto px-4 lg:p-[100px]  flex flex-col items-center justify-start py-8 ">
+      <div className="w-full lg:max-w-[1440px] mx-auto  md:px-0  px-4 lg:p-[100px]  flex flex-col items-center justify-start py-8 ">
 
         {/* CENTER HEADING */}
         <h2 className="
@@ -41,12 +41,12 @@ export default function GreenFinancing() {
           </div>
 
           {/* Right Section */}
-          <div className="w-full lg:w-[582px] relative flex flex-col justify-center min-h-auto lg:min-h-[506px]">
+          <div className="w-full lg:w-[582px] relative flex flex-col justify-center md:px-5 min-h-auto lg:min-h-[506px]">
 
             {/* Text */}
             <div className="flex flex-col gap-[16px] sm:gap-[20px] lg:gap-[20px]">
               <p className="text-[16px] xs:text-[18px] sm:text-[20px] lg:text-[24px] leading-[22px] xs:leading-[26px] sm:leading-[28px] lg:leading-[30px] text-brown">
-                Access tailored financing solutions designed specifically for eco-friendly construction. Our green financing program empowers you to invest in certified sustainable materials while maintaining cost efficiency and project <br/>stability.
+                Access tailored financing solutions designed specifically for eco-friendly construction. Our green financing program empowers you to invest in certified sustainable materials while maintaining cost efficiency and project stability.
               </p>
               
               <p className="text-[16px] xs:text-[18px] sm:text-[20px] lg:text-[24px] leading-[22px] xs:leading-[26px] sm:leading-[28px] lg:leading-[30px] text-brown">

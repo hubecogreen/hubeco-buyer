@@ -1370,7 +1370,7 @@ const LoginPopup = ({
           </p>
 
           {/* Buyer + Vendor buttons */}
-          <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+          <div className="flex flex-row md:flex-row gap-4 w-full md:w-auto">
 
             {/* BUYER */}
             <button

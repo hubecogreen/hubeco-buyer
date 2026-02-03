@@ -35,7 +35,7 @@ const ProcureSection: React.FC = () => {
     ];
 
     return (
-        <section className="w-full flex justify-center pt-[60px] sm:pt-[80px] pb-[60px] sm:pb-[80px] lg:p-[100px]">
+        <section className="w-full flex justify-center pt-[60px] sm:pt-[80px] pb-[60px] md:pb-[40px] sm:pb-[80px] lg:p-[100px]">
             <div className="max-w-[1250px] w-full px-4 lg:px-0">
 
                 {/* HEADING */}
@@ -82,7 +82,7 @@ const ProcureSection: React.FC = () => {
                     </div>
 
                     {/* RIGHT CARDS */}
-                    <div className="grid grid-cols-2 gap-[10px] xs:gap-[12px] sm:gap-[15px] w-full">
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 gap-[10px] md:gap-[5px] xs:gap-[12px] sm:gap-[15px] w-full">
                         {services.map((service) => (
                             <div
                                 key={service.id}
@@ -94,7 +94,9 @@ const ProcureSection: React.FC = () => {
                 lg:rounded-[20px]
                 lg:w-[300px]
                 lg:h-[286px]
+                md:h-[231px]
                 p-[16px]
+                md:p-[20px]
                 xs:p-[20px]
                 sm:p-[28px]
                 lg:p-[40px]
@@ -104,12 +106,12 @@ const ProcureSection: React.FC = () => {
                                 <img
                                     src={service.icon}
                                     alt={service.title}
-                                    className="w-[32px] h-[32px] xs:w-[36px] xs:h-[36px] sm:w-[42px] sm:h-[42px] lg:w-[65px] lg:h-[65px]"
+                                    className="w-[32px] h-[32px] xs:w-[36px] xs:h-[36px] md:h-[52px] md:w-[52px] sm:w-[42px] sm:h-[42px] lg:w-[65px] lg:h-[65px]"
                                 />
                                 {/* <h3 className="text-[20px] lg:text-[22px] font-medium">
                                     {service.title}
                                 </h3> */}
-                                <p className="text-[11px] xs:text-[12px] sm:text-[14px] lg:text-[22px] text-brown leading-[16px] xs:leading-[17px] sm:leading-[20px] lg:leading-[28px]">
+                                <p className="text-[16px] xs:text-[12px] sm:text-[14px] lg:text-[22px] md:text-[16px] md:font-medium text-brown leading-[16px] xs:leading-[17px] sm:leading-[20px] lg:leading-[28px]">
                                     {service.description}
                                 </p>
                             </div>

@@ -87,6 +87,7 @@ export default function TrustedBy() {
       grid 
       grid-cols-2
       gap-4
+      md:gap-[10px]
       sm:gap-6
       lg:flex
       lg:justify-between
@@ -95,6 +96,7 @@ export default function TrustedBy() {
       lg:w-[1220px]
       max-w-[1220px]
       lg:h-[217px]
+      md:grid-cols-4
     "
   >
     {cards.map((card, index) => (
@@ -106,6 +108,7 @@ export default function TrustedBy() {
           sm:h-[180px]
           lg:w-[293.75px]
           lg:h-[217px]
+          md:h-[153px]
           rounded-[20px]
           p-[20px]
           sm:p-[25px]
@@ -115,7 +118,7 @@ export default function TrustedBy() {
           flex
           flex-col
           items-center
-          justify-center
+          justify-center          
         "
       >
         <Image

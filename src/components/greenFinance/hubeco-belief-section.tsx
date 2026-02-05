@@ -19,7 +19,7 @@ export default function HubecoBeliefSection() {
       <div className="max-w-screen-xl mx-auto px-4  ">
         <div className="bg-gray-50 rounded-3xl sm:px-10 lg:px-8 md:px-0 py-12 sm:py-16 ">
           <div
-            className="grid grid-cols-1  lg:grid-cols-2 gap-10 lg:gap-16 items-center  pb-14  rounded-2xl"
+            className="grid grid-cols-1  md:grid-cols-2 gap-10 lg:gap-16 md:gap-6 items-stretch pb-14  rounded-2xl"
            
           >
             {/* Left Column: Text */}
@@ -37,7 +37,7 @@ export default function HubecoBeliefSection() {
             </div>
 
             {/* Right Column: Image */}
-            <div className="relative h-72 sm:h-80 w-full rounded-2xl overflow-hidden shadow-lg">
+            <div className="relative  sm:h-80 w-full rounded-2xl overflow-hidden shadow-lg min-h-72 md:h-full">
               <Image
                 src="/images/greenFinance/about-Hubeco.jpg"
                 alt="Modern sustainable apartment buildings"

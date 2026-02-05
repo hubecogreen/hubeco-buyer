@@ -10,10 +10,10 @@ export default function GreenHomeLoanSection() {
   return (
     <div className="w-full py-16">
       <div className="max-w-[1450px] mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-6 items-stretch">
           {/* Left Image */}
           <div className="relative">
-            <div className="relative h-96 w-full rounded-2xl overflow-hidden">
+            <div className="relative  w-full rounded-2xl overflow-hidden  min-h-96 h-full">
               <Image
                 src="/images/greenFinance/loan_section2.png"
                 alt="Modern eco-conscious home with large windows"

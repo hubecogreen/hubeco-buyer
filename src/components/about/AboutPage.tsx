@@ -147,7 +147,7 @@ export default function Page() {
         <div className=" w-full ">
           <div
             className={`${styles.secondSection} flex flex-col md:flex-row items-center justify-between
-        md:py-12 py-6 px-2 lg:px-4 mx-auto max-w-[90%] gap-6 mb-12`}
+        md:py-12 py-6 px-2 lg:px-4 mx-auto max-w-[90%] lg:max-w-[90%] md:max-w-full gap-6 mb-12`}
           >
             {/* TEXT COLUMN */}
             <div className="md:w-1/2 overflow-visible lg:overflow-auto p-2 lg:p-4">
@@ -221,11 +221,11 @@ export default function Page() {
             </div>
           </div>
           <div
-            className="flex flex-col lg:flex-row justify-evenly mx-auto max-w-[94%]"
+            className="flex flex-col lg:flex-row justify-evenly mx-auto lg:max-w-[94%] max-w-[94%] md:max-w-full "
           >
             <div className="w-full lg:w-5/12 md:py-2 py-2 md:pr-5 pr-1">
               {valueItems.slice(0, 2).map((item, index) => (
-                <div key={index} className="flex p-4 items-start justify-start">
+                <div key={index} className="flex lg:p-4 p-4 md:py-4 md:px-0 items-start justify-start">
                   <div className="align-middle bg-primary hover:bg-primary mt-[5px] md:ml-4 md:p-1.5 p-[7px] rounded-md  ">
                     <Image
                       src={item.imgSrc}
@@ -244,7 +244,7 @@ export default function Page() {
                     <h1 className="text-xl font-medium mb-4 text-brown text-justify">
                       {item.title}
                     </h1>
-                    <p className="max-w-2xl text-brown text-md font-normal text-justify">
+                    <p className="lg:max-w-2xl max-w-2xl md:max-w-none text-brown text-md font-normal text-justify">
                       {item.description}
                     </p>
                   </div>
@@ -252,7 +252,7 @@ export default function Page() {
               ))}
             </div>
             <div className="w-full lg:w-3/12 py-5 flex justify-center items-center">
-            <Image
+              <Image
                 src="images/about/values.webp"
                 alt="banner1"
                 className=" w-full  h-auto rounded-md max-w-xs lg:max-w-sm mx-auto md:hidden lg:block block"
@@ -275,9 +275,9 @@ export default function Page() {
                 loading="lazy"
               />
             </div>
-            <div className="w-full lg:w-2/5 md:py-2 py-11 md:pl-5">
+            <div className="w-full lg:w-2/5 md:py-2 py-11 md:pl-5 md:pr-5 ">
               {valueItems.slice(2).map((item, index) => (
-                <div key={index} className="flex p-4 items-start justify-start">
+                <div key={index} className="flex lg:p-4 p-4 md:py-4 md:px-0  items-start justify-start">
                   <div className="align-middle bg-primary hover:bg-primary mt-[5px] lg:ml-4 md:ml-[-5px] md:p-1.5 p-[7px] rounded-md  ">
                     <Image
                       src={item.imgSrc}
@@ -296,7 +296,7 @@ export default function Page() {
                     <h1 className="text-xl font-medium mb-4 text-brown text-justify">
                       {item.title}
                     </h1>
-                    <p className="max-w-2xl text-brown text-md text-justify">
+                    <p className="lg:max-w-2xl max-w-2xl md:max-w-full text-brown text-md text-justify">
                       {item.description}
                     </p>
                   </div>
@@ -316,14 +316,14 @@ export default function Page() {
         </div>
 
         <div
-          className="bg-cream w-full flex flex-col lg:flex-row items-start justify-center py-12 md:px-16 px-4 lg:px-20 space-y-8 lg:space-y-0 lg:space-x-4 bg-cover bg-no-repeat bg-center relative"
-          // style={{backgroundImage: "url('/images/about/aboutWavesBg_2.png')"}}
+          className="bg-cream w-full flex flex-col lg:flex-row items-start justify-center py-12 md:px-4 px-4 lg:px-20 space-y-8 lg:space-y-0 lg:space-x-4 bg-cover bg-no-repeat bg-center relative"
+        // style={{backgroundImage: "url('/images/about/aboutWavesBg_2.png')"}}
         >
           <div className="flex flex-col items-start md:w-[100%] lg:w-1/2 md:pl-0">
             <Image
               src="images/about/aboutBanner3.webp"
               alt="banner1"
-              className="h-64 lg:h-72 w-full rounded-md md:w-full lg:w-full"
+              className="h-64 lg:h-72 w-full rounded-md md:w-full lg:w-full object-cover"
               width={668.28}
               height={288}
               onError={e => {
@@ -347,7 +347,7 @@ export default function Page() {
             <Image
               src="images/about/aboutBanner4.webp"
               alt="banner2"
-              className="h-64 lg:h-72 w-full rounded-md md:w-full lg:w-full"
+              className="h-64 lg:h-72 w-full rounded-md md:w-full lg:w-full object-cover"
               width={648.53}
               height={288}
               onError={e => {
@@ -393,7 +393,7 @@ export default function Page() {
                   <div className="flex flex-col md:flex-row gap-4">
                     <CustomButton
                       onPress={() => {
-                        window.location.href =`${process.env.NEXT_PUBLIC_VENDOR_URL}/login`;
+                        window.location.href = `${process.env.NEXT_PUBLIC_VENDOR_URL}/login`;
                       }}
                       title={"Vendor Connect"}
                       className="text-white bg-primary hover:bg-primary font-semibold h-12 w-full md:w-40 text-sm md:text-md"
@@ -425,17 +425,17 @@ export default function Page() {
         </div>
 
         {/* PROFILE SECTION */}
-        <div className="bg-cream w-full flex items-center justify-center p-6 md:p-12 bg-cover bg-no-repeat bg-center relative pb-0 lg:pb-20">
-          <div className="w-full flex justify-center">
+        <div className="bg-cream w-full flex items-center justify-center p-6 md:px-4 md:py-12 lg:p-12 bg-cover bg-no-repeat bg-center relative pb-0 lg:pb-20">
+          <div className="w-full flex lg:justify-center">
             {/* Main Container: 1280px x 542px */}
-            <div className="relative flex flex-col lg:flex-row w-full max-w-[400px] h-[542px] md:max-w-[770px] md:h-[952.5px] md:px-[6.95px] lg:pr-0 lg:max-w-[1280px] lg:h-auto border border-primary bg-cream rounded-xl overflow-hidden">
+            <div className="relative flex flex-col md:flex-row lg:flex-row  w-full  h-[542px]   md:h-[320px]  lg:pr-0 lg:max-w-[1280px] lg:h-auto border border-primary bg-cream rounded-xl overflow-hidden md:overflow-visible lg:overflow-hidden">
 
 
               {/* TEXT COLUMN: Properties based on Figma Auto Layout */}
-              <div className="flex-1 flex flex-col items-start justify-start px-4 md:px-12 lg:px-16 lg:pt-[95px] pt-2">
+              <div className="flex-1 flex flex-col items-start justify-start px-4 md:px-[32px] lg:px-16 lg:pt-[95px] md:pt-[40px] pt-2">
                 {/* Text Container: Set to Fill width and Hug height */}
                 <div className="w-full h-auto flex flex-col items-start gap-0">
-                  <h1 className="text-[40px] md:text-[56px] lg:text-[60px] font-bold text-brown leading-[1.1] lg:mb-[52px] mb-[20px]">
+                  <h1 className="text-[40px] md:text-[46px] lg:text-[60px] font-bold text-brown leading-[1.1] lg:mb-[52px] md:mb-[35px] mb-[20px]">
                     <span className="whitespace-nowrap">
                       Together,&nbsp;let&apos;s
                     </span>
@@ -449,27 +449,27 @@ export default function Page() {
                   {/* <span className="text-brown-medium">
                       hubeco.market
                     </span> */}
-                  <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mt-auto lg:pb-[95px]">
+                  <div className="flex flex-col md:flex-row items-start md:items-center gap-6 lg:gap-6 md:gap-6  mt-auto lg:pb-[95px] md:pb-[50px]">
                     <div className="flex flex-col">
                       <div className="flex items-center gap-3">
-                        <h2 className="text-2xl font-bold text-brown">
+                        <h2 className="text-2xl md:text-[22px] font-bold text-brown">
                           SaiPadma Potluri
                         </h2>
                         <Link
                           href="https://www.linkedin.com/in/saipadmap/"
                           target="_blank"
-                          className="hidden lg:flex p-1 rounded-md h-7 w-7 bg-primary hover:opacity-90 flex items-center justify-center transition-all"
+                          className="hidden lg:flex md:flex p-1 rounded-md h-7 w-7 bg-primary hover:opacity-90 flex items-center justify-center transition-all"
                         >
                           <BiLogoLinkedin className="text-white" size={24} />
                         </Link>
                       </div>
-                      <p className="text-brown text-lg">
+                      <p className="text-brown md:text-[17px] text-lg">
                         Founder & CEO
                       </p>
                       <Link
                         href="https://www.linkedin.com/in/saipadmap/"
                         target="_blank"
-                        className="lg:hidden mt-1 p-1 rounded-md h-7 w-7 bg-primary hover:opacity-90 flex items-center justify-center transition-all"
+                        className="lg:hidden md:hidden mt-1 p-1 rounded-md h-7 w-7 bg-primary hover:opacity-90 flex items-center justify-center transition-all"
                       >
                         <BiLogoLinkedin className="text-white" size={24} />
                       </Link>
@@ -479,23 +479,20 @@ export default function Page() {
               </div>
 
               {/* IMAGE COLUMN: Fixed 668px width */}
-              <div className="relative w-full h-[400px] md:w-[756.11px] md:h-[678.58px] lg:w-[668px] lg:h-[542px]">
+              <div className="relative w-full h-[400px] md:w-[528px] md:h-[320px] lg:w-[668px] lg:h-[542px]">                <Image
+                src="/images/about/blob-mobile.png"
+                alt="SaiPadma Potluri - Founder & CEO"
+                fill
+                className="object-cover object-top md:hidden"
+                loading="lazy"
+              />
                 <Image
-                  src="/images/about/blob-mobile.png"
+                  src="/images/about/blob-tab1.png"
                   alt="SaiPadma Potluri - Founder & CEO"
                   fill
-                  className="object-cover object-top md:hidden"
+                  className="hidden md:block lg:hidden absolute bottom-0 right-0 object-cover "
                   loading="lazy"
                 />
-                <Image
-                  src="/images/about/blob-tab.png"
-                  alt="SaiPadma Potluri - Founder & CEO"
-                  width={756}
-                  height={678}
-                  className="hidden md:block lg:hidden absolute bottom-0 left-[49%] -translate-x-1/2"
-                  loading="lazy"
-                />
-
                 <Image
                   src="/images/about/blob-desktop.png"
                   alt="SaiPadma Potluri - Founder & CEO"
@@ -508,6 +505,7 @@ export default function Page() {
                   loading="lazy"
                 />
 
+
               </div>
               <div className="hidden lg:block md:hidden absolute bottom-0 left-[-40px]">
                 <Image
@@ -519,6 +517,17 @@ export default function Page() {
                   priority
                 />
               </div>
+              <div className="hidden lg:hidden md:block absolute bottom-0 left-[-10px]">
+                <Image
+                  src="/images/about/leaf-1.png"
+                  alt="SaiPadma Potluri - Founder & CEO"
+                  width={97}
+                  height={238}
+
+                  loading="lazy"
+                />
+              </div>
+
             </div>
           </div>
         </div>

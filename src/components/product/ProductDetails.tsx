@@ -56,6 +56,7 @@ import SimilarProducts from "./SimilarProducts";
 import useClient from "../hooks/useClient";
 import Custom404 from "../404/page";
 import { normalizePath } from "@/lib/utils";
+import SubmitEnquiryModal from "../modals/SubmitEnquiryModal";
 
 interface ProductProps {
   slug: string;
@@ -150,6 +151,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
   const [startIndex, setStartIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
   const [isMobile, setIsMobile] = useState(false);
+  const [openEnquiryFlow, setOpenEnquiryFlow] = useState(false);
   const displayName = isSingle ? totalProduct?.name : productData?.variantName;
   const isLongVariant =
     (displayName && displayName.length > 17); // tweak threshold as you like
@@ -947,15 +949,21 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
 
 
+  // function checkBuyerLogin() {
+  //   const buyer = sessionStorage.getItem("buyerUserInfo");
+  //   if (buyer == null) {
+  //     window.location.href = "/login";
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
+
   function checkBuyerLogin() {
-    const buyer = sessionStorage.getItem("buyerUserInfo");
-    if (buyer == null) {
-      window.location.href = "/login";
-      return false;
-    } else {
-      return true;
-    }
-  }
+  const buyer = sessionStorage.getItem("buyerUserInfo");
+  return !!buyer;
+}
+
 
   // console.log(totalProduct, "totalProducttotalProduct");
 
@@ -1017,8 +1025,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
       }
     }
   }
-
   if (!isClient) return <></>;
+  
+  const enquiryInitialQty =
+  quantity ??
+  newSelectedVariant?.minBuyQty ??
+  1;
 
   // console.log(getMeta("metaDescription", totalProduct),"getMeta");
   return (
@@ -1477,6 +1489,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           onClick={() => {
                             if (checkBuyerLogin()) {
                               setIsOpen(true);
+                            }
+                            else {
+                              setOpenEnquiryFlow(true); // NOT logged in → open shared flow
                             }
                           }}
                         >
@@ -2236,7 +2251,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   {attachments && attachments?.length !== 0 && (
                     <TabsTrigger
                       value="attachments"
-                    className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                      className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                     >
                       Attachments
                     </TabsTrigger>
@@ -2531,9 +2546,13 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
         combinations={combinations}
         productData={productData}
       />
-
-
-
+      <SubmitEnquiryModal
+        open={openEnquiryFlow}
+        onClose={() => setOpenEnquiryFlow(false)}
+        product={productData}
+        mode="proceed"
+        initialQuantity={enquiryInitialQty}
+      />
     </div>
   );
 };

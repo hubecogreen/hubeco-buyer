@@ -202,7 +202,7 @@ export default function SubmitEnquiryModal({
                                 <p className="text-[#667085] text-sm sm:text-base">
                                     Your enquiry has been submitted successfully.
                                     <br />
-                                    Our team will contact you shortly.
+                                    Our team will contact you within 24 hours.
                                 </p>
                             </div>
 

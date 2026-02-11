@@ -270,6 +270,7 @@ export default function SubmitEnquiryModal({
 
                             {/* FORM */}
                             <form
+                             noValidate
                                 className="flex flex-col gap-4 lg:gap-3 flex-1 w-full"
                                 onSubmit={handleSubmit(onSubmit)}
                             >
@@ -284,7 +285,7 @@ export default function SubmitEnquiryModal({
                                             onChange={field.onChange}
                                             errorMessage={errors.name?.message}
                                             inputClassNames="h-[48px]"
-                                            required
+                                            
                                             placeholder=""
                                         />
                                     )}
@@ -308,7 +309,7 @@ export default function SubmitEnquiryModal({
                                                 height: "48px",
                                                 lineHeight: "48px",
                                             }}
-                                            required
+                                            
                                         />
                                     )}
                                 />
@@ -341,7 +342,7 @@ export default function SubmitEnquiryModal({
                                             isTextArea
                                             numberOfLines={4}
                                             inputClassNames="min-h-[120px] max-h-[160px] overflow-y-auto"
-                                            required
+                                           
                                             placeholder=""
                                         />
                                     )}

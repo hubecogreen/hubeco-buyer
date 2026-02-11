@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Buy Eco-Friendly, Low-Carbon Building Materials India Online",
     description:
-    "Discover eco-friendly, low‑carbon building materials online in India. Shop sustainable supplies on Hubeco Marketplace and build smarter, greener projects today.",
+      "Discover eco-friendly, low‑carbon building materials online in India. Shop sustainable supplies on Hubeco Marketplace and build smarter, greener projects today.",
     siteName: "Hubeco",
     images: [
       {
@@ -62,25 +62,25 @@ export default function RootLayout({
         <link rel="preconnect" href="https://assets.hubeco.market" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://snap.licdn.com" crossOrigin="anonymous" />
-        
+
         {/* DNS prefetch for faster resource loading */}
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://px.ads.linkedin.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        
+
         {/* Preload critical carousel images for LCP and Speed Index */}
         <link rel="preload" href="/images/home/latest/homebanner-roads.webp" as="image" type="image/webp" fetchPriority="high" />
         <link rel="preload" href="/images/home/latest/9.webp" as="image" type="image/webp" fetchPriority="high" />
         <link rel="preload" href="/images/home/latest/f.webp" as="image" type="image/webp" fetchPriority="high" />
         <link rel="preload" href="/images/home/latest/8.webp" as="image" type="image/webp" fetchPriority="high" />
-        
+
         {/* Preload critical background images */}
         <link rel="preload" href="/images/home/bg1.webp" as="image" type="image/webp" />
-        
+
         {/* Preload critical CSS for faster rendering */}
         <link rel="preload" href="/globals.css" as="style" />
         <noscript><link rel="stylesheet" href="/globals.css" /></noscript>
-        
+
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="lazyOnload">
           {`
@@ -104,7 +104,7 @@ export default function RootLayout({
             gtag('config', 'G-REE72KGV61');
           `}
         </Script>
-        
+
         {/* Service Worker Registration for Enhanced Caching */}
         <Script id="service-worker" strategy="lazyOnload">
           {`
@@ -125,15 +125,15 @@ export default function RootLayout({
       <body className={poppins.className}>
         {/* Google Tag Manager (noscript) */}
         <noscript>
-          <iframe 
+          <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-TBS9JSSD"
-            height="0" 
-            width="0" 
+            height="0"
+            width="0"
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
         {/* End Google Tag Manager (noscript) */}
-        
+
         <MainLayout isProd={isProd}>{children}</MainLayout>
 
         {/* LinkedIn Insight Tag */}
@@ -149,6 +149,55 @@ export default function RootLayout({
           strategy="lazyOnload"
           src="https://snap.licdn.com/li.lms-analytics/insight.min.js"
         />
+        {/* Page Load Diagnostics */}
+        <Script id="page-load-diagnostics" strategy="afterInteractive">
+          {`
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        const t = performance.timing;
+
+        const metrics = {
+          DNS_Time: t.domainLookupEnd - t.domainLookupStart,
+          TCP_Connection: t.connectEnd - t.connectStart,
+          TTFB_Server_Response: t.responseStart - t.requestStart,
+          Response_Download: t.responseEnd - t.responseStart,
+          DOM_Processing: t.domComplete - t.domLoading,
+          First_Render: t.domContentLoadedEventEnd - t.navigationStart,
+          Full_Page_Load: t.loadEventEnd - t.navigationStart,
+        };
+
+        console.group("🚀 PAGE LOAD DIAGNOSTICS");
+        console.table(metrics);
+        console.groupEnd();
+
+        // Paint Metrics
+        new PerformanceObserver((list) => {
+          list.getEntries().forEach((entry) => {
+            console.log("🎨 Paint Metric:", entry.name, entry.startTime + "ms");
+          });
+        }).observe({ type: "paint", buffered: true });
+
+        // LCP
+        new PerformanceObserver((list) => {
+          const entries = list.getEntries();
+          const last = entries[entries.length - 1];
+          if (last) {
+            console.log("🔥 LCP:", last.startTime, "ms");
+          }
+        }).observe({ type: "largest-contentful-paint", buffered: true });
+
+        // Long Tasks
+        new PerformanceObserver((list) => {
+          list.getEntries().forEach((entry) => {
+            console.warn("⛔ Long JS Task:", entry.duration, "ms");
+          });
+        }).observe({ type: "longtask", buffered: true });
+
+      }, 100);
+    });
+  `}
+        </Script>
+
         <noscript>
           <Image
             height={1}

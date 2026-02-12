@@ -137,6 +137,7 @@ export default function SubmitEnquiryModal({
           sm:w-[500px]
           lg:w-[500px]
           max-w-[672px]
+          
           overflow-hidden
           flex flex-col
         "
@@ -217,145 +218,138 @@ export default function SubmitEnquiryModal({
                             />
                         </div>
                     )}
+                    
                     {/* ================= ENQUIRY FORM ================= */}
                     {step === "form" && (
-                        <>
-                            {/* HEADER */}
-                            <div className="flex justify-between items-center mb-6 lg:mb-4">
+                        <div className="flex flex-col h-full max-h-[75vh] md:max-h-[90vh] overflow-hidden"> {/* Container for the whole form view */}
+
+                            {/* FIXED HEADER */}
+                            <div className="flex justify-between items-center mb-4 flex-shrink-0">
                                 <h2 className="text-lg font-semibold">Submit an Enquiry</h2>
                                 <button onClick={handleClose}>
                                     <X size={18} />
                                 </button>
                             </div>
 
-                            {/* PRODUCT + QUANTITY */}
-                            <div className="flex items-center justify-between mb-6 lg:mb-4">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-[50px] h-[50px] rounded-[10px] overflow-hidden border">
-                                        <Image
-                                            src={
-                                                productImage
-                                                    ? normalizePath(`${process.env.NEXT_PUBLIC_ASSET_URL}/${productImage}`)
-                                                    : "/images/product-placeholder.webp"
-                                            }
-                                            alt={productName}
-                                            width={50}
-                                            height={50}
-                                            className="object-cover"
-                                        />
-                                    </div>
-                                    <p className="font-medium text-brown">
-                                        {productName}
-                                    </p>
-                                </div>
-
-                                <div className="flex items-center border border-primary rounded-md overflow-hidden">
-                                    <button
-                                        type="button"
-                                        className="px-4 py-2 text-pink-600 text-lg"
-                                        onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                                    >
-                                        −
-                                    </button>
-                                    <span className="px-4 py-2 border-x">{quantity}</span>
-                                    <button
-                                        type="button"
-                                        className="px-4 py-2 text-pink-600 text-lg"
-                                        onClick={() => setQuantity((q) => q + 1)}
-                                    >
-                                        +
-                                    </button>
-                                </div>
-                            </div>
-
-                            {/* FORM */}
+                            {/* SCROLLABLE BODY */}
                             <form
-                             noValidate
-                                className="flex flex-col gap-4 lg:gap-3 flex-1 w-full"
+                                noValidate
+                                className="flex flex-col flex-1 overflow-hidden" // Main form wrapper
                                 onSubmit={handleSubmit(onSubmit)}
                             >
-                                <Controller
-                                    name="name"
-                                    control={control}
-                                    rules={{ required: "Name is required" }}
-                                    render={({ field }) => (
-                                        <CustomInput
-                                            label="Name*"
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                            errorMessage={errors.name?.message}
-                                            inputClassNames="h-[48px]"
-                                            
-                                            placeholder=""
-                                        />
-                                    )}
-                                />
+                                <div className="flex-1 overflow-y-auto pr-2 scrollbar">
+                                    {/* Inside here are the scrolling elements. 
+                   The padding-right (pr-2) prevents the scrollbar from overlapping content. 
+                */}
 
-                                <Controller
-                                    name="phone"
-                                    control={control}
-                                    rules={{ required: "Phone number is required" }}
-                                    render={({ field }) => (
-                                        <CustomInput
-                                            label="Phone Number*"
-                                            placeholder="Enter Phone Number"
-                                            prefix="+91"
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                            errorMessage={errors.phone?.message}
-                                            isMobileInput
-                                            extraClassnames="custom-input"
-                                            customStyles={{
-                                                height: "48px",
-                                                lineHeight: "48px",
-                                            }}
-                                            
-                                        />
-                                    )}
-                                />
+                                    {/* PRODUCT + QUANTITY (Now inside scroll area) */}
+                                    <div className="flex items-center justify-between mb-6 lg:mb-4">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-[50px] h-[50px] rounded-[10px] overflow-hidden border">
+                                                <Image
+                                                    src={productImage ? normalizePath(`${process.env.NEXT_PUBLIC_ASSET_URL}/${productImage}`) : "/images/product-placeholder.webp"}
+                                                    alt={productName}
+                                                    width={50}
+                                                    height={50}
+                                                    className="object-cover"
+                                                />
+                                            </div>
+                                            <p className="font-medium text-brown">{productName}</p>
+                                        </div>
 
-                                <Controller
-                                    name="email"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <CustomInput
-                                            label="Email"
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                            type="email"
-                                            inputClassNames="h-[48px]"
-                                            placeholder=""
-                                        />
-                                    )}
-                                />
+                                        <div className="flex items-center border border-primary rounded-md overflow-hidden">
+                                            <button
+                                                type="button"
+                                                className="px-4 py-2 text-pink-600 text-lg"
+                                                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                                            > − </button>
+                                            <span className="px-4 py-2 border-x">{quantity}</span>
+                                            <button
+                                                type="button"
+                                                className="px-4 py-2 text-pink-600 text-lg"
+                                                onClick={() => setQuantity((q) => q + 1)}
+                                            > + </button>
+                                        </div>
+                                    </div>
 
-                                <Controller
-                                    name="requirement"
-                                    control={control}
-                                    rules={{ required: "Requirement is required" }}
-                                    render={({ field }) => (
-                                        <CustomInput
-                                            label="Requirement*"
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                            errorMessage={errors.requirement?.message}
-                                            isTextArea
-                                            numberOfLines={4}
-                                            inputClassNames="min-h-[120px] max-h-[160px] overflow-y-auto"
-                                           
-                                            placeholder=""
+                                    {/* FORM FIELDS */}
+                                    <div className="flex flex-col gap-4 lg:gap-3 pb-4">
+                                        <Controller
+                                            name="name"
+                                            control={control}
+                                            rules={{ required: "Name is required" }}
+                                            render={({ field }) => (
+                                                <CustomInput
+                                                    label="Name*"
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                    errorMessage={errors.name?.message}
+                                                    inputClassNames="h-[48px]"
+                                                    placeholder=""
+                                                />
+                                            )}
                                         />
-                                    )}
-                                />
 
-                                {/* BUTTONS */}
-                                <div className="flex gap-4 mt-auto pt-4">
+                                        <Controller
+                                            name="phone"
+                                            control={control}
+                                            rules={{ required: "Phone number is required" }}
+                                            render={({ field }) => (
+                                                <CustomInput
+                                                    label="Phone Number*"
+                                                    placeholder="Enter Phone Number"
+                                                    prefix="+91"
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                    errorMessage={errors.phone?.message}
+                                                    isMobileInput
+                                                    customStyles={{ height: "48px" }}
+                                                />
+                                            )}
+                                        />
+
+                                        <Controller
+                                            name="email"
+                                            control={control}
+                                            render={({ field }) => (
+                                                <CustomInput
+                                                    label="Email"
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                    type="email"
+                                                    inputClassNames="h-[48px]"
+                                                    placeholder=""
+                                                />
+                                            )}
+                                        />
+
+                                        <Controller
+                                            name="requirement"
+                                            control={control}
+                                            rules={{ required: "Requirement is required" }}
+                                            render={({ field }) => (
+                                                <CustomInput
+                                                    label="Requirement*"
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                    errorMessage={errors.requirement?.message}
+                                                    isTextArea
+                                                    numberOfLines={4}
+                                                    inputClassNames="min-h-[120px]"
+                                                    placeholder=""
+                                                />
+                                            )}
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* FIXED FOOTER BUTTONS */}
+                                <div className="flex gap-4 pt-4 mt-auto  bg-[#FFFEF8] flex-shrink-0">
                                     <CustomButton
                                         title="Cancel"
                                         onPress={handleClose}
                                         className="w-1/2 border border-primary text-primary bg-cream"
                                     />
-
                                     <CustomButton
                                         title="Submit Enquiry"
                                         type="submit"
@@ -363,7 +357,7 @@ export default function SubmitEnquiryModal({
                                     />
                                 </div>
                             </form>
-                        </>
+                        </div>
                     )}
                 </div>
             </div>

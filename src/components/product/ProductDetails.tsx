@@ -1576,7 +1576,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       )}
 
                     {/* CERTIFIED BUTTON */}
-                    <div className="w-full md:w-auto relative ">
+                    <div className="w-full md:w-auto relative  -ml-1 md:-ml-2">
 
                       {totalProduct?.certificate?.certificateImg.endsWith(".pdf") ? (
                         // PDF BUTTON

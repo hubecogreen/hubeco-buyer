@@ -121,12 +121,13 @@ export default function Page() {
             About
           </Link>
         </div>
-
+          
         <div
           className="
                     z-100 bg-cream w-full flex justify-start items-center
                     pt-[80px] pb-[40px]
                     px-[80px]
+                    md:px-[40px]
                     max-lg:px-6
                     max-sm:px-4
   "
@@ -153,17 +154,18 @@ export default function Page() {
                   ABOUT US
                 </span>
 
-                <h2 className="text-[60px] font-bold leading-[1.1] mb-8">
+                <h2 className="lg:text-[60px] md:text-[48px] text-[36px] font-bold leading-[1.1] mb-8">
                   <span className="block text-brown">Building a</span>
                   <span className="block text-primary">Sustainable Future</span>
                 </h2>
 
                 <div>
-                  <p className="md:text-lg text-[18px] text-justify leading-relaxed">
-                    I am delighted to introduce hubeco.market, our green sourcing
+                  <p className="md:text-lg lg:text-[18px] text-start leading-relaxed">
+                    I am delighted to introduce{" "}
+                    <span className="font-bold">hubeco.market</span>, our green sourcing
                     platform for building and architectural products and services.
                   </p>
-                  <p className="md:text-lg text-[18px] text-justify leading-relaxed mt-4">
+                  <p className="md:text-lg text-[18px] text-start leading-relaxed mt-4">
                     Our mission is to empower builders architects and homeowners to make
                     sustainable choices that positively impact our planet. We believe
                     that every construction project, whether big or small, should
@@ -188,7 +190,9 @@ export default function Page() {
       text-white
       flex items-center justify-center
       gap-1
+      whitespace-nowrap
     "
+     onPress={() => router.push("/products")}
                 rightIcon={<GoArrowRight />}
               />
             </div>
@@ -200,7 +204,7 @@ export default function Page() {
                 alt="About Hubeco"
                 width={608}
                 height={600}
-                className="w-full lg:h-[608px] h-[268px] md:h-[408px] rounded-md object-cover"
+                className="w-full lg:h-[608px] h-[268px] md:h-[408px] rounded-[16px] object-cover"
               />
             </div>
 
@@ -209,14 +213,14 @@ export default function Page() {
 
         <div className=" w-full ">
           {/* Replace the entire secondSection div with this */}
-          <div className={`flex flex-col items-center py-6 md:py-8 lg:pb-10 mx-auto max-w-[1280px] w-full gap-6 `}>
+          <div className={`flex flex-col items-center py-2 md:px-8 lg:px-0 px-2 md:py-8 lg:pb-10 mx-auto max-w-[1280px] w-full gap-6 `}>
             <div className="w-full p-2 md:p-2 lg:p-0">
               <span className="text-[14px] font-semibold text-primary tracking-wider mb-2 block">
                 OUR FOCUS
               </span>
 
               <h1 className="text-2xl font-bold mb-4 text-brown">What We Do</h1>
-              <p className="text-md text-brown mb-6">
+              <p className="text-md text-brown lg:mb-6 md:mb-6 mb-6">
                 We provide a comprehensive marketplace that connects you with a wide
                 range of eco-friendly building materials.
               </p>
@@ -226,13 +230,13 @@ export default function Page() {
                 {accordionItems.map((item, index) => (
                   <div
                     key={index}
-                    className="w-full lg:max-w-[290px] h-[259.5px] p-8 rounded-2xl border border-primary bg-cream hover:shadow-lg transition-shadow duration-300"
+                    className="w-full lg:max-w-[290px] md:h-[259px] h-[153.5px] md:p-8 py-5 px-8 rounded-2xl border border-primary bg-cream hover:shadow-lg transition-shadow duration-300"
                     style={{
                       borderRadius: '16px',
                       borderWidth: '1px',
                     }}
                   >
-                    <div className="flex flex-col h-full">
+                    <div className="flex md:flex-col flex-row justify-between md:justify-start gap-6 md:gap-0  h-full">
                       {/* Icon */}
                       <div className="mb-6">
                         <Image
@@ -240,12 +244,12 @@ export default function Page() {
                           alt={item.alt}
                           width={56}
                           height={56}
-                          className="w-14 h-14"
+                          className="w-15 h-14"
                         />
                       </div>
-
+<div className="w-full flex items-start justify-between md:items-start justify-start flex-col">
                       {/* Title */}
-                      <h3 className="font-semibold text-brown text-lg mb-3">
+                      <h3 className="font-semibold text-brown md:text-lg text-[20px] mb-3">
                         {item.title}
                       </h3>
 
@@ -253,6 +257,7 @@ export default function Page() {
                       <p className="text-[14px] text-brown leading-relaxed">
                         {item.description}
                       </p>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -262,26 +267,26 @@ export default function Page() {
           </div>
 
           {/* OUR VALUES SECTION */}
-          <div className="w-full py-[40px] px-[80px] max-lg:px-6 max-sm:px-4">
+          <div className="w-full py-[40px] md:px-[40px] lg:px-[80px] px-4">
             <div className="max-w-[1280px] mx-auto w-full">
 
-              <div className="flex flex-col lg:flex-row gap-16 lg:items-end">
+              <div className="flex flex-col lg:flex-row md:flex-col gap-[23px] md:gap-16 lg:items-end">
 
                 {/* LEFT SIDE */}
-                <div className="flex-1">
+                <div className="flex-1 order-2 lg:order-none mt-0">
 
                   {/* Heading */}
                   <div className="mb-12">
-                    <h2 className="text-[36px] font-bold text-brown mb-4">
+                    <h2 className="text-[36px] md:text-start text-center font-bold text-brown mb-4">
                       Our Values
                     </h2>
-                    <p className="text-brown text-sm">
+                    <p className="text-brown md:text-start text-center text-[18px] md:text-sm">
                       Guiding principles that drive our commitment to a sustainable future.
                     </p>
                   </div>
 
                   {/* Values List */}
-                  <div className="space-y-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-10">
                     {valueItems.map((item, index) => (
                       <div key={index} className="border-b border-primary pb-6">
 
@@ -310,7 +315,7 @@ export default function Page() {
                   </div>
                 </div>
 
-                <div className="flex-1 flex justify-end lg:items-end items-center">
+                <div className="w-full order-1 lg:order-none lg:flex-1 flex md:justify-start justify-center lg:justify-end">
                   <Image
                     src="images/about/values.webp"
                     alt="Sustainable values"
@@ -318,18 +323,38 @@ export default function Page() {
                     height={702}
                     className="
                             w-full
-                            max-w-[582px]
-                            h-auto
+                            max-w-[582px]                            
+                            md:max-w-[688px]
+                            md:h-[476px]
+                            lg:h-auto
                             rounded-xl
                             object-cover
+                            hidden
+                            lg:block 
+                            md:hidden
+                            block
                           "
+                  />
+                  <Image
+                   src="images/about/values-tab.jpg"
+                    alt="Sustainable values"
+                    width={688} 
+                    height={476}
+                    className="hidden md:w-full md:block lg:hidden rounded-xl"
+                    />  
+                    <Image
+                    src="images/about/values-mob.png"
+                    alt="Sustainable values"
+                    width={358}
+                    height={268}
+                    className="md:hidden block lg:hidden w-full h-full rounded-xl"
                   />
                 </div>
 
 
               </div>
               {/* Center Button */}
-              <div className="flex justify-center mt-12">
+              <div className="flex justify-center mt-12 order-3 lg:order-none">
                 <CustomButton
                   title="Explore Materials"
                   className="bg-primary hover:bg-primary text-white h-[48px] px-8 rounded-md"
@@ -342,7 +367,7 @@ export default function Page() {
         </div>
 
         {/* MISSION & VISION SECTION */}
-        <div className="w-full py-[40px] px-[80px] max-lg:px-6 max-sm:px-4">
+        <div className="w-full py-[40px] px-[80px] md:px-[40px] max-lg:px-6 max-sm:px-4">
           <div className="max-w-[1280px] mx-auto w-full">
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -454,7 +479,7 @@ export default function Page() {
         </div>
 
         {/* PROFILE SECTION */}
-        <div className="bg-cream w-full flex items-center justify-center p-6 md:px-4 md:py-12 lg:p-12 bg-cover bg-no-repeat bg-center relative pb-0 lg:pb-20">
+        <div className="bg-cream w-full flex items-center justify-center px-4 p-6 md:px-10 md:py-12 lg:p-12 bg-cover bg-no-repeat bg-center relative pb-0 lg:pb-20">
           <div className="w-full flex lg:justify-center">
             {/* Main Container: 1280px x 542px */}
             <div className="relative flex flex-col md:flex-row lg:flex-row  w-full  h-[542px]   md:h-[320px]  lg:pr-0 lg:max-w-[1280px] lg:h-auto border border-primary bg-cream rounded-xl overflow-hidden md:overflow-visible lg:overflow-hidden">

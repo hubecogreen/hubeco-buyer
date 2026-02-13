@@ -78,9 +78,9 @@ export default function RootLayout({
         <link rel="preload" href="/images/home/bg1.webp" as="image" type="image/webp" />
 
         {/* Preload critical CSS for faster rendering */}
-        <link rel="preload" href="/globals.css" as="style" />
-        <noscript><link rel="stylesheet" href="/globals.css" /></noscript>
-
+        {/* <link rel="preload" href="/globals.css" as="style" />
+        <noscript><link rel="stylesheet" href="/globals.css" /></noscript> */}
+        
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="lazyOnload">
           {`

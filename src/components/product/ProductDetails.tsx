@@ -1602,7 +1602,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               href="#"
                               className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
                        w-[90%] md:w-40 mx-auto md:mx-0
-                       text-sm md:text-md flex items-center justify-center
+                       text-sm md:text-md flex items-center justify-center rounded-md
                        md:relative md:right-[10px]"
                             >
                               <p className="text-cream font-semibold text-md">Certified</p>

@@ -70,6 +70,7 @@ export default function RootLayout({
 
         {/* Preload critical carousel images for LCP and Speed Index */}
         <link rel="preload" href="/images/actions/Action.jpg" as="image" type="image/webp" fetchPriority="high" />
+        <link rel="preload" href="/images/home/hero/video-poster.png" as="image" type="image/webp" fetchPriority="high" />
 
         {/* Preload critical background images */}
         {/* <link rel="preload" href="/images/home/bg1.webp" as="image" type="image/webp" /> */}

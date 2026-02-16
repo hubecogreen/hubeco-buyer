@@ -66,8 +66,25 @@ export const metadata: Metadata = {
 };
 
 export default function MyApp() {
+  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
+  const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video.mp4`;
+  const assetOrigin = (() => {
+    if (!assetURL) return "";
+    try {
+      return new URL(assetURL).origin;
+    } catch {
+      return "";
+    }
+  })();
+
   return (
     <div className="bg-cream ">
+      <head>
+        {assetOrigin ? (
+          <link rel="preconnect" href={assetOrigin} crossOrigin="anonymous" />
+        ) : null}
+        <link rel="preload" href={heroVideoUrl} as="video" type="video/mp4" />
+      </head>
       <OrganizationSchema />
       <HomePage />
     </div>

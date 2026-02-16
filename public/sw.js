@@ -23,6 +23,7 @@ self.addEventListener('install', (event) => {
         // Pre-cache critical images
         return cache.addAll([
           '/images/actions/Action.jpg',
+          '/images/home/hero/video-poster.png'
         ]);
       })
     ])

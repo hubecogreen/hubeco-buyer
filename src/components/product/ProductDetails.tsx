@@ -1575,7 +1575,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               (e.currentTarget.src = "/images/product-placeholder.webp")
                             }
                             loading="lazy"
-                            className="md:w-[60px] w-[80px] h-[60px] rounded-full border border-[#f0f0f0] bg-white object-contain"
+                            className="md:w-[60px] w-[80px] h-[60px] rounded-full border border-[#f0f0f0] bg-transparent object-contain"
                           />
                         </div>
                       )}

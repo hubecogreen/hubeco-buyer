@@ -959,7 +959,7 @@ const Header: React.FC<HeaderProps> = () => {
 {/* Logo */}
 <Link href="/" className="flex-shrink-0">
   <Image
-    src="/images/home/header/hubeco-logo.png"
+    src="/images/Rlogo.png"
     alt="Hubeco Logo"
     width={140}
     height={40}
@@ -1144,7 +1144,7 @@ const Header: React.FC<HeaderProps> = () => {
   {/* Logo */}
   <Link href="/" className="flex justify-center flex-1">
     <Image
-      src="/images/home/header/hubeco-logo.png"
+      src="/images/Rlogo.png"
       alt="Hubeco Logo"
       width={188}
       height={43}
@@ -1358,7 +1358,7 @@ const LoginPopup = ({
 
           {/* Logo */}
           <Image
-            src="/images/home/header/hubeco-logo.png"
+            src="/images/Rlogo.png"
             alt="Hubeco Logo"
             width={180}
             height={40}

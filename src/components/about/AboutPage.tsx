@@ -165,7 +165,7 @@ export default function Page() {
                     <span className="font-bold">hubeco.market</span>, our green sourcing
                     platform for building and architectural products and services.
                   </p>
-                  <p className="md:text-lg text-[18px] text-start leading-relaxed mt-4">
+                  <p className="md:text-lg lg:text-[18px] text-start leading-relaxed mt-4">
                     Our mission is to empower builders architects and homeowners to make
                     sustainable choices that positively impact our planet. We believe
                     that every construction project, whether big or small, should

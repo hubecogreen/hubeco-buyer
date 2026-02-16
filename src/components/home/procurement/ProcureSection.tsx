@@ -62,7 +62,7 @@ const ProcureSection: React.FC = () => {
             h-[280px]
             xs:h-[320px]
             sm:h-[400px]
-            md:h-[600px] 
+            md:h-[449px] 
             lg:h-[598px]
             rounded-[12px]
             overflow-hidden
@@ -72,13 +72,13 @@ const ProcureSection: React.FC = () => {
                         <img
                             src="/images/procurement/img1.png"
                             alt="Procurement Benefits"
-                            className="w-full h-full object-cover lg:object-cover md:object-cover md:hidden lg:block block"
+                            className="w-full h-full object-cover lg:object-cover md:object-cover md:object-[50%_25%] md:block lg:block block"
                         />
-                        <img
+                        {/* <img
                             src="/images/procurement/img1-tab.png"
                             alt="Procurement Benefits"
                             className="w-full h-full object-cover lg:object-cover md:object-cover md:block lg:hidden hidden"
-                        />
+                        /> */}
                     </div>
 
                     {/* RIGHT CARDS */}

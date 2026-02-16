@@ -960,9 +960,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
   // }
 
   function checkBuyerLogin() {
-  const buyer = sessionStorage.getItem("buyerUserInfo");
-  return !!buyer;
-}
+    const buyer = sessionStorage.getItem("buyerUserInfo");
+    return !!buyer;
+  }
 
 
   // console.log(totalProduct, "totalProducttotalProduct");
@@ -1026,11 +1026,11 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
     }
   }
   if (!isClient) return <></>;
-  
+
   const enquiryInitialQty =
-  quantity ??
-  newSelectedVariant?.minBuyQty ??
-  1;
+    quantity ??
+    newSelectedVariant?.minBuyQty ??
+    1;
 
   // console.log(getMeta("metaDescription", totalProduct),"getMeta");
   return (
@@ -1155,12 +1155,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     <div className="flex items-center gap-1 mt-4 h-auto md:h-[218px]">
 
                       {/* PREV BUTTON */}
-                      <button
-                        onClick={prevImage}
-                        className="flex w-6 h-6 items-center justify-center bg-white border border-secondary rounded-full shadow"
-                      >
-                        <BsChevronLeft color="#A92449" />
-                      </button>
+                      {images2?.length > 3 && (
+                        <button
+                          onClick={prevImage}
+                          className="flex w-6 h-6 items-center justify-center bg-white border border-secondary rounded-full shadow"
+                        >
+                          <BsChevronLeft color="#A92449" />
+                        </button>
+                      )}
 
                       {/* FIXED-BOX FOR 3 THUMBNAILS (NO SCROLLBAR) */}
                       <div className="overflow-hidden w-full md:w-[600px] h-[120px]  md:h-[218px]">
@@ -1208,12 +1210,15 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       </div>
 
                       {/* NEXT BUTTON */}
-                      <button
-                        onClick={nextImage}
-                        className="flex w-6 h-6 items-center justify-center bg-white border border-secondary rounded-full shadow"
-                      >
-                        <BsChevronRight color="#A92449" />
-                      </button>
+                      {images2?.length > 3 && (
+                        <button
+                          onClick={nextImage}
+                          className="flex w-6 h-6 items-center justify-center bg-white border border-secondary rounded-full shadow"
+                        >
+                          <BsChevronRight color="#A92449" />
+                        </button>
+                      )}
+
 
                     </div>
                   )}

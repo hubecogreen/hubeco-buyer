@@ -95,16 +95,16 @@ const Footer = () => {
       <div className="w-full max-w-[1250px] flex flex-col">
 
         {/* TOP GREEN LINE */}
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center px-5 md:px-5 lg:px-0">
           <div className="w-full lg:w-[1200px] h-[1px] bg-[#069A66]" />
         </div>
 
         {/* COPYRIGHT */}
         <div className="w-full flex justify-center pt-2">
-          <div className="w-full max-w-[1200px]">
+          <div className="w-full max-w-[1200px] mx-auto lg:px-0 md:px-4">
             {/* Mobile */}
-            <div className="lg:hidden flex flex-col gap-2 px-4 pb-10">
-              <p className="text-[12px] text-brown font-light mb-[40px]">
+            <div className="lg:hidden flex flex-col gap-2 px-4 pb-10 ">
+              <p className="text-[12px] text-brown font-light mb-[80px]">
                 Copyright © {currentYear}, Powered By Hubeco Green Ventures Pvt. Ltd.
                 All Rights Reserved
               </p>
@@ -144,7 +144,7 @@ const Footer = () => {
         <div className="w-full bg-cover bg-center bg-no-repeat">
 
           {/* GREEN DIVIDER */}
-          <div className="w-full flex justify-start lg:ml-[460px] pt-0 md:pt-6 lg:pt-[138px] mb-4 px-4 lg:px-0 md:px-8">
+          <div className="w-full flex justify-start lg:ml-[460px] pt-0 md:pt-6 lg:pt-[138px] mb-4 px-4 md:px-4 lg:px-0">
             <div className="w-full lg:w-[768px] h-[1px] bg-[#069A66]" />
           </div>
 
@@ -264,7 +264,7 @@ const Footer = () => {
             <Link href="/">
               <div className="relative lg:w-[717px] lg:h-[162px]  w-[279px] h-[63px] md:w-[497px] md:h-[112px]">
                 <Image
-                  src="/images/logo3.png"
+                  src="/images/Rlogo.png"
                   alt="Hubeco Logo"
                   fill
                   className="object-contain"

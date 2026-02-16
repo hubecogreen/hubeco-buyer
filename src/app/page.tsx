@@ -9,7 +9,7 @@ function OrganizationSchema() {
     name: "Hubeco Market",
     alternateName: "Hubeco MarketPlace",
     url: "https://hubeco.market",
-    logo: "https://hubeco.market/images/Logo-2.webp",
+    logo: "https://hubeco.market/images/Rlogo.png",
     sameAs: [
       "https://www.facebook.com/people/HubecoMarket/61566048633254",
       "https://www.instagram.com/hubeco.market/",

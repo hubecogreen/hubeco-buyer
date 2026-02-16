@@ -289,7 +289,7 @@ export default function GreenHomeLoanForm({
             <Link href="/">
             <div className="flex items-center space-x-2">
               <img
-                src="/images/Logo-2.webp"
+                src="/images/Rlogo.png"
                 alt="Hubeco Logo"
                 className="h-12 md:h-14 w-auto"
               />

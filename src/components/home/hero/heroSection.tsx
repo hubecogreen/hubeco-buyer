@@ -20,7 +20,9 @@ const greenProLabels = ["GreenPro", "EPD", "GRIHA"];
 
 const HeroSection = () => {
   const router=useRouter();
-    const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
+  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
+  const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video.mp4`;
+  const heroPosterUrl = '/images/home/hero/video-poster.png';
 
 
 
@@ -32,9 +34,11 @@ const HeroSection = () => {
         loop
         muted
         playsInline
+        preload="auto"
+        poster={heroPosterUrl}
         className="absolute inset-0 w-full h-full object-cover brightness-95 z-0"
       >
-        <source src={assetURL+"/buyer/home-video/hero-video.mp4"} type="video/mp4" />
+        <source src={heroVideoUrl} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 

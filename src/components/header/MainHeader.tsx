@@ -477,7 +477,7 @@ const Header: React.FC<HeaderProps> = () => {
                
               >
                 <Image
-                  src="/images/logo3.png"
+                  src="/images/Rlogo.png"
                   className="!h-[72px] !w-[255px] object-contain"
                   alt="Hubeco Logo"
                   width={255}
@@ -959,7 +959,7 @@ const Header: React.FC<HeaderProps> = () => {
 {/* Logo */}
 <Link href="/" className="flex-shrink-0">
   <Image
-    src="/images/home/header/hubeco-logo.png"
+    src="/images/Rlogo.png"
     alt="Hubeco Logo"
     width={140}
     height={40}
@@ -1144,7 +1144,7 @@ const Header: React.FC<HeaderProps> = () => {
   {/* Logo */}
   <Link href="/" className="flex justify-center flex-1">
     <Image
-      src="/images/home/header/hubeco-logo.png"
+      src="/images/Rlogo.png"
       alt="Hubeco Logo"
       width={188}
       height={43}
@@ -1358,7 +1358,7 @@ const LoginPopup = ({
 
           {/* Logo */}
           <Image
-            src="/images/home/header/hubeco-logo.png"
+            src="/images/Rlogo.png"
             alt="Hubeco Logo"
             width={180}
             height={40}
@@ -1370,7 +1370,7 @@ const LoginPopup = ({
           </p>
 
           {/* Buyer + Vendor buttons */}
-          <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+          <div className="flex flex-row md:flex-row gap-4 w-full md:w-auto">
 
             {/* BUYER */}
             <button

@@ -584,7 +584,7 @@ export default function Page() {
             </h1>
             <p className="mb-4 md:text-big text-md md:text-center text-justify font-normal text-brown">
               Stay connected and follow us on social media for the latest
-              updates, news, and promotions:
+              updates, news and promotions:
             </p>
 
             <div className="flex justify-center">

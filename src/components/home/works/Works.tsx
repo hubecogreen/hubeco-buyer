@@ -55,7 +55,7 @@ const WorksSection = () => {
 
   const buyerContent = useMemo(
     () => (
-      <div className="grid grid-cols-2 lg:grid-cols-2 gap-[10px] pt-5">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 gap-[10px] pt-5">
         {[
           {
             img: "/images/home/howitwork/search-icon.png",
@@ -74,78 +74,79 @@ const WorksSection = () => {
             text: "Build with curated green materials",
           },
         ].map((item, i) => (
-          <div
-            key={i}
-            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-primary h-[140px] w-full lg:px-5 lg:pt-10 lg:pb-5 lg:h-[215px] lg:w-[300px]"
-          >
-            <div className="flex flex-col gap-3 lg:gap-5">
-              <div className="h-[32px] lg:h-[52px] flex items-center">
+   <div
+  key={i}
+  className="flex flex-col justify-start md:py-[30px] px-3  pt-5 pb-3 md:p-[20px] rounded-xl border border-primary h-[140px] md:h-[240px] lg:h-[215px] w-full lg:w-[300px]"
+>
+  <div className="h-[32px] w-[32px] md:h-[52px] md:w-[52px]">
+    <Image
+      src={item.img}
+      alt="icon"
+      width={52}
+      height={52}
+      className="h-full w-full object-contain"
+    />
+  </div>
 
-              <Image
-                src={item.img}
-                alt="icon"
-               width={52}
-                height={32}
-                className="w-[30px] h-auto lg:w-[52px] lg:h-auto"
-              />
-              </div>
-              <p className="text-[13px] lg:text-[24px]  lg:leading-6 text-brown">
-                {item.text}
-              </p>
-            </div>
-          </div>
+  <p className="mt-3 md:mt-5  text-[13px] md:text-[16px] md:font-medium lg:text-[24px] lg:leading-6 text-brown">
+    {item.text}
+  </p>
+</div>
+
+
         ))}
       </div>
     ),
     []
   );
 
-  const vendorContent = useMemo(
-    () => (
-      <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 pt-5">
-        {[
-          {
-            img: "/images/home/howitwork/user-icon.png",
-            text: "Sign up easily to become a vendor",
-          },
-          {
-            img: "/images/home/howitwork/cloud-icon.png",
-            text: "List products with specs, certifications and prices",
-          },
-          {
-            img: "/images/home/howitwork/shop-icon.png",
-            text: "Reach buyers and receive RFQ’s",
-          },
-          {
-            img: "/images/home/howitwork/graph-icon.png",
-            text: "Track sales and revenue in your vendor dashboard",
-          },
-        ].map((item, i) => (
-          <div
-            key={i}
-            className="flex items-start px-3 pt-5 pb-3 rounded-xl border-[1px] border-secondary h-[140px] w-full lg:px-5 lg:pt-10 lg:pb-5 lg:h-[215px] lg:w-[300px]"
-          >
-            <div className="flex flex-col gap-3 lg:gap-5">
-                            <div className="h-[32px] lg:h-[52px] flex items-center">
-
-              <Image
-                src={item.img}
-                alt="icon"
-                width={52}
-                height={32}
-                className="w-[30px] h-auto lg:w-[52px] lg:h-auto"
-              />
-              </div>
-              <p className="text-[13px]  lg:text-[24px] lg:leading-6 text-brown">
-                {item.text}
-              </p>
-            </div>
+const vendorContent = useMemo(
+  () => (
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 gap-3 pt-5">
+      {[
+        {
+          img: "/images/home/howitwork/user-icon.png",
+          text: "Sign up easily to become a vendor",
+        },
+        {
+          img: "/images/home/howitwork/cloud-icon.png",
+          text: "List products with specs, certifications and prices",
+        },
+        {
+          img: "/images/home/howitwork/shop-icon.png",
+          text: "Reach buyers and receive RFQ’s",
+        },
+        {
+          img: "/images/home/howitwork/graph-icon.png",
+          text: "Track sales and revenue in your vendor dashboard",
+        },
+      ].map((item, i) => (
+        <div
+          key={i}
+          className="flex flex-col justify-start px-3 pt-5 pb-3 md:p-[20px] rounded-xl border border-secondary h-[140px] md:h-[240px] lg:h-[215px] w-full lg:w-[300px]"
+        >
+          {/* Image wrapper */}
+          <div className="h-[32px] w-[32px] md:h-[52px] md:w-[52px]">
+            <Image
+              src={item.img}
+              alt="icon"
+              width={52}
+              height={52}
+              className="h-full w-full object-contain"
+            />
           </div>
-        ))}
-      </div>
-    ),
-    []
-  );
+
+          {/* Text */}
+          <p className="mt-3 md:mt-5 text-[13px] md:text-[16px] md:font-medium lg:text-[24px] lg:leading-6 text-brown">
+            {item.text}
+          </p>
+        </div>
+      ))}
+    </div>
+  ),
+  []
+);
+
 
   return (
  <section className="relative block bg-cream mx-auto lg:flex  lg:p-[100px] p-[20px] lg:max-w-[1440px] ">
@@ -161,11 +162,11 @@ const WorksSection = () => {
   {/* Left Div */}
   <div className="flex lg:flex-row flex-col justify-start lg:gap-[162px]">
   <div className="relative z-10  ">
-    <h2 className="text-center text-[43px] text-brown pb-3 lg:text-left lg:text-[43px] lg:pb-5">
+    <h2 className="text-center text-[43px] text-brown pb-3 lg:text-left lg:text-[43px] md:text-[27px] lg:pb-5">
       How it Works
     </h2>
 
-    <p className="text-[12px] leading-relaxed text-lightGraytext mb-4 lg:text-[18px] lg:leading-[30px] lg:w-[390px] lg:mb-10">
+    <p className="text-[12px] leading-relaxed text-lightGraytext mb-4 lg:text-[18px] md:text-[18px] lg:leading-[30px] lg:w-[390px] lg:mb-10">
       We are passionate about driving the transition towards sustainable
       living by providing eco-friendly construction materials for both B2B
       and B2C customers.

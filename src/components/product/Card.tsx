@@ -21,6 +21,9 @@ import {
 import { setCookie, getCookie } from "cookies-next";
 import { normalizePath } from "@/lib/utils";
 
+import SubmitEnquiryModal from "@/components/modals/SubmitEnquiryModal";
+
+
 const ProductCard = ({
   product,
 }: {
@@ -53,7 +56,11 @@ const ProductCard = ({
   const [maxQty, setMaxQty] = useState<number>(product?.maxBuyQty);
   const [quantity, setQuantity] = useState(minQty);
   const [wishlistId, setWIshlistId] = useState("");
+  // const [showPricingPopup, setShowPricingPopup] = useState(false);
   const wishlistReduxData = store.getState()?.user?.wishlistRedux;
+  // const [showProceedPopup, setShowProceedPopup] = useState(false);
+  // const [showEnquiryPopup, setShowEnquiryPopup] = useState(false);
+  const [enquiryMode, setEnquiryMode] = useState<"proceed" | "form" | null>(null);
   const dispatch = useDispatch();
   const token = getCookie("token");
 
@@ -61,6 +68,8 @@ const ProductCard = ({
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
   const { refreshTokens } = useRefreshToken();
   const { callApi } = useApi();
+
+
 
   const handleCartApiError = async (err: any) => {
     const result = err?.response;
@@ -179,6 +188,12 @@ const ProductCard = ({
   };
 
   const addToCart = async (id?: any) => {
+    // If user is not authenticated, navigate to login instead of showing button loader
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+
     const payloadData = {
       product: id,
       quantity: quantity,
@@ -313,7 +328,8 @@ const ProductCard = ({
       router.push(`/${slug}?qt=open`);
     } else {
       // console.log("tokenOneNot");
-      router.push("/login");
+      // router.push("/login");
+      setEnquiryMode("proceed");
     }
   };
 
@@ -330,7 +346,7 @@ const ProductCard = ({
           }
           alt={product?.productName}
           className="w-full h-[314px] object-contain px-4 pt-10"
-          
+
           height={400}
           width={400}
           onError={(e) => {
@@ -371,7 +387,7 @@ const ProductCard = ({
                     className="group-hover:text-white cursor-pointer z-50"
                     size={25}
                     onClick={() => deleteWishlist(product?.variantId)}
-                    // onClick={() => router.push("/coming-soon")}
+                  // onClick={() => router.push("/coming-soon")}
                   />
                 </>
               ) : (
@@ -381,7 +397,7 @@ const ProductCard = ({
                     className="group-hover:text-white cursor-pointer z-50"
                     size={25}
                     onClick={() => addToWishlist(product?.variantId)}
-                    // onClick={() => router.push("/coming-soon")}
+                  // onClick={() => router.push("/coming-soon")}
                   />
                 </>
               )}
@@ -520,7 +536,14 @@ const ProductCard = ({
           )}
         </div>
       </div>
+      <SubmitEnquiryModal
+        open={!!enquiryMode}
+        mode={enquiryMode}
+        onClose={() => setEnquiryMode(null)}
+        product={product}
+      />
     </div>
+
   );
 };
 

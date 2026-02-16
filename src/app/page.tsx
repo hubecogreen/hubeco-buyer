@@ -9,7 +9,7 @@ function OrganizationSchema() {
     name: "Hubeco Market",
     alternateName: "Hubeco MarketPlace",
     url: "https://hubeco.market",
-    logo: "https://hubeco.market/images/Logo-2.webp",
+    logo: "https://hubeco.market/images/Rlogo.png",
     sameAs: [
       "https://www.facebook.com/people/HubecoMarket/61566048633254",
       "https://www.instagram.com/hubeco.market/",
@@ -62,8 +62,25 @@ export const metadata: Metadata = {
 };
 
 export default function MyApp() {
+  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
+  const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video.mp4`;
+  const assetOrigin = (() => {
+    if (!assetURL) return "";
+    try {
+      return new URL(assetURL).origin;
+    } catch {
+      return "";
+    }
+  })();
+
   return (
     <div className="bg-cream ">
+      <head>
+        {assetOrigin ? (
+          <link rel="preconnect" href={assetOrigin} crossOrigin="anonymous" />
+        ) : null}
+        <link rel="preload" href={heroVideoUrl} as="video" type="video/mp4" />
+      </head>
       <OrganizationSchema />
       <HomePage />
     </div>

@@ -56,6 +56,7 @@ import SimilarProducts from "./SimilarProducts";
 import useClient from "../hooks/useClient";
 import Custom404 from "../404/page";
 import { normalizePath } from "@/lib/utils";
+import SubmitEnquiryModal from "../modals/SubmitEnquiryModal";
 
 interface ProductProps {
   slug: string;
@@ -150,6 +151,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
   const [startIndex, setStartIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
   const [isMobile, setIsMobile] = useState(false);
+  const [openEnquiryFlow, setOpenEnquiryFlow] = useState(false);
   const displayName = isSingle ? totalProduct?.name : productData?.variantName;
   const isLongVariant =
     (displayName && displayName.length > 17); // tweak threshold as you like
@@ -947,15 +949,21 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
 
 
+  // function checkBuyerLogin() {
+  //   const buyer = sessionStorage.getItem("buyerUserInfo");
+  //   if (buyer == null) {
+  //     window.location.href = "/login";
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
+
   function checkBuyerLogin() {
     const buyer = sessionStorage.getItem("buyerUserInfo");
-    if (buyer == null) {
-      window.location.href = "/login";
-      return false;
-    } else {
-      return true;
-    }
+    return !!buyer;
   }
+
 
   // console.log(totalProduct, "totalProducttotalProduct");
 
@@ -1017,8 +1025,12 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
       }
     }
   }
-
   if (!isClient) return <></>;
+
+  const enquiryInitialQty =
+    quantity ??
+    newSelectedVariant?.minBuyQty ??
+    1;
 
   // console.log(getMeta("metaDescription", totalProduct),"getMeta");
   return (
@@ -1143,12 +1155,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     <div className="flex items-center gap-1 mt-4 h-auto md:h-[218px]">
 
                       {/* PREV BUTTON */}
-                      <button
-                        onClick={prevImage}
-                        className="flex w-6 h-6 items-center justify-center bg-white border border-secondary rounded-full shadow"
-                      >
-                        <BsChevronLeft color="#A92449" />
-                      </button>
+                      {images2?.length > 3 && (
+                        <button
+                          onClick={prevImage}
+                          className="flex w-6 h-6 items-center justify-center bg-white border border-secondary rounded-full shadow"
+                        >
+                          <BsChevronLeft color="#A92449" />
+                        </button>
+                      )}
 
                       {/* FIXED-BOX FOR 3 THUMBNAILS (NO SCROLLBAR) */}
                       <div className="overflow-hidden w-full md:w-[600px] h-[120px]  md:h-[218px]">
@@ -1196,12 +1210,15 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       </div>
 
                       {/* NEXT BUTTON */}
-                      <button
-                        onClick={nextImage}
-                        className="flex w-6 h-6 items-center justify-center bg-white border border-secondary rounded-full shadow"
-                      >
-                        <BsChevronRight color="#A92449" />
-                      </button>
+                      {images2?.length > 3 && (
+                        <button
+                          onClick={nextImage}
+                          className="flex w-6 h-6 items-center justify-center bg-white border border-secondary rounded-full shadow"
+                        >
+                          <BsChevronRight color="#A92449" />
+                        </button>
+                      )}
+
 
                     </div>
                   )}
@@ -1478,6 +1495,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             if (checkBuyerLogin()) {
                               setIsOpen(true);
                             }
+                            else {
+                              setOpenEnquiryFlow(true); // NOT logged in → open shared flow
+                            }
                           }}
                         >
                           <p className="text-cream text-md text-medium ml-3">Request for Pricing</p>
@@ -1555,13 +1575,13 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               (e.currentTarget.src = "/images/product-placeholder.webp")
                             }
                             loading="lazy"
-                            className="md:w-[60px] w-[80px] h-[60px] rounded-full border border-[#f0f0f0] bg-white object-contain"
+                            className="md:w-[60px] w-[80px] h-[60px] rounded-full border border-[#f0f0f0] bg-transparent object-contain"
                           />
                         </div>
                       )}
 
                     {/* CERTIFIED BUTTON */}
-                    <div className="w-full md:w-auto relative ">
+                    <div className="w-full md:w-auto relative  -ml-1 md:-ml-2">
 
                       {totalProduct?.certificate?.certificateImg.endsWith(".pdf") ? (
                         // PDF BUTTON
@@ -1582,7 +1602,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               href="#"
                               className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
                        w-[90%] md:w-40 mx-auto md:mx-0
-                       text-sm md:text-md flex items-center justify-center
+                       text-sm md:text-md flex items-center justify-center rounded-md
                        md:relative md:right-[10px]"
                             >
                               <p className="text-cream font-semibold text-md">Certified</p>
@@ -2236,7 +2256,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   {attachments && attachments?.length !== 0 && (
                     <TabsTrigger
                       value="attachments"
-                    className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
+                      className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"
                     >
                       Attachments
                     </TabsTrigger>
@@ -2531,9 +2551,13 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
         combinations={combinations}
         productData={productData}
       />
-
-
-
+      <SubmitEnquiryModal
+        open={openEnquiryFlow}
+        onClose={() => setOpenEnquiryFlow(false)}
+        product={productData}
+        mode="proceed"
+        initialQuantity={enquiryInitialQty}
+      />
     </div>
   );
 };

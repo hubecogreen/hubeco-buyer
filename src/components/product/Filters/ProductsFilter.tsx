@@ -335,7 +335,7 @@ const FiltersSidebar: React.FC<FilterProps> = ({
   };
 
   return (
-    <div className="w-full border-[1.5px] border-primary rounded-[10px] p-4 opacity-90 cursor-pointer text-brown  ">
+    <div className="w-full border-[1.5px] border-primary rounded-[10px] p-4 opacity-90 cursor-pointer text-brown">
       <div className="flex items-center justify-between mb-4  pb-2">
         <h2 className="text-xl font-medium  ">Filters</h2>
         {Object.entries(selectedFilters).some(([key, filter]) => {
@@ -352,7 +352,7 @@ const FiltersSidebar: React.FC<FilterProps> = ({
             </button>
           )}
       </div>
-      <div className="max-h-[calc(100vh-140px)] lg:max-h-[1030px] overflow-y-auto no-scrollbar">
+      <div className="max-h-[calc(100vh-140px)] lg:max-h-[1030px] overflow-y-auto no-scrollbar mb-[50px] md:mb-0">
         {/* CATEGORIES FILTER */}
         <CategoryFiltersList
           onCategorySelectionChange={filterWithChildCategories}

@@ -55,7 +55,9 @@ export default function SubmitEnquiryModal({
 
     const router = useRouter();
     const [step, setStep] = useState<"proceed" | "form" | "success">("proceed");
-    const [quantity, setQuantity] = useState(initialQuantity ?? 1);
+    const [quantity, setQuantity] = useState<number | "">(initialQuantity ?? 1);
+    const [timeoutID, setTimeoutID] = useState<NodeJS.Timeout>();
+
 
     const {
         control,
@@ -70,6 +72,13 @@ export default function SubmitEnquiryModal({
             requirement: "",
         },
     });
+
+    useEffect(() => {
+        if (open) {
+            setStep(mode ?? "proceed");
+        }
+    }, [open, mode]);
+
 
     useEffect(() => {
         if (mode) {
@@ -88,7 +97,7 @@ export default function SubmitEnquiryModal({
     const handleClose = () => {
         reset();
         setQuantity(1);
-        setStep("proceed");
+        // setStep("proceed");
         onClose();
     };
 
@@ -98,12 +107,15 @@ export default function SubmitEnquiryModal({
             email: data.email,
             phone: data.phone,
             requirement: data.requirement,
-            products: [
-                {
-                    variantId: resolvedProduct?._id || resolvedProduct?.variantId,
-                    quantity: quantity,
-                },
-            ],
+            products: resolvedProduct
+                ? [
+                    {
+                        variantId:
+                            resolvedProduct?._id || resolvedProduct?.variantId,
+                        quantity: quantity,
+                    },
+                ]
+                : [],
         };
 
         try {
@@ -218,7 +230,7 @@ export default function SubmitEnquiryModal({
                             />
                         </div>
                     )}
-                    
+
                     {/* ================= ENQUIRY FORM ================= */}
                     {step === "form" && (
                         <div className="flex flex-col h-full max-h-[75vh] md:max-h-[90vh] overflow-hidden"> {/* Container for the whole form view */}
@@ -243,34 +255,67 @@ export default function SubmitEnquiryModal({
                 */}
 
                                     {/* PRODUCT + QUANTITY (Now inside scroll area) */}
-                                    <div className="flex items-center justify-between mb-6 lg:mb-4">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-[50px] h-[50px] rounded-[10px] overflow-hidden border">
-                                                <Image
-                                                    src={productImage ? normalizePath(`${process.env.NEXT_PUBLIC_ASSET_URL}/${productImage}`) : "/images/product-placeholder.webp"}
-                                                    alt={productName}
-                                                    width={50}
-                                                    height={50}
-                                                    className="object-cover"
-                                                />
+                                    {resolvedProduct && (
+                                        <div className="flex items-center justify-between w-full mb-6 lg:mb-4">
+                                            <div className="flex items-center gap-3 flex-1">
+                                                <div className="w-[50px] h-[50px] rounded-[10px] overflow-hidden border flex-shrink-0">
+                                                    <Image
+                                                        src={productImage ? normalizePath(`${process.env.NEXT_PUBLIC_ASSET_URL}/${productImage}`) : "/images/product-placeholder.webp"}
+                                                        alt={productName}
+                                                        width={50}
+                                                        height={50}
+                                                        className="object-cover"
+                                                    />
+                                                </div>
+                                                <p className="font-medium text-brown text-sm line-clamp-2">{productName}</p>
                                             </div>
-                                            <p className="font-medium text-brown">{productName}</p>
-                                        </div>
 
-                                        <div className="flex items-center border border-primary rounded-md overflow-hidden">
-                                            <button
-                                                type="button"
-                                                className="px-4 py-2 text-pink-600 text-lg"
-                                                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                                            > − </button>
-                                            <span className="px-4 py-2 border-x">{quantity}</span>
-                                            <button
-                                                type="button"
-                                                className="px-4 py-2 text-pink-600 text-lg"
-                                                onClick={() => setQuantity((q) => q + 1)}
-                                            > + </button>
+                                            <div className="flex items-center border border-primary rounded-md overflow-hidden ml-4">
+                                                <button
+                                                    type="button"
+                                                    className="px-4 py-2 text-pink-600 text-lg"
+                                                    onClick={() =>
+                                                        setQuantity((prev) =>
+                                                            typeof prev === "number" ? Math.max(prev - 1, 1) : 1
+                                                        )
+                                                    }
+                                                > − </button>
+                                                <input
+                                                    type="number"
+                                                    value={quantity}
+                                                    onChange={(e) => {
+                                                        clearTimeout(timeoutID);
+
+                                                        const value = e.target.value === "" ? "" : parseInt(e.target.value, 10);
+
+                                                        if (value === "") {
+                                                            setQuantity("");
+                                                        } else if (!isNaN(value) && value > 0) {
+                                                            setQuantity(value);
+                                                        }
+
+                                                        setTimeoutID(
+                                                            setTimeout(() => {
+                                                                if (value === "" || (typeof value === "number" && value < 1)) {
+                                                                    setQuantity(1);
+                                                                }
+                                                            }, 1000)
+                                                        );
+                                                    }}
+                                                    className="w-16 text-center border-x outline-none bg-transparent"
+                                                />
+                                                <button
+                                                    type="button"
+                                                    className="px-4 py-2 text-pink-600 text-lg"
+                                                    onClick={() =>
+                                                        setQuantity((prev) =>
+                                                            typeof prev === "number" ? prev + 1 : 1
+                                                        )
+                                                    }
+                                                > + </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
 
                                     {/* FORM FIELDS */}
                                     <div className="flex flex-col gap-4 lg:gap-3 pb-4">

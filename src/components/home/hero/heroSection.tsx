@@ -22,7 +22,7 @@ const HeroSection = () => {
   const router=useRouter();
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
   const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video.mp4`;
-  const heroPosterUrl = '/images/home/hero/video-poster.png';
+  const heroPosterUrl = '/images/home/hero/video-poster.webp';
 
 
 
@@ -34,7 +34,7 @@ const HeroSection = () => {
         loop
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         poster={heroPosterUrl}
         className="absolute inset-0 w-full h-full object-cover brightness-95 z-0"
       >

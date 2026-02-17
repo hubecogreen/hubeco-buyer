@@ -25,7 +25,7 @@ const CallToActionSection: React.FC = () => {
          {/* Background Image */}
          <div className="absolute inset-0">
             <img
-               src="/images/actions/Action.jpg"
+               src="/images/actions/Action.webp"
                alt="Call to action"
                className="w-full h-full object-cover"
             />

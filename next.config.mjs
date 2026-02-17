@@ -1,3 +1,5 @@
+const isProd = process.env.NODE_ENV === "production";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async headers() {
@@ -54,15 +56,27 @@ const nextConfig = {
   images: {
     // domains: ['assets-dev.hubeco.market']
     disableStaticImages: true,
-    unoptimized: true,
+    // unoptimized: true,
     remotePatterns: [
+     
       {
         protocol: "https",
-        hostname: "assets.hubeco.market",
-        // hostname: 'assets.hubeco.market',
+        hostname: isProd ? "assets.hubeco.market" : "assets-uat.hubeco.market",
         port: "",
         pathname: "/**",
       },
+      // {
+      //   protocol: "https",
+      //   hostname: "assets-uat.hubeco.market",
+      //   port: "",
+      //   pathname: "/**",
+      // },
+      // {
+      //   protocol: "https",
+      //   hostname: "assets-dev.hubeco.market",
+      //   port: "",
+      //   pathname: "/**",
+      // },
     ],
   },
   webpack(config) {

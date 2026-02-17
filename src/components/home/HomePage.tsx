@@ -1,17 +1,35 @@
+import dynamic from "next/dynamic";
 import HeroSection from "@/components/home/hero/heroSection";
-import CategorySection from "@/components/home/categories/Category";
-import FeaturedProducts from "@/components/home/featured/FeaturedProducts";
-import BrandsSection from "@/components/home/brands/BrandsSection";
-import ProjectsSection from "@/components/home/projects/ProjectSection";
-import BlogsSection from "@/components/home/blogs/BlogSection";
-import WorksSection from "@/components/home/works/Works";
-import ContactSection from "./contacts/ContactSection";
-import PartnersSection from "./partners/PartnersSection";
-import CallToActionSection from "./actions/CallToActionSection";
-import ProcureSection from "./procurement/ProcureSection";
-import TrustedBy from "./Trusts/TrustedBy";
 import GreenFinancing from "./financing/GreenFinancing";
 import CategoryList from "../categories/CategoryList";
+
+const TrustedBy = dynamic(() => import("./Trusts/TrustedBy"), {
+  loading: () => <div className="min-h-[180px]" />,
+});
+
+const WorksSection = dynamic(() => import("./works/Works"), {
+  loading: () => <div className="min-h-[280px]" />,
+});
+
+const CallToActionSection = dynamic(() => import("./actions/CallToActionSection"), {
+  loading: () => <div className="min-h-[180px]" />,
+});
+
+const ProcureSection = dynamic(() => import("./procurement/ProcureSection"), {
+  loading: () => <div className="min-h-[180px]" />,
+});
+
+const PartnersSection = dynamic(() => import("./partners/PartnersSection"), {
+  loading: () => <div className="min-h-[180px]" />,
+});
+
+const BlogsSection = dynamic(() => import("./blogs/BlogSection"), {
+  loading: () => <div className="min-h-[220px]" />,
+});
+
+const ContactSection = dynamic(() => import("./contacts/ContactSection"), {
+  loading: () => <div className="min-h-[220px]" />,
+});
 
 const HomePage = () => {
   return (

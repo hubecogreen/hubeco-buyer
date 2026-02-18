@@ -32,7 +32,7 @@ export default function GreenFinancing() {
           {/* Left Image */}
           <div className="w-full lg:w-[592px] h-auto lg:h-[520px] rounded-xl overflow-hidden relative">
             <Image
-              src="/images/greenFinance/green.png"
+              src="/images/greenFinance/green.webp"
               alt="Green Financing"
               width={592}
               height={520}

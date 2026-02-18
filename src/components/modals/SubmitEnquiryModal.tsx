@@ -36,6 +36,8 @@ export default function SubmitEnquiryModal({
     const { callApi } = useApi();
     // ✅ normalize product for both Card & Details page
     const resolvedProduct = product?.product ?? product;
+    const minQty = resolvedProduct?.minBuyQty ?? 1;
+    const maxQty = resolvedProduct?.maxBuyQty ?? 999999;
 
     const productName =
         resolvedProduct?.productName &&
@@ -55,7 +57,7 @@ export default function SubmitEnquiryModal({
 
     const router = useRouter();
     const [step, setStep] = useState<"proceed" | "form" | "success">("proceed");
-    const [quantity, setQuantity] = useState<number | "">(initialQuantity ?? 1);
+    const [quantity, setQuantity] = useState<number | "">(initialQuantity ?? minQty);
     const [timeoutID, setTimeoutID] = useState<NodeJS.Timeout>();
 
 
@@ -88,9 +90,9 @@ export default function SubmitEnquiryModal({
 
     useEffect(() => {
         if (open) {
-            setQuantity(initialQuantity ?? 1);
+            setQuantity(initialQuantity ?? minQty);
         }
-    }, [open, initialQuantity]);
+    }, [open, initialQuantity, minQty]);
 
     if (!open) return null;
 
@@ -276,7 +278,7 @@ export default function SubmitEnquiryModal({
                                                     className="px-4 py-2 text-pink-600 text-lg"
                                                     onClick={() =>
                                                         setQuantity((prev) =>
-                                                            typeof prev === "number" ? Math.max(prev - 1, 1) : 1
+                                                            typeof prev === "number" ? Math.max(prev - 1, minQty) : 1
                                                         )
                                                     }
                                                 > − </button>
@@ -284,23 +286,25 @@ export default function SubmitEnquiryModal({
                                                     type="number"
                                                     value={quantity}
                                                     onChange={(e) => {
-                                                        clearTimeout(timeoutID);
+                                                        const rawValue = e.target.value;
 
-                                                        const value = e.target.value === "" ? "" : parseInt(e.target.value, 10);
-
-                                                        if (value === "") {
+                                                        if (rawValue === "") {
                                                             setQuantity("");
-                                                        } else if (!isNaN(value) && value > 0) {
-                                                            setQuantity(value);
+                                                            return;
                                                         }
 
-                                                        setTimeoutID(
-                                                            setTimeout(() => {
-                                                                if (value === "" || (typeof value === "number" && value < 1)) {
-                                                                    setQuantity(1);
-                                                                }
-                                                            }, 1000)
-                                                        );
+                                                        const value = parseInt(rawValue, 10);
+
+                                                        if (!isNaN(value)) {
+                                                            setQuantity(value);
+                                                        }
+                                                    }}
+                                                    onBlur={() => {
+                                                        if (quantity === "" || quantity < minQty) {
+                                                            setQuantity(minQty);
+                                                        } else if (quantity > maxQty) {
+                                                            setQuantity(maxQty);
+                                                        }
                                                     }}
                                                     className="w-16 text-center border-x outline-none bg-transparent"
                                                 />
@@ -309,7 +313,7 @@ export default function SubmitEnquiryModal({
                                                     className="px-4 py-2 text-pink-600 text-lg"
                                                     onClick={() =>
                                                         setQuantity((prev) =>
-                                                            typeof prev === "number" ? prev + 1 : 1
+                                                            typeof prev === "number" ? Math.min(prev + 1, maxQty) : 1
                                                         )
                                                     }
                                                 > + </button>

@@ -70,7 +70,7 @@ const ProcureSection: React.FC = () => {
           "
                     >
                         <img
-                            src="/images/procurement/img1.png"
+                            src="/images/procurement/img1.webp"
                             alt="Procurement Benefits"
                             className="w-full h-full object-cover lg:object-cover md:object-cover md:object-[50%_25%] md:block lg:block block"
                         />

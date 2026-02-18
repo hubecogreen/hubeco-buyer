@@ -21,7 +21,7 @@ const greenProLabels = ["GreenPro", "EPD", "GRIHA"];
 const HeroSection = () => {
   const router=useRouter();
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
-  const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video.mp4`;
+  const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video-U.webm`;
   const heroPosterUrl = '/images/home/hero/video-poster.webp';
 
 

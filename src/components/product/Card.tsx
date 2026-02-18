@@ -541,6 +541,7 @@ const ProductCard = ({
         mode={enquiryMode}
         onClose={() => setEnquiryMode(null)}
         product={product}
+        initialQuantity={product?.minBuyQty}
       />
     </div>
 

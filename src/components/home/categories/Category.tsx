@@ -18,10 +18,10 @@ import styles from "./Category.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { normalizePath } from "@/lib/utils";
-import * as getEndpoint from "../../../network/EndPoints";
 import toast from "react-hot-toast";
 import useApi from "@/components/Fetcher/useAPI";
 import CustomLoader from "@/components/sharedComponents/loader";
+import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 
 interface Category {
   _id: string;
@@ -56,15 +56,12 @@ const CategorySection = () => {
   // Memoize categories fetching
   const getCategories = useCallback(async () => {
     try {
-      const result = (await callApi(
-        getEndpoint.default.PRODUCTS_CATEGORIES,
-        "GET"
-      )) as any;
-      if (result.data == null) {
-        handleApiError(result.errorData);
+      const data = await getProductCategoryTree(callApi);
+      if (!Array.isArray(data) || data.length === 0) {
+        handleApiError(null);
       } else {
         // Extract all subcategories with their parent category info
-        const allSubCategoriesWithParent = result.data.flatMap(
+        const allSubCategoriesWithParent = data.flatMap(
           (category: Category) => 
             (category.subCategories || []).map((subCat: any) => ({
               ...subCat,

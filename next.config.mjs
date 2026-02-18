@@ -1,3 +1,4 @@
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async headers() {
@@ -56,13 +57,25 @@ const nextConfig = {
     disableStaticImages: true,
     unoptimized: true,
     remotePatterns: [
+     
       {
         protocol: "https",
         hostname: "assets.hubeco.market",
-        // hostname: 'assets.hubeco.market',
         port: "",
         pathname: "/**",
       },
+      // {
+      //   protocol: "https",
+      //   hostname: "assets-uat.hubeco.market",
+      //   port: "",
+      //   pathname: "/**",
+      // },
+      // {
+      //   protocol: "https",
+      //   hostname: "assets-dev.hubeco.market",
+      //   port: "",
+      //   pathname: "/**",
+      // },
     ],
   },
   webpack(config) {

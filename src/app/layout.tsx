@@ -49,6 +49,7 @@ export default function RootLayout({
   const isProd =
     !process.env.NEXT_PUBLIC_API_BASE_URL?.includes("uat") &&
     !process.env.NEXT_PUBLIC_API_BASE_URL?.includes("dev");
+  const enableDiagnostics = process.env.NODE_ENV !== "production";
 
   return (
     <html lang="en" className={poppins.variable}>
@@ -57,18 +58,16 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://assets.hubeco.market" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://www.clarity.ms" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://snap.licdn.com" crossOrigin="anonymous" />
 
         {/* DNS prefetch for faster resource loading */}
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://px.ads.linkedin.com" />
+        {/* <link rel="dns-prefetch" href="https://px.ads.linkedin.com" /> */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
         
         {/* Preload critical carousel images for LCP and Speed Index */}
-        <link rel="preload" href="/images/actions/Action.jpg" as="image" type="image/webp" fetchPriority="high" />
-        <link rel="preload" href="/images/home/hero/video-poster.png" as="image" type="image/webp" fetchPriority="high" />
+        <link rel="preload" href="/images/actions/Action.webp" as="image" type="image/webp" fetchPriority="high" />
+        <link rel="preload" href="/images/home/hero/video-poster.webp" as="image" type="image/webp" fetchPriority="high" />
 
         {/* Preload critical background images */}
         {/* <link rel="preload" href="/images/home/bg1.webp" as="image" type="image/webp" /> */}
@@ -142,21 +141,38 @@ export default function RootLayout({
 
         <MainLayout isProd={isProd}>{children}</MainLayout>
 
-        {/* LinkedIn Insight Tag */}
-        <Script id="linkedin-insight-init" strategy="lazyOnload">
+        {/* LinkedIn Insight Tag - deferred until user intent/idle */}
+        <Script id="linkedin-insight-deferred" strategy="afterInteractive">
           {`
-            _linkedin_partner_id = "8360633";
-            window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
-            window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+            (function () {
+              let booted = false;
+              function boot() {
+                if (booted) return;
+                booted = true;
+                window._linkedin_partner_id = "8360633";
+                window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+                window._linkedin_data_partner_ids.push(window._linkedin_partner_id);
+
+                const s = document.createElement("script");
+                s.async = true;
+                s.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+                document.head.appendChild(s);
+              }
+
+              ["scroll", "keydown", "pointerdown", "touchstart"].forEach(function (eventName) {
+                window.addEventListener(eventName, boot, { once: true, passive: true });
+              });
+
+              if ("requestIdleCallback" in window) {
+                window.requestIdleCallback(boot, { timeout: 7000 });
+              } else {
+                setTimeout(boot, 5000);
+              }
+            })();
           `}
         </Script>
-        <Script
-          id="linkedin-insight"
-          strategy="lazyOnload"
-          src="https://snap.licdn.com/li.lms-analytics/insight.min.js"
-        />
         {/* Page Load Diagnostics */}
-        <Script id="page-load-diagnostics" strategy="afterInteractive">
+        {enableDiagnostics ? <Script id="page-load-diagnostics" strategy="afterInteractive">
           {`
     window.addEventListener("load", () => {
       setTimeout(() => {
@@ -202,7 +218,7 @@ export default function RootLayout({
       }, 100);
     });
   `}
-        </Script>
+        </Script> : null}
 
         <noscript>
           <Image

@@ -12,6 +12,7 @@ import { Search } from "lucide-react";
 import useClient from "../hooks/useClient";
 import { normalizePath } from "@/lib/utils";
 import LottieWrapper from "../LottieWrapper";
+import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 
 interface CustomSearchBarProps {
   customStyles?: React.CSSProperties;
@@ -118,12 +119,9 @@ useEffect(() => {
   // Function to fetch categories for enhancing subcategory data
   const getCategories = async () => {
     try {
-      const result = (await callApi(
-        getEndpoint.default.PRODUCTS_CATEGORIES,
-        "GET"
-      )) as any;
-      if (result?.data && result.data.length > 0) {
-        setCategories(result.data);
+      const data = await getProductCategoryTree(callApi);
+      if (Array.isArray(data) && data.length > 0) {
+        setCategories(data);
       }
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -133,15 +131,12 @@ useEffect(() => {
   // Function to fetch dynamic placeholders from categories
   const getDynamicPlaceholders = async () => {
     try {
-      const result = (await callApi(
-        getEndpoint.default.PRODUCTS_CATEGORIES,
-        "GET"
-      )) as any;
-      if (result?.data && result.data.length > 0) {
+      const data = await getProductCategoryTree(callApi);
+      if (Array.isArray(data) && data.length > 0) {
         const placeholders: string[] = [];
         
         // Collect category names (main categories, subcategories, and child categories)
-        result.data.forEach((category: any) => {
+        data.forEach((category: any) => {
           // Add main category name
           if (category.name && category.name !== "N/A") {
             const truncatedName = category.name.length > 20 

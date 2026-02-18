@@ -7,9 +7,8 @@ const STATIC_URLS = [
   '/',
   '/offline.html',
   '/images/product-placeholder.webp',
-  '/images/Admin-2.webp',    
-  '/images/actions/Action.jpg',
-  
+  '/images/Admin-2.webp', 
+  '/images/actions/Action.webp'
 ];
 
 // Install event - cache static assets
@@ -22,8 +21,8 @@ self.addEventListener('install', (event) => {
       caches.open(IMAGE_CACHE_NAME).then((cache) => {
         // Pre-cache critical images
         return cache.addAll([
-          '/images/actions/Action.jpg',
-          '/images/home/hero/video-poster.png'
+          '/images/home/hero/video-poster.webp',
+          '/images/actions/Action.webp'
         ]);
       })
     ])

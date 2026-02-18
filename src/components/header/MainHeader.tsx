@@ -44,6 +44,8 @@ import useApi from "../Fetcher/useAPI";
 import { BsShop } from "react-icons/bs";
 import Image from "next/image";
 import useClient from "../hooks/useClient";
+import SubmitEnquiryModal from "../modals/SubmitEnquiryModal";
+import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 
 const vendorURL = process.env.NEXT_PUBLIC_VENDOR_URL;
 interface HeaderProps { }
@@ -88,6 +90,7 @@ const Header: React.FC<HeaderProps> = () => {
   const [tempPincode, setTempPincode] = useState<any>(getCookie("culp"));
   const [showVendorLogin, setShowVendorLogin] = useState<any>(false);
   const [showLoginPopup, setShowLoginPopup] = useState<any>(false);
+  const [showEnquiryModal, setShowEnquiryModal] = useState(false);
   const [reloadH, setReloadH] = useState<any>(0);
   const isClient = useClient();
 
@@ -158,17 +161,14 @@ const Header: React.FC<HeaderProps> = () => {
   // Fetch categories for rotating placeholders
   const getCategoriesForPlaceholders = async () => {
     try {
-      const result = (await callApi(
-        getEndpoint.default.PRODUCTS_CATEGORIES,
-        "GET"
-      )) as any;
-      if (result?.data && result.data.length > 0) {
+      const data = await getProductCategoryTree(callApi);
+      if (Array.isArray(data) && data.length > 0) {
         const placeholders: string[] = [];
 
-        console.log(result.data, "categories data");
+        console.log(data, "categories data");
 
         // Collect category names (main categories, subcategories, and child categories)
-        result.data.forEach((category: any) => {
+        data.forEach((category: any) => {
           // Add main category name
           if (category.name && category.name !== "N/A") {
             const truncatedName = category.name.length > 20
@@ -469,12 +469,12 @@ const Header: React.FC<HeaderProps> = () => {
                 : "space-x-2"
                 }`}
             >
-             
+
               {/* Mobile Logo */}
               <Link
                 href="/"
                 className={`${styles.logo}  hover:cursor-pointer flex-shrink-0 min-w-0 lg:pb-2`}
-               
+
               >
                 <Image
                   src="/images/Rlogo.png"
@@ -491,7 +491,7 @@ const Header: React.FC<HeaderProps> = () => {
 
               </Link>
 
-              
+
               {/* Desktop Navigation Links - Visible on tablet and large screens */}
               <div
                 className={`hidden lg:flex items-center flex-shrink-0 ${isSearchFocused ? "lg:flex md:hidden" : ""
@@ -689,7 +689,7 @@ const Header: React.FC<HeaderProps> = () => {
                   : "space-x-6 md:space-x-8 lg:space-x-8"
                   }`}
               > */}
-                {/* <Link
+            {/* <Link
                 href="/brands"
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/brands"
@@ -702,7 +702,7 @@ const Header: React.FC<HeaderProps> = () => {
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link> */}
-                {/* <Link
+            {/* <Link
                 href="/blogs"
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/blogs"
@@ -717,7 +717,7 @@ const Header: React.FC<HeaderProps> = () => {
               </Link> */}
 
 
-                {/* <Link
+            {/* <Link
                 href="/contact"
                 className={`font-medium cursor-pointer transition-colors relative hidden lg:block ${
                   pathname === "/contact"
@@ -730,7 +730,7 @@ const Header: React.FC<HeaderProps> = () => {
                   <div className="absolute bottom-0 right-0 h-0.5 bg-[#B90647]"></div>
                 )}
               </Link> */}
-              {/* </div>
+            {/* </div>
             )} */}
 
             {/* Mobile Additional Navigation Links - Removed, moved to hamburger menu */}
@@ -782,30 +782,30 @@ const Header: React.FC<HeaderProps> = () => {
           </div> */}
 
 
-  
+
             {/* Right side - User actions */}
             <div className="flex items-center md:space-x-2 lg:space-x-4 justify-end ">
               {/* Profile Icon - Visible on all screen sizes */}
               {token ? <div className="flex ">
                 <div
-                ref={iconRef}
-                onClick={() => {
-                  if (isUserPopoverOpen) {
-                    setUserPopoverOpen(false);
-                    setIsUserPopoverClicked(false);
-                  } else {
-                    setUserPopoverOpen(true);
-                    setIsUserPopoverClicked(true);
-                  }
-                }}
-                className="relative flex justify-between items-center gap-[5px] cursor-pointer"
-              >
-                <PiUserCircleThin
-                  className="text-brown hover:cursor-pointer"
-                  size={30}
-                />
-                <span className="text-primary">Profile</span>
-              </div>
+                  ref={iconRef}
+                  onClick={() => {
+                    if (isUserPopoverOpen) {
+                      setUserPopoverOpen(false);
+                      setIsUserPopoverClicked(false);
+                    } else {
+                      setUserPopoverOpen(true);
+                      setIsUserPopoverClicked(true);
+                    }
+                  }}
+                  className="relative flex justify-between items-center gap-[5px] cursor-pointer"
+                >
+                  <PiUserCircleThin
+                    className="text-brown hover:cursor-pointer"
+                    size={30}
+                  />
+                  <span className="text-primary">Profile</span>
+                </div>
 
                 <div ref={popoverRef}>
                   <UserPopover
@@ -817,40 +817,40 @@ const Header: React.FC<HeaderProps> = () => {
 
                 {/* Cart Icon - Visible on all screen sizes */}
                 <div className=" flex justify-between items-center pr-2 md:pr-2 lg:pr-4 lg:mx-4 gap-[5px] cursor-pointer "
-                onClick={onClickCart}>
+                  onClick={onClickCart}>
                   <div className="relative">
-                  <CiShoppingCart
-                    className="text-brown hover:cursor-pointer " 
-                    size={30}
-                    
-                  />
-                  {Number(cartCountV) > 0 &&
-                    (cartCountV !== "0" ||
-                      cartCount !== null ||
-                      cartCount !== undefined) &&
-                    token ? (
-                    <div className="absolute top-[-8px] right-[2px] md:top-[-8px] md:right-[2px] lg:top-[-12px] lg:right-[-7px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[16px] md:h-[16px] lg:w-[20px] lg:h-[20px] flex items-center justify-center text-[8px] md:text-[8px] lg:text-[10px] font-bold">
-                      {cartCountV ? cartCountV : cartCount ? cartCount : ""}
-                    </div>
-                  ) : null}
+                    <CiShoppingCart
+                      className="text-brown hover:cursor-pointer "
+                      size={30}
+
+                    />
+                    {Number(cartCountV) > 0 &&
+                      (cartCountV !== "0" ||
+                        cartCount !== null ||
+                        cartCount !== undefined) &&
+                      token ? (
+                      <div className="absolute top-[-8px] right-[2px] md:top-[-8px] md:right-[2px] lg:top-[-12px] lg:right-[-7px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[16px] md:h-[16px] lg:w-[20px] lg:h-[20px] flex items-center justify-center text-[8px] md:text-[8px] lg:text-[10px] font-bold">
+                        {cartCountV ? cartCountV : cartCount ? cartCount : ""}
+                      </div>
+                    ) : null}
                   </div>
-                   <span className="text-primary">View Cart</span>
+                  <span className="text-primary">View Cart</span>
                 </div>
-               
+
               </div>
                 :
                 <div className="flex justify-between items-center">
                   <CustomButton
                     title="Submit Enquiry"
                     className="text-[16px] bg-secondaryLight py-[12px] px-[13px]  h-12 m-[10px] hidden lg:flex text-white w-[145px] "
-                  
+
                     hoverBgColor=""
-                    onPress={() => router.push('/contact')}
+                    onPress={() => setShowEnquiryModal(true)}
                   />
                   <CustomButton
                     title="Login / SignUp"
                     className="text-[16px] bg-cream text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
-                 
+
                     hoverBgColor=""
                     onPress={() => setShowLoginPopup(true)}
                   />
@@ -947,62 +947,62 @@ const Header: React.FC<HeaderProps> = () => {
 
 
         {/* ================= TABLET HEADER ONLY ================= */}
-<div className="hidden md:flex lg:hidden  w-full items-center gap-3 px-4 h-[72px] bg-cream border-b">
+        <div className="hidden md:flex lg:hidden  w-full items-center gap-3 px-4 h-[72px] bg-cream border-b">
 
-{/* Menu */}
-<VscMenu
-  className="text-brown cursor-pointer"
-  size={22}
-  onClick={toggleMenu}
-/>
+          {/* Menu */}
+          <VscMenu
+            className="text-brown cursor-pointer"
+            size={22}
+            onClick={toggleMenu}
+          />
 
-{/* Logo */}
-<Link href="/" className="flex-shrink-0">
-  <Image
-    src="/images/Rlogo.png"
-    alt="Hubeco Logo"
-    width={140}
-    height={40}
-    className="object-contain"
-  />
-</Link>
+          {/* Logo */}
+          <Link href="/" className="flex-shrink-0">
+            <Image
+              src="/images/Rlogo.png"
+              alt="Hubeco Logo"
+              width={140}
+              height={40}
+              className="object-contain"
+            />
+          </Link>
 
-{/* Search */}
-<div className="flex-1">
-  <SearchBar
-    isExpanded={true}
-    onFocus={handleSearchFocus}
-    onBlur={handleSearchBlur}
-    value={searchValue}
-    onChange={(value) => setSearchValue(value)}
-    placeholder={
-      rotatingPlaceholders[currentPlaceholderIndex] ||
-      "Search for Products..."
-    }
-  />
-</div>
+          {/* Search */}
+          <div className="flex-1">
+            <SearchBar
+              isExpanded={true}
+              onFocus={handleSearchFocus}
+              onBlur={handleSearchBlur}
+              value={searchValue}
+              onChange={(value) => setSearchValue(value)}
+              placeholder={
+                rotatingPlaceholders[currentPlaceholderIndex] ||
+                "Search for Products..."
+              }
+            />
+          </div>
 
-{/* Submit Enquiry */}
-{!token && (
-  <>
-<CustomButton
-  title="Submit Enquiry"
-  className="bg-secondaryLight text-cream h-10 px-4 text-sm"
-  onPress={() => router.push("/contact")}
-/>
+          {/* Submit Enquiry */}
+          {!token && (
+            <>
+              <CustomButton
+                title="Submit Enquiry"
+                className="bg-secondaryLight text-cream h-10 px-4 text-sm"
+                onPress={() => setShowEnquiryModal(true)}
+              />
 
 
-  <CustomButton
-    title="Login / SignUp"
-    className="bg-cream border border-secondaryLight text-secondaryLight h-10 px-4 text-sm"
-    onPress={() => setShowLoginPopup(true)}
-  />
-  </>
-)}
+              <CustomButton
+                title="Login / SignUp"
+                className="bg-cream border border-secondaryLight text-secondaryLight h-10 px-4 text-sm"
+                onPress={() => setShowLoginPopup(true)}
+              />
+            </>
+          )}
 
-<div className="flex items-center md:space-x-2 lg:space-x-4 ">
-              {/* Profile Icon - Visible on all screen sizes */}
-              {token ? <>
+          <div className="flex items-center md:space-x-2 lg:space-x-4 ">
+            {/* Profile Icon - Visible on all screen sizes */}
+            {token ? <>
               <div
                 ref={iconRef}
                 onClick={() => {
@@ -1022,52 +1022,52 @@ const Header: React.FC<HeaderProps> = () => {
                 />
               </div>
 
-                <div ref={popoverRef}>
-                  <UserPopover
-                    isOpen={isUserPopoverOpen}
-                    userInfos={userInfo}
-                    onClose={() => closeUserPopover()}
-                  />
-                </div>
+              <div ref={popoverRef}>
+                <UserPopover
+                  isOpen={isUserPopoverOpen}
+                  userInfos={userInfo}
+                  onClose={() => closeUserPopover()}
+                />
+              </div>
 
-                {/* Cart Icon - Visible on all screen sizes */}
-                <div className="relative pr-2 md:pr-2 lg:pr-4">
-                  <CiShoppingCart
-                    className="text-brown hover:cursor-pointer"
-                    size={30}
-                    onClick={onClickCart}
-                  />
-                  {Number(cartCountV) > 0 &&
-                    (cartCountV !== "0" ||
-                      cartCount !== null ||
-                      cartCount !== undefined) &&
-                    token ? (
-                    <div className="absolute top-[-8px] right-[2px] md:top-[-8px] md:right-[2px] lg:top-[-12px] lg:right-[2px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[16px] md:h-[16px] lg:w-[20px] lg:h-[20px] flex items-center justify-center text-[8px] md:text-[8px] lg:text-[10px] font-bold">
-                      {cartCountV ? cartCountV : cartCount ? cartCount : ""}
-                    </div>
-                  ) : null}
-                </div>
-              </>
-                :
-                <div className="flex justify-between items-center">
-                  <CustomButton
-                    title="Submit Enquiry"
-                    className="text-[16px] bg-secondaryLight py-[12px] px-[13px]  h-12 m-[10px] hidden lg:flex text-white w-[145px] "
-                  
-                    hoverBgColor=""
-                    onPress={() => router.push('/contact')}
-                  />
-                  <CustomButton
-                    title="Login / SignUp"
-                    className="text-[16px] bg-cream text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
-                 
-                    hoverBgColor=""
-                    onPress={() => setShowLoginPopup(true)}
-                  />
-                </div>}
+              {/* Cart Icon - Visible on all screen sizes */}
+              <div className="relative pr-2 md:pr-2 lg:pr-4">
+                <CiShoppingCart
+                  className="text-brown hover:cursor-pointer"
+                  size={30}
+                  onClick={onClickCart}
+                />
+                {Number(cartCountV) > 0 &&
+                  (cartCountV !== "0" ||
+                    cartCount !== null ||
+                    cartCount !== undefined) &&
+                  token ? (
+                  <div className="absolute top-[-8px] right-[2px] md:top-[-8px] md:right-[2px] lg:top-[-12px] lg:right-[2px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[16px] md:h-[16px] lg:w-[20px] lg:h-[20px] flex items-center justify-center text-[8px] md:text-[8px] lg:text-[10px] font-bold">
+                    {cartCountV ? cartCountV : cartCount ? cartCount : ""}
+                  </div>
+                ) : null}
+              </div>
+            </>
+              :
+              <div className="flex justify-between items-center">
+                <CustomButton
+                  title="Submit Enquiry"
+                  className="text-[16px] bg-secondaryLight py-[12px] px-[13px]  h-12 m-[10px] hidden lg:flex text-white w-[145px] "
 
-              {/* Vendor Button/Icon - Different for mobile vs tablet vs desktop */}
-              {/* {!token && (
+                  hoverBgColor=""
+                  onPress={() => router.push('/contact')}
+                />
+                <CustomButton
+                  title="Login / SignUp"
+                  className="text-[16px] bg-cream text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
+
+                  hoverBgColor=""
+                  onPress={() => setShowLoginPopup(true)}
+                />
+              </div>}
+
+            {/* Vendor Button/Icon - Different for mobile vs tablet vs desktop */}
+            {/* {!token && (
               <>
               
                 <CustomButton
@@ -1120,107 +1120,107 @@ const Header: React.FC<HeaderProps> = () => {
               </>
             )} */}
 
-            
-              
-            </div>
 
-</div>
+
+          </div>
+
+        </div>
 
 
 
         {/* MOBILE HEADER */}
-<div className="md:hidden sm:hidden w-full mx-[10px] p-2 bg-cream border-[1px] border-gray-200 shadow-sm h-[122px]" >
+        <div className="md:hidden sm:hidden w-full mx-[10px] p-2 bg-cream border-[1px] border-gray-200 shadow-sm h-[122px]" >
 
-{/* Row 1: Menu | Logo | Login */}
-<div className="flex items-center justify-between">
+          {/* Row 1: Menu | Logo | Login */}
+          <div className="flex items-center justify-between">
 
-  {/* Menu */}
-  <VscMenu
-    className="text-brown cursor-pointer"
-    size={24}
-    onClick={toggleMenu}
-  />
+            {/* Menu */}
+            <VscMenu
+              className="text-brown cursor-pointer"
+              size={24}
+              onClick={toggleMenu}
+            />
 
-  {/* Logo */}
-  <Link href="/" className="flex justify-center flex-1">
-    <Image
-      src="/images/Rlogo.png"
-      alt="Hubeco Logo"
-      width={188}
-      height={43}
-      className="object-contain"
-    />
-  </Link>
+            {/* Logo */}
+            <Link href="/" className="flex justify-center flex-1">
+              <Image
+                src="/images/Rlogo.png"
+                alt="Hubeco Logo"
+                width={188}
+                height={43}
+                className="object-contain"
+              />
+            </Link>
 
-  {/* Login / Profile */}
-  {token ? (
-    <div className="flex items-center md:space-x-2 lg:space-x-4">
-    {/* Profile Icon - Visible on all screen sizes */}
-    {token ? <><div
-      ref={iconRef}
-      onClick={() => {
-        if (isUserPopoverOpen) {
-          setUserPopoverOpen(false);
-          setIsUserPopoverClicked(false);
-        } else {
-          setUserPopoverOpen(true);
-          setIsUserPopoverClicked(true);
-        }
-      }}
-      className="relative"
-    >
-      <PiUserCircleThin
-        className="text-brown hover:cursor-pointer"
-        size={30}
-      />
-    </div>
+            {/* Login / Profile */}
+            {token ? (
+              <div className="flex items-center md:space-x-2 lg:space-x-4">
+                {/* Profile Icon - Visible on all screen sizes */}
+                {token ? <><div
+                  ref={iconRef}
+                  onClick={() => {
+                    if (isUserPopoverOpen) {
+                      setUserPopoverOpen(false);
+                      setIsUserPopoverClicked(false);
+                    } else {
+                      setUserPopoverOpen(true);
+                      setIsUserPopoverClicked(true);
+                    }
+                  }}
+                  className="relative"
+                >
+                  <PiUserCircleThin
+                    className="text-brown hover:cursor-pointer"
+                    size={30}
+                  />
+                </div>
 
-      <div ref={popoverRef}>
-        <UserPopover
-          isOpen={isUserPopoverOpen}
-          userInfos={userInfo}
-          onClose={() => closeUserPopover()}
-        />
-      </div>
+                  <div ref={popoverRef}>
+                    <UserPopover
+                      isOpen={isUserPopoverOpen}
+                      userInfos={userInfo}
+                      onClose={() => closeUserPopover()}
+                    />
+                  </div>
 
-      {/* Cart Icon - Visible on all screen sizes */}
-      <div className="relative pr-2 md:pr-2 lg:pr-4">
-        <CiShoppingCart
-          className="text-brown hover:cursor-pointer"
-          size={30}
-          onClick={onClickCart}
-        />
-        {Number(cartCountV) > 0 &&
-          (cartCountV !== "0" ||
-            cartCount !== null ||
-            cartCount !== undefined) &&
-          token ? (
-          <div className="absolute top-[-8px] right-[2px] md:top-[-8px] md:right-[2px] lg:top-[-12px] lg:right-[2px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[16px] md:h-[16px] lg:w-[20px] lg:h-[20px] flex items-center justify-center text-[8px] md:text-[8px] lg:text-[10px] font-bold">
-            {cartCountV ? cartCountV : cartCount ? cartCount : ""}
-          </div>
-        ) : null}
-      </div>
-    </>
-      :
-      <div className="flex justify-between items-center">
-        <CustomButton
-          title="Submit Enquiry"
-          className="text-[16px] bg-secondaryLight py-[12px] px-[13px]  h-12 m-[10px] hidden lg:flex text-white w-[145px] "
-        
-          hoverBgColor=""
-          onPress={() => router.push('/contact')}
-        />
-        <CustomButton
-          title="Login / SignUp"
-          className="text-[16px] bg-cream text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
-       
-          hoverBgColor=""
-          onPress={() => setShowLoginPopup(true)}
-        />
-      </div>}
+                  {/* Cart Icon - Visible on all screen sizes */}
+                  <div className="relative pr-2 md:pr-2 lg:pr-4">
+                    <CiShoppingCart
+                      className="text-brown hover:cursor-pointer"
+                      size={30}
+                      onClick={onClickCart}
+                    />
+                    {Number(cartCountV) > 0 &&
+                      (cartCountV !== "0" ||
+                        cartCount !== null ||
+                        cartCount !== undefined) &&
+                      token ? (
+                      <div className="absolute top-[-8px] right-[2px] md:top-[-8px] md:right-[2px] lg:top-[-12px] lg:right-[2px] bg-[#439787] text-white rounded-full w-[16px] h-[16px] md:w-[16px] md:h-[16px] lg:w-[20px] lg:h-[20px] flex items-center justify-center text-[8px] md:text-[8px] lg:text-[10px] font-bold">
+                        {cartCountV ? cartCountV : cartCount ? cartCount : ""}
+                      </div>
+                    ) : null}
+                  </div>
+                </>
+                  :
+                  <div className="flex justify-between items-center">
+                    <CustomButton
+                      title="Submit Enquiry"
+                      className="text-[16px] bg-secondaryLight py-[12px] px-[13px]  h-12 m-[10px] hidden lg:flex text-white w-[145px] "
 
-    {/* Vendor Button/Icon - Different for mobile vs tablet vs desktop */}
-    {/* {!token && (
+                      hoverBgColor=""
+                      onPress={() => router.push('/contact')}
+                    />
+                    <CustomButton
+                      title="Login / SignUp"
+                      className="text-[16px] bg-cream text-secondaryLight border-[1px] border-secondaryLight  py-[12px] px-[13px] w-[145px]   h-12  hidden lg:flex  font-medium"
+
+                      hoverBgColor=""
+                      onPress={() => setShowLoginPopup(true)}
+                    />
+                  </div>}
+
+                {/* Vendor Button/Icon - Different for mobile vs tablet vs desktop */}
+                {/* {!token && (
     <>
     
       <CustomButton
@@ -1273,37 +1273,37 @@ const Header: React.FC<HeaderProps> = () => {
     </>
   )} */}
 
-  
-    
-  </div>
 
-  ) : (
-    <CustomButton
-    title="Login / SignUp"
-    className="text-[12px] bg-cream text-secondaryLight border-[1px] border-secondaryLight px-4 lg:px-2  md:h-12 h-10   lg:flex  font-medium"
- 
-    hoverBgColor=""
-    onPress={() => setShowLoginPopup(true)}
-  />
-  )}
-</div>
 
-{/* Row 2: Full-width Search */}
-<div className="mt-3">
-  <SearchBar
-    isExpanded={true}
-    onFocus={handleSearchFocus}
-    onBlur={handleSearchBlur}
-    className="w-full"
-    value={searchValue}
-    onChange={(value) => setSearchValue(value)}
-    placeholder={
-      rotatingPlaceholders[currentPlaceholderIndex] ||
-      "Search for Products..."
-    }
-  />
-</div>
-</div>
+              </div>
+
+            ) : (
+              <CustomButton
+                title="Login / SignUp"
+                className="text-[12px] bg-cream text-secondaryLight border-[1px] border-secondaryLight px-4 lg:px-2  md:h-12 h-10   lg:flex  font-medium"
+
+                hoverBgColor=""
+                onPress={() => setShowLoginPopup(true)}
+              />
+            )}
+          </div>
+
+          {/* Row 2: Full-width Search */}
+          <div className="mt-3">
+            <SearchBar
+              isExpanded={true}
+              onFocus={handleSearchFocus}
+              onBlur={handleSearchBlur}
+              className="w-full"
+              value={searchValue}
+              onChange={(value) => setSearchValue(value)}
+              placeholder={
+                rotatingPlaceholders[currentPlaceholderIndex] ||
+                "Search for Products..."
+              }
+            />
+          </div>
+        </div>
 
 
         <PincodePopup isOpen={isPopupOpen} onClose={togglePopup} />
@@ -1315,19 +1315,20 @@ const Header: React.FC<HeaderProps> = () => {
           />
         )}
       </header>
- <LoginPopup
-  open={showLoginPopup}
-  onOpenChange={setShowLoginPopup}
-  router={router}
-/>
-
-
+      <LoginPopup
+        open={showLoginPopup}
+        onOpenChange={setShowLoginPopup}
+        router={router}
+      />
+      <SubmitEnquiryModal
+        open={showEnquiryModal}
+        onClose={() => setShowEnquiryModal(false)}
+        product={null}
+        mode="form"
+      />
     </>
   );
 };
-
-
-
 // ----------------------------
 // Login Popup Component
 // ----------------------------

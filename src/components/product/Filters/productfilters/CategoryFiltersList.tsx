@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import useApi from "@/components/Fetcher/useAPI";
-import * as getEndpoint from "../../../../network/EndPoints";
 import toast from "react-hot-toast";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import FilterHTML from "./FilterHTML";
+import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 
 interface VendorFiltersListProps {
   onCategorySelectionChange: (selectedCats: string[]) => void;
@@ -44,12 +44,9 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
 
   const fetchCategories = async () => {
     try {
-      const result = await callApi(
-        getEndpoint.default.PRODUCTS_CATEGORIES,
-        "GET"
-      );
+      const data = await getProductCategoryTree(callApi);
 
-      const allSubCategories = result.data.flatMap(
+      const allSubCategories = data.flatMap(
         (cat: any) => cat.subCategories || []
       );
 

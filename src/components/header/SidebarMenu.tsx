@@ -4,16 +4,10 @@ import { AiOutlineClose } from "react-icons/ai";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import styles from "./Sidebar.module.css";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
 import useApi from "../Fetcher/useAPI";
-import store from "@/reduxStore";
-import {
-  saveCategories,
-  saveCatTime,
-} from "@/reduxStore/slices/masterDataSlice";
 import toast from "react-hot-toast";
-import * as getEndpoint from "../../network/EndPoints";
 import useClient from "../hooks/useClient";
+import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 
 interface MenuItem {
   level: number;
@@ -119,7 +113,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
 
   const [openMenus, setOpenMenus] = useState<{ [key: string]: boolean }>({});
 
-  const dispatch = useDispatch();
   const isClient = useClient();
 
   const handleApiError = async (err: any) => {
@@ -135,17 +128,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
 
   const getCategories = async () => {
     try {
-      const result = (await callApi(
-        getEndpoint.default.PRODUCTS_CATEGORIES,
-        "GET"
-      )) as any;
-      if (result.data == null) {
-        handleApiError(result.errorData);
+      const data = await getProductCategoryTree(callApi);
+      if (!Array.isArray(data) || data.length === 0) {
+        handleApiError(null);
       } else {
-        const currentTime = new Date();
-        setAllCategories(result?.data || []);
-        dispatch(saveCategories(result?.data || []));
-        dispatch(saveCatTime(currentTime));
+        setAllCategories(data || []);
       }
     } catch (error) {
       handleApiError(error);

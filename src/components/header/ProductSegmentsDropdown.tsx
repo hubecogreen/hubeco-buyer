@@ -19,6 +19,7 @@ import ViewMore from "../product/quote/ViewMore";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import { GoArrowRight } from "react-icons/go";
 import Image from "next/image";
+import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 
 interface Category {
   seoSlug: string;
@@ -199,16 +200,13 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
   const getMenuCategories = async () => {
     try {
       setIsLoading(true);
-      const result = (await callApi(
-        getEndpoint.default.PRODUCTS_CATEGORIES,
-        "GET"
-      )) as any;
-      if (result?.data == null) {
-        handleApiError(result?.errorData);
+      const data = await getProductCategoryTree(callApi);
+      if (!Array.isArray(data) || data.length === 0) {
+        handleApiError(null);
       } else {
-        console.log(result?.data, "checkncknnd");
-        setMainCategories(result?.data);
-        setSelectedCategory(result?.data[0]);
+        console.log(data, "checkncknnd");
+        setMainCategories(data);
+        setSelectedCategory(data[0]);
       }
     } catch (e) {
       handleApiError(e);

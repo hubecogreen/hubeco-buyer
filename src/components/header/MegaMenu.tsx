@@ -7,7 +7,6 @@ import useApi from "../Fetcher/useAPI";
 import * as getEndpoint from "../../network/EndPoints";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import store from "@/reduxStore";
 import { ArrowBigRight, ChevronRight, Search } from "lucide-react";
 
 import {
@@ -18,6 +17,7 @@ import { useRouter } from "next/navigation";
 import ViewMore from "../product/quote/ViewMore";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import { GoArrowRight } from "react-icons/go";
+import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 
 interface MenuItem {
   title: string;
@@ -51,16 +51,8 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
     null
   );
   const { callApi } = useApi();
-  const categoriesRedux = store.getState().masterData.categories;
-  const catTimeRedux = store.getState().masterData.catetime;
   const dispatch = useDispatch();
-
-  const currentTime = Date.now(); // Get the current time in milliseconds
-  const catTime = new Date(catTimeRedux).getTime(); // Convert catTimeRedux to a timestamp
   const router = useRouter();
-
-  const timeDifference = currentTime - catTime;
-  const timeDifferenceInHours = timeDifference / (1000 * 60 * 60);
   const breakpoint = useBreakpoint();
   const threshold = breakpoint === "tablet" ? 9 : 9;
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -100,16 +92,11 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
 
   const getCategories = async () => {
     try {
-      const result = (await callApi(
-        getEndpoint.default.PRODUCTS_CATEGORIES,
-        "GET"
-      )) as any;
-      if (result.data == null) {
-        handleApiError(result.errorData);
+      const data = await getProductCategoryTree(callApi);
+      if (!Array.isArray(data) || data.length === 0) {
+        handleApiError(null);
       } else {
-        const cuurentTime = new Date();
-
-        const catResult = result && result?.data;
+        const catResult = data;
         setMainCategories(catResult);
         catResult &&
           catResult.forEach((element: any) => {
@@ -118,8 +105,8 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
             }
           });
 
-        dispatch(saveCategories(result?.data[0]?.subCategories || []));
-        dispatch(saveCatTime(cuurentTime));
+        dispatch(saveCategories(catResult || []));
+        dispatch(saveCatTime(new Date()));
       }
     } catch (error) {
       handleApiError(error);

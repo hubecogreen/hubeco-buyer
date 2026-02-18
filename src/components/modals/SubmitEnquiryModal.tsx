@@ -330,11 +330,11 @@ export default function SubmitEnquiryModal({
                                             render={({ field }) => (
                                                 <CustomInput
                                                     label="Name*"
+                                                    placeholder="Enter Name"
                                                     value={field.value}
                                                     onChange={field.onChange}
                                                     errorMessage={errors.name?.message}
-                                                    inputClassNames="h-[48px]"
-                                                    placeholder=""
+                                                    inputClassNames="h-[48px]"                                                    
                                                 />
                                             )}
                                         />
@@ -367,7 +367,7 @@ export default function SubmitEnquiryModal({
                                                     onChange={field.onChange}
                                                     type="email"
                                                     inputClassNames="h-[48px]"
-                                                    placeholder=""
+                                                    placeholder="Enter Email"
                                                 />
                                             )}
                                         />
@@ -385,7 +385,7 @@ export default function SubmitEnquiryModal({
                                                     isTextArea
                                                     numberOfLines={4}
                                                     inputClassNames="min-h-[120px]"
-                                                    placeholder=""
+                                                    placeholder="Enter requirements"
                                                 />
                                             )}
                                         />

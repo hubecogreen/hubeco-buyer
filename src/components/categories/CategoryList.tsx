@@ -13,13 +13,13 @@ import animationData from "../../../public/animations/nodatafound.json";
 import styles from "../home/categories/Category.module.css";
 import CustomButton from "../customButton/CustomButton";
 
-import * as getEndpoint from "../../network/EndPoints";
 import useApi from "../Fetcher/useAPI";
 import {
   saveCategories,
   saveCatTime,
 } from "@/reduxStore/slices/masterDataSlice";
 import { normalizePath } from "@/lib/utils";
+import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
@@ -120,17 +120,11 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
   // -----------------------------
   const fetchCategories = async () => {
     try {
-      const result: any = await callApi(
-        getEndpoint.default.PRODUCTS_CATEGORIES,
-        "GET"
-      );
-
-      if (!result?.data) {
-        handleApiError(result?.errorData);
+      const data = await getProductCategoryTree(callApi);
+      if (!Array.isArray(data) || data.length === 0) {
+        handleApiError(null);
         return;
       }
-
-      const data = result.data;
 
     dispatch(saveCategories(data || []));
       dispatch(saveCatTime(new Date()));

@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import useApi from "@/components/Fetcher/useAPI";
-import * as getEndpoint from "../../network/EndPoints";
 import { GoArrowRight } from "react-icons/go";
 import CustomButton from "../customButton/CustomButton";
 import { BsEnvelope } from "react-icons/bs";
@@ -12,6 +11,7 @@ import { FaLinkedinIn } from "react-icons/fa6";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 
 const useAuth = () => {
   const userInfo = useSelector((state: any) => state.user?.userInfo || {});
@@ -52,14 +52,8 @@ const Footer = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await callApi(
-          getEndpoint.default.PRODUCTS_CATEGORIES,
-          "GET"
-        );
-
         const map: Record<string, string> = {};
-
-        const data = (res as { data?: any[] })?.data;
+        const data = await getProductCategoryTree(callApi);
 
         if (Array.isArray(data)) {
           data.forEach((parent: any) => {
@@ -259,10 +253,10 @@ const Footer = () => {
         </div>
 
         {/* BOTTOM LOGO */}
-        <div className="w-full flex mt-[90px] pb-[16px] md:pb-[2px] lg:pb-[58px] px-4 lg:px-0">
+        <div className="w-full flex mt-[90px] pb-[60px] md:pb-[2px] lg:pb-[58px] px-4 lg:px-0">
           <div className="max-w-[1200px] w-full">
             <Link href="/">
-              <div className="relative lg:w-[717px] lg:h-[162px]  w-[279px] h-[63px] md:w-[497px] md:h-[112px]">
+              <div className="relative lg:w-[717px] lg:h-[162px]  w-[339px] h-[77px] md:w-[497px] md:h-[112px]">
                 <Image
                   src="/images/Rlogo.png"
                   alt="Hubeco Logo"

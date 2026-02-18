@@ -45,6 +45,7 @@ import { BsShop } from "react-icons/bs";
 import Image from "next/image";
 import useClient from "../hooks/useClient";
 import SubmitEnquiryModal from "../modals/SubmitEnquiryModal";
+import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 
 const vendorURL = process.env.NEXT_PUBLIC_VENDOR_URL;
 interface HeaderProps { }
@@ -160,17 +161,14 @@ const Header: React.FC<HeaderProps> = () => {
   // Fetch categories for rotating placeholders
   const getCategoriesForPlaceholders = async () => {
     try {
-      const result = (await callApi(
-        getEndpoint.default.PRODUCTS_CATEGORIES,
-        "GET"
-      )) as any;
-      if (result?.data && result.data.length > 0) {
+      const data = await getProductCategoryTree(callApi);
+      if (Array.isArray(data) && data.length > 0) {
         const placeholders: string[] = [];
 
-        console.log(result.data, "categories data");
+        console.log(data, "categories data");
 
         // Collect category names (main categories, subcategories, and child categories)
-        result.data.forEach((category: any) => {
+        data.forEach((category: any) => {
           // Add main category name
           if (category.name && category.name !== "N/A") {
             const truncatedName = category.name.length > 20

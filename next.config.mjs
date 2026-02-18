@@ -1,4 +1,3 @@
-const isProd = process.env.NODE_ENV === "production";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -56,12 +55,12 @@ const nextConfig = {
   images: {
     // domains: ['assets-dev.hubeco.market']
     disableStaticImages: true,
-    // unoptimized: true,
+    unoptimized: true,
     remotePatterns: [
      
       {
         protocol: "https",
-        hostname: isProd ? "assets.hubeco.market" : "assets-uat.hubeco.market",
+        hostname: "assets.hubeco.market",
         port: "",
         pathname: "/**",
       },

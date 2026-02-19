@@ -38,7 +38,7 @@ const HeroSection = () => {
         poster={heroPosterUrl}
         className="absolute inset-0 w-full h-full object-cover brightness-95 z-0"
       >
-        <source src={heroVideoUrl} type="video/mp4" />
+        <source src={heroVideoUrl} type="video/webm" />
         Your browser does not support the video tag.
       </video>
 

@@ -89,7 +89,7 @@ const Footer = () => {
       <div className="w-full max-w-[1250px] flex flex-col">
 
         {/* TOP GREEN LINE */}
-        <div className="w-full flex justify-center px-5 md:px-5 lg:px-0">
+        <div className="w-full flex justify-center px-4 md:px-5 lg:px-0">
           <div className="w-full lg:w-[1200px] h-[1px] bg-[#069A66]" />
         </div>
 

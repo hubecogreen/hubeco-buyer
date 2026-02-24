@@ -352,7 +352,7 @@ const FiltersSidebar: React.FC<FilterProps> = ({
             </button>
           )}
       </div>
-      <div className="max-h-[calc(100vh-140px)] lg:max-h-[1030px] overflow-y-auto no-scrollbar mb-[50px] md:mb-0">
+      <div className="max-h-[calc(100vh-140px)] lg:max-h-[1030px] overflow-y-auto no-scrollbar pb-[50px] md:pb-4">
         {/* CATEGORIES FILTER */}
         <CategoryFiltersList
           onCategorySelectionChange={filterWithChildCategories}

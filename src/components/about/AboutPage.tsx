@@ -226,28 +226,28 @@ export default function Page() {
               </p>
 
               {/* Card Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:justify-between gap-8 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:justify-between gap-8 lg:gap-8 md:gap-[11px] w-full">
                 {accordionItems.map((item, index) => (
                   <div
                     key={index}
-                    className="w-full lg:max-w-[290px] md:h-[259px] h-[153.5px] md:p-8 py-5 px-8 rounded-2xl border border-primary bg-cream hover:shadow-lg transition-shadow duration-300"
+                    className="w-full lg:max-w-[290px] lg:h-[259px] md:h-[179px] h-[153.5px] lg:p-8 md:px-5 md:py-8 py-5 px-8 rounded-2xl border border-primary bg-cream hover:shadow-lg transition-shadow duration-300"
                     style={{
                       borderRadius: '16px',
                       borderWidth: '1px',
                     }}
                   >
-                    <div className="flex md:flex-col flex-row justify-between md:justify-start gap-6 md:gap-0  h-full">
+                    <div className="flex md:flex-row lg:flex-col flex-row justify-between md:justify-start gap-6 lg:gap-0 md:gap-5  h-full">
                       {/* Icon */}
-                      <div className="mb-6">
+                      <div className="mb-6 md:flex-shrink-1 ">
                         <Image
                           src={item.imgSrc}
                           alt={item.alt}
                           width={56}
                           height={56}
-                          className="w-15 h-14"
+                          className="w-15 h-14 lg:w-15 lg:h-14 md:w-14 md:h-14"
                         />
                       </div>
-<div className="w-full flex items-start justify-between md:items-start justify-start flex-col">
+<div className="w-full flex items-start justify-between md:items-start md:justify-start flex-col">
                       {/* Title */}
                       <h3 className="font-semibold text-brown md:text-lg text-[20px] mb-3">
                         {item.title}

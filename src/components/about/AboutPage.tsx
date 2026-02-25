@@ -230,7 +230,7 @@ export default function Page() {
                 {accordionItems.map((item, index) => (
                   <div
                     key={index}
-                    className="w-full lg:max-w-[290px] lg:h-[259px] md:h-[179px] h-[153.5px] lg:p-8 md:px-5 md:py-8 py-5 px-8 rounded-2xl border border-primary bg-cream hover:shadow-lg transition-shadow duration-300"
+                    className="w-full lg:max-w-[290px] lg:h-[259px] md:h-[179px] min-h-[153.5px] max-h-[168px] lg:p-8 md:px-5 md:py-8 py-5 px-8 rounded-2xl border border-primary bg-cream hover:shadow-lg transition-shadow duration-300"
                     style={{
                       borderRadius: '16px',
                       borderWidth: '1px',
@@ -247,7 +247,7 @@ export default function Page() {
                           className="w-15 h-14 lg:w-15 lg:h-14 md:w-14 md:h-14"
                         />
                       </div>
-<div className="w-full flex items-start justify-between md:items-start md:justify-start flex-col">
+<div className="w-full flex items-start justify-start md:items-start md:justify-start flex-col">
                       {/* Title */}
                       <h3 className="font-semibold text-brown md:text-lg text-[20px] mb-3">
                         {item.title}
@@ -339,8 +339,8 @@ export default function Page() {
                    src="images/about/values-tab.jpg"
                     alt="Sustainable values"
                     width={688} 
-                    height={476}
-                    className="hidden md:w-full md:block lg:hidden rounded-xl"
+                    height={400}
+                    className="hidden md:w-full md:h-[400px] md:block lg:hidden rounded-xl  "
                     />  
                     <Image
                     src="images/about/values-mob.png"

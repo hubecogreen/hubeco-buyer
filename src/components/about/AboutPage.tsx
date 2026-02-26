@@ -230,7 +230,7 @@ export default function Page() {
                 {accordionItems.map((item, index) => (
                   <div
                     key={index}
-                    className="w-full lg:max-w-[290px] lg:h-[259px] md:h-[179px] min-h-[153.5px] max-h-[168px] lg:p-8 md:px-5 md:py-8 py-5 px-8 rounded-2xl border border-primary bg-cream hover:shadow-lg transition-shadow duration-300"
+                    className="w-full lg:max-w-[290px] lg:h-[259px] md:h-[179px] md:max-h-full min-h-[153.5px] max-h-[168px] lg:p-8 md:px-5 md:py-8 py-5 px-8 rounded-2xl border border-primary bg-cream hover:shadow-lg transition-shadow duration-300"
                     style={{
                       borderRadius: '16px',
                       borderWidth: '1px',

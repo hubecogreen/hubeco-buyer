@@ -1408,7 +1408,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   {productData?.status == "PUBLISHED" &&
                     productData?.deletedAt == null &&
                     productData?.isActive && (
-                      <div className="flex md:flex-row flex-col  w-full  md:gap-6 gap-2 pb-4">
+                      <div className="flex md:flex-row flex-row  w-full  md:gap-6 gap-2 md:pb-4 pb-2">
                         {/* QUANTITY - LEFT SIDE (50%) */}
                         <div className="md:w-1/4 w-full">
                           <p className="text-md text-brown mb-3">Quantity</p>

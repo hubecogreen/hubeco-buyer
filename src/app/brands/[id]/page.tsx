@@ -113,7 +113,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <div className="bg-white">
+      <div className="bg-cream">
         {/* <Meta title="Brands" subtitle="Brands" description="" /> */}
         <head>
           <title>{userValues?.companyName} | Hubeco</title>
@@ -159,7 +159,7 @@ export default function Page({ params }: { params: { id: string } }) {
             <input
               type="text"
               placeholder="Search"
-              className="focus:outline-none border border-gray-300 rounded-l-md p-2 w-full"
+              className="focus:outline-none bg-cream border border-[#E8E3C5] rounded-l-md p-2 w-full"
               value={searchTerm}
               onChange={handleSearch}
             />

@@ -126,7 +126,7 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
 
         return (
           <div key={attributeName} className="w-full">
-            <p className="text-md text-brown text-normal mb-3 capitalize">
+            <p className="text-md text-brown font-semibold mb-3 capitalize">
               {attributeName}
             </p>
             <Select

@@ -1401,7 +1401,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 <div
                   className={` rounded-xl  ${totalProduct?.purchaseType !== "QUOTE"
                     ? "py-[10px] mt-3 md:px-[0px] px-[0px]"
-                    : "md:py-[24px] p-[10px] mt-2"
+                    : "md:py-[24px] p-[0px] mt-2"
                     }`}
                 >
                   {/* QUANTITY + VARIATIONS ROW */}
@@ -1411,7 +1411,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       <div className="flex  w-full  md:gap-6 gap-2 md:pb-4 pb-2">
                         {/* QUANTITY - LEFT SIDE (50%) */}
                         <div className="md:w-1/4 w-1/2">
-                          <p className="text-md text-brown mb-3">Quantity</p>
+                          <p className="text-md text-brown font-semibold mb-3">Quantity</p>
 
                           <TooltipProvider>
                             <Tooltip open={showQtyTip}>

@@ -11,7 +11,7 @@ const WhatsAppWidget = () => {
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-40 pointer-events-auto"
+      className="fixed bottom-5 right-5 z-40 pointer-events-auto bg-cream"
       style={{ pointerEvents: 'auto' }}
     >
       <Image

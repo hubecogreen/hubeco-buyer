@@ -1408,9 +1408,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   {productData?.status == "PUBLISHED" &&
                     productData?.deletedAt == null &&
                     productData?.isActive && (
-                      <div className="flex md:flex-row flex-col  w-full  md:gap-6 gap-2 pb-4">
+                      <div className="flex  w-full  md:gap-6 gap-2 md:pb-4 pb-2">
                         {/* QUANTITY - LEFT SIDE (50%) */}
-                        <div className="md:w-1/4 w-full">
+                        <div className="md:w-1/4 w-1/2">
                           <p className="text-md text-brown mb-3">Quantity</p>
 
                           <TooltipProvider>
@@ -1461,7 +1461,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         </div>
 
                         {/* VARIATIONS - RIGHT SIDE (50%) */}
-                        <div className="md:w-auto w-full">
+                        <div className="md:w-auto w-1/2">
                           {!isSingle &&
                             totalProduct?.productAttributes &&
                             combinations && (
@@ -1475,7 +1475,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     )}
 
                   {/* BUTTONS BELOW */}
-                  <div className="flex gap-4 mt-6 md:flex-row flex-col">
+                  <div className="flex gap-2 md:gap-4 mt-6 ">
                     {/* REQUEST QUOTE BUTTON */}
                     {(totalProduct?.purchaseType == "MULTI" ||
                       totalProduct?.purchaseType == "QUOTE") &&
@@ -1488,8 +1488,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             (totalProduct?.purchaseType === "QUOTE" &&
                               !(totalProduct?.purchaseType === "MULTI")) ||
                               totalProduct?.purchaseType === "QUOTE"
-                              ? " md:w-1/2 w-full"
-                              : "md:w-1/2 w-full"
+                              ? " md:w-1/2 w-1/2"
+                              : "md:w-1/2 w-1/2"
                             }`}
                           onClick={() => {
                             if (checkBuyerLogin()) {
@@ -1500,7 +1500,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                             }
                           }}
                         >
-                          <p className="text-cream text-md text-medium ml-3">Request for Pricing</p>
+                          <p className="text-cream text-md text-medium ml-1">Request for Pricing</p>
                         </Button>
                       )}
 
@@ -1515,7 +1515,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           onClick={() => addToCart(productData?._id)}
                           className={`bg-secondary rounded shadow-xs group py-[15px] hover:bg-secondary bg-opacity-100 hover:bg-opacity-85 transition ${
                             // if only add to cart is present → full width
-                            totalProduct?.purchaseType === "ONLINE" ? "w-full" : "md:w-1/2 w-full"
+                            totalProduct?.purchaseType === "ONLINE" ? "w-full" : "md:w-1/2 w-1/2"
                             }`}
                         >
                           {loadingCartButton ? (

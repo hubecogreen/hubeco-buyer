@@ -10,10 +10,10 @@ export default function GreenFinancingSection() {
   const [isProjectFormOpen, setIsProjectFormOpen] = useState(false);
 
   return (
-    <div className ="md:px-2 px-0 lg:px-0">
-      <div className="relative w-full h-[500px] overflow-hidden rounded-[48px] mx-auto max-w-[1440px] top-8 ">
+    <div className ="md:px-2 px-0 lg:px-[100px] max-w-screen-xl mx-auto ">
+      <div className="relative w-full h-[500px] overflow-hidden rounded-[48px] top-8 ">
         {/* Background Image */}
-        <div className="absolute inset-0 m-4 md:m-2
+        <div className="absolute inset-0 m-4 md:m-2 lg:m-0
 
       ">
           <Image

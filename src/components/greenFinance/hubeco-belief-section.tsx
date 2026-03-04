@@ -16,8 +16,8 @@ export default function HubecoBeliefSection() {
       </div>
 
       {/* Content Container */}
-      <div className="max-w-screen-xl mx-auto px-4  ">
-        <div className="bg-gray-50 rounded-3xl sm:px-10 lg:px-8 md:px-0 py-12 sm:py-16 ">
+      <div className="max-w-screen-xl mx-auto px-4 lg:px-0 ">
+        <div className="bg-gray-50 rounded-3xl sm:px-10 lg:px-[100px] md:px-0 py-12 sm:py-16 ">
           <div
             className="grid grid-cols-1  md:grid-cols-2 gap-10 lg:gap-16 md:gap-6 items-stretch pb-14  rounded-2xl"
            

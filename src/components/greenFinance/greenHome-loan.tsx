@@ -9,7 +9,7 @@ export default function GreenHomeLoanSection() {
 
   return (
     <div className="w-full py-16">
-      <div className="max-w-[1450px] mx-auto px-4">
+      <div className="max-w-screen-xl mx-auto px-4 lg:px-[100px]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-6 items-stretch">
           {/* Left Image */}
           <div className="relative">

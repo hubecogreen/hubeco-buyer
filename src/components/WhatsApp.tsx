@@ -15,10 +15,10 @@ const WhatsAppWidget = () => {
       style={{ pointerEvents: 'auto' }}
     >
       <Image
-        src="/images/whatsapp-1.png" // Place a WhatsApp icon image in your public folder as whatsapp-icon.webp "D:\hubeco\hubeco-buyer\public\images\whatsapp (1).png"
+        src="/images/whatsapp-1.svg" // Place a WhatsApp icon image in your public folder as whatsapp-icon.webp "D:\hubeco\hubeco-buyer\public\images\whatsapp (1).png"
         alt="Chat on WhatsApp"
-        width={50}
-        height={50}
+        width={150}
+        height={150}
       />
     </a>
   );

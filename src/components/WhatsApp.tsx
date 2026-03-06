@@ -18,8 +18,8 @@ const WhatsAppWidget = () => {
       <Image
         src="/images/whatsapp-1.svg" // Place a WhatsApp icon image in your public folder as whatsapp-icon.webp "D:\hubeco\hubeco-buyer\public\images\whatsapp (1).png"
         alt="Chat on WhatsApp"
-        width={90}
-        height={72}
+        width={150}
+        height={150}
       />
     </a>
   );

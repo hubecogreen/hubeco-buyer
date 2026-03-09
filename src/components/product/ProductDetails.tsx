@@ -1410,7 +1410,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                     productData?.isActive && (
                       <div className="flex  w-full  md:gap-6 gap-2 md:pb-4 pb-2">
                         {/* QUANTITY - LEFT SIDE (50%) */}
-                        <div className="md:w-1/4 w-1/2">
+                        <div className="md:w-[210px] w-1/2">
                           <p className="text-md text-brown font-semibold mb-3">Quantity</p>
 
                           <TooltipProvider>
@@ -1483,14 +1483,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       productData?.deletedAt == null &&
                       productData?.isActive && (
                         <Button
-                          className={`bg-primary rounded shadow-xs group py-[15px] ${
-                            // If only this button exists → full width
-                            (totalProduct?.purchaseType === "QUOTE" &&
-                              !(totalProduct?.purchaseType === "MULTI")) ||
-                              totalProduct?.purchaseType === "QUOTE"
-                              ? " md:w-1/2 w-1/2"
-                              : "md:w-1/2 w-1/2"
-                            }`}
+                          className="bg-primary rounded shadow-xs group py-[15px] md:w-[210px] w-1/2"
                           onClick={() => {
                             if (checkBuyerLogin()) {
                               setIsOpen(true);
@@ -1514,8 +1507,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           disabled={loadingCartButton}
                           onClick={() => addToCart(productData?._id)}
                           className={`bg-secondary rounded shadow-xs group py-[15px] hover:bg-secondary bg-opacity-100 hover:bg-opacity-85 transition ${
-                            // if only add to cart is present → full width
-                            totalProduct?.purchaseType === "ONLINE" ? "w-full" : "md:w-1/2 w-1/2"
+                            totalProduct?.purchaseType === "ONLINE"
+                              ? "md:w-[210px] w-full"
+                              : "md:w-[210px] w-1/2"
                             }`}
                         >
                           {loadingCartButton ? (
@@ -2652,4 +2646,5 @@ export default ProductDetails;
 //     )}
 //     {/* </div>  */}
 //   </div>
+
 

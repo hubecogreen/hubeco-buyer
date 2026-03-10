@@ -1531,9 +1531,9 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
               {/* SELLER DETAILS */}
               <div className="">
-                <p className="text-md text-brown font-semibold  text-normal mt-3 mb-2">Seller Details</p>
+                <p className="text-md text-brown font-semibold  text-normal mt-3 mb-0 md:mb-2">Seller Details</p>
 
-                <div className="md:flex flex flex-col md:flex-row justify-start md:items-center items-start gap-4">
+                <div className="flex flex-row md:flex-row justify-between md:justify-start md:items-center items-center gap-4">
                   <div className="flex justify-start items-center md:mr-2 md:max-w-[60%]">
                     <div>
                       <p className="text-[15px] capitalize text-brown">
@@ -1546,100 +1546,90 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   </div>
 
                   {/* CERTIFICATION */}
-                  <div className="flex justify-end items-center md:w-[40%] md:mt-0 mobile-sm:mt-2 my-2">
+                 <div className="flex justify-end items-center md:w-[40%] md:mt-0 mobile-sm:mt-2 my-2">
 
-                    {/* CERTIFICATE LOGO */}
-                    {totalProduct?.certificate?.organization?.logo &&
-                      totalProduct?.certificate?.organization?.authorityName !== "Others" && (
-                        <div className="w-fit z-10 relative">
-                          <Image
-                            src={
-                              totalProduct?.certificate?.organization?.logo
-                                ? totalProduct.certificate.organization.logo.includes("https://")
-                                  ? "/images/product-placeholder.webp"
-                                  : normalizePath(
-                                    `${assetURL}/${totalProduct.certificate.organization.logo}`
-                                  )
-                                : "/images/product-placeholder.webp"
-                            }
-                            alt="Vendor Name"
-                            width={70}
-                            height={70}
-                            onError={(e) =>
-                              (e.currentTarget.src = "/images/product-placeholder.webp")
-                            }
-                            loading="lazy"
-                            className="md:w-[60px] w-[80px] h-[60px] rounded-full border border-[#f0f0f0] bg-transparent object-contain"
-                          />
-                        </div>
-                      )}
+  <div className="relative flex items-center">
 
-                    {/* CERTIFIED BUTTON */}
-                    <div className="w-full md:w-auto relative  -ml-1 md:-ml-2">
+    {/* CERTIFIED BUTTON */}
+    {totalProduct?.certificate?.certificateImg.endsWith(".pdf") ? (
+      <Button
+        onClick={() => window.open(totalProduct?.certificateLink, "_blank")}
+        className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
+        pl-12 pr-4 md:w-40
+        text-sm md:text-md flex items-center justify-center"
+      >
+        <p className="text-cream font-semibold text-md">Certified</p>
+      </Button>
+    ) : (
+      <Dialog>
+        <DialogTrigger asChild>
+          <Link
+            href="#"
+            className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
+            pl-12 pr-4 md:w-40
+            text-sm md:text-md flex items-center justify-center rounded-md"
+          >
+            <p className="text-cream font-semibold text-md">Certified</p>
+          </Link>
+        </DialogTrigger>
 
-                      {totalProduct?.certificate?.certificateImg.endsWith(".pdf") ? (
-                        // PDF BUTTON
-                        <Button
-                          onClick={() => window.open(totalProduct?.certificateLink, "_blank")}
-                          className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
-                   w-[90%] md:w-40 mx-0 md:mx-0
-                   text-sm md:text-md flex items-center justify-center
-                   relative right-[10px]"
-                        >
-                          <p className="text-cream font-semibold text-md">Certified</p>
-                        </Button>
-                      ) : (
-                        // IMAGE PREVIEW DIALOG
-                        <Dialog>
-                          <DialogTrigger asChild className="max-w-[90%]">
-                            <Link
-                              href="#"
-                              className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
-                       w-[90%] md:w-40 mx-auto md:mx-0
-                       text-sm md:text-md flex items-center justify-center rounded-md
-                       md:relative md:right-[10px]"
-                            >
-                              <p className="text-cream font-semibold text-md">Certified</p>
-                            </Link>
-                          </DialogTrigger>
+        <DialogContent className="w-[98%] fixed h-[98%] lg:w-full">
+          <DialogClose className="flex justify-end absolute z-50 right-[15px] top-[15px]">
+            <IoCloseCircleSharp
+              color="white"
+              className="bg-bgGray rounded-full"
+              size={30}
+            />
+          </DialogClose>
 
-                          <DialogContent className="w-[98%] fixed h-[98%] lg:w-full">
-                            <DialogClose className="flex justify-end absolute z-50 right-[15px] top-[15px]">
-                              <IoCloseCircleSharp
-                                color="white"
-                                className="bg-bgGray rounded-full"
-                                size={30}
-                              />
-                            </DialogClose>
+          <div className="h-full w-full">
+            <Image
+              src={
+                totalProduct?.certificate?.certificateImg
+                  ? normalizePath(`${assetURL}/${totalProduct.certificate.certificateImg}`)
+                  : "/images/product-placeholder.webp"
+              }
+              className="p-[10px] rounded"
+              onError={(e) =>
+                (e.currentTarget.src = "images/failedToLoadImage.webp")
+              }
+              loading="lazy"
+              fill
+              objectFit="contain"
+              alt="certificate"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
+    )}
 
-                            <div className="h-full w-full">
-                              <Image
-                                src={
-                                  totalProduct?.certificate?.certificateImg
-                                    ? normalizePath(
-                                      `${assetURL}/${totalProduct.certificate.certificateImg}`
-                                    )
-                                    : "/images/product-placeholder.webp"
-                                }
-                                className="p-[10px] rounded"
-                                onError={(e) =>
-                                (e.currentTarget.src =
-                                  "images/failedToLoadImage.webp")
-                                }
-                                loading="lazy"
-                                fill={true}
-                                objectFit="contain"
-                                alt="certificate"
-                              />
-                            </div>
-                          </DialogContent>
-                        </Dialog>
-                      )}
+    {/* CERTIFICATE LOGO (ABSOLUTE) */}
+    {totalProduct?.certificate?.organization?.logo &&
+      totalProduct?.certificate?.organization?.authorityName !== "Others" && (
+        <div className="absolute -left-4">
+          <Image
+            src={
+              totalProduct?.certificate?.organization?.logo
+                ? totalProduct.certificate.organization.logo.includes("https://")
+                  ? "/images/product-placeholder.webp"
+                  : normalizePath(`${assetURL}/${totalProduct.certificate.organization.logo}`)
+                : "/images/product-placeholder.webp"
+            }
+            alt="Vendor Name"
+            width={60}
+            height={60}
+            onError={(e) =>
+              (e.currentTarget.src = "/images/product-placeholder.webp")
+            }
+            loading="lazy"
+            className="w-[60px] h-[60px] rounded-full border border-[#f0f0f0] bg-white object-contain"
+          />
+        </div>
+      )}
 
-                    </div>
-                  </div>
-
-                </div>
+  </div>
+</div>
+</div>
 
                 {/* COUNTRY & DELIVERY */}
                 <div className="flex justify-start md:items-center items-start md:gap-8 gap-2 md:flex-row flex-col">

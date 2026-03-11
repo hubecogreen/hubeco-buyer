@@ -1402,7 +1402,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   {productData?.status == "PUBLISHED" &&
                     productData?.deletedAt == null &&
                     productData?.isActive && (
-                      <div className="flex  w-full  md:gap-6 gap-2 md:pb-4 pb-2">
+                      <div className="flex  w-full  md:gap-4 gap-2 md:pb-4 pb-2">
                         {/* QUANTITY - LEFT SIDE (50%) */}
                         <div className="md:w-[210px] w-1/2">
                           <p className="text-md text-brown font-semibold mb-3">Quantity</p>
@@ -1455,7 +1455,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         </div>
 
                         {/* VARIATIONS - RIGHT SIDE (50%) */}
-                        <div className="md:w-auto w-1/2">
+                        <div className="md:w-[210px] w-1/2">
                           {!isSingle &&
                             totalProduct?.productAttributes &&
                             combinations && (

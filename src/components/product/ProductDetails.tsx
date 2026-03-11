@@ -1229,55 +1229,49 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
             <div
               ref={rightDivRef}
-              className="lg:w-1/2 w-full lg:mt-0 md:mt-8 mt-4 md:pl-[10px] no-scrollbar overflow-y-auto h-fit"
+              className="lg:w-1/2 w-full lg:mt-0 md:mt-8 mt-4 md:pl-[10px] no-scrollbar overflow-y-hidden h-fit"
             >
 
               <div className="md:h-[384px]">
                 {/* TITLE + WISHLIST */}
 
 
-                <div
-                  className={`flex items-start ${isLongVariant
-                    ? "justify-between" // long name → wishlist extreme right (desktop & mobile)
-                    : "justify-between md:justify-start gap-3" // short name → desktop: two 50% blocks
-                    }`}
-                >
-                  <div className={`w-auto ${!isLongVariant ? "md:w-1/2" : "md:w-auto"}`}>
-                    <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-brown text-normal pr-[10px] sr-only">
-                      {productData?.meta?.metaTitle}
-                    </h1>
+              <div className="flex items-start gap-16 w-auto">
+  <div className="">
+    <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-brown text-normal pr-[10px] sr-only">
+      {productData?.meta?.metaTitle}
+    </h1>
 
-                    <h2 className="md:text-[30px] text-[24px] font-semibold text-md text-secondary pr-[10px] -mt-2">
-                      {displayName}
-                    </h2>
-                  </div>
+    <h2 className="md:text-[30px] text-[24px] font-semibold text-md text-secondary pr-[10px] -mt-2 break-words">
+      {displayName}
+    </h2>
+  </div>
 
-                  {productData?.status === "PUBLISHED" &&
-                    productData?.deletedAt == null &&
-                    productData?.isActive && (
-                      <div
-                        className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group
-     
+  {productData?.status === "PUBLISHED" &&
+    productData?.deletedAt == null &&
+    productData?.isActive && (
+      <div
+        className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group shrink-0
         ${isClicked ? "bg-secondary" : "bg-cream"}`}
-                      >
-                        {isClicked ? (
-                          <CiBookmark
-                            color="#ffffff"
-                            className="group-hover:text-cream cursor-pointer z-50"
-                            size={25}
-                            onClick={() => deleteWishlist(productData?._id)}
-                          />
-                        ) : (
-                          <CiBookmark
-                            color="#A92449"
-                            className="group-hover:text-cream cursor-pointer z-50"
-                            size={25}
-                            onClick={() => addToWishlist(productData?._id)}
-                          />
-                        )}
-                      </div>
-                    )}
-                </div>
+      >
+        {isClicked ? (
+          <CiBookmark
+            color="#ffffff"
+            className="group-hover:text-cream cursor-pointer z-50"
+            size={25}
+            onClick={() => deleteWishlist(productData?._id)}
+          />
+        ) : (
+          <CiBookmark
+            color="#A92449"
+            className="group-hover:text-cream cursor-pointer z-50"
+            size={25}
+            onClick={() => addToWishlist(productData?._id)}
+          />
+        )}
+      </div>
+    )}
+</div>
 
                 {/* STATUS + SKU WRAPPER */}
                 <div className={`flex flex-row items-center  gap-4 ${totalProduct?.purchaseType === "QUOTE" ? "my-4" : "my-2"}`}>

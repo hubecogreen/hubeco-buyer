@@ -1236,42 +1236,42 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 {/* TITLE + WISHLIST */}
 
 
-              <div className="flex items-start gap-16 w-auto">
-  <div className="">
-    <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-brown text-normal pr-[10px] sr-only">
-      {productData?.meta?.metaTitle}
-    </h1>
+                <div className="flex items-start gap-16 w-auto">
+                  <div className="">
+                    <h1 className="md:text-[30px] text-[24px] font-semibold text-md text-brown text-normal pr-[10px] sr-only">
+                      {productData?.meta?.metaTitle}
+                    </h1>
 
-    <h2 className="md:text-[30px] text-[24px] font-semibold text-md text-secondary pr-[10px] -mt-2 break-words">
-      {displayName}
-    </h2>
-  </div>
+                    <h2 className="md:text-[30px] text-[24px] font-semibold text-md text-secondary pr-[10px] -mt-2 break-words">
+                      {displayName}
+                    </h2>
+                  </div>
 
-  {productData?.status === "PUBLISHED" &&
-    productData?.deletedAt == null &&
-    productData?.isActive && (
-      <div
-        className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group shrink-0
+                  {productData?.status === "PUBLISHED" &&
+                    productData?.deletedAt == null &&
+                    productData?.isActive && (
+                      <div
+                        className={`p-[10px] mt-[1px] border border-secondary hover:cursor-pointer group shrink-0
         ${isClicked ? "bg-secondary" : "bg-cream"}`}
-      >
-        {isClicked ? (
-          <CiBookmark
-            color="#ffffff"
-            className="group-hover:text-cream cursor-pointer z-50"
-            size={25}
-            onClick={() => deleteWishlist(productData?._id)}
-          />
-        ) : (
-          <CiBookmark
-            color="#A92449"
-            className="group-hover:text-cream cursor-pointer z-50"
-            size={25}
-            onClick={() => addToWishlist(productData?._id)}
-          />
-        )}
-      </div>
-    )}
-</div>
+                      >
+                        {isClicked ? (
+                          <CiBookmark
+                            color="#ffffff"
+                            className="group-hover:text-cream cursor-pointer z-50"
+                            size={25}
+                            onClick={() => deleteWishlist(productData?._id)}
+                          />
+                        ) : (
+                          <CiBookmark
+                            color="#A92449"
+                            className="group-hover:text-cream cursor-pointer z-50"
+                            size={25}
+                            onClick={() => addToWishlist(productData?._id)}
+                          />
+                        )}
+                      </div>
+                    )}
+                </div>
 
                 {/* STATUS + SKU WRAPPER */}
                 <div className={`flex flex-row items-center  gap-4 ${totalProduct?.purchaseType === "QUOTE" ? "my-4" : "my-2"}`}>
@@ -1500,8 +1500,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                         <Button
                           disabled={loadingCartButton}
                           onClick={() => addToCart(productData?._id)}
-                          className={`bg-secondary rounded shadow-xs group py-[15px] hover:bg-secondary bg-opacity-100 hover:bg-opacity-85 transition ${
-                            totalProduct?.purchaseType === "ONLINE"
+                          className={`bg-secondary rounded shadow-xs group py-[15px] hover:bg-secondary bg-opacity-100 hover:bg-opacity-85 transition ${totalProduct?.purchaseType === "ONLINE"
                               ? "md:w-[210px] w-full"
                               : "md:w-[210px] w-1/2"
                             }`}
@@ -1527,8 +1526,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
               <div className="">
                 <p className="text-md text-brown font-semibold  text-normal mt-3 mb-0 md:mb-2">Seller Details</p>
 
-                <div className="flex flex-row md:flex-row justify-between md:justify-start md:items-center items-center gap-4">
-                  <div className="flex justify-start items-center md:mr-2 md:max-w-[60%]">
+                <div className="flex flex-row md:flex-row justify-start md:justify-start md:items-center items-center gap-8 md:gap-4">
+                  <div className="flex justify-start items-center md:mr-2 md:max-w-[60%] w-auto">
                     <div>
                       <p className="text-[15px] capitalize text-brown">
                         {vendorInfo?.companyName}
@@ -1540,90 +1539,90 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   </div>
 
                   {/* CERTIFICATION */}
-                 <div className="flex justify-end items-center md:w-[40%] md:mt-0 mobile-sm:mt-2 my-2">
+                  <div className="flex justify-end items-center w-auto md:w-[40%] md:mt-0 mobile-sm:mt-2 my-2">
 
-  <div className="relative flex items-center">
+                    <div className="relative flex items-center">
 
-    {/* CERTIFIED BUTTON */}
-    {totalProduct?.certificate?.certificateImg.endsWith(".pdf") ? (
-      <Button
-        onClick={() => window.open(totalProduct?.certificateLink, "_blank")}
-        className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
+                      {/* CERTIFIED BUTTON */}
+                      {totalProduct?.certificate?.certificateImg.endsWith(".pdf") ? (
+                        <Button
+                          onClick={() => window.open(totalProduct?.certificateLink, "_blank")}
+                          className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
         pl-12 pr-4 md:w-40
         text-sm md:text-md flex items-center justify-center"
-      >
-        <p className="text-cream font-semibold text-md">Certified</p>
-      </Button>
-    ) : (
-      <Dialog>
-        <DialogTrigger asChild>
-          <Link
-            href="#"
-            className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
+                        >
+                          <p className="text-cream font-semibold text-md">Certified</p>
+                        </Button>
+                      ) : (
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Link
+                              href="#"
+                              className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
             pl-12 pr-4 md:w-40
             text-sm md:text-md flex items-center justify-center rounded-md"
-          >
-            <p className="text-cream font-semibold text-md">Certified</p>
-          </Link>
-        </DialogTrigger>
+                            >
+                              <p className="text-cream font-semibold text-md">Certified</p>
+                            </Link>
+                          </DialogTrigger>
 
-        <DialogContent className="w-[98%] fixed h-[98%] lg:w-full">
-          <DialogClose className="flex justify-end absolute z-50 right-[15px] top-[15px]">
-            <IoCloseCircleSharp
-              color="white"
-              className="bg-bgGray rounded-full"
-              size={30}
-            />
-          </DialogClose>
+                          <DialogContent className="w-[98%] fixed h-[98%] lg:w-full">
+                            <DialogClose className="flex justify-end absolute z-50 right-[15px] top-[15px]">
+                              <IoCloseCircleSharp
+                                color="white"
+                                className="bg-bgGray rounded-full"
+                                size={30}
+                              />
+                            </DialogClose>
 
-          <div className="h-full w-full">
-            <Image
-              src={
-                totalProduct?.certificate?.certificateImg
-                  ? normalizePath(`${assetURL}/${totalProduct.certificate.certificateImg}`)
-                  : "/images/product-placeholder.webp"
-              }
-              className="p-[10px] rounded"
-              onError={(e) =>
-                (e.currentTarget.src = "images/failedToLoadImage.webp")
-              }
-              loading="lazy"
-              fill
-              objectFit="contain"
-              alt="certificate"
-            />
-          </div>
-        </DialogContent>
-      </Dialog>
-    )}
+                            <div className="h-full w-full">
+                              <Image
+                                src={
+                                  totalProduct?.certificate?.certificateImg
+                                    ? normalizePath(`${assetURL}/${totalProduct.certificate.certificateImg}`)
+                                    : "/images/product-placeholder.webp"
+                                }
+                                className="p-[10px] rounded"
+                                onError={(e) =>
+                                  (e.currentTarget.src = "images/failedToLoadImage.webp")
+                                }
+                                loading="lazy"
+                                fill
+                                objectFit="contain"
+                                alt="certificate"
+                              />
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                      )}
 
-    {/* CERTIFICATE LOGO (ABSOLUTE) */}
-    {totalProduct?.certificate?.organization?.logo &&
-      totalProduct?.certificate?.organization?.authorityName !== "Others" && (
-        <div className="absolute -left-4">
-          <Image
-            src={
-              totalProduct?.certificate?.organization?.logo
-                ? totalProduct.certificate.organization.logo.includes("https://")
-                  ? "/images/product-placeholder.webp"
-                  : normalizePath(`${assetURL}/${totalProduct.certificate.organization.logo}`)
-                : "/images/product-placeholder.webp"
-            }
-            alt="Vendor Name"
-            width={60}
-            height={60}
-            onError={(e) =>
-              (e.currentTarget.src = "/images/product-placeholder.webp")
-            }
-            loading="lazy"
-            className="w-[60px] h-[60px] rounded-full border border-[#f0f0f0] bg-white object-contain"
-          />
-        </div>
-      )}
+                      {/* CERTIFICATE LOGO (ABSOLUTE) */}
+                      {totalProduct?.certificate?.organization?.logo &&
+                        totalProduct?.certificate?.organization?.authorityName !== "Others" && (
+                          <div className="absolute -left-4">
+                            <Image
+                              src={
+                                totalProduct?.certificate?.organization?.logo
+                                  ? totalProduct.certificate.organization.logo.includes("https://")
+                                    ? "/images/product-placeholder.webp"
+                                    : normalizePath(`${assetURL}/${totalProduct.certificate.organization.logo}`)
+                                  : "/images/product-placeholder.webp"
+                              }
+                              alt="Vendor Name"
+                              width={60}
+                              height={60}
+                              onError={(e) =>
+                                (e.currentTarget.src = "/images/product-placeholder.webp")
+                              }
+                              loading="lazy"
+                              className="w-[60px] h-[60px] rounded-full border border-[#f0f0f0] bg-white object-contain"
+                            />
+                          </div>
+                        )}
 
-  </div>
-</div>
-</div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* COUNTRY & DELIVERY */}
                 <div className="flex justify-start md:items-center items-start md:gap-8 gap-2 md:flex-row flex-col">

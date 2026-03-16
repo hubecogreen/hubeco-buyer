@@ -1527,7 +1527,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 <p className="text-md text-brown font-semibold  text-normal mt-3 mb-0 md:mb-2">Seller Details</p>
 
                 <div className="flex flex-row md:flex-row justify-start md:justify-start md:items-center items-center gap-8 md:gap-4">
-                  <div className="flex justify-start items-center md:mr-2 md:max-w-[60%] w-auto">
+                  <div className="flex justify-start items-center  md:max-w-[60%] md:w-[210px] w-auto">
                     <div>
                       <p className="text-[15px] capitalize text-brown">
                         {vendorInfo?.companyName}
@@ -1539,7 +1539,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   </div>
 
                   {/* CERTIFICATION */}
-                  <div className="flex justify-end items-center w-auto md:w-[40%] md:mt-0 mobile-sm:mt-2 my-2">
+                  <div className="flex justify-end md:justiy-start items-center w-auto md:w-[210px] md:mt-0 mobile-sm:mt-2 my-2">
 
                     <div className="relative flex items-center">
 
@@ -1625,7 +1625,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                 </div>
 
                 {/* COUNTRY & DELIVERY */}
-                <div className="flex justify-start md:items-center items-start md:gap-8 gap-2 md:flex-row flex-col">
+                <div className="flex justify-start md:items-center items-start md:gap-5 gap-2 md:flex-row flex-col">
                   <p className="text-md text-brown md:mt-4 mt-1">
                     Country Of Origin :
                     <span className="text-secondary font-medium uppercase ml-1">
@@ -1643,14 +1643,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       All India Delivery
                     </p>
                   ) : (
-                    <div className="flex md:flex-row flex-col justify-between md:items-center items-start md:mt-4 mt-2 md:gap-3 ">
+                    <div className="flex md:flex-row flex-col justify-between md:items-center items-start md:mt-4 mt-2 md:gap-2 ">
                       <p className="text-md text-brown flex items-center justify-start text-normal font-normal  ">
                         Delivery:
 
                       </p>
-                      <div className="relative w-[250px] md:w-[250px]">
+                      <div className="relative w-[250px] md:w-[150px]">
                         <Input
-                          placeholder="Enter Pincode"
+                          placeholder="Pincode"
                           onChange={(e: any) => {
                             if (e.target.value.length === 6) {
                               setPincode(e.target.value);
@@ -1659,14 +1659,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                               setPincode(e.target.value);
                             }
                           }}
-                          className="border border-primary bg-cream text-[16px] text-brown h-10 pr-16 rounded-none"
+                          className="border border-primary bg-cream text-[16px] text-brown h-10 pr-16 rounded-md"
                         />
 
                         <Button
                           variant="link"
                           disabled={pincode.length !== 6}
                           onClick={() => CheckDelivery(pincode)}
-                          className={`absolute right-3 top-1/2 -translate-y-1/2 text-secondary 
+                          className={`absolute right-2  md:px-2 top-1/2 -translate-y-1/2 text-secondary 
       ${pincode.length === 6 ? "opacity-100" : "opacity-50"}`}
                         >
                           Check

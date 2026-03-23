@@ -24,6 +24,12 @@ const HeroSection = () => {
   const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video-U.webm`;
   const heroPosterUrl = '/images/home/hero/video-poster.webp';
 
+    const whatsappNumber = "919985544055"; // Replace with your number in international format (without +)
+  const defaultMessage =
+    "Hello, I would like to get a quote for sustainable building materials for my project. Please let me know the next steps to share my requirements.";
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
+
+
 
 
   return (
@@ -127,7 +133,7 @@ const HeroSection = () => {
              w-full lg:w-[190px] 
              lg:px-[28px] lg:py-[18px] py-[10px] px-[20px] text-[17px] font-medium
              rounded-md whitespace-nowrap"
-  onClick={() => router.push("/products")}
+  onClick={() => window.open(whatsappLink, "_blank")}
 >
   {/* Default (white icon) */}
   <Image

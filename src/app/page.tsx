@@ -1,6 +1,12 @@
 import HomePage from "@/components/home/HomePage";
 import { Metadata } from "next";
 
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
+const isProductionIndexable =
+  apiBaseUrl.length > 0 &&
+  !apiBaseUrl.includes("uat") &&
+  !apiBaseUrl.includes("dev");
+
 // Organization Schema component
 function OrganizationSchema() {
   const schemaData = {
@@ -22,6 +28,29 @@ function OrganizationSchema() {
       contactType: "Customer Service",
       areaServed: "IN",
       availableLanguage: ["English"]
+    }
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
+  );
+}
+
+function WebsiteSchema() {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Hubeco",
+    alternateName: "Hubeco Market",
+    url: "https://hubeco.market",
+    description:
+      "Marketplace for sustainable, eco-friendly, and low-carbon building materials.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://hubeco.market/products?search={search_term_string}",
+      "query-input": "required name=search_term_string"
     }
   };
   return (
@@ -60,8 +89,8 @@ export const metadata: Metadata = {
     canonical: "https://hubeco.market/",
   },
   robots: {
-    index: false,   // generates "noindex"
-    follow: false,  // generates "nofollow"
+    index: isProductionIndexable,
+    follow: isProductionIndexable,
   }
 };
 
@@ -69,6 +98,7 @@ export default function MyApp() {
   return (
     <div className="bg-cream ">
       <OrganizationSchema />
+      <WebsiteSchema />
       <HomePage />
     </div>
   );

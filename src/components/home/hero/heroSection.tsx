@@ -118,18 +118,37 @@ const HeroSection = () => {
   {/* Buttons */}
   <div className=" gap-3 mt-4 flex  lg:gap-6  ">
     
-    <motion.button
-      initial={{ opacity: 0, y: 25 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
-      className="bg-primary hover:bg-cream hover:text-primary text-cream 
-                 w-full lg:w-auto 
-                 lg:px-[20px] lg:py-[18px] py-[10px] px-[20px] text-[17px] font-medium
-                 rounded-md whitespace-nowrap"
-      onClick={() => router.push("/products")}
-    >
-      Explore Materials
-    </motion.button>
+<motion.button
+  initial={{ opacity: 0, y: 25 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+  className="group flex items-center gap-[10px] 
+             bg-primary hover:bg-cream hover:text-primary text-cream 
+             w-full lg:w-[190px] 
+             lg:px-[28px] lg:py-[18px] py-[10px] px-[20px] text-[17px] font-medium
+             rounded-md whitespace-nowrap"
+  onClick={() => router.push("/products")}
+>
+  {/* Default (white icon) */}
+  <Image
+    src="/images/home/hero/whatsapp-white.png"
+    alt="Get Quote"
+    width={30}
+    height={30}
+    className="group-hover:hidden"
+  />
+
+  {/* Hover (green icon) */}
+  <Image
+    src="/images/home/hero/whatsapp-green.png"
+    alt="Get Quote"
+    width={30}
+    height={30}
+    className="hidden group-hover:block"
+  />
+
+  Get Quote
+</motion.button>
 
     <motion.button
       initial={{ opacity: 0, y: 25 }}

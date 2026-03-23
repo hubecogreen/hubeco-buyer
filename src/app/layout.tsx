@@ -7,6 +7,12 @@ import MainLayout from "@/components/home/MainLayout";
 import WhatsAppWidget from "@/components/WhatsApp";
 import Image from "next/image";
 
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
+const isProductionIndexable =
+  apiBaseUrl.length > 0 &&
+  !apiBaseUrl.includes("uat") &&
+  !apiBaseUrl.includes("dev");
+
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
@@ -26,10 +32,27 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: isProductionIndexable,
+    follow: isProductionIndexable,
+    googleBot: {
+      index: isProductionIndexable,
+      follow: isProductionIndexable,
+      noimageindex: false,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title: "Buy Eco-Friendly, Low-Carbon Building Materials India Online",
     description:
       "Discover eco-friendly, low‑carbon building materials online in India. Shop sustainable supplies on Hubeco Marketplace and build smarter, greener projects today.",
+    url: "/",
+    type: "website",
     siteName: "Hubeco",
     images: [
       {
@@ -37,10 +60,6 @@ export const metadata: Metadata = {
         alt: "Hubeco Logo",
       },
     ],
-  },
-  robots: {
-    index: false,   // generates "noindex"
-    follow: false,  // generates "nofollow"
   }
 };
 
@@ -50,9 +69,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isProd =
-    !process.env.NEXT_PUBLIC_API_BASE_URL?.includes("uat") &&
-    !process.env.NEXT_PUBLIC_API_BASE_URL?.includes("dev");
+  const isProd = isProductionIndexable;
   const enableDiagnostics = process.env.NODE_ENV !== "production";
 
   return (
@@ -227,3 +244,4 @@ export default function RootLayout({
     </html>
   );
 }
+

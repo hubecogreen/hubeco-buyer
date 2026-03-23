@@ -148,9 +148,9 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
     flex flex-col items-center
 
     w-[115px] h-[150px]
-    lg:w-[282px] lg:h-[369px]
+    lg:w-[282px] lg:h-[320px]
     md:w-[170px] md:h-[223px]
-    p-[4px] md:pt-[18px] md:px-[11px] md:pb-4 lg:p-4
+    p-[4px] md:pt-[18px] md:px-[11px] 
 
     lg:hover:bg-primary
     lg:hover:scale-105
@@ -177,7 +177,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
           />
 
           <p
-            className={`${styles.cattitle} text-[12px] md:text-[14px] lg:text-[18px] font-medium  text-primary lg:group-hover:text-white md:mt-4 mt-1 text-center `}
+            className={`${styles.cattitle} text-[12px] md:text-[14px] lg:text-[18px] font-medium  text-primary lg:group-hover:text-white md:mt-[10px] mt-1 text-center `}
           >
             {category?.name}
           </p>
@@ -200,8 +200,8 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
 return(
     <div
       className={`px-4 bg-cream lg:max-w-[1440px] mx-auto ${title === "Building Systems"
-          ? "lg:px-[100px] p-[20px] lg:py-[0px]"
-          : "lg:px-[100px] py-[20px] lg:py-[80px]"
+          ? "lg:px-[100px] p-[20px] lg:py-[40px] "
+          : "lg:px-[100px] py-[20px] lg:pt-[40px] lg:pb-[0px]"
         }`}
     >
       {/* 👇 CENTERED when width > 1440px */}

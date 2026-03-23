@@ -64,13 +64,13 @@ const HomePage = () => {
         <ProjectsSection />
       </div> */}
       
-      <div className="calltoaction-section mx-auto pt-10 bg-cream">
+      <div className="calltoaction-section mx-auto  bg-cream">
         <CallToActionSection />
       </div>
-      <div className="procure-section mx-auto pt-10 bg-cream">
+      <div className="procure-section mx-auto  bg-cream">
         <ProcureSection />
       </div>
-      <div className="partners-section mx-auto">
+      <div className="partners-section mx-auto   ">
         <PartnersSection />
       </div>
       <div className="blogs-section mx-auto">

@@ -149,20 +149,20 @@ const vendorContent = useMemo(
 
 
   return (
- <section className="relative block bg-cream mx-auto lg:flex  lg:p-[100px] p-[20px] lg:max-w-[1440px] ">
+ <section className="relative block bg-cream mx-auto lg:flex  lg:px-[100px] lg:py-[40px] p-[20px] lg:max-w-[1440px] ">
   {/* Background Image - Positioned to match reference */}
   <Image
     src="/images/home/latest/Vector.webp"
     alt="Center Vector"
     width={700}
     height={300}
-    className="hidden lg:block absolute left-[600px] top-[365px] -translate-x-3/4 -translate-y-1/2 opacity-80 pointer-events-none z-0"
+    className="hidden lg:block absolute left-[600px] top-[308px] -translate-x-3/4 -translate-y-1/2 opacity-80 pointer-events-none z-0"
   />
 
   {/* Left Div */}
   <div className="flex lg:flex-row flex-col justify-start lg:gap-[162px]">
   <div className="relative z-10  ">
-    <h2 className="text-center text-[43px] text-brown pb-3 lg:text-left lg:text-[43px] md:text-[27px] lg:pb-5">
+    <h2 className="text-center text-brown pb-3 lg:text-left lg:text-[43px] md:text-[27px] text-[28px] lg:pb-5">
       How it Works
     </h2>
 

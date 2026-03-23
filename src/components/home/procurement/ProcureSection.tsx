@@ -35,7 +35,7 @@ const ProcureSection: React.FC = () => {
     ];
 
     return (
-        <section className="w-full flex justify-center pt-[60px] sm:pt-[80px] pb-[60px] md:pb-[40px] sm:pb-[80px] lg:p-[100px]">
+        <section className="w-full flex justify-center pt-[60px] sm:pt-[80px] pb-[60px] md:pb-[40px] sm:pb-[80px] lg:px-[100px] lg:py-[40px]">
             <div className="max-w-[1250px] w-full px-4 lg:px-0">
 
                 {/* HEADING */}

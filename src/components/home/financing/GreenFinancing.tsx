@@ -6,7 +6,7 @@ export default function GreenFinancing() {
   const router = useRouter();
   return (
     <section className="w-full bg-[#FFFEF8] ">
-      <div className="w-full lg:max-w-[1440px] mx-auto  md:px-0  px-4 lg:p-[100px]  flex flex-col items-center justify-start py-8 ">
+      <div className="w-full lg:max-w-[1440px] mx-auto  md:px-0  px-4 lg:px-[100px] lg:py-[40px]  flex flex-col items-center justify-start py-8 ">
 
         {/* CENTER HEADING */}
         <h2 className="

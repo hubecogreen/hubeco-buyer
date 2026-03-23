@@ -71,7 +71,8 @@ export default function TrustedBy() {
     w-full
     lg:max-w-[1440px]
     p-[20px]
-    lg:p-[100px]
+    lg:px-[100px]
+    lg:py-[40px]
     block
     lg:flex
     lg:flex-col

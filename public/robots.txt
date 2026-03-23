@@ -7,4 +7,28 @@ User-agent: *
  Disallow: /search 
  Allow: / 
 
+# OpenAI crawler
+User-agent: GPTBot
+Allow: /
+
+# OpenAI search crawler
+User-agent: OAI-SearchBot
+Allow: /
+
+# ChatGPT browsing
+User-agent: ChatGPT-User
+Allow: /
+
+# Google AI training
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic AI
+User-agent: ClaudeBot
+Allow: /
+
 Sitemap: https://hubeco.market/sitemap.xml 

@@ -45,8 +45,8 @@ const BlogsSection = () => {
   if (blogs.length === 0) return null;
 
   return (
-    <section className="relative px-5  py-8 bg-cream">
-      <div className="flex flex-col lg:flex-row justify-between gap-10  lg:max-w-[1440px] lg:p-[100px] mx-auto">
+    <section className="relative px-5  py-8 lg:py-0 bg-cream">
+      <div className="flex flex-col lg:flex-row justify-between gap-10  lg:max-w-[1440px] lg:px-[100px] lg:py-[40px] mx-auto">
 
         {/* LEFT CONTENT */}
         <div className="w-full lg:w-[450px]">

@@ -24,6 +24,12 @@ const HeroSection = () => {
   const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video-U.webm`;
   const heroPosterUrl = '/images/home/hero/video-poster.webp';
 
+    const whatsappNumber = "919985544055"; // Replace with your number in international format (without +)
+  const defaultMessage =
+    "Hello, I would like to get a quote for sustainable building materials for my project. Please let me know the next steps to share my requirements.";
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
+
+
 
 
   return (
@@ -118,18 +124,37 @@ const HeroSection = () => {
   {/* Buttons */}
   <div className=" gap-3 mt-4 flex  lg:gap-6  ">
     
-    <motion.button
-      initial={{ opacity: 0, y: 25 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
-      className="bg-primary hover:bg-cream hover:text-primary text-cream 
-                 w-full lg:w-auto 
-                 lg:px-[20px] lg:py-[18px] py-[10px] px-[20px] text-[17px] font-medium
-                 rounded-md whitespace-nowrap"
-      onClick={() => router.push("/products")}
-    >
-      Explore Materials
-    </motion.button>
+<motion.button
+  initial={{ opacity: 0, y: 25 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+  className="group flex justify-center items-center gap-[10px] 
+             bg-primary hover:bg-cream hover:text-primary text-cream 
+             w-full lg:w-[190px] 
+             lg:px-[20px] lg:py-[18px] py-[10px] px-[20px] text-[17px] font-medium
+             rounded-md whitespace-nowrap"
+  onClick={() => window.open(whatsappLink, "_blank")}
+>
+  {/* Default (white icon) */}
+  <Image
+    src="/images/home/hero/whatsapp-white.png"
+    alt="Get Quote"
+    width={30}
+    height={30}
+    className="group-hover:hidden"
+  />
+
+  {/* Hover (green icon) */}
+  <Image
+    src="/images/home/hero/whatsapp-green.png"
+    alt="Get Quote"
+    width={30}
+    height={30}
+    className="hidden group-hover:block"
+  />
+
+  Get Quote
+</motion.button>
 
     <motion.button
       initial={{ opacity: 0, y: 25 }}

@@ -209,7 +209,7 @@ return(
 
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:justify-between gap-4">
-          <h2 className="text-xl lg:text-[43px] lg:text-start text-center text-brown">
+          <h2 className="text-[28px] lg:text-[43px] lg:text-start text-center text-brown">
             {title}
           </h2>
 

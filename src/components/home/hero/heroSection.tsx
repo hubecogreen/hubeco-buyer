@@ -128,10 +128,10 @@ const HeroSection = () => {
   initial={{ opacity: 0, y: 25 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
-  className="group flex items-center gap-[10px] 
+  className="group flex justify-center items-center gap-[10px] 
              bg-primary hover:bg-cream hover:text-primary text-cream 
              w-full lg:w-[190px] 
-             lg:px-[28px] lg:py-[18px] py-[10px] px-[20px] text-[17px] font-medium
+             lg:px-[20px] lg:py-[18px] py-[10px] px-[20px] text-[17px] font-medium
              rounded-md whitespace-nowrap"
   onClick={() => window.open(whatsappLink, "_blank")}
 >

@@ -27,14 +27,19 @@ const WhatsAppWidget = () => {
       return;
     }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setHideOnHomeHero(entry.isIntersecting);
-      },
-      {
-      threshold: 0.5  // stricter, smoother UX
-      }
-    );
+const observer = new IntersectionObserver(
+  ([entry]) => {
+    const ratio = entry.intersectionRatio;
+
+    // Show when 15% or less is visible
+    const shouldShow = ratio <= 0.25;
+
+    setHideOnHomeHero(!shouldShow);
+  },
+  {
+    threshold: [0, 0.25, 1],
+  }
+);
 
     observer.observe(heroSection);
 

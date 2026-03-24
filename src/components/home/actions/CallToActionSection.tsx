@@ -19,7 +19,7 @@ const CallToActionSection: React.FC = () => {
             flex 
             items-center 
             justify-center
-            md:h-[600px]
+            md:h-[504px]
          "
       >
          {/* Background Image */}

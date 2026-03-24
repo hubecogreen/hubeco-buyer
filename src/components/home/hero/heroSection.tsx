@@ -33,7 +33,10 @@ const HeroSection = () => {
 
 
   return (
-    <section className="relative  lg:h-[561px] md:h-[472px] h-[536px]  ">
+    <section
+      id="home-hero-section"
+      className="relative  lg:h-[561px] md:h-[472px] h-[536px]  "
+    >
       {/* Full-screen video */}
       <video
         autoPlay

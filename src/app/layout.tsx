@@ -4,10 +4,15 @@ import { Metadata } from "next";
 import React from "react";
 import Script from "next/script";
 import MainLayout from "@/components/home/MainLayout";
-import WhatsAppWidget from "@/components/WhatsApp";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const WhatsAppWidget = dynamic(() => import("@/components/WhatsApp"), {
+  loading: () => <div className="min-h-[100px]" />,
+});
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
+
 const isProductionIndexable =
   apiBaseUrl.length > 0 &&
   !apiBaseUrl.includes("uat") &&

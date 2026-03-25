@@ -6,57 +6,87 @@ import { usePathname } from "next/navigation";
 
 const WhatsAppWidget = () => {
   const pathname = usePathname();
-  const [hideOnHomeHero, setHideOnHomeHero] = useState(false);
+  const isHomeRoute = pathname === "/" || pathname === "/home";
+  const [isWidgetVisible, setIsWidgetVisible] = useState(!isHomeRoute);
   const whatsappNumber = "919985544055"; // Replace with your number in international format (without +)
   const defaultMessage =
     "Hello, I would like to get a quote for sustainable building materials for my project. Please let me know the next steps to share my requirements.";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
   useEffect(() => {
-    const isHomeRoute = pathname === "/" || pathname === "/home";
+    let observer: IntersectionObserver | null = null;
+    let frameId: number | null = null;
+    let mutationObserver: MutationObserver | null = null;
 
     if (!isHomeRoute) {
-      setHideOnHomeHero(false);
+      setIsWidgetVisible(true);
       return;
     }
 
-    const heroSection = document.getElementById("home-hero-section");
+    setIsWidgetVisible(false);
 
-    if (!heroSection) {
-      setHideOnHomeHero(false);
-      return;
+    const connectHeroObserver = () => {
+      const heroSection = document.getElementById("home-hero-section");
+
+      if (!heroSection) {
+        return false;
+      }
+
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          const shouldShow = entry.intersectionRatio <= 0.25;
+          setIsWidgetVisible(shouldShow);
+        },
+        {
+          threshold: [0, 0.25, 1],
+        }
+      );
+
+      observer.observe(heroSection);
+      return true;
+    };
+
+    if (!connectHeroObserver()) {
+      frameId = window.requestAnimationFrame(() => {
+        if (connectHeroObserver()) {
+          return;
+        }
+
+        mutationObserver = new MutationObserver(() => {
+          if (connectHeroObserver()) {
+            mutationObserver?.disconnect();
+            mutationObserver = null;
+          }
+        });
+
+        mutationObserver.observe(document.body, {
+          childList: true,
+          subtree: true,
+        });
+      });
     }
 
-const observer = new IntersectionObserver(
-  ([entry]) => {
-    const ratio = entry.intersectionRatio;
+    return () => {
+      observer?.disconnect();
+      mutationObserver?.disconnect();
 
-    // Show when 15% or less is visible
-    const shouldShow = ratio <= 0.25;
-
-    setHideOnHomeHero(!shouldShow);
-  },
-  {
-    threshold: [0, 0.25, 1],
-  }
-);
-
-    observer.observe(heroSection);
-
-    return () => observer.disconnect();
-  }, [pathname]);
-
-  if (hideOnHomeHero) {
-    return null;
-  }
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
+  }, [isHomeRoute]);
 
   return (
     <a
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-40 pointer-events-auto bg-cream rounded-sm"
-      style={{ pointerEvents: 'auto' }}
+      aria-hidden={!isWidgetVisible}
+      className={`fixed bottom-5 right-5 z-40 rounded-sm bg-cream transition-all duration-300 ease-out ${
+        isWidgetVisible
+          ? "translate-y-0 opacity-100 pointer-events-auto"
+          : "translate-y-3 opacity-0 pointer-events-none"
+      }`}
     >
       <Image
         src="/images/whatsapp-1.svg" // Place a WhatsApp icon image in your public folder as whatsapp-icon.webp "D:\hubeco\hubeco-buyer\public\images\whatsapp (1).png"

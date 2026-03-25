@@ -88,9 +88,9 @@ const PartnersSection: React.FC = () => {
     <section className="w-full flex justify-center py-12 md:py-10 bg-[#109989] px-4">
       <div className="w-full max-w-[1440px] flex flex-col items-center gap-3">
 
-        <h1 className="text-[28px] md:text-[43px] text-white font-semibold text-center">
+        <h2 className="text-[28px] md:text-[43px] text-white font-semibold text-center">
           What our Partners Say
-        </h1>
+        </h2>
 
         <h2 className="text-[16px] md:text-[20px] text-white opacity-90 text-center">
           Trusted By Developers, Procurement Teams and Suppliers

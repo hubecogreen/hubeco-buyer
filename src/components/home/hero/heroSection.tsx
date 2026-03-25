@@ -61,32 +61,25 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row items-start lg:items-center  lg:gap-[80px] gap-[20px] w-full">
           {/* LEFT TITLE */}
           <div className="lg:max-w-3xl lg:space-y-4 lg:pt-[209px] pt-[160px] w-full">
-            <h1 className="text-[27px] lg:text-[60px] lg:leading-[60px] leading-[30px] font-medium">
-              Digitizing <br className="hidden lg:block" /> Procurement for <br className="lg:block md:hidden block " />
-              Smarter,{" "} <br className="md:block lg:hidden hidden " />
-              <span className="bg-primary px-2  py-1 rounded text-cream inline-flex">
-                {"Sustainable".split("").map((char, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 0.35,
-                      delay: i * 0.04,
-                      ease: [0.25, 0.1, 0.25, 1], // smooth cubic ease
-                    }}
-                    className="inline-block will-change-transform"
-                    style={{ display: "inline-block" }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </span>
-              {" "}
-              <br className="md:hidden lg:block block" />
-            
-              Construction
-            </h1>
+<h1
+  className="text-[27px] lg:text-[60px] lg:leading-[60px] leading-[30px] font-medium"
+  aria-label="Digitizing Procurement for Smarter Sustainable Construction"
+>
+  Digitizing <br className="hidden lg:block" />
+  Procurement for <br className="lg:block md:hidden block" />
+  Smarter,{" "}
+
+  <span className="bg-primary px-2 py-1 rounded text-cream inline-block whitespace-nowrap">
+    {"Sustainable".split("").map((char, i) => (
+      <motion.span key={i} className="inline-block">
+        {char}
+      </motion.span>
+    ))}
+  </span>
+
+  <br className="md:hidden lg:block block" />
+  Construction
+</h1>
           </div>
 
           {/* RIGHT SIDE — Vertical swiper text */}

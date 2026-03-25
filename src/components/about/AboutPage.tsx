@@ -154,10 +154,10 @@ export default function Page() {
                   ABOUT US
                 </span>
 
-                <h2 className="lg:text-[60px] md:text-[48px] text-[36px] font-bold leading-[1.1] mb-8">
+                <h1 className="lg:text-[60px] md:text-[48px] text-[36px] font-bold leading-[1.1] mb-8">
                   <span className="block text-brown">Building a</span>
                   <span className="block text-primary">Sustainable Future</span>
-                </h2>
+                </h1>
 
                 <div>
                   <p className="md:text-lg lg:text-[18px] text-start leading-relaxed">
@@ -219,7 +219,7 @@ export default function Page() {
                 OUR FOCUS
               </span>
 
-              <h1 className="text-2xl font-bold mb-4 text-brown">What We Do</h1>
+              <h2 className="text-2xl font-bold mb-4 text-brown">What We Do</h2>
               <p className="text-md text-brown lg:mb-6 md:mb-6 mb-6">
                 We provide a comprehensive marketplace that connects you with a wide
                 range of eco-friendly building materials.
@@ -433,9 +433,9 @@ export default function Page() {
           >
             <div className="bg-opacity-90 h-full flex items-center justify-center py-10 md:py-20">
               <div className="text-center p-4 max-w-lg md:max-w-2xl lg:max-w-4xl text-white">
-                <h1 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4">
+                <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4">
                   Join Us on Our Journey
-                </h1>
+                </h2>
                 <p className="mb-6 md:mb-8 lg:mb-10 text-sm md:text-base lg:text-lg">
                   Whether you are a builder, architect or homeowner, I invite
                   you to join us on our journey towards a more sustainable
@@ -489,7 +489,7 @@ export default function Page() {
               <div className="flex-1 flex flex-col items-start justify-start px-4 md:px-[32px] lg:px-16 lg:pt-[95px] md:pt-[40px] pt-2">
                 {/* Text Container: Set to Fill width and Hug height */}
                 <div className="w-full h-auto flex flex-col items-start gap-0">
-                  <h1 className="text-[40px] md:text-[46px] lg:text-[60px] font-bold text-brown leading-[1.1] lg:mb-[52px] md:mb-[35px] mb-[20px]">
+                  <h2 className="text-[40px] md:text-[46px] lg:text-[60px] font-bold text-brown leading-[1.1] lg:mb-[52px] md:mb-[35px] mb-[20px]">
                     <span className="whitespace-nowrap">
                       Together,&nbsp;let&apos;s
                     </span>
@@ -499,7 +499,7 @@ export default function Page() {
                     </span>
                     <br />
                     tomorrow
-                  </h1>
+                  </h2>
                   {/* <span className="text-brown-medium">
                       hubeco.market
                     </span> */}

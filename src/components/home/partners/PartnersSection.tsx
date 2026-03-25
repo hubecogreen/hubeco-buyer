@@ -85,19 +85,19 @@ const PartnersSection: React.FC = () => {
   };
 
   return (
-    <section className="w-full flex justify-center py-12 md:py-20 bg-[#109989] px-4">
-      <div className="w-full max-w-[1440px] flex flex-col items-center gap-8">
+    <section className="w-full flex justify-center py-12 md:py-10 bg-[#109989] px-4">
+      <div className="w-full max-w-[1440px] flex flex-col items-center gap-3">
 
-        <h1 className="text-[32px] md:text-[43px] text-white font-semibold text-center">
+        <h2 className="text-[28px] md:text-[43px] text-white font-semibold text-center">
           What our Partners Say
-        </h1>
+        </h2>
 
         <h2 className="text-[16px] md:text-[20px] text-white opacity-90 text-center">
           Trusted By Developers, Procurement Teams and Suppliers
         </h2>
 
         {/* Carousel: mobile + md */}
-        <div className="relative w-full mt-8 lg:hidden">
+        <div className="relative w-full mt-3 lg:hidden">
           <div
             ref={scrollContainerRef}
             className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
@@ -189,7 +189,7 @@ const PartnersSection: React.FC = () => {
         </div>
 
         {/* Desktop static */}
-        <div className="hidden lg:flex gap-[10px] justify-center w-full mt-10">
+        <div className="hidden lg:flex gap-[10px] justify-center w-full mt-3">
           {partners.map((p) => (
             <div
               key={p.id}

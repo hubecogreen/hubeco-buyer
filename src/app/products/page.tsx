@@ -1,29 +1,17 @@
-"use client";
-import BannerSection from "@/components/sharedComponents/BannerSection";
-// import Meta from "@/components/sharedComponents/Meta";
+import type { Metadata } from "next";
 import ProductsList from "@/components/product/ProductsList";
-import React from "react";
-import { useSearchParams } from "next/navigation";
 
-type Props = {};
+export const metadata: Metadata = {
+  title: "Sustainable Building Materials | Hubeco",
+  alternates: {
+    canonical: "/products",
+  },
+};
 
-function page(params: any) {
-  const paramsS = useSearchParams();
-
+export default function ProductsPage() {
   return (
     <div className="bg-white">
-      <head>
-        <title>Products</title>
-        {/* <meta name="description" content='' />
-        <meta name="keywords" content='' /> */}
-        {/* <meta name="author" content={productsData?.author.firstName} /> */}
-        {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
-      </head>
-      {/* <Meta title="Products" subtitle="Products" description="" /> */}
-      
       <ProductsList />
     </div>
   );
 }
-
-export default page;

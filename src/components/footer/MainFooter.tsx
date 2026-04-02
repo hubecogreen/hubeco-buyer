@@ -204,6 +204,7 @@ const Footer = () => {
                 <li><Link className="text-brown" href="/orders">Returns</Link></li>
                 <li><Link className="text-brown" href="/contact">Contact Us</Link></li>
                 <li><Link className="text-brown" href="/faq">FAQ&apos;s</Link></li>
+                <li><Link className="text-brown" href="/careers">Careers</Link></li>
               </ul>
             </div>
 

@@ -16,7 +16,7 @@ export default function HeroSection() {
         />
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0 bg-black/5" />
 
         {/* 🔥 Content Container (EXACT FIGMA POSITION) */}
         <div className="absolute top-[84px] left-[100px] ">

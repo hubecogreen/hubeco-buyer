@@ -3,13 +3,13 @@ export default function BuildFutureSection() {
         <section className="w-full flex justify-center bg-cream">
 
             {/* Main Container */}
-            <div className="w-full max-w-[1280px] h-[721px] py-[40px] px-[24px]">
+            <div className="w-full max-w-[1280px] py-[40px] px-[24px]">
 
                 {/* Two Column Layout */}
                 <div className="flex gap-[32px] items-center">
 
                     {/* LEFT SIDE */}
-                    <div className="w-[584px] h-[641px] flex flex-col gap-[32px]">
+                    <div className="w-[584px] flex flex-col gap-[32px]">
 
                         <h2 className="text-[48px] font-bold leading-[48px] text-brown">
                             Build the Future of Green Construction Ecosystems

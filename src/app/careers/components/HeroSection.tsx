@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 
 export default function HeroSection() {
@@ -7,7 +8,7 @@ export default function HeroSection() {
 
         {/* Background */}
         <Image
-          src="/images/careers/hero.jpeg"
+          src="/images/careers/hero.jpg"
           alt="Careers Hero"
           fill
           priority
@@ -15,7 +16,7 @@ export default function HeroSection() {
         />
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/10" />
 
         {/* 🔥 Content Container (EXACT FIGMA POSITION) */}
         <div className="absolute top-[84px] left-[100px] ">
@@ -51,13 +52,19 @@ export default function HeroSection() {
             {/* Description */}
             <p className="text-[20px] text-cream">
               Build the future of India's construction industry with Hubeco, the
-              leading <br/> digital platform for sustainable building materials and
+              leading <br /> digital platform for sustainable building materials and
               green procurement.
             </p>
 
             {/* Buttons */}
             <div className="flex gap-[16px] pt-[8px]">
-              <button className="bg-primary text-cream px-8 py-4 rounded-[8px] font-bold text-[18px]">
+              <button
+                onClick={() => {
+                  const section = document.getElementById("open-roles");
+                  section?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="bg-primary text-cream px-8 py-4 rounded-[8px] font-bold text-[18px]"
+              >
                 Explore Open Roles
               </button>
 

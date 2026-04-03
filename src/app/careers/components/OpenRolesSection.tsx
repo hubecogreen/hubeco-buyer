@@ -7,7 +7,7 @@ export default function OpenRoles() {
   const router = useRouter();
 
   return (
-    <section className="w-full flex justify-center bg-cream">
+    <section id="open-roles" className="w-full flex justify-center bg-cream">
 
       {/* MAIN CONTAINER */}
       <div className="w-full max-w-[1280px] h-[659.5px] py-[40px] px-[24px]">

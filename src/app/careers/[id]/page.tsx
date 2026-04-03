@@ -82,21 +82,63 @@ export default function JobDetails({ params }: Props) {
             <div className="mt-[16px] flex items-center justify-between">
 
               {/* LEFT META */}
-              <div className="flex items-center gap-[24px] text-[14px] font-bold text-brown max-w-[550px]">
-                <span>📍 {job.location}</span>
+              <div className="flex items-center gap-[24px] text-[16px] font-medium text-brown max-w-[550px]">
 
-                <span><span>•</span>{job.type}</span>
+                {/* Location */}
+                <span className="flex items-center gap-[6px]">
+                  <Image
+                    src="/images/careers/con1.svg"
+                    alt="location"
+                    width={12}
+                    height={15}
+                    className="object-contain"
+                  />
+                  {job.location}
+                </span>
 
-                <span>  <span>•</span>{job.experience}</span>
+                {/* Type */}
+                <span className="flex items-center gap-[6px]">
+                  <Image
+                    src="/images/careers/con3.svg"
+                    alt="type"
+                    width={12}
+                    height={15}
+                    className="object-contain"
+                  />
+                  Product
+                </span>
+
+
+
+                {/* Experience */}
+                <span className="flex items-center gap-[6px]">
+                  <Image
+                    src="/images/careers/con2.svg"
+                    alt="experience"
+                    width={12}
+                    height={15}
+                    className="object-contain"
+                  />
+                  {job.type}
+                </span>
+
+
+
               </div>
 
               {/* RIGHT BUTTON + SHARE */}
               <div className="flex items-center gap-[12px] ml-[111.75px]">
 
-                <button className="w-[260px] h-[48px] px-[32px] py-[12px] bg-primary text-cream rounded-[12px] text-[14px] font-semibold">
+                <button
+                  onClick={() => {
+                    document.getElementById("apply-form")?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }}
+                  className="w-[260px] h-[48px] px-[32px] py-[12px] bg-primary text-cream rounded-[12px] text-[16px] font-semibold"
+                >
                   Apply for this position
                 </button>
-
                 <div className="rounded-[12px] flex items-center justify-center">
                   <Image
                     src="/images/careers/share.svg"
@@ -207,7 +249,7 @@ export default function JobDetails({ params }: Props) {
           </div>
 
           {/* FORM */}
-          <div className="mt-[40px] w-[704px] border border-[#109989] rounded-[24px] p-[48px] flex flex-col gap-[24px]">
+          <div id="apply-form" className="mt-[40px] w-[704px] border border-primary rounded-[24px] p-[48px] flex flex-col gap-[24px]">
 
             {/* Heading */}
             <div className="flex flex-col gap-[8px]">
@@ -224,22 +266,22 @@ export default function JobDetails({ params }: Props) {
 
               <div className="flex flex-col gap-[6px]">
                 <label className="text-[12px] text-brown">Full Name *</label>
-                <input className="h-[48px] border border-[#109989] rounded-[12px] px-[16px]" placeholder="Jane Doe" />
+                <input className="h-[48px] border border-primary rounded-[12px] px-[16px]" placeholder="Jane Doe" />
               </div>
 
               <div className="flex flex-col gap-[6px]">
                 <label className="text-[12px] text-brown">Email Address *</label>
-                <input className="h-[48px] border border-[#109989] rounded-[12px] px-[16px]" placeholder="jane@example.com" />
+                <input className="h-[48px] border border-primary rounded-[12px] px-[16px]" placeholder="jane@example.com" />
               </div>
 
               <div className="flex flex-col gap-[6px]">
                 <label className="text-[12px] text-brown">Phone Number</label>
-                <input className="h-[48px] border border-[#109989] rounded-[12px] px-[16px]" placeholder="+91 000 000 0000" />
+                <input className="h-[48px] border border-primary rounded-[12px] px-[16px]" placeholder="+91 000 000 0000" />
               </div>
 
               <div className="flex flex-col gap-[6px]">
                 <label className="text-[12px] text-brown">LinkedIn Profile URL</label>
-                <input className="h-[48px] border border-[#109989] rounded-[12px] px-[16px]" placeholder="linkedin.com/in/username" />
+                <input className="h-[48px] border border-primary rounded-[12px] px-[16px]" placeholder="linkedin.com/in/username" />
               </div>
 
             </div>
@@ -248,11 +290,11 @@ export default function JobDetails({ params }: Props) {
             <div className="flex flex-col gap-[6px]">
               <label className="text-[12px] text-brown">Resume / CV *</label>
 
-              <div className="h-[120px] border border-dashed border-[#109989] rounded-[16px] flex flex-col items-center justify-center text-center gap-[6px]">
+              <div className="h-[120px] border border-dashed border-primary rounded-[16px] flex flex-col items-center justify-center text-center gap-[6px]">
                 <span className="text-[14px] text-brown font-medium">
                   Upload your resume
                 </span>
-                <span className="text-[12px] text-[#5A5A5A]">
+                <span className="text-[12px] text-brown">
                   PDF, DOCX up to 10MB
                 </span>
               </div>

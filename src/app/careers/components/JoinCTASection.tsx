@@ -1,4 +1,13 @@
+"use client";
+
 export default function CareersCTA() {
+
+  const scrollToRoles = () => {
+    document.getElementById("open-roles")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section className="w-full flex justify-center bg-cream py-[40px]">
 
@@ -32,7 +41,8 @@ export default function CareersCTA() {
           </p>
 
           {/* BUTTON */}
-          <button className="
+
+          <button onClick={scrollToRoles} className="
   w-[470.81px]
   px-[40px] py-[20px]
   bg-primary
@@ -45,6 +55,7 @@ export default function CareersCTA() {
 ">
             Explore Careers in Green Construction
           </button>
+
 
         </div>
 

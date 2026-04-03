@@ -1,22 +1,51 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useEffect, useRef, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
-import { jobsData, Job } from "../data/jobsData";
 import Link from "next/link";
 import Image from "next/image";
+import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import CustomButton from "@/components/customButton/CustomButton";
+import CustomInput from "@/components/customInput/CustomTextField";
+import { jobsData, Job } from "../data/jobsData";
+
 type Props = {
   params: {
     id: number;
   };
 };
 
-export default function JobDetails({ params }: Props) {
-  const job: Job | undefined = jobsData.find(
-    (j) => j.id == params.id
-  );
+type CareerApplicationFormValues = {
+  name: string;
+  email: string;
+  phone: string;
+  linkedin: string;
+};
 
-  if (!job) return <div>Job not found</div>;
+export default function JobDetails({ params }: Props) {
+  const job: Job | undefined = jobsData.find((j) => j.id == params.id);
   const [activeTab, setActiveTab] = useState("overview");
+  const [formResetKey, setFormResetKey] = useState(0);
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resumeFileName, setResumeFileName] = useState("");
+  const [resumeTouched, setResumeTouched] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const resumeInputRef = useRef<HTMLInputElement | null>(null);
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<CareerApplicationFormValues>({
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      linkedin: "",
+    },
+  });
 
   useEffect(() => {
     const sections = ["overview", "responsibilities", "qualifications", "skills"];
@@ -40,6 +69,66 @@ export default function JobDetails({ params }: Props) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (!job) return <div>Job not found</div>;
+
+  const onSubmit = async (data: CareerApplicationFormValues) => {
+    setResumeTouched(true);
+
+    if (!resumeFile) {
+      toast.error("Please upload your resume to apply.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("first_name", data.name);
+    formData.append("email", data.email);
+    formData.append("phone_number", `+91${data.phone}`);
+    formData.append("profile_url", data.linkedin);
+    formData.append("resume", resumeFile);
+    formData.append("job_title", job.title);
+
+    try {
+      setIsSubmitting(true);
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/careers/apply`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        let errorMessage = "Failed to submit application";
+
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData?.message || errorMessage;
+        } catch {
+          // Keep fallback message when response isn't JSON.
+        }
+
+        throw new Error(errorMessage);
+      }
+
+      toast.success("Application submitted successfully!");
+      reset();
+      setResumeFile(null);
+      setResumeFileName("");
+      setResumeTouched(false);
+      setFormResetKey((prev) => prev + 1);
+
+      if (resumeInputRef.current) {
+        resumeInputRef.current.value = "";
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Something went wrong";
+      toast.error(message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div>
@@ -70,21 +159,13 @@ export default function JobDetails({ params }: Props) {
             </span>
           </div>
 
-          {/* TOP */}
           <div className="mt-[16px]">
-
-            {/* TITLE */}
             <h1 className="text-[32px] font-semibold leading-[48px] text-brown max-w-[550px]">
               {job.title}
             </h1>
 
-            {/* META + BUTTON ROW */}
             <div className="mt-[16px] flex items-center justify-between">
-
-              {/* LEFT META */}
               <div className="flex items-center gap-[24px] text-[16px] font-medium text-brown max-w-[550px]">
-
-                {/* Location */}
                 <span className="flex items-center gap-[6px]">
                   <Image
                     src="/images/careers/con1.svg"
@@ -96,7 +177,6 @@ export default function JobDetails({ params }: Props) {
                   {job.location}
                 </span>
 
-                {/* Type */}
                 <span className="flex items-center gap-[6px]">
                   <Image
                     src="/images/careers/con3.svg"
@@ -108,9 +188,6 @@ export default function JobDetails({ params }: Props) {
                   Product
                 </span>
 
-
-
-                {/* Experience */}
                 <span className="flex items-center gap-[6px]">
                   <Image
                     src="/images/careers/con2.svg"
@@ -121,24 +198,18 @@ export default function JobDetails({ params }: Props) {
                   />
                   {job.type}
                 </span>
-
-
-
               </div>
 
-              {/* RIGHT BUTTON + SHARE */}
               <div className="flex items-center gap-[12px] ml-[111.75px]">
-
-                <button
-                  onClick={() => {
+                <CustomButton
+                  title="Apply for this position"
+                  onPress={() => {
                     document.getElementById("apply-form")?.scrollIntoView({
                       behavior: "smooth",
                     });
                   }}
-                  className="w-[260px] h-[48px] px-[32px] py-[12px] bg-primary text-cream rounded-[12px] text-[16px] font-semibold"
-                >
-                  Apply for this position
-                </button>
+                  className="w-[260px] h-[48px] bg-primary text-cream rounded-[12px] text-[16px] font-semibold"
+                />
                 <div className="rounded-[12px] flex items-center justify-center">
                   <Image
                     src="/images/careers/share.svg"
@@ -147,19 +218,18 @@ export default function JobDetails({ params }: Props) {
                     height={48}
                   />
                 </div>
-
               </div>
             </div>
 
-            {/* TABS */}
-            <div className="mt-[24px] border-b border-primary  font-bold flex gap-[32px] text-[14px]">
+            <div className="mt-[24px] border-b border-primary font-bold flex gap-[32px] text-[14px]">
               <a
                 href="#overview"
                 onClick={() => setActiveTab("overview")}
-                className={`pb-[8px] ${activeTab === "overview"
-                  ? "border-b-2 border-primary text-primary font-medium"
-                  : "text-brown"
-                  }`}
+                className={`pb-[8px] ${
+                  activeTab === "overview"
+                    ? "border-b-2 border-primary text-primary font-medium"
+                    : "text-brown"
+                }`}
               >
                 Overview
               </a>
@@ -167,10 +237,11 @@ export default function JobDetails({ params }: Props) {
               <a
                 href="#responsibilities"
                 onClick={() => setActiveTab("responsibilities")}
-                className={`pb-[8px] ${activeTab === "responsibilities"
-                  ? "border-b-2 border-primary text-primary font-medium"
-                  : "text-brown"
-                  }`}
+                className={`pb-[8px] ${
+                  activeTab === "responsibilities"
+                    ? "border-b-2 border-primary text-primary font-medium"
+                    : "text-brown"
+                }`}
               >
                 Responsibilities
               </a>
@@ -178,10 +249,11 @@ export default function JobDetails({ params }: Props) {
               <a
                 href="#qualifications"
                 onClick={() => setActiveTab("qualifications")}
-                className={`pb-[8px] ${activeTab === "qualifications"
-                  ? "border-b-2 border-primary text-primary font-medium"
-                  : "text-brown"
-                  }`}
+                className={`pb-[8px] ${
+                  activeTab === "qualifications"
+                    ? "border-b-2 border-primary text-primary font-medium"
+                    : "text-brown"
+                }`}
               >
                 Qualifications
               </a>
@@ -189,26 +261,21 @@ export default function JobDetails({ params }: Props) {
               <a
                 href="#skills"
                 onClick={() => setActiveTab("skills")}
-                className={`pb-[8px] ${activeTab === "skills"
-                  ? "border-b-2 border-primary text-primary font-medium"
-                  : "text-brown"
-                  }`}
+                className={`pb-[8px] ${
+                  activeTab === "skills"
+                    ? "border-b-2 border-primary text-primary font-medium"
+                    : "text-brown"
+                }`}
               >
                 Skills
               </a>
             </div>
-
           </div>
 
-          {/* CONTENT */}
           <div className="mt-[32px] max-w-[800px]">
-
             <div id="overview" className="scroll-mt-[120px]">
               <h2 className="text-[24px] font-semibold mb-[12px]">Job overview</h2>
-              <p className="text-[18px] text-brown leading-[22px]">
-                {job.overview}
-              </p>
-
+              <p className="text-[18px] text-brown leading-[22px]">{job.overview}</p>
             </div>
 
             <div id="responsibilities" className="scroll-mt-[120px]">
@@ -218,7 +285,7 @@ export default function JobDetails({ params }: Props) {
               <ul className="space-y-[8px]">
                 {job.responsibilities.map((item, i) => (
                   <li key={i} className="text-[18px] text-brown">
-                    • {item}
+                    {"\u2022"} {item}
                   </li>
                 ))}
               </ul>
@@ -229,7 +296,7 @@ export default function JobDetails({ params }: Props) {
               <ul className="space-y-[8px]">
                 {job.requirements.map((item, i) => (
                   <li key={i} className="text-[18px] text-brown">
-                    • {item}
+                    {"\u2022"} {item}
                   </li>
                 ))}
               </ul>
@@ -240,73 +307,178 @@ export default function JobDetails({ params }: Props) {
               <ul className="space-y-[8px]">
                 {job.preferred.map((item, i) => (
                   <li key={i} className="text-[18px] text-brown">
-                    • {item}
+                    {"\u2022"} {item}
                   </li>
                 ))}
               </ul>
             </div>
-
           </div>
 
-          {/* FORM */}
-          <div id="apply-form" className="mt-[40px] w-[704px] border border-primary rounded-[24px] p-[48px] flex flex-col gap-[24px]">
-
-            {/* Heading */}
+          <form
+            key={formResetKey}
+            id="apply-form"
+            noValidate
+            onSubmit={handleSubmit(onSubmit)}
+            className="mt-[40px] w-[704px] max-w-full border border-primary rounded-[24px] p-[48px] flex flex-col gap-[24px]"
+          >
             <div className="flex flex-col gap-[8px]">
               <h3 className="text-[24px] font-semibold text-brown">
                 Apply for this role
               </h3>
               <p className="text-[14px] text-[#5A5A5A]">
-                We’re excited to see your work and hear about your journey.
+                We&apos;re excited to see your work and hear about your journey.
               </p>
             </div>
 
-            {/* Inputs Grid */}
-            <div className="grid grid-cols-2 gap-[16px]">
-
-              <div className="flex flex-col gap-[6px]">
-                <label className="text-[12px] text-brown">Full Name *</label>
-                <input className="h-[48px] border border-primary rounded-[12px] px-[16px]" placeholder="Jane Doe" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+              <div className="">
+                <label className="text-[12px] text-brown font-bold pb-[8.5px]">Full Name *</label>
+                <Controller
+                  name="name"
+                  control={control}
+                  rules={{ required: "Name is required" }}
+                  render={({ field }) => (
+                    <CustomInput
+                      placeholder="Enter Full Name"
+                      value={field.value}
+                      onChange={field.onChange}
+                      errorMessage={errors.name?.message}
+                      inputClassNames="h-[48px] px-[13px] py-[16px]"
+                    />
+                  )}
+                />
               </div>
 
-              <div className="flex flex-col gap-[6px]">
-                <label className="text-[12px] text-brown">Email Address *</label>
-                <input className="h-[48px] border border-primary rounded-[12px] px-[16px]" placeholder="jane@example.com" />
+{/* 
+                <div className=" ">
+                          <label className="block text-brown mb-2 text-brown text-base font-medium">
+                            Name <span className="text-red">*</span>
+                          </label>
+                          <Controller
+                                            rules={{ required: "Name is required" }}
+
+                            control={control}
+                            render={({ field: { onChange, value } }) => (
+                              <CustomInput
+                                placeholder="Enter Name"
+                                onChange={onChange}
+                                value={value}
+                                customStyles={{
+                                  // backgroundColor: "#F3F3F3",
+                                  borderRadius: "5px",
+                                  // width: "500px",
+                                }}
+                                extraClassnames="custom-input"
+                                errorMessage={errors.name?.message}
+                              />
+                            )}
+                            name="name"
+                          />
+                        </div> */}
+
+              <div className="">
+                <label className="text-[12px] text-brown font-bold pb-[6px]">Email Address *</label>
+                <Controller
+                  name="email"
+                  control={control}
+                  rules={{
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Enter a valid email address",
+                    },
+                  }}
+                  render={({ field }) => (
+                    <CustomInput
+                      placeholder="Enter Email Address"
+                      value={field.value}
+                      onChange={field.onChange}
+                      errorMessage={errors.email?.message}
+                      type="email"
+                      inputClassNames="h-[48px] px-[13px] py-[16px]"
+                    />
+                  )}
+                />
               </div>
 
-              <div className="flex flex-col gap-[6px]">
-                <label className="text-[12px] text-brown">Phone Number</label>
-                <input className="h-[48px] border border-primary rounded-[12px] px-[16px]" placeholder="+91 000 000 0000" />
+              <div className="">
+                <label className="text-[12px] text-brown font-bold pb-[6px]">Phone Number *</label>
+                <Controller
+                  name="phone"
+                  control={control}
+             rules={{ required: "Phone number is required" }}
+                  render={({ field }) => (
+                    <CustomInput
+                      placeholder="Enter Phone Number"
+                      
+                      prefix="+91"
+                      value={field.value}
+                      onChange={field.onChange}
+                      errorMessage={errors.phone?.message}
+                      isMobileInput
+                      inputClassNames="h-[48px] px-[13px] py-[16px]"
+                    />
+                  )}
+                />
               </div>
 
-              <div className="flex flex-col gap-[6px]">
-                <label className="text-[12px] text-brown">LinkedIn Profile URL</label>
-                <input className="h-[48px] border border-primary rounded-[12px] px-[16px]" placeholder="linkedin.com/in/username" />
+              <div className="">
+                <label className="text-[12px] text-brown font-bold pb-[6px]">LinkedIn Profile *</label>
+                <Controller
+                  name="linkedin"
+                  control={control}
+                  rules={{required:"LinkedIn url is Required"}}
+                  render={({ field }) => (
+                    <CustomInput
+                      placeholder="linkedin.com/in/username"
+                      value={field.value}
+                      onChange={field.onChange}
+                        errorMessage={errors.linkedin?.message}
+                      inputClassNames="h-[48px] px-[13px] py-[16px]"
+                    />
+                  )}
+                />
               </div>
-
             </div>
 
-            {/* Upload */}
             <div className="flex flex-col gap-[6px]">
-              <label className="text-[12px] text-brown">Resume / CV *</label>
-
-              <div className="h-[120px] border border-dashed border-primary rounded-[16px] flex flex-col items-center justify-center text-center gap-[6px]">
-                <span className="text-[14px] text-brown font-medium">
-                  Upload your resume
+              <label className="text-[12px] text-brown font-bold pb-[6px]">Resume / CV *</label>
+              <input
+                ref={resumeInputRef}
+                type="file"
+                accept=".pdf,.doc,.docx"
+                className="hidden"
+                onChange={(event) => {
+                  const file = event.target.files?.[0] ?? null;
+                  setResumeTouched(true);
+                  setResumeFile(file);
+                  setResumeFileName(file?.name ?? "");
+                }}
+              />
+              <button
+                type="button"
+                onClick={() => resumeInputRef.current?.click()}
+                className="h-[120px] border border-dashed border-primary rounded-[16px] flex flex-col items-center justify-center text-center gap-[6px] bg-cream"
+              >
+                <span className={`text-[14px] underline underline-blue font-medium ${resumeTouched && !resumeFileName ? "text-red" : "text-brown "}`}>
+                  {resumeFileName || "Upload your resume"}
                 </span>
-                <span className="text-[12px] text-brown">
-                  PDF, DOCX up to 10MB
-                </span>
-              </div>
+                <span className="text-[12px] text-brown">PDF, DOCX up to 10MB</span>
+              </button>
+              {resumeTouched && !resumeFileName && (
+                <p className="w-full text-sm mt-1 text-left text-[#d22525]">
+                  Please upload your resume to apply.
+                </p>
+              )}
             </div>
 
-            {/* Button */}
-            <button className="w-full h-[56px] bg-[#109989] text-white rounded-[12px] text-[16px] font-semibold shadow-[0px_8px_20px_rgba(16,153,137,0.25)]">
-              Submit Application
-            </button>
-
-          </div>
-
+            <CustomButton
+              title="Submit Application"
+              type="submit"
+              loading={isSubmitting}
+              className="w-full h-[56px] bg-primary text-white rounded-[12px] text-[16px] font-semibold shadow-[0px_8px_20px_rgba(16,153,137,0.25)]"
+            />
+          </form>
         </div>
       </section>
     </div>

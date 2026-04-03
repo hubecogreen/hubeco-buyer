@@ -8,7 +8,7 @@ export default function HeroSection() {
 
         {/* Background */}
         <Image
-          src="/images/careers/hero.jpg"
+          src="/images/careers/hero.png"
           alt="Careers Hero"
           fill
           priority
@@ -41,19 +41,17 @@ export default function HeroSection() {
             </div>
 
             {/* Heading */}
-            <h1 className="text-[56px] text-cream font-semibold leading-[1.1]">
-              Careers in{" "}
-              <span className="text-primary">
-                Sustainable Construction
+            <h1 className="text-[72px] text-cream font-bold leading-[1.1]">
+              Build the Future{" "}<br/>
+              <span className="text-cream">
+                of Sustainable <br/> Construction
               </span>{" "}
-              & Green Procurement
+             
             </h1>
 
             {/* Description */}
-            <p className="text-[20px] text-cream">
-              Build the future of India's construction industry with Hubeco, the
-              leading <br /> digital platform for sustainable building materials and
-              green procurement.
+            <p className="text-[23px] text-cream">
+             At hubeco, we’re re defiling how the <br /> world sources building Materials 
             </p>
 
             {/* Buttons */}
@@ -68,9 +66,9 @@ export default function HeroSection() {
                 Explore Open Roles
               </button>
 
-              <button className="bg-cream text-primary px-8 py-4 rounded-[8px] font-bold text-[18px]">
+              {/* <button className="bg-cream text-primary px-8 py-4 rounded-[8px] font-bold text-[18px]">
                 Partner With Our Mission
-              </button>
+              </button> */}
             </div>
 
           </div>

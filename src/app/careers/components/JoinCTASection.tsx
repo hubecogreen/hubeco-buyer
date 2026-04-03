@@ -34,9 +34,9 @@ export default function CareersCTA() {
 
           {/* DESCRIPTION */}
           <p className="mt-[16px] mb-[8px] text-cream text-[20px] leading-[32.5px] font-medium max-w-[768px]">
-            Ready to make an impact in green building, sustainable materials, and
+            Ready to make an impact in green building, sustainable materials and
             construction technology? At Hubeco, you’ll work on real-world problems
-            that shape cities, reduce emissions, and improve how construction is
+            that shape cities, reduce emissions and improve how construction is
             done across India.
           </p>
 

@@ -19,7 +19,7 @@ export default function WhyWorkWithUs() {
           </h3>
 
           <p className="mt-4 max-w-[700px] text-[18px] leading-[28px] text-brown">
-            Work at the intersection of construction, climate tech, and digital procurement systems.
+            Work at the intersection of construction, climate tech and digital procurement systems.
             Hubeco offers a high-impact environment where your work directly contributes to reducing
             carbon emissions and improving material transparency in the built environment.
           </p>
@@ -68,7 +68,7 @@ export default function WhyWorkWithUs() {
 
             <p className="text-[16px] text-brown leading-[1.6]">
               Work on cutting-edge platforms involving digital procurement systems,
-              supply chain optimization, and sustainability analytics.
+              supply chain optimization and sustainability analytics.
             </p>
           </div>
 
@@ -89,7 +89,7 @@ export default function WhyWorkWithUs() {
             </h4>
 
             <p className="text-[16px] text-brown leading-[1.6]">
-              We promote open collaboration between buyers, vendors, and partners ensuring
+              We promote open collaboration between buyers, vendors and partners ensuring
               accountability and efficiency across every project.
             </p>
           </div>

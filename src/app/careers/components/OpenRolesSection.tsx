@@ -10,7 +10,7 @@ export default function OpenRoles() {
     <section id="open-roles" className="w-full flex justify-center bg-cream">
 
       {/* MAIN CONTAINER */}
-      <div className="w-full max-w-[1280px] h-[659.5px] py-[40px] px-[24px]">
+      <div className="w-full max-w-[1280px]  py-[40px] px-[24px]">
 
         {/* HEADING */}
         <h2 className="text-[45px] leading-[48px] font-bold text-brown max-w-[1193px]">
@@ -19,7 +19,7 @@ export default function OpenRoles() {
 
         {/* SUBTEXT */}
         <p className="mt-[12px] text-[18px] leading-[28px] text-brown max-w-[700px]">
-          We are hiring across product, engineering, sustainability, and business
+          We are hiring across product, engineering, sustainability and business
           functions to scale India’s leading green construction marketplace.
         </p>
 
@@ -40,30 +40,30 @@ export default function OpenRoles() {
 
                   {/* CATEGORY */}
                   <div className="flex justify-between items-center">
-                  <div>
-                  <span className="text-[12px] font-semibold text-primary tracking-wide">
-                    {job.category.toUpperCase()}
-                  </span>
+                    <div>
+                      <span className="text-[12px] font-semibold text-primary tracking-wide">
+                        {job.category.toUpperCase()}
+                      </span>
 
-                  {/* TITLE */}
+                      {/* TITLE */}
 
-                  <h3 className="mt-[4.5px] text-[22px] font-semibold text-brown">
-                    {job.title}
-                  </h3>
-                  </div>
+                      <h3 className="mt-[4.5px] text-[22px] font-semibold text-brown">
+                        {job.title}
+                      </h3>
+                    </div>
                     <div className="flex gap-[8px]">
 
-                  <span className="text-[11px] px-[10px] py-[4px]  bg-primary/10 text-primary uppercase rounded-full font-bold">
-                    {job.type}
-                  </span>
+                      <span className="text-[11px] px-[10px] py-[4px]  bg-primary/10 text-primary uppercase rounded-full font-bold">
+                        {job.type}
+                      </span>
 
-                  {/* OPTIONAL (if you add later in JSON) */}
-                  <span className="text-[11px] px-[10px] py-[4px]  bg-primary/10 text-primary uppercase rounded-full font-bold">
-                    HYBRID
-                  </span>
+                      {/* OPTIONAL (if you add later in JSON) */}
+                      <span className="text-[11px] px-[10px] py-[4px]  bg-primary/10 text-primary uppercase rounded-full font-bold">
+                        HYBRID
+                      </span>
 
-                </div>
-                </div>
+                    </div>
+                  </div>
 
                   {/* DESCRIPTION */}
                   <p className="mt-[12px] text-[18px] leading-[22px] text-brown max-w-auto">
@@ -79,42 +79,41 @@ export default function OpenRoles() {
 
                 {/* BOTTOM META */}
                 <div className="flex justify-between items-center">
-                <div className="flex items-center gap-[16px] mt-[16px] font-bold text-[13px] text-brown">
-                  <span>📍 {job.location}</span>
-                  
-                  <span><span>•</span>{job.experience}</span>
-                </div>
+                  <div className="flex items-center gap-[16px] mt-[8px] font-medium text-[14px] text-brown">
 
-                <div> <button
-                  onClick={() => router.push(`/careers/${job.id}`)}
-                  className="text-primary font-semibold text-[14px] hover:underline"
-                >
-                  Apply Now →
-                </button>
-                </div>
+                    {/* LOCATION */}
+                    <div className="flex items-center gap-[6px]">
+                      <img src="/images/careers/con1.svg" alt="Location" className="w-[9px] h-[12px]" />
+                      <span>{job.location}</span>
+                    </div>
+
+                    {/* EXPERIENCE */}
+                    <div className="flex items-center gap-[6px]">
+                      <img src="/images/careers/container4.svg" alt="Experience" className="w-[11px] h-[11px]" />
+                      <span>{job.experience}</span>
+                    </div>
+
+                  </div>
+
+                  <div>
+                    <button
+                      onClick={() => router.push(`/careers/${job.id}`)}
+                      className="text-primary font-semibold text-[14px] hover:underline"
+                    >
+                      Apply Now →
+                    </button>
+                  </div>
                 </div>
 
               </div>
 
-             
+
 
             </div>
           ))}
 
         </div>
 
-        {/* BOTTOM TEXT */}
-        <div className="mt-[32px] text-center">
-
-          <p className="text-[18px] text-brown">
-            Don’t see a role that fits? Join our talent network and help build India’s largest sustainable construction ecosystem.
-          </p>
-
-          <p className="mt-[23.5px] text-primary font-semibold text-[18px] cursor-pointer">
-            Send a general application →
-          </p>
-
-        </div>
 
       </div>
     </section>

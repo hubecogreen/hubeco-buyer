@@ -45,7 +45,7 @@ export default function BuildFutureSection() {
                         </div>
 
                         <p className="text-[#2AAE9E] text-[18px] font-medium">
-                            This is your opportunity to shape how India builds smarter, faster, and greener.
+                            This is your opportunity to shape how India builds smarter, faster and greener.
                         </p>
 
                     </div>

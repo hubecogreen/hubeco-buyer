@@ -31,22 +31,22 @@ const Footer = () => {
 
 
   const finalCategories = useMemo(() => {
-  const BASE_CATEGORIES = ["Bricks", "Sand", "Paints", "Tiles"];
+    const BASE_CATEGORIES = ["Bricks", "Sand", "Paints", "Tiles"];
 
-  const hasAdhesives = !!categoryIdMap["adhesives"];
-  const hasSanitary = !!categoryIdMap["sanitary & bath fittings"];
+    const hasAdhesives = !!categoryIdMap["adhesives"];
+    const hasSanitary = !!categoryIdMap["sanitary & bath fittings"];
 
-  let extraCategories: string[] = [];
+    let extraCategories: string[] = [];
 
-  if (hasAdhesives || hasSanitary) {
-    if (hasAdhesives) extraCategories.push("Adhesives");
-    if (hasSanitary) extraCategories.push("Sanitary & Bath Fittings");
-  } else {
-    extraCategories = ["Pavers", "Steel"];
-  }
+    if (hasAdhesives || hasSanitary) {
+      if (hasAdhesives) extraCategories.push("Adhesives");
+      if (hasSanitary) extraCategories.push("Sanitary & Bath Fittings");
+    } else {
+      extraCategories = ["Pavers", "Steel"];
+    }
 
-  return [...BASE_CATEGORIES, ...extraCategories].slice(0, 6);
-}, [categoryIdMap]);
+    return [...BASE_CATEGORIES, ...extraCategories].slice(0, 6);
+  }, [categoryIdMap]);
 
 
   useEffect(() => {
@@ -161,18 +161,18 @@ const Footer = () => {
             {/* Products */}
             <div className="w-full md:w-full lg:w-[112px]">
               <h4 className="text-[14px] text-primary mb-2">Products</h4>
-             <ul className="space-y-1 text-[13px] lg:text-[14px]">
-  {finalCategories.map((cat) => (
-    <li key={cat}>
-      <button
-        onClick={() => goToCategory(cat)}
-        className="text-brown"
-      >
-        {cat === "Sanitary & Bath Fittings" ? "Bath Fittings" : cat}
-      </button>
-    </li>
-  ))}
-</ul>
+              <ul className="space-y-1 text-[13px] lg:text-[14px]">
+                {finalCategories.map((cat) => (
+                  <li key={cat}>
+                    <button
+                      onClick={() => goToCategory(cat)}
+                      className="text-brown"
+                    >
+                      {cat === "Sanitary & Bath Fittings" ? "Bath Fittings" : cat}
+                    </button>
+                  </li>
+                ))}
+              </ul>
 
             </div>
 
@@ -192,7 +192,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li><Link className="text-brown" href="/brands">Brands</Link></li>
-
+                <li><Link className="text-brown" href="/careers">Careers</Link></li>
               </ul>
             </div>
 
@@ -204,7 +204,7 @@ const Footer = () => {
                 <li><Link className="text-brown" href="/orders">Returns</Link></li>
                 <li><Link className="text-brown" href="/contact">Contact Us</Link></li>
                 <li><Link className="text-brown" href="/faq">FAQ&apos;s</Link></li>
-                <li><Link className="text-brown" href="/careers">Careers</Link></li>
+
               </ul>
             </div>
 

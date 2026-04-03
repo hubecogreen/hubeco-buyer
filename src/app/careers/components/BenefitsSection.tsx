@@ -43,7 +43,7 @@ export default function BenefitsSection() {
                         </h3>
 
                         <p className="text-[16px] text-brown leading-[22px]">
-                            Upskill in: Sustainability certifications, Construction technology, and Procurement systems with dedicated budgets.
+                            Upskill in: Sustainability certifications, Construction technology and Procurement systems with dedicated budgets.
                         </p>
 
                     </div>

@@ -29,7 +29,7 @@ export default function BuildFutureSection() {
                                 "Systems for CO₂ tracking and environmental impact measurement",
                                 "Digital workflows for end-to-end construction sourcing"
                             ].map((item, index) => (
-                                <div key={index} className="flex items-start gap-[16px]">
+                                <div key={index} className="flex items-center gap-[16px]">
 
                                     <div className="min-w-[40px] h-[40px] flex items-center justify-center rounded-[10px] bg-[#E6F4F1]">
                                         <span className="text-[#2AAE9E] text-[14px] font-semibold">

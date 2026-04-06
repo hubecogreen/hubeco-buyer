@@ -21,7 +21,7 @@ shortDescription:
   "Drive Hubeco's growth by building relationships with Developers, Architects and Procurement teams. Scale the adoption of sustainable materials across major construction projects in India.",
     location: "Hyderabad / Remote",
     type: "Full-Time",
-    experience: "5+ Years Exp.",
+    experience: "3-5 Years Exp.",
     overview:
       "The BDM will drive business growth in Hyderabad by approaching developers and contractors promoting hubeco.market’s platform, and closing B2B2C deals in the sustainable construction ecosystem",
     responsibilities: [

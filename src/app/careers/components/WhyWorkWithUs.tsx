@@ -5,7 +5,7 @@ export default function WhyWorkWithUs() {
     <section className="w-full flex justify-center bg-cream">
 
       {/* Container */}
-      <div className="w-full max-w-[1280px] h-[730px] pt-[40px] pb-[40px] px-[24px]">
+      <div className="w-full max-w-[1280px]  pt-[40px] pb-[40px] px-[24px]">
 
         {/* Heading Block */}
         <div className="flex flex-col items-center text-center">
@@ -29,21 +29,21 @@ export default function WhyWorkWithUs() {
         <div className="mt-12 flex justify-center gap-[32px]">
 
           {/* CARD 1 */}
-          <div className="w-[389.33px] h-[362px] rounded-[24px] border border-primary bg-cream shadow-[0px_4px_24px_-1px_#0000000D] p-[41px]">
-            <div className="mb-8">
+          <div className="w-[389.33px] h-[252px] rounded-[24px] border border-primary bg-cream shadow-[0px_4px_24px_-1px_#0000000D] px-[32px] py-[36px]">
+            <div className="flex  items-center mb-[22px]">
               <Image
                 src="/images/careers/icon1.svg"   // your png path
                 alt="check"
-                width={64}
-                height={64}
-                className="mt-[2px]"
+                width={52}
+                height={52}
+                
               />
+
+
+              <h4 className="text-[21px] font-bold ml-[18px] text-brown">
+                Impact-Driven Work
+              </h4>
             </div>
-
-            <h4 className="text-[24px] font-semibold mb-4 text-brown">
-              Impact-Driven Work
-            </h4>
-
             <p className="text-[16px] text-brown leading-[1.6]">
               Build solutions that enable carbon reduction in construction projects by helping
               businesses choose sustainable materials.
@@ -51,20 +51,21 @@ export default function WhyWorkWithUs() {
           </div>
 
           {/* CARD 2 */}
-          <div className="w-[389.33px] h-[362px] rounded-[24px] border border-primary bg-cream shadow-[0px_4px_24px_-1px_#0000000D] p-[41px]">
-            <div className="mb-8">
+          <div className="w-[389.33px] h-[252px] rounded-[24px] border border-primary bg-cream shadow-[0px_4px_24px_-1px_#0000000D] py-[36px] px-[32px]">
+            <div className="flex  items-center mb-[16px]">
               <Image
                 src="/images/careers/icon2.svg"   // your png path
                 alt="check"
-                width={64}
-                height={64}
+                width={52}
+                height={52}
                 className="mt-[2px]"
               />
-            </div>
 
-            <h4 className="text-[24px] font-semibold mb-4 text-brown">
-              Innovative Work Environment
-            </h4>
+
+              <h4 className="text-[21px] font-bold ml-[18px]  text-brown">
+                Innovative Work Environment
+              </h4>
+            </div>
 
             <p className="text-[16px] text-brown leading-[1.6]">
               Work on cutting-edge platforms involving digital procurement systems,
@@ -73,21 +74,21 @@ export default function WhyWorkWithUs() {
           </div>
 
           {/* CARD 3 */}
-          <div className="w-[389.33px] h-[362px] rounded-[24px] border border-primary bg-cream shadow-[0px_4px_24px_-1px_#0000000D] p-[41px]">
-            <div className="mb-8">
+          <div className="w-[389.33px] h-[252px] rounded-[24px] border border-primary bg-cream shadow-[0px_4px_24px_-1px_#0000000D] py-[36px] px-[32px]">
+            <div className="flex items-center mb-[16px]">
               <Image
                 src="/images/careers/icon3.svg"   // your png path
                 alt="check"
-                width={64}
-                height={64}
+                width={52}
+                height={52}
                 className="mt-[2px]"
               />
+
+
+              <h4 className="text-[21px] font-bold ml-[18px] text-brown">
+                Transparency & Trust
+              </h4>
             </div>
-
-            <h4 className="text-[24px] font-semibold mb-4 text-brown">
-              Transparency & Trust
-            </h4>
-
             <p className="text-[16px] text-brown leading-[1.6]">
               We promote open collaboration between buyers, vendors and partners ensuring
               accountability and efficiency across every project.

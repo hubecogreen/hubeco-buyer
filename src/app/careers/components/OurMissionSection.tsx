@@ -52,7 +52,7 @@ export default function OurMissionSection() {
 
             {/* Points */}
             <ul className="space-y-3">
-              <li className="flex items-end gap-3">
+              <li className="flex items-center gap-3">
                 <Image
                   src="/images/careers/Icon.svg"   // your png path
                   alt="check"
@@ -65,7 +65,7 @@ export default function OurMissionSection() {
                 </p>
               </li>
 
-              <li className="flex items-end gap-3">
+              <li className="flex items-center gap-3">
                  <Image
                   src="/images/careers/Icon.svg"   // your png path
                   alt="check"
@@ -78,7 +78,7 @@ export default function OurMissionSection() {
                 </p>
               </li>
 
-              <li className="flex items-end gap-3">
+              <li className="flex items-center gap-3">
                 <Image
                   src="/images/careers/Icon.svg"   // your png path
                   alt="check"
@@ -91,7 +91,7 @@ export default function OurMissionSection() {
                 </p>
               </li>
 
-              <li className="flex items-end gap-3">
+              <li className="flex items-center gap-3">
                <Image
                   src="/images/careers/Icon.svg"   // your png path
                   alt="check"

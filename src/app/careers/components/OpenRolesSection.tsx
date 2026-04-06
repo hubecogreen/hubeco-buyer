@@ -13,12 +13,12 @@ export default function OpenRoles() {
       <div className="w-full max-w-[1280px]  py-[40px] px-[24px]">
 
         {/* HEADING */}
-        <h2 className="text-[45px] leading-[48px] font-bold text-brown max-w-[1193px]">
+        <h2 className="text-[45px] leading-[48px] font-bold text-brown max-w-[1193px] text-center">
           Open Roles in Sustainable Construction, Procurement & Climate Tech
         </h2>
 
         {/* SUBTEXT */}
-        <p className="mt-[12px] text-[18px] leading-[28px] text-brown max-w-[700px]">
+        <p className="mt-[12px] text-[18px] leading-[28px] text-brown max-w-[700px] mx-auto text-center">
           We are hiring across product, engineering, sustainability and business
           functions to scale India’s leading green construction marketplace.
         </p>

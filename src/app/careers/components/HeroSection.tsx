@@ -51,7 +51,7 @@ export default function HeroSection() {
 
             {/* Description */}
             <p className="text-[23px] text-cream">
-             At hubeco, we’re re defiling how the <br /> world sources building Materials 
+             At hubeco, we’re redefining how the <br /> world sources building Materials 
             </p>
 
             {/* Buttons */}

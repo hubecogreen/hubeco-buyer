@@ -2,119 +2,86 @@
 
 import { useRouter } from "next/navigation";
 import { jobsData, Job } from "../data/jobsData";
+import Image from "next/image";
 
 export default function OpenRoles() {
   const router = useRouter();
 
   return (
-    <section id="open-roles" className="w-full flex justify-center bg-cream">
-
-      {/* MAIN CONTAINER */}
-      <div className="w-full max-w-[1280px]  py-[40px] px-[24px]">
-
-        {/* HEADING */}
-        <h2 className="text-[45px] leading-[48px] font-bold text-brown max-w-[1193px] text-center">
+    <section id="open-roles" className="flex w-full justify-center bg-cream">
+      <div className="w-full max-w-[1280px] px-5 lg:py-[40px] py-[20px] sm:px-6 lg:px-[24px]">
+        <h2 className="max-w-[1193px] text-start lg:text-center text-[30px] font-bold leading-[1.15] text-brown sm:text-[36px] lg:text-[45px] lg:leading-[48px]">
           Open Roles in Sustainable Construction, Procurement & Climate Tech
         </h2>
 
-        {/* SUBTEXT */}
-        <p className="mt-[12px] text-[18px] leading-[28px] text-brown max-w-[700px] mx-auto text-center">
+        <p className="mx-auto mt-[12px] max-w-[700px] text-start lg:text-center text-[18px] leading-[26px] text-brown lg:text-[18px] lg:leading-[28px]">
           We are hiring across product, engineering, sustainability and business
           functions to scale India’s leading green construction marketplace.
         </p>
 
-        {/* JOB LIST */}
-        <div className="mt-[32px] flex flex-col gap-[16px]">
-
+        <div className=" mt-[24px] lg:mt-[32px] flex flex-col gap-[16px]">
           {jobsData.map((job: Job) => (
             <div
               key={job.id}
-              className="w-[1232px] h-[270px] border border-[#109989] rounded-[24px] p-[40px] backdrop-blur-[12px] flex justify-between"
+              className="flex w-full flex-col gap-6 rounded-[24px] border border-primary p-5  sm:p-6 lg:h-[270px] lg:w-[1232px] lg:flex-row lg:justify-between lg:p-[40px]"
             >
-
-              {/* LEFT SIDE */}
-              <div className="flex flex-col justify-between">
-
-                {/* TOP CONTENT */}
+              <div className="flex flex-1 flex-col justify-between gap-5">
                 <div>
-
-                  {/* CATEGORY */}
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                     <div>
-                      <span className="text-[12px] font-semibold text-primary tracking-wide">
+                      <span className="text-[12px] font-semibold tracking-wide text-primary">
                         {job.category.toUpperCase()}
                       </span>
 
-                      {/* TITLE */}
-
-                      <h3 className="mt-[4.5px] text-[22px] font-semibold text-brown">
+                      <h3 className="mt-[4.5px] text-[20px] font-semibold text-brown lg:text-[22px]">
                         {job.title}
                       </h3>
                     </div>
-                    <div className="flex gap-[8px]">
 
-                      <span className="text-[11px] px-[10px] py-[4px]  bg-primary/10 text-primary uppercase rounded-full font-bold">
+                    <div className="flex flex-wrap gap-[8px]">
+                      <span className="rounded-full bg-primary/10 px-[10px] py-[4px] text-[11px] font-bold uppercase text-primary">
                         {job.type}
                       </span>
 
-                      {/* OPTIONAL (if you add later in JSON) */}
-                      <span className="text-[11px] px-[10px] py-[4px]  bg-primary/10 text-primary uppercase rounded-full font-bold">
+                      <span className="rounded-full bg-primary/10 px-[10px] py-[4px] text-[11px] font-bold uppercase text-primary">
                         HYBRID
                       </span>
-
                     </div>
                   </div>
 
-                  {/* DESCRIPTION */}
-                  <p className="mt-[12px] text-[18px] leading-[22px] text-brown max-w-auto">
+                  <p className="mt-[12px] text-[18px] leading-[24px] text-brown lg:text-[18px] lg:leading-[22px]">
                     {job.shortDescription}
                   </p>
-
-                  {/* EXTRA MANUAL LINE (as you requested) */}
-                  {/* <p className="mt-[8px] text-[13px] text-[#5A5A5A]">
-                    A {job.location} Role · {job.experience}
-                  </p> */}
-
                 </div>
 
-                {/* BOTTOM META */}
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-[16px] mt-[8px] font-medium text-[14px] text-brown">
-
-                    {/* LOCATION */}
+                <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                  <div className="mt-[8px] flex flex-wrap items-center gap-x-[16px] gap-y-2 text-[14px] font-medium text-brown">
                     <div className="flex items-center gap-[6px]">
-                      <img src="/images/careers/con1.svg" alt="Location" className="w-[9px] h-[12px]" />
+                      <img src="/images/careers/con1.svg" alt="Location" className="h-[12px] w-[9px]" />
                       <span>{job.location}</span>
                     </div>
 
-                    {/* EXPERIENCE */}
                     <div className="flex items-center gap-[6px]">
-                      <img src="/images/careers/container4.svg" alt="Experience" className="w-[11px] h-[11px]" />
+                      <img src="/images/careers/container4.svg" alt="Experience" className="h-[11px] w-[11px]" />
                       <span>{job.experience}</span>
                     </div>
-
                   </div>
 
-                  <div>
+                  <div className=" flex justify-end">
                     <button
                       onClick={() => router.push(`/careers/${job.id}`)}
-                      className="text-primary font-semibold text-[14px] hover:underline"
+                      className="text-[16px] font-semibold text-primary hover:underline flex justify-end"
                     >
-                      Apply Now →
+                      Apply Now 
+                      <Image alt="arrow" src="/images/careers/right-arrow.svg" width={16} height={16} className="ml-[6px] md:hidden block" />
+                       <Image alt="arrow" src="/images/careers/right-arrow.svg" width={20} height={20} className="ml-[6px] md:block hidden" />
                     </button>
                   </div>
                 </div>
-
               </div>
-
-
-
             </div>
           ))}
-
         </div>
-
-
       </div>
     </section>
   );

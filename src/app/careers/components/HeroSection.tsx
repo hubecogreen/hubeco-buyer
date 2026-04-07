@@ -4,76 +4,59 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     <section className="w-full">
-      <div className="relative w-full h-[636px]">
-
-        {/* Background */}
+      <div className="relative h-[624px] w-full lg:h-[636px]">
         <Image
           src="/images/careers/hero.png"
           alt="Careers Hero"
           fill
           priority
-          className="object-cover"
+          className="object-cover hidden md:block"
         />
 
-        {/* Overlay */}
+        <Image
+          src="/images/careers/hero-mobile.jpg"
+          alt="Careers Hero"
+          fill
+          priority
+          className="object-cover block md:hidden"
+        />
+
         <div className="absolute inset-0 bg-black/5" />
 
-        {/* 🔥 Content Container (EXACT FIGMA POSITION) */}
-        <div className="absolute top-[84px] left-[100px] ">
-
-          <div
-            className="
-              text-cream
-              w-[854px]
-              max-w-[1024px]
-              pr-[24px]
-              flex flex-col
-              gap-[32px]
-            "
-          >
-
-            {/* Top Tag */}
-            <div className="inline-flex items-center gap-2 px-4 py-[6px] rounded-full border border-primary bg-transparent w-fit h-[30px]">
-              <span className="w-2 h-2 bg-cream font-Bold rounded-full"></span>
-              <span className="text-[12px] tracking-[2px] font-bold uppercase text-cream">
+        <div className="absolute inset-x-0  px-[24px] py-[78px] sm:px-6 lg:left-[100px] lg:right-auto lg:top-[84px] lg:py-0 lg:px-0">
+          <div className="flex w-full max-w-[854px] flex-col gap-6 pr-0 text-cream lg:gap-[32px] lg:pr-[24px]">
+            <div className="hidden sm:inline-flex h-[30px] w-fit items-center gap-2 rounded-full border border-primary bg-transparent px-4 py-[6px]">
+              <span className="h-2 w-2 rounded-full bg-cream font-Bold"></span>
+              <span className="text-[12px] font-bold uppercase tracking-[2px] text-cream">
                 We are hiring
               </span>
             </div>
 
-            {/* Heading */}
-            <h1 className="text-[72px] text-cream font-bold leading-[1.1]">
-              Build the Future{" "}<br/>
+            <h1 className="text-[48px] font-bold leading-[1.1] text-cream sm:text-[48px] lg:text-[72px]">
+              Build the Future <br className="block lg:block" />
               <span className="text-cream">
-                of Sustainable <br/> Construction
-              </span>{" "}
-             
+                of Sustainable <br className="hidden lg:hidden" /> Construction
+              </span>
             </h1>
 
-            {/* Description */}
-            <p className="text-[23px] text-cream">
-             At hubeco, we’re redefining how the <br /> world sources building Materials 
+            <p className="max-w-[620px] text-[23px] leading-[1.5] text-cream sm:text-[20px] lg:text-[23px]">
+              At hubeco, we’re redefining how the <br className="hidden lg:block" />
+              world sources building Materials
             </p>
 
-            {/* Buttons */}
-            <div className="flex gap-[16px] pt-[8px]">
+            <div className="flex pt-[8px]">
               <button
                 onClick={() => {
                   const section = document.getElementById("open-roles");
                   section?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="bg-primary text-cream px-8 py-4 rounded-[8px] font-bold text-[18px]"
+                className="w-full rounded-[8px] bg-primary lg:px-8 lg:py-4 px-[32px] py-[16px] text-center lg:text-[16px] text-[18px] font-bold text-cream sm:w-fit sm:px-8 sm:py-4 sm:text-[18px]"
               >
                 Explore Open Roles
               </button>
-
-              {/* <button className="bg-cream text-primary px-8 py-4 rounded-[8px] font-bold text-[18px]">
-                Partner With Our Mission
-              </button> */}
             </div>
-
           </div>
         </div>
-
       </div>
     </section>
   );

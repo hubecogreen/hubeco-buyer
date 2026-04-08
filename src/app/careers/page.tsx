@@ -10,7 +10,7 @@ export default function CareersPage() {
   return (
     <>
       <HeroSection />
-      <OurMissionSection />
+      {/* <OurMissionSection /> */}
       <WhyWorkWithUs />
       <BuildFutureSection />
       <BenefitsSection />

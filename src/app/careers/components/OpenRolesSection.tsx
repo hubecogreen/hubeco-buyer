@@ -14,10 +14,10 @@ export default function OpenRoles() {
           Open Roles in Sustainable Construction, Procurement & Climate Tech
         </h2>
 
-        <p className="mx-auto mt-[12px] max-w-[700px] text-start lg:text-center text-[18px] leading-[26px] text-brown lg:text-[18px] lg:leading-[28px]">
-          We are hiring across product, engineering, sustainability and business
-          functions to scale India’s leading green construction marketplace.
-        </p>
+       <p className="mt-[12px] max-w-[700px] text-start text-[18px] leading-[26px] text-brown md:text-start lg:mx-auto lg:text-center lg:text-[18px] lg:leading-[28px]">
+  We are hiring across product, engineering, sustainability and business
+  functions to scale India’s leading green construction marketplace.
+</p>
 
         <div className=" mt-[24px] lg:mt-[32px] flex flex-col gap-[16px]">
           {jobsData.map((job: Job) => (

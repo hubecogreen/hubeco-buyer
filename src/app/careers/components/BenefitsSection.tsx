@@ -4,7 +4,7 @@ export default function BenefitsSection() {
   return (
     <section className="flex w-full justify-center bg-cream">
       <div className="w-full max-w-[1280px] px-5 lg:py-[40px] py-[20px] sm:px-6 lg:px-[24px]">
-        <h2 className="mx-auto max-w-[800px]  text-start lg:text-center text-[28px] font-bold leading-[1.2] text-brown sm:text-[32px] lg:text-[36px] lg:leading-[48px]">
+        <h2 className="mx-auto max-w-[800px]  text-start lg:text-center text-[26px] font-bold leading-[1.2] text-brown sm:text-[32px] lg:text-[36px] lg:leading-[48px]">
           Benefits Designed for High-Performance Teams in Climate Tech
         </h2>
 

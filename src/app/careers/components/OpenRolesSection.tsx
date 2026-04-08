@@ -10,7 +10,7 @@ export default function OpenRoles() {
   return (
     <section id="open-roles" className="flex w-full justify-center bg-cream">
       <div className="w-full max-w-[1280px] px-5 lg:py-[40px] py-[20px] sm:px-6 lg:px-[24px]">
-        <h2 className="max-w-[1193px] text-start lg:text-center text-[30px] font-bold leading-[1.15] text-brown sm:text-[36px] lg:text-[45px] lg:leading-[48px]">
+        <h2 className="max-w-[1193px] text-start lg:text-center text-[26px] font-bold leading-[1.15] text-brown sm:text-[36px] lg:text-[45px] lg:leading-[48px]">
           Open Roles in Sustainable Construction, Procurement & Climate Tech
         </h2>
 

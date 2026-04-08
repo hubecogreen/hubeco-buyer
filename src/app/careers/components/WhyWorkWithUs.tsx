@@ -5,11 +5,11 @@ export default function WhyWorkWithUs() {
     <section className="flex w-full justify-center bg-cream">
       <div className="w-full max-w-[1280px] px-5 lg:pb-[40px] lg:pt-[40px] py-[20px] sm:px-6 lg:px-[24px]">
         <div className="flex flex-col items-start text-start lg:items-center lg:text-center">
-          <h2 className="text-[32px]  font-bold leading-[1.15] text-brown sm:text-[40px] lg:text-[48px] lg:leading-[48px]">
+          <h2 className="text-[26px]  font-bold leading-[1.15] text-brown sm:text-[40px] lg:text-[48px] lg:leading-[48px]">
             Why Work at Hubeco:
           </h2>
 
-          <h3 className="mt-2 text-[30px] lg:font-medium font-bold leading-[1.2] text-brown sm:text-[32px] lg:text-[42px] lg:leading-[48px]">
+          <h3 className="mt-2 text-[26px] lg:font-medium font-bold leading-[1.2] text-brown sm:text-[32px] lg:text-[42px] lg:leading-[48px]">
             Where Sustainability Meets Digital Innovation
           </h3>
 

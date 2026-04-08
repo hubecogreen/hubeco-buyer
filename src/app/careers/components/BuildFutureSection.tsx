@@ -4,7 +4,7 @@ export default function BuildFutureSection() {
       <div className="w-full max-w-[1280px] px-5 lg:py-[40px] py-[20px] sm:px-6 lg:px-[24px]">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-[32px]">
           <div className="flex w-full flex-col gap-6 lg:w-[584px] lg:gap-[32px]">
-            <h2 className="text-[32px] font-bold leading-[1.15] text-brown sm:text-[40px] lg:text-[48px] lg:leading-[48px]">
+            <h2 className="text-[26px] font-bold leading-[1.15] text-brown sm:text-[40px] lg:text-[48px] lg:leading-[48px]">
               Build the Future of Green Construction Ecosystems
             </h2>
 

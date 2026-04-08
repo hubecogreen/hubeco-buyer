@@ -23,7 +23,7 @@ shortDescription:
     type: "Full-Time",
     experience: "3-5 Years Exp.",
     overview:
-      "The BDM will drive business growth in Hyderabad by approaching developers and contractors promoting hubeco.market’s platform, and closing B2B2C deals in the sustainable construction ecosystem",
+      "The BDM will drive business growth in Hyderabad by approaching developers and contractors promoting hubeco.market’s platform and closing B2B2C deals in the sustainable construction ecosystem",
     responsibilities: [
       "Identify and acquire developers, contractors and residential owners in Telangana/AP",
       "Present and promote hubeco.market to decision makers in construction firms",

@@ -132,7 +132,7 @@ export default function JobDetails({ params }: Props) {
 
   return (
     <div>
-      <div className="relative md:px-20 px-10 bg-[url('/images/about/aboutBanner1.webp')] bg-cover bg-center h-[200px] flex items-center justify-start text-white">
+      <div className="relative flex h-[160px] items-center justify-start bg-[url('/images/about/aboutBanner1.webp')] bg-cover bg-center px-4 text-white sm:px-6 lg:h-[200px] lg:px-20">
         <Link
           href="/"
           className="text-white flex items-center no-underline px-2.5 py-1 rounded"
@@ -150,9 +150,9 @@ export default function JobDetails({ params }: Props) {
         </Link>
       </div>
 
-      <section className="w-full flex justify-center bg-cream ">
-        <div className="w-full max-w-[1280px] py-[40px]">
-          <div className="inline-flex items-center gap-[8px] px-[12px] py-[4px] rounded-full bg-primary/10 w-fit h-[24px]">
+      <section className="flex w-full justify-center bg-cream">
+        <div className="w-full max-w-[1280px] px-4 py-8 sm:px-6 lg:py-[40px]">
+          <div className="inline-flex h-[24px] w-fit items-center gap-[8px] rounded-full bg-primary/10 px-[12px] py-[4px]">
             <span className="w-2 h-2 bg-primary rounded-full"></span>
             <span className="text-[12px] tracking-[2px] font-bold uppercase text-primary">
               Hiring Now
@@ -160,12 +160,12 @@ export default function JobDetails({ params }: Props) {
           </div>
 
           <div className="mt-[16px]">
-            <h1 className="text-[32px] font-semibold leading-[48px] text-brown max-w-[550px]">
+            <h1 className="max-w-full text-[28px] font-semibold leading-[1.2] text-brown sm:text-[30px] lg:max-w-[550px] lg:text-[32px] lg:leading-[48px]">
               {job.title}
             </h1>
 
-            <div className="mt-[16px] flex items-center justify-between">
-              <div className="flex items-center gap-[24px] text-[16px] font-medium text-brown max-w-[550px]">
+            <div className="mt-[16px] flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex max-w-full flex-row flex-wrap  gap-3 text-[14px] font-medium text-brown sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:max-w-[550px] lg:gap-[24px] lg:text-[16px]">
                 <span className="flex items-center gap-[6px]">
                   <Image
                     src="/images/careers/con1.svg"
@@ -200,7 +200,7 @@ export default function JobDetails({ params }: Props) {
                 </span>
               </div>
 
-              <div className="flex items-center gap-[12px] ml-[111.75px]">
+              <div className="flex w-full items-center gap-3 lg:ml-[111.75px] lg:w-auto lg:gap-[12px]">
                 <CustomButton
                   title="Apply for this position"
                   onPress={() => {
@@ -208,9 +208,9 @@ export default function JobDetails({ params }: Props) {
                       behavior: "smooth",
                     });
                   }}
-                  className="w-[260px] h-[48px] bg-primary text-cream rounded-[12px] text-[16px] font-semibold"
+                  className="h-[48px] w-full rounded-[12px] bg-primary text-[15px] font-semibold text-cream sm:w-[260px] lg:text-[16px]"
                 />
-                <div className="rounded-[12px] flex items-center justify-center">
+                <div className="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-[12px]">
                   <Image
                     src="/images/careers/share.svg"
                     alt="Share"
@@ -221,7 +221,7 @@ export default function JobDetails({ params }: Props) {
               </div>
             </div>
 
-            <div className="mt-[24px] border-b border-primary font-bold flex gap-[32px] text-[14px]">
+            <div className="mt-[24px] flex gap-5 overflow-x-auto border-b border-primary text-[13px] font-bold whitespace-nowrap lg:gap-[32px] lg:text-[14px]">
               <a
                 href="#overview"
                 onClick={() => setActiveTab("overview")}
@@ -272,41 +272,49 @@ export default function JobDetails({ params }: Props) {
             </div>
           </div>
 
-          <div className="mt-[32px] max-w-[800px]">
-            <div id="overview" className="scroll-mt-[120px]">
-              <h2 className="text-[24px] font-semibold mb-[12px]">Job overview</h2>
-              <p className="text-[18px] text-brown leading-[22px]">{job.overview}</p>
+          <div className="mt-[32px] max-w-full lg:max-w-[950px]">
+            <div id="overview" className="scroll-mt-[100px] lg:scroll-mt-[120px]">
+              <h2 className="mb-[12px] text-[22px] font-semibold lg:text-[24px]">
+                Job overview
+              </h2>
+              <p className="text-[16px] leading-7 text-brown lg:text-[18px] lg:leading-[22px]">
+                {job.overview}
+              </p>
             </div>
 
-            <div id="responsibilities" className="scroll-mt-[120px]">
-              <h2 className="mt-[24px] text-[24px] font-semibold mb-[12px]">
+            <div id="responsibilities" className="scroll-mt-[100px] lg:scroll-mt-[120px]">
+              <h2 className="mt-[24px] mb-[12px] text-[22px] font-semibold lg:text-[24px]">
                 Key Responsibilities
               </h2>
               <ul className="space-y-[8px]">
                 {job.responsibilities.map((item, i) => (
-                  <li key={i} className="text-[18px] text-brown">
+                  <li key={i} className="text-[16px] leading-7 text-brown lg:text-[18px]">
                     {"\u2022"} {item}
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div id="qualifications" className="scroll-mt-[120px]">
-              <h2 className="mt-[24px] text-[24px] font-semibold mb-[12px]">Requirements</h2>
+            <div id="qualifications" className="scroll-mt-[100px] lg:scroll-mt-[120px]">
+              <h2 className="mt-[24px] mb-[12px] text-[22px] font-semibold lg:text-[24px]">
+                Requirements
+              </h2>
               <ul className="space-y-[8px]">
                 {job.requirements.map((item, i) => (
-                  <li key={i} className="text-[18px] text-brown">
+                  <li key={i} className="text-[16px] leading-7 text-brown lg:text-[18px]">
                     {"\u2022"} {item}
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div id="skills" className="scroll-mt-[120px]">
-              <h2 className="mt-[24px] text-[24px] font-semibold mb-[12px]">Skills</h2>
+            <div id="skills" className="scroll-mt-[100px] lg:scroll-mt-[120px]">
+              <h2 className="mt-[24px] mb-[12px] text-[22px] font-semibold lg:text-[24px]">
+                Skills
+              </h2>
               <ul className="space-y-[8px]">
                 {job.preferred.map((item, i) => (
-                  <li key={i} className="text-[18px] text-brown">
+                  <li key={i} className="text-[16px] leading-7 text-brown lg:text-[18px]">
                     {"\u2022"} {item}
                   </li>
                 ))}
@@ -319,7 +327,7 @@ export default function JobDetails({ params }: Props) {
             id="apply-form"
             noValidate
             onSubmit={handleSubmit(onSubmit)}
-            className="mt-[40px] w-[704px] max-w-full border border-primary rounded-[24px] p-[48px] flex flex-col gap-[24px]"
+            className="mt-[40px] flex w-full max-w-full flex-col gap-[24px] rounded-[20px] border border-primary p-5 sm:p-6 lg:w-[704px] lg:rounded-[24px] lg:p-[48px]"
           >
             <div className="flex flex-col gap-[8px]">
               <h3 className="text-[24px] font-semibold text-brown">
@@ -330,7 +338,7 @@ export default function JobDetails({ params }: Props) {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+            <div className="grid grid-cols-1 gap-[16px] md:grid-cols-2">
               <div className="">
                 <label className="text-[12px] text-brown font-bold pb-[8.5px]">Full Name *</label>
                 <Controller

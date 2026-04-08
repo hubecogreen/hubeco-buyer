@@ -204,20 +204,29 @@ export default function JobDetails({ params }: Props) {
                 <CustomButton
                   title="Apply for this position"
                   onPress={() => {
-                    document.getElementById("apply-form")?.scrollIntoView({
+                    const formSection = document.getElementById("apply-form");
+
+                    if (!formSection) return;
+
+                    const headerOffset = 120;
+                    const elementTop =
+                      formSection.getBoundingClientRect().top + window.scrollY;
+
+                    window.scrollTo({
+                      top: Math.max(elementTop - headerOffset, 0),
                       behavior: "smooth",
                     });
                   }}
                   className="h-[48px] w-full rounded-[12px] bg-primary text-[15px] font-semibold text-cream sm:w-[260px] lg:text-[16px]"
                 />
-                <div className="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-[12px]">
+                {/* <div className="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-[12px]">
                   <Image
                     src="/images/careers/share.svg"
                     alt="Share"
                     width={48}
                     height={48}
                   />
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -297,7 +306,7 @@ export default function JobDetails({ params }: Props) {
 
             <div id="qualifications" className="scroll-mt-[100px] lg:scroll-mt-[120px]">
               <h2 className="mt-[24px] mb-[12px] text-[22px] font-semibold lg:text-[24px]">
-                Requirements
+                Required Qualifications
               </h2>
               <ul className="space-y-[8px]">
                 {job.requirements.map((item, i) => (

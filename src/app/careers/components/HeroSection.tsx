@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     <section className="w-full">
-      <div className="relative h-[624px] w-full lg:h-[636px] md:h-[440px] ">
+      <div className="relative h-[524px] w-full lg:h-[636px] md:h-[440px] ">
         <Image
           src="/images/careers/hero.png"
           alt="Careers Hero"
@@ -32,7 +32,7 @@ export default function HeroSection() {
               </span>
             </div>
 
-            <h1 className="text-[48px] font-bold leading-[1.1] text-cream sm:text-[48px] lg:text-[72px]">
+            <h1 className="text-[46px] font-bold leading-[1.1] text-cream sm:text-[48px] lg:text-[72px]">
               Build the Future <br className="block lg:block" />
               <span className="text-cream">
                 of Sustainable <br className="hidden lg:hidden md:block" /> Construction

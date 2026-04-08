@@ -93,12 +93,12 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
         icon: "TbCategory",
       },
       {
-        title: "Contact Us",
-        link: "/contact",
+        title: "Careers",
+        link: `/careers`,
         mb: true,
         level: 1,
         submenu: [],
-        icon: "TbCategory",
+        icon: "FaStore",
       },
       {
         title: "Vendor Connect",
@@ -108,6 +108,15 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
         submenu: [],
         icon: "FaStore",
       },
+      {
+        title: "Contact Us",
+        link: "/contact",
+        mb: true,
+        level: 1,
+        submenu: [],
+        icon: "TbCategory",
+      },
+      
     ],
   };
 

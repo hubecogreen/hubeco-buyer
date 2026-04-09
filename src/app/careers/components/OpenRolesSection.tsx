@@ -43,9 +43,9 @@ export default function OpenRoles() {
                         {job.type}
                       </span>
 
-                      <span className="rounded-full bg-primary/10 px-[10px] py-[4px] text-[11px] font-bold uppercase text-primary">
+                      {/* <span className="rounded-full bg-primary/10 px-[10px] py-[4px] text-[11px] font-bold uppercase text-primary">
                         HYBRID
-                      </span>
+                      </span> */}
                     </div>
                   </div>
 

@@ -306,7 +306,7 @@ export default function JobDetails({ params }: Props) {
 
             <div id="qualifications" className="scroll-mt-[100px] lg:scroll-mt-[120px]">
               <h2 className="mt-[24px] mb-[12px] text-[22px] font-semibold lg:text-[24px]">
-                Required Qualifications
+               Requirement
               </h2>
               <ul className="space-y-[8px]">
                 {job.requirements.map((item, i) => (

@@ -19,7 +19,7 @@ export default function BenefitsSection() {
             </div>
 
             <p className="text-[16px] leading-[22px] text-brown">
-              Work with distributed teams across India with flexible work options that fit your lifestyle.
+              Work with distributed teams across India with flexible work options.
             </p>
           </div>
 
@@ -33,7 +33,7 @@ export default function BenefitsSection() {
             </div>
 
             <p className="text-[16px] leading-[22px] text-brown">
-              Upskill in: Sustainability certifications, Construction technology and Procurement systems with dedicated budgets.
+              Upskill in: Sustainability certifications, Construction technology and Procurement systems.
             </p>
           </div>
 
@@ -47,7 +47,7 @@ export default function BenefitsSection() {
             </div>
 
             <p className="text-[16px] leading-[22px] text-brown">
-              Participate in projects that contribute to real-world environmental impact and ESG goals at scale.
+              Participate in projects that contribute to real-world environmental impact and ESG goals.
             </p>
           </div>
         </div>

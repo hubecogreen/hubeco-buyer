@@ -18,7 +18,7 @@ export default function CareersCTA() {
 
         <div className="absolute inset-0 bg-black/40" />
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center md:justify-center lg:justify-center px-[10px] py-[40px] text-center sm:px-8 lg:px-[232px] lg:py-[96px]">
+        <div className="absolute inset-0 flex flex-col items-center justify-center md:justify-center lg:justify-center md:text-center  px-[10px] py-[40px]  sm:px-8 lg:px-[232px] lg:py-[96px]">
           <h2 className="max-w-[768px] text-[26px] font-bold leading-[1.1] text-cream sm:text-[40px] lg:text-[60px] lg:leading-[60px]">
             Join India’s Sustainable Construction Revolution
           </h2>

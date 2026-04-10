@@ -124,6 +124,11 @@ export default function RootLayout({
             gtag('config', 'G-REE72KGV61');
           `}
         </Script>
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="diLRPHS68vrjgTxnWTWOMw"
+          strategy="afterInteractive"
+        />
 
         {/* Service Worker Registration for Enhanced Caching */}
         <Script id="service-worker" strategy="lazyOnload">

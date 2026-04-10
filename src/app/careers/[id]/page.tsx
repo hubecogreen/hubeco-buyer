@@ -177,7 +177,7 @@ export default function JobDetails({ params }: Props) {
                   {job.location}
                 </span>
 
-                <span className="flex items-center gap-[6px]">
+                {/* <span className="flex items-center gap-[6px]">
                   <Image
                     src="/images/careers/con3.svg"
                     alt="type"
@@ -186,7 +186,7 @@ export default function JobDetails({ params }: Props) {
                     className="object-contain"
                   />
                   Product
-                </span>
+                </span> */}
 
                 <span className="flex items-center gap-[6px]">
                   <Image
@@ -230,7 +230,7 @@ export default function JobDetails({ params }: Props) {
               </div>
             </div>
 
-            <div className="mt-[24px] flex gap-5 overflow-x-auto border-b border-primary text-[13px] font-bold whitespace-nowrap lg:gap-[32px] lg:text-[14px]">
+            {/* <div className="mt-[24px] flex gap-5 overflow-x-auto border-b border-primary text-[13px] font-bold whitespace-nowrap lg:gap-[32px] lg:text-[14px]">
               <a
                 href="#overview"
                 onClick={() => setActiveTab("overview")}
@@ -278,10 +278,13 @@ export default function JobDetails({ params }: Props) {
               >
                 Skills
               </a>
-            </div>
-          </div>
+            </div> */}
 
-          <div className="mt-[32px] max-w-full lg:max-w-[950px]">
+          </div>
+          <div className="w-full h-[0.5px] bg-primary mt-[20px]"></div>
+
+          <div className="mt-[16px] max-w-full lg:max-w-[950px]">
+            
             <div id="overview" className="scroll-mt-[100px] lg:scroll-mt-[120px]">
               <h2 className="mb-[12px] text-[22px] font-semibold lg:text-[24px]">
                 Job overview

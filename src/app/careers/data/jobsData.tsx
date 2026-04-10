@@ -16,7 +16,7 @@ export const jobsData: Job[] = [
   {
     id: 1,
     category: "Business Development",
-    title: "Business Development Manager (B2B / Construction Materials)",
+    title: "Business Development Manager (B2B2C / Construction Materials)",
 shortDescription:
   "Drive Hubeco's growth by building relationships with Developers, Architects and Procurement teams.",
     location: "Hyderabad",

@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section className="w-full pt-[45px] md:pt-0">
-      <div className="relative h-[365px] w-full lg:h-[636px] md:h-[440px] ">
+    <section className="w-full pt-[40px] md:pt-0">
+      <div className="relative h-[365px] w-full lg:h-[636px] md:h-[400px] ">
         <Image
           src="/images/careers/hero-ai-2.png"
           alt="Careers Hero"
@@ -23,19 +23,19 @@ export default function HeroSection() {
 
         <div className="absolute inset-0 bg-black/5" />
 
-<div className="absolute inset-x-0 top-[18px] px-[24px] sm:px-6 md:top-[40px] md:px-8 md:py-0 lg:left-[100px] lg:right-auto lg:top-[84px] lg:px-0 lg:py-0">          
-  <div className="flex w-full max-w-[854px] flex-col gap-4 md:gap-[14px] pr-0 text-cream lg:gap-[32px]  lg:pr-[24px]">
-            <div className="hidden sm:inline-flex h-[30px] w-fit items-center gap-2 rounded-full border border-primary bg-transparent px-4 py-[6px]">
+<div className="absolute inset-x-0 top-[12px] px-[24px] sm:px-6 md:top-[20px] md:px-8 md:py-0 lg:left-[100px] lg:right-auto lg:top-[84px] lg:px-0 lg:py-0">          
+  <div className="flex w-full max-w-[854px] flex-col gap-2 md:gap-[14px] pr-0 text-cream lg:gap-[32px]  lg:pr-[24px]">
+            <div className="hidden md:hidden lg:block sm:inline-flex h-[30px] w-fit items-center gap-2 rounded-full border border-primary bg-transparent px-4 py-[6px]">
               <span className="h-2 w-2 rounded-full bg-cream font-Bold"></span>
               <span className="text-[12px] font-bold uppercase tracking-[2px] text-cream">
                 We are hiring
               </span>
             </div>
 
-            <h1 className="text-[30px] font-semibold leading-[1.1] text-cream sm:text-[48px] lg:text-[72px]">
+            <h1 className="text-[30px] font-semibold leading-[1.1] text-cream sm:text-[48px] md:text-[48px] md:mb-[40px] mb-[28px] lg:text-[72px]">
               Build the Future <br className="block lg:block" />
               <span className="text-cream">
-                of Sustainable <br className="hidden lg:hidden md:block" /> Construction
+                of Sustainable <br className="block lg:hidden md:block" /> Construction
               </span>
             </h1>
 

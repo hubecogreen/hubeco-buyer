@@ -21,6 +21,11 @@ const useAuth = () => {
   return { isAuthenticated, userInfo, rehydrated };
 };
 
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
+}
+
 const Footer = () => {
   const router = useRouter();
   const currentYear = new Date().getFullYear();
@@ -28,6 +33,10 @@ const Footer = () => {
   if (!rehydrated) return null;
   const { callApi } = useApi();
   const [categoryIdMap, setCategoryIdMap] = useState<Record<string, string>>({});
+  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [isStandalone, setIsStandalone] = useState(false);
+  const [isIPhoneSafari, setIsIPhoneSafari] = useState(false);
+  const [canShare, setCanShare] = useState(false);
 
 
   const finalCategories = useMemo(() => {
@@ -76,6 +85,54 @@ const Footer = () => {
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    const checkStandalone = () => {
+      const isIosStandalone =
+        typeof window !== "undefined" &&
+        "standalone" in window.navigator &&
+        Boolean((window.navigator as Navigator & { standalone?: boolean }).standalone);
+
+      const isDisplayModeStandalone =
+        typeof window !== "undefined" &&
+        window.matchMedia("(display-mode: standalone)").matches;
+
+      setIsStandalone(isIosStandalone || isDisplayModeStandalone);
+    };
+
+    const checkIPhoneSafari = () => {
+      if (typeof window === "undefined") {
+        return;
+      }
+
+      const userAgent = window.navigator.userAgent;
+      const isIPhone = /iPhone/i.test(userAgent);
+      const isSafari = /Safari/i.test(userAgent) && !/CriOS|FxiOS|EdgiOS/i.test(userAgent);
+
+      setIsIPhoneSafari(isIPhone && isSafari);
+      setCanShare(typeof window.navigator.share === "function");
+    };
+
+    const handleBeforeInstallPrompt = (event: Event) => {
+      event.preventDefault();
+      setInstallPrompt(event as BeforeInstallPromptEvent);
+    };
+
+    const handleAppInstalled = () => {
+      setInstallPrompt(null);
+      setIsStandalone(true);
+    };
+
+    checkStandalone();
+    checkIPhoneSafari();
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    window.addEventListener("appinstalled", handleAppInstalled);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.removeEventListener("appinstalled", handleAppInstalled);
+    };
+  }, []);
+
 
   const goToCategory = (name: string) => {
     const scid = categoryIdMap[name.toLowerCase()];
@@ -84,9 +141,74 @@ const Footer = () => {
     router.push(`/products?scid=${scid}`);
   };
 
+  const handleInstall = async () => {
+    if (!installPrompt) {
+      return;
+    }
+
+    await installPrompt.prompt();
+    const choice = await installPrompt.userChoice;
+
+    if (choice.outcome === "accepted") {
+      setInstallPrompt(null);
+    }
+  };
+
+  const handleShare = async () => {
+    if (typeof window === "undefined" || typeof window.navigator.share !== "function") {
+      return;
+    }
+
+    try {
+      await window.navigator.share({
+        title: "Hubeco",
+        text: "Install Hubeco on your iPhone from Safari.",
+        url: window.location.origin,
+      });
+    } catch {
+      // User dismissed the share sheet.
+    }
+  };
+
   return (
     <footer className="w-full bg-cream flex justify-center overflow-x-hidden pt-[49px]">
       <div className="w-full max-w-[1250px] flex flex-col">
+        {true ? (
+          <div className="w-full px-4 md:px-5 lg:px-0">
+            <div className="mx-auto mb-6 flex w-full max-w-[1200px] flex-col gap-3 rounded-2xl bg-[#E6F7F3] px-4 py-4 text-brown md:flex-row md:items-center md:justify-between">
+              <p className="text-sm font-medium">
+                Install Hubeco for a faster app-like experience on your device.
+              </p>
+              <button
+                type="button"
+                onClick={handleInstall}
+                disabled={!installPrompt}
+                className="h-10 shrink-0 rounded-full bg-[#01B6A3] px-4 text-sm font-semibold text-white shadow-md disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                Install App
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {!isStandalone && !installPrompt && isIPhoneSafari ? (
+          <div className="w-full px-4 md:px-5 lg:px-0">
+            <div className="mx-auto mb-6 flex w-full max-w-[1200px] flex-col gap-3 rounded-2xl bg-[#FFF4E8] px-4 py-4 text-brown md:flex-row md:items-center md:justify-between">
+              <p className="text-sm font-medium">
+                On iPhone Safari, tap Share and choose Add to Home Screen to install Hubeco.
+              </p>
+              {canShare ? (
+                <button
+                  type="button"
+                  onClick={handleShare}
+                  className="h-10 shrink-0 rounded-full bg-[#01B6A3] px-4 text-sm font-semibold text-white shadow-md"
+                >
+                  Open Share
+                </button>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
 
         {/* TOP GREEN LINE */}
         <div className="w-full flex justify-center px-4 md:px-5 lg:px-0">

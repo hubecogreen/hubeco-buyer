@@ -15,25 +15,25 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "en-IN",
     icons: [
       {
-        src: "/Admin-2.webp",
+        src: "/images/app-logo.png",
         sizes: "192x192",
-        type: "image/webp",
+        type: "image/png",
       },
       {
-        src: "/Admin-2.webp",
+        src: "/images/app-logo.png",
         sizes: "512x512",
-        type: "image/webp",
+        type: "image/png",
       },
       {
-        src: "/Admin-2.webp",
+        src: "/images/app-logo.png",
         sizes: "512x512",
-        type: "image/webp",
+        type: "image/png",
         purpose: "maskable",
       },
       {
-        src: "/Admin-2.webp",
+        src: "/images/app-logo.png",
         sizes: "180x180",
-        type: "image/webp",
+        type: "image/png",
       },
     ],
   };

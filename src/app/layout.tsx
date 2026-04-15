@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "Green building materials, sustainable building materials, green construction materials, construction materials, sustainable materials, marketplace for green building materials, online shopping for building materials, online shopping for green building materials, online shopping for sustainable building materials, eco-friendly construction, green building materials, sustainable construction, buy eco materials, B2B construction marketplace, green construction solutions, carbon-neutral materials, environmentally friendly building supplies. bio-digesters, waste management solutions, eco-friendly sanitation, sustainable water treatment, green sewage systems, organic waste recycling, sustainable wastewater management, recycled construction materials. energy-efficient building materials, thermal insulation, solar roofing, smart glass, eco-friendly insulation, cool roof technology, sustainable energy solutions, passive cooling materials. low-carbon cement, green concrete, sustainable construction materials, eco-friendly cement, carbon-neutral concrete, geopolymer concrete, high-performance sustainable cement. sustainable wood, bamboo building materials, reclaimed wood, engineered wood, eco-friendly timber, FSC-certified wood, sustainable forestry materials, wooden green building solutions. recycled building materials, upcycled construction materials, plastic bricks, reclaimed metal, crushed glass aggregates, sustainable raw materials, green building waste solutions",
   icons: {
     icon: "/favicon.ico",
-    apple: "/Admin-2.webp",
+    apple: "/images/app-logo.png",
   },
   manifest: "/manifest.webmanifest",
   applicationName: "Hubeco",
@@ -97,6 +97,21 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Hubeco" />
         <meta name="mobile-web-app-capable" content="yes" />
+
+        <Script id="pwa-install-prompt-capture" strategy="beforeInteractive">
+          {`
+            window.__hubecoInstallPrompt = null;
+            window.addEventListener('beforeinstallprompt', function(event) {
+              event.preventDefault();
+              window.__hubecoInstallPrompt = event;
+              window.dispatchEvent(new CustomEvent('hubeco:installpromptavailable'));
+            });
+            window.addEventListener('appinstalled', function() {
+              window.__hubecoInstallPrompt = null;
+              window.dispatchEvent(new CustomEvent('hubeco:appinstalled'));
+            });
+          `}
+        </Script>
 
         {/* DNS prefetch for faster resource loading */}
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />

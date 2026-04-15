@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import useApi from "@/components/Fetcher/useAPI";
 import { GoArrowRight } from "react-icons/go";
 import CustomButton from "../customButton/CustomButton";
@@ -30,13 +30,15 @@ const Footer = () => {
   const router = useRouter();
   const currentYear = new Date().getFullYear();
   const { rehydrated } = useAuth();
-  if (!rehydrated) return null;
   const { callApi } = useApi();
+  const callApiRef = useRef(callApi);
   const [categoryIdMap, setCategoryIdMap] = useState<Record<string, string>>({});
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isStandalone, setIsStandalone] = useState(false);
+  const [isAndroid, setIsAndroid] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
   const [isIPhoneSafari, setIsIPhoneSafari] = useState(false);
-  const [canShare, setCanShare] = useState(false);
+  const [installFallbackMessage, setInstallFallbackMessage] = useState("");
 
 
   const finalCategories = useMemo(() => {
@@ -57,12 +59,19 @@ const Footer = () => {
     return [...BASE_CATEGORIES, ...extraCategories].slice(0, 6);
   }, [categoryIdMap]);
 
+  useEffect(() => {
+    callApiRef.current = callApi;
+  }, [callApi]);
 
   useEffect(() => {
+    if (!rehydrated) {
+      return;
+    }
+
     const fetchCategories = async () => {
       try {
         const map: Record<string, string> = {};
-        const data = await getProductCategoryTree(callApi);
+        const data = await getProductCategoryTree(callApiRef.current);
 
         if (Array.isArray(data)) {
           data.forEach((parent: any) => {
@@ -83,53 +92,73 @@ const Footer = () => {
     };
 
     fetchCategories();
-  }, []);
+  }, [rehydrated]);
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const checkStandalone = () => {
       const isIosStandalone =
-        typeof window !== "undefined" &&
         "standalone" in window.navigator &&
         Boolean((window.navigator as Navigator & { standalone?: boolean }).standalone);
 
       const isDisplayModeStandalone =
-        typeof window !== "undefined" &&
         window.matchMedia("(display-mode: standalone)").matches;
 
       setIsStandalone(isIosStandalone || isDisplayModeStandalone);
     };
 
-    const checkIPhoneSafari = () => {
-      if (typeof window === "undefined") {
-        return;
-      }
-
+    const checkDevice = () => {
       const userAgent = window.navigator.userAgent;
-      const isIPhone = /iPhone/i.test(userAgent);
+      const platform = window.navigator.platform;
+      const isIOS =
+        /iPhone|iPad|iPod/i.test(userAgent) ||
+        (platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
       const isSafari = /Safari/i.test(userAgent) && !/CriOS|FxiOS|EdgiOS/i.test(userAgent);
 
-      setIsIPhoneSafari(isIPhone && isSafari);
-      setCanShare(typeof window.navigator.share === "function");
+      setIsAndroid(/Android/i.test(userAgent));
+      setIsIOS(isIOS);
+      setIsIPhoneSafari(isIOS && isSafari);
+    };
+
+    const syncInstallPrompt = () => {
+      const storedPrompt = (window as Window & {
+        __hubecoInstallPrompt?: BeforeInstallPromptEvent | null;
+      }).__hubecoInstallPrompt;
+
+      setInstallPrompt(storedPrompt ?? null);
+      if (storedPrompt) {
+        setInstallFallbackMessage("");
+      }
     };
 
     const handleBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
       setInstallPrompt(event as BeforeInstallPromptEvent);
+      setInstallFallbackMessage("");
     };
 
     const handleAppInstalled = () => {
       setInstallPrompt(null);
       setIsStandalone(true);
+      setInstallFallbackMessage("");
     };
 
     checkStandalone();
-    checkIPhoneSafari();
+    checkDevice();
+    syncInstallPrompt();
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     window.addEventListener("appinstalled", handleAppInstalled);
+    window.addEventListener("hubeco:installpromptavailable", syncInstallPrompt);
+    window.addEventListener("hubeco:appinstalled", handleAppInstalled);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
       window.removeEventListener("appinstalled", handleAppInstalled);
+      window.removeEventListener("hubeco:installpromptavailable", syncInstallPrompt);
+      window.removeEventListener("hubeco:appinstalled", handleAppInstalled);
     };
   }, []);
 
@@ -142,15 +171,45 @@ const Footer = () => {
   };
 
   const handleInstall = async () => {
+    setInstallFallbackMessage("");
+
+    if (isStandalone) {
+      return;
+    }
+
+    if (!installPrompt && isIPhoneSafari) {
+      await handleShare();
+      setInstallFallbackMessage("Use Share, then Add to Home Screen to install Hubeco.");
+      return;
+    }
+
+    if (!installPrompt && isIOS) {
+      setInstallFallbackMessage(
+        "Open this page in Safari, then tap Share and choose Add to Home Screen."
+      );
+      return;
+    }
+
     if (!installPrompt) {
+      setInstallFallbackMessage(
+        isAndroid
+          ? "Use Chrome menu and choose Install app or Add to Home screen."
+          : "Use your browser menu and choose Install app or Add to Home screen."
+      );
       return;
     }
 
     await installPrompt.prompt();
     const choice = await installPrompt.userChoice;
+    setInstallPrompt(null);
+    (window as Window & {
+      __hubecoInstallPrompt?: BeforeInstallPromptEvent | null;
+    }).__hubecoInstallPrompt = null;
 
-    if (choice.outcome === "accepted") {
-      setInstallPrompt(null);
+    if (choice.outcome === "dismissed") {
+      setInstallFallbackMessage(
+        "Install was dismissed. Use your browser menu to try installing again."
+      );
     }
   };
 
@@ -170,42 +229,43 @@ const Footer = () => {
     }
   };
 
+  if (!rehydrated) return null;
+
+  const showInstallCard = !isStandalone && (isAndroid || isIOS || !!installPrompt);
+  const installMessage = isIPhoneSafari
+    ? "On iPhone Safari, tap Share and choose Add to Home Screen to install Hubeco."
+    : isIOS
+      ? "To install Hubeco on iPhone, open this page in Safari and add it to your Home Screen."
+    : isAndroid
+      ? "Install Hubeco on your Android phone for a faster app-like experience."
+      : "Install Hubeco for a faster app-like experience on your device.";
+  const installButtonLabel = isIPhoneSafari
+    ? "Open Share"
+    : isIOS
+      ? "How to Install"
+      : "Install App";
+
   return (
     <footer className="w-full bg-cream flex justify-center overflow-x-hidden pt-[49px]">
       <div className="w-full max-w-[1250px] flex flex-col">
-        {true ? (
+        {showInstallCard ? (
           <div className="w-full px-4 md:px-5 lg:px-0">
             <div className="mx-auto mb-6 flex w-full max-w-[1200px] flex-col gap-3 rounded-2xl bg-[#E6F7F3] px-4 py-4 text-brown md:flex-row md:items-center md:justify-between">
-              <p className="text-sm font-medium">
-                Install Hubeco for a faster app-like experience on your device.
-              </p>
+              <div>
+                <p className="text-sm font-medium">
+                  {installMessage}
+                </p>
+                {installFallbackMessage ? (
+                  <p className="mt-1 text-xs text-brown/80">{installFallbackMessage}</p>
+                ) : null}
+              </div>
               <button
                 type="button"
                 onClick={handleInstall}
-                disabled={!installPrompt}
-                className="h-10 shrink-0 rounded-full bg-[#01B6A3] px-4 text-sm font-semibold text-white shadow-md disabled:cursor-not-allowed disabled:opacity-60"
+                className="h-10 shrink-0 rounded-full bg-[#01B6A3] px-4 text-sm font-semibold text-white shadow-md"
               >
-                Install App
+                {installButtonLabel}
               </button>
-            </div>
-          </div>
-        ) : null}
-
-        {!isStandalone && !installPrompt && isIPhoneSafari ? (
-          <div className="w-full px-4 md:px-5 lg:px-0">
-            <div className="mx-auto mb-6 flex w-full max-w-[1200px] flex-col gap-3 rounded-2xl bg-[#FFF4E8] px-4 py-4 text-brown md:flex-row md:items-center md:justify-between">
-              <p className="text-sm font-medium">
-                On iPhone Safari, tap Share and choose Add to Home Screen to install Hubeco.
-              </p>
-              {canShare ? (
-                <button
-                  type="button"
-                  onClick={handleShare}
-                  className="h-10 shrink-0 rounded-full bg-[#01B6A3] px-4 text-sm font-semibold text-white shadow-md"
-                >
-                  Open Share
-                </button>
-              ) : null}
             </div>
           </div>
         ) : null}

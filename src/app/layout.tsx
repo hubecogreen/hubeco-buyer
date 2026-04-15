@@ -152,7 +152,7 @@ export default function RootLayout({
             gtag('config', 'G-REE72KGV61');
           `}
         </Script>
-        <Script id="microsoft-clarity" strategy="afterInteractive">
+        {/* <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
             (function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -160,7 +160,7 @@ export default function RootLayout({
               y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             })(window, document, "clarity", "script", "w9t6yqq51c");
           `}
-        </Script>
+        </Script> */}
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="diLRPHS68vrjgTxnWTWOMw"

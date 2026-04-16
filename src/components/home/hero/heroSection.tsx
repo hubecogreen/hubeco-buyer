@@ -66,7 +66,9 @@ const HeroSection = () => {
   aria-label="Digitizing Procurement for Smarter Sustainable Construction"
 >
   Digitizing <br className="hidden lg:block" />
-  Procurement for <br className="lg:block md:hidden block" />
+  <span className="whitespace-nowrap">
+  Procurement for
+</span> <br className="lg:block md:hidden block" />
   Smarter,{" "}
 
   <span className="bg-primary px-2 py-1 rounded text-cream inline-block whitespace-nowrap">
@@ -111,7 +113,7 @@ const HeroSection = () => {
   
   {/* Text */}
   <div className="">
-    <p className="text-[20px] lg:leading-[30px] leading-[20px]  lg:mt-2 font-regular  ">
+    <p className="max-[370px]:text-[16px] text-[20px] lg:leading-[30px] leading-[20px]  lg:mt-2 font-regular  ">
       Empowering India’s Construction Industry with <br className="hidden lg:block" />
       Sustainable Materials and Digital Efficiency
     </p>

@@ -1547,7 +1547,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                       {totalProduct?.certificate?.certificateImg.endsWith(".pdf") ? (
                         <Button
                           // onClick={() => window.open(totalProduct?.certificateLink, "_blank")}
-                          className="text-cream bg-primary hover:bg-secondary font-semibold h-[45px]
+                          className="text-cream bg-primary hover:bg-primary cursor-default font-semibold h-[45px]
         pl-12 pr-4 md:w-40
         text-sm md:text-md flex items-center justify-center"
                         >

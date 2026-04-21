@@ -231,7 +231,8 @@ const Footer = () => {
 
   if (!rehydrated) return null;
 
-  const showInstallCard = !isStandalone && (isAndroid || isIOS || !!installPrompt);
+const showInstallCard = !isStandalone && (isAndroid || isIOS || !!installPrompt);
+  const showInstallButton = !isIPhoneSafari;
   const installMessage = isIPhoneSafari
     ? "On iPhone Safari, tap Share and choose Add to Home Screen to install Hubeco."
     : isIOS
@@ -239,12 +240,9 @@ const Footer = () => {
     : isAndroid
       ? "Install Hubeco on your Android phone for a faster app-like experience."
       : "Install Hubeco for a faster app-like experience on your device.";
-  const installButtonLabel = isIPhoneSafari
-    ? "Open Share"
-    : isIOS
-      ? "How to Install"
-      : "Install App";
+const isIOSDevice = isIPhoneSafari || isIOS;
 
+const installButtonLabel = !isIOSDevice ? "Install App" : "";
   return (
     <footer className="w-full bg-cream flex justify-center overflow-x-hidden pt-[49px]">
       <div className="w-full max-w-[1250px] flex flex-col">
@@ -259,13 +257,15 @@ const Footer = () => {
                   <p className="mt-1 text-xs text-brown/80">{installFallbackMessage}</p>
                 ) : null}
               </div>
-              <button
-                type="button"
-                onClick={handleInstall}
-                className="h-10 shrink-0 rounded-full bg-[#01B6A3] px-4 text-sm font-semibold text-white shadow-md"
-              >
-                {installButtonLabel}
-              </button>
+              {(showInstallButton && installButtonLabel) && (
+                <button
+                  type="button"
+                  onClick={handleInstall}
+                  className="h-10 shrink-0 rounded-full bg-[#01B6A3] px-4 text-sm font-semibold text-white shadow-md"
+                >
+                  {installButtonLabel}
+                </button>
+              )}
             </div>
           </div>
         ) : null}

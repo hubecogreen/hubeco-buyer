@@ -1,61 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hubeco - Offline</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #01B6A3 0%, #A92449 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        .offline-container {
-            text-align: center;
-            max-width: 500px;
-        }
-        .offline-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-        .retry-btn {
-            background: white;
-            color: #01B6A3;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .retry-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>No Internet Connection - Hubeco</title>
+
+  <style>
+    @font-face {
+      font-family: 'Poppins';
+      src: url('/fonts/Poppins-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Poppins';
+      src: url('/fonts/Poppins-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Poppins';
+      src: url('/fonts/Poppins-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Poppins';
+      src: url('/fonts/Poppins-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+  height: 100%;
+        background-color: #FFFEF8;
+
+}
+
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #FFFEF8;
+      /* min-height: 100vh; */
+      height:100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Responsive container */
+    .phone-frame {
+      width: 100%;
+      height: auto;
+      /* max-width: 420px;
+      min-height: 100vh; */
+      background-color: #FFFEF8;
+      /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12); */
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+          }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .logo-icon {
+      width: 242px;
+      height: auto;
+    }
+
+    .wifi-wrapper {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .wifi-ring {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(180, 175, 168, 0.18);
+    }
+
+    .wifi-ring-outer {
+      width: 140px;
+      height: 140px;
+    }
+
+    .wifi-ring-inner {
+      width: 100px;
+      height: 100px;
+    }
+
+    .wifi-icon-circle {
+      width: 70px;
+      height: 70px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      z-index: 1;
+    }
+
+    .wifi-svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.08); opacity: 0.25; }
+      100% { transform: scale(1); opacity: 0.5; }
+    }
+
+    .wifi-ring-outer { animation: pulse-ring 2.4s ease-in-out infinite; }
+    .wifi-ring-inner { animation: pulse-ring 2.4s ease-in-out infinite 0.3s; }
+
+    .content {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #7a7570;
+      line-height: 1.6;
+      max-width: 260px;
+      margin: 0 auto;
+    }
+
+    .btn-try {
+      width: 100%;
+      max-width: 300px;
+      padding: 15px 0;
+      background: #109989;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      box-shadow: 0 6px 20px rgba(26, 138, 114, 0.32);
+      transition: 0.2s;
+    }
+
+    .btn-try:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-try:active {
+      transform: translateY(1px);
+    }
+
+    .spin-icon {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .btn-try.loading .spin-icon { display: block; }
+    .btn-try.loading .btn-label,
+    .btn-try.loading .retry-icon { display: none; }
+
+    .status-message {
+      min-height: 20px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #7a7570;
+      text-align: center;
+    }
+
+    .status-message.is-error {
+      color: #b54747;
+    }
+
+    .about {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #9a9590;
+      text-decoration: none;
+    }
+
+    .about:hover {
+      color: #109989;
+    }
+
+    /* Desktop view */
+    @media (min-width: 768px) {
+      body {
+        background-color: #FFFEF8;
+      }
+
+      .phone-frame {
+        min-height: auto;
+        padding: 60px 40px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="offline-container">
-        <div class="offline-icon">📡</div>
-        <h1>You're Offline</h1>
-        <p>Don't worry! Some content is still available offline. Check your connection and try again.</p>
-        <button class="retry-btn" onclick="window.location.reload()">Retry Connection</button>
+  <div class="phone-frame">
+
+    <div class="logo">
+      <img class="logo-icon" src="/images/Rlogo.png" alt="Hubeco logo" />
     </div>
+
+    <div class="wifi-wrapper">
+      <div class="wifi-ring wifi-ring-outer"></div>
+      <div class="wifi-ring wifi-ring-inner"></div>
+
+      <div class="wifi-icon-circle">
+        <svg class="wifi-svg" viewBox="0 0 48 48">
+          <path d="M8 20 Q24 8 40 20" stroke="#b0aaa4" stroke-width="3" fill="none"/>
+          <path d="M13 26 Q24 17 35 26" stroke="#b0aaa4" stroke-width="3" fill="none"/>
+          <path d="M18.5 32 Q24 27 29.5 32" stroke="#b0aaa4" stroke-width="3" fill="none"/>
+          <circle cx="24" cy="37" r="2.5" fill="#b0aaa4"/>
+          <line x1="10" y1="10" x2="38" y2="38" stroke="#c0bbb5" stroke-width="2.5"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="content">
+      <p class="title">No Internet Connection</p>
+      <p class="subtitle">
+       Please check your network settings, 
+verify your connection, and try again.
+      </p>
+    </div>
+
+    <button class="btn-try" id="tryBtn" onclick="handleRetry()">
+      <span class="btn-label">Try Again</span>
+      <div class="spin-icon"></div>
+    </button>
+
+    <p class="status-message" id="statusMessage"></p>
+
+    <!-- <a class="about" href="/about">About us</a> -->
+  </div>
+
+  <script>
+    function setStatus(message, isError) {
+      const status = document.getElementById('statusMessage');
+      status.textContent = message;
+      status.classList.toggle('is-error', isError);
+    }
+
+    function setLoading(isLoading) {
+      const btn = document.getElementById('tryBtn');
+      btn.classList.toggle('loading', isLoading);
+      btn.disabled = isLoading;
+    }
+
+    function handleRetry() {
+      setLoading(true);
+      setStatus('Trying to reconnect...', false);
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 600);
+    }
+
+    window.addEventListener('online', () => {
+      setStatus('Back online. Reloading...', false);
+      window.location.reload();
+    });
+
+    window.addEventListener('offline', () => {
+      setLoading(false);
+      setStatus('No internet connection.', true);
+    });
+  </script>
+
 </body>
-</html> 
+</html>

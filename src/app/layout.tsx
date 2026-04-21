@@ -168,7 +168,7 @@ export default function RootLayout({
         />
 
         {/* Service Worker Registration for Enhanced Caching */}
-        <Script id="service-worker" strategy="lazyOnload">
+        <Script id="service-worker" strategy="beforeInteractive">
           {`
             if ('serviceWorker' in navigator) {
               window.addEventListener('load', function() {

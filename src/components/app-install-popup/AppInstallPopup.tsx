@@ -121,7 +121,7 @@ const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
     {/* <p className="mb-4 text-sm leading-6 text-gray-600">
       On iPhone and iPad, install works through Safari. Follow these quick steps.
     </p> */}
-    <div className="flex">
+    <div className="flex items-center gap-2 mb-5">
     <div>
       <Image 
         src="/images/home/iphone-icon.png"
@@ -130,7 +130,7 @@ const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
         height={50}
       />
     </div>
-    <div className="mb-5 rounded-xl bg-cream pl-4 pr-1 py-2 text-left text-sm leading-6 text-[#374151]">
+    <div className=" rounded-xl bg-cream pl-4 pr-1 py-2 text-left text-sm leading-6 text-[#374151]">
       <div className="flex gap-2 items-center">
         <Image src="/images/home/number-1-icon.png" width={27} height={27} alt="1-icon"/>
         <p> Open this website in <span className="font-medium text-[#1F2937]">Safari</span>.</p>
@@ -141,7 +141,7 @@ const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
         Tap the <span className="font-medium text-[#1F2937]">Share</span> icon.
       </p>
       </div>
-      <div className="flex gap-2 mt-2 items-center">
+      <div className="flex gap-2 mt-2 items-center whitespace-nowrap">
         <Image src="/images/home/number-3-icon.png" width={27} height={27} alt="3-icon"/>
       <p>
         Choose
@@ -282,7 +282,7 @@ const AppInstallPopup = () => {
               className=" md:w-[255px] w-[225px] md:h-[50px] h-[40px] object-contain"
               priority={false}
             />
-            <h2 className=" md:text-[32px] text-[26px]  text-primary  ">{isAndroid || isDesktop ? "Install Hubeco App" : "Add to Home Screen"}</h2>
+            <h2 className=" md:text-[32px] text-[23px]  text-primary  ">{isAndroid || isDesktop ? "Install Hubeco App" : "Add to Home Screen"}</h2>
 
           </div>
         </div>

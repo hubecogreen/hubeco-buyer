@@ -85,16 +85,16 @@ const InstallPromptContent = ({
       Add Hubeco to your Android home screen for a faster, app-like shopping
       experience.
     </p> */}
-    {!canInstall ? (
+    {/* {!canInstall ? (
       <p className="mb-4 rounded-xl bg-[#F4F7F7] px-4 py-3 text-left text-sm leading-6 text-[#4B5563]">
         If the install button is unavailable, open your browser menu and choose
         <span className="font-medium text-[#1F2937]"> Install app </span>
         or
         <span className="font-medium text-[#1F2937]"> Add to Home screen</span>.
       </p>
-    ) : null}
+    ) : null} */}
     <div className="flex flex-col gap-3 w-[254px] justify-center ">
-       {canInstall ? (
+       {/* {canInstall ? ( */}
         <button
           type="button"
           onClick={onInstall}
@@ -102,7 +102,7 @@ const InstallPromptContent = ({
         >
          👉 Install Now
         </button>
-      ) : null}
+      {/* ) : null} */}
       <button
         type="button"
         onClick={onDismiss}
@@ -131,18 +131,18 @@ const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
       />
     </div>
     <div className=" rounded-xl bg-cream pl-4 pr-1 py-2 text-left text-sm leading-6 text-[#374151]">
-      <div className="flex gap-2 items-center">
+      {/* <div className="flex gap-2 items-center">
         <Image src="/images/home/number-1-icon.png" width={27} height={27} alt="1-icon"/>
         <p> Open this website in <span className="font-medium text-[#1F2937]">Safari</span>.</p>
-      </div>
+      </div> */}
       <div className="flex gap-2 mt-2 items-center">
-        <Image src="/images/home/number-2-icon.png" width={27} height={27} alt="2-icon"/>
+        <Image src="/images/home/number-1-icon.png" width={27} height={27} alt="2-icon"/>
       <p>
         Tap the <span className="font-medium text-[#1F2937]">Share</span> icon.
       </p>
       </div>
       <div className="flex gap-2 mt-2 items-center whitespace-nowrap">
-        <Image src="/images/home/number-3-icon.png" width={27} height={27} alt="3-icon"/>
+        <Image src="/images/home/number-2-icon.png" width={27} height={27} alt="3-icon"/>
       <p>
         Choose
         <span className="font-medium text-[#1F2937]"> Add to Home Screen</span>.
@@ -272,7 +272,7 @@ const AppInstallPopup = () => {
           &times;
         </button>
 
-        <div className="mb-6 flex justify-center items-center">
+        <div className="mb-2 flex justify-center items-center">
           <div className="rounded-[20px]  flex flex-col justify-center items-center gap-[9px] mt-[15px]">
             <Image
               src="/images/Rlogo.png"

@@ -185,7 +185,7 @@ const BlogsDetails = ({ id }: any) => {
                 <div>
 
                   <div>
-                    <div className={`${styles.contentWrapper} text-justify text-sm lg:text-sm xl:text-sm w-full lg:pt-10 pt-5 prose prose-lg xl:prose-xl hover:prose-a:text-brand`}
+                    <div className={`${styles.contentWrapper} prose prose-lg [&_ul]:list-disc [&_ul]:pb-2 text-justify text-sm lg:text-sm xl:text-sm w-full lg:pt-10 pt-5 prose prose-lg xl:prose-xl hover:prose-a:text-brand`}
                       // dangerouslySetInnerHTML={{ __html: blogData.content }}
                       dangerouslySetInnerHTML={{
                         __html: blogData.content

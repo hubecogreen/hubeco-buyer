@@ -87,14 +87,14 @@ const InstallPromptContent = ({
       </p>
     ) : null} */}
     <div className="flex flex-col gap-3 w-[254px] justify-center ">
-       {/* {canInstall ? ( */}
-        <button
-          type="button"
-          onClick={onInstall}
-          className=" rounded-[30px] tracking-[2px] bg-primary px-[24px] py-[16px] text-[18px]  text-white transition hover:bg-[#019988]"
-        >
-         👉 Install Now
-        </button>
+      {/* {canInstall ? ( */}
+      <button
+        type="button"
+        onClick={onInstall}
+        className=" rounded-[30px] tracking-[2px] bg-primary px-[24px] py-[16px] text-[18px]  text-white transition hover:bg-[#019988]"
+      >
+        👉 Install Now
+      </button>
       {/* ) : null} */}
       <button
         type="button"
@@ -103,7 +103,7 @@ const InstallPromptContent = ({
       >
         👉 Maybe Later
       </button>
-     
+
     </div>
   </>
 );
@@ -115,33 +115,33 @@ const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
       On iPhone and iPad, install works through Safari. Follow these quick steps.
     </p> */}
     <div className="flex items-center gap-2 mb-5">
-    <div>
-      <Image 
-        src="/images/home/iphone-icon.png"
-        alt="iPhone Icon"
-        width={50}
-        height={50}
-      />
-    </div>
-    <div className=" rounded-xl bg-cream pl-4 pr-1 py-2 text-left text-sm leading-6 text-[#374151]">
-      {/* <div className="flex gap-2 items-center">
+      <div>
+        <Image
+          src="/images/home/iphone-icon.png"
+          alt="iPhone Icon"
+          width={50}
+          height={50}
+        />
+      </div>
+      <div className=" rounded-xl bg-cream pl-4 pr-1 py-2 text-left text-sm leading-6 text-[#374151]">
+        {/* <div className="flex gap-2 items-center">
         <Image src="/images/home/number-1-icon.png" width={27} height={27} alt="1-icon"/>
         <p> Open this website in <span className="font-medium text-[#1F2937]">Safari</span>.</p>
       </div> */}
-      <div className="flex gap-2 mt-2 items-center">
-        <Image src="/images/home/number-1-icon.png" width={27} height={27} alt="2-icon"/>
-      <p>
-        Tap the <span className="font-medium text-[#1F2937]">Share</span> icon.
-      </p>
+        <div className="flex gap-2 mt-2 items-center">
+          <Image src="/images/home/number-1-icon.png" width={27} height={27} alt="2-icon" />
+          <p>
+            Tap the <span className="font-medium text-[#1F2937]">Share</span> icon.
+          </p>
+        </div>
+        <div className="flex gap-2 mt-2 items-center whitespace-nowrap">
+          <Image src="/images/home/number-2-icon.png" width={27} height={27} alt="3-icon" />
+          <p>
+            Choose
+            <span className="font-medium text-[#1F2937]"> Add to Home Screen</span>.
+          </p>
+        </div>
       </div>
-      <div className="flex gap-2 mt-2 items-center whitespace-nowrap">
-        <Image src="/images/home/number-2-icon.png" width={27} height={27} alt="3-icon"/>
-      <p>
-        Choose
-        <span className="font-medium text-[#1F2937]"> Add to Home Screen</span>.
-      </p>
-      </div>
-    </div>
     </div>
     <button
       type="button"
@@ -172,13 +172,13 @@ const AppInstallPopup = () => {
     const promptWindow = window as InstallPromptWindow;
     let timer: number | null = null;
 
-    if (
-      isAppRunningStandalone() ||
-      window.localStorage.getItem(INSTALLED_STORAGE_KEY) === "true" ||
-      isDismissedRecently()
-    ) {
-      return;
-    }
+    // if (
+    //   isAppRunningStandalone() ||
+    //   window.localStorage.getItem(INSTALLED_STORAGE_KEY) === "true" ||
+    //   isDismissedRecently()
+    // ) {
+    //   return;
+    // }
 
     setDeviceType(currentDeviceType);
 
@@ -202,6 +202,13 @@ const AppInstallPopup = () => {
       }
     };
 
+    const handleManualOpen = () => {
+      console.log("POPUP EVENT RECEIVED");
+      setIsVisible(true);
+    };
+
+    window.addEventListener("hubeco:open-install-popup", handleManualOpen);
+
     const handleAppInstalled = () => {
       window.localStorage.setItem(INSTALLED_STORAGE_KEY, "true");
       setInstallPrompt(null);
@@ -222,6 +229,7 @@ const AppInstallPopup = () => {
       if (timer !== null) {
         window.clearTimeout(timer);
       }
+      window.removeEventListener("hubeco:open-install-popup", handleManualOpen);
       window.removeEventListener("hubeco:installpromptavailable", syncInstallPrompt);
       window.removeEventListener("hubeco:appinstalled", handleAppInstalled);
       window.removeEventListener("appinstalled", handleAppInstalled);

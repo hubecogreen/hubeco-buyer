@@ -8,7 +8,7 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
 }
 
-type DeviceType = "android" | "ios" | "desktop" | "other";
+type DeviceType = "android" | "ios" | "desktop";
 
 type InstallPromptWindow = Window & {
   __hubecoInstallPrompt?: BeforeInstallPromptEvent | null;
@@ -52,9 +52,6 @@ const getDeviceType = (): DeviceType => {
   const isIOS =
     /iPhone|iPad|iPod/i.test(userAgent) ||
     (platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
-  const isSafari =
-    /Safari/i.test(userAgent) &&
-    !/Chrome|Chromium|CriOS|FxiOS|Edg|OPR|Android/i.test(userAgent);
 
   if (isIOS) {
     return "ios";
@@ -64,11 +61,7 @@ const getDeviceType = (): DeviceType => {
     return "android";
   }
 
-  if (/Win32|Win64|Windows/i.test(platform) || isSafari) {
-    return "desktop";
-  }
-
-  return "other";
+  return "desktop";
 };
 
 const InstallPromptContent = ({
@@ -162,7 +155,7 @@ const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
 
 const AppInstallPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [deviceType, setDeviceType] = useState<DeviceType>("other");
+  const [deviceType, setDeviceType] = useState<DeviceType | null>(null);
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
 
   const isAndroid = deviceType === "android";
@@ -177,9 +170,9 @@ const AppInstallPopup = () => {
 
     const currentDeviceType = getDeviceType();
     const promptWindow = window as InstallPromptWindow;
+    let timer: number | null = null;
 
     if (
-      currentDeviceType === "other" ||
       isAppRunningStandalone() ||
       window.localStorage.getItem(INSTALLED_STORAGE_KEY) === "true" ||
       isDismissedRecently()
@@ -188,14 +181,25 @@ const AppInstallPopup = () => {
     }
 
     setDeviceType(currentDeviceType);
-    setInstallPrompt(promptWindow.__hubecoInstallPrompt ?? null);
 
-    const timer = window.setTimeout(() => {
-      setIsVisible(true);
-    }, POPUP_DELAY_MS);
+    const startPopupTimer = () => {
+      if (timer !== null) {
+        return;
+      }
+
+      timer = window.setTimeout(() => {
+        setIsVisible(true);
+      }, POPUP_DELAY_MS);
+    };
 
     const syncInstallPrompt = () => {
-      setInstallPrompt(promptWindow.__hubecoInstallPrompt ?? null);
+      const storedPrompt = promptWindow.__hubecoInstallPrompt ?? null;
+
+      setInstallPrompt(storedPrompt);
+
+      if (storedPrompt && currentDeviceType !== "ios") {
+        startPopupTimer();
+      }
     };
 
     const handleAppInstalled = () => {
@@ -204,12 +208,20 @@ const AppInstallPopup = () => {
       setIsVisible(false);
     };
 
+    syncInstallPrompt();
+
+    if (currentDeviceType === "ios") {
+      startPopupTimer();
+    }
+
     window.addEventListener("hubeco:installpromptavailable", syncInstallPrompt);
     window.addEventListener("hubeco:appinstalled", handleAppInstalled);
     window.addEventListener("appinstalled", handleAppInstalled);
 
     return () => {
-      window.clearTimeout(timer);
+      if (timer !== null) {
+        window.clearTimeout(timer);
+      }
       window.removeEventListener("hubeco:installpromptavailable", syncInstallPrompt);
       window.removeEventListener("hubeco:appinstalled", handleAppInstalled);
       window.removeEventListener("appinstalled", handleAppInstalled);

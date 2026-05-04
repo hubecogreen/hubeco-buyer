@@ -1,12 +1,11 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import { Download } from "lucide-react";
 
 
@@ -19,9 +18,48 @@ const logos = [
 
 const greenProLabels = ["GreenPro", "EPD", "GRIHA"];
 
+const INSTALLED_STORAGE_KEY = "hubeco:install-popup:installed";
+
+type DeviceType = "android" | "ios" | "desktop";
+
+type InstallPromptWindow = Window & {
+  __hubecoInstallPrompt?: Event | null;
+};
+
+const isAppInstalled = () => {
+  const iosStandalone =
+    "standalone" in window.navigator &&
+    Boolean((window.navigator as Navigator & { standalone?: boolean }).standalone);
+  const displayModeStandalone = window.matchMedia("(display-mode: standalone)").matches;
+
+  return (
+    iosStandalone ||
+    displayModeStandalone ||
+    window.localStorage.getItem(INSTALLED_STORAGE_KEY) === "true"
+  );
+};
+
+const getDeviceType = (): DeviceType => {
+  const userAgent = window.navigator.userAgent;
+  const platform = window.navigator.platform;
+  const isIOS =
+    /iPhone|iPad|iPod/i.test(userAgent) ||
+    (platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
+
+  if (isIOS) {
+    return "ios";
+  }
+
+  if (/Android/i.test(userAgent)) {
+    return "android";
+  }
+
+  return "desktop";
+};
+
 
 const HeroSection = () => {
-  const router = useRouter();
+  const [showInstallButton, setShowInstallButton] = useState(false);
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
   const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video-U.webm`;
   const heroPosterUrl = '/images/home/hero/video-poster.webp';
@@ -30,6 +68,46 @@ const HeroSection = () => {
   const defaultMessage =
     "Hello, I would like to get a quote for sustainable building materials for my project. Please let me know the next steps to share my requirements.";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const promptWindow = window as InstallPromptWindow;
+    const currentDeviceType = getDeviceType();
+
+    const syncInstallAvailability = () => {
+      if (isAppInstalled()) {
+        setShowInstallButton(false);
+        return;
+      }
+
+      if (currentDeviceType === "ios") {
+        setShowInstallButton(true);
+        return;
+      }
+
+      setShowInstallButton(Boolean(promptWindow.__hubecoInstallPrompt));
+    };
+
+    const handleAppInstalled = () => {
+      window.localStorage.setItem(INSTALLED_STORAGE_KEY, "true");
+      setShowInstallButton(false);
+    };
+
+    syncInstallAvailability();
+
+    window.addEventListener("hubeco:installpromptavailable", syncInstallAvailability);
+    window.addEventListener("hubeco:appinstalled", handleAppInstalled);
+    window.addEventListener("appinstalled", handleAppInstalled);
+
+    return () => {
+      window.removeEventListener("hubeco:installpromptavailable", syncInstallAvailability);
+      window.removeEventListener("hubeco:appinstalled", handleAppInstalled);
+      window.removeEventListener("appinstalled", handleAppInstalled);
+    };
+  }, []);
 
 
 
@@ -60,7 +138,7 @@ const HeroSection = () => {
       <div className="relative z-20 w-full h-full flex flex-col justify-center px-[20px] lg:px-[120px]  text-cream lg:translate-y-[-100px] translate-y-[-40px] lg:max-w-[1440px] mx-auto  ">
 
         {/* Title + Right Section */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center  lg:gap-[80px] gap-[20px] w-full">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center  lg:gap-[25px] gap-[20px] w-full">
           {/* LEFT TITLE */}
           <div className="lg:max-w-3xl lg:space-y-4 lg:pt-[209px] pt-[160px] w-full">
             <h1
@@ -79,7 +157,7 @@ const HeroSection = () => {
                     {char}
                   </motion.span>
                 ))}
-              </span>
+              </span> 
 
               <br className="md:hidden lg:block block" />
               Construction
@@ -88,7 +166,7 @@ const HeroSection = () => {
 
           {/* RIGHT SIDE — Vertical swiper text */}
           {/* RIGHT SIDE — Vertical swiper text */}
-          <div className="flex flex-col justify-center h-full lg:translate-y-[190px] gap-2 w-full md:w-1/2 lg:w-auto">
+          <div className="flex flex-col justify-center h-full lg:translate-y-[190px] gap-2 w-full md:w-1/2 lg:w-1/2">
             <p className="text-[20px] font-regular">Certified Products aligned with</p>
 
             <div className="flex items-center justify-between sm:gap-4 lg:gap-6 w-full  md:w-full lg:w-full sm:w-fit">
@@ -106,22 +184,23 @@ const HeroSection = () => {
               </div>
 
               {/* 👉 BUTTON */}
-              <button
-                onClick={() => {
-                  console.log("BUTTON CLICKED");
-                  window.dispatchEvent(new Event("hubeco:open-install-popup"));
-                }}
-                className="flex items-center gap-2 bg-primary 
-           w-auto sm:w-auto max-w-full overflow-hidden
-           lg:px-[13px] lg:py-[11.5px] py-[10px] md:px-[18px] px-[16px] 
-           rounded-[4px] text-cream text-[14px] sm:text-[16px] font-medium whitespace-nowrap"
-              >
-                <div className="flex items-center justify-center w-[28px] h-[28px] shrink-0">
-                  <Download size={22} color="#FFFEF8" />
-                </div>
+              {showInstallButton ? (
+                <button
+                  onClick={() => {
+                    window.dispatchEvent(new Event("hubeco:open-install-popup"));
+                  }}
+                  className="flex items-center gap-2 bg-primary 
+             w-auto sm:w-auto max-w-full overflow-hidden
+             lg:px-[13px] lg:py-[11.5px] py-[10px] md:px-[18px] px-[16px] 
+             rounded-[4px] text-cream text-[14px] sm:text-[16px] font-medium whitespace-nowrap"
+                >
+                  <div className="flex items-center justify-center w-[28px] h-[28px] shrink-0">
+                    <Download size={22} color="#FFFEF8" />
+                  </div>
 
-                Get Hubeco App
-              </button>
+                  Get Hubeco App
+                </button>
+              ) : null}
 
             </div>
           </div>

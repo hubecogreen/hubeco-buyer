@@ -15,26 +15,8 @@ type InstallPromptWindow = Window & {
 };
 
 const POPUP_DELAY_MS = 5000;
-const DISMISS_COOLDOWN_MS = 24 * 60 * 60 * 1000;
 const DISMISSED_AT_STORAGE_KEY = "hubeco:install-popup:dismissed-at";
 const INSTALLED_STORAGE_KEY = "hubeco:install-popup:installed";
-
-const isDismissedRecently = () => {
-  const dismissedAt = window.localStorage.getItem(DISMISSED_AT_STORAGE_KEY);
-
-  if (!dismissedAt) {
-    return false;
-  }
-
-  const dismissedAtMs = Number(dismissedAt);
-
-  if (Number.isNaN(dismissedAtMs)) {
-    window.localStorage.removeItem(DISMISSED_AT_STORAGE_KEY);
-    return false;
-  }
-
-  return Date.now() - dismissedAtMs < DISMISS_COOLDOWN_MS;
-};
 
 const isAppRunningStandalone = () => {
   const iosStandalone =
@@ -44,6 +26,13 @@ const isAppRunningStandalone = () => {
   const displayModeStandalone = window.matchMedia("(display-mode: standalone)").matches;
 
   return iosStandalone || displayModeStandalone;
+};
+
+const isAppInstalled = () => {
+  return (
+    isAppRunningStandalone() ||
+    window.localStorage.getItem(INSTALLED_STORAGE_KEY) === "true"
+  );
 };
 
 const getDeviceType = (): DeviceType => {
@@ -66,55 +55,43 @@ const getDeviceType = (): DeviceType => {
 
 const InstallPromptContent = ({
   canInstall,
+  isInstalled,
   onInstall,
   onDismiss,
 }: {
   canInstall: boolean;
+  isInstalled: boolean;
   onInstall: () => void;
   onDismiss: () => void;
 }) => (
-  <>
-    {/* <p className="mb-4 text-sm leading-6 text-gray-600">
-      Add Hubeco to your Android home screen for a faster, app-like shopping
-      experience.
-    </p> */}
-    {/* {!canInstall ? (
-      <p className="mb-4 rounded-xl bg-[#F4F7F7] px-4 py-3 text-left text-sm leading-6 text-[#4B5563]">
-        If the install button is unavailable, open your browser menu and choose
-        <span className="font-medium text-[#1F2937]"> Install app </span>
-        or
-        <span className="font-medium text-[#1F2937]"> Add to Home screen</span>.
+  <div className="flex w-[254px] flex-col justify-center gap-3">
+    {isInstalled ? (
+      <p className="rounded-[24px] bg-[#F4F7F7] px-4 py-4 text-center text-[16px] leading-6 text-[#374151]">
+        App is already installed. Please check your home screen.
       </p>
-    ) : null} */}
-    <div className="flex flex-col gap-3 w-[254px] justify-center ">
-      {/* {canInstall ? ( */}
+    ) : (
       <button
         type="button"
         onClick={onInstall}
-        className=" rounded-[30px] tracking-[2px] bg-primary px-[24px] py-[16px] text-[18px]  text-white transition hover:bg-[#019988]"
+        disabled={!canInstall}
+        className="rounded-[30px] bg-primary px-[24px] py-[16px] text-[18px] tracking-[2px] text-white transition hover:bg-[#019988] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-primary"
       >
-        👉 Install Now
+        Install Now
       </button>
-      {/* ) : null} */}
-      <button
-        type="button"
-        onClick={onDismiss}
-        className=" rounded-[30px] border border-[#D1D5DB] px-[24px] py-[16px] text-[18px] font-medium text-[#374151] transition hover:bg-gray-50"
-      >
-        👉 Maybe Later
-      </button>
-
-    </div>
-  </>
+    )}
+    <button
+      type="button"
+      onClick={onDismiss}
+      className="rounded-[30px] border border-[#D1D5DB] px-[24px] py-[16px] text-[18px] font-medium text-[#374151] transition hover:bg-gray-50"
+    >
+      Maybe Later
+    </button>
+  </div>
 );
 
 const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
   <>
-    {/* <h2 className="mb-2 text-xl font-semibold text-[#1F2937]">Add Hubeco to Home Screen</h2> */}
-    {/* <p className="mb-4 text-sm leading-6 text-gray-600">
-      On iPhone and iPad, install works through Safari. Follow these quick steps.
-    </p> */}
-    <div className="flex items-center gap-2 mb-5">
+    <div className="mb-5 flex items-center gap-2">
       <div>
         <Image
           src="/images/home/iphone-icon.png"
@@ -123,18 +100,14 @@ const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
           height={50}
         />
       </div>
-      <div className=" rounded-xl bg-cream pl-4 pr-1 py-2 text-left text-sm leading-6 text-[#374151]">
-        {/* <div className="flex gap-2 items-center">
-        <Image src="/images/home/number-1-icon.png" width={27} height={27} alt="1-icon"/>
-        <p> Open this website in <span className="font-medium text-[#1F2937]">Safari</span>.</p>
-      </div> */}
-        <div className="flex gap-2 mt-2 items-center">
+      <div className="rounded-xl bg-cream py-2 pl-4 pr-1 text-left text-sm leading-6 text-[#374151]">
+        <div className="mt-2 flex items-center gap-2">
           <Image src="/images/home/number-1-icon.png" width={27} height={27} alt="2-icon" />
           <p>
             Tap the <span className="font-medium text-[#1F2937]">Share</span> icon.
           </p>
         </div>
-        <div className="flex gap-2 mt-2 items-center whitespace-nowrap">
+        <div className="mt-2 flex items-center gap-2 whitespace-nowrap">
           <Image src="/images/home/number-2-icon.png" width={27} height={27} alt="3-icon" />
           <p>
             Choose
@@ -157,6 +130,7 @@ const AppInstallPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [deviceType, setDeviceType] = useState<DeviceType | null>(null);
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [isInstalled, setIsInstalled] = useState(false);
 
   const isAndroid = deviceType === "android";
   const isIOS = deviceType === "ios";
@@ -172,15 +146,13 @@ const AppInstallPopup = () => {
     const promptWindow = window as InstallPromptWindow;
     let timer: number | null = null;
 
-    // if (
-    //   isAppRunningStandalone() ||
-    //   window.localStorage.getItem(INSTALLED_STORAGE_KEY) === "true" ||
-    //   isDismissedRecently()
-    // ) {
-    //   return;
-    // }
-
     setDeviceType(currentDeviceType);
+    const installed = isAppInstalled();
+    setIsInstalled(installed);
+
+    if (installed) {
+      return;
+    }
 
     const startPopupTimer = () => {
       if (timer !== null) {
@@ -196,6 +168,7 @@ const AppInstallPopup = () => {
       const storedPrompt = promptWindow.__hubecoInstallPrompt ?? null;
 
       setInstallPrompt(storedPrompt);
+      setIsInstalled(isAppInstalled());
 
       if (storedPrompt && currentDeviceType !== "ios") {
         startPopupTimer();
@@ -203,17 +176,24 @@ const AppInstallPopup = () => {
     };
 
     const handleManualOpen = () => {
-      console.log("POPUP EVENT RECEIVED");
+      const installedNow = isAppInstalled();
+      setIsInstalled(installedNow);
+
+      if (installedNow) {
+        return;
+      }
+
       setIsVisible(true);
     };
 
-    window.addEventListener("hubeco:open-install-popup", handleManualOpen);
-
     const handleAppInstalled = () => {
       window.localStorage.setItem(INSTALLED_STORAGE_KEY, "true");
+      setIsInstalled(true);
       setInstallPrompt(null);
       setIsVisible(false);
     };
+
+    window.addEventListener("hubeco:open-install-popup", handleManualOpen);
 
     syncInstallPrompt();
 
@@ -258,7 +238,7 @@ const AppInstallPopup = () => {
   };
 
   const handleInstall = async () => {
-    if (!installPrompt) {
+    if (!installPrompt || isInstalled) {
       return;
     }
 
@@ -266,9 +246,9 @@ const AppInstallPopup = () => {
     const choice = await installPrompt.userChoice;
 
     if (choice.outcome === "accepted") {
-      setIsVisible(false);
+      window.localStorage.setItem(INSTALLED_STORAGE_KEY, "true");
+      setIsInstalled(true);
     } else {
-      window.localStorage.setItem(DISMISSED_AT_STORAGE_KEY, String(Date.now()));
       setIsVisible(false);
     }
 
@@ -282,7 +262,7 @@ const AppInstallPopup = () => {
 
   return (
     <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/55 px-4">
-      <div className="relative w-full max-w-sm rounded-[24px] bg-cream p-[24px] shadow-2xl flex justify-center items-center flex-col">
+      <div className="relative flex w-full max-w-sm flex-col items-center justify-center rounded-[24px] bg-cream p-[24px] shadow-2xl">
         <button
           type="button"
           onClick={handleDismiss}
@@ -292,24 +272,26 @@ const AppInstallPopup = () => {
           &times;
         </button>
 
-        <div className="mb-2 flex justify-center items-center">
-          <div className="rounded-[20px]  flex flex-col justify-center items-center gap-[9px] mt-[15px]">
+        <div className="mb-2 flex items-center justify-center">
+          <div className="mt-[15px] flex flex-col items-center justify-center gap-[9px] rounded-[20px]">
             <Image
               src="/images/Rlogo.png"
               alt="Hubeco app icon"
               width={255}
               height={50}
-              className=" md:w-[255px] w-[225px] md:h-[50px] h-[40px] object-contain"
+              className="h-[40px] w-[225px] object-contain md:h-[50px] md:w-[255px]"
               priority={false}
             />
-            <h2 className=" md:text-[32px] text-[23px]  text-primary  ">{isAndroid || isDesktop ? "Install Hubeco App" : "Add to Home Screen"}</h2>
-
+            <h2 className="text-[23px] text-primary md:text-[32px]">
+              {isAndroid || isDesktop ? "Install Hubeco App" : "Add to Home Screen"}
+            </h2>
           </div>
         </div>
 
         {isAndroid || isDesktop ? (
           <InstallPromptContent
             canInstall={canUseInstallPrompt}
+            isInstalled={isInstalled}
             onInstall={handleInstall}
             onDismiss={handleDismiss}
           />

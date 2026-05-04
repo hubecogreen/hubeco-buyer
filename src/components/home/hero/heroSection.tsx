@@ -88,10 +88,10 @@ const HeroSection = () => {
 
           {/* RIGHT SIDE — Vertical swiper text */}
           {/* RIGHT SIDE — Vertical swiper text */}
-          <div className="flex flex-col justify-center h-full lg:translate-y-[190px] gap-2">
+          <div className="flex flex-col justify-center h-full lg:translate-y-[190px] gap-2 w-full md:w-1/2 lg:w-auto">
             <p className="text-[20px] font-regular">Certified Products aligned with</p>
 
-            <div className="flex items-center gap-11 lg:gap-6 md:gap-6 w-fit">
+            <div className="flex items-center justify-between sm:gap-4 lg:gap-6 w-full  md:w-full lg:w-full sm:w-fit">
 
               <div className="h-[50px] overflow-hidden flex-shrink-0 min-w-[120px]">
                 <div className="vertical-marquee">
@@ -111,9 +111,12 @@ const HeroSection = () => {
                   console.log("BUTTON CLICKED");
                   window.dispatchEvent(new Event("hubeco:open-install-popup"));
                 }}
-                className="flex items-center gap-2 bg-primary w-full  lg:px-[13px] lg:py-[11.5px] py-[10px] md:px-[18px] px-[20px] rounded-[4px] text-cream text-[16px] font-medium whitespace-nowrap"
+                className="flex items-center gap-2 bg-primary 
+           w-auto sm:w-auto max-w-full overflow-hidden
+           lg:px-[13px] lg:py-[11.5px] py-[10px] md:px-[18px] px-[16px] 
+           rounded-[4px] text-cream text-[14px] sm:text-[16px] font-medium whitespace-nowrap"
               >
-                <div className="flex items-center justify-center w-[28px] h-[28px] rounded-full">
+                <div className="flex items-center justify-center w-[28px] h-[28px] shrink-0">
                   <Download size={22} color="#FFFEF8" />
                 </div>
 

@@ -246,7 +246,7 @@ const installButtonLabel = !isIOSDevice ? "Install App" : "";
   return (
     <footer className="w-full bg-cream flex justify-center overflow-x-hidden pt-[49px]">
       <div className="w-full max-w-[1250px] flex flex-col">
-        {showInstallCard ? (
+        {/* {showInstallCard ? (
           <div className="w-full px-4 md:px-5 lg:px-0">
             <div className="mx-auto mb-6 flex w-full max-w-[1200px] flex-col gap-3 rounded-2xl bg-[#E6F7F3] px-4 py-4 text-brown md:flex-row md:items-center md:justify-between">
               <div>
@@ -268,7 +268,7 @@ const installButtonLabel = !isIOSDevice ? "Install App" : "";
               )}
             </div>
           </div>
-        ) : null}
+        ) : null} */}
 
         {/* TOP GREEN LINE */}
         <div className="w-full flex justify-center px-4 md:px-5 lg:px-0">

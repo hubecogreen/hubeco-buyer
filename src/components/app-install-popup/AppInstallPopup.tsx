@@ -2,92 +2,39 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
-}
-
-type DeviceType = "android" | "ios" | "desktop";
-
-type InstallPromptWindow = Window & {
-  __hubecoInstallPrompt?: BeforeInstallPromptEvent | null;
-};
+import toast from "react-hot-toast";
+import usePWAInstall from "@/components/hooks/usePWAInstall";
 
 const POPUP_DELAY_MS = 5000;
+const DISMISS_COOLDOWN_MS = 24 * 60 * 60 * 1000;
 const DISMISSED_AT_STORAGE_KEY = "hubeco:install-popup:dismissed-at";
-const INSTALLED_STORAGE_KEY = "hubeco:install-popup:installed";
 
-const isAppRunningStandalone = () => {
-  const iosStandalone =
-    "standalone" in window.navigator &&
-    Boolean((window.navigator as Navigator & { standalone?: boolean }).standalone);
+const wasDismissedRecently = () => {
+  const dismissedAt = window.localStorage.getItem(DISMISSED_AT_STORAGE_KEY);
 
-  const displayModeStandalone = window.matchMedia("(display-mode: standalone)").matches;
+  if (!dismissedAt) {
+    return false;
+  }
 
-  return iosStandalone || displayModeStandalone;
+  const dismissedAtMs = Number(dismissedAt);
+
+  if (Number.isNaN(dismissedAtMs)) {
+    window.localStorage.removeItem(DISMISSED_AT_STORAGE_KEY);
+    return false;
+  }
+
+  return Date.now() - dismissedAtMs < DISMISS_COOLDOWN_MS;
 };
 
-const isAppInstalled = () => {
-  return (
-    isAppRunningStandalone() ||
-    window.localStorage.getItem(INSTALLED_STORAGE_KEY) === "true"
-  );
-};
-
-const getDeviceType = (): DeviceType => {
+const isIOSDevice = () => {
   const userAgent = window.navigator.userAgent;
   const platform = window.navigator.platform;
-  const isIOS =
+
+  return (
     /iPhone|iPad|iPod/i.test(userAgent) ||
-    (platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
-
-  if (isIOS) {
-    return "ios";
-  }
-
-  if (/Android/i.test(userAgent)) {
-    return "android";
-  }
-
-  return "desktop";
+    (platform === "MacIntel" && window.navigator.maxTouchPoints > 1)
+  );
 };
-
-const InstallPromptContent = ({
-  canInstall,
-  isInstalled,
-  onInstall,
-  onDismiss,
-}: {
-  canInstall: boolean;
-  isInstalled: boolean;
-  onInstall: () => void;
-  onDismiss: () => void;
-}) => (
-  <div className="flex w-[254px] flex-col justify-center gap-3">
-    {isInstalled ? (
-      <p className="rounded-[24px] bg-[#F4F7F7] px-4 py-4 text-center text-[16px] leading-6 text-[#374151]">
-        App is already installed. Please check your home screen.
-      </p>
-    ) : (
-      <button
-        type="button"
-        onClick={onInstall}
-        disabled={!canInstall}
-        className="rounded-[30px] bg-primary px-[24px] py-[16px] text-[18px] tracking-[2px] text-white transition hover:bg-[#019988] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-primary"
-      >
-        Install Now
-      </button>
-    )}
-    <button
-      type="button"
-      onClick={onDismiss}
-      className="rounded-[30px] border border-[#D1D5DB] px-[24px] py-[16px] text-[18px] font-medium text-[#374151] transition hover:bg-gray-50"
-    >
-      Maybe Later
-    </button>
-  </div>
-);
 
 const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
   <>
@@ -128,93 +75,49 @@ const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
 
 const AppInstallPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [deviceType, setDeviceType] = useState<DeviceType | null>(null);
-  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  const [isInstalled, setIsInstalled] = useState(false);
-
-  const isAndroid = deviceType === "android";
-  const isIOS = deviceType === "ios";
-  const isDesktop = deviceType === "desktop";
-  const canUseInstallPrompt = (isAndroid || isDesktop) && Boolean(installPrompt);
+  const [isIOS, setIsIOS] = useState(false);
+  const {
+    isInstalled,
+    setMessage,
+    promptInstall,
+    shouldShowInstallButton,
+    fallbackMessage,
+  } = usePWAInstall();
 
   useEffect(() => {
-    if (typeof window === "undefined") {
+    if (typeof window === "undefined" || isInstalled) {
       return;
     }
 
-    const currentDeviceType = getDeviceType();
-    const promptWindow = window as InstallPromptWindow;
-    let timer: number | null = null;
+    setIsIOS(isIOSDevice());
 
-    setDeviceType(currentDeviceType);
-    const installed = isAppInstalled();
-    setIsInstalled(installed);
-
-    if (installed) {
+    if (wasDismissedRecently()) {
       return;
     }
 
-    const startPopupTimer = () => {
-      if (timer !== null) {
-        return;
-      }
-
-      timer = window.setTimeout(() => {
-        setIsVisible(true);
-      }, POPUP_DELAY_MS);
-    };
-
-    const syncInstallPrompt = () => {
-      const storedPrompt = promptWindow.__hubecoInstallPrompt ?? null;
-
-      setInstallPrompt(storedPrompt);
-      setIsInstalled(isAppInstalled());
-
-      if (storedPrompt && currentDeviceType !== "ios") {
-        startPopupTimer();
-      }
-    };
+    const timer = window.setTimeout(() => {
+      setIsVisible(true);
+    }, POPUP_DELAY_MS);
 
     const handleManualOpen = () => {
-      const installedNow = isAppInstalled();
-      setIsInstalled(installedNow);
-
-      if (installedNow) {
-        return;
-      }
-
       setIsVisible(true);
     };
 
     const handleAppInstalled = () => {
-      window.localStorage.setItem(INSTALLED_STORAGE_KEY, "true");
-      setIsInstalled(true);
-      setInstallPrompt(null);
       setIsVisible(false);
     };
 
     window.addEventListener("hubeco:open-install-popup", handleManualOpen);
-
-    syncInstallPrompt();
-
-    if (currentDeviceType === "ios") {
-      startPopupTimer();
-    }
-
-    window.addEventListener("hubeco:installpromptavailable", syncInstallPrompt);
     window.addEventListener("hubeco:appinstalled", handleAppInstalled);
     window.addEventListener("appinstalled", handleAppInstalled);
 
     return () => {
-      if (timer !== null) {
-        window.clearTimeout(timer);
-      }
+      window.clearTimeout(timer);
       window.removeEventListener("hubeco:open-install-popup", handleManualOpen);
-      window.removeEventListener("hubeco:installpromptavailable", syncInstallPrompt);
       window.removeEventListener("hubeco:appinstalled", handleAppInstalled);
       window.removeEventListener("appinstalled", handleAppInstalled);
     };
-  }, []);
+  }, [isInstalled]);
 
   useEffect(() => {
     if (typeof document === "undefined" || !isVisible) {
@@ -235,28 +138,20 @@ const AppInstallPopup = () => {
     }
 
     setIsVisible(false);
+    setMessage("");
   };
 
   const handleInstall = async () => {
-    if (!installPrompt || isInstalled) {
-      return;
-    }
+    const result = await promptInstall();
 
-    await installPrompt.prompt();
-    const choice = await installPrompt.userChoice;
-
-    if (choice.outcome === "accepted") {
-      window.localStorage.setItem(INSTALLED_STORAGE_KEY, "true");
-      setIsInstalled(true);
-    } else {
+    if (result.outcome === "fallback" || result.outcome === "dismissed") {
       setIsVisible(false);
+      setMessage("");
+      toast.success(fallbackMessage);
     }
-
-    setInstallPrompt(null);
-    (window as InstallPromptWindow).__hubecoInstallPrompt = null;
   };
 
-  if (!isVisible || (!isAndroid && !isIOS && !isDesktop)) {
+  if (!isVisible || !shouldShowInstallButton) {
     return null;
   }
 
@@ -283,20 +178,30 @@ const AppInstallPopup = () => {
               priority={false}
             />
             <h2 className="text-[23px] text-primary md:text-[32px]">
-              {isAndroid || isDesktop ? "Install Hubeco App" : "Add to Home Screen"}
+              {isIOS ? "Add to Home Screen" : "Install Hubeco App"}
             </h2>
           </div>
         </div>
 
-        {isAndroid || isDesktop ? (
-          <InstallPromptContent
-            canInstall={canUseInstallPrompt}
-            isInstalled={isInstalled}
-            onInstall={handleInstall}
-            onDismiss={handleDismiss}
-          />
-        ) : (
+        {isIOS ? (
           <IOSInstallContent onDismiss={handleDismiss} />
+        ) : (
+          <div className="flex w-[254px] flex-col justify-center gap-3">
+            <button
+              type="button"
+              onClick={handleInstall}
+              className="rounded-[30px] bg-primary px-[24px] py-[16px] text-[18px] tracking-[2px] text-white transition hover:bg-[#019988]"
+            >
+              Install Now
+            </button>
+            <button
+              type="button"
+              onClick={handleDismiss}
+              className="rounded-[30px] border border-[#D1D5DB] px-[24px] py-[16px] text-[18px] font-medium text-[#374151] transition hover:bg-gray-50"
+            >
+              Maybe Later
+            </button>
+          </div>
         )}
       </div>
     </div>

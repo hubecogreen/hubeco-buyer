@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,7 +7,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
-
+import usePWAInstall from "@/components/hooks/usePWAInstall";
 
 const logos = [
   "/images/home/hero/banka-bio-logo.png",
@@ -18,106 +18,22 @@ const logos = [
 
 const greenProLabels = ["GreenPro", "EPD", "GRIHA"];
 
-const INSTALLED_STORAGE_KEY = "hubeco:install-popup:installed";
-
-type DeviceType = "android" | "ios" | "desktop";
-
-type InstallPromptWindow = Window & {
-  __hubecoInstallPrompt?: Event | null;
-};
-
-const isAppInstalled = () => {
-  const iosStandalone =
-    "standalone" in window.navigator &&
-    Boolean((window.navigator as Navigator & { standalone?: boolean }).standalone);
-  const displayModeStandalone = window.matchMedia("(display-mode: standalone)").matches;
-
-  return (
-    iosStandalone ||
-    displayModeStandalone ||
-    window.localStorage.getItem(INSTALLED_STORAGE_KEY) === "true"
-  );
-};
-
-const getDeviceType = (): DeviceType => {
-  const userAgent = window.navigator.userAgent;
-  const platform = window.navigator.platform;
-  const isIOS =
-    /iPhone|iPad|iPod/i.test(userAgent) ||
-    (platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
-
-  if (isIOS) {
-    return "ios";
-  }
-
-  if (/Android/i.test(userAgent)) {
-    return "android";
-  }
-
-  return "desktop";
-};
-
-
 const HeroSection = () => {
-  const [showInstallButton, setShowInstallButton] = useState(false);
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
   const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video-U.webm`;
-  const heroPosterUrl = '/images/home/hero/video-poster.webp';
+  const heroPosterUrl = "/images/home/hero/video-poster.webp";
+  const { shouldShowInstallButton } = usePWAInstall();
 
-  const whatsappNumber = "919985544055"; // Replace with your number in international format (without +)
+  const whatsappNumber = "919985544055";
   const defaultMessage =
     "Hello, I would like to get a quote for sustainable building materials for my project. Please let me know the next steps to share my requirements.";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
-
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    const promptWindow = window as InstallPromptWindow;
-    const currentDeviceType = getDeviceType();
-
-    const syncInstallAvailability = () => {
-      if (isAppInstalled()) {
-        setShowInstallButton(false);
-        return;
-      }
-
-      if (currentDeviceType === "ios") {
-        setShowInstallButton(true);
-        return;
-      }
-
-      setShowInstallButton(Boolean(promptWindow.__hubecoInstallPrompt));
-    };
-
-    const handleAppInstalled = () => {
-      window.localStorage.setItem(INSTALLED_STORAGE_KEY, "true");
-      setShowInstallButton(false);
-    };
-
-    syncInstallAvailability();
-
-    window.addEventListener("hubeco:installpromptavailable", syncInstallAvailability);
-    window.addEventListener("hubeco:appinstalled", handleAppInstalled);
-    window.addEventListener("appinstalled", handleAppInstalled);
-
-    return () => {
-      window.removeEventListener("hubeco:installpromptavailable", syncInstallAvailability);
-      window.removeEventListener("hubeco:appinstalled", handleAppInstalled);
-      window.removeEventListener("appinstalled", handleAppInstalled);
-    };
-  }, []);
-
-
-
 
   return (
     <section
       id="home-hero-section"
       className="relative  lg:h-[561px] md:h-[472px] h-[536px]  "
     >
-      {/* Full-screen video */}
       <video
         autoPlay
         loop
@@ -131,15 +47,10 @@ const HeroSection = () => {
         Your browser does not support the video tag.
       </video>
 
-      {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-black/0 z-10" />
 
-      {/* Content Layer */}
       <div className="relative z-20 w-full h-full flex flex-col justify-center px-[20px] lg:px-[120px]  text-cream lg:translate-y-[-100px] translate-y-[-40px] lg:max-w-[1440px] mx-auto  ">
-
-        {/* Title + Right Section */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center  lg:gap-[25px] gap-[20px] w-full">
-          {/* LEFT TITLE */}
           <div className="lg:max-w-3xl lg:space-y-4 lg:pt-[209px] pt-[160px] w-full">
             <h1
               className="text-[27px] lg:text-[60px] lg:leading-[60px] leading-[30px] font-medium"
@@ -157,20 +68,17 @@ const HeroSection = () => {
                     {char}
                   </motion.span>
                 ))}
-              </span> 
+              </span>
 
               <br className="md:hidden lg:block block" />
               Construction
             </h1>
           </div>
 
-          {/* RIGHT SIDE — Vertical swiper text */}
-          {/* RIGHT SIDE — Vertical swiper text */}
           <div className="flex flex-col justify-center h-full lg:translate-y-[190px] gap-2 w-full md:w-1/2 lg:w-1/2">
             <p className="text-[20px] font-regular">Certified Products aligned with</p>
 
             <div className="flex items-center justify-between sm:gap-4 lg:gap-6 w-full  md:w-full lg:w-full sm:w-fit">
-
               <div className="h-[50px] overflow-hidden flex-shrink-0 min-w-[120px]">
                 <div className="vertical-marquee">
                   <div className="vertical-track">
@@ -183,8 +91,7 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              {/* 👉 BUTTON */}
-              {showInstallButton ? (
+              {shouldShowInstallButton ? (
                 <button
                   onClick={() => {
                     window.dispatchEvent(new Event("hubeco:open-install-popup"));
@@ -201,30 +108,20 @@ const HeroSection = () => {
                   Get Hubeco App
                 </button>
               ) : null}
-
             </div>
           </div>
-
-
-
         </div>
         <hr className="border-white/40 w-full lg:my-6 my-[10px]" />
 
-
-        {/* Middle Row (Paragraph + Buttons) */}
         <div className="lg:flex block gap-[312px] items-center  lg:pb-[50px] pb-[18px] lg:justify-between md:w-1/2 lg:w-auto">
-
-          {/* Text */}
           <div className="">
             <p className="max-[370px]:text-[16px] text-[20px] lg:leading-[30px] leading-[20px]  lg:mt-2 font-regular  ">
-              Empowering India’s Construction Industry with <br className="hidden lg:block" />
+              Empowering Indiaâ€™s Construction Industry with <br className="hidden lg:block" />
               Sustainable Materials and Digital Efficiency
             </p>
           </div>
 
-          {/* Buttons */}
           <div className=" gap-3 mt-4 flex  lg:gap-6  ">
-
             <motion.button
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
@@ -236,7 +133,6 @@ const HeroSection = () => {
              rounded-md whitespace-nowrap"
               onClick={() => window.open(whatsappLink, "_blank")}
             >
-              {/* Default (white icon) */}
               <Image
                 src="/images/home/hero/whatsapp-white.png"
                 alt="Get Quote"
@@ -245,7 +141,6 @@ const HeroSection = () => {
                 className="group-hover:hidden"
               />
 
-              {/* Hover (green icon) */}
               <Image
                 src="/images/home/hero/whatsapp-green.png"
                 alt="Get Quote"
@@ -269,25 +164,21 @@ const HeroSection = () => {
             >
               Partner with Us
             </motion.button>
-
           </div>
         </div>
 
-
-        {/* Bottom scrolling logos */}
         <div className="w-full flex flex-row items-center justify-center bg-white/10 backdrop-blur-md rounded-md py-2 px-4">
-
           <p className="opacity-70 whitespace-nowrap px-3 text-[16px] ">Trusted by:</p>
 
           <Swiper
             slidesPerView="auto"
-            loop={false}               // important
-            allowTouchMove={false}     // prevent dragging reset
+            loop={false}
+            allowTouchMove={false}
             autoplay={false}
             speed={5000}
             className="ml-4 opacity-85 w-full marquee-swiper"
           >
-            {[...logos, ...logos, ...logos].map((dup) =>        // duplicate items manually ×2
+            {[...logos, ...logos, ...logos].map((dup) =>
               logos.map((logo, i) => (
                 <SwiperSlide key={`${dup}-${i}`} className="marquee-slide ">
                   <Image src={logo} alt={`logo-${i}`} width={80} height={24} className="mx-3 mt-2" />
@@ -295,12 +186,8 @@ const HeroSection = () => {
               ))
             )}
           </Swiper>
-
-
         </div>
-
       </div>
-
     </section>
   );
 };

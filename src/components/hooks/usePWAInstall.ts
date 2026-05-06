@@ -24,6 +24,7 @@ const getStoredPrompt = () => {
 const usePWAInstall = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isInstalled, setIsInstalled] = useState(false);
+  const [hasCheckedInstallState, setHasCheckedInstallState] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const usePWAInstall = () => {
     const syncInstallState = () => {
       setIsInstalled(getStandaloneState());
       setDeferredPrompt(getStoredPrompt());
+      setHasCheckedInstallState(true);
     };
 
     const handlePromptAvailable = () => {
@@ -44,8 +46,9 @@ const usePWAInstall = () => {
     };
 
     const handleAppInstalled = () => {
-      setIsInstalled(true);
+      setIsInstalled(getStandaloneState());
       setDeferredPrompt(null);
+      setHasCheckedInstallState(true);
       setMessage("");
     };
 
@@ -88,7 +91,7 @@ const usePWAInstall = () => {
         return { outcome: "accepted" as const };
       }
 
-      setMessage(FALLBACK_MESSAGE);
+      setMessage("");
       return { outcome: "dismissed" as const };
     } catch {
       setDeferredPrompt(null);
@@ -102,7 +105,7 @@ const usePWAInstall = () => {
     deferredPrompt,
     isInstalled,
     isInstallAvailable: Boolean(deferredPrompt),
-    shouldShowInstallButton: !isInstalled,
+    shouldShowInstallButton: hasCheckedInstallState && !isInstalled,
     message,
     setMessage,
     promptInstall,

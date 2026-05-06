@@ -76,6 +76,7 @@ const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
 const AppInstallPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
+  const [hasDismissedThisSession, setHasDismissedThisSession] = useState(false);
   const {
     isInstalled,
     setMessage,
@@ -85,21 +86,28 @@ const AppInstallPopup = () => {
   } = usePWAInstall();
 
   useEffect(() => {
-    if (typeof window === "undefined" || isInstalled) {
+    if (typeof window === "undefined") {
       return;
     }
 
     setIsIOS(isIOSDevice());
 
-    if (wasDismissedRecently()) {
-      return;
+    let timer: number | undefined;
+
+    if (!isInstalled && !hasDismissedThisSession && !wasDismissedRecently()) {
+      timer = window.setTimeout(() => {
+        setIsVisible(true);
+      }, POPUP_DELAY_MS);
     }
 
-    const timer = window.setTimeout(() => {
-      setIsVisible(true);
-    }, POPUP_DELAY_MS);
-
     const handleManualOpen = () => {
+      if (isInstalled) {
+        setIsVisible(false);
+        toast.success(fallbackMessage);
+        return;
+      }
+
+      setHasDismissedThisSession(false);
       setIsVisible(true);
     };
 
@@ -112,12 +120,14 @@ const AppInstallPopup = () => {
     window.addEventListener("appinstalled", handleAppInstalled);
 
     return () => {
-      window.clearTimeout(timer);
+      if (timer) {
+        window.clearTimeout(timer);
+      }
       window.removeEventListener("hubeco:open-install-popup", handleManualOpen);
       window.removeEventListener("hubeco:appinstalled", handleAppInstalled);
       window.removeEventListener("appinstalled", handleAppInstalled);
     };
-  }, [isInstalled]);
+  }, [fallbackMessage, hasDismissedThisSession, isInstalled]);
 
   useEffect(() => {
     if (typeof document === "undefined" || !isVisible) {
@@ -137,6 +147,7 @@ const AppInstallPopup = () => {
       window.localStorage.setItem(DISMISSED_AT_STORAGE_KEY, String(Date.now()));
     }
 
+    setHasDismissedThisSession(true);
     setIsVisible(false);
     setMessage("");
   };
@@ -144,10 +155,16 @@ const AppInstallPopup = () => {
   const handleInstall = async () => {
     const result = await promptInstall();
 
-    if (result.outcome === "fallback" || result.outcome === "dismissed") {
+    if (result.outcome === "fallback") {
       setIsVisible(false);
       setMessage("");
       toast.success(fallbackMessage);
+      return;
+    }
+
+    if (result.outcome === "dismissed") {
+      setIsVisible(false);
+      setMessage("");
     }
   };
 

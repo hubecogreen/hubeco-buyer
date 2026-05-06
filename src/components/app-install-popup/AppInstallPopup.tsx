@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import usePWAInstall from "@/components/hooks/usePWAInstall";
+import { Menu, MoreVertical, Share } from "lucide-react";
 
 const POPUP_DELAY_MS = 5000;
 const DISMISS_COOLDOWN_MS = 24 * 60 * 60 * 1000;
@@ -34,6 +35,10 @@ const isIOSDevice = () => {
     /iPhone|iPad|iPod/i.test(userAgent) ||
     (platform === "MacIntel" && window.navigator.maxTouchPoints > 1)
   );
+};
+
+const isFirefoxBrowser = () => {
+  return /firefox|fxios/i.test(window.navigator.userAgent);
 };
 
 const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
@@ -73,12 +78,92 @@ const IOSInstallContent = ({ onDismiss }: { onDismiss: () => void }) => (
   </>
 );
 
+const FirefoxInstallContent = ({
+  isIOS,
+  onDismiss,
+}: {
+  isIOS: boolean;
+  onDismiss: () => void;
+}) => (
+  <>
+    <div className="mb-5 flex items-center">
+       {isIOS && <div>
+        <Image
+          src="/images/home/iphone-icon.png"
+          alt="iPhone Icon"
+          width={50}
+          height={50}
+        />
+      </div>}
+      <div className="rounded-xl bg-cream py-2 pl-4 pr-1 text-left text-sm leading-6 text-[#374151]">
+        <div className="mt-2 flex items-center gap-2">
+          <Image src="/images/home/number-1-icon.png" width={27} height={27} alt="1-icon" />
+         <p className="flex items-center gap-1">
+  Tap the{" "}
+  {isIOS ? (
+    <>
+      <span className="font-medium text-[#1F2937]">Share</span>
+      <Share size={16} />
+    </>
+  ) : (
+    <>
+      <span className="font-medium text-[#1F2937]">Menu</span>
+      <MoreVertical size={16} />
+    </>
+  )}{" "}
+  icon.
+</p>
+        </div>
+
+        {isIOS ? (
+          <div className="mt-2 flex items-center gap-2 whitespace-nowrap">
+            <Image src="/images/home/number-2-icon.png" width={27} height={27} alt="2-icon" />
+            <p>
+              Choose
+              <span className="font-medium text-[#1F2937]"> Add to Home Screen</span>.
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="mt-2 flex items-center gap-2 whitespace-nowrap">
+              <Image src="/images/home/number-2-icon.png" width={27} height={27} alt="2-icon" />
+              <p className="flex items-center gap-1">
+                Click on
+                <span className="inline-flex items-center gap-1 font-medium text-[#1F2937]">
+                  more 
+                </span>
+                .
+              </p>
+            </div>
+            <div className="mt-2 flex items-center gap-2 whitespace-nowrap">
+              <Image src="/images/home/number-3-icon.png" width={27} height={27} alt="3-icon" />
+              <p>
+                Choose
+                <span className="font-medium text-[#1F2937]"> Add App to Home Screen</span>.
+              </p>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+    <button
+      type="button"
+      onClick={onDismiss}
+      className="w-full rounded-xl border border-[#D1D5DB] px-4 py-3 text-sm font-medium text-[#374151] transition hover:bg-gray-50"
+    >
+      Close
+    </button>
+  </>
+);
+
 const AppInstallPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
+  const [isFirefox, setIsFirefox] = useState(false);
   const [hasDismissedThisSession, setHasDismissedThisSession] = useState(false);
   const {
     isInstalled,
+    isInstallAvailable,
     setMessage,
     promptInstall,
     shouldShowInstallButton,
@@ -91,6 +176,7 @@ const AppInstallPopup = () => {
     }
 
     setIsIOS(isIOSDevice());
+    setIsFirefox(isFirefoxBrowser());
 
     let timer: number | undefined;
 
@@ -195,12 +281,16 @@ const AppInstallPopup = () => {
               priority={false}
             />
             <h2 className="text-[23px] text-primary md:text-[32px]">
-              {isIOS ? "Add to Home Screen" : "Install Hubeco App"}
+              {isIOS || (isFirefox && !isInstallAvailable)
+                ? "Add to Home Screen"
+                : "Install Hubeco App"}
             </h2>
           </div>
         </div>
 
-        {isIOS ? (
+        {isFirefox && !isInstallAvailable ? (
+          <FirefoxInstallContent isIOS={isIOS} onDismiss={handleDismiss} />
+        ) : isIOS ? (
           <IOSInstallContent onDismiss={handleDismiss} />
         ) : (
           <div className="flex w-[254px] flex-col justify-center gap-3">

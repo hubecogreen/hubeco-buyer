@@ -187,6 +187,11 @@ const AppInstallPopup = () => {
     }
 
     const handleManualOpen = () => {
+      if (timer) {
+        window.clearTimeout(timer);
+        timer = undefined;
+      }
+
       if (isInstalled) {
         setIsVisible(false);
         toast.success(fallbackMessage);

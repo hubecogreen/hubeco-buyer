@@ -478,7 +478,7 @@ const Header: React.FC<HeaderProps> = () => {
               >
                 <Image
                   src="/images/Rlogo.png"
-                  className="!h-[72px] !w-[255px] object-contain"
+                  className="!h-[72px] !w-[255px]  object-contain"
                   alt="Hubeco Logo"
                   width={255}
                   height={72}
@@ -1148,7 +1148,7 @@ const Header: React.FC<HeaderProps> = () => {
                 alt="Hubeco Logo"
                 width={188}
                 height={43}
-                className="object-contain"
+                className="object-contain max-[380px]:w-[160px]"
               />
             </Link>
 
@@ -1280,7 +1280,7 @@ const Header: React.FC<HeaderProps> = () => {
             ) : (
               <CustomButton
                 title="Login / SignUp"
-                className="text-[12px] bg-cream text-secondaryLight border-[1px] border-secondaryLight px-4 lg:px-2  md:h-12 h-10   lg:flex  font-medium"
+                className="text-[12px] bg-cream text-secondaryLight border-[1px] border-secondaryLight px-4 lg:px-2  max-[380px]:px-[6px]  md:h-12 h-10   lg:flex  font-medium"
 
                 hoverBgColor=""
                 onPress={() => setShowLoginPopup(true)}

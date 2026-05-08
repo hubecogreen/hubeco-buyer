@@ -99,7 +99,7 @@ const HeroSection = () => {
                   className="flex items-center gap-2 bg-primary 
              w-auto sm:w-auto max-w-full overflow-hidden
              lg:px-[13px] lg:py-[11.5px] py-[10px] md:px-[18px] px-[16px] 
-             rounded-[4px] text-cream text-[14px] sm:text-[16px] font-medium whitespace-nowrap"
+             rounded-[4px] text-cream text-[14px] sm:text-[16px] font-medium whitespace-nowrap cursor-pointer"
                 >
                   <div className="flex items-center justify-center w-[28px] h-[28px] shrink-0">
                     <Download size={22} color="#FFFEF8" />
@@ -116,12 +116,12 @@ const HeroSection = () => {
         <div className="lg:flex block gap-[312px] items-center  lg:pb-[50px] pb-[18px] lg:justify-between md:w-1/2 lg:w-auto">
           <div className="">
             <p className="max-[370px]:text-[16px] text-[20px] lg:leading-[30px] leading-[20px]  lg:mt-2 font-regular  ">
-              Empowering Indiaâ€™s Construction Industry with <br className="hidden lg:block" />
+              Empowering India&apos;s Construction Industry with <br className="hidden lg:block" />
               Sustainable Materials and Digital Efficiency
             </p>
           </div>
 
-          <div className=" gap-3 mt-4 flex  lg:gap-6  ">
+          <div className=" gap-3 mt-4 flex  lg:gap-6 relative z-30  ">
             <motion.button
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
@@ -130,7 +130,7 @@ const HeroSection = () => {
              bg-primary hover:bg-cream hover:text-primary text-cream 
              w-full lg:w-[190px] 
              lg:px-[33px] lg:py-[11.5px] py-[10px] px-[20px] text-[17px] font-medium
-             rounded-md whitespace-nowrap"
+             rounded-md whitespace-nowrap cursor-pointer"
               onClick={() => window.open(whatsappLink, "_blank")}
             >
               <Image
@@ -159,7 +159,7 @@ const HeroSection = () => {
               className="bg-primary hover:bg-cream hover:text-primary text-cream 
                  w-full lg:w-auto 
                  lg:px-[33px] lg:py-[11.5px] py-[10px] px-[20px] text-[17px] font-medium
-                 rounded-md whitespace-nowrap"
+                 rounded-md whitespace-nowrap cursor-pointer"
               onClick={() => window.location.href = `${process.env.NEXT_PUBLIC_VENDOR_URL}/login`}
             >
               Partner with Us

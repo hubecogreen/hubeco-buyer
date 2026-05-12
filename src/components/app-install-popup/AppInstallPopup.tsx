@@ -175,12 +175,21 @@ const AppInstallPopup = () => {
       return;
     }
 
-    setIsIOS(isIOSDevice());
-    setIsFirefox(isFirefoxBrowser());
+    const currentIsIOS = isIOSDevice();
+    const currentIsFirefox = isFirefoxBrowser();
+    const hasManualInstallPath = currentIsIOS || (currentIsFirefox && !isInstallAvailable);
+
+    setIsIOS(currentIsIOS);
+    setIsFirefox(currentIsFirefox);
 
     let timer: number | undefined;
 
-    if (!isInstalled && !hasDismissedThisSession && !wasDismissedRecently()) {
+    if (
+      !isInstalled &&
+      !hasDismissedThisSession &&
+      !wasDismissedRecently() &&
+      !hasManualInstallPath
+    ) {
       timer = window.setTimeout(() => {
         setIsVisible(true);
       }, POPUP_DELAY_MS);
@@ -218,7 +227,7 @@ const AppInstallPopup = () => {
       window.removeEventListener("hubeco:appinstalled", handleAppInstalled);
       window.removeEventListener("appinstalled", handleAppInstalled);
     };
-  }, [fallbackMessage, hasDismissedThisSession, isInstalled]);
+  }, [fallbackMessage, hasDismissedThisSession, isInstalled, isInstallAvailable]);
 
   useEffect(() => {
     if (typeof document === "undefined" || !isVisible) {

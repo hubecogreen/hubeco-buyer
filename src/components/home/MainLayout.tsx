@@ -3,6 +3,7 @@
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Footer from "@/components/footer/MainFooter";
 import Header from "@/components/header/MainHeader";
+import NetworkStatusToast from "@/components/network-status/NetworkStatusToast";
 import PrivateRoute from "@/components/PrivateRouter";
 import MeDetails from "@/reduxStore/Compo";
 import { RootProvider } from "@/reduxStore/customProvider";
@@ -35,6 +36,7 @@ const MainLayout = ({
             <ChakraProvider>
               <Header />
               <div className="mt-[79px] bg-cream">
+                <NetworkStatusToast />
                 <PrivateRoute>{children}</PrivateRoute>
               </div>
               <Footer  />

@@ -1,138 +1,280 @@
-const CACHE_NAME = 'hubeco-cache-v1';
-const STATIC_CACHE_NAME = 'hubeco-static-v1';
-const IMAGE_CACHE_NAME = 'hubeco-images-v1';
+const VERSION = 'v2';
+const STATIC_CACHE_NAME = `hubeco-static-${VERSION}`;
+const IMAGE_CACHE_NAME = `hubeco-images-${VERSION}`;
+const PAGE_CACHE_NAME = `hubeco-pages-${VERSION}`;
+const PUBLIC_API_CACHE_NAME = `hubeco-public-api-${VERSION}`;
 
-// Cache URLs for static assets
-const STATIC_URLS = [
-  '/',
-  '/offline.html',
-  '/images/product-placeholder.webp',
-  '/images/Admin-2.webp', 
-  '/images/actions/Action.webp'
+const OFFLINE_URL = '/offline.html';
+const PRODUCT_PLACEHOLDER_URL = '/images/product-placeholder.webp';
+
+const PRECACHE_URLS = [
+  OFFLINE_URL,
+  '/manifest.webmanifest',
+  '/favicon.ico',
+  '/images/Rlogo.png',
+  '/images/app-logo.png',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  PRODUCT_PLACEHOLDER_URL,
+  '/images/actions/Action.webp',
+  '/images/home/hero/video-poster.webp'
 ];
 
-// Install event - cache static assets
+const PUBLIC_PAGE_PATHS = [
+  '/',
+  '/about',
+  '/contact',
+  '/faq',
+  '/privacy-policy',
+  '/terms-of-use',
+  '/shipping-delivery',
+  '/returns-refunds-cancellations',
+  '/blogs',
+  '/brands',
+  '/categories',
+  '/products'
+];
+
+const BLOCKED_API_KEYWORDS = [
+  'auth',
+  'login',
+  'register',
+  'password',
+  'otp',
+  'profile',
+  'user',
+  'cart',
+  'wishlist',
+  'checkout',
+  'payment',
+  'order',
+  'quote',
+  'ticket',
+  'support',
+  'subscription'
+];
+
+const PUBLIC_API_KEYWORDS = [
+  'categories',
+  'category',
+  'subcategory',
+  'products',
+  'product',
+  'blogs',
+  'blog',
+  'brands',
+  'brand'
+];
+
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    Promise.all([
-      caches.open(STATIC_CACHE_NAME).then((cache) => {
-        return cache.addAll(STATIC_URLS);
-      }),
-      caches.open(IMAGE_CACHE_NAME).then((cache) => {
-        // Pre-cache critical images
-        return cache.addAll([
-          '/images/home/hero/video-poster.webp',
-          '/images/actions/Action.webp'
-        ]);
-      })
-    ])
-  );
-  self.skipWaiting();
+  event.waitUntil(precache());
 });
 
-// Activate event - clean up old caches
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME && 
-              cacheName !== STATIC_CACHE_NAME && 
-              cacheName !== IMAGE_CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    caches.keys().then((cacheNames) =>
+      Promise.all(
+        cacheNames
+          .filter((cacheName) =>
+            cacheName.startsWith('hubeco-') &&
+            ![
+              STATIC_CACHE_NAME,
+              IMAGE_CACHE_NAME,
+              PAGE_CACHE_NAME,
+              PUBLIC_API_CACHE_NAME
+            ].includes(cacheName)
+          )
+          .map((cacheName) => caches.delete(cacheName))
+      )
+    )
   );
+
   self.clients.claim();
 });
 
-// Fetch event - serve from cache when possible
 self.addEventListener('fetch', (event) => {
   const { request } = event;
-  const url = new URL(request.url);
 
-  // Handle image requests with aggressive caching
-  if (request.destination === 'image') {
-    event.respondWith(
-      caches.open(IMAGE_CACHE_NAME).then((cache) => {
-        return cache.match(request).then((response) => {
-          if (response) {
-            // Return cached image
-            return response;
-          }
-          
-          // Fetch from network and cache
-          return fetch(request).then((networkResponse) => {
-            if (networkResponse.ok) {
-              cache.put(request, networkResponse.clone());
-            }
-            return networkResponse;
-          }).catch(() => {
-            // Return placeholder if network fails
-            return cache.match('/images/product-placeholder.webp');
-          });
-        });
-      })
-    );
-    return;
-  }
-
-  // Handle static assets
-  if (request.destination === 'style' || 
-      request.destination === 'script' || 
-      request.destination === 'font') {
-    event.respondWith(
-      caches.open(STATIC_CACHE_NAME).then((cache) => {
-        return cache.match(request).then((response) => {
-          if (response) {
-            return response;
-          }
-          return fetch(request).then((networkResponse) => {
-            if (networkResponse.ok) {
-              cache.put(request, networkResponse.clone());
-            }
-            return networkResponse;
-          });
-        });
-      })
-    );
-    return;
-  }
-
-  // Handle API requests (no caching)
-  if (url.pathname.startsWith('/api/')) {
+  if (request.method !== 'GET') {
     event.respondWith(fetch(request));
     return;
   }
 
-  // Handle navigation requests
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      fetch(request).catch(() => {
-        return caches.match('/offline.html');
-      })
-    );
+  const url = new URL(request.url);
+
+  if (isAuthorizedRequest(request)) {
+    event.respondWith(fetch(request));
     return;
   }
 
-  // Default: try network first, fallback to cache
-  event.respondWith(
-    fetch(request).catch(() => {
-      return caches.match(request);
+  if (isApiRequest(request, url)) {
+    event.respondWith(handleApiRequest(request, url));
+    return;
+  }
+
+  if (request.mode === 'navigate') {
+    event.respondWith(handleNavigationRequest(request, url));
+    return;
+  }
+
+  if (request.destination === 'image') {
+    event.respondWith(cacheFirst(request, IMAGE_CACHE_NAME, PRODUCT_PLACEHOLDER_URL, 150));
+    return;
+  }
+
+  if (['style', 'script', 'font', 'manifest'].includes(request.destination)) {
+    event.respondWith(staleWhileRevalidate(request, STATIC_CACHE_NAME, 80));
+    return;
+  }
+
+  event.respondWith(fetch(request).catch(() => caches.match(request)));
+});
+
+async function precache() {
+  const cache = await caches.open(STATIC_CACHE_NAME);
+
+  await Promise.all(
+    PRECACHE_URLS.map(async (url) => {
+      try {
+        await cache.add(url);
+      } catch (error) {
+        console.warn('[Hubeco SW] Failed to precache', url, error);
+      }
     })
   );
-});
+}
 
-// Background sync for offline functionality
-self.addEventListener('sync', (event) => {
-  if (event.tag === 'background-sync') {
-    event.waitUntil(doBackgroundSync());
+function isAuthorizedRequest(request) {
+  return request.headers.has('authorization');
+}
+
+function isApiRequest(request, url) {
+  if (url.origin === self.location.origin) {
+    return url.pathname.startsWith('/api/') || url.pathname.includes('/api/');
   }
-});
 
-async function doBackgroundSync() {
-  // Handle background sync tasks
-  console.log('Background sync completed');
-} 
+  return request.destination === '';
+}
+
+function isBlockedApiPath(pathname) {
+  const lowerPath = pathname.toLowerCase();
+  return BLOCKED_API_KEYWORDS.some((keyword) => lowerPath.includes(keyword));
+}
+
+function isPublicApiPath(pathname) {
+  const lowerPath = pathname.toLowerCase();
+  return PUBLIC_API_KEYWORDS.some((keyword) => lowerPath.includes(keyword));
+}
+
+function isPublicPagePath(pathname) {
+  const normalizedPath = pathname.replace(/\/$/, '') || '/';
+  return PUBLIC_PAGE_PATHS.some((path) => normalizedPath === path || normalizedPath.startsWith(`${path}/`));
+}
+
+function isCacheableResponse(response) {
+  return response && response.ok && (response.type === 'basic' || response.type === 'cors');
+}
+
+async function handleApiRequest(request, url) {
+  if (isBlockedApiPath(url.pathname) || !isPublicApiPath(url.pathname)) {
+    return fetch(request);
+  }
+
+  return networkFirst(request, PUBLIC_API_CACHE_NAME, null, 40);
+}
+
+async function handleNavigationRequest(request, url) {
+  if (!isPublicPagePath(url.pathname)) {
+    return fetch(request).catch(() => caches.match(OFFLINE_URL));
+  }
+
+  return networkFirst(request, PAGE_CACHE_NAME, OFFLINE_URL, 30);
+}
+
+async function networkFirst(request, cacheName, fallbackUrl, maxEntries) {
+  const cache = await caches.open(cacheName);
+
+  try {
+    const response = await fetch(request);
+
+    if (isCacheableResponse(response)) {
+      await cache.put(request, response.clone());
+      await trimCache(cacheName, maxEntries);
+    }
+
+    return response;
+  } catch (error) {
+    const cachedResponse = await cache.match(request);
+
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+
+    if (fallbackUrl) {
+      return caches.match(fallbackUrl);
+    }
+
+    throw error;
+  }
+}
+
+async function cacheFirst(request, cacheName, fallbackUrl, maxEntries) {
+  const cache = await caches.open(cacheName);
+  const cachedResponse = await cache.match(request);
+
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  try {
+    const response = await fetch(request);
+
+    if (isCacheableResponse(response)) {
+      await cache.put(request, response.clone());
+      await trimCache(cacheName, maxEntries);
+    }
+
+    return response;
+  } catch (error) {
+    if (fallbackUrl) {
+      return caches.match(fallbackUrl);
+    }
+
+    throw error;
+  }
+}
+
+async function staleWhileRevalidate(request, cacheName, maxEntries) {
+  const cache = await caches.open(cacheName);
+  const cachedResponse = await cache.match(request);
+
+  const fetchPromise = fetch(request)
+    .then(async (response) => {
+      if (isCacheableResponse(response)) {
+        await cache.put(request, response.clone());
+        await trimCache(cacheName, maxEntries);
+      }
+
+      return response;
+    })
+    .catch(() => cachedResponse);
+
+  return cachedResponse || fetchPromise;
+}
+
+async function trimCache(cacheName, maxEntries) {
+  if (!maxEntries) return;
+
+  const cache = await caches.open(cacheName);
+  const keys = await cache.keys();
+
+  if (keys.length <= maxEntries) return;
+
+  await Promise.all(keys.slice(0, keys.length - maxEntries).map((request) => cache.delete(request)));
+}

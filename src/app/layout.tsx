@@ -7,6 +7,7 @@ import MainLayout from "@/components/home/MainLayout";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import AppInstallPopup from "@/components/app-install-popup/AppInstallPopup";
+import PwaUpdatePrompt from "@/components/pwa-update-prompt/PwaUpdatePrompt";
 
 const WhatsAppWidget = dynamic(() => import("@/components/WhatsApp"), {
   loading: () => <div className="min-h-[100px]" />,
@@ -289,6 +290,7 @@ export default function RootLayout({
         </noscript>
         <WhatsAppWidget />
         <AppInstallPopup />
+        <PwaUpdatePrompt />
       </body>
     </html>
   );

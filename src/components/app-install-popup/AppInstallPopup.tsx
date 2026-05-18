@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import usePWAInstall from "@/components/hooks/usePWAInstall";
-import { Menu, MoreVertical, Share } from "lucide-react";
+import { MoreVertical, Share } from "lucide-react";
 
 const POPUP_DELAY_MS = 5000;
 const DISMISS_COOLDOWN_MS = 24 * 60 * 60 * 1000;
@@ -186,6 +186,7 @@ const AppInstallPopup = () => {
 
     if (
       !isInstalled &&
+      isInstallAvailable &&
       !hasDismissedThisSession &&
       !wasDismissedRecently() &&
       !hasManualInstallPath

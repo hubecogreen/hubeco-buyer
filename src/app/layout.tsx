@@ -7,17 +7,19 @@ import MainLayout from "@/components/home/MainLayout";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import AppInstallPopup from "@/components/app-install-popup/AppInstallPopup";
+import PwaUpdatePrompt from "@/components/pwa-update-prompt/PwaUpdatePrompt";
 
 const WhatsAppWidget = dynamic(() => import("@/components/WhatsApp"), {
   loading: () => <div className="min-h-[100px]" />,
 });
 
-const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
+const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "").toLowerCase();
 
 const isProductionIndexable =
   apiBaseUrl.length > 0 &&
   !apiBaseUrl.includes("uat") &&
-  !apiBaseUrl.includes("dev");
+  !apiBaseUrl.includes("dev") &&
+  !apiBaseUrl.includes("localhost");
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -47,9 +49,6 @@ export const metadata: Metadata = {
     title: "Hubeco",
   },
   themeColor: "#01B6A3",
-  alternates: {
-    canonical: "/",
-  },
   robots: {
     index: isProductionIndexable,
     follow: isProductionIndexable,
@@ -300,6 +299,7 @@ export default function RootLayout({
         </noscript>
         <WhatsAppWidget />
         <AppInstallPopup />
+        <PwaUpdatePrompt />
       </body>
     </html>
   );

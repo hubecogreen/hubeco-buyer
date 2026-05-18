@@ -1,11 +1,12 @@
 import HomePage from "@/components/home/HomePage";
 import { Metadata } from "next";
 
-const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
+const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "").toLowerCase();
 const isProductionIndexable =
   apiBaseUrl.length > 0 &&
   !apiBaseUrl.includes("uat") &&
-  !apiBaseUrl.includes("dev");
+  !apiBaseUrl.includes("dev") &&
+  !apiBaseUrl.includes("localhost");
 
 // Organization Schema component
 function OrganizationSchema() {

@@ -2,6 +2,13 @@ import ProductPreview from "@/components/product/ProductPage";
 import { normalizePath } from "@/lib/utils";
 import React from "react";
 
+const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "").toLowerCase();
+const isProductionIndexable =
+  apiBaseUrl.length > 0 &&
+  !apiBaseUrl.includes("uat") &&
+  !apiBaseUrl.includes("dev") &&
+  !apiBaseUrl.includes("localhost");
+
 // Breadcrumb Schema component
 function BreadcrumbSchema({
   breadcrumbs,
@@ -127,12 +134,12 @@ export async function generateMetadata({
         canonical: canonicalUrl,
       },
       robots: {
-        index: true,
-        follow: true,
+        index: isProductionIndexable,
+        follow: isProductionIndexable,
         nocache: false,
         googleBot: {
-          index: true,
-          follow: true,
+          index: isProductionIndexable,
+          follow: isProductionIndexable,
           noimageindex: false,
         },
       },

@@ -1,25 +1,27 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
 const BlogCard = ({ product }: any) => {
-  const [hover, setHover] = useState(false);
-  const assetURL = process.env.NEXT_PUBLIC_ASSET_URL;
+  const assetURL = (process.env.NEXT_PUBLIC_ASSET_URL || "").replace(/\/+$/, "");
+
+  const thumbnailPath = (product.thumbnail || "").replace(/^\/+/, "");
+
+  const thumbnailUrl = thumbnailPath
+    ? `${assetURL}/${thumbnailPath}`
+    : "/images/failedToLoadImage.webp";
 
   return (
     <motion.div
       className="cursor-pointer w-full"
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
       onClick={() => (window.location.href = `/blogs/${product.slug}`)}
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Image container with aspect ratio 560/479 */}
-      <div className="relative w-full aspect-[560/370] md:aspect-[560/370] lg:aspect-[560/370]">
+      <div className="relative w-full aspect-[560/370]">
         <Image
-          src={`${assetURL}${product.thumbnail.replace("admin/", "/admin/")}`}
+          src={thumbnailUrl}
           alt={product.title}
           fill
           className="object-cover rounded-2xl"

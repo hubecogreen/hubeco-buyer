@@ -1,11 +1,5 @@
-User-agent: * 
- Disallow: /cart 
- Disallow: /checkout 
- Disallow: /account 
- Disallow: /login 
- Disallow: /register 
- Disallow: /search 
- Allow: / 
+User-agent: *
+Allow: /
 
 # OpenAI crawler
 User-agent: GPTBot

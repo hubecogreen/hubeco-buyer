@@ -13,12 +13,13 @@ const WhatsAppWidget = dynamic(() => import("@/components/WhatsApp"), {
   loading: () => <div className="min-h-[100px]" />,
 });
 
-const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
+const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "").toLowerCase();
 
 const isProductionIndexable =
   apiBaseUrl.length > 0 &&
   !apiBaseUrl.includes("uat") &&
-  !apiBaseUrl.includes("dev");
+  !apiBaseUrl.includes("dev") &&
+  !apiBaseUrl.includes("localhost");
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -48,9 +49,6 @@ export const metadata: Metadata = {
     title: "Hubeco",
   },
   themeColor: "#01B6A3",
-  alternates: {
-    canonical: "/",
-  },
   robots: {
     index: isProductionIndexable,
     follow: isProductionIndexable,

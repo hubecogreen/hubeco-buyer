@@ -2,6 +2,7 @@
   "name": "Hubeco",
   "short_name": "Hubeco",
   "description": "Buy eco-friendly and low-carbon building materials online with Hubeco.",
+  "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

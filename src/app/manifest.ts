@@ -6,6 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Hubeco",
     description:
       "Shop eco-friendly, low-carbon building materials and manage sustainable procurement on Hubeco.",
+    id: "/",
     start_url: "/",
     display: "standalone",
     orientation: "portrait",

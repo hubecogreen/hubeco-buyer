@@ -6,27 +6,6 @@ import toast from "react-hot-toast";
 import usePWAInstall from "@/components/hooks/usePWAInstall";
 import { MoreVertical, Share } from "lucide-react";
 
-const POPUP_DELAY_MS = 5000;
-const DISMISS_COOLDOWN_MS = 24 * 60 * 60 * 1000;
-const DISMISSED_AT_STORAGE_KEY = "hubeco:install-popup:dismissed-at";
-
-const wasDismissedRecently = () => {
-  const dismissedAt = window.localStorage.getItem(DISMISSED_AT_STORAGE_KEY);
-
-  if (!dismissedAt) {
-    return false;
-  }
-
-  const dismissedAtMs = Number(dismissedAt);
-
-  if (Number.isNaN(dismissedAtMs)) {
-    window.localStorage.removeItem(DISMISSED_AT_STORAGE_KEY);
-    return false;
-  }
-
-  return Date.now() - dismissedAtMs < DISMISS_COOLDOWN_MS;
-};
-
 const isIOSDevice = () => {
   const userAgent = window.navigator.userAgent;
   const platform = window.navigator.platform;
@@ -160,7 +139,6 @@ const AppInstallPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
   const [isFirefox, setIsFirefox] = useState(false);
-  const [hasDismissedThisSession, setHasDismissedThisSession] = useState(false);
   const {
     isInstalled,
     isInstallAvailable,
@@ -177,38 +155,17 @@ const AppInstallPopup = () => {
 
     const currentIsIOS = isIOSDevice();
     const currentIsFirefox = isFirefoxBrowser();
-    const hasManualInstallPath = currentIsIOS || (currentIsFirefox && !isInstallAvailable);
 
     setIsIOS(currentIsIOS);
     setIsFirefox(currentIsFirefox);
 
-    let timer: number | undefined;
-
-    if (
-      !isInstalled &&
-      isInstallAvailable &&
-      !hasDismissedThisSession &&
-      !wasDismissedRecently() &&
-      !hasManualInstallPath
-    ) {
-      timer = window.setTimeout(() => {
-        setIsVisible(true);
-      }, POPUP_DELAY_MS);
-    }
-
     const handleManualOpen = () => {
-      if (timer) {
-        window.clearTimeout(timer);
-        timer = undefined;
-      }
-
       if (isInstalled) {
         setIsVisible(false);
         toast.success(fallbackMessage);
         return;
       }
 
-      setHasDismissedThisSession(false);
       setIsVisible(true);
     };
 
@@ -221,14 +178,11 @@ const AppInstallPopup = () => {
     window.addEventListener("appinstalled", handleAppInstalled);
 
     return () => {
-      if (timer) {
-        window.clearTimeout(timer);
-      }
       window.removeEventListener("hubeco:open-install-popup", handleManualOpen);
       window.removeEventListener("hubeco:appinstalled", handleAppInstalled);
       window.removeEventListener("appinstalled", handleAppInstalled);
     };
-  }, [fallbackMessage, hasDismissedThisSession, isInstalled, isInstallAvailable]);
+  }, [fallbackMessage, isInstalled, isInstallAvailable]);
 
   useEffect(() => {
     if (typeof document === "undefined" || !isVisible) {
@@ -244,11 +198,6 @@ const AppInstallPopup = () => {
   }, [isVisible]);
 
   const handleDismiss = () => {
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem(DISMISSED_AT_STORAGE_KEY, String(Date.now()));
-    }
-
-    setHasDismissedThisSession(true);
     setIsVisible(false);
     setMessage("");
   };

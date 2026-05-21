@@ -1,4 +1,11 @@
 
+const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "").toLowerCase();
+const isProductionIndexable =
+  apiBaseUrl.length > 0 &&
+  !apiBaseUrl.includes("uat") &&
+  !apiBaseUrl.includes("dev") &&
+  !apiBaseUrl.includes("localhost");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async headers() {
@@ -55,7 +62,7 @@ const nextConfig = {
   images: {
     // domains: ['assets-dev.hubeco.market']
     disableStaticImages: true,
-    unoptimized: true,
+    unoptimized: !isProductionIndexable,
     remotePatterns: [
      
       {

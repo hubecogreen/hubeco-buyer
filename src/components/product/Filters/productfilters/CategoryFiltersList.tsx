@@ -46,8 +46,17 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
     try {
       const data = await getProductCategoryTree(callApi);
 
-      const allSubCategories = data.flatMap(
-        (cat: any) => cat.subCategories || []
+      const allSubCategories = data.flatMap((cat: any) =>
+        (cat.subCategories || []).map((subCat: any) => ({
+          ...subCat,
+          parentCategorySlug: cat.seoSlug,
+          childCategories: (subCat.childCategories || []).map((childCat: any) => ({
+            ...childCat,
+            parentCategorySlug: cat.seoSlug,
+            parentSubCategorySlug: subCat.seoSlug,
+            parentSubCategoryId: subCat._id,
+          })),
+        }))
       );
 
       setCategoriesData(allSubCategories);
@@ -89,6 +98,35 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
 
   /* ================= HANDLERS ================= */
 
+  const getSubCategoryPath = (subCategory: any) => {
+    if (subCategory?.parentCategorySlug && subCategory?.seoSlug) {
+      return `/products/${subCategory.parentCategorySlug}/${subCategory.seoSlug}`;
+    }
+
+    return pathname;
+  };
+
+  const getChildCategoryPath = (childCategory: any) => {
+    if (
+      childCategory?.parentCategorySlug &&
+      childCategory?.parentSubCategorySlug &&
+      childCategory?.seoSlug
+    ) {
+      return `/products/${childCategory.parentCategorySlug}/${childCategory.parentSubCategorySlug}/${childCategory.seoSlug}`;
+    }
+
+    const parentSubCategory = categoriesData.find((category: any) =>
+      category.childCategories?.some((child: any) => child._id === childCategory?._id)
+    );
+
+    return parentSubCategory ? getSubCategoryPath(parentSubCategory) : pathname;
+  };
+
+  const buildPathWithParams = (path: string, params: URLSearchParams) => {
+    const query = params.toString();
+    return query ? `${path}?${query}` : path;
+  };
+
   const onSelectCat = (id: string) => {
     setSelectedCats(prev => {
       const updated = prev.includes(id)
@@ -102,7 +140,16 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
         ? params.set("ccid", updated.join(","))
         : params.delete("ccid");
 
-      router.push(`${pathname}?${params.toString()}`);
+      if (updated.length === 1) {
+        const selectedChild = categoriesData
+          .flatMap((category: any) => category.childCategories || [])
+          .find((child: any) => child._id === updated[0]);
+
+        router.push(buildPathWithParams(getChildCategoryPath(selectedChild), params));
+      } else {
+        router.push(buildPathWithParams(pathname, params));
+      }
+
       return updated;
     });
   };
@@ -121,7 +168,7 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
         onCategorySelectionChange([]);
         onChangeParentSelectionChange([]);
 
-        router.push(pathname);
+        router.push("/products");
         return [];
       }
 
@@ -133,7 +180,11 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
       onCategorySelectionChange([]);
       onChangeParentSelectionChange([id]);
 
-      router.push(`${pathname}?${params.toString()}`);
+      const selectedSubCategory = categoriesData.find(
+        (category: any) => category._id === id
+      );
+
+      router.push(buildPathWithParams(getSubCategoryPath(selectedSubCategory), params));
       return [id];
     });
   };

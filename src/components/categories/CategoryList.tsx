@@ -195,8 +195,11 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
     (c: any) => c?.name?.toLowerCase() === title.toLowerCase()
   );
 
-  // Extract subCategories (Bricks, Sand, Cement, etc)
-  const subCategories = parentCategory?.subCategories || [];
+  // Extract subCategories with their parent slug for SEO-friendly product URLs.
+  const subCategories = (parentCategory?.subCategories || []).map((subCat: any) => ({
+    ...subCat,
+    parentCategorySlug: parentCategory?.seoSlug,
+  }));
 return(
     <div
       className={`px-4 bg-cream lg:max-w-[1440px] mx-auto ${title === "Building Systems"

@@ -189,7 +189,7 @@ const FilterHTML = ({
                 ) : (
                   <div className="flex items-center flex-row mt-3 mb-4">
                     <button
-                      className="text-sm text-white "
+                      className="text-sm text-secondary "
                       onClick={handleShowMoreCats}
                     >
                       Show More

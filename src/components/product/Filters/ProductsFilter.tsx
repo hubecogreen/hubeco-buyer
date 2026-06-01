@@ -42,6 +42,13 @@ const FiltersSidebar: React.FC<FilterProps> = ({
   const router = useRouter();
   const [refreshp, setRefreshp] = useState<any>(0);
   const [refresht, setRefresht] = useState<any>(0);
+  const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "").toLowerCase();
+  const isProduction =
+  apiBaseUrl.length > 0 &&
+  !apiBaseUrl.includes("uat") &&
+  !apiBaseUrl.includes("dev") &&
+  !apiBaseUrl.includes("localhost");
+
 
   // State Management
   const buyerInfo = sessionStorage.getItem("buyerUserInfo") as any;
@@ -361,7 +368,7 @@ const FiltersSidebar: React.FC<FilterProps> = ({
         />
 
         {/* PRICE RANGE FILTER */}
-        <div className="mt-2 mb-4 border-b border-primary">
+        {!isProduction &&<div className="mt-2 mb-4 border-b border-primary">
           <h3 className="text-sm font-semibold mb-8 flex items-center justify-between">
             PRICE RANGE
           </h3>
@@ -375,7 +382,7 @@ const FiltersSidebar: React.FC<FilterProps> = ({
               refresh={refresht}
             />
           </div>
-        </div>
+        </div>}
 
         {/* VENDORS FILTER */}
         <VendorFiltersList

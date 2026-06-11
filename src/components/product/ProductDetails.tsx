@@ -2211,7 +2211,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
           <div className="bg-cream border border-primary md:flex block w-full md:mx-auto  md:max-w-[87.5%] md:py-6 md:justify-center md:items-center py-8 px-4 rounded-lg">
             <Tabs defaultValue="account" className="w-full">
               <div className="   top-[128px] overflow-x-scroll no-scrollbar">
-                <TabsList className="border-b border-transparent h-[45px] w-full rounded-none flex justify-start items-center  pb-0 mb-6 overflow-x-scroll no-scrollbar">
+                <TabsList className="border-b border-transparent h-[45px] w-full rounded-none flex justify-start items-center  pb-0 overflow-x-scroll no-scrollbar">
                   <TabsTrigger
                     value="account"
                     className="px-4 text-md bg-transparent text-brown border-b-2 border-transparent rounded-none data-[state=active]:border-primary data-[state=active]:text-primary  data-[state=active]:border-b-2 data-[state=active]:bg-transparent"

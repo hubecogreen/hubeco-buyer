@@ -144,7 +144,7 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
                 />
               </SelectTrigger>
               <SelectContent className="w-fit">
-                <Input
+                {/* <Input
                   type="text"
                   value={searchTerm}
                   onChange={(e) =>
@@ -152,7 +152,7 @@ const AttributeDisplay = ({ attributes, currentAttributes }: any) => {
                   }
                   placeholder="Search..."
                   className="bg-cream mb-2 p-2 border max-w-[95%] mx-auto h-[35px] mt-2 border-primary rounded"
-                />
+                /> */}
 
                 {filteredValues.length > 0 ? (
                   filteredValues.map((value: string) => (

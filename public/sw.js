@@ -1,4 +1,4 @@
-const VERSION = 'v2.0.3';
+const VERSION = 'v2.0.4';
 const STATIC_CACHE_NAME = `hubeco-static-${VERSION}`;
 const IMAGE_CACHE_NAME = `hubeco-images-${VERSION}`;
 const PAGE_CACHE_NAME = `hubeco-pages-${VERSION}`;
@@ -272,7 +272,11 @@ async function staleWhileRevalidate(request, cacheName, maxEntries) {
 
       return response;
     })
-    .catch(() => cachedResponse);
+    // Never resolve `undefined` here - this serves Next.js's own JS/CSS
+    // chunks. An undefined response passed to respondWith() corrupts the
+    // chunk load, which triggers webpack/Next's ChunkLoadError recovery
+    // (a forced window.location.reload()).
+    .catch(() => cachedResponse || Response.error());
 
   return cachedResponse || fetchPromise;
 }

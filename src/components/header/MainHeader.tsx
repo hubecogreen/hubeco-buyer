@@ -46,6 +46,7 @@ import Image from "next/image";
 import useClient from "../hooks/useClient";
 import SubmitEnquiryModal from "../modals/SubmitEnquiryModal";
 import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
+import { canSafelyRefresh } from "@/lib/reloadGuard";
 
 const vendorURL = process.env.NEXT_PUBLIC_VENDOR_URL;
 interface HeaderProps { }
@@ -242,8 +243,16 @@ const Header: React.FC<HeaderProps> = () => {
   };
 
   useEffect(() => {
-    router.refresh();
     setCartCount(cartCountV);
+
+    // router.refresh() fails when offline, which makes Next.js fall back to
+    // a hard browser navigation - that reload remounts this component and
+    // re-fires this effect, creating a continuous reload loop. Skip it when
+    // offline, or when the reload-loop guard has already detected a loop in
+    // progress (see src/lib/reloadGuard.ts).
+    if (!canSafelyRefresh()) return;
+
+    router.refresh();
   }, [cartCountV]);
 
   useEffect(() => {

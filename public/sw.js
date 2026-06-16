@@ -1,4 +1,4 @@
-const VERSION = 'v2.0.1';
+const VERSION = 'v2.0.3';
 const STATIC_CACHE_NAME = `hubeco-static-${VERSION}`;
 const IMAGE_CACHE_NAME = `hubeco-images-${VERSION}`;
 const PAGE_CACHE_NAME = `hubeco-pages-${VERSION}`;
@@ -8,7 +8,6 @@ const OFFLINE_URL = '/offline.html';
 const PRODUCT_PLACEHOLDER_URL = '/images/product-placeholder.webp';
 
 const PRECACHE_URLS = [
-  '/',
   OFFLINE_URL,
   '/manifest.webmanifest',
   '/favicon.ico',
@@ -67,15 +66,9 @@ const PUBLIC_API_KEYWORDS = [
   'brand'
 ];
 
-// self.addEventListener('install', (event) => {
-//   event.waitUntil(precache());
-// });
-
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
   event.waitUntil(precache());
 });
-
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
@@ -108,41 +101,12 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
-  // if (request.method !== 'GET') {
-  //   event.respondWith(fetch(request));
-  //   return;
-  // }
   if (request.method !== 'GET') {
-  return;
-}
+    event.respondWith(fetch(request));
+    return;
+  }
 
   const url = new URL(request.url);
-
-  // Next.js static assets
-if (url.pathname.startsWith('/_next/static/')) {
-  event.respondWith(
-    staleWhileRevalidate(
-      request,
-      STATIC_CACHE_NAME,
-      200
-    )
-  );
-  return;
-}
-
-// Next.js optimized images
-if (url.pathname.startsWith('/_next/image/')) {
-  event.respondWith(
-    cacheFirst(
-      request,
-      IMAGE_CACHE_NAME,
-      PRODUCT_PLACEHOLDER_URL,
-      200
-    )
-  );
-  return;
-}
-
 
   if (isAuthorizedRequest(request)) {
     event.respondWith(fetch(request));
@@ -155,7 +119,7 @@ if (url.pathname.startsWith('/_next/image/')) {
   }
 
   if (request.mode === 'navigate') {
-event.respondWith(handleNavigationRequest(request));
+    event.respondWith(handleNavigationRequest(request, url));
     return;
   }
 
@@ -169,7 +133,15 @@ event.respondWith(handleNavigationRequest(request));
     return;
   }
 
-  event.respondWith(fetch(request).catch(() => caches.match(request)));
+  event.respondWith(
+    fetch(request).catch(async () => {
+      const cached = await caches.match(request);
+      // Never resolve `undefined` here - Next.js's router (and any other
+      // same-origin fetch, e.g. RSC payload requests) needs a real Response
+      // (even a synthetic network error) or it falls back to a hard reload.
+      return cached || Response.error();
+    })
+  );
 });
 
 async function precache() {
@@ -190,21 +162,13 @@ function isAuthorizedRequest(request) {
   return request.headers.has('authorization');
 }
 
-// function isApiRequest(request, url) {
-//   if (url.origin === self.location.origin) {
-//     return url.pathname.startsWith('/api/') || url.pathname.includes('/api/');
-//   }
-
-//   return request.destination === '';
-// }
-
 function isApiRequest(request, url) {
-  return (
-    url.origin === self.location.origin &&
-    url.pathname.startsWith('/api/')
-  );
-}
+  if (url.origin === self.location.origin) {
+    return url.pathname.startsWith('/api/') || url.pathname.includes('/api/');
+  }
 
+  return request.destination === '';
+}
 
 function isBlockedApiPath(pathname) {
   const lowerPath = pathname.toLowerCase();
@@ -233,41 +197,13 @@ async function handleApiRequest(request, url) {
   return networkFirst(request, PUBLIC_API_CACHE_NAME, null, 40);
 }
 
-// async function handleNavigationRequest(request, url) {
-//   if (!isPublicPagePath(url.pathname)) {
-//     return fetch(request).catch(() => caches.match(OFFLINE_URL));
-//   }
-
-//   return networkFirst(request, PAGE_CACHE_NAME, OFFLINE_URL, 30);
-// }
-
-async function handleNavigationRequest(request) {
-  const cache = await caches.open(PAGE_CACHE_NAME);
-
-  try {
-    const response = await fetch(request);
-
-    if (isCacheableResponse(response)) {
-      await cache.put(request, response.clone());
-      await trimCache(PAGE_CACHE_NAME, 30);
-    }
-
-    return response;
-  } catch (error) {
-    const cached = await cache.match(request);
-
-    if (cached) {
-      return cached;
-    }
-
-    const home = await caches.match('/');
-
-    if (home) {
-      return home;
-    }
-
-    return caches.match(OFFLINE_URL);
+async function handleNavigationRequest(request, url) {
+  if (!isPublicPagePath(url.pathname)) {
+    // ✅ caches.match (global) not cache.match (specific cache)
+    return fetch(request).catch(() => caches.match(OFFLINE_URL));
   }
+
+  return networkFirst(request, PAGE_CACHE_NAME, OFFLINE_URL, 30);
 }
 
 async function networkFirst(request, cacheName, fallbackUrl, maxEntries) {

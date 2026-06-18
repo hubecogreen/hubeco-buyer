@@ -292,21 +292,91 @@ verify your connection, and try again.
       btn.disabled = isLoading;
     }
 
+    // navigator.onLine only reflects OS network-interface state, not real
+    // reachability, and can flap on weak/unstable connections. Always confirm
+    // with an actual request before reloading, and cap how often we'll
+    // auto-reload so a flapping connection can't cause a continuous loop.
+    let reloadTimer = null;
+    let isReloading = false;
+
+    const RELOAD_GUARD_KEY = 'hubeco-offline-reload-times';
+    const RELOAD_GUARD_WINDOW_MS = 10000;
+    const RELOAD_GUARD_MAX = 3;
+
+    function canAutoReload() {
+      const now = Date.now();
+      let times = [];
+      try {
+        times = JSON.parse(sessionStorage.getItem(RELOAD_GUARD_KEY) || '[]');
+      } catch (error) {
+        times = [];
+      }
+      times = times.filter((t) => now - t < RELOAD_GUARD_WINDOW_MS);
+
+      if (times.length >= RELOAD_GUARD_MAX) {
+        return false;
+      }
+
+      times.push(now);
+      sessionStorage.setItem(RELOAD_GUARD_KEY, JSON.stringify(times));
+      return true;
+    }
+
+    async function isActuallyOnline() {
+      try {
+        const response = await fetch('/favicon.ico', { method: 'HEAD', cache: 'no-store' });
+        return response.ok;
+      } catch (error) {
+        return false;
+      }
+    }
+
     function handleRetry() {
+      if (!navigator.onLine) {
+        setStatus('Still no internet connection.', true);
+        return; // don't reload if already offline
+      }
+
       setLoading(true);
       setStatus('Trying to reconnect...', false);
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 600);
+      isActuallyOnline().then((online) => {
+        if (online) {
+          window.location.reload();
+        } else {
+          setLoading(false);
+          setStatus('Still no internet connection.', true);
+        }
+      });
     }
 
     window.addEventListener('online', () => {
-      setStatus('Back online. Reloading...', false);
-      window.location.reload();
+      if (isReloading) return;
+
+      clearTimeout(reloadTimer);
+      setStatus('Back online. Checking connection...', false);
+
+      // Debounce: wait a moment in case this is a flapping connection, then
+      // verify real connectivity before reloading.
+      reloadTimer = setTimeout(async () => {
+        if (!(await isActuallyOnline())) {
+          setStatus('No internet connection.', true);
+          return;
+        }
+
+        if (!canAutoReload()) {
+          setStatus('Back online. Tap "Try Again" to continue.', false);
+          return;
+        }
+
+        isReloading = true;
+        setStatus('Back online. Reloading...', false);
+        window.location.reload();
+      }, 1000);
     });
 
     window.addEventListener('offline', () => {
+      clearTimeout(reloadTimer);
       setLoading(false);
       setStatus('No internet connection.', true);
     });

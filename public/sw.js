@@ -133,7 +133,15 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  event.respondWith(fetch(request).catch(() => caches.match(request)));
+  event.respondWith(
+    fetch(request).catch(async () => {
+      const cached = await caches.match(request);
+      // Never resolve `undefined` here - Next.js's router (and any other
+      // same-origin fetch, e.g. RSC payload requests) needs a real Response
+      // (even a synthetic network error) or it falls back to a hard reload.
+      return cached || Response.error();
+    })
+  );
 });
 
 async function precache() {
@@ -191,6 +199,7 @@ async function handleApiRequest(request, url) {
 
 async function handleNavigationRequest(request, url) {
   if (!isPublicPagePath(url.pathname)) {
+    // ✅ caches.match (global) not cache.match (specific cache)
     return fetch(request).catch(() => caches.match(OFFLINE_URL));
   }
 
@@ -263,7 +272,11 @@ async function staleWhileRevalidate(request, cacheName, maxEntries) {
 
       return response;
     })
-    .catch(() => cachedResponse);
+    // Never resolve `undefined` here - this serves Next.js's own JS/CSS
+    // chunks. An undefined response passed to respondWith() corrupts the
+    // chunk load, which triggers webpack/Next's ChunkLoadError recovery
+    // (a forced window.location.reload()).
+    .catch(() => cachedResponse || Response.error());
 
   return cachedResponse || fetchPromise;
 }

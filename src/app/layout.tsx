@@ -85,6 +85,7 @@ export default function RootLayout({
 }>) {
   const isProd = isProductionIndexable;
   const enableDiagnostics = process.env.NODE_ENV !== "production";
+  const isProductionBuild = process.env.NODE_ENV === "production";
 
   return (
     <html lang="en" className={poppins.variable}>
@@ -178,22 +179,38 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
 
-        {/* Service Worker Registration for Enhanced Caching */}
-        <Script id="service-worker" strategy="beforeInteractive">
-          {`
-            if ('serviceWorker' in navigator) {
-              window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                  .then(function(registration) {
-                    console.log('SW registered: ', registration);
-                  })
-                  .catch(function(registrationError) {
-                    console.log('SW registration failed: ', registrationError);
-                  });
-              });
-            }
-          `}
-        </Script>
+         {/* Service Worker Registration for Enhanced Caching - production only.
+            next dev's HMR client and on-demand chunk compilation conflict with
+            a caching service worker (stale/mismatched chunks, reload loops),
+            so it must never register against the dev server. */}
+        {isProductionBuild ? (
+          <Script id="service-worker" strategy="beforeInteractive">
+            {`
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                      console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                      console.log('SW registration failed: ', registrationError);
+                    });
+                });
+              }
+            `}
+          </Script>
+        ) : (
+          <Script id="service-worker-dev-cleanup" strategy="beforeInteractive">
+            {`
+              if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                  registrations.forEach(function(registration) { registration.unregister(); });
+                });
+              }
+            `}
+          </Script>
+        )}
+      
       </head>
       <body className={poppins.className}>
         {/* Google Tag Manager (noscript) */}

@@ -15,27 +15,36 @@ const logos = [
   "/images/home/hero/brand-logos/bildtech-logo.webp",
   "/images/home/hero/brand-logos/citadel-logo.webp",
   "/images/home/hero/brand-logos/eco-strong-logo.webp",
+
   "/images/home/hero/brand-logos/green-jam-logo.webp",
    "/images/home/hero/brand-logos/jalsevak-logo.webp",
    "/images/home/hero/brand-logos/magnus-logo.webp",
    "/images/home/hero/brand-logos/meghalite-logo.webp",
    "/images/home/hero/brand-logos/nanospan-greyscale-logo.webp",
+
    "/images/home/hero/brand-logos/path-frame-logo.webp",
    "/images/home/hero/brand-logos/perfect-logo.webp",
    "/images/home/hero/brand-logos/ploygon-logo.webp",
    "/images/home/hero/brand-logos/radha-tmt-logo.webp",
    "/images/home/hero/brand-logos/sai-iges-power-pvt-ltd-logo.webp",
+
    "/images/home/hero/brand-logos/saltech-logo.webp",
    "/images/home/hero/brand-logos/sbf-rapid-logo.webp",
    "/images/home/hero/brand-logos/trigger-logo.webp",
   "/images/home/hero/brand-logos/univ-logo.webp",
   "/images/home/hero/brand-logos/vinayak-industries-logo.webp",
+
   "/images/home/hero/brand-logos/visaka-logo.webp",
   "/images/home/hero/brand-logos/zydex-logo.webp",
   "/images/home/hero/brand-logos/bonphu-logo.webp",
   "/images/home/hero/brand-logos/kingston-logo.webp",
   "/images/home/hero/brand-logos/bathous-logo.webp",
   "/images/home/hero/brand-logos/hey-concreste-logo.webp",
+  "/images/home/hero/brand-logos/dalmia-logo.webp",
+  "/images/home/hero/brand-logos/ekam-eco-logo.webp",
+  "/images/home/hero/brand-logos/gaia-logo.webp",
+  "/images/home/hero/brand-logos/indowud-logo.webp",
+  "/images/home/hero/brand-logos/prayag-clay-logo.webp",
 ];
 
 const greenProLabels = ["GreenPro", "EPD", "GRIHA"];

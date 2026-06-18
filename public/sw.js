@@ -1,4 +1,4 @@
-const VERSION = 'v2.0.4';
+const VERSION = 'v2.0.5';
 const STATIC_CACHE_NAME = `hubeco-static-${VERSION}`;
 const IMAGE_CACHE_NAME = `hubeco-images-${VERSION}`;
 const PAGE_CACHE_NAME = `hubeco-pages-${VERSION}`;
@@ -6,6 +6,9 @@ const PUBLIC_API_CACHE_NAME = `hubeco-public-api-${VERSION}`;
 
 const OFFLINE_URL = '/offline.html';
 const PRODUCT_PLACEHOLDER_URL = '/images/product-placeholder.webp';
+
+// Fetch timeout (ms) before falling through to cache on slow connections.
+const NETWORK_TIMEOUT_MS = 5000;
 
 const PRECACHE_URLS = [
   OFFLINE_URL,
@@ -66,8 +69,16 @@ const PUBLIC_API_KEYWORDS = [
   'brand'
 ];
 
+// ---------------------------------------------------------------------------
+// Lifecycle
+// ---------------------------------------------------------------------------
+
 self.addEventListener('install', (event) => {
-  event.waitUntil(precache());
+  // ⚠️  skipWaiting() here is a one-release emergency measure to push the
+  // reload-loop hotfix to existing production sessions immediately.
+  // Revert to `event.waitUntil(precache())` once the fix is confirmed stable
+  // so the normal "prompt before update" UX (PwaUpdatePrompt) is restored.
+  event.waitUntil(Promise.all([precache(), self.skipWaiting()]));
 });
 
 self.addEventListener('message', (event) => {
@@ -78,42 +89,51 @@ self.addEventListener('message', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) =>
-      Promise.all(
-        cacheNames
-          .filter((cacheName) =>
-            cacheName.startsWith('hubeco-') &&
-            ![
-              STATIC_CACHE_NAME,
-              IMAGE_CACHE_NAME,
-              PAGE_CACHE_NAME,
-              PUBLIC_API_CACHE_NAME
-            ].includes(cacheName)
-          )
-          .map((cacheName) => caches.delete(cacheName))
-      )
-    )
+    Promise.all([
+      // Delete stale versioned caches from previous releases.
+      caches.keys().then((cacheNames) =>
+        Promise.all(
+          cacheNames
+            .filter(
+              (name) =>
+                name.startsWith('hubeco-') &&
+                ![
+                  STATIC_CACHE_NAME,
+                  IMAGE_CACHE_NAME,
+                  PAGE_CACHE_NAME,
+                  PUBLIC_API_CACHE_NAME,
+                ].includes(name)
+            )
+            .map((name) => caches.delete(name))
+        )
+      ),
+      // Immediately take control of all open tabs so users get the updated
+      // SW without needing to reload manually.
+      self.clients.claim(),
+    ])
   );
-
-  self.clients.claim();
 });
+
+// ---------------------------------------------------------------------------
+// Fetch routing
+// ---------------------------------------------------------------------------
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
-  if (request.method !== 'GET') {
-    event.respondWith(fetch(request));
-    return;
-  }
+  // Never intercept non-GET requests (POST/PUT/DELETE for cart, checkout, etc.)
+  if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
 
-  if (isAuthorizedRequest(request)) {
-    event.respondWith(fetch(request));
-    return;
-  }
+  // Never intercept cross-origin requests (analytics, GTM, CDN, socket.io).
+  // Only cache same-origin resources we explicitly control.
+  if (url.origin !== self.location.origin) return;
 
-  if (isApiRequest(request, url)) {
+  // Never intercept authenticated requests — always hit the network.
+  if (isAuthorizedRequest(request)) return;
+
+  if (isApiRequest(url)) {
     event.respondWith(handleApiRequest(request, url));
     return;
   }
@@ -124,7 +144,9 @@ self.addEventListener('fetch', (event) => {
   }
 
   if (request.destination === 'image') {
-    event.respondWith(cacheFirst(request, IMAGE_CACHE_NAME, PRODUCT_PLACEHOLDER_URL, 150));
+    event.respondWith(
+      cacheFirst(request, IMAGE_CACHE_NAME, PRODUCT_PLACEHOLDER_URL, 150)
+    );
     return;
   }
 
@@ -133,16 +155,122 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Remaining same-origin GETs (e.g. RSC payload fetches from Next.js router):
+  // try network, fall back to cache, then return a clean network-error
+  // response rather than undefined — undefined passed to respondWith() causes
+  // an internal SW crash which Next.js's router treats as cause to force a
+  // full hard-navigation reload.
   event.respondWith(
-    fetch(request).catch(async () => {
+    fetchWithTimeout(request).catch(async () => {
       const cached = await caches.match(request);
-      // Never resolve `undefined` here - Next.js's router (and any other
-      // same-origin fetch, e.g. RSC payload requests) needs a real Response
-      // (even a synthetic network error) or it falls back to a hard reload.
       return cached || Response.error();
     })
   );
 });
+
+// ---------------------------------------------------------------------------
+// Route handlers
+// ---------------------------------------------------------------------------
+
+async function handleApiRequest(request, url) {
+  if (isBlockedApiPath(url.pathname) || !isPublicApiPath(url.pathname)) {
+    return fetch(request);
+  }
+
+  return networkFirst(request, PUBLIC_API_CACHE_NAME, null, 40);
+}
+
+async function handleNavigationRequest(request, url) {
+  if (!isPublicPagePath(url.pathname)) {
+    return fetchWithTimeout(request).catch(() => offlineFallback());
+  }
+
+  return networkFirst(request, PAGE_CACHE_NAME, OFFLINE_URL, 30);
+}
+
+// ---------------------------------------------------------------------------
+// Caching strategies
+// ---------------------------------------------------------------------------
+
+async function networkFirst(request, cacheName, fallbackUrl, maxEntries) {
+  const cache = await caches.open(cacheName);
+
+  try {
+    const response = await fetchWithTimeout(request);
+
+    if (isCacheableResponse(response)) {
+      await cache.put(request, response.clone());
+      await trimCache(cacheName, maxEntries);
+    }
+
+    return response;
+  } catch {
+    const cached = await cache.match(request);
+    if (cached) return cached;
+    if (fallbackUrl) return offlineFallback();
+    throw new Error('offline, no cache');
+  }
+}
+
+async function cacheFirst(request, cacheName, fallbackUrl, maxEntries) {
+  const cache = await caches.open(cacheName);
+  const cached = await cache.match(request);
+  if (cached) return cached;
+
+  try {
+    const response = await fetch(request);
+
+    if (isCacheableResponse(response)) {
+      await cache.put(request, response.clone());
+      await trimCache(cacheName, maxEntries);
+    }
+
+    return response;
+  } catch {
+    if (fallbackUrl) return offlineFallback();
+    throw new Error('offline, no cache');
+  }
+}
+
+async function staleWhileRevalidate(request, cacheName, maxEntries) {
+  const cache = await caches.open(cacheName);
+  const cached = await cache.match(request);
+
+  const revalidate = fetch(request)
+    .then(async (response) => {
+      if (isCacheableResponse(response)) {
+        await cache.put(request, response.clone());
+        await trimCache(cacheName, maxEntries);
+      }
+      return response;
+    })
+    .catch(() => cached || Response.error());
+
+  return cached || revalidate;
+}
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchWithTimeout(request, ms = NETWORK_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), ms);
+
+  return fetch(request, { signal: controller.signal }).finally(() =>
+    clearTimeout(timer)
+  );
+}
+
+async function offlineFallback() {
+  const cached = await caches.match(OFFLINE_URL);
+  // If offline.html itself failed to precache, return a bare-bones response
+  // rather than undefined — undefined crashes respondWith() internally.
+  return cached || new Response(
+    '<html><body><h2>No internet connection</h2></body></html>',
+    { headers: { 'Content-Type': 'text/html' } }
+  );
+}
 
 async function precache() {
   const cache = await caches.open(STATIC_CACHE_NAME);
@@ -162,123 +290,35 @@ function isAuthorizedRequest(request) {
   return request.headers.has('authorization');
 }
 
-function isApiRequest(request, url) {
-  if (url.origin === self.location.origin) {
-    return url.pathname.startsWith('/api/') || url.pathname.includes('/api/');
-  }
-
-  return request.destination === '';
+// Only intercept same-origin API paths — cross-origin requests are now
+// filtered out entirely at the fetch handler level before this is called.
+function isApiRequest(url) {
+  return url.pathname.startsWith('/api/') || url.pathname.includes('/api/');
 }
 
 function isBlockedApiPath(pathname) {
-  const lowerPath = pathname.toLowerCase();
-  return BLOCKED_API_KEYWORDS.some((keyword) => lowerPath.includes(keyword));
+  const lower = pathname.toLowerCase();
+  return BLOCKED_API_KEYWORDS.some((kw) => lower.includes(kw));
 }
 
 function isPublicApiPath(pathname) {
-  const lowerPath = pathname.toLowerCase();
-  return PUBLIC_API_KEYWORDS.some((keyword) => lowerPath.includes(keyword));
+  const lower = pathname.toLowerCase();
+  return PUBLIC_API_KEYWORDS.some((kw) => lower.includes(kw));
 }
 
 function isPublicPagePath(pathname) {
-  const normalizedPath = pathname.replace(/\/$/, '') || '/';
-  return PUBLIC_PAGE_PATHS.some((path) => normalizedPath === path || normalizedPath.startsWith(`${path}/`));
+  const normalized = pathname.replace(/\/$/, '') || '/';
+  return PUBLIC_PAGE_PATHS.some(
+    (p) => normalized === p || normalized.startsWith(`${p}/`)
+  );
 }
 
 function isCacheableResponse(response) {
-  return response && response.ok && (response.type === 'basic' || response.type === 'cors');
-}
-
-async function handleApiRequest(request, url) {
-  if (isBlockedApiPath(url.pathname) || !isPublicApiPath(url.pathname)) {
-    return fetch(request);
-  }
-
-  return networkFirst(request, PUBLIC_API_CACHE_NAME, null, 40);
-}
-
-async function handleNavigationRequest(request, url) {
-  if (!isPublicPagePath(url.pathname)) {
-    // ✅ caches.match (global) not cache.match (specific cache)
-    return fetch(request).catch(() => caches.match(OFFLINE_URL));
-  }
-
-  return networkFirst(request, PAGE_CACHE_NAME, OFFLINE_URL, 30);
-}
-
-async function networkFirst(request, cacheName, fallbackUrl, maxEntries) {
-  const cache = await caches.open(cacheName);
-
-  try {
-    const response = await fetch(request);
-
-    if (isCacheableResponse(response)) {
-      await cache.put(request, response.clone());
-      await trimCache(cacheName, maxEntries);
-    }
-
-    return response;
-  } catch (error) {
-    const cachedResponse = await cache.match(request);
-
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-
-    if (fallbackUrl) {
-      return caches.match(fallbackUrl);
-    }
-
-    throw error;
-  }
-}
-
-async function cacheFirst(request, cacheName, fallbackUrl, maxEntries) {
-  const cache = await caches.open(cacheName);
-  const cachedResponse = await cache.match(request);
-
-  if (cachedResponse) {
-    return cachedResponse;
-  }
-
-  try {
-    const response = await fetch(request);
-
-    if (isCacheableResponse(response)) {
-      await cache.put(request, response.clone());
-      await trimCache(cacheName, maxEntries);
-    }
-
-    return response;
-  } catch (error) {
-    if (fallbackUrl) {
-      return caches.match(fallbackUrl);
-    }
-
-    throw error;
-  }
-}
-
-async function staleWhileRevalidate(request, cacheName, maxEntries) {
-  const cache = await caches.open(cacheName);
-  const cachedResponse = await cache.match(request);
-
-  const fetchPromise = fetch(request)
-    .then(async (response) => {
-      if (isCacheableResponse(response)) {
-        await cache.put(request, response.clone());
-        await trimCache(cacheName, maxEntries);
-      }
-
-      return response;
-    })
-    // Never resolve `undefined` here - this serves Next.js's own JS/CSS
-    // chunks. An undefined response passed to respondWith() corrupts the
-    // chunk load, which triggers webpack/Next's ChunkLoadError recovery
-    // (a forced window.location.reload()).
-    .catch(() => cachedResponse || Response.error());
-
-  return cachedResponse || fetchPromise;
+  return (
+    response &&
+    response.ok &&
+    (response.type === 'basic' || response.type === 'cors')
+  );
 }
 
 async function trimCache(cacheName, maxEntries) {
@@ -289,5 +329,7 @@ async function trimCache(cacheName, maxEntries) {
 
   if (keys.length <= maxEntries) return;
 
-  await Promise.all(keys.slice(0, keys.length - maxEntries).map((request) => cache.delete(request)));
+  await Promise.all(
+    keys.slice(0, keys.length - maxEntries).map((req) => cache.delete(req))
+  );
 }

@@ -5,6 +5,17 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Service worker must never be cached by the browser or a CDN.
+        // A stale cached sw.js means users keep running the old (buggy)
+        // worker even after a new version is deployed — updates simply
+        // never arrive. no-cache forces a byte-check on every navigation.
+        source: "/sw.js",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+          { key: "Pragma", value: "no-cache" },
+        ],
+      },
+      {
         source: "/sitemap.xml",
         headers: [
           {

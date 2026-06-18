@@ -1,4 +1,4 @@
-const VERSION = 'v2.0.6';
+const VERSION = 'v2.0.7';
 const STATIC_CACHE_NAME = `hubeco-static-${VERSION}`;
 const IMAGE_CACHE_NAME = `hubeco-images-${VERSION}`;
 const PAGE_CACHE_NAME = `hubeco-pages-${VERSION}`;

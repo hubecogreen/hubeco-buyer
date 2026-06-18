@@ -99,6 +99,33 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Hubeco" />
         <meta name="mobile-web-app-capable" content="yes" />
 
+         {/* Reload-loop circuit breaker. Records every full page load and flags
+            it in sessionStorage if too many happen in a short window. Any
+            code that conditionally calls router.refresh()/router.push() on
+            mount (see src/lib/reloadGuard.ts) should check this flag first -
+            it stops repeated hard-navigation fallbacks (Next.js reloads the
+            page when an RSC fetch fails, e.g. while offline) regardless of
+            which component triggers them. Must run before any component
+            effects, so it's the first script in <head>. */}
+        <Script id="reload-loop-guard" strategy="beforeInteractive">
+          {`
+            (function() {
+              try {
+                var KEY = 'hubeco-load-times';
+                var WINDOW_MS = 6000;
+                var MAX_LOADS = 2;
+                var now = Date.now();
+                var raw = sessionStorage.getItem(KEY);
+                var times = raw ? JSON.parse(raw) : [];
+                times = times.filter(function(t) { return now - t < WINDOW_MS; });
+                times.push(now);
+                sessionStorage.setItem(KEY, JSON.stringify(times));
+                sessionStorage.setItem('hubeco-reload-loop', times.length > MAX_LOADS ? '1' : '0');
+              } catch (e) {}
+            })();
+          `}
+        </Script>
+
         <Script id="pwa-install-prompt-capture" strategy="beforeInteractive">
           {`
             window.__hubecoInstallPrompt = null;

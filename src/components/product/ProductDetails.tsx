@@ -1054,10 +1054,14 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
             ? `/products/${totalProduct.categoryId?.seoSlug || ""}/${totalProduct.subCategoryId[0]?.seoSlug || ""}/${totalProduct.childCategories[0]?.seoSlug || ""}?ccid=${totalProduct.childCategories[0]?._id || ""}`
             : "/products",
         }}
-        link5={{
-          name: `${isSingle ? totalProduct?.name : productData?.variantName}`,
-          href: `/${isSingle ? totalProduct?.slug : productData?.slug}`,
-        }}
+        link5={
+          isMobile
+            ? undefined
+            : {
+              name: isSingle ? totalProduct?.name : productData?.variantName,
+              href: `/${isSingle ? totalProduct?.slug : productData?.slug}`,
+            }
+        }
       />
       {productLoading ? (
         <div className="md:flex block w-full md:px-24 md:py-12 py-8 px-4">
@@ -1501,8 +1505,8 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                           disabled={loadingCartButton}
                           onClick={() => addToCart(productData?._id)}
                           className={`bg-secondary rounded shadow-xs group py-[15px] hover:bg-secondary bg-opacity-100 hover:bg-opacity-85 transition ${totalProduct?.purchaseType === "ONLINE"
-                              ? "md:w-[210px] w-full"
-                              : "md:w-[210px] w-1/2"
+                            ? "md:w-[210px] w-full"
+                            : "md:w-[210px] w-1/2"
                             }`}
                         >
                           {loadingCartButton ? (

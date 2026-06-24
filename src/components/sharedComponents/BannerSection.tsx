@@ -25,7 +25,8 @@ type Props = {
   };
 };
 
-function BannerSection({ link1, link2, link3, link4, link5 }: Props) {
+function BannerSection({ link1, link2, link3, link4, link5 }: Props) {  
+  
   return (
     <div className="banner-section">
       <div className="relative  md:flex block md:justify-start justify-center items-center md:px-20 px-3 bg-[url('/images/about/aboutBanner1.webp')] bg-cover bg-center h-[150px] md:h-[200px] flex items-center justify-start text-cream mt-[120px] md:mt-[85px]">
@@ -43,7 +44,7 @@ function BannerSection({ link1, link2, link3, link4, link5 }: Props) {
         >
           {link2.name}
         </Link>
-        {link3 ? (
+        {link3?.name?.trim() ?(
           <>
             <span className="text-cream mx-[2px] md:mx-2">/</span>
             <Link
@@ -56,7 +57,7 @@ function BannerSection({ link1, link2, link3, link4, link5 }: Props) {
         ) : (
           <></>
         )}
-        {link4 ? (
+        {link4?.name?.trim() ? (
           <>
             <span className="text-cream mx-[2px] md:mx-2">/</span>
             <Link
@@ -69,7 +70,7 @@ function BannerSection({ link1, link2, link3, link4, link5 }: Props) {
         ) : (
           <></>
         )}
-        {link5 ? (
+        {link5?.name?.trim() ?(
           <>
             <span className="text-cream mx-[2px] md:mx-2">/</span>
             <Link

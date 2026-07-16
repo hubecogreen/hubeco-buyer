@@ -99,7 +99,7 @@ export default function Page() {
   return (
     <div className="bg-cream md:mb-0 ">
       <head>
-        <title>About | Hubeco Buyer</title>
+        <title>About | Hubeco</title>
       </head>
 
       <div className="banner-section h-102">

@@ -12,6 +12,9 @@ import React from "react";
 import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import useClient from "../hooks/useClient";
+import { useState } from "react";
+import SubmitEnquiryModal from "../modals/SubmitEnquiryModal";
+import BottomNavigation from "@/components/navigation/BottomNavigation";
 
 const MainLayout = ({
   children,
@@ -20,6 +23,15 @@ const MainLayout = ({
   children: React.ReactNode;
   isProd: boolean;
 }) => {
+  const [showEnquiryModal, setShowEnquiryModal] = useState(false);
+
+  const openEnquiryModal = () => {
+    setShowEnquiryModal(true);
+  };
+
+  const closeEnquiryModal = () => {
+    setShowEnquiryModal(false);
+  };
   const isClient = useClient();
 
   if (!isClient) return <></>;
@@ -34,12 +46,19 @@ const MainLayout = ({
         <RootProvider>
           <MeDetails>
             <ChakraProvider>
-              <Header />
+              <Header onSubmitEnquiry={openEnquiryModal}/>
               <div className="mt-[79px] bg-cream">
                 <NetworkStatusToast />
                 <PrivateRoute>{children}</PrivateRoute>
               </div>
-              <Footer  />
+              <BottomNavigation onSubmitEnquiry={openEnquiryModal}/>
+              <SubmitEnquiryModal
+                open={showEnquiryModal}
+                onClose={closeEnquiryModal}
+                product={null}
+                mode="form"
+              />
+              <Footer />
             </ChakraProvider>
           </MeDetails>
         </RootProvider>

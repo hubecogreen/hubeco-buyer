@@ -341,7 +341,7 @@ export default function RootLayout({
             src="https://px.ads.linkedin.com/collect/?pid=8360633&fmt=gif"
           />
         </noscript>
-        <WhatsAppWidget />
+        <WhatsAppWidget  />
         <AppInstallPopup />
         <PwaUpdatePrompt />
       </body>

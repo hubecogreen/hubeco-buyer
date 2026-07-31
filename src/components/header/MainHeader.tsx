@@ -49,9 +49,13 @@ import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 import { canSafelyRefresh } from "@/lib/reloadGuard";
 
 const vendorURL = process.env.NEXT_PUBLIC_VENDOR_URL;
-interface HeaderProps { }
+interface HeaderProps {
+  onSubmitEnquiry: () => void;
+}
 
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC<HeaderProps> = ({
+  onSubmitEnquiry,
+}) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -91,7 +95,7 @@ const Header: React.FC<HeaderProps> = () => {
   const [tempPincode, setTempPincode] = useState<any>(getCookie("culp"));
   const [showVendorLogin, setShowVendorLogin] = useState<any>(false);
   const [showLoginPopup, setShowLoginPopup] = useState<any>(false);
-  const [showEnquiryModal, setShowEnquiryModal] = useState(false);
+  // const [showEnquiryModal, setShowEnquiryModal] = useState(false);
   const [reloadH, setReloadH] = useState<any>(0);
   const isClient = useClient();
 
@@ -854,7 +858,7 @@ const Header: React.FC<HeaderProps> = () => {
                     className="text-[16px] bg-secondaryLight py-[12px] px-[13px]  h-12 m-[10px] hidden lg:flex text-white w-[145px] "
 
                     hoverBgColor=""
-                    onPress={() => setShowEnquiryModal(true)}
+                    onPress={onSubmitEnquiry}
                   />
                   <CustomButton
                     title="Login / SignUp"
@@ -997,7 +1001,7 @@ const Header: React.FC<HeaderProps> = () => {
               <CustomButton
                 title="Submit Enquiry"
                 className="bg-secondaryLight text-cream h-10 px-4 text-sm"
-                onPress={() => setShowEnquiryModal(true)}
+                onPress={onSubmitEnquiry}
               />
 
 
@@ -1329,12 +1333,12 @@ const Header: React.FC<HeaderProps> = () => {
         onOpenChange={setShowLoginPopup}
         router={router}
       />
-      <SubmitEnquiryModal
+      {/* <SubmitEnquiryModal
         open={showEnquiryModal}
         onClose={() => setShowEnquiryModal(false)}
         product={null}
         mode="form"
-      />
+      /> */}
     </>
   );
 };

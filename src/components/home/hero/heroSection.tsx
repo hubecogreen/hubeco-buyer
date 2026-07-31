@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,6 +8,8 @@ import "swiper/css";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import usePWAInstall from "@/components/hooks/usePWAInstall";
+import { useBreakpoint } from "@/components/hooks/useBreakpoint";
+import GetQuoteSheet from "@/components/GetQuoteSheet";
 
 const logos = [
   "/images/home/hero/brand-logos/angrirus-logo.webp",
@@ -54,11 +56,22 @@ const HeroSection = () => {
   const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video-U.webm`;
   const heroPosterUrl = "/images/home/hero/video-poster.webp";
   const { shouldShowInstallButton } = usePWAInstall();
+  const breakpoint = useBreakpoint();
+  const [isQuoteSheetOpen, setIsQuoteSheetOpen] = useState(false);
 
   const whatsappNumber = "919985544055";
   const defaultMessage =
     "Hello, I would like to get a quote for sustainable building materials for my project. Please let me know the next steps to share my requirements.";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
+
+  const handleGetQuoteClick = () => {
+    if (breakpoint === "mobile") {
+      setIsQuoteSheetOpen(true);
+      return;
+    }
+
+    window.open(whatsappLink, "_blank");
+  };
 
   return (
     <section
@@ -162,7 +175,7 @@ const HeroSection = () => {
              w-full lg:w-[190px] 
              lg:px-[33px] lg:py-[11.5px] py-[10px] px-[20px] text-[17px] font-medium
              rounded-md whitespace-nowrap cursor-pointer"
-              onClick={() => window.open(whatsappLink, "_blank")}
+              onClick={handleGetQuoteClick}
             >
               <Image
                 src="/images/home/hero/whatsapp-white.png"
@@ -230,6 +243,14 @@ const HeroSection = () => {
 </Swiper>
         </div>
       </div>
+
+      <GetQuoteSheet
+        isOpen={isQuoteSheetOpen}
+        onClose={() => setIsQuoteSheetOpen(false)}
+        whatsappLink={whatsappLink}
+        phoneNumber="+919985544055"
+        email="info@hubeco.market"
+      />
     </section>
   );
 };

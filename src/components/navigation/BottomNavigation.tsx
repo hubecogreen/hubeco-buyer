@@ -45,9 +45,9 @@ export default function BottomNavigation({
 
     return (
         <nav
-            className="fixed bottom-[-1px] left-0 right-0 z-50 md:hidden bg-cream border-t shadow-[0_-2px_8px_rgba(0,0,0,0.08)]"
+            className="fixed bottom-[-1px] left-0 right-0 z-50 lg:hidden bg-cream border-t shadow-[0_-2px_8px_rgba(0,0,0,0.08)]"
         >
-            <div className="mx-auto grid h-[64px] w-full max-w-[390px] grid-cols-4 px-2 pt-2">
+            <div className="mx-auto grid h-[64px] w-full max-w-[390px] sm:max-w-[480px] md:max-w-[640px] grid-cols-4 px-2 sm:px-6 md:px-10 pt-2">
                 {navItems.map((item) => {
                     const active = pathname === item.href;
 

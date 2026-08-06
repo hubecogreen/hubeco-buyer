@@ -18,7 +18,7 @@ const WhatsAppWidget = () => {
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
   const handleWidgetClick = () => {
-    if (breakpoint === "mobile") {
+    if (breakpoint === "mobile" || breakpoint === "tablet") {
       setIsQuoteSheetOpen(true);
       return;
     }
@@ -96,7 +96,7 @@ const WhatsAppWidget = () => {
         onClick={handleWidgetClick}
         aria-hidden={!isWidgetVisible}
         aria-label="Chat on WhatsApp"
-        className={`fixed lg:bottom-5 bottom-20 md:bottom-6  right-5 z-40 rounded-sm bg-cream transition-all duration-300 ease-out ${
+        className={`fixed lg:bottom-5 bottom-20 md:bottom-20  right-5 z-40 rounded-sm bg-cream transition-all duration-300 ease-out ${
           isWidgetVisible
             ? "translate-y-0 opacity-100 pointer-events-auto"
             : "translate-y-3 opacity-0 pointer-events-none"

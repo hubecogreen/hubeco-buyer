@@ -65,7 +65,7 @@ const HeroSection = () => {
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
   const handleGetQuoteClick = () => {
-    if (breakpoint === "mobile") {
+    if (breakpoint === "mobile" || breakpoint === "tablet") {
       setIsQuoteSheetOpen(true);
       return;
     }

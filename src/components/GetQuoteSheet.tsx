@@ -55,7 +55,7 @@ const GetQuoteSheet = ({
   return (
     <AnimatePresence>
       {isOpen ? (
-        <div className="fixed inset-0 z-[120] md:hidden">
+        <div className="fixed inset-0 z-[120] xl:hidden">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

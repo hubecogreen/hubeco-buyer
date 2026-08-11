@@ -83,7 +83,7 @@ const GetQuotePopover = ({
           <div className="mb-3 flex items-start justify-between">
             <div>
               <h2 className="text-[16px] font-medium text-brown">Get Quote</h2>
-              <p className="text-[12px] text-brown/60">Choose how you&apos;d like to connect</p>
+              <p className="text-[12px] text-brown/60">Get a custom quote based on your requirements.</p>
             </div>
 
             <button

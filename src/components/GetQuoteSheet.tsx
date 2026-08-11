@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronRight, Mail , Phone, X } from "lucide-react";
+import { ChevronRight, Mail, Phone, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
 interface GetQuoteSheetProps {
@@ -38,6 +38,7 @@ const GetQuoteSheet = ({
       label: "Call Us",
       icon: Phone,
       href: `tel:${phoneNumber}`,
+      className: "md:hidden lg:flex",
     },
     {
       label: "Chat on WhatsApp",
@@ -55,7 +56,7 @@ const GetQuoteSheet = ({
   return (
     <AnimatePresence>
       {isOpen ? (
-        <div className="fixed inset-0 z-[120] xl:hidden">
+        <div className="fixed inset-0 z-[120] lg:hidden">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -91,14 +92,14 @@ const GetQuoteSheet = ({
             </div>
 
             <div className="flex flex-col gap-3">
-              {options.map(({ label, icon: Icon, href, external }) => (
+              {options.map(({ label, icon: Icon, href, external, className }) => (
                 <a
                   key={label}
                   href={href}
                   target={external ? "_blank" : undefined}
                   rel={external ? "noopener noreferrer" : undefined}
                   onClick={onClose}
-                  className="flex items-center gap-3 rounded-2xl border border-[2px] border-primary/30 px-4 py-3 text-brown transition hover:bg-primary/5"
+                  className={`flex items-center gap-3 rounded-2xl border-[2px] border-primary/30 px-4 py-3 text-brown transition hover:bg-primary/5 ${className ?? ""}`}
                 >
                   <Icon size={26} className="text-primary" />
                   <span className="flex-1 text-[18px] font-medium">{label}</span>

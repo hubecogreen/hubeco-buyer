@@ -8,8 +8,8 @@ import "swiper/css";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import usePWAInstall from "@/components/hooks/usePWAInstall";
-import { useBreakpoint } from "@/components/hooks/useBreakpoint";
 import GetQuoteSheet from "@/components/GetQuoteSheet";
+import GetQuotePopover from "@/components/GetQuotePopover";
 
 const logos = [
   "/images/home/hero/brand-logos/angrirus-logo.webp",
@@ -56,7 +56,6 @@ const HeroSection = () => {
   const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video-U.webm`;
   const heroPosterUrl = "/images/home/hero/video-poster.webp";
   const { shouldShowInstallButton } = usePWAInstall();
-  const breakpoint = useBreakpoint();
   const [isQuoteSheetOpen, setIsQuoteSheetOpen] = useState(false);
 
   const whatsappNumber = "919985544055";
@@ -65,12 +64,7 @@ const HeroSection = () => {
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
   const handleGetQuoteClick = () => {
-    if (breakpoint === "mobile" || breakpoint === "tablet") {
-      setIsQuoteSheetOpen(true);
-      return;
-    }
-
-    window.open(whatsappLink, "_blank");
+    setIsQuoteSheetOpen(true);
   };
 
   return (
@@ -166,35 +160,45 @@ const HeroSection = () => {
           </div>
 
           <div className=" gap-3 mt-4 flex  lg:gap-6 relative z-30  ">
-            <motion.button
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
-              className="group flex justify-center items-center gap-[10px] 
-             bg-primary hover:bg-cream hover:text-primary text-cream 
-             w-full lg:w-[190px] 
+            <div className="relative w-full lg:w-[190px]">
+              <motion.button
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+                className="group flex justify-center items-center gap-[10px]
+             bg-primary hover:bg-cream hover:text-primary text-cream
+             w-full lg:w-[190px]
              lg:px-[33px] lg:py-[11.5px] py-[10px] px-[20px] text-[17px] font-medium
              rounded-md whitespace-nowrap cursor-pointer"
-              onClick={handleGetQuoteClick}
-            >
-              <Image
-                src="/images/home/hero/whatsapp-white.png"
-                alt="Get Quote"
-                width={30}
-                height={30}
-                className="group-hover:hidden"
-              />
+                onClick={handleGetQuoteClick}
+              >
+                {/* <Image
+                  src="/images/home/hero/whatsapp-white.png"
+                  alt="Get Quote"
+                  width={30}
+                  height={30}
+                  className="group-hover:hidden"
+                />
 
-              <Image
-                src="/images/home/hero/whatsapp-green.png"
-                alt="Get Quote"
-                width={30}
-                height={30}
-                className="hidden group-hover:block"
-              />
+                <Image
+                  src="/images/home/hero/whatsapp-green.png"
+                  alt="Get Quote"
+                  width={30}
+                  height={30}
+                  className="hidden group-hover:block"
+                /> */}
 
-              Get Quote
-            </motion.button>
+                Get Quote
+              </motion.button>
+
+              <GetQuotePopover
+                isOpen={isQuoteSheetOpen}
+                onClose={() => setIsQuoteSheetOpen(false)}
+                whatsappLink={whatsappLink}
+                phoneNumber="+919985544055"
+                email="info@hubeco.market"
+              />
+            </div>
 
             <motion.button
               initial={{ opacity: 0, y: 25 }}

@@ -3,14 +3,13 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useBreakpoint } from "@/components/hooks/useBreakpoint";
 import GetQuoteSheet from "@/components/GetQuoteSheet";
+import GetQuotePopover from "@/components/GetQuotePopover";
 
 const WhatsAppWidget = () => {
   const pathname = usePathname();
   const isHomeRoute = pathname === "/" || pathname === "/home";
   const [isWidgetVisible, setIsWidgetVisible] = useState(!isHomeRoute);
-  const breakpoint = useBreakpoint();
   const [isQuoteSheetOpen, setIsQuoteSheetOpen] = useState(false);
   const whatsappNumber = "919985544055"; // Replace with your number in international format (without +)
   const defaultMessage =
@@ -18,12 +17,7 @@ const WhatsAppWidget = () => {
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
   const handleWidgetClick = () => {
-    if (breakpoint === "mobile" || breakpoint === "tablet") {
-      setIsQuoteSheetOpen(true);
-      return;
-    }
-
-    window.open(whatsappLink, "_blank", "noopener,noreferrer");
+    setIsQuoteSheetOpen(true);
   };
 
   useEffect(() => {
@@ -91,24 +85,36 @@ const WhatsAppWidget = () => {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={handleWidgetClick}
-        aria-hidden={!isWidgetVisible}
-        aria-label="Chat on WhatsApp"
-        className={`fixed lg:bottom-5 bottom-20 md:bottom-20  right-5 z-40 rounded-sm bg-cream transition-all duration-300 ease-out ${
+      <div
+        className={`fixed lg:bottom-5 bottom-20 md:bottom-20  right-5 z-40 transition-all duration-300 ease-out ${
           isWidgetVisible
             ? "translate-y-0 opacity-100 pointer-events-auto"
             : "translate-y-3 opacity-0 pointer-events-none"
         }`}
       >
-        <Image
-          src="/images/get-quote.svg" // Place a WhatsApp icon image in your public folder as whatsapp-icon.webp "D:\hubeco\hubeco-buyer\public\images\whatsapp (1).png"
-          alt="Chat on WhatsApp"
-          width={150}
-          height={150}
+        <button
+          type="button"
+          onClick={handleWidgetClick}
+          aria-hidden={!isWidgetVisible}
+          aria-label="Chat on WhatsApp"
+          className="block rounded-sm bg-cream"
+        >
+          <Image
+            src="/images/get-quote.svg" // Place a WhatsApp icon image in your public folder as whatsapp-icon.webp "D:\hubeco\hubeco-buyer\public\images\whatsapp (1).png"
+            alt="Chat on WhatsApp"
+            width={150}
+            height={150}
+          />
+        </button>
+
+        <GetQuotePopover
+          isOpen={isQuoteSheetOpen}
+          onClose={() => setIsQuoteSheetOpen(false)}
+          whatsappLink={whatsappLink}
+          phoneNumber="+919985544055"
+          email="info@hubeco.market"
         />
-      </button>
+      </div>
 
       <GetQuoteSheet
         isOpen={isQuoteSheetOpen}

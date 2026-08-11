@@ -51,11 +51,11 @@ const GetQuotePopover = ({
   }, [isOpen, onClose]);
 
   const options = [
-    {
-      label: "Call Us",
-      icon: Phone,
-      href: `tel:${phoneNumber}`,
-    },
+    // {
+    //   label: "Call Us",
+    //   icon: Phone,
+    //   href: `tel:${phoneNumber}`,
+    // },
     {
       label: "Chat on WhatsApp",
       icon: FaWhatsapp,

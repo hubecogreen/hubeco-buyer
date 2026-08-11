@@ -848,10 +848,10 @@ const QuoteDetails = ({ id }: any) => {
         </div>
 
 
-        <AlertDialog open={isOpen !== ""}>
-          <AlertDialogContent>
+        <AlertDialog open={isOpen !== ""} >
+          <AlertDialogContent className="bg-cream">
             <AlertDialogHeader>
-              <AlertDialogTitle className="text-center pb-5 text-[#B90647]">
+              <AlertDialogTitle className="text-center pb-5 text-[#B90647] ">
                 Are you sure you want to {isOpen} this quotation?
               </AlertDialogTitle>
               <BsExclamationCircle
@@ -895,14 +895,14 @@ const QuoteDetails = ({ id }: any) => {
                   setRemarks("");
                   setErrorOnRemark("");
                 }}
-                className="md:h-12 h-8 md:w-24"
+                className="md:h-12 h-8 md:w-24 bg-secondary hover:bg-secondary text-cream hover:text-cream"
               >
                 No
               </AlertDialogCancel>
 
               <CustomButton
                 title={"Yes"}
-                className="ml-3 bg-secondary hover:bg-primary h-12 md:h-12 md:w-24 w-24 md:text-md text-sm text-white"
+                className="ml-3 bg-primary  h-12 md:h-12 md:w-24 w-24 md:text-md text-sm text-cream"
                 onPress={handleQuoteAction}
               />
             </AlertDialogFooter>

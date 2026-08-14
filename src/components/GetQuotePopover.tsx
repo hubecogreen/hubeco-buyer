@@ -11,18 +11,27 @@ interface GetQuotePopoverProps {
   whatsappLink: string;
   phoneNumber: string;
   email: string;
-  /** Which edge of the trigger the popover hugs. Defaults to "right". */
-  align?: "left" | "right";
+  /**
+   * Which edge of the trigger the popover hugs.
+   * "responsive" hugs the left edge from md up to (but not including) lg
+   * — where the trigger still sits on the left of the layout — then
+   * switches to the right edge at lg+, where the layout pushes the
+   * trigger to the right. Use "right" for triggers that stay pinned to
+   * the right at every breakpoint (e.g. the floating WhatsApp button).
+   */
+  align?: "left" | "right" | "responsive";
 }
 
 const alignClasses: Record<NonNullable<GetQuotePopoverProps["align"]>, string> = {
   left: "left-0",
   right: "right-0",
+  responsive: "left-0 lg:left-auto lg:right-0",
 };
 
 const arrowAlignClasses: Record<NonNullable<GetQuotePopoverProps["align"]>, string> = {
   left: "left-8",
   right: "right-8",
+  responsive: "left-8 lg:left-auto lg:right-8",
 };
 
 const GetQuotePopover = ({
@@ -78,7 +87,7 @@ const GetQuotePopover = ({
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 8, scale: 0.96 }}
           transition={{ duration: 0.15, ease: "easeOut" }}
-          className={`absolute bottom-full z-[120] mb-3 hidden w-[min(280px,calc(100vw-2.5rem))] rounded-[16px] border border-black/5 bg-cream px-4 py-4 shadow-2xl lg:block ${alignClasses[align]}`}
+          className={`absolute bottom-full z-[120] mb-3 hidden w-[min(280px,calc(100vw-2.5rem))] rounded-[16px] border border-black/5 bg-cream px-4 py-4 shadow-2xl md:block ${alignClasses[align]}`}
         >
           <div className="mb-3 flex items-start justify-between">
             <div>

@@ -197,6 +197,7 @@ const HeroSection = () => {
                 whatsappLink={whatsappLink}
                 phoneNumber="+919985544055"
                 email="info@hubeco.market"
+                align="responsive"
               />
             </div>
 

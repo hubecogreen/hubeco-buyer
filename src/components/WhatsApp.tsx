@@ -86,11 +86,10 @@ const WhatsAppWidget = () => {
   return (
     <>
       <div
-        className={`fixed lg:bottom-5 bottom-20 md:bottom-20  right-5 z-40 transition-all duration-300 ease-out ${
-          isWidgetVisible
-            ? "translate-y-0 opacity-100 pointer-events-auto"
-            : "translate-y-3 opacity-0 pointer-events-none"
-        }`}
+        className={`fixed hidden lg:block lg:bottom-5 bottom-20 md:bottom-20  right-5 z-40 transition-all duration-300 ease-out ${isWidgetVisible
+          ? "translate-y-0 opacity-100 pointer-events-auto"
+          : "translate-y-3 opacity-0 pointer-events-none"
+          }`}
       >
         <button
           type="button"
@@ -108,11 +107,13 @@ const WhatsAppWidget = () => {
         </button>
 
         <GetQuotePopover
+
           isOpen={isQuoteSheetOpen}
           onClose={() => setIsQuoteSheetOpen(false)}
           whatsappLink={whatsappLink}
           phoneNumber="+919985544055"
           email="info@hubeco.market"
+          align="right"
         />
       </div>
 

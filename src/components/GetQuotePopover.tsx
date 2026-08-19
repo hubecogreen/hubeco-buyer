@@ -19,6 +19,7 @@ interface GetQuotePopoverProps {
    * trigger to the right. Use "right" for triggers that stay pinned to
    * the right at every breakpoint (e.g. the floating WhatsApp button).
    */
+  fromBottomNav?: boolean;
   align?: "left" | "right" | "responsive";
 }
 
@@ -40,6 +41,7 @@ const GetQuotePopover = ({
   whatsappLink,
   phoneNumber,
   email,
+  fromBottomNav = false,
   align = "right",
 }: GetQuotePopoverProps) => {
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -83,11 +85,14 @@ const GetQuotePopover = ({
       {isOpen ? (
         <motion.div
           ref={popoverRef}
-          initial={{ opacity: 0, y: 8, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
+          initial={{ opacity: 0, y: 8, scale: 0.96, ...(fromBottomNav ? { x: "-50%" } : {}), }}
+          animate={{ opacity: 1, y: 0, scale: 1, ...(fromBottomNav ? { x: "-50%" } : {}), }}
           exit={{ opacity: 0, y: 8, scale: 0.96 }}
           transition={{ duration: 0.15, ease: "easeOut" }}
-          className={`absolute bottom-full z-[120] mb-3 hidden w-[min(280px,calc(100vw-2.5rem))] rounded-[16px] border border-black/5 bg-cream px-4 py-4 shadow-2xl md:block ${alignClasses[align]}`}
+          className={`${fromBottomNav
+            ? "fixed bottom-[96px] left-1/2"
+            : "absolute bottom-full"
+            } z-[120] mb-3 hidden w-[min(280px,calc(100vw-2.5rem))] rounded-[16px] border border-black/5 bg-cream px-4 py-4 shadow-2xl md:block ${fromBottomNav ? "" : alignClasses[align]}`}
         >
           <div className="mb-3 flex items-start justify-between">
             <div>
@@ -122,7 +127,12 @@ const GetQuotePopover = ({
             ))}
           </div>
 
-          <div className={`absolute -bottom-1.5 h-3 w-3 rotate-45 bg-cream ${arrowAlignClasses[align]}`} />
+          <div
+            className={`absolute -bottom-1.5 h-3 w-3 rotate-45 bg-cream ${fromBottomNav
+              ? "left-1/2 -translate-x-1/2"
+              : arrowAlignClasses[align]
+              }`}
+          />
         </motion.div>
       ) : null}
     </AnimatePresence>

@@ -12,9 +12,17 @@ const persistConfig = {
   storage,
 };
 
+// categories/catetime are re-fetched on demand (see productCategoryTreeCache.ts)
+// and must never survive a reload as stale data, so they're excluded here.
+const masterDataPersistConfig = {
+  key: "masterData",
+  storage,
+  blacklist: ["categories", "catetime"],
+};
+
 const rootReducer = combineReducers({
   user: userReducer,
-  masterData: masterDataReducer,
+  masterData: persistReducer(masterDataPersistConfig, masterDataReducer),
   counter: counterReducer,
 });
 

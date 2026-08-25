@@ -9,10 +9,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { ArrowBigRight, ChevronRight, Search } from "lucide-react";
 
-import {
-  saveCategories,
-  saveCatTime,
-} from "@/reduxStore/slices/masterDataSlice";
+import { saveCategories } from "@/reduxStore/slices/masterDataSlice";
 import { useRouter } from "next/navigation";
 import ViewMore from "../product/quote/ViewMore";
 import { useBreakpoint } from "../hooks/useBreakpoint";
@@ -106,7 +103,6 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
           });
 
         dispatch(saveCategories(catResult || []));
-        dispatch(saveCatTime(new Date()));
       }
     } catch (error) {
       handleApiError(error);

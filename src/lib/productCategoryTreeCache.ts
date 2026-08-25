@@ -1,12 +1,19 @@
 import store from "@/reduxStore";
 import * as getEndpoint from "@/network/EndPoints";
-import { saveCategories } from "@/reduxStore/slices/masterDataSlice";
+import { saveCategories, saveCatTime } from "@/reduxStore/slices/masterDataSlice";
+
+const CATEGORY_TREE_TTL_MS = 30_000;
 
 let inFlightCategoryTreeRequest: Promise<any[]> | null = null;
 
 const getCachedCategories = () => {
   const categories = store.getState()?.masterData?.categories;
   return Array.isArray(categories) ? categories : [];
+};
+
+const isCategoryCacheFresh = () => {
+  const catetime = store.getState()?.masterData?.catetime;
+  return typeof catetime === "number" && Date.now() - catetime < CATEGORY_TREE_TTL_MS;
 };
 
 export const getProductCategoryTree = async (
@@ -16,7 +23,7 @@ export const getProductCategoryTree = async (
   const force = options?.force ?? false;
 
   const cached = getCachedCategories();
-  if (!force && cached.length > 0) {
+  if (!force && cached.length > 0 && isCategoryCacheFresh()) {
     return cached;
   }
 
@@ -31,6 +38,7 @@ export const getProductCategoryTree = async (
 
       if (Array.isArray(data) && data.length > 0) {
         store.dispatch(saveCategories(data));
+        store.dispatch(saveCatTime(Date.now()));
         return data;
       }
 

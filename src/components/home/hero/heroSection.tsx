@@ -19,20 +19,20 @@ const logos = [
   "/images/home/hero/brand-logos/eco-strong-logo.webp",
 
   "/images/home/hero/brand-logos/green-jam-logo.webp",
-   "/images/home/hero/brand-logos/jalsevak-logo.webp",
-   "/images/home/hero/brand-logos/magnus-logo.webp",
-   "/images/home/hero/brand-logos/meghalite-logo.webp",
-   "/images/home/hero/brand-logos/nanospan-greyscale-logo.webp",
+  "/images/home/hero/brand-logos/jalsevak-logo.webp",
+  "/images/home/hero/brand-logos/magnus-logo.webp",
+  "/images/home/hero/brand-logos/meghalite-logo.webp",
+  "/images/home/hero/brand-logos/nanospan-greyscale-logo.webp",
 
-   "/images/home/hero/brand-logos/path-frame-logo.webp",
-   "/images/home/hero/brand-logos/perfect-logo.webp",
-   "/images/home/hero/brand-logos/ploygon-logo.webp",
-   "/images/home/hero/brand-logos/radha-tmt-logo.webp",
-   "/images/home/hero/brand-logos/sai-iges-power-pvt-ltd-logo.webp",
+  "/images/home/hero/brand-logos/path-frame-logo.webp",
+  "/images/home/hero/brand-logos/perfect-logo.webp",
+  "/images/home/hero/brand-logos/ploygon-logo.webp",
+  "/images/home/hero/brand-logos/radha-tmt-logo.webp",
+  "/images/home/hero/brand-logos/sai-iges-power-pvt-ltd-logo.webp",
 
-   "/images/home/hero/brand-logos/saltech-logo.webp",
-   "/images/home/hero/brand-logos/sbf-rapid-logo.webp",
-   "/images/home/hero/brand-logos/trigger-logo.webp",
+  "/images/home/hero/brand-logos/saltech-logo.webp",
+  "/images/home/hero/brand-logos/sbf-rapid-logo.webp",
+  "/images/home/hero/brand-logos/trigger-logo.webp",
   "/images/home/hero/brand-logos/univ-logo.webp",
   "/images/home/hero/brand-logos/vinayak-industries-logo.webp",
 
@@ -63,8 +63,12 @@ const HeroSection = () => {
     "Hello, I would like to get a quote for sustainable building materials for my project. Please let me know the next steps to share my requirements.";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
+  // const handleGetQuoteClick = () => {
+  //   setIsQuoteSheetOpen(true);
+  // };
+
   const handleGetQuoteClick = () => {
-    setIsQuoteSheetOpen(true);
+    window.dispatchEvent(new Event("hubeco:open-boq-modal"));
   };
 
   return (
@@ -188,7 +192,7 @@ const HeroSection = () => {
                   className="hidden group-hover:block"
                 /> */}
 
-                Get Quote
+                Submit Boq
               </motion.button>
 
               <GetQuotePopover
@@ -220,32 +224,32 @@ const HeroSection = () => {
           <p className="opacity-70 whitespace-nowrap px-3 text-[16px] ">Trusted by:</p>
 
           <Swiper
-  slidesPerView="auto"
-  loop={true}
-  autoplay={{
-    delay: 0,
-    disableOnInteraction: false,
-  }}
-  speed={10000} // Increase for slower movement (e.g., 5000-10000)
-  allowTouchMove={false}
-  modules={[Autoplay]}
-  className="w-full marquee-swiper"
->
-  {[...logos, ...logos].map((logo, i) => (
-    <SwiperSlide
-      key={i}
-      className="!w-auto flex items-center justify-center px-4"
-    >
-      <Image
-        src={logo}
-        alt={`logo-${i}`}
-        width={80}
-        height={40}
-        className="h-10 w-auto object-contain max-w-[100px]"
-      />
-    </SwiperSlide>
-  ))}
-</Swiper>
+            slidesPerView="auto"
+            loop={true}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+            }}
+            speed={10000} // Increase for slower movement (e.g., 5000-10000)
+            allowTouchMove={false}
+            modules={[Autoplay]}
+            className="w-full marquee-swiper"
+          >
+            {[...logos, ...logos].map((logo, i) => (
+              <SwiperSlide
+                key={i}
+                className="!w-auto flex items-center justify-center px-4"
+              >
+                <Image
+                  src={logo}
+                  alt={`logo-${i}`}
+                  width={80}
+                  height={40}
+                  className="h-10 w-auto object-contain max-w-[100px]"
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
 

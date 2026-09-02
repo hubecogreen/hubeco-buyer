@@ -62,7 +62,12 @@ export default function SubmitEnquiryModal({
     const [quantity, setQuantity] = useState<number | "">(initialQuantity ?? minQty);
     const [boqDocument, setBoqDocument] = useState<File | null>(null);
     const [timeoutID, setTimeoutID] = useState<NodeJS.Timeout>();
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loggedInUser, setLoggedInUser] = useState<{
+        name: string;
+        email: string;
+        phone: string;
+    } | null>(null);
 
     const {
         control,
@@ -96,6 +101,62 @@ export default function SubmitEnquiryModal({
             setQuantity(initialQuantity ?? minQty);
         }
     }, [open, initialQuantity, minQty]);
+
+    useEffect(() => {
+        if (!open || !boqMode) {
+            setIsLoggedIn(false);
+            setLoggedInUser(null);
+            return;
+        }
+
+        const storedRoot = localStorage.getItem("persist:root");
+
+        if (!storedRoot) {
+            setIsLoggedIn(false);
+            setLoggedInUser(null);
+            return;
+        }
+
+        try {
+            const rootData = JSON.parse(storedRoot);
+
+            const userData =
+                typeof rootData?.user === "string"
+                    ? JSON.parse(rootData.user)
+                    : rootData?.user;
+
+            const userInfo = userData?.userInfo;
+
+            if (
+                !userInfo ||
+                typeof userInfo !== "object" ||
+                Object.keys(userInfo).length === 0
+            ) {
+                setIsLoggedIn(false);
+                setLoggedInUser(null);
+                return;
+            }
+
+            setIsLoggedIn(true);
+
+            setLoggedInUser({
+                name: `${userInfo.firstName ?? ""} ${userInfo.lastName ?? ""}`.trim(),
+                email: userInfo.email ?? "",
+                phone: userInfo.number ?? "",
+            });
+        } catch (error) {
+            console.error("Failed to get logged-in user details", error);
+            setIsLoggedIn(false);
+            setLoggedInUser(null);
+        }
+    }, [open, boqMode]);
+    console.log("BOQ DEBUG:", {
+        boqMode,
+        isLoggedIn,
+        loggedInUser,
+        storedUser: localStorage.getItem("user"),
+    });
+    const shouldHideBoqContactFields = boqMode && isLoggedIn && !!loggedInUser;
 
     if (!open) return null;
 
@@ -131,9 +192,9 @@ export default function SubmitEnquiryModal({
 
             const formData = new FormData();
 
-            formData.append("name", data.name);
-            formData.append("email", data.email);
-            formData.append("phone", data.phone);
+            formData.append("name", loggedInUser?.name || data.name);
+            formData.append("email", loggedInUser?.email || data.email);
+            formData.append("phone", loggedInUser?.phone || data.phone);
             formData.append("requirement", data.requirement);
             formData.append("boqDocument", boqDocument);
 
@@ -361,55 +422,58 @@ export default function SubmitEnquiryModal({
 
                                     {/* FORM FIELDS */}
                                     <div className="flex flex-col gap-4 lg:gap-3 pb-4">
-                                        <Controller
-                                            name="name"
-                                            control={control}
-                                            rules={{ required: "Name is required" }}
-                                            render={({ field }) => (
-                                                <CustomInput
-                                                    label="Name*"
-                                                    placeholder="Enter Name"
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    errorMessage={errors.name?.message}
-                                                    inputClassNames="h-[48px]"
-                                                />
-                                            )}
-                                        />
-
-                                        <Controller
-                                            name="phone"
-                                            control={control}
-                                            rules={{ required: "Phone number is required" }}
-                                            render={({ field }) => (
-                                                <CustomInput
-                                                    label="Phone Number*"
-                                                    placeholder="Enter Phone Number"
-                                                    prefix="+91"
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    errorMessage={errors.phone?.message}
-                                                    isMobileInput
-                                                    customStyles={{ height: "48px" }}
-                                                />
-                                            )}
-                                        />
-
-                                        <Controller
-                                            name="email"
-                                            control={control}
-                                            render={({ field }) => (
-                                                <CustomInput
-                                                    label="Email"
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    type="email"
-                                                    inputClassNames="h-[48px]"
-                                                    placeholder="Enter Email"
-                                                />
-                                            )}
-                                        />
-
+                                        {!shouldHideBoqContactFields && (
+                                            <Controller
+                                                name="name"
+                                                control={control}
+                                                rules={{ required: "Name is required" }}
+                                                render={({ field }) => (
+                                                    <CustomInput
+                                                        label="Name*"
+                                                        placeholder="Enter Name"
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                        errorMessage={errors.name?.message}
+                                                        inputClassNames="h-[48px]"
+                                                    />
+                                                )}
+                                            />
+                                        )}
+                                        {!shouldHideBoqContactFields && (
+                                            <Controller
+                                                name="phone"
+                                                control={control}
+                                                rules={{ required: "Phone number is required" }}
+                                                render={({ field }) => (
+                                                    <CustomInput
+                                                        label="Phone Number*"
+                                                        placeholder="Enter Phone Number"
+                                                        prefix="+91"
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                        errorMessage={errors.phone?.message}
+                                                        isMobileInput
+                                                        customStyles={{ height: "48px" }}
+                                                    />
+                                                )}
+                                            />
+                                        )}
+                                        {!shouldHideBoqContactFields && (
+                                            <Controller
+                                                name="email"
+                                                control={control}
+                                                render={({ field }) => (
+                                                    <CustomInput
+                                                        label="Email"
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                        type="email"
+                                                        inputClassNames="h-[48px]"
+                                                        placeholder="Enter Email"
+                                                    />
+                                                )}
+                                            />
+                                        )}
                                         <Controller
                                             name="requirement"
                                             control={control}

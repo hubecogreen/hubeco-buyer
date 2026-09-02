@@ -36,7 +36,7 @@ const useApi = <T>() => {
           ...(payload instanceof FormData
             ? {}
             : { 'Content-Type': 'application/json' }),
-          Authorization: `Bearer ${token}`
+          ...(token ? { Authorization: `Bearer ${token}` } : {})
         }
       }
 

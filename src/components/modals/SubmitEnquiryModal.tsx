@@ -338,7 +338,7 @@ export default function SubmitEnquiryModal({
 
                             {/* FIXED HEADER */}
                             <div className="flex justify-between items-center mb-4 flex-shrink-0">
-                                <h2 className="text-lg font-semibold">Submit an Enquiry</h2>
+                                <h2 className="text-lg font-semibold">{boqMode ? "Submit BOQ" : "Submit an Enquiry"}</h2>
                                 <button onClick={handleClose}>
                                     <X size={18} />
                                 </button>

@@ -26,12 +26,14 @@ export default function SubmitEnquiryModal({
     product,
     mode,
     initialQuantity,
+    boqMode = false,
 }: {
     open: boolean;
     onClose: () => void;
     product: any;
     mode: "proceed" | "form" | null;
     initialQuantity?: number;
+    boqMode?: boolean;
 }) {
     const { callApi } = useApi();
     // ✅ normalize product for both Card & Details page
@@ -58,8 +60,14 @@ export default function SubmitEnquiryModal({
     const router = useRouter();
     const [step, setStep] = useState<"proceed" | "form" | "success">("proceed");
     const [quantity, setQuantity] = useState<number | "">(initialQuantity ?? minQty);
+    const [boqDocument, setBoqDocument] = useState<File | null>(null);
     const [timeoutID, setTimeoutID] = useState<NodeJS.Timeout>();
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loggedInUser, setLoggedInUser] = useState<{
+        name: string;
+        email: string;
+        phone: string;
+    } | null>(null);
 
     const {
         control,
@@ -94,11 +102,68 @@ export default function SubmitEnquiryModal({
         }
     }, [open, initialQuantity, minQty]);
 
+    useEffect(() => {
+        if (!open || !boqMode) {
+            setIsLoggedIn(false);
+            setLoggedInUser(null);
+            return;
+        }
+
+        const storedRoot = localStorage.getItem("persist:root");
+
+        if (!storedRoot) {
+            setIsLoggedIn(false);
+            setLoggedInUser(null);
+            return;
+        }
+
+        try {
+            const rootData = JSON.parse(storedRoot);
+
+            const userData =
+                typeof rootData?.user === "string"
+                    ? JSON.parse(rootData.user)
+                    : rootData?.user;
+
+            const userInfo = userData?.userInfo;
+
+            if (
+                !userInfo ||
+                typeof userInfo !== "object" ||
+                Object.keys(userInfo).length === 0
+            ) {
+                setIsLoggedIn(false);
+                setLoggedInUser(null);
+                return;
+            }
+
+            setIsLoggedIn(true);
+
+            setLoggedInUser({
+                name: `${userInfo.firstName ?? ""} ${userInfo.lastName ?? ""}`.trim(),
+                email: userInfo.email ?? "",
+                phone: userInfo.number ?? "",
+            });
+        } catch (error) {
+            console.error("Failed to get logged-in user details", error);
+            setIsLoggedIn(false);
+            setLoggedInUser(null);
+        }
+    }, [open, boqMode]);
+    console.log("BOQ DEBUG:", {
+        boqMode,
+        isLoggedIn,
+        loggedInUser,
+        storedUser: localStorage.getItem("user"),
+    });
+    const shouldHideBoqContactFields = boqMode && isLoggedIn && !!loggedInUser;
+
     if (!open) return null;
 
     const handleClose = () => {
         reset();
         setQuantity(1);
+        setBoqDocument(null);
         // setStep("proceed");
         onClose();
     };
@@ -119,6 +184,40 @@ export default function SubmitEnquiryModal({
                 ]
                 : [],
         };
+        if (boqMode) {
+            if (!boqDocument) {
+                toast.error("Please upload your BOQ document");
+                return;
+            }
+
+            const formData = new FormData();
+
+            formData.append("name", loggedInUser?.name || data.name);
+            formData.append("email", loggedInUser?.email || data.email);
+            formData.append("phone", loggedInUser?.phone || data.phone);
+            formData.append("requirement", data.requirement);
+            formData.append("boqDocument", boqDocument);
+
+            try {
+                const result = await callApi(
+                    getEndpoint.default.GUEST_ENQUIRY,
+                    "POST",
+                    formData
+                );
+
+                if (result.data == null) {
+                    toast.error("Failed to submit BOQ");
+                    return;
+                }
+
+                toast.success("BOQ submitted successfully");
+                setStep("success");
+            } catch (error) {
+                toast.error("Something went wrong");
+            }
+
+            return;
+        }
 
         try {
             const result = await callApi(
@@ -239,7 +338,7 @@ export default function SubmitEnquiryModal({
 
                             {/* FIXED HEADER */}
                             <div className="flex justify-between items-center mb-4 flex-shrink-0">
-                                <h2 className="text-lg font-semibold">Submit an Enquiry</h2>
+                                <h2 className="text-lg font-semibold">{boqMode ? "Submit BOQ" : "Submit an Enquiry"}</h2>
                                 <button onClick={handleClose}>
                                     <X size={18} />
                                 </button>
@@ -323,55 +422,58 @@ export default function SubmitEnquiryModal({
 
                                     {/* FORM FIELDS */}
                                     <div className="flex flex-col gap-4 lg:gap-3 pb-4">
-                                        <Controller
-                                            name="name"
-                                            control={control}
-                                            rules={{ required: "Name is required" }}
-                                            render={({ field }) => (
-                                                <CustomInput
-                                                    label="Name*"
-                                                    placeholder="Enter Name"
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    errorMessage={errors.name?.message}
-                                                    inputClassNames="h-[48px]"                                                    
-                                                />
-                                            )}
-                                        />
-
-                                        <Controller
-                                            name="phone"
-                                            control={control}
-                                            rules={{ required: "Phone number is required" }}
-                                            render={({ field }) => (
-                                                <CustomInput
-                                                    label="Phone Number*"
-                                                    placeholder="Enter Phone Number"
-                                                    prefix="+91"
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    errorMessage={errors.phone?.message}
-                                                    isMobileInput
-                                                    customStyles={{ height: "48px" }}
-                                                />
-                                            )}
-                                        />
-
-                                        <Controller
-                                            name="email"
-                                            control={control}
-                                            render={({ field }) => (
-                                                <CustomInput
-                                                    label="Email"
-                                                    value={field.value}
-                                                    onChange={field.onChange}
-                                                    type="email"
-                                                    inputClassNames="h-[48px]"
-                                                    placeholder="Enter Email"
-                                                />
-                                            )}
-                                        />
-
+                                        {!shouldHideBoqContactFields && (
+                                            <Controller
+                                                name="name"
+                                                control={control}
+                                                rules={{ required: "Name is required" }}
+                                                render={({ field }) => (
+                                                    <CustomInput
+                                                        label="Name*"
+                                                        placeholder="Enter Name"
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                        errorMessage={errors.name?.message}
+                                                        inputClassNames="h-[48px]"
+                                                    />
+                                                )}
+                                            />
+                                        )}
+                                        {!shouldHideBoqContactFields && (
+                                            <Controller
+                                                name="phone"
+                                                control={control}
+                                                rules={{ required: "Phone number is required" }}
+                                                render={({ field }) => (
+                                                    <CustomInput
+                                                        label="Phone Number*"
+                                                        placeholder="Enter Phone Number"
+                                                        prefix="+91"
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                        errorMessage={errors.phone?.message}
+                                                        isMobileInput
+                                                        customStyles={{ height: "48px" }}
+                                                    />
+                                                )}
+                                            />
+                                        )}
+                                        {!shouldHideBoqContactFields && (
+                                            <Controller
+                                                name="email"
+                                                control={control}
+                                                render={({ field }) => (
+                                                    <CustomInput
+                                                        label="Email"
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                        type="email"
+                                                        inputClassNames="h-[48px]"
+                                                        placeholder="Enter Email"
+                                                    />
+                                                )}
+                                            />
+                                        )}
                                         <Controller
                                             name="requirement"
                                             control={control}
@@ -390,6 +492,46 @@ export default function SubmitEnquiryModal({
                                             )}
                                         />
                                     </div>
+                                    {boqMode && (
+                                        <div className="flex flex-col gap-2">
+                                            <label className="text-sm font-medium text-brown">
+                                                BOQ Document*
+                                            </label>
+
+                                            <input
+                                                type="file"
+                                                accept=".pdf,.xls,.xlsx"
+                                                onChange={(e) => {
+                                                    const file = e.target.files?.[0] || null;
+
+                                                    if (!file) {
+                                                        setBoqDocument(null);
+                                                        return;
+                                                    }
+
+                                                    if (file.size > 10 * 1024 * 1024) {
+                                                        toast.error("BOQ document must not exceed 10 MB");
+                                                        e.target.value = "";
+                                                        setBoqDocument(null);
+                                                        return;
+                                                    }
+
+                                                    setBoqDocument(file);
+                                                }}
+                                                className="w-full border border-gray-300 rounded-md p-2 text-sm"
+                                            />
+
+                                            <p className="text-xs text-gray-500">
+                                                PDF, XLS or XLSX. Maximum size: 10 MB.
+                                            </p>
+
+                                            {boqDocument && (
+                                                <p className="text-xs text-gray-600">
+                                                    Selected: {boqDocument.name}
+                                                </p>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* FIXED FOOTER BUTTONS */}
@@ -400,7 +542,7 @@ export default function SubmitEnquiryModal({
                                         className="w-1/2 border border-primary text-primary bg-cream"
                                     />
                                     <CustomButton
-                                        title="Submit Enquiry"
+                                        title={boqMode ? "Submit BOQ" : "Submit Enquiry"}
                                         type="submit"
                                         className="w-1/2 bg-primary text-white"
                                     />

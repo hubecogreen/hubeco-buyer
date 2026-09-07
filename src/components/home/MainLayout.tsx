@@ -12,7 +12,7 @@ import React from "react";
 import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import useClient from "../hooks/useClient";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SubmitEnquiryModal from "../modals/SubmitEnquiryModal";
 import BottomNavigation from "@/components/navigation/BottomNavigation";
 
@@ -24,14 +24,38 @@ const MainLayout = ({
   isProd: boolean;
 }) => {
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
+  const [boqMode, setBoqMode] = useState(false);
 
   const openEnquiryModal = () => {
+    setBoqMode(false);
+    setShowEnquiryModal(true);
+  };
+
+  const openBoqModal = () => {
+    setBoqMode(true);
     setShowEnquiryModal(true);
   };
 
   const closeEnquiryModal = () => {
     setShowEnquiryModal(false);
+    setBoqMode(false)
   };
+
+  useEffect(() => {
+    const handleOpenBoqModal = () => {
+      openBoqModal();
+    };
+
+    window.addEventListener("hubeco:open-boq-modal", handleOpenBoqModal);
+
+    return () => {
+      window.removeEventListener(
+        "hubeco:open-boq-modal",
+        handleOpenBoqModal
+      );
+    };
+  }, []);
+  
   const isClient = useClient();
 
   if (!isClient) return <></>;
@@ -46,17 +70,18 @@ const MainLayout = ({
         <RootProvider>
           <MeDetails>
             <ChakraProvider>
-              <Header onSubmitEnquiry={openEnquiryModal}/>
+              <Header onSubmitEnquiry={openEnquiryModal} />
               <div className="mt-[79px] bg-cream">
                 <NetworkStatusToast />
                 <PrivateRoute>{children}</PrivateRoute>
               </div>
-              <BottomNavigation onSubmitEnquiry={openEnquiryModal}/>
+              <BottomNavigation onSubmitEnquiry={openEnquiryModal} />
               <SubmitEnquiryModal
                 open={showEnquiryModal}
                 onClose={closeEnquiryModal}
                 product={null}
                 mode="form"
+                boqMode={boqMode}
               />
               <Footer />
             </ChakraProvider>

@@ -19,20 +19,20 @@ const logos = [
   "/images/home/hero/brand-logos/eco-strong-logo.webp",
 
   "/images/home/hero/brand-logos/green-jam-logo.webp",
-   "/images/home/hero/brand-logos/jalsevak-logo.webp",
-   "/images/home/hero/brand-logos/magnus-logo.webp",
-   "/images/home/hero/brand-logos/meghalite-logo.webp",
-   "/images/home/hero/brand-logos/nanospan-greyscale-logo.webp",
+  "/images/home/hero/brand-logos/jalsevak-logo.webp",
+  "/images/home/hero/brand-logos/magnus-logo.webp",
+  "/images/home/hero/brand-logos/meghalite-logo.webp",
+  "/images/home/hero/brand-logos/nanospan-greyscale-logo.webp",
 
-   "/images/home/hero/brand-logos/path-frame-logo.webp",
-   "/images/home/hero/brand-logos/perfect-logo.webp",
-   "/images/home/hero/brand-logos/ploygon-logo.webp",
-   "/images/home/hero/brand-logos/radha-tmt-logo.webp",
-   "/images/home/hero/brand-logos/sai-iges-power-pvt-ltd-logo.webp",
+  "/images/home/hero/brand-logos/path-frame-logo.webp",
+  "/images/home/hero/brand-logos/perfect-logo.webp",
+  "/images/home/hero/brand-logos/ploygon-logo.webp",
+  "/images/home/hero/brand-logos/radha-tmt-logo.webp",
+  "/images/home/hero/brand-logos/sai-iges-power-pvt-ltd-logo.webp",
 
-   "/images/home/hero/brand-logos/saltech-logo.webp",
-   "/images/home/hero/brand-logos/sbf-rapid-logo.webp",
-   "/images/home/hero/brand-logos/trigger-logo.webp",
+  "/images/home/hero/brand-logos/saltech-logo.webp",
+  "/images/home/hero/brand-logos/sbf-rapid-logo.webp",
+  "/images/home/hero/brand-logos/trigger-logo.webp",
   "/images/home/hero/brand-logos/univ-logo.webp",
   "/images/home/hero/brand-logos/vinayak-industries-logo.webp",
 
@@ -63,8 +63,12 @@ const HeroSection = () => {
     "Hello, I would like to get a quote for sustainable building materials for my project. Please let me know the next steps to share my requirements.";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
+  // const handleGetQuoteClick = () => {
+  //   setIsQuoteSheetOpen(true);
+  // };
+
   const handleGetQuoteClick = () => {
-    setIsQuoteSheetOpen(true);
+    window.dispatchEvent(new Event("hubeco:open-boq-modal"));
   };
 
   return (
@@ -94,29 +98,34 @@ const HeroSection = () => {
               className="text-[27px] lg:text-[60px] lg:leading-[60px] leading-[30px] font-medium"
               aria-label="Digitizing Procurement for Smarter Sustainable Construction"
             >
-              Digitizing <br className="hidden lg:block" />
+              India’s Digital <br className="hidden lg:block" />
               <span className="whitespace-nowrap">
-                Procurement for
+                Procurement Platform for
               </span> <br className="lg:block md:hidden block" />
-              Smarter,{" "}
+              {/* Smarter,{" "} */}
+<span className="inline-flex items-center whitespace-nowrap">
+  <span className="bg-primary px-2 py-1 rounded text-cream inline-block">
+    {"Sustainable".split("").map((char, i) => (
+      <motion.span
+        key={i}
+        className="inline-block"
+      >
+        {char}
+      </motion.span>
+    ))}
+  </span>
 
-              <span className="bg-primary px-2 py-1 rounded text-cream inline-block whitespace-nowrap">
-                {"Sustainable".split("").map((char, i) => (
-                  <motion.span key={i} className="inline-block">
-                    {char}
-                  </motion.span>
-                ))}
-              </span>
-
-              <br className="md:hidden lg:block block" />
-              Construction
+  <span className="ml-1">Construction</span>
+</span>
+              {/* <br className="md:hidden block" /> */}
+              
             </h1>
           </div>
 
-          <div className="flex flex-col justify-center h-full lg:translate-y-[190px] gap-2 w-full md:w-1/2 lg:w-1/2">
-            <p className="text-[20px] font-regular">Certified Products aligned with</p>
+          <div className="flex flex-col justify-center h-full lg:pt-[290px] gap-2 w-full md:w-1/2 lg:w-1/2">
+            <p className="text-[20px] font-regular md:ml-[52px]">Certified Products aligned with</p>
 
-            <div className="flex items-center justify-between sm:gap-4 lg:gap-6 w-full  md:w-full lg:w-full sm:w-fit">
+            <div className="flex items-center md:ml-[52px] sm:gap-4 lg:gap-6 w-full  md:w-full lg:w-full sm:w-fit">
               <div className="h-[50px] overflow-hidden flex-shrink-0 min-w-[120px]">
                 <div className="vertical-marquee">
                   <div className="vertical-track">
@@ -151,13 +160,14 @@ const HeroSection = () => {
         </div>
         <hr className="border-white/40 w-full lg:my-6 my-[10px]" />
 
-        <div className="lg:flex block gap-[312px] items-center  lg:pb-[50px] pb-[18px] lg:justify-between md:w-1/2 lg:w-auto">
-          <div className="">
-            <p className="max-[370px]:text-[16px] text-[20px] lg:leading-[30px] leading-[20px]  lg:mt-2 font-regular  ">
-              Empowering India&apos;s Construction Industry with <br className="hidden lg:block" />
-              Sustainable Materials and Digital Efficiency
-            </p>
-          </div>
+       <div className="lg:flex block items-center gap-12 lg:pb-[50px] pb-[18px]">
+         <div className="flex-1">
+    <p className="max-[390px] text-[16px] md:text-[20px] lg:leading-[30px] leading-[20px] lg:mt-2 font-regular">
+      Source certified sustainable materials, building systems and green
+      financing from verified suppliers. Upload BOQs, compare quotes and
+      build a greener future.
+    </p>
+  </div>
 
           <div className=" gap-3 mt-4 flex  lg:gap-6 relative z-30  ">
             <div className="relative w-full lg:w-[190px]">
@@ -168,7 +178,7 @@ const HeroSection = () => {
                 className="group flex justify-center items-center gap-[10px]
              bg-primary hover:bg-cream hover:text-primary text-cream
              w-full lg:w-[190px]
-             lg:px-[33px] lg:py-[11.5px] py-[10px] px-[20px] text-[17px] font-medium
+             lg:px-[33px] lg:py-[11.5px] py-[10px] px-[10px] text-[17px] font-medium
              rounded-md whitespace-nowrap cursor-pointer"
                 onClick={handleGetQuoteClick}
               >
@@ -188,7 +198,7 @@ const HeroSection = () => {
                   className="hidden group-hover:block"
                 /> */}
 
-                Get Quote
+                Submit BOQ
               </motion.button>
 
               <GetQuotePopover
@@ -220,32 +230,32 @@ const HeroSection = () => {
           <p className="opacity-70 whitespace-nowrap px-3 text-[16px] ">Trusted by:</p>
 
           <Swiper
-  slidesPerView="auto"
-  loop={true}
-  autoplay={{
-    delay: 0,
-    disableOnInteraction: false,
-  }}
-  speed={10000} // Increase for slower movement (e.g., 5000-10000)
-  allowTouchMove={false}
-  modules={[Autoplay]}
-  className="w-full marquee-swiper"
->
-  {[...logos, ...logos].map((logo, i) => (
-    <SwiperSlide
-      key={i}
-      className="!w-auto flex items-center justify-center px-4"
-    >
-      <Image
-        src={logo}
-        alt={`logo-${i}`}
-        width={80}
-        height={40}
-        className="h-10 w-auto object-contain max-w-[100px]"
-      />
-    </SwiperSlide>
-  ))}
-</Swiper>
+            slidesPerView="auto"
+            loop={true}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+            }}
+            speed={10000} // Increase for slower movement (e.g., 5000-10000)
+            allowTouchMove={false}
+            modules={[Autoplay]}
+            className="w-full marquee-swiper"
+          >
+            {[...logos, ...logos].map((logo, i) => (
+              <SwiperSlide
+                key={i}
+                className="!w-auto flex items-center justify-center px-4"
+              >
+                <Image
+                  src={logo}
+                  alt={`logo-${i}`}
+                  width={80}
+                  height={40}
+                  className="h-10 w-auto object-contain max-w-[100px]"
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
 

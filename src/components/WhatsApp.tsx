@@ -1,15 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import GetQuoteSheet from "@/components/GetQuoteSheet";
 import GetQuotePopover from "@/components/GetQuotePopover";
 
 const WhatsAppWidget = () => {
-  const pathname = usePathname();
-  const isHomeRoute = pathname === "/" || pathname === "/home";
-  const [isWidgetVisible, setIsWidgetVisible] = useState(!isHomeRoute);
   const [isQuoteSheetOpen, setIsQuoteSheetOpen] = useState(false);
   const whatsappNumber = "919985544055"; // Replace with your number in international format (without +)
   const defaultMessage =
@@ -20,81 +16,12 @@ const WhatsAppWidget = () => {
     setIsQuoteSheetOpen(true);
   };
 
-  useEffect(() => {
-    let observer: IntersectionObserver | null = null;
-    let frameId: number | null = null;
-    let mutationObserver: MutationObserver | null = null;
-
-    if (!isHomeRoute) {
-      setIsWidgetVisible(true);
-      return;
-    }
-
-    setIsWidgetVisible(false);
-
-    const connectHeroObserver = () => {
-      const heroSection = document.getElementById("home-hero-section");
-
-      if (!heroSection) {
-        return false;
-      }
-
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          const shouldShow = entry.intersectionRatio <= 0.25;
-          setIsWidgetVisible(shouldShow);
-        },
-        {
-          threshold: [0, 0.25, 1],
-        }
-      );
-
-      observer.observe(heroSection);
-      return true;
-    };
-
-    if (!connectHeroObserver()) {
-      frameId = window.requestAnimationFrame(() => {
-        if (connectHeroObserver()) {
-          return;
-        }
-
-        mutationObserver = new MutationObserver(() => {
-          if (connectHeroObserver()) {
-            mutationObserver?.disconnect();
-            mutationObserver = null;
-          }
-        });
-
-        mutationObserver.observe(document.body, {
-          childList: true,
-          subtree: true,
-        });
-      });
-    }
-
-    return () => {
-      observer?.disconnect();
-      mutationObserver?.disconnect();
-
-      if (frameId !== null) {
-        window.cancelAnimationFrame(frameId);
-      }
-    };
-  }, [isHomeRoute]);
-
   return (
     <>
-      <div
-        className={`fixed hidden lg:block lg:bottom-5 bottom-20 md:bottom-20  right-5 z-40 transition-all duration-300 ease-out ${isWidgetVisible
-          ? "translate-y-0 opacity-100 pointer-events-auto"
-          : "translate-y-3 opacity-0 pointer-events-none"
-          }`}
-      >
+      <div className="fixed hidden lg:block lg:bottom-5 bottom-20 md:bottom-20 right-5 z-40">
         <button
           type="button"
           onClick={handleWidgetClick}
-          aria-hidden={!isWidgetVisible}
           aria-label="Chat on WhatsApp"
           className="block rounded-sm bg-cream"
         >

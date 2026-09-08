@@ -185,18 +185,16 @@ export default function SubmitEnquiryModal({
                 : [],
         };
         if (boqMode) {
-            if (!boqDocument) {
-                toast.error("Please upload your BOQ document");
-                return;
-            }
-
             const formData = new FormData();
 
             formData.append("name", loggedInUser?.name || data.name);
             formData.append("email", loggedInUser?.email || data.email);
             formData.append("phone", loggedInUser?.phone || data.phone);
             formData.append("requirement", data.requirement);
-            formData.append("boqDocument", boqDocument);
+
+            if (boqDocument) {
+                formData.append("boqDocument", boqDocument);
+            }
 
             try {
                 const result = await callApi(
@@ -495,7 +493,7 @@ export default function SubmitEnquiryModal({
                                     {boqMode && (
                                         <div className="flex flex-col gap-2">
                                             <label className="text-sm font-medium text-brown">
-                                                BOQ Document*
+                                                BOQ Document (Optional)
                                             </label>
 
                                             <input

@@ -493,7 +493,7 @@ export default function SubmitEnquiryModal({
                                     {boqMode && (
                                         <div className="flex flex-col gap-2">
                                             <label className="text-sm font-medium text-brown">
-                                                BOQ Document (Optional)
+                                                Attach BOQ
                                             </label>
 
                                             <input

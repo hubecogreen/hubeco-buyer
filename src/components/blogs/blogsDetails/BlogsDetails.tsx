@@ -22,6 +22,7 @@ import animationData from '../../../../public/animations/nodatafound.json'
 import { CircularProgress, Spinner, Stack } from "@chakra-ui/react";
 import Image from "next/image";
 import LottieWrapper from "@/components/LottieWrapper";
+import { normalizePath } from "@/lib/utils";
 interface Blog {
   _id: string;
   title: string;
@@ -171,7 +172,7 @@ const BlogsDetails = ({ id }: any) => {
                     </div>
                   </div>
                   <Image
-                    src={`${assetURL}${blogData.thumbnail.includes('/admin/') ? blogData.thumbnail : blogData.thumbnail.replace('admin/', '/admin/')}`}
+                    src={blogData.thumbnail ? normalizePath(`${assetURL}/${blogData.thumbnail}`) : "/images/failedToLoadImage.webp"}
                     alt="blog"
                     width={339.33}
                     height={300}
@@ -240,7 +241,7 @@ const BlogsDetails = ({ id }: any) => {
 
                       <div className="w-full">
                         <Image
-                    src={`${assetURL}${item.thumbnail.includes('/admin/') ? item.thumbnail : item.thumbnail.replace('admin/', '/admin/')}`}
+                    src={item.thumbnail ? normalizePath(`${assetURL}/${item.thumbnail}`) : "/images/failedToLoadImage.webp"}
                           alt={`Thumbnail for ${item?.title}`}
                           width={339.33}
                           height={300}

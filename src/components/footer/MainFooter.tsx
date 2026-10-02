@@ -42,16 +42,18 @@ const Footer = () => {
 
 
   const finalCategories = useMemo(() => {
-    const BASE_CATEGORIES = ["Bricks", "Sand", "Paints", "Tiles"];
+    const BASE_CATEGORIES = ["Bricks", "Sand", "Paints"];
 
     const hasAdhesives = !!categoryIdMap["adhesives"];
     const hasSanitary = !!categoryIdMap["sanitary & bath fittings"];
+    const hasFlooring = !!categoryIdMap["flooring"];
 
     let extraCategories: string[] = [];
 
-    if (hasAdhesives || hasSanitary) {
+    if (hasAdhesives || hasSanitary || hasFlooring) {
       if (hasAdhesives) extraCategories.push("Adhesives");
       if (hasSanitary) extraCategories.push("Sanitary & Bath Fittings");
+      if (hasFlooring) extraCategories.push("Flooring");
     } else {
       extraCategories = ["Pavers", "Steel"];
     }

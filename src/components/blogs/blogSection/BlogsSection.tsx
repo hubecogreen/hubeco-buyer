@@ -10,6 +10,7 @@ import dayjs from "dayjs";
 import animationData from '../../../../public/animations/nodatafound.json'
 import Image from "next/image";
 import LottieWrapper from "@/components/LottieWrapper";
+import { normalizePath } from "@/lib/utils";
 interface Blog {
   _id: string;
   title: string;
@@ -158,7 +159,7 @@ const BlogsSection = () => {
               <div className={styles.itemCard}>
               <Image
                     className={`${styles.itemImage} w-[400px] h-[300px] cursor-pointer`}
-                    src={`${assetURL}${item.thumbnail.includes('/admin/') ? item.thumbnail : item.thumbnail.replace('admin/', '/admin/')}`}
+                    src={item.thumbnail ? normalizePath(`${assetURL}/${item.thumbnail}`) : "/images/failedToLoadImage.webp"}
                     alt="image"
                     width={400}
                     height={300}

@@ -103,7 +103,7 @@ const ContactSection: React.FC = () => {
     lg:gap-[22px]
     lg:px-[50px] lg:py-[50px]
 
-    text-white
+    text-cream
     bg-gradient-to-br from-[#109989] to-[#084A42]
     rounded-lg lg:rounded-r-lg lg:rounded-l-none
   "

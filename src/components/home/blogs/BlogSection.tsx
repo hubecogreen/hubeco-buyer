@@ -25,18 +25,60 @@ interface Blog {
 const BlogsSection = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
 
-  const getData = useCallback(() => {
-    const token = getCookie("token");
-    const url = `${getEndpoint.default.BLOGS}?limit=9`;
+  // const getData = useCallback(() => {
+  //   const token = getCookie("token");
+  //   const url = `${getEndpoint.default.BLOGS}`;
 
-    Webservices.callGetApi(url, token || undefined)
-      .then((res: any) => {
-        if (Array.isArray(res?.data?.data)) {
-          setBlogs(res.data.data);
-        }
-      })
-      .catch(console.error);
-  }, []);
+  //   Webservices.callGetApi(url, token || undefined)
+  //     .then((res: any) => {
+  //       if (Array.isArray(res?.data?.data)) {
+  //         setBlogs(res.data.data);
+  //       }
+  //     })
+  //     .catch(console.error);
+  // }, []);
+
+  const getData = useCallback(async () => {
+  const token = getCookie("token");
+
+  try {
+    // Get the first page
+    const firstUrl = `${getEndpoint.default.BLOGS}?page=1`;
+
+    const firstResponse: any = await Webservices.callGetApi(
+      firstUrl,
+      token || undefined
+    );
+
+    const firstBlogs = Array.isArray(firstResponse?.data?.data)
+      ? firstResponse.data.data
+      : [];
+
+    const totalPages = firstResponse?.data?.metadata?.totalPages || 1;
+
+    // If there are more pages, fetch them too
+    const remainingRequests = [];
+
+    for (let page = 2; page <= totalPages; page++) {
+      const url = `${getEndpoint.default.BLOGS}?page=${page}`;
+
+      remainingRequests.push(
+        Webservices.callGetApi(url, token || undefined)
+      );
+    }
+
+    const remainingResponses = await Promise.all(remainingRequests);
+
+    const remainingBlogs = remainingResponses.flatMap((response: any) =>
+      Array.isArray(response?.data?.data) ? response.data.data : []
+    );
+
+    // Combine all pages
+    setBlogs([...firstBlogs, ...remainingBlogs]);
+  } catch (error) {
+    console.error(error);
+  }
+}, []);
 
   useEffect(() => {
     getData();

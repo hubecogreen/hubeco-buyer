@@ -43,13 +43,14 @@ const BlogsSection = () => {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [totalPage, setTotalPage] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL
 
   useEffect(() => {
     getData();
   }, [searchTerm]);
 
- 
+
 
 
 
@@ -59,12 +60,12 @@ const BlogsSection = () => {
     Webservices.callGetApi(url, '')
       .then(
         (response: {
-          data: { data: Blog[]; nextCursor: string | null; totalCount: number; metadata: { totalCount: number; currentPage: number,totalPages: number } };
+          data: { data: Blog[]; nextCursor: string | null; totalCount: number; metadata: { totalCount: number; currentPage: number, totalPages: number } };
         }) => {
           if (response.data && Array.isArray(response.data.data)) {
             setBlogData(response.data.data);
 
-            setTotalPage(response?.data?.metadata?.totalPages);
+            setTotalItems(response?.data?.metadata?.totalCount);
             setPage(response?.data?.metadata?.currentPage);
           } else {
             // consoleerror("Unexpected response format: ", response);
@@ -80,25 +81,25 @@ const BlogsSection = () => {
     setSearchTerm(event.target.value);
   };
 
- // // console.log('totalPage',totalPage)
+  // // console.log('totalPage',totalPage)
 
   const handleChange = (newPage: number) => {
     if (window.scrollY > 0) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-    if(newPage ==page){
-     // // console.log("same page")
-      return 
+    if (newPage == page) {
+      // // console.log("same page")
+      return
     }
     getData(newPage);
   };
 
   const handleBlogClick = (slug: string) => {
-   // // console.log('wferty',slug)
+    // // console.log('wferty',slug)
     router.push(`/blogs/${encodeURIComponent(slug)}`);
   };
 
-  function truncateDescription(description:any, maxLength:any) {
+  function truncateDescription(description: any, maxLength: any) {
     if (description.length <= maxLength) {
       return description;
     }
@@ -109,14 +110,15 @@ const BlogsSection = () => {
     <div className="px-4 md:px-16 mt-8 md:mt-10">
       <div className="flex justify-between mb-6 md:mb-6">
         <h2 className="text-brown font-bold text-2xl md:text-3xl">Blogs</h2>
-          <div className="flex w-[75%] md:w-96 h-8 md:h-12">
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={handleSearch}
-              className="
+        <div className="flex w-[75%] md:w-96 h-8 md:h-12">
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={handleSearch}
+            className="
                 border border-gray-300 
+                bg-cream
                 rounded-l-[5px] 
                 p-2 
                 w-full 
@@ -124,8 +126,8 @@ const BlogsSection = () => {
                 h-full 
                 text-sm md:text-base
               "
-            />
-            <div className="
+          />
+          <div className="
                 bg-primary 
                 p-2 
                 h-full 
@@ -134,58 +136,57 @@ const BlogsSection = () => {
                 justify-center 
                 rounded-r-[5px]
               "
-            >
-              <IoIosSearch
-                className="text-white md:w-[25px] md:h-[20px] w-[15px] h-auto"
-              />
-            </div>
+          >
+            <IoIosSearch
+              className="text-white md:w-[25px] md:h-[20px] w-[15px] h-auto"
+            />
           </div>
+        </div>
 
       </div>
       {blogData.length > 0 ? (
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-4 lg:gap-x-8 sm:gap-y-6 lg:gap-y-12 mb-8 lg:mb-8">
-        
-         { blogData.map((item:any) => 
-            { 
-              const wordCount = item.content.split(/\s+/).length;
-              const readingTimeMinutes = Math.ceil(wordCount / 150);
-              //// // console.log('fewrgthy',encodeURIComponent(item?.slug))
-              
-              return <div
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-4 lg:gap-x-8 sm:gap-y-6 lg:gap-y-12 mb-8 lg:mb-8">
+
+          {blogData.map((item: any) => {
+            const wordCount = item.content.split(/\s+/).length;
+            const readingTimeMinutes = Math.ceil(wordCount / 150);
+            //// // console.log('fewrgthy',encodeURIComponent(item?.slug))
+
+            return <div
               className={`${styles.gridItem} cursor-pointer`}
               key={item._id}
               onClick={() => handleBlogClick(item?.slug)}
             >
               <div className={styles.itemCard}>
-              <Image
-                    className={`${styles.itemImage} w-[400px] h-[300px] cursor-pointer`}
-                    src={item.thumbnail ? normalizePath(`${assetURL}/${item.thumbnail}`) : "/images/failedToLoadImage.webp"}
-                    alt="image"
-                    width={400}
-                    height={300}
-                    onError={(e) => {
-                      e.currentTarget.src = "/images/failedToLoadImage.webp";
-                    }}
-                    loading="lazy"
-                  />
+                <Image
+                  className={`${styles.itemImage} w-[400px] h-[300px] cursor-pointer`}
+                  src={item.thumbnail ? normalizePath(`${assetURL}/${item.thumbnail}`) : "/images/failedToLoadImage.webp"}
+                  alt="image"
+                  width={400}
+                  height={300}
+                  onError={(e) => {
+                    e.currentTarget.src = "/images/failedToLoadImage.webp";
+                  }}
+                  loading="lazy"
+                />
 
                 <div className={styles.itemTimings}>
                   <div className="flex items-center justify-start">
-                  <p className={styles.nameText}>
+                    <p className={styles.nameText}>
                       By{" "}
                       <span className={styles.nameTextColor}>
                         {/* {item.author.firstName} {item.author.lastName} */}
                         hubeco team
                       </span>
                     </p>
-                  <p className={`${styles.timeText} ml-2`} >| {'  '}{readingTimeMinutes} mins reads</p>
+                    <p className={`${styles.timeText} ml-2`} >| {'  '}{readingTimeMinutes} mins reads</p>
                   </div>
                   <p className={styles.timeText}>
                     {dayjs(item.updatedAt).format("MMM DD YYYY")}
                   </p>
                 </div>
                 <div className={styles.itemContent}>
-                  <h5 className={`${styles.itemTitle} cursor-pointer text-justify h-[45px]`} >{truncateDescription(item.title,80)}</h5>
+                  <h5 className={`${styles.itemTitle} cursor-pointer text-justify h-[45px]`} >{truncateDescription(item.title, 80)}</h5>
                   <div className={styles.name}>
                     {/* <p className={styles.nameText}>
                       By{" "}
@@ -194,28 +195,28 @@ const BlogsSection = () => {
                       </span>
                     </p> */}
                   </div>
-                  <p className={'text-sm text-brown mt-3'}>{truncateDescription(item.description,250)}</p>
+                  <p className={'text-sm text-brown mt-3'}>{truncateDescription(item.description, 250)}</p>
                 </div>
               </div>
             </div>
           })
-            
-        }</div>
-        ) : (
-          <>
+
+          }</div>
+      ) : (
+        <>
           <LottieWrapper
-              animationData={animationData}
-              loop={true}
-              className="flex mx-auto justify-center items-center w-[400px] h-[400px]"
-            />
+            animationData={animationData}
+            loop={true}
+            className="flex mx-auto justify-center items-center w-[400px] h-[400px]"
+          />
 
           <p className="text-center text-brown mt-4 text-lg font-bold ">No Blogs Found.</p>
-          </>
-        )}
-    
-      {totalPage > 1 && (
+        </>
+      )}
+
+      {totalItems > 12 && (
         <Pagination
-          totalItems={totalPage}
+          totalItems={totalItems}
           itemsPerPage={12}
           currentPage={page}
           onPageChange={handleChange}

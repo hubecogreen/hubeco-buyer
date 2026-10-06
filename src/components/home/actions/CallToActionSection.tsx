@@ -42,7 +42,7 @@ const CallToActionSection: React.FC = () => {
             {/* Title */}
             <h2
                className="
-                  text-white 
+                  text-cream 
                   font-medium 
                   text-[50px] 
                   leading-[1.1em] 
@@ -61,7 +61,7 @@ const CallToActionSection: React.FC = () => {
             {/* Subtitle */}
             <p
                className="
-                  text-white 
+                  text-cream
                   text-[22px] 
                   leading-[1.5em]
                   md:text-[22px]
@@ -85,7 +85,7 @@ const CallToActionSection: React.FC = () => {
                <CustomButton
                   className="
       bg-primary
-      text-white 
+      text-cream 
       text-[20px]
       font-medium  
       !px-[19px]
@@ -109,7 +109,7 @@ const CallToActionSection: React.FC = () => {
                <a
                   className="
       bg-primary
-      text-white 
+      text-cream 
       text-[20px]
       font-medium 
       px-[19px] 

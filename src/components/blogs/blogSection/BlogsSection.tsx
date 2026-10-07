@@ -1,6 +1,6 @@
 "use client"
 import styles from "./BlogsSection.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { useRouter } from "next/navigation"; // Use 'next/router' for client-side routing
 import Pagination from "@/components/pagination/Pagination";
@@ -44,6 +44,10 @@ const BlogsSection = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [totalPage, setTotalPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
+  const [initialLoading, setInitialLoading] = useState(true);
+
+  const isFirstLoad = useRef(true);
+
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL
 
   useEffect(() => {
@@ -55,25 +59,48 @@ const BlogsSection = () => {
 
 
   const getData = (page = 1) => {
+    const isInitialRequest = isFirstLoad.current;
+
+    if (isInitialRequest) {
+      setInitialLoading(true);
+    }
 
     const url = `${getEndpoint.default.BLOGS}?searchTerm=${searchTerm}&limit=12&page=${page}`;
+
     Webservices.callGetApi(url, '')
       .then(
         (response: {
-          data: { data: Blog[]; nextCursor: string | null; totalCount: number; metadata: { totalCount: number; currentPage: number, totalPages: number } };
+          data: {
+            data: Blog[];
+            nextCursor: string | null;
+            totalCount: number;
+            metadata: {
+              totalCount: number;
+              currentPage: number;
+              totalPages: number;
+            };
+          };
         }) => {
           if (response.data && Array.isArray(response.data.data)) {
             setBlogData(response.data.data);
 
-            setTotalItems(response?.data?.metadata?.totalCount);
-            setPage(response?.data?.metadata?.currentPage);
+            setTotalItems(response.data.metadata.totalCount);
+            setPage(response.data.metadata.currentPage);
           } else {
-            // consoleerror("Unexpected response format: ", response);
+            setBlogData([]);
+            setTotalItems(0);
           }
         }
       )
       .catch((err) => {
-        // consoleerror("API call failed: ", err);
+        setBlogData([]);
+        setTotalItems(0);
+      })
+      .finally(() => {
+        if (isInitialRequest) {
+          setInitialLoading(false);
+          isFirstLoad.current = false;
+        }
       });
   };
 
@@ -104,6 +131,27 @@ const BlogsSection = () => {
       return description;
     }
     return description.slice(0, maxLength) + '...';
+  }
+
+  if (initialLoading) {
+    return (
+      <div className="px-4 md:px-16 mt-8 md:mt-10">
+        <div className="flex justify-between mb-6">
+          <div className="h-8 w-24 bg-gray-200 rounded animate-pulse" />
+
+          <div className="h-12 w-96 bg-gray-200 rounded animate-pulse" />
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-4 lg:gap-x-8 sm:gap-y-6 lg:gap-y-12">
+          {[1, 2, 3, 4, 5, 6].map((item) => (
+            <div
+              key={item}
+              className="h-[400px] bg-gray-200 rounded animate-pulse"
+            />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   return (

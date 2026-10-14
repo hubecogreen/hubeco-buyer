@@ -1,4 +1,5 @@
 'use client'
+import { isCashfreeSession, startCashfreeCheckout } from "@/lib/cashfree"
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import animationData from '../../../public/animations/failure.json'
@@ -38,6 +39,11 @@ const PaymentFailed = () => {
       if (result.status === 201) {
         setLoading(false)
         setData(result.data)
+        // Cashfree: backend returns a checkout session instead of the PayU form
+        if (isCashfreeSession(result.data)) {
+          startCashfreeCheckout(result.data)
+          return
+        }
         document.open()
         document.write(result.data)
         document.close()

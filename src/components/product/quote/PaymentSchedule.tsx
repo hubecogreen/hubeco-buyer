@@ -1,3 +1,4 @@
+import { isCashfreeSession, startCashfreeCheckout } from "@/lib/cashfree";
 import useApi from "@/components/Fetcher/useAPI";
 import useRefreshToken from "@/components/hooks/useRefreshToken";
 import dayjs from "dayjs";
@@ -53,6 +54,11 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
           handleBuyApiError(result?.errorData);
         } else {
           // toast.success('Redirecting you to the Payment page');
+          // Cashfree: backend returns a checkout session instead of the PayU form
+          if (isCashfreeSession(result.data)) {
+            startCashfreeCheckout(result.data);
+            return;
+          }
           const parser1 = new DOMParser();
           const doc1 = parser1.parseFromString(result.data, 'text/html');
           // Extract the form element

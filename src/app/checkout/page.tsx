@@ -1,4 +1,5 @@
 "use client";
+import { isCashfreeSession, startCashfreeCheckout } from "@/lib/cashfree";
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import CustomInput from "@/components/customInput/CustomTextField";
@@ -418,6 +419,11 @@ const Checkout = () => {
               secondary: "#FFFAEE",
             },
           });
+          // Cashfree: backend returns a checkout session instead of the PayU form
+          if (isCashfreeSession(result.data)) {
+            startCashfreeCheckout(result.data);
+            return;
+          }
           const parser1 = new DOMParser();
           const doc1 = parser1.parseFromString(result.data, "text/html");
           // Extract the form element

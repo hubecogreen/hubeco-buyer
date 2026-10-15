@@ -1463,10 +1463,10 @@ const Checkout = () => {
                   className="mr-2 z-10 accent-[#B90647]"
                   defaultChecked
                   onClick={() => handleCheckPayU(checkedP)}
-                  title="PayU Secure (UPI, Cards, Wallets, NetBanking)"
+                  title="Cashfree Secure (UPI, Cards, Wallets, NetBanking)"
                 />
 
-                <label>PayU Secure (UPI, Cards, Wallets, NetBanking)</label>
+                <label>Cashfree Secure (UPI, Cards, Wallets, NetBanking)</label>
               </div>
               <div className="flex items-center justify-center pb-5">
                 <Image
@@ -1482,7 +1482,7 @@ const Checkout = () => {
                 />
               </div>
               <p className="text-sm text-brown mt-2 text-center pb-10 px-10">
-                After clicking "Pay now", you will be redirected to PayU to
+                After clicking "Pay now", you will be redirected to Cashfree to
                 complete your purchase securely.
               </p>
             </div>

@@ -301,10 +301,10 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
                 </div>
               </div>
 
-              {/* PayU Section */}
+              {/* Cashfree Section */}
               <div className="space-y-4">
                 <p className="text-brown">
-                  Please use PayU Payment Gateway for initiating{" "}
+                  Please use Cashfree Payment Gateway for initiating{" "}
                   {selectedPayment.applicablePaymentMethod === "RTGS_NEFT"
                     ? "RTGS/NEFT Transfer"
                     : "online payment methods"}

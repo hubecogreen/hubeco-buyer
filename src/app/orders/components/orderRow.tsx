@@ -71,7 +71,11 @@ export default function OrderRow({ order, reloadPage }: OrderProps) {
         <div className="w-full md:w-[45%] flex flex-col md:flex-row justify-between lg:items-center">
           <p className="text-sm text-brown font-medium mb-2 md:mb-0">
             <span className="text-sm font-regular mr-2">Payment Mode:</span>
-            {order?.orders[0]?.payment === "Pay U payment gateway" ? "PayU" : order?.orders[0]?.payment}
+            {order?.orders[0]?.payment === "Pay U payment gateway"
+              ? "PayU"
+              : order?.orders[0]?.payment === "Cashfree payment gateway"
+                ? "Cashfree"
+                : order?.orders[0]?.payment}
           </p>
           <p className="text-lg text-brown font-semibold">
             <span className="text-sm font-medium mr-2">Total Amount:</span>  <span className="text-brown text-lg font-normal font-monospace mr-1">

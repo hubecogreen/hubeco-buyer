@@ -299,8 +299,8 @@ export default function OrdersPage({ params }: any) {
                 <span className="text-brown font-medium text-md mr-2">
                   Payment Mode :
                 </span>{" "}
-                PayU
-                {/* {orderData?.orders[0]?.payment==='Pay U payment gateway'?'PayU':orderData?.orders[0]?.payment} */}
+                {/* orders created before the gateway label existed default to PayU */}
+                {orderData?.orders?.[0]?.payment === "Cashfree payment gateway" ? "Cashfree" : "PayU"}
               </p>
             </div>
           </div>

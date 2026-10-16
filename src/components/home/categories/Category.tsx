@@ -22,6 +22,7 @@ import toast from "react-hot-toast";
 import useApi from "@/components/Fetcher/useAPI";
 import CustomLoader from "@/components/sharedComponents/loader";
 import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
+import { categoryPath } from "@/lib/categoryUrls";
 
 interface Category {
   _id: string;
@@ -94,17 +95,7 @@ const CategorySection = () => {
   // Memoize navigation handlers
   const handleCategoryClick = useCallback(
     (category: any) => {
-      // Use both category and subcategory slugs for better SEO
-      if (category?.parentCategorySlug && category?.seoSlug) {
-        const url = `/products/${category.parentCategorySlug}/${category.seoSlug}?scid=${category._id}`;
-        console.log("Navigating to:", url);
-        router.push(url);
-      } else {
-        // Fallback to original structure if parent category slug is missing
-        const url = `/products/${category?.seoSlug}?scid=${category?._id}`;
-        console.log("Fallback navigation to:", url);
-        router.push(url);
-      }
+      router.push(categoryPath(category?.parentCategorySlug, category?.seoSlug));
     },
     [router]
   );

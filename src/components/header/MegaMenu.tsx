@@ -15,6 +15,7 @@ import ViewMore from "../product/quote/ViewMore";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import { GoArrowRight } from "react-icons/go";
 import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
+import { categoryPath, categoryPathById } from "@/lib/categoryUrls";
 
 interface MenuItem {
   title: string;
@@ -412,18 +413,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                                         >
                                                           {child ? (
                                                             <Link
-                                                              href={`/products/${
-                                                                currentCategory?.seoSlug ||
-                                                                "category"
-                                                              }/${
-                                                                subCat?.seoSlug ||
-                                                                "sub-category"
-                                                              }/${
-                                                                child?.seoSlug ||
-                                                                "child-category"
-                                                              }?ccid=${
-                                                                child._id
-                                                              }`}
+                                                              href={categoryPath(currentCategory?.seoSlug, subCat?.seoSlug, child?.seoSlug)}
                                                               className="block hover:text-teal-600 transition-colors duration-200"
                                                               onClick={() => {
                                                                 toggleSidebar();
@@ -484,9 +474,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                     </a>
                   </a> */}
                   <Link
-                    href={`/products/${
-                      menuItem?.seoSlug || "sub-category"
-                    }?scid=${menuItem?._id}`}
+                    href={categoryPathById(mainCategories, menuItem?._id) ?? "/products"}
                     className={`block font-semibold text-md py-2 px-3 text-white flex items-center ${styles.parentMenuItemText}`}
                     onClick={handleClick}
                   >
@@ -513,11 +501,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                                 </a>
                               </a> */}
                               <Link
-                                href={`/products/${
-                                  menuItem?.seoSlug || "sub-category"
-                                }/${
-                                  subItem?.seoSlug || "child-category"
-                                }?ccid=${subItem?._id}`}
+                                href={categoryPathById(mainCategories, subItem?._id) ?? "/products"}
                                 replace={true}
                                 className="block text-brown text-sm my-1 px-2 py-1"
                                 onClick={handleClick}
@@ -580,9 +564,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                           <ViewMore text={menuItem?.name} length={30} />
                         </h4> */}
                         <Link
-                          href={`/products/${
-                            menuItem?.seoSlug || "sub-category"
-                          }?scid=${menuItem?._id}`}
+                          href={categoryPathById(mainCategories, menuItem?._id) ?? "/products"}
                           className="font-medium text-base text-primary mb-1.5 cursor-pointer"
                         >
                           <ViewMore text={menuItem?.name} length={30} />
@@ -601,11 +583,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen }) => {
                             // </a>
                             <Link
                               key={itemIndex}
-                              href={`/products/${
-                                menuItem?.seoSlug || "sub-category"
-                              }/${item?.seoSlug || "child-category"}?ccid=${
-                                item?._id
-                              }`}
+                              href={categoryPathById(mainCategories, item?._id) ?? "/products"}
                               className="block text-brown text-sm my-1"
                               onClick={handleClick}
                             >

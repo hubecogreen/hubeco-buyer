@@ -17,6 +17,9 @@ const Page = () => {
   const [data, setData] = React.useState<any>(null)
   const [loading, setLoading] = React.useState<boolean>(false)
   const [time, setTime] = React.useState<number>(6)
+  // Cashfree redirects with paymentStatus=pending when the payment isn't confirmed yet
+  // (e.g. NEFT/RTGS bank transfer not received)
+  const [isPending, setIsPending] = React.useState<boolean>(false)
   const dispatch = useDispatch()
 
   async function checkTransId(txnId: string) {
@@ -55,11 +58,14 @@ const Page = () => {
   }
 
   React.useEffect(() => {
-    const txnId = new URLSearchParams(window.location.search).get('orderId')
+    const params = new URLSearchParams(window.location.search)
+    const txnId = params.get('orderId')
+    const pending = params.get('paymentStatus') === 'pending'
+    setIsPending(pending)
 
     if (!txnId || txnId.length < 7) {
       handleBackToLogin('run')
-    } else {
+    } else if (!pending) {
       checkTransId(txnId)
     }
 
@@ -88,15 +94,26 @@ const Page = () => {
     <div className='flex flex-col items-center justify-center  pb-16 bg-green-50 text-center'>
       <div >
 
-        <div className='mb-1'>
-          <LottieWrapper animationData={animationData} loop={true} className='w-64 h-64 mx-auto' />
-          <h4  className='font-bold text-primary mb-4 md:text-3xl text-xl'>
-            Payment Successful!
-          </h4>
-          <p  className='text-brown'>
-            Thank you for your payment. Your transaction has been completed.
-          </p>
-        </div>
+        {isPending ? (
+          <div className='mb-1 pt-16'>
+            <h4  className='font-bold text-primary mb-4 md:text-3xl text-xl'>
+              Payment Processing
+            </h4>
+            <p  className='text-brown'>
+              Your payment is being confirmed. If you chose NEFT/RTGS, please complete the transfer to the account details shown by Cashfree. We will update your quote once the payment is received and you will receive an email.
+            </p>
+          </div>
+        ) : (
+          <div className='mb-1'>
+            <LottieWrapper animationData={animationData} loop={true} className='w-64 h-64 mx-auto' />
+            <h4  className='font-bold text-primary mb-4 md:text-3xl text-xl'>
+              Payment Successful!
+            </h4>
+            <p  className='text-brown'>
+              Thank you for your payment. Your transaction has been completed.
+            </p>
+          </div>
+        )}
 
         <div className='mb-4  p-5 rounded-lg max-w-fit-content inline-block'>
           {/* <h6 className='font-bold text-brown'>

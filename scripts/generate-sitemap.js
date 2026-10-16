@@ -174,43 +174,29 @@ function generateDynamicUrls(data) {
   const dynamicUrls = [];
   const { categories, products, vendors, blogs } = data;
 
-  console.log("categories", categories);
-  console.log("categories", categories.seoSlug);
+  // Hierarchical category URLs, matching src/lib/categoryUrls.ts:
+  //   /products/{category}[/{subCategory}[/{childCategory}]]
+  // ?type= filter combinations are canonicalised to their subcategory and never listed.
+  const categoryUrl = (...slugs) => ({
+    loc: `${PROD_URL}/products/${slugs.join("/")}`,
+    lastmod: new Date().toISOString(),
+    changefreq: 'weekly',
+    priority: '0.8',
+  });
 
-  // Generate hierarchical category URLs
   categories.forEach((category) => {
-    if (category) {
+    if (!category || !category.seoSlug) return;
+    dynamicUrls.push(categoryUrl(category.seoSlug));
 
-      // Subcategory URLs
-      if (category.subCategories && Array.isArray(category.subCategories)) {
-        category.subCategories.forEach((subCategory) => {
-          if (subCategory && subCategory.seoSlug) {
-            // Subcategory level URL with scid parameter
-            dynamicUrls.push({
-              loc: `${PROD_URL}/products/${category.seoSlug}/${subCategory.seoSlug}?scid=${subCategory._id}`,
-              lastmod: new Date().toISOString(),
-              changefreq: 'weekly',
-              priority: '0.8',
-            });
+    (category.subCategories || []).forEach((subCategory) => {
+      if (!subCategory || !subCategory.seoSlug) return;
+      dynamicUrls.push(categoryUrl(category.seoSlug, subCategory.seoSlug));
 
-            // Child category URLs
-            if (subCategory.childCategories && Array.isArray(subCategory.childCategories)) {
-              subCategory.childCategories.forEach((childCategory) => {
-                if (childCategory && childCategory.seoSlug) {
-                  // Full hierarchical URL with ccid parameter
-                  dynamicUrls.push({
-                    loc: `${PROD_URL}/products/${category.seoSlug}/${subCategory.seoSlug}/${childCategory.seoSlug}?ccid=${childCategory._id}`,
-                    lastmod: new Date().toISOString(),
-                    changefreq: 'weekly',
-                    priority: '0.8',
-                  });
-                }
-              });
-            }
-          }
-        });
-      }
-    }
+      (subCategory.childCategories || []).forEach((childCategory) => {
+        if (!childCategory || !childCategory.seoSlug) return;
+        dynamicUrls.push(categoryUrl(category.seoSlug, subCategory.seoSlug, childCategory.seoSlug));
+      });
+    });
   });
 
   // Product URLs

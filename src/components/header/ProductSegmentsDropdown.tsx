@@ -20,6 +20,7 @@ import { useBreakpoint } from "../hooks/useBreakpoint";
 import { GoArrowRight } from "react-icons/go";
 import Image from "next/image";
 import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
+import { CHILD_FILTER_PARAM, categoryPath, parseChildFilter } from "@/lib/categoryUrls";
 
 interface Category {
   seoSlug: string;
@@ -81,11 +82,17 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Function to check if a category is active based on URL
-  const isCategoryActive = (categoryId: string) => {
-    if (typeof window !== "undefined") {
-      return window.location.href.includes(categoryId);
-    }
-    return false;
+  const isCategoryActive = (path: string) => {
+    if (typeof window === "undefined") return false;
+    const { pathname, search } = window.location;
+    if (pathname === path) return true;
+
+    // Child categories selected together sit on their subcategory page as ?type=a,b
+    const slash = path.lastIndexOf("/");
+    return (
+      pathname === path.slice(0, slash) &&
+      parseChildFilter(new URLSearchParams(search).get(CHILD_FILTER_PARAM)).includes(path.slice(slash + 1))
+    );
   };
 
   useEffect(() => {
@@ -397,7 +404,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             key={subCat._id}
                             className={`p-1 cursor-pointer  rounded transition-all duration-200 ${
                               openedCategoryId === subCat._id ||
-                              isCategoryActive(subCat._id)
+                              isCategoryActive(categoryPath(selectedCategory?.seoSlug, subCat.seoSlug))
                                 ? "text-[#B90647] font-semibold"
                                 : "text-[#B5B5B5] font-light hover:text-[#B90647]"
                             }`}
@@ -419,7 +426,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                               // Redirect to subcategory page on double click
                               if (subCat.seoSlug) {
                                 router.push(
-                                  `/products/${selectedCategory?.seoSlug}/${subCat.seoSlug}?scid=${subCat._id}`
+                                  categoryPath(selectedCategory?.seoSlug, subCat.seoSlug)
                                 );
                                 onClose();
                               }
@@ -427,7 +434,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                           >
                             <div className="flex items-center justify-between">
                               <Link
-                                href={`/products/${selectedCategory?.seoSlug}/${subCat.seoSlug}?scid=${subCat._id}`}
+                                href={categoryPath(selectedCategory?.seoSlug, subCat.seoSlug)}
                                 className="text-sm  font-light "
                                 onClick={() => {
                                   onClose();
@@ -467,20 +474,13 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                                     <div
                                       key={child._id}
                                       className={`p-0 cursor-pointer rounded text-white transition-all duration-200 font-light ${
-                                        isCategoryActive(child._id)
+                                        isCategoryActive(categoryPath(selectedCategory?.seoSlug, subCat?.seoSlug, child?.seoSlug))
                                           ? "text-[#B90647] font-semibold"
                                           : ""
                                       }`}
                                     >
                                       <Link
-                                        href={`/products/${
-                                          selectedCategory?.seoSlug ||
-                                          "category"
-                                        }/${
-                                          subCat?.seoSlug || "sub-category"
-                                        }/${
-                                          child?.seoSlug || "child-category"
-                                        }?ccid=${child._id}`}
+                                        href={categoryPath(selectedCategory?.seoSlug, subCat?.seoSlug, child?.seoSlug)}
                                         className="text-xs"
                                         onClick={() => {
                                           onClose();
@@ -523,7 +523,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                             key={subCat._id}
                             className={`p-1 cursor-pointer rounded transition-all duration-200 ${
                               openedCategoryId === subCat._id ||
-                              isCategoryActive(subCat._id)
+                              isCategoryActive(categoryPath(selectedCategory?.seoSlug, subCat.seoSlug))
                                 ? "text-[#B90647] font-semibold"
                                 : "text-[#B5B5B5] font-light hover:text-[#B90647]"
                             }`}
@@ -544,7 +544,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                           >
                             <div className="flex items-center justify-between">
                               <Link
-                                href={`/products/${selectedCategory?.seoSlug}/${subCat.seoSlug}?scid=${subCat._id}`}
+                                href={categoryPath(selectedCategory?.seoSlug, subCat.seoSlug)}
                                 className="text-sm font-light"
                                 onClick={() => {
                                   onClose();
@@ -578,14 +578,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                                       className="p-0 cursor-pointer rounded text-white  transition-all duration-200 font-light"
                                     >
                                       <Link
-                                        href={`/products/${
-                                          selectedCategory?.seoSlug ||
-                                          "category"
-                                        }/${
-                                          subCat?.seoSlug || "sub-category"
-                                        }/${
-                                          child?.seoSlug || "child-category"
-                                        }?ccid=${child._id}`}
+                                        href={categoryPath(selectedCategory?.seoSlug, subCat?.seoSlug, child?.seoSlug)}
                                         className="text-xs"
                                         onClick={() => {
                                           onClose();
@@ -777,7 +770,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                         key={subCat._id}
                         className={`p-3 cursor-pointer rounded transition-all duration-200 ${
                           openedCategoryId === subCat._id ||
-                          isCategoryActive(subCat._id)
+                          isCategoryActive(categoryPath(selectedCategory?.seoSlug, subCat.seoSlug))
                             ? "text-[#B90647] font-semibold"
                             : "text-white"
                         }`}
@@ -796,7 +789,7 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                       >
                         <div className="flex items-center justify-between">
                           <Link
-                            href={`/products/${selectedCategory?.seoSlug}/${subCat.seoSlug}?scid=${subCat._id}`}
+                            href={categoryPath(selectedCategory?.seoSlug, subCat.seoSlug)}
                             className="text-sm"
                             onClick={() => {
                               onClose();
@@ -828,17 +821,13 @@ const ProductSegmentsDropdown: React.FC<ProductSegmentsDropdownProps> = ({
                                 <div
                                   key={child._id}
                                   className={`p-2 cursor-pointer rounded text-white hover:text-[#B90647] transition-all duration-200 ${
-                                    isCategoryActive(child._id)
+                                    isCategoryActive(categoryPath(selectedCategory?.seoSlug, subCat?.seoSlug, child?.seoSlug))
                                       ? "text-[#B90647] font-semibold"
                                       : ""
                                   }`}
                                 >
                                   <Link
-                                    href={`/products/${
-                                      selectedCategory?.seoSlug || "category"
-                                    }/${subCat?.seoSlug || "sub-category"}/${
-                                      child?.seoSlug || "child-category"
-                                    }?ccid=${child._id}`}
+                                    href={categoryPath(selectedCategory?.seoSlug, subCat?.seoSlug, child?.seoSlug)}
                                     className="text-xs"
                                     onClick={() => {
                                       onClose();

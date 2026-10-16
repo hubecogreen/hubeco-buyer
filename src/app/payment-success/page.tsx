@@ -17,6 +17,8 @@ const PaymentSuccessful = () => {
   const [data, setData] = React.useState<any>(null)
   const [loading, setLoading] = React.useState<boolean>(false)
   const [time, setTime] = React.useState<number>(5)
+  // Cashfree redirects with paymentStatus=pending when the bank hasn't confirmed yet
+  const [isPending, setIsPending] = React.useState<boolean>(false)
   const dispatch = useDispatch()
 
   async function checkTransId(txnId: string) {
@@ -56,11 +58,14 @@ const PaymentSuccessful = () => {
   }
 
   React.useEffect(() => {
-    const txnId = new URLSearchParams(window.location.search).get('txnId')
+    const params = new URLSearchParams(window.location.search)
+    const txnId = params.get('txnId')
+    const pending = params.get('paymentStatus') === 'pending'
+    setIsPending(pending)
 
     if (!txnId || txnId.length < 7) {
       handleBackToLogin('run')
-    } else {
+    } else if (!pending) {
       checkTransId(txnId)
     }
 
@@ -103,15 +108,26 @@ const PaymentSuccessful = () => {
     <div className='flex flex-col items-center justify-center  md:h-screen pb-16 bg-green-50 text-center'>
       <div >
 
-        <div className='mb-1'>
-          <LottieWrapper animationData={animationData} loop={true} className='w-64 h-64 mx-auto' />
-          <h4  className='font-bold text-primary mb-4 md:text-3xl text-xl'>
-            Payment Successful!
-          </h4>
-          <p  className='text-brown'>
-            Thank you for your payment. Your transaction has been completed.
-          </p>
-        </div>
+        {isPending ? (
+          <div className='mb-1 pt-16'>
+            <h4  className='font-bold text-primary mb-4 md:text-3xl text-xl'>
+              Payment Processing
+            </h4>
+            <p  className='text-brown'>
+              Your payment is being confirmed by the bank. Your plan will be activated once it is confirmed and you will receive an email shortly.
+            </p>
+          </div>
+        ) : (
+          <div className='mb-1'>
+            <LottieWrapper animationData={animationData} loop={true} className='w-64 h-64 mx-auto' />
+            <h4  className='font-bold text-primary mb-4 md:text-3xl text-xl'>
+              Payment Successful!
+            </h4>
+            <p  className='text-brown'>
+              Thank you for your payment. Your transaction has been completed.
+            </p>
+          </div>
+        )}
 
         <div className='mb-4  p-5 rounded-lg max-w-fit-content inline-block'>
           {/* <h6 className='font-bold text-brown'>

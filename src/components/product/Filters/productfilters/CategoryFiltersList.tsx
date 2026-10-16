@@ -1,10 +1,23 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import useApi from "@/components/Fetcher/useAPI";
 import toast from "react-hot-toast";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import FilterHTML from "./FilterHTML";
 import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
+import {
+  CHILD_FILTER_PARAM,
+  CategoryNode,
+  LEGACY_CATEGORY_PARAMS,
+  categoryHref,
+  childSelectionTarget,
+  childrenFromFilter,
+  indexCategoriesById,
+  parseChildFilter,
+  resolveCategorySlugs,
+  resolvedCategoryPath,
+  slugsFromPathname,
+} from "@/lib/categoryUrls";
 
 interface VendorFiltersListProps {
   onCategorySelectionChange: (selectedCats: string[]) => void;
@@ -22,13 +35,12 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
   const pathname = usePathname();
   const router = useRouter();
 
-  const scid = searchParams.get("scid");
-  const ccid = searchParams.get("ccid");
 
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
   const [selectedParentid, setSelectedParentId] = useState<string[]>([]);
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
 
+  const [categoryTree, setCategoryTree] = useState<CategoryNode[]>([]);
   const [categoriesData, setCategoriesData] = useState<any[]>([]);
   const [filteredCategories, setFilteredCategories] = useState<any[]>([]);
   const [catCount, setCatCount] = useState<number>(0);
@@ -45,6 +57,7 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
   const fetchCategories = async () => {
     try {
       const data = await getProductCategoryTree(callApi);
+      setCategoryTree(data);
 
       const allSubCategories = data.flatMap((cat: any) =>
         (cat.subCategories || []).map((subCat: any) => ({
@@ -80,6 +93,22 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
 
   /* ============ URL → STATE SYNC (NO PUSH HERE) ============ */
 
+  const categoryIndex = useMemo(() => indexCategoriesById(categoryTree), [categoryTree]);
+
+  // The selected subcategory comes from the path; selected children from the
+  // path (one child) or ?type= (several children of that subcategory)
+  const { scid, ccids } = useMemo(() => {
+    const slugs = slugsFromPathname(pathname);
+    const resolved = slugs && categoryTree.length ? resolveCategorySlugs(categoryTree, slugs) : null;
+    if (!resolved?.subCategory) return { scid: null, ccids: [] as string[] };
+
+    const children = resolved.childCategory
+      ? [resolved.childCategory]
+      : childrenFromFilter(resolved.subCategory, parseChildFilter(searchParams.get(CHILD_FILTER_PARAM)));
+    return { scid: resolved.subCategory._id, ccids: children.map((child) => child._id) };
+  }, [pathname, searchParams, categoryTree]);
+  const ccidKey = ccids.join(",");
+
   useEffect(() => {
     if (!categoriesData.length) return;
 
@@ -89,104 +118,62 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
       onChangeParentSelectionChange([scid]);
     }
 
-    if (ccid) {
-      const ccids = ccid.split(",");
-      setSelectedCats(ccids);
+    setSelectedCats(ccids);
+    if (ccids.length) {
       onCategorySelectionChange(ccids);
     }
-  }, [scid, ccid, categoriesData]);
+  }, [scid, ccidKey, categoriesData]);
 
   /* ================= HANDLERS ================= */
 
-  const getSubCategoryPath = (subCategory: any) => {
-    if (subCategory?.parentCategorySlug && subCategory?.seoSlug) {
-      return `/products/${subCategory.parentCategorySlug}/${subCategory.seoSlug}`;
-    }
-
-    return pathname;
-  };
-
-  const getChildCategoryPath = (childCategory: any) => {
-    if (
-      childCategory?.parentCategorySlug &&
-      childCategory?.parentSubCategorySlug &&
-      childCategory?.seoSlug
-    ) {
-      return `/products/${childCategory.parentCategorySlug}/${childCategory.parentSubCategorySlug}/${childCategory.seoSlug}`;
-    }
-
-    const parentSubCategory = categoriesData.find((category: any) =>
-      category.childCategories?.some((child: any) => child._id === childCategory?._id)
-    );
-
-    return parentSubCategory ? getSubCategoryPath(parentSubCategory) : pathname;
-  };
-
-  const buildPathWithParams = (path: string, params: URLSearchParams) => {
-    const query = params.toString();
-    return query ? `${path}?${query}` : path;
+  // Category selection lives in the path and ?type=; keep any other query params
+  const preservedParams = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    [...LEGACY_CATEGORY_PARAMS, CHILD_FILTER_PARAM].forEach((key) => params.delete(key));
+    return params;
   };
 
   const onSelectCat = (id: string) => {
-    setSelectedCats(prev => {
-      const updated = prev.includes(id)
-        ? prev.filter(x => x !== id)
-        : [...prev, id];
+    const updated = selectedCats.includes(id)
+      ? selectedCats.filter(x => x !== id)
+      : [...selectedCats, id];
 
-      onCategorySelectionChange(updated);
+    setSelectedCats(updated);
+    onCategorySelectionChange(updated);
 
-      const params = new URLSearchParams(searchParams.toString());
-      updated.length
-        ? params.set("ccid", updated.join(","))
-        : params.delete("ccid");
+    const clicked = categoryIndex.get(id);
+    if (!clicked?.subCategory) return;
 
-      if (updated.length === 1) {
-        const selectedChild = categoriesData
-          .flatMap((category: any) => category.childCategories || [])
-          .find((child: any) => child._id === updated[0]);
+    const siblings = updated
+      .map(childId => categoryIndex.get(childId))
+      .filter(located => located?.childCategory && located.subCategory?._id === clicked.subCategory!._id)
+      .map(located => located!.childCategory!);
 
-        router.push(buildPathWithParams(getChildCategoryPath(selectedChild), params));
-      } else {
-        router.push(buildPathWithParams(pathname, params));
-      }
-
-      return updated;
-    });
+    const target = childSelectionTarget(clicked.category, clicked.subCategory, siblings);
+    router.push(categoryHref(target.path, target.childSlugs, preservedParams()));
   };
 
   const onSelectParentCat = (id: string) => {
-    setSelectedParentId(prev => {
-      const isSelected = prev.includes(id);
-
-      const params = new URLSearchParams(searchParams.toString());
-
-      if (isSelected) {
-        params.delete("scid");
-        params.delete("ccid");
-
-        setSelectedCats([]);
-        onCategorySelectionChange([]);
-        onChangeParentSelectionChange([]);
-
-        router.push("/products");
-        return [];
-      }
-
-      params.set("scid", id);
-      params.delete("ccid");
-
-      setExpandedCategories([id]);
+    if (selectedParentid.includes(id)) {
+      setSelectedParentId([]);
       setSelectedCats([]);
       onCategorySelectionChange([]);
-      onChangeParentSelectionChange([id]);
+      onChangeParentSelectionChange([]);
 
-      const selectedSubCategory = categoriesData.find(
-        (category: any) => category._id === id
-      );
+      router.push("/products");
+      return;
+    }
 
-      router.push(buildPathWithParams(getSubCategoryPath(selectedSubCategory), params));
-      return [id];
-    });
+    setSelectedParentId([id]);
+    setExpandedCategories([id]);
+    setSelectedCats([]);
+    onCategorySelectionChange([]);
+    onChangeParentSelectionChange([id]);
+
+    const located = categoryIndex.get(id);
+    if (located?.subCategory) {
+      router.push(categoryHref(resolvedCategoryPath(located), [], preservedParams()));
+    }
   };
 
   const toggleExpansion = (id: string) => {
@@ -230,7 +217,7 @@ const CategoryFiltersList: React.FC<VendorFiltersListProps> = ({
 
   return (
     <FilterHTML
-      ccid={ccid}
+      ccid={ccids[0]}
       scid={scid}
       catCount={catCount}
       selectedParentid={selectedParentid}

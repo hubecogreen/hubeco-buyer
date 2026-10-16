@@ -8,6 +8,7 @@ import useApi from "../Fetcher/useAPI";
 import toast from "react-hot-toast";
 import useClient from "../hooks/useClient";
 import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
+import { categoryPath } from "@/lib/categoryUrls";
 
 interface MenuItem {
   level: number;
@@ -296,6 +297,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
   ) => {
     if (!categories || categories.length === 0) return null;
 
+    const pathFor = (category: any) =>
+      type === "child"
+        ? categoryPath(seoCategorySlug, seoSlug, category?.seoSlug)
+        : categoryPath(seoSlug, category?.seoSlug);
+
     return (
       <>
         {categories.map((category: any) => (
@@ -309,7 +315,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
             <div
               className={`flex justify-between items-center cursor-pointer text-sm mb-1 ${
                 typeof window !== "undefined" &&
-                window.location.href.includes(category?._id)
+                window.location.pathname === pathFor(category)
                   ? styles.parentItemActive
                   : ""
               }`}
@@ -317,22 +323,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isOpen, onClose }) => {
                 // Prevent event bubbling to parent li
                 e.stopPropagation();
 
-                // Handle child category click
-                if (type === "child") {
-                  const url = `/products/${seoCategorySlug}/${seoSlug}/${category?.seoSlug}?ccid=${category?._id}`;
-                  console.log(
-                    "Child category clicked - Generated URL:",
-                    url,
-                    "category:",
-                    category?.name
-                  );
-                  router.push(url);
-                  if (onClose) onClose();
-                } else {
-                  const url = `/products/${seoSlug}/${category?.seoSlug}?scid=${category?._id}`;
-                  router.push(url);
-                  if (onClose) onClose();
-                }
+                router.push(pathFor(category));
+                if (onClose) onClose();
               }}
             >
               {category?.name}

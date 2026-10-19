@@ -27,6 +27,7 @@ import QuotePaymentH from "./components/QuotePayment";
 import useClient from "@/components/hooks/useClient";
 import useGetBuyer from "@/components/hooks/useGetBuyer";
 import { normalizePath } from "@/lib/utils";
+import { orderPaymentGateway } from "@/lib/paymentGateway";
 
 export default function OrdersPage({ params }: any) {
   const id = params?.id;
@@ -299,8 +300,7 @@ export default function OrdersPage({ params }: any) {
                 <span className="text-brown font-medium text-md mr-2">
                   Payment Mode :
                 </span>{" "}
-                {/* orders created before the gateway label existed default to PayU */}
-                {orderData?.orders?.[0]?.payment === "Cashfree payment gateway" ? "Cashfree" : "PayU"}
+                {orderPaymentGateway(orderData)}
               </p>
             </div>
           </div>

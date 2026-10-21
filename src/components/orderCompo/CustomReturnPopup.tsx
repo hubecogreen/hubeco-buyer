@@ -249,7 +249,7 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
 
       {/* Popup Content */}
       <div className="fixed inset-0 flex items-center justify-center z-50">
-        <div className="bg-white sm:max-w-[425px] p-6 rounded shadow-lg border border-borderGray relative">
+        <div className="bg-cream sm:max-w-[425px] p-6 rounded shadow-lg border border-borderGray relative">
           <div className="w-full flex justify-center items-center">
             <Image
               src="/images/ReturnS.svg"
@@ -330,7 +330,7 @@ const CustomReturnPopup = ({ open, onClose, orderId }: any) => {
             /> */}
             <label
               htmlFor="file"
-              className="flex flex-col items-center justify-center gap-2 p-4 border border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition"
+              className="flex flex-col items-center justify-center gap-2 p-4 border border-dashed border-gray-300 rounded-lg cursor-pointer bg-cream hover:bg-darkcream/40 transition"
             >
               <div className="icon text-brown">
                 <svg

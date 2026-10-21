@@ -373,7 +373,7 @@ export default function quoteComponent() {
       </Dialog>
 
       <Dialog open={doneOpen}>
-        <DialogContent className="sm:max-w-lg p-10">
+        <DialogContent className="sm:max-w-lg p-10 bg-cream">
           <div className="flex">
             <Image
               src="/images/checkout/Group.webp"

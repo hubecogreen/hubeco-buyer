@@ -11,7 +11,8 @@ import Pagination from "../pagination/Pagination";
 import Meta from "../sharedComponents/Meta";
 // import {useRouter} from 'next/navigation'
 // import { Skeleton } from "../ui/skeleton";
-import ProductCard from "../productCard/ProductCard";
+// Same card as the products listing page
+import ProductCard from "../product/Card";
 import LottieWrapper from "../LottieWrapper";
 
 interface Blog {
@@ -270,7 +271,7 @@ const ProductGrid = (id: any, search:any) => {
       )} */}
       
       {projectData.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {projectData.map((product:any) => (
             <>
             <ProductCard key={product._id} product={product} />

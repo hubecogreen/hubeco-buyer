@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default function QuoteDone({doneOpen, setDoneOpen}:any) {
   return (
     <Dialog open={doneOpen} onOpenChange={()=>setDoneOpen(false)}>
-    <DialogContent className="sm:max-w-lg p-10">
+    <DialogContent className="sm:max-w-lg p-10 bg-cream">
       <div className="flex justify-center items-center gap-5">
         <Image
           src="/images/checkout/Group.webp"

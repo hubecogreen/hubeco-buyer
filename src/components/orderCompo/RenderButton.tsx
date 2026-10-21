@@ -340,7 +340,7 @@ const RenderButton = ({ orderId, order, justify = "center" }: any) => {
             <>
               <Button
                 variant="outline"
-                className="!h-[35px] border-secondary text-secondary rounded-none hover:bg-white bg-white"
+                className="!h-[35px] border-secondary text-secondary rounded-none hover:bg-cream bg-cream"
                 color="orange"
                 onClick={handleOpenReturn}
               >

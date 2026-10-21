@@ -1,6 +1,6 @@
 # Dynamic Sitemap Generation with Hierarchical URLs
 
-This project includes a dynamic sitemap generation system that creates hierarchical URLs for product categories with proper query parameters.
+This project includes a dynamic sitemap generation system that creates clean, hierarchical URLs for product categories.
 
 ## URL Structure
 
@@ -8,18 +8,25 @@ The sitemap generates URLs in the following hierarchical format:
 
 ### 1. Category Level URLs
 ```
-https://uat.hubeco.market/products/building-materials-hubeco
+https://hubeco.market/products/eco-friendly-building-materials
 ```
 
-### 2. Subcategory Level URLs (with scid parameter)
+### 2. Subcategory Level URLs
 ```
-https://uat.hubeco.market/products/bricks?scid=671a2cbeb450760ae5997954
+https://hubeco.market/products/eco-friendly-building-materials/eco-friendly-bricks
 ```
 
-### 3. Child Category URLs (with ccid parameter)
+### 3. Child Category URLs
 ```
-https://uat.hubeco.market/products/building-materials-hubeco/bricks/agrocrete-bricks?ccid=671a2d98b450760ae59979a6
+https://hubeco.market/products/eco-friendly-building-materials/eco-friendly-bricks/ecotherm-bricks
 ```
+
+Several child categories selected together in the product filter use
+`/products/{category}/{subCategory}?type=child-a,child-b` (slugs sorted). These pages
+canonicalise to the subcategory URL and are not listed in the sitemap.
+
+URLs are built and resolved by `src/lib/categoryUrls.ts`. Old URLs with `?cid=`, `?scid=` or
+`?ccid=` are 301-redirected to the clean URL by `src/middleware.ts`.
 
 ## How it works
 
@@ -31,7 +38,7 @@ The sitemap generation system uses two API endpoints:
 ## Features
 
 - ✅ **Hierarchical Category URLs** - Full category/subcategory/child-category structure
-- ✅ **Query Parameters** - Proper scid and ccid parameters for filtering
+- ✅ **Clean URLs** - No database ids in category URLs
 - ✅ **Dynamic Product URLs** - All product slugs are automatically included
 - ✅ **Vendor Pages** - All vendor profile pages are included
 - ✅ **Blog Posts** - All blog post URLs are included
@@ -142,12 +149,12 @@ Based on the category structure, the system generates URLs like:
 
 ```xml
 <url>
-  <loc>https://uat.hubeco.market/products/building-materials-hubeco/bricks/agrocrete-bricks?ccid=671a2d98b450760ae59979a6</loc>
+  <loc>https://hubeco.market/products/eco-friendly-building-materials/eco-friendly-bricks/ecotherm-bricks</loc>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
-  <loc>https://uat.hubeco.market/products/bricks?scid=671a2cbeb450760ae5997954</loc>
+  <loc>https://hubeco.market/products/eco-friendly-building-materials/eco-friendly-bricks</loc>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>

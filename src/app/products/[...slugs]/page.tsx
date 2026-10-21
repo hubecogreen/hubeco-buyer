@@ -1,165 +1,139 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import ProductsList from "@/components/product/ProductsList";
-import MetaTitleH1 from "./MetaTitleH1";
-import BreadCrumb, { BreadcrumbItem } from "@/components/sharedComponents/BreadCrumb";
-import BannerSection from "@/components/sharedComponents/BannerSection";
+import { loadCategoryPage } from "@/lib/categoryTreeServer";
+import {
+  CHILD_FILTER_PARAM,
+  ResolvedCategory,
+  categoryPath,
+  childrenFromFilter,
+  parseChildFilter,
+  resolvedCategoryPath,
+} from "@/lib/categoryUrls";
 
-export async function generateMetadata({ params, searchParams }: {
-  params: { slugs?: string[] },
-  searchParams: { [key: string]: string | string[] | undefined }
-}) {
-  const ccid = searchParams.ccid;
-  const scid = searchParams.scid;
-  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+type PageProps = {
+  params: { slugs?: string[] };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+const DEFAULT_TITLE = "Products | Hubeco";
+const DEFAULT_DESCRIPTION =
+  "Marketplace for green building materials. India's biggest online store for green building materials...";
+const DEFAULT_KEYWORDS =
+  "Green building materials, sustainable building materials, eco-friendly construction, etc.";
+const DEFAULT_IMAGE = "/images/Admin-2.webp";
+const DEFAULT_H1 = "Featured Sustainable Products";
+
+function slugsKey(params: PageProps["params"]) {
+  return (params.slugs ?? []).join("/");
+}
+
+function deepestCategory(resolved: ResolvedCategory) {
+  return resolved.childCategory ?? resolved.subCategory ?? resolved.category;
+}
+
+function categoryBreadcrumbs(resolved: ResolvedCategory) {
+  const { category, subCategory, childCategory } = resolved;
+  return [
+    category && { name: category.name, href: categoryPath(category.seoSlug) },
+    subCategory && { name: subCategory.name, href: categoryPath(category?.seoSlug, subCategory.seoSlug) },
+    childCategory && {
+      name: childCategory.name,
+      href: categoryPath(category?.seoSlug, subCategory?.seoSlug, childCategory.seoSlug),
+    },
+  ].filter((crumb): crumb is { name: string; href: string } => !!crumb);
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const siteURL = process.env.NEXT_PUBLIC_PROD_URL;
-  let metaData: any = {};
+  const page = await loadCategoryPage(slugsKey(params));
 
-  try {
-    let canonicalPath = `${siteURL}/products`;
-    if (params.slugs && params.slugs.length > 0) {
-      canonicalPath += '/' + params.slugs.join('/');
-    }
-    let query = '';
-    if (scid && typeof scid === 'string') {
-      query = `?scid=${encodeURIComponent(scid)}`;
-    } else if (ccid && typeof ccid === 'string') {
-      query = `?ccid=${encodeURIComponent(ccid)}`;
-    }
-    const canonicalUrl = canonicalPath + query;
-
-    if (scid && typeof scid === 'string') {
-      const res = await fetch(`${baseURL}/subcategories/getSubcategoryByIdPublic/${scid}`);
-      if (res.ok) {
-        const data = await res.json();
-        metaData = {
-          title: data?.metaTitle ? `${data.metaTitle} | Hubeco` : 'Products | Hubeco',
-          description: data?.metaDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
-          keywords: data?.metaTags || 'Green building materials, sustainable building materials, eco-friendly construction, etc.',
-          canonical: canonicalUrl,
-          ogTitle: data?.metaTitle ? `${data.metaTitle} | Hubeco` : 'Products | Hubeco',
-          ogDescription: data?.metaDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
-          ogImage: data?.metaImage ? (Array.isArray(data.metaImage) ? data.metaImage[0] : data.metaImage) : '/images/Admin-2.webp',
-        };
-      }
-    } else if (ccid && typeof ccid === 'string') {
-      const res = await fetch(`${baseURL}/childCategories/getChildCategoryByIdPublic/${ccid}`);
-      if (res.ok) {
-        const data = await res.json();
-        metaData = {
-          title: data?.metaTitle ? `${data.metaTitle} | Hubeco` : 'Products | Hubeco',
-          description: data?.metaDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
-          keywords: data?.metaTags || 'Green building materials, sustainable building materials, eco-friendly construction, etc.',
-          canonical: canonicalUrl,
-          ogTitle: data?.metaTitle ? `${data.metaTitle} | Hubeco` : 'Products | Hubeco',
-          ogDescription: data?.metaDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
-          ogImage: data?.metaImage ? (Array.isArray(data.metaImage) ? data.metaImage[0] : data.metaImage) : '/images/Admin-2.webp',
-        };
-      }
-    } else {
-      metaData.canonical = canonicalUrl;
-    }
-  } catch (error) {
-    // fallback below
+  // The 404 status itself is set by src/middleware.ts; this keeps the page out of the index
+  // if a request ever reaches here unresolved
+  if (page.status === "not-found") {
+    return { title: "Page not found | Hubeco", robots: { index: false, follow: true } };
   }
 
+  // ?type= filtered views canonicalise to their subcategory, so the query is never included
+  const path =
+    page.status === "ok" ? resolvedCategoryPath(page.resolved) : categoryPath(...(params.slugs ?? []));
+  const canonical = `${siteURL}${path}`;
+
+  const node = page.status === "ok" ? deepestCategory(page.resolved) : undefined;
+  const title = node?.metaTitle
+    ? `${node.metaTitle} | Hubeco`
+    : node?.name
+      ? `${node.name} | Hubeco`
+      : DEFAULT_TITLE;
+  const description = node?.metaDescription || DEFAULT_DESCRIPTION;
+
   return {
-    title: metaData.title || 'Products | Hubeco',
-    description: metaData.description || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
-    keywords: metaData.keywords || 'Green building materials, sustainable building materials, eco-friendly construction, etc.',
-    alternates: {
-      canonical: metaData.canonical,
-    },
+    title,
+    description,
+    keywords: node?.metaTags || DEFAULT_KEYWORDS,
+    alternates: { canonical },
     openGraph: {
-      title: metaData.ogTitle || 'Products | Hubeco',
-      description: metaData.ogDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
-      url: metaData.canonical ,
+      title,
+      description,
+      url: canonical,
       type: "website",
       siteName: "Hubeco",
-      images: [
-        {
-          url: metaData.ogImage || '/images/Admin-2.webp',
-          alt: metaData.title || 'Hubeco Product Image',
-        }
-      ]
+      images: [{ url: DEFAULT_IMAGE, alt: title }],
     },
     twitter: {
       card: "summary_large_image",
-      title: metaData.ogTitle || 'Products | Hubeco',
-      description: metaData.ogDescription || 'Marketplace for green building materials. India\'s biggest online store for green building materials...',
-      images: [metaData.ogImage || '/images/Admin-2.webp']
-    }
+      title,
+      description,
+      images: [DEFAULT_IMAGE],
+    },
   };
 }
 
-function capitalizeFirstLetter(str: string) {
-  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+function BreadcrumbSchema({ breadcrumbs }: { breadcrumbs: { name: string; href: string }[] }) {
+  const siteURL = process.env.NEXT_PUBLIC_PROD_URL;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [{ name: "Home", href: "/" }, ...breadcrumbs].map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.name,
+      item: `${siteURL}${crumb.href === "/" ? "" : crumb.href}`,
+    })),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
 }
 
-async function getH1Tag(params: { slugs?: string[] }, searchParams: { [key: string]: string | string[] | undefined }) {
-  const ccid = searchParams.ccid;
-  const scid = searchParams.scid;
-  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+export default async function Page({ params, searchParams }: PageProps) {
+  const page = await loadCategoryPage(slugsKey(params));
+  if (page.status === "not-found") notFound();
 
-  if (!ccid && !scid) {
-    return 'Featured Sustainable Products';
-  }
-  
-  try {
-    if (scid && typeof scid === 'string') {
-      const res = await fetch(`${baseURL}/subcategories/getSubcategoryByIdPublic/${scid}`);
-      if (res.ok) {
-        const data = await res.json();
-        return data?.h1Tag || 'Featured Sustainable Products';
-      }
-    } else if (ccid && typeof ccid === 'string') {
-      const res = await fetch(`${baseURL}/childCategories/getChildCategoryByIdPublic/${ccid}`);
-      if (res.ok) {
-        const data = await res.json();
-        return data?.h1Tag || 'Featured Sustainable Products';
-      }
-    }
-  } catch (error) {
-    console.error('Error fetching h1tag:', error);
-  }
-  
-  return 'Featured Sustainable Products';
-}
+  const resolved = page.status === "ok" ? page.resolved : {};
+  const { category, subCategory, childCategory } = resolved;
 
-export default async function Page({
-  params,
-  searchParams
-}: {
-  params: { slugs?: string[] },
-  searchParams: { [key: string]: string | string[] | undefined }
-}) {
-  const breadcrumbs: BreadcrumbItem[] = [
-    { name: "Home", href: "/" },
-  ];
+  const selectedChildren = childCategory
+    ? [childCategory]
+    : subCategory
+      ? childrenFromFilter(subCategory, parseChildFilter(searchParams[CHILD_FILTER_PARAM]))
+      : [];
 
-  // Add all slugs as breadcrumb segments, only first letter capitalized
-  if (params.slugs && params.slugs.length > 0) {
-    let path = "/products";
-    params.slugs.forEach((slug) => {
-      path += `/${slug}`;
-      breadcrumbs.push({
-        name: capitalizeFirstLetter(slug.replace(/-/g, ' ')),
-        href: path
-      });
-    });
-  }
-
-  // Fetch h1tag from API
-  const h1tag = await getH1Tag(params, searchParams);
-
-  console.log(h1tag, "h1tag");
-  // Do NOT add ccid or scid as breadcrumbs
+  const node = deepestCategory(resolved);
+  const breadcrumbs = categoryBreadcrumbs(resolved);
 
   return (
     <div className="bg-white">
-      {/* <MetaTitleH1 params={params} searchParams={searchParams} /> */}
-      {/* <BreadCrumb breadcrumbs={breadcrumbs} /> */}
-      <ProductsList 
-        initialH1Tag={h1tag}
-        searchParams={searchParams}
+      {breadcrumbs.length > 0 && <BreadcrumbSchema breadcrumbs={breadcrumbs} />}
+      <ProductsList
+        initialH1Tag={node?.h1Tag || node?.name || DEFAULT_H1}
+        categoryId={category?._id}
+        subCategoryId={subCategory?._id}
+        childCategoryIds={selectedChildren.map((child) => child._id)}
+        breadcrumbs={breadcrumbs}
       />
     </div>
   );

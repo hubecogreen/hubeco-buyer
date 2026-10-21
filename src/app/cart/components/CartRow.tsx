@@ -3,7 +3,7 @@ import useApi from "@/components/Fetcher/useAPI";
 import useRefreshToken from "@/components/hooks/useRefreshToken";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import * as getEndpoint from "../../../network/EndPoints";
 import { GoTrash } from "react-icons/go";
@@ -79,6 +79,10 @@ export default function CartRow({
   const [loadingQuoteButton, setLoadingQuoteButton] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [unavailableMsg, setUnavailableMsg] = useState<string>("");
+  // The next quantity is computed from the current one, which only changes once the
+  // server confirms; block further updates until then so fast clicks can't send it twice
+  const [isUpdating, setIsUpdating] = useState(false);
+  const updatingRef = useRef(false);
 
 
   //Quote states
@@ -226,7 +230,11 @@ export default function CartRow({
     });
   }, []);
 
-  // // console.log('dfgrwhetjyuk',product)
+  // Rows stay mounted across cart refreshes, so follow the server's quantity
+  useEffect(() => {
+    setQuantity(product?.quantity);
+  }, [product?.quantity]);
+
 
   const handleApiError = async (err: any, type?: any) => {
     const result = err?.response;
@@ -270,6 +278,10 @@ export default function CartRow({
     isRemove = false,
     manualQuantity?: number
   ) => {
+    if (updatingRef.current) return;
+    updatingRef.current = true;
+    setIsUpdating(true);
+
     const payload = {
       product: product?.product?._id,
       quantity: isRemove
@@ -302,6 +314,8 @@ export default function CartRow({
     } catch (e: any) {
       handleApiError(e, type);
     } finally {
+      updatingRef.current = false;
+      setIsUpdating(false);
       if (isRemove) setDeleteItemLoading(false);
       setOpen(false);
     }
@@ -479,7 +493,7 @@ export default function CartRow({
                           type="button"
                           onClick={handleDecrement}
                           className="pl-4 pr-0 py-2 bg-transparent text-lg hover:bg-transparent  text-secondary"
-                          disabled={quantity <= minQty ? true : false}
+                          disabled={isUpdating || quantity <= minQty}
                         >
                           -
                         </Button>
@@ -504,7 +518,7 @@ export default function CartRow({
                           type="button"
                           onClick={handleIncrement}
                           className="pr-4 pl-0 py-2 text-lg bg-transparent hover:bg-transparent text-secondary"
-                          disabled={quantity >= maxQty ? true : false}
+                          disabled={isUpdating || quantity >= maxQty}
                         >
                           +
                         </Button>

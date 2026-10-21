@@ -1,3 +1,4 @@
+import { isCashfreeSession, startCashfreeCheckout } from "@/lib/cashfree";
 import useApi from "@/components/Fetcher/useAPI";
 import useRefreshToken from "@/components/hooks/useRefreshToken";
 import dayjs from "dayjs";
@@ -53,6 +54,11 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
           handleBuyApiError(result?.errorData);
         } else {
           // toast.success('Redirecting you to the Payment page');
+          // Cashfree: backend returns a checkout session instead of the PayU form
+          if (isCashfreeSession(result.data)) {
+            startCashfreeCheckout(result.data);
+            return;
+          }
           const parser1 = new DOMParser();
           const doc1 = parser1.parseFromString(result.data, 'text/html');
           // Extract the form element
@@ -254,7 +260,7 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
       </div>
 
       <AlertDialog open={isOpen}>
-        <AlertDialogContent className="max-w-md max-h-[100vh] overflow-auto">
+        <AlertDialogContent className="max-w-md max-h-[100vh] overflow-auto bg-cream">
           <AlertDialogHeader className="space-y-6">
             <AlertDialogTitle className="text-xl text-center text-[#B90647]">
               Choose your Payment Option
@@ -290,15 +296,15 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
               {/* Divider */}
               <div className="relative flex items-center justify-center">
                 <div className="absolute w-full border-t border-gray-300" />
-                <div className="relative px-4 bg-white">
+                <div className="relative px-4 bg-cream">
                   <span className="text-sm text-brown uppercase">or</span>
                 </div>
               </div>
 
-              {/* PayU Section */}
+              {/* Cashfree Section */}
               <div className="space-y-4">
                 <p className="text-brown">
-                  Please use PayU Payment Gateway for initiating{" "}
+                  Please use Cashfree Payment Gateway for initiating{" "}
                   {selectedPayment.applicablePaymentMethod === "RTGS_NEFT"
                     ? "RTGS/NEFT Transfer"
                     : "online payment methods"}
@@ -322,7 +328,7 @@ export default function PaymentSchedule({ initialState, setIsLoading }: any) {
           <AlertDialogFooter className="flex justify-center mt-2 underline">
             <AlertDialogCancel
               onClick={() => setIsOpen(false)}
-              className="w-full h-12"
+              className="w-full h-12 bg-cream hover:bg-darkcream/40"
             >
               Close
             </AlertDialogCancel>

@@ -13,6 +13,7 @@ import useClient from "../hooks/useClient";
 import { normalizePath } from "@/lib/utils";
 import LottieWrapper from "../LottieWrapper";
 import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
+import { categoryPath, categoryPathById } from "@/lib/categoryUrls";
 
 interface CustomSearchBarProps {
   customStyles?: React.CSSProperties;
@@ -500,16 +501,7 @@ useEffect(() => {
                           if (onDropdownToggle) onDropdownToggle(false);
                           
                           setTimeout(() => {
-                            // Build the full hierarchy URL for child categories
-                            if (childCategory?.parentCategorySlug && childCategory?.parentSubCategorySlug && childCategory?.seoSlug) {
-                              const url = `/products/${childCategory.parentCategorySlug}/${childCategory.parentSubCategorySlug}/${childCategory.seoSlug}?ccid=${childCategory?.id}`;
-                              console.log('Child category URL:', url);
-                              window.location.href = url;
-                            } else {
-                              // Fallback to original structure if hierarchy data is not available
-                              router.refresh();
-                              router.push(`/products/?ccid=${childCategory?.id}`);
-                            }
+                            window.location.href = categoryPathById(categories, childCategory?.id) ?? "/products";
                             setIsNavigating(false);
                           }, 100);
                         }}
@@ -571,18 +563,7 @@ useEffect(() => {
                           
                           // Use window.location for more reliable navigation
                           setTimeout(() => {
-                            // For search results, we may not have parent category info
-                            // Use the enhanced URL structure if available, otherwise fallback
-                            if (subCategory?.parentCategorySlug && subCategory?.seoSlug) {
-                              const url = `/products/${subCategory.parentCategorySlug}/${subCategory.seoSlug}?scid=${subCategory?.id}`;
-                              console.log('Enhanced URL:', url);
-                              window.location.href = url;
-                            } else {
-                              // Fallback to original structure for search results
-                              const url = `/products/${subCategory?.seoSlug}?scid=${subCategory?.id}`;
-                              console.log('Fallback URL:', url);
-                              window.location.href = url;
-                            }
+                            window.location.href = categoryPathById(categories, subCategory?.id) ?? "/products";
                             setIsNavigating(false);
                           }, 100);
                         }}
@@ -724,7 +705,7 @@ useEffect(() => {
                           if (onDropdownToggle) onDropdownToggle(false);
                           
                           setTimeout(() => {
-                            window.location.href = `/products/${category?.seoSlug}?cid=${category?._id}`;
+                            window.location.href = categoryPath(category?.seoSlug);
                             setIsNavigating(false);
                           }, 100);
                         }}

@@ -57,6 +57,7 @@ import useClient from "../hooks/useClient";
 import Custom404 from "../404/page";
 import { normalizePath } from "@/lib/utils";
 import SubmitEnquiryModal from "../modals/SubmitEnquiryModal";
+import { categoryPath } from "@/lib/categoryUrls";
 
 interface ProductProps {
   slug: string;
@@ -1039,19 +1040,19 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
         link1={{ name: "Home", href: "/" }}
         link2={{
           name: `${totalProduct?.categoryId?.name || ""}`,
-          href: "/products",
+          href: categoryPath(totalProduct?.categoryId?.seoSlug),
         }}
         link3={{
           name: `${totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0 ? totalProduct.subCategoryId[0]?.name || "" : ""}`,
           href: totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0
-            ? `/products/${totalProduct?.categoryId?.seoSlug}/${totalProduct.subCategoryId[0]?.seoSlug || ""}?scid=${totalProduct.subCategoryId[0]?._id || ""}`
+            ? categoryPath(totalProduct?.categoryId?.seoSlug, totalProduct.subCategoryId[0]?.seoSlug)
             : "/products",
         }}
         link4={{
           name: `${totalProduct?.childCategories && Array.isArray(totalProduct.childCategories) && totalProduct.childCategories.length > 0 ? totalProduct.childCategories[0]?.name || "" : ""}`,
           href: totalProduct?.subCategoryId && Array.isArray(totalProduct.subCategoryId) && totalProduct.subCategoryId.length > 0 &&
             totalProduct?.childCategories && Array.isArray(totalProduct.childCategories) && totalProduct.childCategories.length > 0
-            ? `/products/${totalProduct.categoryId?.seoSlug || ""}/${totalProduct.subCategoryId[0]?.seoSlug || ""}/${totalProduct.childCategories[0]?.seoSlug || ""}?ccid=${totalProduct.childCategories[0]?._id || ""}`
+            ? categoryPath(totalProduct.categoryId?.seoSlug, totalProduct.subCategoryId[0]?.seoSlug, totalProduct.childCategories[0]?.seoSlug)
             : "/products",
         }}
         link5={

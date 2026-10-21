@@ -333,11 +333,9 @@ const FiltersSidebar: React.FC<FilterProps> = ({
     setRefresht((refresht: any) => refresht + 1);
     setRefreshp((refreshp: any) => refreshp + 1);
 
-    const url = window.location.href;
-    const queryIndex = url.indexOf("?");
-    if (queryIndex !== -1) {
-      const newUrl = url.substring(0, queryIndex);
-      window.history.replaceState(null, "", newUrl);
+    // The selected category is part of the path, so clearing it means leaving the category page
+    if (window.location.pathname !== "/products" || window.location.search) {
+      router.push("/products");
     }
   };
 

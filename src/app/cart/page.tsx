@@ -98,8 +98,10 @@ const Cart = () => {
   //  getCart();
   // }, [refresh]);
 
-  const getCart = async () => {
-    setLoading(true);
+  // The full-page skeleton is only for the first load; later refreshes (after a
+  // quantity change or address switch) update the rows in place
+  const getCart = async (showLoader = true) => {
+    if (showLoader) setLoading(true);
 
     try {
       const result = (await callApi(getEndpoint.default.CART, "GET")) as any;
@@ -244,7 +246,7 @@ const Cart = () => {
       handleShippingApiError(e, address);
     } finally {
       setSummaryLoading(false);
-      getCart();
+      getCart(false);
     }
   };
 
@@ -293,8 +295,6 @@ const Cart = () => {
   };
 
   const reloadCart = () => {
-    router.refresh();
-
     handleCalculateShipping(selectedAddress);
   };
 
@@ -464,7 +464,7 @@ const Cart = () => {
                                   }
                                   return (
                                     <CartRow
-                                      key={index}
+                                      key={product?.product?._id ?? index}
                                       product={product}
                                       shipErr={shipErrors}
                                       enable={isThere}

@@ -43,7 +43,8 @@ const PaymentSuccessful = () => {
     getOrderDetails(txnId);
     setCookie("CartCount", 0);
     const isPending = urlParam.get("PG_TYPE");
-    if (isPending == "NEFTRTGS-PG") {
+    // NEFTRTGS-PG: PayU bank transfer; paymentStatus=pending: Cashfree not confirmed yet
+    if (isPending == "NEFTRTGS-PG" || urlParam.get("paymentStatus") === "pending") {
       setIsPendingScreen(true);
     }
   }, []);

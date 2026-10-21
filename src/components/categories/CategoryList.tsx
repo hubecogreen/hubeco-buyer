@@ -22,6 +22,7 @@ import { normalizePath } from "@/lib/utils";
 import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { categoryPath } from "@/lib/categoryUrls";
 
 import "swiper/css";
 
@@ -138,7 +139,7 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
   // -----------------------------
   const CategoryCard = ({ category, index }: any) => (
     <Link
-      href={`/products/${category?.parentCategorySlug}/${category?.seoSlug}?scid=${category?._id}`}
+      href={categoryPath(category?.parentCategorySlug, category?.seoSlug)}
     >
       <div className="px-[5px] pb-4 ">
         <div

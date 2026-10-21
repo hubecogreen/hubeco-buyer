@@ -381,12 +381,12 @@ export default function ChatBox({
                       <div className="flex flex-col">
                         <div
                           className={`${message.senderId === myId
-                            ? "bg-white text-brown shadow-[0px_1px_6px_0px_#2F2B3D1A] rounded-[9px]"
+                            ? "bg-cream text-brown shadow-[0px_1px_6px_0px_#2F2B3D1A] rounded-[9px]"
                             : message?.isAQuery == false
-                              ? "bg-white text-brown shadow-[0px_1px_6px_0px_#2F2B3D1A] rounded-[9px]"
+                              ? "bg-cream text-brown shadow-[0px_1px_6px_0px_#2F2B3D1A] rounded-[9px]"
                               : message?.isAQuery == true
                                 ? "bg-[#B906471A] text-secondary"
-                                : "bg-white text-brown shadow-[0px_1px_6px_0px_#2F2B3D1A] rounded-[9px]"
+                                : "bg-cream text-brown shadow-[0px_1px_6px_0px_#2F2B3D1A] rounded-[9px]"
                             } rounded-lg px-4 py-2 max-w-xs`}
                         >
                           <p className="text-sm">

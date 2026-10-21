@@ -11,7 +11,6 @@ import useApi from "../Fetcher/useAPI";
 import SearchInput from "../sharedComponents/searchInput";
 import EmptyProducts from "./EmptyProducts";
 import { Skeleton } from "../ui/skeleton";
-import { usePathname, useSearchParams } from "next/navigation";
 import BannerSection from "../sharedComponents/BannerSection";
 import {
   Select,
@@ -22,26 +21,29 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+const DEFAULT_H1 = "Featured Sustainable Products";
+
+// Filter callbacks hand over ids as arrays; the products API takes a comma-separated string
+const toIdList = (ids: string | string[] | null | undefined) =>
+  (Array.isArray(ids) ? ids.join(",") : ids) || null;
+
 interface Props {
-  catSlug?: string;
-  subCatSlug?: string;
-  childCatSlug?: string;
-  ccid?: string | string[];
-  scid?: string | string[];
+  // Resolved server-side from the category URL path
+  categoryId?: string;
+  subCategoryId?: string;
+  childCategoryIds?: string[];
   initialH1Tag?: string;
-  searchParams?: { [key: string]: string | string[] | undefined };
+  breadcrumbs?: { name: string; href: string }[];
 }
 
 const ProductsList: React.FC<Props> = ({
-  catSlug,
-  subCatSlug,
-  childCatSlug,
-  ccid,
-  scid,
+  categoryId,
+  subCategoryId,
+  childCategoryIds,
   initialH1Tag,
-  searchParams: pageSearchParams,
+  breadcrumbs = [],
 }) => {
-  const searchParams = useSearchParams();
+  const childCategoryKey = toIdList(childCategoryIds);
   const buyerInfo = sessionStorage.getItem("buyerUserInfo") as any;
   const prefferedPlan = JSON.parse(buyerInfo ?? "{}")?.preferredPlan;
   const buyerType = JSON.parse(buyerInfo ?? "{}")?.buyerInfo?.buyerType;
@@ -53,16 +55,16 @@ const ProductsList: React.FC<Props> = ({
   const [limit, setLimit] = useState(30);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [gridLoading, setGridLoading] = useState(true);
-  const [h1Tag, setH1Tag] = useState<string>("Featured Sustainable Products");
+  const [h1Tag, setH1Tag] = useState<string>(initialH1Tag || DEFAULT_H1);
 
   // Filter States
   const [planType, setPlanType] = useState<string>(prefferedPlan || "");
   const [brandCode, setBrandCode] = useState<string>("");
   const [purchaseType, setPurchaseType] = useState<string>("");
   const [isSingle, setIsSingle] = useState(false);
-  const [catId, setCatId] = useState<string | null>(null);
-  const [subCatId, setSubCatId] = useState<string | null>(null);
-  const [childCatId, setChildCatId] = useState<string | null>(null);
+  const [catId, setCatId] = useState<string | null>(categoryId || null);
+  const [subCatId, setSubCatId] = useState<string | null>(subCategoryId || null);
+  const [childCatId, setChildCatId] = useState<string | null>(childCategoryKey);
   const [country, setCountry] = useState<string>("");
   const [status, setStatus] = useState<string>("");
   const [isReturnable, setIsReturnable] = useState(false);
@@ -76,90 +78,18 @@ const ProductsList: React.FC<Props> = ({
 
   const { refreshTokens } = useRefreshToken();
   const { callApi } = useApi();
-  const pathname = usePathname();
 
-  // Update h1tag when searchParams change
+  // Category ids, H1 and breadcrumbs come from the URL path via the server page,
+  // and change on client-side navigation between category pages
   useEffect(() => {
-    const currentCcid = searchParams.get('ccid');
-    const currentScid = searchParams.get('scid');
-    
-    // If no category parameters are present, reset to default
-    if (!currentCcid && !currentScid) {
-      setH1Tag('Featured Sustainable Products');
-      return;
-    }
-    
-    // If we have parameters, fetch the appropriate h1tag
-    fetchH1Tag();
-  }, [searchParams]);
+    setH1Tag(initialH1Tag || DEFAULT_H1);
+  }, [initialH1Tag]);
 
-  // Function to fetch H1 tag from API
-  const fetchH1Tag = async () => {
-    const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-    const currentCcid = searchParams.get('ccid');
-    const currentScid = searchParams.get('scid');
-
-    try {
-      if (currentCcid) {
-        // Fetch from child category
-        const res = await fetch(
-          `${baseURL}/childCategories/getChildCategoryByIdPublic/${currentCcid}`,
-          {
-            cache: "no-store",
-          }
-        );
-        if (res.ok) {
-          const data = await res.json();
-          if (data?.h1Tag) {
-            setH1Tag(data.h1Tag);
-            return;
-          }
-        }
-      } else if (currentScid) {
-        // Fetch from subcategory
-        const res = await fetch(
-          `${baseURL}/subcategories/getSubcategoryByIdPublic/${currentScid}`,
-          {
-            cache: "no-store",
-          }
-        );
-        if (res.ok) {
-          const data = await res.json();
-          if (data?.h1Tag) {
-            setH1Tag(data.h1Tag);
-            return;
-          }
-        }
-      }
-
-      // If no H1 tag found, use initialH1Tag or default
-      setH1Tag('Featured Sustainable Products');
-    } catch (err) {
-      console.error("Error fetching h1Tag:", err);
-      setH1Tag('Featured Sustainable Products');
-    }
-  };
-
-  // Set initial state from props if provided
   useEffect(() => {
-    if (catSlug) setCatId(catSlug);
-    if (subCatSlug) setSubCatId(subCatSlug);
-    if (childCatSlug) setChildCatId(childCatSlug);
-    if (scid) setSubCatId(typeof scid === "string" ? scid : scid[0]);
-    if (ccid) setChildCatId(typeof ccid === "string" ? ccid : ccid[0]);
-  }, [catSlug, subCatSlug, childCatSlug, ccid, scid]);
-
-
-
-  // Reset options on path change
-  useEffect(() => {
-    const resetOptions = () => {
-      setCatId(searchParams?.get("cid") || null);
-      setSubCatId(searchParams?.get("scid") || null);
-      setChildCatId(searchParams?.get("ccid") || null);
-    };
-    // resetOptions();
-  }, [pathname, searchParams]);
+    setCatId(categoryId || null);
+    setSubCatId(subCategoryId || null);
+    setChildCatId(childCategoryKey);
+  }, [categoryId, subCategoryId, childCategoryKey]);
 
   // // Fetch products when filters change
   // useEffect(() => {
@@ -315,13 +245,12 @@ useEffect(() => {
     setVendorCode(vendors);
   };
 
-  const filterWithSubCategories = (subCategories: string) => {
-    setSubCatId(subCategories);
+  const filterWithSubCategories = (subCategories: string | string[]) => {
+    setSubCatId(toIdList(subCategories));
   };
 
-  const filterWithChildCategories = (childCategories: string) => {
-    // console.log("params from fun", childCategories);
-    setChildCatId(childCategories);
+  const filterWithChildCategories = (childCategories: string | string[]) => {
+    setChildCatId(toIdList(childCategories));
   };
   const filterWithPrice = (data: any) => {
     setPriceRangeObj(data);
@@ -339,7 +268,9 @@ useEffect(() => {
     <>
       <BannerSection
         link1={{ name: "Home", href: "/" }}
-        link2={{ name: h1Tag, href: "/products" }}
+        link2={breadcrumbs[0] ?? { name: h1Tag, href: "/products" }}
+        link3={breadcrumbs[1]}
+        link4={breadcrumbs[2]}
       />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 px-4 md:px-24 md:pt-16 pt-6 bg-cream">
       {/* Desktop Filter Sidebar */}

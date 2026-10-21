@@ -8,6 +8,7 @@ import useRefreshToken from "@/components/hooks/useRefreshToken";
 // import toast from "react-hot-toast";
 // import * as getEndpoint from "../../../network/EndPoints";
 import RenderChildOrder from "@/components/orderCompo/RenderChildOrder";
+import { orderPaymentGateway } from "@/lib/paymentGateway";
 
 interface OrderProps {
   order: any;
@@ -71,7 +72,7 @@ export default function OrderRow({ order, reloadPage }: OrderProps) {
         <div className="w-full md:w-[45%] flex flex-col md:flex-row justify-between lg:items-center">
           <p className="text-sm text-brown font-medium mb-2 md:mb-0">
             <span className="text-sm font-regular mr-2">Payment Mode:</span>
-            {order?.orders[0]?.payment === "Pay U payment gateway" ? "PayU" : order?.orders[0]?.payment}
+            {orderPaymentGateway(order)}
           </p>
           <p className="text-lg text-brown font-semibold">
             <span className="text-sm font-medium mr-2">Total Amount:</span>  <span className="text-brown text-lg font-normal font-monospace mr-1">

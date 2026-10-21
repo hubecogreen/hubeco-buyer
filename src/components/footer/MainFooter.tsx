@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
+import { categoryPath } from "@/lib/categoryUrls";
 
 const useAuth = () => {
   const userInfo = useSelector((state: any) => state.user?.userInfo || {});
@@ -32,7 +33,7 @@ const Footer = () => {
   const { rehydrated } = useAuth();
   const { callApi } = useApi();
   const callApiRef = useRef(callApi);
-  const [categoryIdMap, setCategoryIdMap] = useState<Record<string, string>>({});
+  const [categoryPathMap, setCategoryPathMap] = useState<Record<string, string>>({});
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isStandalone, setIsStandalone] = useState(false);
   const [isAndroid, setIsAndroid] = useState(false);
@@ -44,9 +45,9 @@ const Footer = () => {
   const finalCategories = useMemo(() => {
     const BASE_CATEGORIES = ["Bricks", "Sand", "Paints"];
 
-    const hasAdhesives = !!categoryIdMap["adhesives"];
-    const hasSanitary = !!categoryIdMap["sanitary & bath fittings"];
-    const hasFlooring = !!categoryIdMap["flooring"];
+    const hasAdhesives = !!categoryPathMap["adhesives"];
+    const hasSanitary = !!categoryPathMap["sanitary & bath fittings"];
+    const hasFlooring = !!categoryPathMap["flooring"];
 
     let extraCategories: string[] = [];
 
@@ -59,7 +60,7 @@ const Footer = () => {
     }
 
     return [...BASE_CATEGORIES, ...extraCategories].slice(0, 6);
-  }, [categoryIdMap]);
+  }, [categoryPathMap]);
 
   useEffect(() => {
     callApiRef.current = callApi;
@@ -79,15 +80,15 @@ const Footer = () => {
           data.forEach((parent: any) => {
             if (Array.isArray(parent?.subCategories)) {
               parent.subCategories.forEach((sub: any) => {
-                if (sub?.name && sub?._id) {
-                  map[sub.name.toLowerCase()] = sub._id;
+                if (sub?.name && sub?.seoSlug) {
+                  map[sub.name.toLowerCase()] = categoryPath(parent.seoSlug, sub.seoSlug);
                 }
               });
             }
           });
         }
 
-        setCategoryIdMap(map);
+        setCategoryPathMap(map);
       } catch (e) {
         console.error("Category fetch failed", e);
       }
@@ -166,10 +167,10 @@ const Footer = () => {
 
 
   const goToCategory = (name: string) => {
-    const scid = categoryIdMap[name.toLowerCase()];
-    if (!scid) return;
+    const path = categoryPathMap[name.toLowerCase()];
+    if (!path) return;
 
-    router.push(`/products?scid=${scid}`);
+    router.push(path);
   };
 
   const handleInstall = async () => {

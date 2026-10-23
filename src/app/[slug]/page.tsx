@@ -1,6 +1,19 @@
 import ProductPreview from "@/components/product/ProductPage";
 import { normalizePath } from "@/lib/utils";
 import React from "react";
+import { permanentRedirect } from "next/navigation";
+
+// Shared by generateMetadata and the page (Next.js de-duplicates the request).
+// The API follows its own 301 for old product URLs, so data.slug is the
+// product's current URL even when an old one was requested.
+async function fetchProductBySlug(slug: string) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/shop/${slug}`,
+    { next: { revalidate: 300 } }
+  );
+  if (!res.ok) return null;
+  return res.json();
+}
 
 const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "").toLowerCase();
 const isProductionIndexable =
@@ -78,14 +91,9 @@ export async function generateMetadata({
   params: { slug: string };
 }) {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/shop/${params.slug}`,
-      { cache: "force-cache" }
-    );
+    const productData = await fetchProductBySlug(params.slug);
+    if (!productData) throw new Error("Product not found");
 
-    if (!res.ok) throw new Error("Product not found");
-
-    const productData = await res.json();
     const product =
       productData?.selectedVariant || productData?.product?.variants[0];
     const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
@@ -107,7 +115,7 @@ export async function generateMetadata({
       product?.meta?.metaWords ||
       "Green building materials, sustainable building materials, eco-friendly construction, etc.";
 
-    const canonicalUrl = `https://hubeco.market/${params.slug}`;
+    const canonicalUrl = `https://hubeco.market/${productData?.slug || params.slug}`;
 
     const images =
       metaImages.length > 0
@@ -166,19 +174,16 @@ export async function generateMetadata({
   }
 }
 
-// Fetch product data for schema in the page component
-async function getProductData(slug: string) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/shop/${slug}`,
-    { cache: "force-cache" }
-  );
-  if (!res.ok) return null;
-  const productData = await res.json();
-  return productData?.selectedVariant || productData?.product?.variants[0];
-}
-
 const Page = async ({ params }: { params: { slug: string } }) => {
-  const product = await getProductData(params.slug);
+  const productData = await fetchProductBySlug(params.slug);
+
+  // Old or differently-cased product URL: send visitors and search engines to the current one
+  if (productData?.slug && productData.slug !== params.slug) {
+    permanentRedirect(`/${productData.slug}`);
+  }
+
+  const product =
+    productData?.selectedVariant || productData?.product?.variants[0];
   // Example breadcrumbs for a product page
   const breadcrumbs = [
     { name: "Products", url: `https://hubeco.market/products` },

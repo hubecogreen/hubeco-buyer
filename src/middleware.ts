@@ -59,6 +59,15 @@ function notFound(request: NextRequest) {
   return NextResponse.rewrite(new URL(NOT_FOUND_PATH, request.url), { status: 404 });
 }
 
+// Search engines still treat this as permanent, but without Cache-Control browsers
+// keep a 301 forever, so a redirect that later changes (a rename, a rollback) would
+// loop for anyone who saw the old one. Browser-only (private), for an hour.
+function permanentRedirect(destination: URL) {
+  const response = NextResponse.redirect(destination, 301);
+  response.headers.set("Cache-Control", "private, max-age=3600");
+  return response;
+}
+
 /* ---------------- product pages: /{slug} ---------------- */
 
 const PRODUCT_RESOLVE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/shop/resolve`;
@@ -123,7 +132,7 @@ async function productMiddleware(request: NextRequest) {
 
   const destination = request.nextUrl.clone();
   destination.pathname = `/${current}`;
-  return NextResponse.redirect(destination, 301);
+  return permanentRedirect(destination);
 }
 
 /* ---------------- category pages: /products/... ---------------- */
@@ -178,7 +187,7 @@ export async function middleware(request: NextRequest) {
   const destination = request.nextUrl.clone();
   destination.pathname = target.path;
   destination.search = query;
-  return NextResponse.redirect(destination, 301);
+  return permanentRedirect(destination);
 }
 
 export const config = {

@@ -5,11 +5,20 @@ import GreenHomeLoanSection from "@/components/greenFinance/greenHome-loan";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Empower Sustainability with Green Financing | Hubeco",
+  title: "Green Financing for Construction Projects | Hubeco",
   description:
-    "Explore green financing loan options with Hubeco. Access sustainable funding solutions that support eco-friendly projects and smart investments.",
+    "Explore green project financing for developers and contractors, along with home loan options for eligible sustainable housing projects.",
+  keywords: "green financing for construction projects India",
   alternates: {
     canonical: "https://hubeco.market/green-financing",
+  },
+  openGraph: {
+    title: "Green Financing for Construction Projects | Hubeco",
+    description:
+      "Explore green project financing for developers and contractors, along with home loan options for eligible sustainable housing projects.",
+    siteName: "Hubeco",
+    url: "https://hubeco.market/green-financing",
+    images: [{ url: "/images/Admin-2.webp", alt: "Hubeco Logo" }],
   },
 };
 

@@ -63,11 +63,11 @@ function WebsiteSchema() {
 }
 
 export const metadata: Metadata = {
-  title: "Buy Eco-Friendly, Low-Carbon Building Materials India Online",
+  title: "Sustainable Building Materials Marketplace | Hubeco",
   description:
-    "Discover eco-friendly, low‑carbon building materials online in India. Shop sustainable supplies on Hubeco Marketplace and build smarter, greener projects today.",
+    "Source sustainable building materials through Hubeco. Explore products, compare specifications and request pricing from suppliers for your projects",
   keywords:
-    "Green building materials, sustainable building materials, green construction materials, construction materials, sustainable materials, marketplace for green building materials, online shopping for building materials, online shopping for green building materials, online shopping for sustainable building materials, eco-friendly construction, green building materials, sustainable construction, buy eco materials, B2B construction marketplace, green construction solutions, carbon-neutral materials, environmentally friendly building suppliers, bio-digesters, waste management solutions, organic waste recycling, recycled construction materials, energy-efficient building materials, thermal insulation, solar roofing, smart glass, eco-friendly insulation, cool roof technology, sustainable energy solutions,low-carbon cement, green concrete, sustainable construction materials, eco-friendly cement, carbon-neutral concrete, geopolymer concrete, high-performance sustainable cement, upcycled construction materials, reclaimed metal, crushed glass aggregates, sustainable raw materials, wall systems, eco electrical solutions, eco plumbing solutions, sustainable boards and panels, eco boards, eco panels, green insulation solutions, green wall finishes, sustainable steel, eco adhesive solutions, reinforcement and additives, green bath fittings, eco sanitary solutions, eco paints, cement alternatives, brick alternatives, sand alternatives",
+    "sustainable building materials marketplace India, Green building materials, sustainable building materials, green construction materials, construction materials, sustainable materials, marketplace for green building materials, online shopping for building materials, online shopping for green building materials, online shopping for sustainable building materials, eco-friendly construction, green building materials, sustainable construction, buy eco materials, B2B construction marketplace, green construction solutions, carbon-neutral materials, environmentally friendly building suppliers, bio-digesters, waste management solutions, organic waste recycling, recycled construction materials, energy-efficient building materials, thermal insulation, solar roofing, smart glass, eco-friendly insulation, cool roof technology, sustainable energy solutions,low-carbon cement, green concrete, sustainable construction materials, eco-friendly cement, carbon-neutral concrete, geopolymer concrete, high-performance sustainable cement, upcycled construction materials, reclaimed metal, crushed glass aggregates, sustainable raw materials, wall systems, eco electrical solutions, eco plumbing solutions, sustainable boards and panels, eco boards, eco panels, green insulation solutions, green wall finishes, sustainable steel, eco adhesive solutions, reinforcement and additives, green bath fittings, eco sanitary solutions, eco paints, cement alternatives, brick alternatives, sand alternatives",
   icons: {
     icon: "/favicon.ico",
   },
@@ -75,9 +75,9 @@ export const metadata: Metadata = {
     google: "TZB2HDrat5f3I40A452lngPPjOvK8aaeLE-TtkdOhks",
   },
   openGraph: {
-    title: "Buy Eco-Friendly, Low-Carbon Building Materials India Online",
+    title: "Sustainable Building Materials Marketplace | Hubeco",
     description:
-    "Discover eco-friendly, low‑carbon building materials online in India. Shop sustainable supplies on Hubeco Marketplace and build smarter, greener projects today.",
+    "Source sustainable building materials through Hubeco. Explore products, compare specifications and request pricing from suppliers for your projects",
     siteName: "Hubeco",
     images: [
       {

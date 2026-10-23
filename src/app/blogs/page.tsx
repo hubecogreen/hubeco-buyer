@@ -7,18 +7,18 @@ import { AiFillHome } from "react-icons/ai";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blogs | Hubeco Buyer",
+  title: "Sustainable Construction Materials Blog | Hubeco",
   description:
-    "Read the latest articles, tips, and news on green building materials, sustainable construction, eco-friendly innovations, and more at Hubeco Buyer.",
+    "Read practical guides on sustainable construction materials, product comparisons, specifications and sourcing for building projects.",
   keywords:
-    "green building blogs, sustainable construction news, eco-friendly materials, green innovations, building tips, construction industry news, Hubeco blogs, sustainable architecture, eco construction, green marketplace articles",
+    "sustainable construction materials blog, green building blogs, sustainable construction news, eco-friendly materials, green innovations, building tips, construction industry news, Hubeco blogs, sustainable architecture, eco construction, green marketplace articles",
   alternates: {
     canonical: "https://hubeco.market/blogs",
   },
   openGraph: {
-    title: "Blogs | Hubeco Buyer",
+    title: "Sustainable Construction Materials Blog | Hubeco",
     description:
-      "Explore insights and updates on sustainable building, eco-friendly materials, and industry trends at Hubeco Buyer.",
+      "Read practical guides on sustainable construction materials, product comparisons, specifications and sourcing for building projects.",
     siteName: "Hubeco",
     url: "https://hubeco.market/blogs",
     images: [

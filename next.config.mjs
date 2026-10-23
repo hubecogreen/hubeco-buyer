@@ -34,6 +34,9 @@ function getAppRoutes() {
 const nextConfig = {
   env: {
     APP_ROUTES: JSON.stringify(getAppRoutes()),
+    // Optional: the API's address as seen from this server (e.g. http://127.0.0.1:3000).
+    // Middleware lookups use it to skip the public internet/CDN round trip.
+    INTERNAL_API_BASE_URL: process.env.INTERNAL_API_BASE_URL || "",
   },
 
   async headers() {

@@ -19,7 +19,11 @@ import {
 //  - old product URLs (previousSlugs, e.g. the "-1" versions) 301 to the current URL.
 //    Same reason: a redirect thrown by the page arrives after the 200.
 
-const CATEGORY_TREE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/categories/getProductCategoryTree`;
+// INTERNAL_API_BASE_URL (set in next.config.mjs) reaches the API directly on the
+// server; without it, lookups go over the public URL, which can take 1-4s via the CDN
+const API_BASE_URL = process.env.INTERNAL_API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL;
+
+const CATEGORY_TREE_URL = `${API_BASE_URL}/categories/getProductCategoryTree`;
 const CATEGORY_TREE_TTL_MS = 5 * 60 * 1000;
 // Before 404ing, re-fetch a tree older than this so new or renamed categories resolve
 const CATEGORY_TREE_MIN_REFRESH_MS = 30 * 1000;
@@ -70,11 +74,12 @@ function permanentRedirect(destination: URL) {
 
 /* ---------------- product pages: /{slug} ---------------- */
 
-const PRODUCT_RESOLVE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/shop/resolve`;
+const PRODUCT_RESOLVE_URL = `${API_BASE_URL}/products/shop/resolve`;
 const PRODUCT_SLUG_TTL_MS = 5 * 60 * 1000;
 const PRODUCT_SLUG_CACHE_LIMIT = 5000;
-// The lookup normally answers in milliseconds; never hold a page longer than this
-const PRODUCT_RESOLVE_TIMEOUT_MS = 1000;
+// Internal lookups answer in milliseconds; over the public URL the API can take
+// over a second, so allow for that rather than silently skipping the redirect
+const PRODUCT_RESOLVE_TIMEOUT_MS = process.env.INTERNAL_API_BASE_URL ? 1000 : 2500;
 // After a failed lookup, serve pages directly (no lookups) for this long
 const PRODUCT_RESOLVE_BACKOFF_MS = 30 * 1000;
 

@@ -180,15 +180,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
     return () => window.removeEventListener("resize", updateVisibleCount);
   }, []);
 
-  //Scroll Props
-
-  const secondSectionRef = useRef(null);
-  const rightDivRef = useRef(null);
-
   const isClient = useClient();
-
-  const [isScrollLocked, setIsScrollLocked] = useState(false);
-  const [isRightDivFullyScrolled, setIsRightDivFullyScrolled] = useState(false);
 
   const countriesData = store.getState().masterData.countries;
   // console.log(countriesData, "countriesData");
@@ -216,78 +208,6 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
 
     return certificateUrl;
   };
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const handleScroll = () => {
-      const secondSection = secondSectionRef.current as HTMLElement | null;
-      const rightDiv = rightDivRef.current as HTMLElement | null;
-
-      if (!secondSection || !rightDiv) return;
-
-      const secondSectionRect = secondSection.getBoundingClientRect();
-      const secondSectionTop = secondSectionRect.top;
-
-      if (
-        secondSectionTop < 128 &&
-        secondSectionTop > 0 &&
-        !isRightDivFullyScrolled
-      ) {
-        document.body.classList.add("no-scroll");
-        setIsScrollLocked(true);
-      } else if (isRightDivFullyScrolled || secondSectionTop > 128) {
-        document.body.classList.remove("no-scroll");
-        setIsScrollLocked(false);
-      }
-    };
-
-    const handleRightDivScroll = () => {
-      const rightDiv = rightDivRef.current as HTMLElement | null;
-      if (!rightDiv) return;
-      if (
-        rightDiv?.scrollTop + rightDiv?.clientHeight >=
-        rightDiv?.scrollHeight
-      ) {
-        // Right div fully scrolled, allow moving to next section
-        setIsRightDivFullyScrolled(true);
-        document.body.classList.remove("no-scroll");
-        setIsScrollLocked(false);
-      } else {
-        setIsRightDivFullyScrolled(false);
-      }
-    };
-
-    const handleKeyDown = (e: any) => {
-      if (!isScrollLocked) return;
-
-      const rightDiv = rightDivRef.current as HTMLElement | null;
-      if (!rightDiv) return;
-
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        rightDiv.scrollTop += 40; // Adjust the speed as needed
-      } else if (e.key === "ArrowUp") {
-        e.preventDefault();
-        rightDiv.scrollTop -= 40; // Adjust the speed as needed
-      }
-
-      handleRightDivScroll();
-    };
-
-    if (isScrollLocked) {
-      rightDivRef.current?.addEventListener("scroll", handleRightDivScroll);
-      document.addEventListener("keydown", handleKeyDown);
-    }
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      document.body.classList.remove("no-scroll");
-      window.removeEventListener("scroll", handleScroll);
-      rightDivRef.current?.removeEventListener("scroll", handleRightDivScroll);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isScrollLocked, isRightDivFullyScrolled]);
 
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page
@@ -1071,9 +991,7 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
       ) : (
         <>
           <div
-            ref={secondSectionRef}
-            className={`relative  w-full px-4 pt-8 pb-4 md:px-24 md:pt-12 md:block lg:flex ${isScrollLocked ? "no-scroll overscroll-none" : ""
-              }`}
+            className="relative  w-full px-4 pt-8 pb-4 md:px-24 md:pt-12 md:block lg:flex"
           >
             <div className={`lg:w-1/2 md:w-[606px] lg:sticky top-0  pr-[10px] `}>
               <div className="  lg:sticky top-0">
@@ -1092,7 +1010,6 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
                   >
 
                     <div
-                      ref={secondSectionRef}
                       className={`relative w-full h-full p-[15px] md:p-[85px] border border-borderGray rounded-lg ${zoomable ? "overflow-hidden" : ""
                         }`}
                       style={{
@@ -1233,7 +1150,6 @@ const ProductDetails: React.FC<ProductProps> = ({ slug }: any) => {
             </div>
 
             <div
-              ref={rightDivRef}
               className="lg:w-1/2 w-full lg:mt-0 md:mt-8 mt-4 md:pl-[10px] no-scrollbar overflow-y-hidden h-fit"
             >
 

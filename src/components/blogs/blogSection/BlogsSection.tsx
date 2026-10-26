@@ -157,7 +157,7 @@ const BlogsSection = () => {
   return (
     <div className="px-4 md:px-16 mt-8 md:mt-10">
       <div className="flex justify-between mb-6 md:mb-6">
-        <h2 className="text-brown font-bold text-2xl md:text-3xl">Blogs</h2>
+        <h1 className="text-brown font-bold text-2xl md:text-3xl">Blogs</h1>
         <div className="flex w-[75%] md:w-96 h-8 md:h-12">
           <input
             type="text"

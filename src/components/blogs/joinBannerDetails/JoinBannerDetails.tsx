@@ -19,9 +19,9 @@ const JoinBannerDetails = () => {
       >
         <div className="bg-opacity-90 h-full flex items-center justify-center py-10 md:py-20">
           <div className="text-center p-4 max-w-lg md:max-w-2xl lg:max-w-4xl text-white">
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 ">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 ">
               Join Us on Our Journey
-            </h1>
+            </h2>
             {/* <p className="mb-6 md:mb-8 lg:mb-10 text-sm md:text-base lg:text-lg">
               Whether you are a builder, architect, or homeowner, I invite you
               to join us on our journey towards a more sustainable future.

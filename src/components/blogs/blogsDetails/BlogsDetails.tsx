@@ -152,9 +152,9 @@ const BlogsDetails = ({ id }: any) => {
                         <div className="mr-3 md:mr-3 ">
                           <p className="text-brown md:text-md text-xs mt-1 md:mt-1">Published On : {createdDate}</p>
 
-                          <p className="text-brown md:text-md text-xs mt-1 md:mt-1 justify-center items-center flex whitespace-nowrap" > Published By :<h1 className=" px-2 font-semibold text-brown text-sm md:text-sm">
+                          <p className="text-brown md:text-md text-xs mt-1 md:mt-1 justify-center items-center flex whitespace-nowrap" > Published By :<span className=" px-2 font-semibold text-brown text-sm md:text-sm">
                             hubeco team
-                          </h1></p>
+                          </span></p>
                           {/* <p className="text-brown text-xs mt-1 md:mt-1">
                     Founder & CEO
                   </p> */}
@@ -192,6 +192,8 @@ const BlogsDetails = ({ id }: any) => {
                         __html: blogData.content
                           // Replace all empty tags like <p></p>, <h1></h1>, etc. with <br/>
                           .replace(/<([a-z][a-z0-9]*)><\/\1>/gi, '<br/>')
+                          // The blog title is the page's only H1; headings inside the body become H2
+                          .replace(/<(\/?)h1(?=[\s>])/gi, '<$1h2')
                       }}
                     />
                   </div>

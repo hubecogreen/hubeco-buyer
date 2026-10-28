@@ -49,6 +49,17 @@ const PaymentSuccessful = () => {
     }
   }, []);
 
+  // Count down, then take the buyer to the order they just placed; replace()
+  // keeps this page out of history so Back doesn't return to it
+  React.useEffect(() => {
+    if (time <= 0) {
+      router.replace(orderId ? `/orders/${orderId}` : "/orders");
+      return;
+    }
+    const timer = setTimeout(() => setTime((t) => t - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [time, router, orderId]);
+
   const handleApiError = async (err: any, id: any) => {
     const result = err?.response;
     if (result?.status === 400) {
@@ -144,6 +155,9 @@ const PaymentSuccessful = () => {
             Track Your Order
           </Button>
         </div>
+        <p className="text-brown text-sm mt-4">
+          Redirecting to your order in {Math.max(time, 0)} second{time === 1 ? "" : "s"}...
+        </p>
       </div>
     </div>
   );

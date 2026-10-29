@@ -8,17 +8,17 @@ import React from "react";
 
 type Props = {};
 
-function page({}: Props) {
+function page({ }: Props) {
   return (
     <div className="bg-cream">
       {/* <Meta title="Brands" subtitle="Brands" description="" /> */}
-      <head>
-        <title>Brands | Hubeco Buyer</title>
-        {/* <meta name="description" content='' />
+
+      {/* <title>Brands | Hubeco Buyer</title> */}
+      {/* <meta name="description" content='' />
         <meta name="keywords" content='' /> */}
-        {/* <meta name="author" content={productsData?.author.firstName} /> */}
-        {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
-      </head>
+      {/* <meta name="author" content={productsData?.author.firstName} /> */}
+      {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
+
       <BannerSection
         link1={{ name: "Home", href: "/" }}
         link2={{ name: "Brands", href: "#" }}

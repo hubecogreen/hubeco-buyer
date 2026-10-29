@@ -98,9 +98,9 @@ export default function Page() {
   useEffect(() => { }, []);
   return (
     <div className="bg-cream md:mb-0 ">
-      <head>
+      {/* <head>
         <title>About | Hubeco</title>
-      </head>
+      </head> */}
 
       <div className="banner-section h-102">
         <div className="relative bg-cover bg-center h-[200px] flex items-center justify-start text-white px-20"
@@ -121,7 +121,7 @@ export default function Page() {
             About
           </Link>
         </div>
-          
+
         <div
           className="
                     z-100 bg-cream w-full flex justify-start items-center
@@ -192,7 +192,7 @@ export default function Page() {
       gap-1
       whitespace-nowrap
     "
-     onPress={() => router.push("/products")}
+                onPress={() => router.push("/products")}
                 rightIcon={<GoArrowRight />}
               />
             </div>
@@ -247,16 +247,16 @@ export default function Page() {
                           className="w-15 h-14 lg:w-15 lg:h-14 md:w-14 md:h-14"
                         />
                       </div>
-<div className="w-full flex items-start justify-start md:items-start md:justify-start flex-col">
-                      {/* Title */}
-                      <h3 className="font-semibold text-brown md:text-lg text-[20px] mb-3">
-                        {item.title}
-                      </h3>
+                      <div className="w-full flex items-start justify-start md:items-start md:justify-start flex-col">
+                        {/* Title */}
+                        <h3 className="font-semibold text-brown md:text-lg text-[20px] mb-3">
+                          {item.title}
+                        </h3>
 
-                      {/* Description */}
-                      <p className="text-[14px] text-brown leading-relaxed">
-                        {item.description}
-                      </p>
+                        {/* Description */}
+                        <p className="text-[14px] text-brown leading-relaxed">
+                          {item.description}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -336,13 +336,13 @@ export default function Page() {
                           "
                   />
                   <Image
-                   src="images/about/values-tab.jpg"
+                    src="images/about/values-tab.jpg"
                     alt="Sustainable values"
-                    width={688} 
+                    width={688}
                     height={400}
                     className="hidden md:w-full md:h-[400px] md:block lg:hidden rounded-xl  "
-                    />  
-                    <Image
+                  />
+                  <Image
                     src="images/about/values-mob.png"
                     alt="Sustainable values"
                     width={358}

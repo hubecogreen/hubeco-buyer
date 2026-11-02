@@ -105,7 +105,7 @@ const PaymentFailed = () => {
     return <></>
 
   return (
-    <div className="bg-white ">
+    <div className="bg-cream ">
   
     <div className='flex flex-col items-center justify-center min-h-screen bg-red-50 text-center'>
       <div >

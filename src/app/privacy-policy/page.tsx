@@ -448,22 +448,46 @@
 import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import Link from "next/link";
+import type { Metadata } from "next";
+const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "").toLowerCase();
+const isProductionIndexable =
+  apiBaseUrl.length > 0 &&
+  !apiBaseUrl.includes("uat") &&
+  !apiBaseUrl.includes("dev") &&
+  !apiBaseUrl.includes("localhost");
+export const metadata: Metadata = {
+  title: "Privacy Policy | Hubeco",
+  description:
+    "Read how Hubeco handles personal information and data collected through the marketplace and its services.",
+  alternates: {
+    canonical: "https://hubeco.market/privacy-policy",
+  },
+  robots: {
+    index: isProductionIndexable,
+    follow: isProductionIndexable,
+  },
+  openGraph: {
+    title: "Privacy Policy | Hubeco",
+    description:
+      "Read how Hubeco handles personal information and data collected through the marketplace and its services.",
+    url: "https://hubeco.market/privacy-policy",
+    type: "website",
+    siteName: "Hubeco",
+  },
+};
 
 export default function Page() {
 
   return (
     <div className="bg-cream">
-      <head>
-        <title>Privacy Policy | Hubeco</title>
-      </head>
       {/* <Header /> */}
       <div className="banner-section h-[100%]">
-      <div
-  className="md:px-20 px-10 relative bg-cover bg-center h-[200px] flex items-center justify-start text-cream"
-  style={{
-    backgroundImage: 'url("images/about/aboutBanner1.webp")',
-  }}
->
+        <div
+          className="md:px-20 px-10 relative bg-cover bg-center h-[200px] flex items-center justify-start text-cream"
+          style={{
+            backgroundImage: 'url("images/about/aboutBanner1.webp")',
+          }}
+        >
 
           <Link
             href="/"
@@ -2306,7 +2330,7 @@ export default function Page() {
                               another entity, we may transfer your information
                               to the successor entity.  If we go out of business
                               or enter bankruptcy, your information would be an
-                              asset transferred or acquired by a third party. 
+                              asset transferred or acquired by a third party.
                               You acknowledge that such transfers may occur and
                               that the transferee may decline to honour
                               commitments we made in this Privacy Policy.

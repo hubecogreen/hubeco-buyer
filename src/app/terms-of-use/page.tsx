@@ -222,9 +222,9 @@ import Link from "next/link";
 export default function Page() {
   return (
     <div className="bg-cream">
-      <head>
+      {/* <head>
         <title>Terms of Use | Hubeco</title>
-      </head>
+      </head> */}
       {/* <Header /> */}
       <div className="banner-section h-[100%]">
         <div
@@ -7279,7 +7279,7 @@ export default function Page() {
                       received or suffered by us, including reasonable
                       attorneys' fees and expenses, made by any third party due
                       to or arising out of (1) your contributions; (2) your use
-                      of the Platform, Services, Platform, and/or Content; (3) 
+                      of the Platform, Services, Platform, and/or Content; (3)
                       any harm or damage arising from the use of Products
                       provided by Vendors; (4) breach of
                     </span>

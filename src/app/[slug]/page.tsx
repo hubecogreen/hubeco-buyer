@@ -99,12 +99,19 @@ export async function generateMetadata({
     const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
     const metaImages = product?.meta?.metaImage || [];
 
-    const title = `${
-      product?.meta?.metaTitle ||
-      (product?.variantName && product.variantName !== "Default"
-        ? product.variantName
-        : product?.productName)
-    } | Hubeco`;
+    const baseTitle = String(
+      product?.meta?.metaTitle?.trim() ||
+        (product?.variantName && product.variantName !== "Default"
+          ? product.variantName
+          : product?.productName) ||
+        ""
+    )
+      .replace(/\s+/g, " ")
+      .trim();
+    // Meta titles may already end with the brand; add it only when missing
+    const title = /\|\s*hubeco$/i.test(baseTitle)
+      ? baseTitle.replace(/\s*\|\s*hubeco$/i, " | Hubeco")
+      : `${baseTitle} | Hubeco`;
     const description =
       product?.meta?.metaDescription ||
       product?.meta?.description ||

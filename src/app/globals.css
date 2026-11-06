@@ -69,6 +69,20 @@
   }
 
 }
+
+@media (max-width: 1365px) {
+  .vendor-register-page :is(h1, h2, h3, h4, h5, h6, p, span, button) {
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+  }
+
+  .vendor-register-page .vendor-heading-word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+}
+
 @layer components {
   input:-webkit-autofill {
     @apply bg-white !important; /* Use Tailwind's bg-blue-500 utility */
@@ -278,6 +292,4 @@ body {
   overflow-y: scroll;
   background: #FFFEF8;
 }
-
-
 

@@ -48,7 +48,7 @@ export default function Home() {
         <title>Hubeco Vendor</title>
       </Head>
       {/* <Header /> */}
-      <div className="banner-section mx-auto h-[560px] md:max-lg:h-[528px] lg:h-full" style={{}}>
+      <div className="banner-section mx-auto h-[560px] md:max-lg:h-[528px] lg:h-[480px]" style={{}}>
         <HeroSection />
       </div>
 
@@ -84,7 +84,7 @@ export default function Home() {
         </div>
         <Benefits />
       </div>
-      <div className="working-section mx-auto pb-0 pt-0 bg-cream md:pb-10 lg:pb-4 lg:pt-0 md:max-w-full">
+      <div className="working-section mx-auto pb-0 pt-0 bg-cream md:pb-10 lg:pb-4 lg:pt-0 md:max-w-full xl:pb-[75px]">
         <Working />
       </div>
       <div className="working-section mx-auto pb-10 bg-cream md:max-w-full">

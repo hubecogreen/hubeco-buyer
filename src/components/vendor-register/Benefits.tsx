@@ -71,6 +71,16 @@ const Benefits = () => {
           lg:items-stretch
           lg:px-4
           lg:py-4
+          xl:box-border
+          xl:min-h-[520px]
+          xl:max-w-[1440px]
+          xl:grid
+          xl:grid-cols-[46fr_54fr]
+          xl:items-start
+          xl:justify-normal
+          xl:gap-20
+          xl:px-20
+          xl:py-16
         "
       >
         {/* Benefits Image */}
@@ -96,6 +106,12 @@ const Benefits = () => {
             lg:rounded-none
             lg:h-auto
               lg:flex-none
+            xl:w-full
+            xl:h-[392px]
+            xl:mt-10
+            xl:aspect-auto
+            xl:object-cover
+            xl:rounded-2xl
             md:max-lg:order-2
             md:max-lg:aspect-[708/449]
             md:max-lg:rounded-2xl
@@ -113,9 +129,12 @@ const Benefits = () => {
             md:max-lg:contents
             lg:w-1/2
             lg:p-8
+            xl:w-full
+            xl:gap-[30px]
+            xl:p-0
           "
         >
-          <div className="flex flex-col gap-5 md:max-lg:order-1 md:max-lg:mb-3 md:max-lg:w-full md:max-lg:gap-2 md:max-lg:pt-0">
+          <div className="flex flex-col gap-5 md:max-lg:order-1 md:max-lg:mb-3 md:max-lg:w-full md:max-lg:gap-2 md:max-lg:pt-0 xl:gap-[15px]">
             {/* Section Label */}
             <span
               className="
@@ -130,6 +149,9 @@ const Benefits = () => {
                 md:max-lg:min-h-[16px]
                 md:max-lg:whitespace-normal
                 md:max-lg:overflow-visible
+                xl:text-[11px]
+                xl:min-h-[15px]
+                xl:tracking-[1.8px]
               "
             >
               GROW WITH HUBECO
@@ -146,6 +168,9 @@ const Benefits = () => {
                 font-['Poppins',sans-serif]
                 mb-0
                 md:max-lg:w-full
+                xl:text-[32px]
+                xl:leading-[125%]
+                xl:tracking-[-0.6px]
               "
             >
               Benefits of becoming A Vendor
@@ -154,7 +179,7 @@ const Benefits = () => {
 
           {/* Benefits Accordion */}
           <Accordion
-            className="w-full flex flex-col gap-[10px] md:max-lg:!order-3 md:max-lg:!mt-[72px] md:max-lg:!grid md:max-lg:!grid-cols-2 md:max-lg:!gap-5"
+            className="w-full flex flex-col gap-[10px] md:max-lg:!order-3 md:max-lg:!mt-[72px] md:max-lg:!grid md:max-lg:!grid-cols-2 md:max-lg:!gap-5 xl:!gap-[10.15px]"
             allowMultiple={false}
             allowToggle={true}
             index={selectedIndex}
@@ -163,12 +188,14 @@ const Benefits = () => {
             {accordionItems.map((item, index) => (
               <AccordionItem
                 key={index}
-                className="!border-0 !m-0 !p-0 !overflow-hidden !rounded-xl"
+                className="!border-0 !m-0 !p-0 !overflow-hidden !rounded-xl xl:!rounded-[10.15px]"
               >
                 {({ isExpanded }) => (
                   <div
                     className={`
                       w-full
+                      xl:min-h-[74px]
+                      xl:box-border
                       rounded-xl
                       border
                       transition-colors
@@ -185,8 +212,12 @@ const Benefits = () => {
                         className="
                           !w-full
                           !min-h-[68px]
+                          xl:!min-h-0
+                          xl:!h-[74px]
                           !px-4
                           !py-4
+                          xl:!px-[13.53px]
+                          xl:!py-[10px]
                           !flex
                           !items-center
                           !justify-between
@@ -198,7 +229,7 @@ const Benefits = () => {
                         "
                       >
                         {/* Icon and Title */}
-                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                        <div className="flex items-center gap-3 flex-1 min-w-0 xl:gap-[10.15px]">
                           <Image
                             src={item.imgSrc}
                             alt={item.alt}
@@ -208,6 +239,8 @@ const Benefits = () => {
                             className="
                               w-6
                               h-6
+                              xl:w-[23.68px]
+                              xl:h-[23.68px]
                               object-contain
                               shrink-0
                             "
@@ -219,6 +252,10 @@ const Benefits = () => {
                               leading-[140%]
                               text-[#203B37]
                               font-['Poppins',sans-serif]
+                              xl:text-[16px]
+                              xl:font-semibold
+                              xl:leading-[140%]
+                              xl:font-['Inter',sans-serif]
                               ${isExpanded
                                 ? "font-semibold"
                                 : "font-medium"
@@ -250,11 +287,17 @@ const Benefits = () => {
                         !pt-0
                         !px-4
                         !pb-4
+                        xl:!box-border
+                        xl:!px-[44px]
+                        xl:!pb-[8px]
+                        xl:!pt-0
                         text-[13px]
                         leading-[150%]
                         font-normal
                         text-[#4D5553]
                         font-['Poppins',sans-serif]
+                        xl:text-[12px]
+                        xl:leading-[100%]
                       "
                     >
                       {item.description}

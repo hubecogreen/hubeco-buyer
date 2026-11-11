@@ -39,7 +39,53 @@ const Working = () => {
   ];
 
   return (
-   <div className="w-full bg-cream lg:bg-cream flex items-center justify-center px-4 py-12 lg:px-4 lg:py-4 md:max-lg:px-[30px] md:max-lg:py-8">
+   <div className="w-full bg-cream lg:bg-cream flex items-center justify-center px-4 py-12 lg:px-4 lg:py-4 md:max-lg:px-[30px] md:max-lg:py-8 xl:p-0">
+    <div className="hidden xl:grid xl:box-border xl:min-h-[520px] xl:w-full xl:max-w-[1440px] xl:mx-auto xl:grid-cols-[minmax(0,46fr)_minmax(0,54fr)] xl:justify-center xl:items-start xl:gap-20 xl:px-20 xl:py-0">
+      <Image
+        src="/images/vendor-register/work.webp"
+        alt="A building materials supplier"
+        width={552}
+        height={480}
+        onError={(e) => {
+          e.currentTarget.src = "/images/product-placeholder.webp";
+        }}
+        loading="lazy"
+        className="mt-[81px] h-[480px] w-full rounded-2xl object-cover"
+      />
+
+      <div className="flex w-full flex-col">
+        <span className="mb-2 text-[11px] font-bold leading-[140%] tracking-[1.8px] text-[#08796D] font-['Poppins',sans-serif]">
+          YOUR NEXT CHAPTER
+        </span>
+        <h2 className="mb-6 text-[34px] font-semibold leading-[100%] tracking-[-0.7px] text-[#203B37] font-['Poppins',sans-serif]">
+          How It Works
+        </h2>
+
+        <div className="relative flex flex-col gap-[34.7px]">
+          <div className="absolute bottom-7 left-[13.5px] top-7 w-px bg-[#A9D5CA]" />
+          {steps.map((step, index) => (
+            <div key={step.number} className="relative flex gap-5">
+              <div
+                className={`z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#109989] text-[14px] font-normal leading-none text-[#08796D] ${
+                  index === 0 ? "bg-[#109989] !text-white" : "bg-[#FFFEF8]"
+                }`}
+              >
+                {step.number}
+              </div>
+              <div className="flex min-w-0 flex-1 flex-col gap-[16.7px]">
+                <h3 className="text-[22.29px] font-semibold leading-[140%] text-[#203B37] font-['Poppins',sans-serif]">
+                  {step.title}
+                </h3>
+                <p className="text-[17.33px] font-normal leading-[165%] text-[#4D5553] font-['Poppins',sans-serif]">
+                  {step.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div className="w-full xl:hidden">
       <div className="w-full">
         <div className="flex flex-wrap justify-center">
           <div className="w-full max-w-screen-xl mx-auto flex flex-col items-start p-0">
@@ -151,6 +197,7 @@ const Working = () => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 

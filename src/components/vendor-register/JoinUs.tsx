@@ -14,19 +14,22 @@ const JoinUs = () => {
   return (
     <div className="relative block w-full m-0 p-0 bg-cream">
       <div
-        className="block w-full m-0 p-0 bg-cover bg-center min-h-[360px] h-auto md:max-lg:min-h-[360px] lg:h-96 lg:min-h-0"
+        className="relative block w-full m-0 p-0 bg-cover bg-center min-h-[360px] h-auto md:max-lg:min-h-[360px] lg:h-96 lg:min-h-0 xl:h-[320px] xl:min-h-[320px]"
         style={{
           backgroundImage: "url(images/vendor-register/joinbg.webp)",
         }}
       >
+        <div className="pointer-events-none absolute inset-0 hidden bg-[rgba(16,44,38,0.7882)] xl:block" />
         <div
           className="
+            relative z-10
             min-h-[360px]
             h-full
             flex items-center justify-center
             px-4 py-12
             md:max-lg:box-border md:max-lg:px-4 md:max-lg:py-16
             lg:px-0 lg:py-20
+            xl:box-border xl:min-h-[320px] xl:px-[390px] xl:py-[62.5px]
           "
         >
           <div
@@ -38,6 +41,7 @@ const JoinUs = () => {
               p-0
               lg:p-4
               text-cream
+              xl:box-border xl:flex xl:h-[195px] xl:w-[660px] xl:max-w-none xl:flex-col xl:items-center xl:justify-start xl:gap-5 xl:p-0
             "
           >
             {/* Heading */}
@@ -53,6 +57,7 @@ const JoinUs = () => {
                 md:max-lg:mb-0 md:max-lg:text-[36px]
                 lg:text-2xl
                 lg:font-bold
+                xl:mb-0 xl:h-[45px] xl:w-full xl:text-[36px] xl:font-semibold xl:leading-[125%]
               "
             >
               Join Us Today
@@ -69,6 +74,7 @@ const JoinUs = () => {
                 mb-6
                 md:max-lg:mb-0
                 lg:mb-10
+                xl:mb-0 xl:h-[50px] xl:w-full xl:text-[15px] xl:leading-[165%]
               "
             >
               Ready to become a part of hubeco.market? Sign up as a vendor and
@@ -76,8 +82,8 @@ const JoinUs = () => {
             </p>
 
             {/* Join Action */}
-            <div className="flex items-center justify-center">
-            <div className="flex flex-col w-full lg:w-auto md:max-lg:w-auto">
+            <div className="flex items-center justify-center xl:h-[60px] xl:w-full">
+            <div className="flex flex-col w-full lg:w-auto md:max-lg:w-auto xl:h-[60px] xl:w-[236px]">
                 <CustomButton
                   title="Vendor Connect"
                   className="
@@ -94,6 +100,7 @@ const JoinUs = () => {
                     lg:!bg-transparent
                     lg:!text-cream
                     lg:text-sm
+                    xl:!h-[60px] xl:!w-[236px] xl:!bg-cream xl:!text-[#A92449] xl:!border-0 xl:!text-[15px]
                   "
                   customStyles={{
                     border: "1px solid #FFFFFF",

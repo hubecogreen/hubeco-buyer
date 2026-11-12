@@ -22,26 +22,26 @@ const JoinUs = () => {
         <div className="pointer-events-none absolute inset-0 hidden bg-[rgba(16,44,38,0.7882)] xl:block" />
         <div
           className="
-            relative z-10
+            relative z-10 lg:max-w-[1440px] lg:mx-auto
             min-h-[360px]
             h-full
-            flex items-center justify-center
+            flex items-center justify-center lg:justify-start
             px-4 py-12
             md:max-lg:box-border md:max-lg:px-4 md:max-lg:py-16
-            lg:px-0 lg:py-20
-            xl:box-border xl:min-h-[320px] xl:px-[390px] xl:py-[62.5px]
+            md:pl-[100px] lg:pr-0 lg:py-20
+            xl:box-border xl:min-h-[320px] xl:pl-[100px] xl:pr-0 xl:py-[62.5px]
           "
         >
           <div
             className="
-              text-center
+              text-center lg:text-left
               w-full
               max-w-4xl
               md:max-lg:max-w-[520px] md:max-lg:flex md:max-lg:flex-col md:max-lg:gap-5
               p-0
               lg:p-4
               text-cream
-              xl:box-border xl:flex xl:h-[195px] xl:w-[660px] xl:max-w-none xl:flex-col xl:items-center xl:justify-start xl:gap-5 xl:p-0
+              xl:box-border xl:flex xl:h-[195px] xl:w-[660px] xl:max-w-none xl:flex-col xl:items-start xl:justify-start xl:gap-5 xl:p-0
             "
           >
             {/* Heading */}
@@ -82,7 +82,7 @@ const JoinUs = () => {
             </p>
 
             {/* Join Action */}
-            <div className="flex items-center justify-center xl:h-[60px] xl:w-full">
+            <div className="flex items-center justify-center lg:justify-start xl:h-[60px] xl:w-full">
             <div className="flex flex-col w-full lg:w-auto md:max-lg:w-auto xl:h-[60px] xl:w-[236px]">
                 <CustomButton
                   title="Vendor Connect"

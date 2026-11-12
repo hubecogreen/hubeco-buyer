@@ -39,8 +39,8 @@ const Working = () => {
   ];
 
   return (
-   <div className="w-full bg-cream lg:bg-cream flex items-center justify-center px-4 py-12 lg:px-4 lg:py-4 md:max-lg:px-[30px] md:max-lg:py-8 xl:p-0">
-    <div className="hidden xl:grid xl:box-border xl:min-h-[520px] xl:w-full xl:max-w-[1440px] xl:mx-auto xl:grid-cols-[minmax(0,46fr)_minmax(0,54fr)] xl:justify-center xl:items-start xl:gap-20 xl:px-20 xl:py-0">
+   <div className="w-full bg-cream lg:bg-cream flex items-center justify-center px-4 py-[20px] mx-auto lg:max-w-[1440px] lg:px-[100px] lg:pt-[40px] lg:pb-[0px]">
+    <div className="hidden xl:grid xl:box-border xl:min-h-[520px] xl:w-full xl:max-w-[1440px] xl:mx-auto xl:grid-cols-[minmax(0,46fr)_minmax(0,54fr)] xl:justify-center xl:items-start xl:gap-20">
       <Image
         src="/images/vendor-register/work.webp"
         alt="A building materials supplier"
@@ -61,7 +61,7 @@ const Working = () => {
           How It Works
         </h2>
 
-        <div className="relative flex flex-col gap-[34.7px]">
+        <div className="relative flex flex-col gap-[16px]">
           <div className="absolute bottom-7 left-[13.5px] top-7 w-px bg-[#A9D5CA]" />
           {steps.map((step, index) => (
             <div key={step.number} className="relative flex gap-5">
@@ -72,7 +72,7 @@ const Working = () => {
               >
                 {step.number}
               </div>
-              <div className="flex min-w-0 flex-1 flex-col gap-[16.7px]">
+              <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
                 <h3 className="text-[22.29px] font-semibold leading-[140%] text-[#203B37] font-['Poppins',sans-serif]">
                   {step.title}
                 </h3>
@@ -131,7 +131,7 @@ const Working = () => {
               <div className="hidden lg:block border-r border-[#C1C1C1] mx-8"></div>
 
               {/* Onboarding Timeline */}
-              <div className="order-1 overflow-visible p-0 w-full lg:order-1 lg:overflow-auto lg:p-4 lg:w-1/2 md:max-lg:order-3 md:max-lg:mt-6 md:max-lg:max-w-[520px]">
+              <div className="order-1 overflow-visible p-0 w-full lg:order-1 lg:overflow-auto lg:p-4 lg:w-1/2 md:max-lg:order-3 md:max-lg:mt-6 md:max-lg:max-w-full">
 
                 <div className="flex flex-col gap-4 lg:space-y-4 lg:gap-0 lg:pl-4 lg:pt-8">
 
@@ -142,13 +142,13 @@ const Working = () => {
                     >
 
                       {/* Mobile Timeline Number */}
-                      <div className="relative flex flex-col items-center shrink-0">
+                      <div className="relative flex flex-col items-center shrink-0 self-stretch">
                         <div className="w-8 h-8 rounded-full bg-[#08796D] text-cream flex items-center justify-center text-sm font-semibold">
                           {step.number}
                         </div>
 
                         {index !== steps.length - 1 && (
-                          <div className="absolute top-8 w-px h-[calc(100%+16px)] bg-[#A9D5CA]"></div>
+                          <div className="absolute top-8 w-px h-[calc(100%-16px)] bg-[#A9D5CA]"></div>
                         )}
                       </div>
 

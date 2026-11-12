@@ -53,10 +53,10 @@ export default function Home() {
       </div>
 
       <div
-        className="benefits-section mx-auto pb-4 pt-10 md:pt-[60px] md:max-lg:pt-0 lg:pb-0 lg:pt-4 bg-cover bg-no-repeat bg-[center_190%] h-auto bg-cream lg:bg-cream"
-        style={{
-          backgroundImage: "url('/images/buyer-register/benefitsVector.webp')",
-        }}
+        className="benefits-section mx-auto pb-4  md:max-lg:pt-0 lg:pb-0  bg-cover bg-no-repeat bg-[center_190%] h-auto bg-cream lg:bg-cream"
+        // style={{
+        //   backgroundImage: "url('/images/buyer-register/benefitsVector.webp')",
+        // }}
       >
         <div>
           {/* {showScrollBottom && (

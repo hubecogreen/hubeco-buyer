@@ -70,7 +70,9 @@ const ProcureSection: React.FC = () => {
           "
                     >
                         <img
-                            src="/images/procurement/img1.webp"
+                            loading="lazy"
+                  decoding="async"
+                  src="/images/procurement/img1.webp"
                             alt="Procurement Benefits"
                             className="w-full h-full object-cover lg:object-cover md:object-cover md:object-[50%_25%] md:block lg:block block"
                         />
@@ -104,7 +106,9 @@ const ProcureSection: React.FC = () => {
               "
                             >
                                 <img
-                                    src={service.icon}
+                                    loading="lazy"
+                  decoding="async"
+                  src={service.icon}
                                     alt={service.title}
                                     className="w-[32px] h-[32px] xs:w-[36px] xs:h-[36px] md:h-[52px] md:w-[52px] sm:w-[42px] sm:h-[42px] lg:w-[65px] lg:h-[65px]"
                                 />

@@ -32,7 +32,9 @@ const store = configureStore({
   reducer: persistedReducer,
 });
 
-export const persistor = persistStore(store);
+// Restoring saved state starts in RootProvider after the first render, so the
+// first browser render matches the server HTML (no hydration mismatch).
+export const persistor = persistStore(store, { manualPersist: true } as any);
 export default store;
 
 export type RootState = ReturnType<typeof store.getState>;

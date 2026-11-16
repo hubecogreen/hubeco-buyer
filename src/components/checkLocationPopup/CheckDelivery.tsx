@@ -20,7 +20,10 @@ const PincodePopup: React.FC<PincodePopupProps> = ({ isOpen, onClose }) => {
   const [pincode, setPincode] = useState("");
   const [selectedAddress, setSelectedAddress] = useState<string>("");
 
-  const buyerInfo = sessionStorage.getItem("buyerUserInfo") as any;
+  const buyerInfo =
+    typeof window !== "undefined"
+      ? (sessionStorage.getItem("buyerUserInfo") as any)
+      : null;
   const addresses = JSON.parse(buyerInfo)?.addresses;
   const router=useRouter()
 

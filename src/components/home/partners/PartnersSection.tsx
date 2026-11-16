@@ -111,7 +111,9 @@ const PartnersSection: React.FC = () => {
                 <div className="bg-[#FFFEF8] rounded-[7px] min-h-[440px] p-6 border border-[#E4F1EE] border-l-[3px] border-l-[#0BA392]">
                   <div className="flex justify-center mb-5">
                     <img
-                      src={p.icon}
+                      loading="lazy"
+                  decoding="async"
+                  src={p.icon}
                       alt={p.name}
                       className="w-[60px] h-[60px]"
                     />
@@ -197,6 +199,8 @@ const PartnersSection: React.FC = () => {
             >
               <div className="flex justify-center mb-6">
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={p.icon}
                   alt={p.name}
                   className="w-[70px] h-[70px]"

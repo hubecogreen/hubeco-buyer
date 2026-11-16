@@ -10,7 +10,8 @@ import AppInstallPopup from "@/components/app-install-popup/AppInstallPopup";
 import PwaUpdatePrompt from "@/components/pwa-update-prompt/PwaUpdatePrompt";
 
 const WhatsAppWidget = dynamic(() => import("@/components/WhatsApp"), {
-  loading: () => <div className="min-h-[100px]" />,
+  // The widget is position:fixed, so it needs no space reserved while it loads.
+  loading: () => null,
 });
 
 const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "").toLowerCase();
@@ -149,7 +150,9 @@ export default function RootLayout({
         
         {/* Preload critical carousel images for LCP and Speed Index */}
         <link rel="preload" href="/images/actions/Action.webp" as="image" type="image/webp" fetchPriority="high" />
-        <link rel="preload" href="/images/home/hero/video-poster.webp" as="image" type="image/webp" fetchPriority="high" />
+        {/* Preload the hero poster (LCP). Action.webp is below the fold, so it is not preloaded. */}
+        <link rel="preload" href="/images/home/hero/video-poster-mobile.webp" as="image" type="image/webp" media="(max-width: 767px)" fetchPriority="high" />
+        <link rel="preload" href="/images/home/hero/video-poster.webp" as="image" type="image/webp" media="(min-width: 768px)" fetchPriority="high" />
 
         {/* Preload critical background images */}
         {/* <link rel="preload" href="/images/home/bg1.webp" as="image" type="image/webp" /> */}

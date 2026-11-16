@@ -20,12 +20,7 @@ import {
 } from "@/reduxStore/slices/masterDataSlice";
 import { normalizePath } from "@/lib/utils";
 import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
 import { categoryPath } from "@/lib/categoryUrls";
-
-import "swiper/css";
-
 
 const FALLBACK_IMAGE = "/images/product-placeholder.webp";
 
@@ -79,37 +74,28 @@ const MobileRowCarousel = ({ items }: { items: any[] }) => {
 
   // Only duplicate when auto sliding
   const marqueeItems = shouldAutoSlide
-    ? [...items, ...items, ...items]
+    ? [...items, ...items]
     : items;
 
   return (
     <div className="lg:hidden">
-      <Swiper
-        modules={[Autoplay]}
-        slidesPerView="auto"
-        spaceBetween={6}
-        loop={false}
-        allowTouchMove={false}
-        autoplay={
-          shouldAutoSlide
-            ? {
-                delay: 0, // continuous
-                disableOnInteraction: false,
-              }
-            : false
-        }
-        speed={shouldAutoSlide ? 5000 : 0}
-        className="w-full"
-      >
-        {marqueeItems.map((cat: any, index: number) => (
-          <SwiperSlide
-            key={`${cat._id}-${index}`}
-            className="!w-auto"
-          >
-            <CategoryCard category={cat} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {/* CSS marquee (no Swiper): list is doubled and slides left by half */}
+      <div className="w-full overflow-hidden">
+        <div
+          className={`flex w-max ${shouldAutoSlide ? "row-marquee" : ""}`}
+          style={
+            shouldAutoSlide
+              ? { animationDuration: `${items.length * 5}s` }
+              : undefined
+          }
+        >
+          {marqueeItems.map((cat: any, index: number) => (
+            <div key={`${cat._id}-${index}`} className="shrink-0 pr-[6px]">
+              <CategoryCard category={cat} />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

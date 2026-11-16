@@ -369,12 +369,12 @@ const installButtonLabel = !isIOSDevice ? "Install App" : "";
                 <li><Link className="text-brown" href="/blogs">Blogs</Link></li>
                 <li><Link className="text-brown whitespace-nowrap" href="/green-financing">Green Financing</Link></li>
                 <li>
-                  <a
-                    href={`${process.env.NEXT_PUBLIC_VENDOR_URL}/login`}
+                  <Link
+                    href="/vendor-register"
                     className="text-brown whitespace-nowrap"
                   >
                     Vendor Connect
-                  </a>
+                  </Link>
                 </li>
                 <li><Link className="text-brown" href="/brands">Brands</Link></li>
                 <li><Link className="text-brown" href="/careers">Careers</Link></li>

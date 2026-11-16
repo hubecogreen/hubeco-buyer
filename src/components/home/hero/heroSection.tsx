@@ -1,10 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import usePWAInstall from "@/components/hooks/usePWAInstall";
@@ -52,6 +50,7 @@ const logos = [
 const greenProLabels = ["GreenPro", "EPD", "GRIHA"];
 
 const HeroSection = () => {
+  const router = useRouter();
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
   const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video-U.webm`;
   const heroPosterUrl = "/images/home/hero/video-poster.webp";
@@ -76,13 +75,27 @@ const HeroSection = () => {
       id="home-hero-section"
       className="relative  lg:h-[561px] md:h-[472px] h-[536px]  "
     >
+      {/* Poster as a real image (LCP) so phones get a smaller portrait crop;
+          desktop/tablet keep the full-size poster. The video plays on top. */}
+      <picture>
+        <source
+          media="(max-width: 767px)"
+          srcSet="/images/home/hero/video-poster-mobile.webp"
+          type="image/webp"
+        />
+        <img
+          src={heroPosterUrl}
+          alt=""
+          fetchPriority="high"
+          className="absolute inset-0 w-full h-full object-cover brightness-95 z-0"
+        />
+      </picture>
       <video
         autoPlay
         loop
         muted
         playsInline
         preload="metadata"
-        poster={heroPosterUrl}
         className="absolute inset-0 w-full h-full object-cover brightness-95 z-0"
       >
         <source src={heroVideoUrl} type="video/webm" />
@@ -219,7 +232,7 @@ const HeroSection = () => {
                  w-full lg:w-auto 
                  lg:px-[33px] lg:py-[11.5px] py-[10px] px-[20px] text-[17px] font-medium
                  rounded-md whitespace-nowrap cursor-pointer"
-              onClick={() => window.location.href = `${process.env.NEXT_PUBLIC_VENDOR_URL}/login`}
+              onClick={() => router.push("/vendor-register")}
             >
               Partner with Us
             </motion.button>
@@ -229,33 +242,25 @@ const HeroSection = () => {
         <div className="w-full flex flex-row items-center justify-center bg-white/10 backdrop-blur-md rounded-md py-2 px-4">
           <p className="opacity-70 whitespace-nowrap px-3 text-[16px] ">Trusted by:</p>
 
-          <Swiper
-            slidesPerView="auto"
-            loop={true}
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
-            }}
-            speed={10000} // Increase for slower movement (e.g., 5000-10000)
-            allowTouchMove={false}
-            modules={[Autoplay]}
-            className="w-full marquee-swiper"
-          >
-            {[...logos, ...logos].map((logo, i) => (
-              <SwiperSlide
-                key={i}
-                className="!w-auto flex items-center justify-center px-4"
-              >
-                <Image
-                  src={logo}
-                  alt={`logo-${i}`}
-                  width={80}
-                  height={40}
-                  className="h-10 w-auto object-contain max-w-[100px]"
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          {/* CSS marquee (no Swiper): the list is doubled and slides left by half */}
+          <div className="w-full overflow-hidden">
+            <div className="logo-marquee flex w-max">
+              {[...logos, ...logos].map((logo, i) => (
+                <div
+                  key={i}
+                  className="flex shrink-0 items-center justify-center px-4"
+                >
+                  <Image
+                    src={logo}
+                    alt={`logo-${i}`}
+                    width={80}
+                    height={40}
+                    className="h-10 w-auto object-contain max-w-[100px]"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 

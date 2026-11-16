@@ -81,7 +81,8 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
     checkAuth()
   }, [router, pathname, validate])
 
-  if(!isClient)
+  // public routes (home) render on the server too; only private routes wait
+  if (!isClient && privateRoutes.some((r) => pathname.startsWith(r)))
     return <></>
     
   // Render children only if the route is public or the user is validated

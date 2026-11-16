@@ -7,7 +7,8 @@ import NetworkStatusToast from "@/components/network-status/NetworkStatusToast";
 import PrivateRoute from "@/components/PrivateRouter";
 import MeDetails from "@/reduxStore/Compo";
 import { RootProvider } from "@/reduxStore/customProvider";
-import { ChakraProvider } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 import React from "react";
 import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,6 +16,9 @@ import useClient from "../hooks/useClient";
 import { useEffect, useState } from "react";
 import SubmitEnquiryModal from "../modals/SubmitEnquiryModal";
 import BottomNavigation from "@/components/navigation/BottomNavigation";
+
+// Chakra (about 250 KB) is only needed by inner pages, not the home page.
+const ChakraShell = dynamic(() => import("./ChakraShell"), { ssr: false });
 
 const MainLayout = ({
   children,
@@ -25,6 +29,7 @@ const MainLayout = ({
 }) => {
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
   const [boqMode, setBoqMode] = useState(false);
+  const isHome = usePathname() === "/";
 
   const openEnquiryModal = () => {
     setBoqMode(false);
@@ -69,22 +74,22 @@ const MainLayout = ({
         />
         <RootProvider>
           <MeDetails>
-            <ChakraProvider>
-              <Header onSubmitEnquiry={openEnquiryModal} />
-              <div className="mt-[79px] bg-cream">
-                <NetworkStatusToast />
-                <PrivateRoute>{children}</PrivateRoute>
-              </div>
-              <BottomNavigation onSubmitEnquiry={openEnquiryModal} />
-              <SubmitEnquiryModal
-                open={showEnquiryModal}
-                onClose={closeEnquiryModal}
-                product={null}
-                mode="form"
-                boqMode={boqMode}
-              />
-              <Footer />
-            </ChakraProvider>
+            <Header onSubmitEnquiry={openEnquiryModal} />
+            <div className="mt-[79px] bg-cream">
+              <NetworkStatusToast />
+              <PrivateRoute>
+                {isHome ? children : <ChakraShell>{children}</ChakraShell>}
+              </PrivateRoute>
+            </div>
+            <BottomNavigation onSubmitEnquiry={openEnquiryModal} />
+            <SubmitEnquiryModal
+              open={showEnquiryModal}
+              onClose={closeEnquiryModal}
+              product={null}
+              mode="form"
+              boqMode={boqMode}
+            />
+            <Footer />
           </MeDetails>
         </RootProvider>
         {/* <ToastContainer /> */}

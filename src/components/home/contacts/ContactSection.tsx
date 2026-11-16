@@ -82,11 +82,11 @@ const ContactSection: React.FC = () => {
         {/* LEFT IMAGE */}
         <div className="hidden lg:block lg:flex-1 relative">
           <Image
-            src="/images/contacts/image.png"
+            src="/images/contacts/image.webp"
             alt="contact"
             className="w-full h-full object-cover rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none"
-            width={100}
-            height={100}
+            width={1000}
+            height={1498}
           />
         </div>
 

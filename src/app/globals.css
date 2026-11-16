@@ -246,6 +246,34 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
   will-change: transform;
 }
 
+.logo-marquee {
+  animation: logoMarquee 100s linear infinite;
+  will-change: transform;
+}
+
+@keyframes logoMarquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee {
+    animation: none;
+  }
+}
+
+.row-marquee {
+  animation: logoMarquee linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row-marquee {
+    animation: none;
+  }
+}
+
 .marquee-slide {
   width: auto !important;
 }

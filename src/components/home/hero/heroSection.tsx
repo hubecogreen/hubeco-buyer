@@ -2,9 +2,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import usePWAInstall from "@/components/hooks/usePWAInstall";
@@ -229,33 +226,25 @@ const HeroSection = () => {
         <div className="w-full flex flex-row items-center justify-center bg-white/10 backdrop-blur-md rounded-md py-2 px-4">
           <p className="opacity-70 whitespace-nowrap px-3 text-[16px] ">Trusted by:</p>
 
-          <Swiper
-            slidesPerView="auto"
-            loop={true}
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
-            }}
-            speed={10000} // Increase for slower movement (e.g., 5000-10000)
-            allowTouchMove={false}
-            modules={[Autoplay]}
-            className="w-full marquee-swiper"
-          >
-            {[...logos, ...logos].map((logo, i) => (
-              <SwiperSlide
-                key={i}
-                className="!w-auto flex items-center justify-center px-4"
-              >
-                <Image
-                  src={logo}
-                  alt={`logo-${i}`}
-                  width={80}
-                  height={40}
-                  className="h-10 w-auto object-contain max-w-[100px]"
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          {/* CSS marquee (no Swiper): the list is doubled and slides left by half */}
+          <div className="w-full overflow-hidden">
+            <div className="logo-marquee flex w-max">
+              {[...logos, ...logos].map((logo, i) => (
+                <div
+                  key={i}
+                  className="flex shrink-0 items-center justify-center px-4"
+                >
+                  <Image
+                    src={logo}
+                    alt={`logo-${i}`}
+                    width={80}
+                    height={40}
+                    className="h-10 w-auto object-contain max-w-[100px]"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 

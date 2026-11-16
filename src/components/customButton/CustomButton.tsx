@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 interface CustomButtonProps {
   title: React.ReactNode; // Content inside the button
   leftIcon?: React.ReactNode; // Left icon component
@@ -64,11 +63,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 >
   {loading ? (
     <span>
-      <CircularProgress
-        className={`${loaderStyles}`}
-        isIndeterminate
-        color="white"
-        size="20px"
+      <span
+        className={`inline-block h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent ${loaderStyles ?? ""}`}
       />
     </span>
   ) : (

@@ -75,13 +75,27 @@ const HeroSection = () => {
       id="home-hero-section"
       className="relative  lg:h-[561px] md:h-[472px] h-[536px]  "
     >
+      {/* Poster as a real image (LCP) so phones get a smaller portrait crop;
+          desktop/tablet keep the full-size poster. The video plays on top. */}
+      <picture>
+        <source
+          media="(max-width: 767px)"
+          srcSet="/images/home/hero/video-poster-mobile.webp"
+          type="image/webp"
+        />
+        <img
+          src={heroPosterUrl}
+          alt=""
+          fetchPriority="high"
+          className="absolute inset-0 w-full h-full object-cover brightness-95 z-0"
+        />
+      </picture>
       <video
         autoPlay
         loop
         muted
         playsInline
         preload="metadata"
-        poster={heroPosterUrl}
         className="absolute inset-0 w-full h-full object-cover brightness-95 z-0"
       >
         <source src={heroVideoUrl} type="video/webm" />

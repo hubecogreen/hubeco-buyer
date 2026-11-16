@@ -38,12 +38,12 @@ import {
 } from "@/reduxStore/slices/userSlice";
 import useGetBuyer from "../hooks/useGetBuyer";
 import { getCookie, setCookie } from "cookies-next";
+import useClient from "../hooks/useClient";
 import { toast } from "react-hot-toast";
 import useRefreshToken from "../hooks/useRefreshToken";
 import useApi from "../Fetcher/useAPI";
 import { BsShop } from "react-icons/bs";
 import Image from "next/image";
-import useClient from "../hooks/useClient";
 import SubmitEnquiryModal from "../modals/SubmitEnquiryModal";
 import { getProductCategoryTree } from "@/lib/productCategoryTreeCache";
 import { canSafelyRefresh } from "@/lib/reloadGuard";
@@ -69,19 +69,21 @@ const Header: React.FC<HeaderProps> = ({
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
   const cartCountRedux = store.getState().user.cartCount;
-  const cartCountV = getCookie("CartCount");
+  // Cookies/sessionStorage exist only in the browser. Read them after mount so the
+  // server HTML and the first browser render match (logged-out view first).
+  const isClient = useClient();
+  const cartCountV = isClient ? getCookie("CartCount") : undefined;
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isUserPopoverOpen, setUserPopoverOpen] = useState(false);
   const [isUserPopoverClicked, setIsUserPopoverClicked] = useState(false);
   const [cartCount, setCartCount] = useState<any>(cartCountV);
   const router = useRouter();
   const [refresh, setRefresh] = useState<number>(0);
-  const token = getCookie("token");
+  const token = isClient ? getCookie("token") : undefined;
   const dispatch = useDispatch();
-  const userInfo =
-    typeof window !== "undefined"
-      ? (sessionStorage.getItem("buyerUserInfo") as any)
-      : null;
+  const userInfo = isClient
+    ? (sessionStorage.getItem("buyerUserInfo") as any)
+    : null;
   const addInfo = userInfo ? JSON.parse(userInfo)?.addresses : null;
   const iconRef = useRef<HTMLDivElement | null>(null);
   const popoverRef = useRef<HTMLDivElement | null>(null);
@@ -97,7 +99,6 @@ const Header: React.FC<HeaderProps> = ({
   const [showLoginPopup, setShowLoginPopup] = useState<any>(false);
   // const [showEnquiryModal, setShowEnquiryModal] = useState(false);
   const [reloadH, setReloadH] = useState<any>(0);
-  const isClient = useClient();
 
   const pathname = usePathname();
   const fullUrl =
@@ -247,6 +248,7 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   useEffect(() => {
+    if (!isClient) return; // wait for the real cookie value
     setCartCount(cartCountV);
 
     // router.refresh() fails when offline, which makes Next.js fall back to
@@ -257,13 +259,13 @@ const Header: React.FC<HeaderProps> = ({
     if (!canSafelyRefresh()) return;
 
     router.refresh();
-  }, [cartCountV]);
+  }, [cartCountV, isClient]);
 
   useEffect(() => {
     if (token) {
       getDefaultLoc();
     }
-  }, [reloadH == 1]);
+  }, [reloadH == 1, token]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -367,7 +369,7 @@ const Header: React.FC<HeaderProps> = ({
       getCart();
       getWishlist();
     }
-  }, []);
+  }, [token]);
 
   // REMOVED: The conflicting click-outside handler that was closing popover before menu items could be clicked
   // The UserPopover component has its own click-outside handler that works correctly
@@ -462,7 +464,6 @@ const Header: React.FC<HeaderProps> = ({
     }
   };
 
-  if (!isClient) return <></>;
 
   return (
     <>

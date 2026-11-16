@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import { Provider } from "react-redux";
 import store, { persistor } from "../reduxStore";
 import { PersistGate } from "redux-persist/integration/react";
@@ -15,6 +16,11 @@ export function RootProvider({
   children: React.ReactNode;
   renderBeforeRehydrate?: boolean;
 }) {
+  // Restore saved state only after hydration (see manualPersist in reduxStore).
+  useEffect(() => {
+    persistor.persist();
+  }, []);
+
   return (
     <Provider store={store}>
       <PersistGate

@@ -147,7 +147,8 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
         {/* Preload the hero poster (LCP). Action.webp is below the fold, so it is not preloaded. */}
-        <link rel="preload" href="/images/home/hero/video-poster.webp" as="image" type="image/webp" fetchPriority="high" />
+        <link rel="preload" href="/images/home/hero/video-poster-mobile.webp" as="image" type="image/webp" media="(max-width: 767px)" fetchPriority="high" />
+        <link rel="preload" href="/images/home/hero/video-poster.webp" as="image" type="image/webp" media="(min-width: 768px)" fetchPriority="high" />
 
         {/* Preload critical background images */}
         {/* <link rel="preload" href="/images/home/bg1.webp" as="image" type="image/webp" /> */}

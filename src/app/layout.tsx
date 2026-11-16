@@ -146,8 +146,7 @@ export default function RootLayout({
         {/* <link rel="dns-prefetch" href="https://px.ads.linkedin.com" /> */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-        {/* Preload critical carousel images for LCP and Speed Index */}
-        <link rel="preload" href="/images/actions/Action.webp" as="image" type="image/webp" fetchPriority="high" />
+        {/* Preload the hero poster (LCP). Action.webp is below the fold, so it is not preloaded. */}
         <link rel="preload" href="/images/home/hero/video-poster.webp" as="image" type="image/webp" fetchPriority="high" />
 
         {/* Preload critical background images */}

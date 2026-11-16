@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
@@ -49,6 +50,7 @@ const logos = [
 const greenProLabels = ["GreenPro", "EPD", "GRIHA"];
 
 const HeroSection = () => {
+  const router = useRouter();
   const assetURL = process.env.NEXT_PUBLIC_ASSET_URL || "";
   const heroVideoUrl = `${assetURL}/buyer/home-video/hero-video-U.webm`;
   const heroPosterUrl = "/images/home/hero/video-poster.webp";
@@ -216,7 +218,7 @@ const HeroSection = () => {
                  w-full lg:w-auto 
                  lg:px-[33px] lg:py-[11.5px] py-[10px] px-[20px] text-[17px] font-medium
                  rounded-md whitespace-nowrap cursor-pointer"
-              onClick={() => window.location.href = `${process.env.NEXT_PUBLIC_VENDOR_URL}/login`}
+              onClick={() => router.push("/vendor-register")}
             >
               Partner with Us
             </motion.button>

@@ -150,12 +150,6 @@ export default function SubmitEnquiryModal({
             setLoggedInUser(null);
         }
     }, [open, boqMode]);
-    console.log("BOQ DEBUG:", {
-        boqMode,
-        isLoggedIn,
-        loggedInUser,
-        storedUser: localStorage.getItem("user"),
-    });
     const shouldHideBoqContactFields = boqMode && isLoggedIn && !!loggedInUser;
 
     if (!open) return null;

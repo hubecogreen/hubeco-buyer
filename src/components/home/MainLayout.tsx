@@ -14,8 +14,12 @@ import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import useClient from "../hooks/useClient";
 import { useEffect, useState } from "react";
-import SubmitEnquiryModal from "../modals/SubmitEnquiryModal";
 import BottomNavigation from "@/components/navigation/BottomNavigation";
+
+// The enquiry form (react-hook-form + yup) is only needed once it is opened.
+const SubmitEnquiryModal = dynamic(() => import("../modals/SubmitEnquiryModal"), {
+  ssr: false,
+});
 
 // Chakra (about 250 KB) is only needed by inner pages, not the home page.
 const ChakraShell = dynamic(() => import("./ChakraShell"), { ssr: false });
@@ -63,7 +67,9 @@ const MainLayout = ({
   
   const isClient = useClient();
 
-  if (!isClient) return <></>;
+  // Home is rendered on the server (real HTML for fast LCP); other pages
+  // still wait for the client.
+  if (!isClient && !isHome) return <></>;
 
   return (
     <>
@@ -72,7 +78,7 @@ const MainLayout = ({
           position={"top-right"}
           toastOptions={{ className: "react-hot-toast abosolute mt-16 " }}
         />
-        <RootProvider>
+        <RootProvider renderBeforeRehydrate={isHome}>
           <MeDetails>
             <Header onSubmitEnquiry={openEnquiryModal} />
             <div className="mt-[79px] bg-cream">
@@ -82,13 +88,15 @@ const MainLayout = ({
               </PrivateRoute>
             </div>
             <BottomNavigation onSubmitEnquiry={openEnquiryModal} />
-            <SubmitEnquiryModal
-              open={showEnquiryModal}
-              onClose={closeEnquiryModal}
-              product={null}
-              mode="form"
-              boqMode={boqMode}
-            />
+            {showEnquiryModal && (
+              <SubmitEnquiryModal
+                open={showEnquiryModal}
+                onClose={closeEnquiryModal}
+                product={null}
+                mode="form"
+                boqMode={boqMode}
+              />
+            )}
             <Footer />
           </MeDetails>
         </RootProvider>

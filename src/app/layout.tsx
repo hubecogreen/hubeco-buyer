@@ -10,7 +10,8 @@ import AppInstallPopup from "@/components/app-install-popup/AppInstallPopup";
 import PwaUpdatePrompt from "@/components/pwa-update-prompt/PwaUpdatePrompt";
 
 const WhatsAppWidget = dynamic(() => import("@/components/WhatsApp"), {
-  loading: () => <div className="min-h-[100px]" />,
+  // The widget is position:fixed, so it needs no space reserved while it loads.
+  loading: () => null,
 });
 
 const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "").toLowerCase();

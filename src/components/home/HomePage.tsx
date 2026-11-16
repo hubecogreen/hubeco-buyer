@@ -8,6 +8,7 @@ const TrustedBy = dynamic(() => import("./Trusts/TrustedBy"), {
 });
 
 const WorksSection = dynamic(() => import("./works/Works"), {
+  ssr: false, // carousel (Swiper): loads after the page is interactive
   loading: () => <div className="min-h-[280px]" />,
 });
 
@@ -24,6 +25,7 @@ const PartnersSection = dynamic(() => import("./partners/PartnersSection"), {
 });
 
 const BlogsSection = dynamic(() => import("./blogs/BlogSection"), {
+  ssr: false, // carousel (Swiper) and API data
   loading: () => <div className="min-h-[220px]" />,
 });
 

@@ -40,7 +40,14 @@ const nextConfig = {
   },
 
   async headers() {
+    // Files in public/ are served by Next with max-age=0. Cache them for 30 days.
+    const longCache = [
+      { key: "Cache-Control", value: "public, max-age=2592000, stale-while-revalidate=86400" },
+    ];
     return [
+      { source: "/images/:path*", headers: longCache },
+      { source: "/icons/:path*", headers: longCache },
+      { source: "/fonts/:path*", headers: longCache },
       {
         source: "/sitemap.xml",
         headers: [

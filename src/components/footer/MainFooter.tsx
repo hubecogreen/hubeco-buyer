@@ -439,10 +439,10 @@ const installButtonLabel = !isIOSDevice ? "Install App" : "";
         </div>
 
         {/* BOTTOM LOGO */}
-        <div className="w-full flex mt-[90px] pb-[60px] md:pb-[2px] lg:pb-[58px] px-4 lg:px-0">
+        <div className="w-full flex mt-[90px] pb-24 lg:pb-[58px] px-4 lg:px-0">
           <div className="max-w-[1200px] w-full">
             <Link href="/">
-              <div className="relative lg:w-[717px] lg:h-[162px]  w-[339px] h-[77px] md:w-[497px] md:h-[112px]">
+              <div className="relative aspect-[1054/200] w-full max-w-[339px] md:max-w-[497px] lg:max-w-[717px]">
                 <Image
                   src="/images/Rlogo.png"
                   alt="Hubeco Logo"

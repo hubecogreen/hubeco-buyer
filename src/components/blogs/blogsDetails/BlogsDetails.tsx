@@ -191,7 +191,12 @@ const BlogsDetails = ({ id }: any) => {
                       dangerouslySetInnerHTML={{
                         __html: blogData.content
                           // Replace all empty tags like <p></p>, <h1></h1>, etc. with <br/>
-                          .replace(/<([a-z][a-z0-9]*)><\/\1>/gi, '<br/>')
+                          // (not table parts: an empty cell must stay a cell)
+                          .replace(/<([a-z][a-z0-9]*)><\/\1>/gi, (tag, name) =>
+                            /^(td|th|tr|thead|tbody|tfoot|table|colgroup|col|caption)$/i.test(name) ? tag : '<br/>')
+                          // Wide tables scroll sideways on small screens
+                          .replace(/<table/gi, `<div class="${styles.tableWrap}"><table`)
+                          .replace(/<\/table>/gi, '</table></div>')
                           // The blog title is the page's only H1; headings inside the body become H2
                           .replace(/<(\/?)h1(?=[\s>])/gi, '<$1h2')
                       }}

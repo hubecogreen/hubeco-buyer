@@ -291,3 +291,43 @@ font-weight: 600;
     font-style: italic;
   }
   
+/* Tables inside blog content */
+.tableWrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 0 0 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.contentWrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: #333;
+}
+
+.contentWrapper th,
+.contentWrapper td {
+  border: 1px solid #d9d9d9;
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.contentWrapper th,
+.contentWrapper thead td {
+  background: #edf7f4;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.contentWrapper tbody tr:nth-child(even) {
+  background: #fafaf5;
+}
+
+/* Paragraphs pasted inside cells shouldn't add extra gaps */
+.contentWrapper td p,
+.contentWrapper th p {
+  margin-bottom: 0;
+  font-size: inherit;
+}

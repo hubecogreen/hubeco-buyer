@@ -90,42 +90,51 @@ const APP_ROUTES = new Set<string>([
   NOT_FOUND_PATH.slice(1),
 ]);
 
-// slug -> current slug (null: no such product)
-const productSlugCache = new Map<string, { current: string | null; fetchedAt: number }>();
-// While the API is failing, skip lookups until this time so visitors aren't held up
-let resolveUnavailableUntil = 0;
+/**
+ * Lookup of the current slug behind a (possibly old) slug, with its own cache and
+ * failure backoff. Resolves to the current slug, null (no such page) or undefined
+ * (the API couldn't answer).
+ */
+function createSlugResolver(resolveUrl: string, ttlMs = PRODUCT_SLUG_TTL_MS) {
+  // slug -> current slug (null: no such page)
+  const cache = new Map<string, { current: string | null; fetchedAt: number }>();
+  // While the API is failing, skip lookups until this time so visitors aren't held up
+  let unavailableUntil = 0;
+
+  return async function resolveSlug(slug: string): Promise<string | null | undefined> {
+    const cached = cache.get(slug);
+    if (cached && Date.now() - cached.fetchedAt < ttlMs) return cached.current;
+    if (Date.now() < unavailableUntil) return undefined;
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), PRODUCT_RESOLVE_TIMEOUT_MS);
+    try {
+      const res = await fetch(`${resolveUrl}/${encodeURIComponent(slug)}`, {
+        signal: controller.signal,
+        cache: "no-store",
+      });
+      // 404 also covers an API without the resolve endpoint: nothing to redirect
+      const current = res.ok ? ((await res.json())?.slug ?? null) : res.status === 404 ? null : undefined;
+      if (current === undefined) {
+        unavailableUntil = Date.now() + PRODUCT_RESOLVE_BACKOFF_MS;
+        return undefined;
+      }
+
+      if (cache.size >= PRODUCT_SLUG_CACHE_LIMIT) cache.clear();
+      cache.set(slug, { current, fetchedAt: Date.now() });
+      return current;
+    } catch {
+      // timeout or network error
+      unavailableUntil = Date.now() + PRODUCT_RESOLVE_BACKOFF_MS;
+      return undefined;
+    } finally {
+      clearTimeout(timeout);
+    }
+  };
+}
 
 /** Current URL for a product slug; undefined when the API couldn't answer */
-async function resolveProductSlug(slug: string): Promise<string | null | undefined> {
-  const cached = productSlugCache.get(slug);
-  if (cached && Date.now() - cached.fetchedAt < PRODUCT_SLUG_TTL_MS) return cached.current;
-  if (Date.now() < resolveUnavailableUntil) return undefined;
-
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), PRODUCT_RESOLVE_TIMEOUT_MS);
-  try {
-    const res = await fetch(`${PRODUCT_RESOLVE_URL}/${encodeURIComponent(slug)}`, {
-      signal: controller.signal,
-      cache: "no-store",
-    });
-    // 404 also covers an API without the resolve endpoint: nothing to redirect
-    const current = res.ok ? ((await res.json())?.slug ?? null) : res.status === 404 ? null : undefined;
-    if (current === undefined) {
-      resolveUnavailableUntil = Date.now() + PRODUCT_RESOLVE_BACKOFF_MS;
-      return undefined;
-    }
-
-    if (productSlugCache.size >= PRODUCT_SLUG_CACHE_LIMIT) productSlugCache.clear();
-    productSlugCache.set(slug, { current, fetchedAt: Date.now() });
-    return current;
-  } catch {
-    // timeout or network error
-    resolveUnavailableUntil = Date.now() + PRODUCT_RESOLVE_BACKOFF_MS;
-    return undefined;
-  } finally {
-    clearTimeout(timeout);
-  }
-}
+const resolveProductSlug = createSlugResolver(PRODUCT_RESOLVE_URL);
 
 /** 301 from an old product URL (e.g. the "-1" versions) to the current one */
 async function productMiddleware(request: NextRequest) {
@@ -140,10 +149,38 @@ async function productMiddleware(request: NextRequest) {
   return permanentRedirect(destination);
 }
 
+/* ---------------- blog pages: /blogs/{slug} ---------------- */
+
+// Blogs get little traffic, so a short cache is cheap and a rename takes effect within a minute
+const BLOG_SLUG_TTL_MS = 60 * 1000;
+const resolveBlogSlug = createSlugResolver(`${API_BASE_URL}/blog/resolveSlug`, BLOG_SLUG_TTL_MS);
+
+/** 301 from an old blog URL (the blog was renamed in admin) or a blog id to the current one */
+async function blogMiddleware(request: NextRequest) {
+  const segment = request.nextUrl.pathname.slice("/blogs/".length);
+  let slug = segment;
+  try {
+    slug = decodeURIComponent(segment);
+  } catch {
+    // keep the raw segment
+  }
+  if (!slug || slug.includes("/")) return NextResponse.next();
+
+  const current = await resolveBlogSlug(slug);
+  if (!current || current === slug) return NextResponse.next();
+
+  // clone keeps the query string (utm_*, ...)
+  const destination = request.nextUrl.clone();
+  destination.pathname = `/blogs/${encodeURIComponent(current)}`;
+  return permanentRedirect(destination);
+}
+
 /* ---------------- category pages: /products/... ---------------- */
 
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams, search } = request.nextUrl;
+
+  if (pathname.startsWith("/blogs/")) return blogMiddleware(request);
 
   const slugs = slugsFromPathname(pathname);
   if (!slugs) return productMiddleware(request);
@@ -196,6 +233,8 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Category pages, plus single-segment paths without a dot (product pages; files are skipped)
-  matcher: ["/products", "/products/:path*", "/((?!_next|api)[^/.]+)"],
+  // Category pages, blog pages, plus single-segment paths without a dot (product pages;
+  // files are skipped)
+  // (a named single param like "/blogs/:slug" doesn't compile to a working matcher)
+  matcher: ["/products", "/products/:path*", "/blogs/:path*", "/((?!_next|api)[^/.]+)"],
 };

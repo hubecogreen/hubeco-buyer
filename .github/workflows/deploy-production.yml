@@ -1,0 +1,42 @@
+
+name: Deploy Buyer Production
+
+on:
+  push:
+    branches:
+      - production
+
+  workflow_dispatch:
+
+concurrency:
+  group: buyer-production-deployment
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy Buyer Production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure SSH
+        env:
+          HOST: ${{ secrets.MILESWEB_HOST }}
+          USER: ${{ secrets.MILESWEB_USER }}
+          SSH_KEY: ${{ secrets.MILESWEB_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy to Production
+        env:
+          HOST: ${{ secrets.MILESWEB_HOST }}
+          USER: ${{ secrets.MILESWEB_USER }}
+        run: |
+          ssh -i ~/.ssh/id_ed25519 \
+            "$USER@$HOST" \
+            'bash /var/www/deploy-scripts/deploy-buyer-prod.sh'

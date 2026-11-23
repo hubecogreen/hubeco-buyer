@@ -1,0 +1,34 @@
+
+name: Deploy Buyer UAT
+
+on:
+  push:
+    branches:
+      - uat
+  workflow_dispatch:
+
+concurrency:
+  group: buyer-uat-deployment
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to MilesWeb UAT
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy through SSH
+        env:
+          HOST: ${{ secrets.MILESWEB_HOST }}
+          USER: ${{ secrets.MILESWEB_USER }}
+          SSH_KEY: ${{ secrets.MILESWEB_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts
+
+          ssh -i ~/.ssh/id_ed25519 \
+            "$USER@$HOST" \
+            'bash /var/www/deploy-scripts/deploy-buyer-uat.sh'

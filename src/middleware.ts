@@ -95,7 +95,7 @@ const APP_ROUTES = new Set<string>([
  * failure backoff. Resolves to the current slug, null (no such page) or undefined
  * (the API couldn't answer).
  */
-function createSlugResolver(resolveUrl: string) {
+function createSlugResolver(resolveUrl: string, ttlMs = PRODUCT_SLUG_TTL_MS) {
   // slug -> current slug (null: no such page)
   const cache = new Map<string, { current: string | null; fetchedAt: number }>();
   // While the API is failing, skip lookups until this time so visitors aren't held up
@@ -103,7 +103,7 @@ function createSlugResolver(resolveUrl: string) {
 
   return async function resolveSlug(slug: string): Promise<string | null | undefined> {
     const cached = cache.get(slug);
-    if (cached && Date.now() - cached.fetchedAt < PRODUCT_SLUG_TTL_MS) return cached.current;
+    if (cached && Date.now() - cached.fetchedAt < ttlMs) return cached.current;
     if (Date.now() < unavailableUntil) return undefined;
 
     const controller = new AbortController();
@@ -151,7 +151,9 @@ async function productMiddleware(request: NextRequest) {
 
 /* ---------------- blog pages: /blogs/{slug} ---------------- */
 
-const resolveBlogSlug = createSlugResolver(`${API_BASE_URL}/blog/resolveSlug`);
+// Blogs get little traffic, so a short cache is cheap and a rename takes effect within a minute
+const BLOG_SLUG_TTL_MS = 60 * 1000;
+const resolveBlogSlug = createSlugResolver(`${API_BASE_URL}/blog/resolveSlug`, BLOG_SLUG_TTL_MS);
 
 /** 301 from an old blog URL (the blog was renamed in admin) or a blog id to the current one */
 async function blogMiddleware(request: NextRequest) {

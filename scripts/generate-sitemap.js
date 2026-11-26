@@ -93,10 +93,16 @@ const staticUrls = [
     loc: `${PROD_URL}/faq`, 
     lastmod: new Date().toISOString(), 
     changefreq: 'monthly', 
-    priority: '0.6' 
+    priority: '0.6'
   },
-  { 
-    loc: `${PROD_URL}/privacy-policy`, 
+  {
+    loc: `${PROD_URL}/vendor-register`,
+    lastmod: new Date().toISOString(),
+    changefreq: 'monthly',
+    priority: '0.6'
+  },
+  {
+    loc: `${PROD_URL}/privacy-policy`,
     lastmod: new Date().toISOString(), 
     changefreq: 'monthly', 
     priority: '0.5' 

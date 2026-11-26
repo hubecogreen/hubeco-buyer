@@ -73,7 +73,7 @@ export default function SubmitEnquiryModal({
         control,
         handleSubmit,
         reset,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm<EnquiryFormValues>({
         defaultValues: {
             name: "",
@@ -536,6 +536,7 @@ export default function SubmitEnquiryModal({
                                     <CustomButton
                                         title={boqMode ? "Submit BOQ" : "Submit Enquiry"}
                                         type="submit"
+                                        loading={isSubmitting} // disabled while the request runs, so repeat clicks can't create duplicates
                                         className="w-1/2 bg-primary text-white"
                                     />
                                 </div>
